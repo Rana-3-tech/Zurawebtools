@@ -1,7 +1,8 @@
 {
   "name": "zurawebtools-free-ai-tools",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "Free AI tools for every task and problem - Auto-deployment ready!",
   "type": "module",
   "scripts": {
     "dev": "vite",
