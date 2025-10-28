@@ -11,13 +11,24 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Test SSH login
-        uses: appleboy/ssh-action@v0.1.10
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Test SSH connection
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
+          port: 22
+          timeout: 30s
+          command_timeout: 10m
           script: |
+            echo "🔗 Testing SSH connection..."
             echo "✅ SSH connection successful!"
+            echo "📊 Server information:"
             hostname
             uptime
+            whoami
+            pwd
+            ls -la /var/www/html
