@@ -25,46 +25,16 @@ jobs:
     - name: Build project
       run: npm run build
     
-    - name: Deploy to server
-      uses: appleboy/ssh-action@v0.1.10
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        key: ${{ secrets.VPS_PRIVATE_KEY }}
-        script: |
-          # Navigate to web directory
-          cd /var/www/html
-          
-          # Backup current files
-          if [ -d "backup" ]; then
-            rm -rf backup
-          fi
-          mkdir -p backup
-          if [ -f "index.html" ]; then
-            cp -r * backup/ 2>/dev/null || true
-          fi
-          
-          # Remove old files (except backup)
-          find . -maxdepth 1 -not -name 'backup' -not -name '.' -not -name '..' -exec rm -rf {} +
-          
-          # Clone latest code
-          git clone https://github.com/Rana-3-tech/Zurawebtools.git temp_repo
-          
-          # Install dependencies and build
-          cd temp_repo
-          npm install
-          npm run build
-          
-          # Copy built files to web root
-          cp -r dist/* /var/www/html/
-          
-          # Cleanup
-          cd /var/www/html
-          rm -rf temp_repo
-          
-          # Set proper permissions
-          chown -R www-data:www-data /var/www/html
-          chmod -R 755 /var/www/html
-          
-          echo "✅ Deployment completed successfully!"
-          echo "🌐 Website is live at: http://72.61.80.159"
+    - name: Setup SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.VPS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+    
+    - name: Deploy via rsync
+      run: |
+        rsync -avz --delete --timeout=60 ./dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/html/
+        echo "✅ Deployment completed successfully!"
+        echo "🌐 Website is live at: http://${{ secrets.VPS_HOST }}"
+      timeout-minutes: 10

@@ -41,6 +41,8 @@ export default defineConfig(({ mode }) => {
           }
         },
         chunkSizeWarningLimit: 1000
-      }
+      },
+      publicDir: 'public',
+      assetsInclude: ['**/*.xml', '**/*.txt']
     };
 });
