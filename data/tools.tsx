@@ -105,6 +105,13 @@ const PercentageChangeIcon = () => (
         <path d="M16 4H8C6.9 4 6 4.9 6 6V18C6 19.1 6.9 20 8 20H16C17.1 20 18 19.1 18 18V6C18 4.9 17.1 4 16 4ZM8.5 7.5C9.33 7.5 10 8.17 10 9C10 9.83 9.33 10.5 8.5 10.5C7.67 10.5 7 9.83 7 9C7 8.17 7.67 7.5 8.5 7.5ZM15.5 16.5C14.67 16.5 14 15.83 14 15C14 14.17 14.67 13.5 15.5 13.5C16.33 13.5 17 14.17 17 15C17 15.83 16.33 16.5 15.5 16.5ZM16 12H8V10L16 6V8H8V10H16V12Z" fill="url(#toolGrad6)" />
     </svg>
 );
+const FabricCostingIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fabricCostingIconTitle">
+        <title id="fabricCostingIconTitle">Fabric Costing Calculator Icon</title>
+        <defs><linearGradient id="toolGrad12" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#f59e0b" /><stop offset="100%" stopColor="#ef4444" /></linearGradient></defs>
+        <path d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17L12 12L2 17ZM2 12L12 17L22 12L12 7L2 12Z" fill="url(#toolGrad12)" />
+    </svg>
+);
 const HexToRgbIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hexToRgbIconTitle">
         <title id="hexToRgbIconTitle">Hex to RGB Converter Icon</title>
@@ -206,6 +213,13 @@ export const toolCategories: Category[] = [
                 link: 'percentage-change-calculator',
                 icon: <PercentageChangeIcon />,
                 gradientColors: { from: '#22c55e', to: '#3b82f6' }, // Green to Blue
+            },
+            {
+                title: 'Fabric Costing Calculator',
+                description: 'Professional fabric costing tool for textile engineers. Calculate warp/weft weight, yarn consumption, and per-meter pricing with accurate cost breakdown.',
+                link: 'fabric-costing-tool',
+                icon: <FabricCostingIcon />,
+                gradientColors: { from: '#f59e0b', to: '#ef4444' }, // Amber to Red
             },
         ]
     },

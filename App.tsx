@@ -34,6 +34,7 @@ import AccessibleColorContrastChecker from './components/tools/AccessibleColorCo
 import JSONFormatterValidator from './components/tools/JSONFormatterValidator';
 import ShadowCSSGenerator from './components/tools/ShadowCSSGenerator';
 import ColorHarmonyChecker from './components/tools/ColorHarmonyChecker';
+import FabricCostingTool from './components/tools/FabricCostingTool';
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -185,6 +186,9 @@ const App: React.FC = () => {
         }
         if (path === 'color-harmony-checker') {
             return <ColorHarmonyChecker navigateTo={navigateTo} />;
+        }
+        if (path === 'fabric-costing-tool') {
+            return <FabricCostingTool navigateTo={navigateTo} />;
         }
         
         const category = toolCategories.find(cat => cat.slug === path);
