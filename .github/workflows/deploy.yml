@@ -34,7 +34,7 @@ jobs:
     
     - name: Deploy via rsync
       run: |
-        rsync -avz --delete --timeout=60 ./dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/html/
+        rsync -avz --delete --timeout=60 ./dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/Zurawebtools/dist/
         echo "✅ Deployment completed successfully!"
         echo "🌐 Website is live at: http://${{ secrets.VPS_HOST }}"
       timeout-minutes: 10
