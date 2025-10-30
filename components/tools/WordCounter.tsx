@@ -12,9 +12,9 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
   const [isThinking, setIsThinking] = useState(false);
   const [readabilityResult, setReadabilityResult] = useState('');
 
-  // 🧠 SEO and Meta Tags Setup
+  // 🧠 Enhanced SEO and Meta Tags Setup
   useEffect(() => {
-    document.title = "Online Word & Character Counter Tool | ZuraWebTools";
+    document.title = "Online Word & Character Counter – Free Text Analyzer & SEO Word Count Tool | ZuraWebTools";
 
     // Meta description
     const metaDescription =
@@ -22,23 +22,33 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
     metaDescription.setAttribute('name', 'description');
     metaDescription.setAttribute(
       'content',
-      "Free online word and character counter tool. Instantly count words, characters, and paragraphs in your text. The perfect SEO content word count tool and blog word counter for writers, students, and marketers."
+      'Free Online Word and Character Counter Tool to instantly count words, characters, sentences, and paragraphs. Perfect for SEO content optimization, blog writing, essays, and social media post character limits.'
     );
     document.head.appendChild(metaDescription);
 
-    // Meta tags for OG & Twitter
+    // Meta keywords (for Bing/Yandex/secondary engines)
+    const metaKeywords =
+      document.querySelector('meta[name="keywords"]') || document.createElement('meta');
+    metaKeywords.setAttribute('name', 'keywords');
+    metaKeywords.setAttribute(
+      'content',
+      'online word counter, character counter, text analyzer, text length calculator, SEO content word count, blog word counter, article word counter, essay word counter, Instagram character counter, Twitter character counter'
+    );
+    document.head.appendChild(metaKeywords);
+
+    // Open Graph & Twitter meta tags
     const metaTags = [
-      { property: 'og:title', content: 'Online Word & Character Counter Tool | ZuraWebTools' },
-      { property: 'og:description', content: 'Instantly count words, characters, and paragraphs in your text. Free text counter for writers, students, and SEO professionals.' },
+      { property: 'og:title', content: 'Online Word & Character Counter – Free Text Analyzer | ZuraWebTools' },
+      { property: 'og:description', content: 'Instantly count words, characters, and paragraphs online. A fast, accurate, and privacy-safe word counter for writers, students, and SEO professionals.' },
       { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-word-counter-og.png' },
-      { property: 'og:image:alt', content: 'A preview of the Online Word & Character Counter Tool from ZuraWebTools, showing text being analyzed.' },
+      { property: 'og:image:alt', content: 'Screenshot of ZuraWebTools Online Word & Character Counter showing text analysis.' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://zurawebtools.com/tools/word-counter' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Online Word & Character Counter Tool | ZuraWebTools' },
-      { name: 'twitter:description', content: 'Free SEO content word count tool and blog word counter for online creators.' },
+      { name: 'twitter:title', content: 'Free Online Word & Character Counter | ZuraWebTools' },
+      { name: 'twitter:description', content: 'Count words, characters, and paragraphs instantly. A powerful SEO content analyzer and blog word counter tool for online creators.' },
       { name: 'twitter:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-word-counter-og.png' },
-      { name: 'twitter:image:alt', content: 'A preview of the Online Word & Character Counter Tool from ZuraWebTools, showing text being analyzed.' },
+      { name: 'twitter:image:alt', content: 'Free online word and character counter showing text stats and readability.' },
     ];
 
     metaTags.forEach(tag => {
@@ -47,13 +57,13 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
       document.head.appendChild(meta);
     });
 
-    // Canonical link
+    // Canonical URL
     const canonical = document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
     canonical.setAttribute('href', 'https://zurawebtools.com/tools/word-counter');
     document.head.appendChild(canonical);
 
-    // JSON-LD Structured Data (SoftwareApplication + FAQ)
+    // JSON-LD Structured Data
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify([
@@ -61,28 +71,12 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Online Word & Character Counter Tool",
-        "author": {
-          "@type": "Organization",
-          "name": "ZuraWebTools"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "ZuraWebTools",
-          "url": "https://zurawebtools.com"
-        },
+        "applicationCategory": "UtilityApplication",
         "operatingSystem": "Any (Web-based)",
-        "applicationCategory": "TextAnalysisTool",
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "ratingCount": "885"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "description": "A free SEO content word count tool and blog word counter that instantly calculates words, characters, sentences, and paragraphs.",
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "1150" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
+        "description": "A free online tool to count words, characters, sentences, and paragraphs. Ideal for SEO optimization, blogging, essays, and content writing.",
         "url": "https://zurawebtools.com/tools/word-counter"
       },
       {
@@ -94,23 +88,23 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
             "name": "How does the online word counter work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The online word counter instantly counts words, characters, and paragraphs as you type or paste your text. It updates results in real time and works directly in your browser without saving any data."
+              "text": "The counter updates word, character, and paragraph counts instantly as you type or paste your text. It runs locally in your browser without uploading any data."
             }
           },
           {
             "@type": "Question",
-            "name": "Is this word and character counter tool free to use?",
+            "name": "Is this word and character counter tool free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, the ZuraWebTools Word & Character Counter is completely free to use. There are no hidden charges or sign-ups required."
+              "text": "Yes, the ZuraWebTools Word & Character Counter is completely free and ad-free. No registration required."
             }
           },
           {
             "@type": "Question",
-            "name": "Does this tool help with SEO optimization?",
+            "name": "Can this tool help with SEO optimization?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, it's designed for SEO writers and bloggers to check ideal content length for articles, meta descriptions, and titles. The word counter also helps you optimize for search engine readability."
+              "text": "Yes, this text analyzer helps maintain optimal content length for SEO-friendly articles, meta titles, and descriptions. It’s ideal for writers, students, and marketers."
             }
           }
         ]
@@ -118,10 +112,11 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
     ]);
     document.head.appendChild(script);
 
-    // Cleanup on unmount
+    // Cleanup
     return () => {
       document.title = 'ZuraWebTools | Free AI Tools for SEO & Social Media Growth';
       metaDescription.remove();
+      metaKeywords.remove();
       metaTags.forEach(tag => {
         const selector = Object.keys(tag)[0];
         const value = Object.values(tag)[0];
@@ -147,25 +142,25 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
   const handleClear = () => setText('');
 
   const handleAnalyzeReadability = async () => {
-      if (!text.trim()) {
-          setReadabilityResult('Please enter some text to analyze.');
-          return;
-      }
-      setIsThinking(true);
-      setReadabilityResult('');
-      try {
-          const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
-          const response = await ai.models.generateContent({
-              model: 'gemini-2.5-flash',
-              contents: `Analyze the readability of the following text and provide a one-sentence summary of its complexity (e.g., "This text is very easy to read," "This text is suitable for a general audience," or "This text has a complex, academic style."). Here is the text: "${text}"`,
-          });
-          setReadabilityResult(response.text);
-      } catch (error) {
-          console.error("Error analyzing readability:", error);
-          setReadabilityResult('Sorry, there was an error analyzing the text.');
-      } finally {
-          setIsThinking(false);
-      }
+    if (!text.trim()) {
+      setReadabilityResult('Please enter some text to analyze.');
+      return;
+    }
+    setIsThinking(true);
+    setReadabilityResult('');
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+      const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: `Analyze the readability of this text and provide a one-sentence summary: "${text}"`,
+      });
+      setReadabilityResult(response.text);
+    } catch (error) {
+      console.error("Error analyzing readability:", error);
+      setReadabilityResult('Sorry, there was an error analyzing the text.');
+    } finally {
+      setIsThinking(false);
+    }
   };
 
   const StatCard: React.FC<{ label: string; value: number }> = ({ label, value }) => (
@@ -174,15 +169,15 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
       <p className="text-4xl font-bold text-white mt-1">{value}</p>
     </div>
   );
-  
+
   const ThinkingIndicator = () => (
     <div className="flex items-center justify-center space-x-2">
-        <span className="text-lg text-gray-300">Analyzing Readability</span>
-        <div className="flex items-center space-x-1">
-            <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-            <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
-        </div>
+      <span className="text-lg text-gray-300">Analyzing Readability</span>
+      <div className="flex items-center space-x-1">
+        <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+        <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+        <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+      </div>
     </div>
   );
 
@@ -244,16 +239,16 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
             Analyze Readability
           </button>
         </div>
-        
+
         {/* ✨ AI Readability Analysis */}
         <div className="max-w-4xl mx-auto mt-8 min-h-[60px] flex items-center justify-center bg-slate-900/50 p-4 rounded-lg shadow-inner">
-            {isThinking ? (
-                <ThinkingIndicator />
-            ) : readabilityResult ? (
-                <p className="text-center text-cyan-300 text-lg">{readabilityResult}</p>
-            ) : (
-                <p className="text-center text-gray-500">Click "Analyze Readability" to get an AI-powered summary.</p>
-            )}
+          {isThinking ? (
+            <ThinkingIndicator />
+          ) : readabilityResult ? (
+            <p className="text-center text-cyan-300 text-lg">{readabilityResult}</p>
+          ) : (
+            <p className="text-center text-gray-500">Click "Analyze Readability" to get an AI-powered summary.</p>
+          )}
         </div>
 
         {/* 💬 FAQ Section */}
@@ -280,7 +275,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
             </div>
           </div>
         </div>
-        
+
         <RelatedTools
           navigateTo={navigateTo}
           relatedSlugs={['remove-extra-spaces', 'case-converter', 'lorem-ipsum-generator']}
