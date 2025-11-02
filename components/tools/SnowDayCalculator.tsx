@@ -460,13 +460,15 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
   };
   
   return (
-    <div className="w-full max-w-5xl space-y-8">
-      <div className="text-center animate-fade-in">
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">Snow Day Calculator</h2>
-        <p className="mt-2 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Will School Be Closed Tomorrow? Check your school closure chances with live weather data and an intelligent snow day prediction model.
-        </p>
-      </div>
+    <section className="py-20 bg-slate-800 text-gray-200">
+      <div className="container mx-auto px-6">
+        <div className="max-w-5xl mx-auto space-y-8">
+          <div className="text-center animate-fade-in">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white">Snow Day Calculator</h1>
+            <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
+              Will School Be Closed Tomorrow? Check your school closure chances with live weather data and an intelligent snow day prediction model.
+            </p>
+          </div>
 
       {/* Section 1: Inputs */}
       <div className="space-y-6 animate-slide-in">
@@ -719,12 +721,14 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
           </div>
       </div>
 
-      <RelatedTools
-        navigateTo={navigateTo}
-        relatedSlugs={['percentage-change-calculator', 'time-difference-calculator', 'fabric-costing-tool']}
-        currentSlug="snow-day-calculator"
-      />
-    </div>
+          <RelatedTools
+            navigateTo={navigateTo}
+            relatedSlugs={['percentage-change-calculator', 'time-difference-calculator', 'fabric-costing-tool']}
+            currentSlug="snow-day-calculator"
+          />
+        </div>
+      </div>
+    </section>
   );
 };
 
