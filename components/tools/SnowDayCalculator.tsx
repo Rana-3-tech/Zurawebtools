@@ -424,8 +424,8 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
   const InputField: React.FC<{ label: string; value: string | number; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; type?: string; placeholder?: string; disabled?: boolean; }> = 
     ({ label, value, onChange, type = 'text', placeholder, disabled = false }) => (
     <div>
-      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
-      <input type={type} value={value} onChange={onChange} placeholder={placeholder} disabled={disabled} className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue disabled:bg-gray-200 dark:disabled:bg-gray-800" />
+      <label className="block text-sm font-medium text-gray-300 mb-1">{label}</label>
+      <input type={type} value={value} onChange={onChange} placeholder={placeholder} disabled={disabled} className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue disabled:bg-gray-200 dark:disabled:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" />
     </div>
   );
 
@@ -433,8 +433,8 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
     ({ label, name, value, min, max, step }) => (
     <div className="flex flex-col space-y-2">
       <div className="flex justify-between items-center text-sm">
-        <label htmlFor={name} className="font-medium">{label}</label>
-        <span className="px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded-md text-xs">{value}</span>
+        <label htmlFor={name} className="font-medium text-white">{label}</label>
+        <span className="px-2 py-1 bg-gray-600 rounded-md text-xs text-white">{value}</span>
       </div>
       <input id={name} type="range" name={name} min={min} max={max} step={step} value={value} onChange={(e) => setWeights({ ...weights, [name]: parseFloat(e.target.value) })} className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer accent-brand-blue" aria-label={`Adjust ${label}`} />
     </div>
@@ -472,21 +472,21 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
 
       {/* Section 1: Inputs */}
       <div className="space-y-6 animate-slide-in">
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-          <h3 className="text-xl font-bold mb-4">Enter Your Details</h3>
+        <div className="bg-slate-800 p-6 rounded-lg shadow-lg">
+          <h3 className="text-xl font-bold mb-4 text-white">Enter Your Details</h3>
           <div className="space-y-4">
             <InputField label="ZIP Code (US Only)" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g., 90210" disabled={manualMode} />
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">School Type</label>
-              <select value={schoolType} onChange={(e) => setSchoolType(e.target.value as SchoolType)} className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue">
+              <label className="block text-sm font-medium text-gray-300 mb-1">School Type</label>
+              <select value={schoolType} onChange={(e) => setSchoolType(e.target.value as SchoolType)} className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue text-gray-900 dark:text-white">
                 <option>Public</option>
                 <option>Private</option>
                 <option>University</option>
               </select>
             </div>
              <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">District Caution Level</label>
-              <select value={districtCaution} onChange={(e) => setDistrictCaution(e.target.value as DistrictCautionLevel)} className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue">
+              <label className="block text-sm font-medium text-gray-300 mb-1">District Caution Level</label>
+              <select value={districtCaution} onChange={(e) => setDistrictCaution(e.target.value as DistrictCautionLevel)} className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue text-gray-900 dark:text-white">
                 <option>Standard</option>
                 <option>Cautious</option>
                 <option>Resistant</option>
@@ -494,7 +494,7 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
             </div>
             <div className="flex items-center">
                 <input type="checkbox" id="manual-mode" checked={manualMode} onChange={(e) => setManualMode(e.target.checked)} className="h-4 w-4 rounded border-gray-300 text-brand-blue focus:ring-brand-blue"/>
-                <label htmlFor="manual-mode" className="ml-2 block text-sm text-gray-900 dark:text-gray-200">Enter Weather Data Manually</label>
+                <label htmlFor="manual-mode" className="ml-2 block text-sm text-gray-200">Enter Weather Data Manually</label>
             </div>
             
             {manualMode && (
@@ -518,13 +518,13 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
           </div>
         </div>
         
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div className="bg-slate-800 p-6 rounded-lg shadow-lg">
           <button onClick={() => setShowAdvanced(!showAdvanced)} className="flex justify-between items-center w-full text-left">
-              <h3 className="text-xl font-bold">Advanced Mode</h3>
+              <h3 className="text-xl font-bold text-white">Advanced Mode</h3>
               <svg className={`w-6 h-6 transform transition-transform ${showAdvanced ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
           </button>
           <div className={`overflow-hidden transition-all duration-500 ease-in-out ${showAdvanced ? 'max-h-screen mt-4' : 'max-h-0'}`}>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Adjust the weights of the algorithm to tune the prediction model.</p>
+              <p className="text-sm text-gray-400 mb-4">Adjust the weights of the algorithm to tune the prediction model.</p>
               <div className="space-y-4">
                   <WeightSlider label="Snowfall Multiplier" name="snowfallMultiplier" value={weights.snowfallMultiplier} min={1} max={15} step={0.5} />
                   <WeightSlider label="Temp Below 0°C Bonus" name="tempBelowZero" value={weights.tempBelowZero} min={0} max={30} step={1} />
@@ -537,7 +537,7 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
 
       {/* Section 2: Results */}
       <div>
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg min-h-[30rem] flex flex-col justify-center items-center animate-fade-in">
+        <div className="bg-slate-800 p-6 rounded-lg shadow-lg min-h-[30rem] flex flex-col justify-center items-center animate-fade-in">
           {error && <div className="text-center text-red-500 bg-red-100 dark:bg-red-900/50 p-4 rounded-md w-full">{error}</div>}
           
           {!isLoading && probability === null && !error && (
@@ -632,14 +632,14 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
       {/* Lower Section Sections */}
       <div className="space-y-8 mt-4">
           {/* Section 3: How to Use */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg animate-fade-in" style={{ animationDelay: '200ms' }}>
-            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <div className="bg-slate-800 p-6 rounded-lg shadow-lg animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <h2 className="text-2xl font-bold mb-4 text-white">
               How to Use the Snow Day Calculator
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 mb-4">
+            <p className="text-gray-300 mb-4">
               Follow these simple steps to check your school closure chances using our smart Snow Day Prediction Tool:
             </p>
-            <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">
+            <ol className="list-decimal list-inside space-y-2 text-gray-300">
               <li>
                 <strong>Enter your ZIP Code:</strong> Type your 5-digit US ZIP code to fetch live weather data automatically.
               </li>
@@ -653,51 +653,51 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
                 <strong>Click “Calculate”:</strong> Instantly view your snow day probability and see if your school is likely to close tomorrow.
               </li>
             </ol>
-            <p className="mt-4 text-sm text-blue-600 dark:text-blue-400 italic">
+            <p className="mt-4 text-sm text-blue-400 italic">
               💡 Tip: For best accuracy, check again within 24 hours of a snowstorm forecast.
             </p>
           </div>
           {/* Section 4: FAQ */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <div className="bg-slate-800 p-6 rounded-lg shadow-lg animate-fade-in" style={{ animationDelay: '400ms' }}>
+            <h2 className="text-2xl font-bold mb-4 text-white">
               Frequently Asked Questions (FAQs)
             </h2>
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                <h3 className="font-semibold text-lg text-gray-100">
                   How accurate is the Snow Day Calculator?
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-gray-300">
                   The Snow Day Calculator uses live forecasts from Open-Meteo and a custom probability model. 
                   Accuracy typically ranges from <strong>70% to 85%</strong> depending on forecast reliability and location.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                <h3 className="font-semibold text-lg text-gray-100">
                   Does this tool work in all locations?
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-gray-300">
                   Yes! Automatic ZIP code lookup supports the US, but you can enable <strong>Manual Mode</strong> 
                   to enter data for any area supported by Open-Meteo’s global forecasts.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                <h3 className="font-semibold text-lg text-gray-100">
                   Can it predict delays or early dismissals?
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-gray-300">
                   While it’s designed to predict full closures, <strong>moderate scores (55–85%)</strong> 
                   may indicate possible delays or early dismissals during severe weather.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                <h3 className="font-semibold text-lg text-gray-100">
                   How does the Snow Day Calculator work?
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-gray-300">
                   It analyzes snowfall, temperature, wind speed, and precipitation probability using a 
                   <strong> custom scoring algorithm</strong> to estimate the likelihood of a snow day for your school district.
                 </p>
@@ -705,8 +705,8 @@ const SnowDayCalculator: React.FC<SnowDayCalculatorProps> = ({ navigateTo }) => 
             </div>
           </div>
           {/* Section 5: Social Sharing */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg animate-slide-in" style={{ animationDelay: '600ms' }}>
-              <h3 className="text-2xl font-bold mb-4">Share This Tool</h3>
+          <div className="bg-slate-800 p-6 rounded-lg shadow-lg animate-slide-in" style={{ animationDelay: '600ms' }}>
+              <h3 className="text-2xl font-bold mb-4 text-white">Share This Tool</h3>
               <div className="flex items-center space-x-4">
                   <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent('https://zurawebtools.com/tools/snow-day-calculator')}&text=${encodeURIComponent('I used this Snow Day Calculator to predict my chances! Check it out:')}`} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-blue-500 transition-colors">
                       <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
