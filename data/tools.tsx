@@ -147,6 +147,13 @@ const ColorHarmonyIcon = () => (
         <path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4ZM12 6L15.09 9.09L18 6L21 9L18 12L15.09 14.91L12 18L8.91 14.91L6 12L9 9L12 6Z" fill="url(#toolGrad11)" />
     </svg>
 );
+const SnowDayCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="snowDayCalculatorIconTitle">
+        <title id="snowDayCalculatorIconTitle">Snow Day Calculator Icon</title>
+        <defs><linearGradient id="toolGrad13" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3b82f6" /><stop offset="100%" stopColor="#06b6d4" /></linearGradient></defs>
+        <path d="M12 2L8.5 8.5L2 12L8.5 15.5L12 22L15.5 15.5L22 12L15.5 8.5L12 2ZM12 6L14 10L18 12L14 14L12 18L10 14L6 12L10 10L12 6Z" fill="url(#toolGrad13)" />
+    </svg>
+);
 
 
 export interface Category {
@@ -220,6 +227,13 @@ export const toolCategories: Category[] = [
                 link: 'fabric-costing-tool',
                 icon: <FabricCostingIcon />,
                 gradientColors: { from: '#f59e0b', to: '#ef4444' }, // Amber to Red
+            },
+            {
+                title: 'Snow Day Calculator',
+                description: 'Predict the likelihood of school closures due to weather conditions. Advanced algorithm analyzes snowfall, temperature, wind, and school district policies.',
+                link: 'snow-day-calculator',
+                icon: <SnowDayCalculatorIcon />,
+                gradientColors: { from: '#3b82f6', to: '#06b6d4' }, // Blue to Cyan
             },
         ]
     },

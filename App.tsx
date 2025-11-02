@@ -35,6 +35,7 @@ import JSONFormatterValidator from './components/tools/JSONFormatterValidator';
 import ShadowCSSGenerator from './components/tools/ShadowCSSGenerator';
 import ColorHarmonyChecker from './components/tools/ColorHarmonyChecker';
 import FabricCostingTool from './components/tools/FabricCostingTool';
+import SnowDayCalculator from './components/tools/SnowDayCalculator';
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -189,6 +190,9 @@ const App: React.FC = () => {
         }
         if (path === 'fabric-costing-tool') {
             return <FabricCostingTool navigateTo={navigateTo} />;
+        }
+        if (path === 'snow-day-calculator') {
+            return <SnowDayCalculator navigateTo={navigateTo} />;
         }
         
         const category = toolCategories.find(cat => cat.slug === path);
