@@ -235,6 +235,13 @@ export const toolCategories: Category[] = [
                 icon: <SnowDayCalculatorIcon />,
                 gradientColors: { from: '#3b82f6', to: '#06b6d4' }, // Blue to Cyan
             },
+            {
+                title: 'Pro RV Loan Calculator',
+                description: 'Calculate RV loan payments with detailed amortization schedule, payment breakdown, and comparison tools. Perfect for RV financing decisions.',
+                link: 'pro-rv-loan-calculator',
+                icon: <PercentageChangeIcon />,
+                gradientColors: { from: '#10b981', to: '#06b6d4' }, // Green to Cyan
+            },
         ]
     },
     {
