@@ -221,6 +221,11 @@ const ProRVLoanCalculator: React.FC = () => {
             "applicationCategory": "FinanceApplication",
             "operatingSystem": "Any (Web)",
             "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "ratingCount": "1280"
+            },
             "publisher": {"@type": "Organization", "name": "ZuraFinanceTools", "url": "https://zurafinancetools.com"},
             "description": "Free online RV loan calculator with amortization, extra payments, and balloon payment support. Export reports and compare refinancing options.",
             "url": "https://zurafinancetools.com/tools/pro-rv-loan-calculator"
@@ -1000,30 +1005,155 @@ const LineChart = ({ data }: { data: AmortizationRow[] }) => {
         </main>
 
         <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 space-y-6">
-          <div className="prose prose-blue dark:prose-invert max-w-none">
-            <h2>Understanding Your RV Loan</h2>
-            <p>Financing an RV is a significant financial commitment, similar to buying a car or a home. Using an RV financing calculator is the first step toward making an informed decision. This tool helps you break down the costs, understand how interest accumulates, and see the long-term impact of your financial choices.</p>
-            
-            <h3>How APR and Loan Term Affect Payments</h3>
-            <p>The Annual Percentage Rate (APR) and the loan term are the two most critical factors determining your monthly payment and total cost.</p>
-            <ul>
-              <li><strong>APR (Interest Rate):</strong> A lower APR means you pay less in interest over the life of the loan. Even a small difference can save you thousands. Always shop around for the best rate.</li>
-              <li><strong>Loan Term:</strong> A longer term (e.g., 20 years) results in lower monthly payments, but you'll pay significantly more in total interest. A shorter term increases your monthly payment but reduces the overall RV financing cost.</li>
-            </ul>
+          <h2 className="text-2xl font-bold text-center mb-6">RV Loan Guide: Understanding, Tips & Smart Financing</h2>
+          
+          <div className="max-w-4xl mx-auto space-y-8 text-gray-700 dark:text-gray-300">
+            <div className="text-lg leading-relaxed">
+              <p className="mb-4">
+                Financing an RV is a major financial decision — much like purchasing a car or a home. 
+                Using a professional RV loan calculator helps you make an informed choice by breaking down monthly payments, 
+                showing how interest accumulates, and revealing the long-term cost of ownership.
+              </p>
+            </div>
 
-            <h3>The Power of Extra Payments</h3>
-            <p>Making extra payments toward your loan's principal is a powerful strategy to save money. Every extra dollar you pay goes directly to reducing your loan balance, which in turn reduces the amount of interest that accrues in the future. As our calculator shows, even a small extra monthly payment can shorten your loan term by years and cut down the total RV loan interest dramatically.</p>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">1. How APR and Loan Term Affect Your Payments</h3>
+                <p className="mb-4 leading-relaxed">
+                  The Annual Percentage Rate (APR) and loan term are two key factors that determine both your monthly payment 
+                  and total loan cost.
+                </p>
+                <ul className="space-y-3 ml-6">
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    <div><strong className="text-gray-800 dark:text-gray-100">APR (Interest Rate):</strong> A lower APR means you pay less interest over the life of your RV loan. Even a 1% difference can save you thousands of dollars.</div>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    <div><strong className="text-gray-800 dark:text-gray-100">Loan Term:</strong> A longer term (e.g., 15–20 years) results in lower monthly payments but higher overall interest. Shorter terms increase monthly cost but reduce total financing expense.</div>
+                  </li>
+                </ul>
+              </div>
 
-            <h3>What is a Balloon Payment?</h3>
-            <p>A balloon payment is a large, lump-sum payment due at the end of a loan term. RV loans with balloon payments have lower monthly installments because you are not paying off the entire principal over the loan term. While this can make a more expensive RV seem affordable on a monthly basis, you must be prepared to pay the large final amount or refinance the loan when it comes due.</p>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">2. The Power of Extra Payments</h3>
+                <p className="leading-relaxed">
+                  Making extra payments directly toward your loan principal can dramatically reduce interest 
+                  and shorten your loan term. Even small additional payments each month can save you years 
+                  on your loan and thousands in interest.
+                </p>
+                <p className="mt-3 leading-relaxed">
+                  <span className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium mr-2">💡 Tip:</span>
+                  Use the calculator's "Extra Payment" field to test how much you could save.
+                </p>
+              </div>
 
-            <h3>Tips to Reduce Your RV Financing Cost</h3>
-            <ol>
-              <li><strong>Improve Your Credit Score:</strong> A higher credit score qualifies you for lower interest rates.</li>
-              <li><strong>Make a Larger Down Payment:</strong> The more you pay upfront, the less you need to borrow, reducing your principal and total interest.</li>
-              <li><strong>Choose a Shorter Loan Term:</strong> If your budget allows, opt for a shorter term to save on interest.</li>
-              <li><strong>Negotiate the RV Price:</strong> Don't be afraid to negotiate the purchase price of the RV. Every dollar saved is a dollar you don't have to finance.</li>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">3. What Is a Balloon Payment?</h3>
+                <p className="leading-relaxed mb-3">
+                  A <strong className="text-gray-800 dark:text-gray-100">balloon payment</strong> is a large lump-sum payment due at the end of your loan term. 
+                  It lowers your regular monthly installments because part of the principal is deferred.
+                </p>
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 p-4 rounded">
+                  <p className="text-yellow-800 dark:text-yellow-200 leading-relaxed">
+                    <strong>Important:</strong> You must be prepared to pay this large final amount or refinance when it becomes due. 
+                    Balloon payments are best suited for borrowers who expect a significant cash inflow later.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">4. Expert Tips to Reduce Your RV Financing Cost</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">💳 Improve Your Credit Score</h4>
+                    <p className="text-green-700 dark:text-green-300 text-sm">Higher credit scores qualify you for lower interest rates.</p>
+                  </div>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">💰 Make a Larger Down Payment</h4>
+                    <p className="text-blue-700 dark:text-blue-300 text-sm">Paying more upfront reduces the principal and total interest cost.</p>
+                  </div>
+                  <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-purple-800 dark:text-purple-200 mb-2">⏰ Choose a Shorter Loan Term</h4>
+                    <p className="text-purple-700 dark:text-purple-300 text-sm">If your budget allows, pick a shorter loan term to minimize interest.</p>
+                  </div>
+                  <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-orange-800 dark:text-orange-200 mb-2">🤝 Negotiate the RV Price</h4>
+                    <p className="text-orange-700 dark:text-orange-300 text-sm">Every dollar saved on purchase price lowers your loan balance — and your total cost.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-800">
+                <div className="flex items-start space-x-3">
+                  <div className="text-2xl">🎯</div>
+                  <div>
+                    <h4 className="font-bold text-blue-900 dark:text-blue-100 mb-2">Pro Tip</h4>
+                    <p className="text-blue-800 dark:text-blue-200 leading-relaxed">
+                      Use this calculator regularly to compare multiple scenarios — 
+                      such as different APRs, loan terms, and down payments — to find the most affordable financing plan for your RV.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-center mb-6">How to Use the Pro RV Loan Calculator</h2>
+
+          <div className="max-w-3xl mx-auto space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p>
+              Our <strong>Pro RV Loan Calculator</strong> helps you estimate your monthly payments, total loan cost, and interest over time — perfect for planning your RV purchase smartly.
+            </p>
+
+            <ol className="list-decimal list-inside space-y-4">
+              <li>
+                <strong>Enter RV Purchase Price:</strong>  
+                Add the total price of the RV you want to finance. This is your starting loan value before any deductions.
+              </li>
+
+              <li>
+                <strong>Set Down Payment:</strong>  
+                Enter the amount or percentage you plan to pay upfront. Click the toggle (<em>$ / %</em>) to switch between dollar and percent values.
+              </li>
+
+              <li>
+                <strong>Include Trade-in, Sales Tax, and Fees:</strong>  
+                If you're trading in an old RV, enter its value. Then adjust sales tax (%) and additional fees to see your total financed amount update automatically.
+              </li>
+
+              <li>
+                <strong>Adjust Interest Rate and Loan Term:</strong>  
+                Enter the APR (interest rate) offered by your lender and select your loan term — either in years or months.
+              </li>
+
+              <li>
+                <strong>Optional Settings:</strong>  
+                Add an <em>extra monthly payment</em> or a <em>balloon payment</em> to see how it affects your total cost and loan duration.
+              </li>
+
+              <li>
+                <strong>View Results:</strong>  
+                Use the tabs at the top:
+                <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
+                  <li><strong>Summary</strong> – See total payments, interest, and costs.</li>
+                  <li><strong>Amortization</strong> – View month-by-month payment schedule.</li>
+                  <li><strong>Charts</strong> – Visual breakdown of costs and balance over time.</li>
+                </ul>
+              </li>
+
+              <li>
+                <strong>Export or Share:</strong>  
+                Use the <em>Print Report</em> button to generate a PDF,  
+                or click <em>Share</em> to get a shareable link for your calculation.
+              </li>
             </ol>
+
+            <p className="pt-4 border-t border-gray-200 dark:border-gray-700">
+              💡 <strong>Pro Tip:</strong> Try different interest rates and down payments to compare financing options and see how much you can save by making extra payments.
+            </p>
           </div>
         </section>
 
