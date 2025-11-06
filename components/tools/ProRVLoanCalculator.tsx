@@ -139,7 +139,7 @@ const US_STATES_TAX = [
   { state: 'Wyoming', rate: 4.0 },
 ];
 
-const ProRVLoanCalculator: React.FC = () => {
+const ProRVLoanCalculator: React.FC<{ navigateTo?: (path: string) => void }> = ({ navigateTo }) => {
   // STATE MANAGEMENT
   const [rvPrice, setRvPrice] = useState<number>(75000);
   const [downPayment, setDownPayment] = useState<number>(15000);

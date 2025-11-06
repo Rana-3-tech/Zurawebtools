@@ -37,6 +37,7 @@ import ColorHarmonyChecker from './components/tools/ColorHarmonyChecker';
 import FabricCostingTool from './components/tools/FabricCostingTool';
 import SnowDayCalculator from './components/tools/SnowDayCalculator';
 import ProRVLoanCalculator from './components/tools/ProRVLoanCalculator';
+import SATScoreCalculator from './components/tools/SATScoreCalculator';
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -197,6 +198,9 @@ const App: React.FC = () => {
         }
         if (path === 'pro-rv-loan-calculator') {
             return <ProRVLoanCalculator navigateTo={navigateTo} />;
+        }
+        if (path === 'sat-score-calculator') {
+            return <SATScoreCalculator />;
         }
         
         const category = toolCategories.find(cat => cat.slug === path);
