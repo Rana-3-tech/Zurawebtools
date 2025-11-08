@@ -401,22 +401,65 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
         {/* About Section with Semantic Keywords */}
         <div className="max-w-4xl mx-auto mt-16">
           <h2 className="text-3xl font-bold text-center mb-8 text-white">📚 About the Percentage Change Calculator</h2>
-          <div className="bg-slate-900/30 p-8 rounded-lg text-gray-300 space-y-4 leading-relaxed">
-            <p>
-              Our <strong>percentage change calculator</strong> is a comprehensive online tool designed to calculate <strong>percent increase</strong>, <strong>percent decrease</strong>, and <strong>percentage difference</strong> between two values instantly. Whether you need to compute investment growth, sales performance changes, or track personal fitness goals, this free <strong>percentage calculator</strong> provides accurate results using the standard <strong>percent change formula</strong>: ((New Value - Original Value) / Original Value) × 100. Perfect for finance professionals, business analysts, students, and anyone needing to <strong>calculate percentage change</strong> quickly and reliably. Use it alongside our <a href="/tools/time-difference-calculator" onClick={(e) => { e.preventDefault(); navigateTo('/tools/time-difference-calculator'); }} className="text-cyan-400 hover:text-cyan-300 underline">time difference calculator</a> for comprehensive data analysis.
-            </p>
-            <p>
-              As a powerful <strong>percent increase calculator</strong> and <strong>percent decrease calculator</strong>, our tool automatically detects whether the change is positive (increase) or negative (decrease) and displays color-coded results for easy interpretation. The <strong>percentage growth calculator</strong> is ideal for tracking financial metrics like revenue growth, profit margins, stock price changes, and investment returns. Business professionals use this <strong>percent difference calculator</strong> to analyze sales performance, market share changes, customer acquisition rates, and key performance indicators (KPIs) in quarterly reports and presentations. The calculator supports both whole numbers and decimals, making it versatile for various calculation needs. Combine it with our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter tool</a> for document analysis.
-            </p>
-            <p>
-              Students and educators benefit from this <strong>calculate percent change</strong> tool for mathematics homework, statistics projects, economics assignments, and science experiments. The <strong>percentage change formula calculator</strong> helps visualize abstract concepts by showing real-time results with practical examples like test score improvements, grade calculations, and statistical data analysis. Unlike basic calculators that only show raw numbers, our tool provides context by indicating whether the change represents growth or decline, making it an excellent educational resource for understanding <strong>percent change formula</strong> applications in real-world scenarios. For text formatting needs, check out our <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }} className="text-cyan-400 hover:text-cyan-300 underline">case converter tool</a>.
-            </p>
-            <p>
-              The <strong>online percentage calculator</strong> includes convenient quick-example templates for common calculations like investment growth (stock portfolios increasing from $10,000 to $12,500), sales performance tracking (units rising from 200 to 250), price discount analysis (products dropping from $500 to $400), weight loss monitoring (body weight reducing from 180 to 162 lbs), revenue growth assessment (monthly income jumping from $50K to $65K), and academic improvement (test scores improving from 70 to 84 points). Simply click any template to instantly populate the calculator and see the percentage change calculation in action.
-            </p>
-            <p>
-              Whether you're a financial analyst calculating ROI, a business owner tracking quarterly growth, a student solving math problems, or someone monitoring personal fitness goals, this <strong>free percentage tool</strong> delivers accurate, instant results without requiring manual formula calculations. The calculator works entirely in your browser with no server delays, ensuring privacy for sensitive financial data. Generate unlimited percentage change calculations with zero registration requirements, no hidden fees, and no usage limits - completely free forever for all your personal, educational, and professional needs.
-            </p>
+          <div className="bg-slate-900/30 p-8 rounded-lg text-gray-300 space-y-6 leading-relaxed">
+            
+            {/* What is it */}
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-3 flex items-center">
+                <span className="text-cyan-400 mr-2">🎯</span> What is This Tool?
+              </h3>
+              <p className="text-gray-300">
+                Our <strong>percentage change calculator</strong> is a free online tool that helps you instantly calculate <strong>percent increase</strong>, <strong>percent decrease</strong>, and <strong>percentage difference</strong> between two values. Whether you're tracking investment growth, sales performance, or personal fitness goals, this <strong>percentage calculator</strong> gives you accurate results using the standard formula: <code className="bg-slate-800 px-2 py-1 rounded text-cyan-300">((New Value - Original Value) / Original Value) × 100</code>
+              </p>
+            </div>
+
+            {/* How it works */}
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-3 flex items-center">
+                <span className="text-purple-400 mr-2">⚙️</span> How Does It Work?
+              </h3>
+              <p className="text-gray-300">
+                Simply enter your original and new values, and the <strong>percent increase calculator</strong> automatically detects if it's an increase (positive) or decrease (negative). Results are color-coded for easy reading: <span className="text-green-400 font-semibold">green for increases</span> and <span className="text-red-400 font-semibold">red for decreases</span>. The calculator supports whole numbers and decimals, making it perfect for any calculation scenario. Use it with our <a href="/tools/time-difference-calculator" onClick={(e) => { e.preventDefault(); navigateTo('/tools/time-difference-calculator'); }} className="text-cyan-400 hover:text-cyan-300 underline">time difference calculator</a> for complete data analysis.
+              </p>
+            </div>
+
+            {/* Who uses it */}
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-3 flex items-center">
+                <span className="text-blue-400 mr-2">👥</span> Who Uses This Calculator?
+              </h3>
+              <div className="text-gray-300 space-y-2">
+                <p><strong className="text-white">Finance Professionals:</strong> Track revenue growth, profit margins, stock prices, and investment returns</p>
+                <p><strong className="text-white">Business Analysts:</strong> Analyze sales performance, market share, and KPIs for quarterly reports</p>
+                <p><strong className="text-white">Students & Teachers:</strong> Solve math homework, understand percentage concepts, and analyze statistical data</p>
+                <p><strong className="text-white">Personal Use:</strong> Monitor weight loss, fitness progress, savings growth, and personal goals</p>
+              </div>
+            </div>
+
+            {/* Quick Examples */}
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-3 flex items-center">
+                <span className="text-orange-400 mr-2">📊</span> Ready-to-Use Examples
+              </h3>
+              <p className="text-gray-300">
+                We've included 6 clickable templates for common scenarios: <strong>Investment Growth</strong> ($10K → $12.5K), <strong>Sales Performance</strong> (200 → 250 units), <strong>Price Discounts</strong> ($500 → $400), <strong>Weight Loss</strong> (180 → 162 lbs), <strong>Revenue Growth</strong> ($50K → $65K), and <strong>Test Scores</strong> (70 → 84). Just click any example to see instant results! Check out our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter</a> and <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }} className="text-cyan-400 hover:text-cyan-300 underline">case converter</a> for more helpful tools.
+              </p>
+            </div>
+
+            {/* Why choose us */}
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-3 flex items-center">
+                <span className="text-green-400 mr-2">✨</span> Why Choose Our Calculator?
+              </h3>
+              <ul className="text-gray-300 space-y-2 list-none">
+                <li>✅ <strong>100% Free</strong> - No registration, no fees, unlimited calculations</li>
+                <li>✅ <strong>Instant Results</strong> - Get answers in real-time without delays</li>
+                <li>✅ <strong>Privacy First</strong> - All calculations happen in your browser</li>
+                <li>✅ <strong>Accurate & Reliable</strong> - Uses standard percentage change formula</li>
+                <li>✅ <strong>Easy to Use</strong> - Simple interface, color-coded results</li>
+              </ul>
+            </div>
+
           </div>
         </div>
 
