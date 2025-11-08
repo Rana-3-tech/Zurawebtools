@@ -696,7 +696,10 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
         <section className="mb-12 max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-white mb-4 text-center">🎨 Quick Test Examples</h2>
           <p className="text-slate-300 mb-6 text-center">Try these popular color combinations used by top brands and designers:</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          
+          {/* Popular Brand Colors */}
+          <h3 className="text-lg font-semibold text-white mb-3">Popular Brand Colors</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             {[
               { name: 'Brand Blue', color: '#0066CC', desc: 'Corporate & Trust' },
               { name: 'Sunset Orange', color: '#FF6B35', desc: 'Energy & Warmth' },
@@ -726,14 +729,124 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
               </button>
             ))}
           </div>
+
+          {/* Seasonal Palettes */}
+          <h3 className="text-lg font-semibold text-white mb-3 mt-6">Seasonal Palettes</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {[
+              { name: 'Spring Fresh', color: '#A8E6CF', desc: '🌸 Renewal & Growth' },
+              { name: 'Summer Bright', color: '#FFD93D', desc: '☀️ Energy & Joy' },
+              { name: 'Autumn Warm', color: '#D97642', desc: '🍂 Cozy & Comfortable' },
+              { name: 'Winter Cool', color: '#4A90E2', desc: '❄️ Calm & Sophisticated' },
+            ].map((example) => (
+              <button
+                key={example.name}
+                onClick={() => setBaseColor(example.color)}
+                className="p-4 rounded-lg border-2 border-slate-600 hover:border-blue-500 transition-all transform hover:scale-105 bg-slate-800 text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div
+                    className="w-10 h-10 rounded-md shadow-lg"
+                    style={{ backgroundColor: example.color }}
+                  ></div>
+                  <div>
+                    <div className="font-semibold text-white group-hover:text-blue-400 transition-colors text-sm">
+                      {example.name}
+                    </div>
+                    <div className="text-xs text-slate-400">{example.color}</div>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-400">{example.desc}</div>
+              </button>
+            ))}
+          </div>
+
+          {/* Industry-Specific Colors */}
+          <h3 className="text-lg font-semibold text-white mb-3">Industry-Specific Colors</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              { name: 'E-commerce Red', color: '#E74C3C', desc: '🛒 Urgency & Action' },
+              { name: 'Finance Blue', color: '#2C3E50', desc: '💼 Trust & Stability' },
+              { name: 'Healthcare Teal', color: '#16A085', desc: '⚕️ Care & Wellness' },
+              { name: 'Education Orange', color: '#F39C12', desc: '📚 Learning & Growth' },
+              { name: 'Tech Dark', color: '#34495E', desc: '💻 Modern & Professional' },
+              { name: 'Food Red', color: '#C0392B', desc: '🍔 Appetite & Passion' },
+            ].map((example) => (
+              <button
+                key={example.name}
+                onClick={() => setBaseColor(example.color)}
+                className="p-4 rounded-lg border-2 border-slate-600 hover:border-blue-500 transition-all transform hover:scale-105 bg-slate-800 text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div
+                    className="w-10 h-10 rounded-md shadow-lg"
+                    style={{ backgroundColor: example.color }}
+                  ></div>
+                  <div>
+                    <div className="font-semibold text-white group-hover:text-blue-400 transition-colors text-sm">
+                      {example.name}
+                    </div>
+                    <div className="text-xs text-slate-400">{example.color}</div>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-400">{example.desc}</div>
+              </button>
+            ))}
+          </div>
         </section>
         
         <section className="mt-16">
             <h2 className="text-3xl font-bold text-center mb-8">Generated Palette Preview</h2>
-            <div className="flex flex-col md:flex-row w-full h-32 md:h-20 rounded-lg overflow-hidden shadow-lg">
+            <div className="flex flex-col md:flex-row w-full h-32 md:h-20 rounded-lg overflow-hidden shadow-lg mb-6">
                 {[baseColor, ...harmonies.flatMap(h => h.colors)].slice(0, 10).map((color, index) => (
                     <div key={`${color}-${index}`} style={{ backgroundColor: color }} className="flex-1 transition-colors duration-300" title={color}></div>
                 ))}
+            </div>
+            
+            {/* Export Options */}
+            <div className="flex flex-wrap justify-center gap-4">
+              <button
+                onClick={() => {
+                  const colors = [baseColor, ...harmonies.flatMap(h => h.colors)].slice(0, 10);
+                  const cssVars = colors.map((color, i) => `  --color-${i + 1}: ${color};`).join('\n');
+                  const cssCode = `:root {\n${cssVars}\n}`;
+                  navigator.clipboard.writeText(cssCode);
+                  handleCopy('CSS Variables copied!');
+                }}
+                className="flex items-center gap-2 px-6 py-3 font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all transform hover:scale-105"
+              >
+                <CopyIcon className="w-5 h-5" />
+                Copy as CSS Variables
+              </button>
+              
+              <button
+                onClick={() => {
+                  const colors = [baseColor, ...harmonies.flatMap(h => h.colors)].slice(0, 10);
+                  const sassVars = colors.map((color, i) => `$color-${i + 1}: ${color};`).join('\n');
+                  navigator.clipboard.writeText(sassVars);
+                  handleCopy('SASS Variables copied!');
+                }}
+                className="flex items-center gap-2 px-6 py-3 font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-700 transition-all transform hover:scale-105"
+              >
+                <CopyIcon className="w-5 h-5" />
+                Copy as SASS Variables
+              </button>
+              
+              <button
+                onClick={() => {
+                  const colors = [baseColor, ...harmonies.flatMap(h => h.colors)].slice(0, 10);
+                  const jsonObj = colors.reduce((acc, color, i) => {
+                    acc[`color${i + 1}`] = color;
+                    return acc;
+                  }, {} as Record<string, string>);
+                  navigator.clipboard.writeText(JSON.stringify(jsonObj, null, 2));
+                  handleCopy('JSON copied!');
+                }}
+                className="flex items-center gap-2 px-6 py-3 font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 transition-all transform hover:scale-105"
+              >
+                <CopyIcon className="w-5 h-5" />
+                Copy as JSON
+              </button>
             </div>
         </section>
 
@@ -849,7 +962,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
               Perfect for discovering <strong>complementary colors</strong> that create maximum contrast, <strong>analogous color schemes</strong> for harmonious designs, <strong>triadic color palettes</strong> for vibrant layouts, and monochromatic variations for elegant, minimal aesthetics. Export colors in multiple formats and integrate them directly into CSS, Sass, design systems, or tools like Figma, Adobe XD, and Sketch.
             </p>
             <p className="text-sm text-slate-400 mt-6 pt-6 border-t border-slate-700">
-              <strong>Related Tools:</strong> Try our <a href="/tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/hex-to-rgb-converter'); }} className="text-blue-400 hover:underline">Hex to RGB Converter</a> for color format conversion, <a href="/tools/accessible-color-contrast-checker" onClick={(e) => { e.preventDefault(); navigateTo('/accessible-color-contrast-checker'); }} className="text-blue-400 hover:underline">Accessible Color Contrast Checker</a> for detailed WCAG testing, or our <a href="/tools/shadow-css-generator" onClick={(e) => { e.preventDefault(); navigateTo('/shadow-css-generator'); }} className="text-blue-400 hover:underline">CSS Shadow Generator</a> for adding depth to your designs.
+              <strong>Related Tools:</strong> Try our <a href="/tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/hex-to-rgb-converter'); }} className="text-blue-400 hover:underline">Hex to RGB Converter</a> for color format conversion, <a href="/tools/accessible-color-contrast-checker" onClick={(e) => { e.preventDefault(); navigateTo('/accessible-color-contrast-checker'); }} className="text-blue-400 hover:underline">Accessible Color Contrast Checker</a> for detailed WCAG testing, <a href="/tools/shadow-css-generator" onClick={(e) => { e.preventDefault(); navigateTo('/shadow-css-generator'); }} className="text-blue-400 hover:underline">CSS Shadow Generator</a> for adding depth to your designs, <a href="/tools/lorem-ipsum-generator" onClick={(e) => { e.preventDefault(); navigateTo('/lorem-ipsum-generator'); }} className="text-blue-400 hover:underline">Lorem Ipsum Generator</a> for placeholder content, or our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/word-counter'); }} className="text-blue-400 hover:underline">Word Counter</a> for content analysis.
             </p>
             <p className="text-xs text-slate-500 text-center mt-4">
               Last Updated: November 8, 2024
