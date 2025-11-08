@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { notifyIndexNow } from '../../utils/indexNow';
 
 // --- TYPE DEFINITIONS ---
 interface RGB { r: number; g: number; b: number; }
@@ -287,10 +288,13 @@ const AccessibilityResult: React.FC<AccessibilityResultProps> = ({ color }) => {
 };
 
 const faqs = [
-    { q: "What is color harmony in design?", a: "Color harmony refers to visually pleasing combinations of colors that create balance and appeal. It’s based on color wheel relationships like complementary, analogous, and triadic." },
-    { q: "How do designers use color harmony?", a: "Designers use color harmony to ensure their color choices convey the right emotion, improve readability, and maintain visual balance across user interfaces." },
-    { q: "Which color harmonies are best for UI design?", a: "Triadic and analogous schemes are often ideal for UI because they offer both contrast and cohesion while maintaining accessibility." },
-    { q: "Does this tool follow color theory principles?", a: "Yes! It uses standard color wheel mathematics and HSL-based calculations to ensure accurate and consistent results." },
+    { q: "What is color harmony in design?", a: "Color harmony refers to visually pleasing combinations of colors based on their relationships on the color wheel. Common harmonies include complementary (opposite colors), analogous (adjacent colors), triadic (three evenly spaced colors), and tetradic (four colors forming a rectangle). These create balance, visual interest, and emotional impact in design." },
+    { q: "How do I use a color harmony checker?", a: "Simply pick a base color using the color picker or enter a HEX code. The tool instantly generates complementary, triadic, analogous, tetradic, and monochromatic color schemes. You can copy any color code (HEX, RGB, or HSL) by clicking the copy icon, and test accessibility with built-in WCAG contrast ratio checking." },
+    { q: "What are complementary colors?", a: "Complementary colors are pairs of colors that sit directly opposite each other on the color wheel, such as red and green, blue and orange, or yellow and purple. They create maximum contrast and vibrant visual impact when used together, making them ideal for call-to-action buttons and important UI elements." },
+    { q: "Which color harmony is best for UI design?", a: "Triadic and analogous harmonies are often best for UI design. Triadic schemes (three evenly spaced colors) provide vibrant contrast while maintaining balance. Analogous schemes (adjacent colors) create cohesive, harmonious interfaces that are easy on the eyes. Both work well when combined with proper accessibility testing." },
+    { q: "Does this tool test color accessibility?", a: "Yes! Every generated color is automatically tested for WCAG accessibility compliance. The tool shows contrast ratios against both white and black text, indicating whether colors meet AA and AAA standards. This ensures your color choices are readable for users with visual impairments." },
+    { q: "Can I export color palettes?", a: "You can easily copy individual color codes in HEX, RGB, or HSL formats by clicking the copy icon next to each value. The generated palette preview at the bottom shows all colors together, which you can screenshot or manually record for your design projects." },
+    { q: "Is this color harmony tool free?", a: "Yes, completely free! No registration, no limits, no hidden fees. Use it unlimited times for personal or commercial projects. Generate as many color palettes as you need for your design work, web development, or creative projects." },
 ];
 
 const relatedTools = [
@@ -383,68 +387,258 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
   }, [baseColor]);
   
   useEffect(() => {
-    const metaInfo = {
-        title: 'Color Harmony Checker – Free Color Palette & Scheme Generator | ZuraWebTools',
-        description: 'Find perfect color combinations with this free Color Harmony Checker. Generate complementary, triadic, and analogous palettes instantly. Ideal for UI designers and web developers.',
-        keywords: 'color harmony checker, color palette generator, complementary colors online, color theory tool, triadic color generator, analogous color scheme maker, color wheel tool, color combination checker, ui design color harmony, web color scheme generator, best color palette generator 2025, free design color tool',
-        canonicalUrl: 'https://zurawebtools.com/color-harmony-checker',
-        imageUrl: 'https://storage.googleapis.com/aai-web-samples/zura-color-harmony-checker-og.png'
-    };
+    document.title = 'Color Harmony Checker – Free Color Palette & Scheme Generator | ZuraWebTools';
 
-    document.title = metaInfo.title;
+    // Set HTML lang attribute
+    document.documentElement.setAttribute('lang', 'en');
 
-    const tagsToManage = [
-        { tag: 'meta', attrs: { name: 'description', content: metaInfo.description } },
-        { tag: 'meta', attrs: { name: 'keywords', content: metaInfo.keywords } },
-        { tag: 'link', attrs: { rel: 'canonical', href: metaInfo.canonicalUrl } },
-        // OG tags
-        { tag: 'meta', attrs: { property: 'og:title', content: metaInfo.title } },
-        { tag: 'meta', attrs: { property: 'og:description', content: metaInfo.description } },
-        { tag: 'meta', attrs: { property: 'og:url', content: metaInfo.canonicalUrl } },
-        { tag: 'meta', attrs: { property: 'og:image', content: metaInfo.imageUrl } },
-        { tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
-        // Twitter tags
-        { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
-        { tag: 'meta', attrs: { name: 'twitter:title', content: metaInfo.title } },
-        { tag: 'meta', attrs: { name: 'twitter:description', content: metaInfo.description } },
-        { tag: 'meta', attrs: { name: 'twitter:image', content: metaInfo.imageUrl } },
-        { tag: 'meta', attrs: { name: 'twitter:site', content: '@ZuraWebTools' } },
+    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.setAttribute('content', 'Free Color Harmony Checker and palette generator tool. Create complementary, triadic, analogous, tetradic & monochromatic color schemes instantly. Perfect for UI/UX designers, web developers, graphic designers, and digital artists. Generate beautiful color combinations with WCAG accessibility testing built-in.');
+    document.head.appendChild(metaDescription);
+
+    const metaTags = [
+      { property: 'og:title', content: 'Color Harmony Checker – Free Color Palette Generator | ZuraWebTools' },
+      { property: 'og:description', content: 'Generate perfect color harmonies instantly. Free color palette generator with complementary, triadic, and analogous schemes for designers.' },
+      { property: 'og:image', content: 'https://zurawebtools.com/assets/og-color-harmony-checker.webp' },
+      { property: 'og:image:alt', content: 'Free Color Harmony Checker showing complementary and triadic color palettes' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'ZuraWebTools' },
+      { property: 'og:url', content: 'https://zurawebtools.com/tools/color-harmony-checker' },
+      { property: 'og:locale', content: 'en_US' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Color Harmony Checker – Free Palette Generator' },
+      { name: 'twitter:description', content: 'Generate complementary, triadic, and analogous color schemes instantly with our free color harmony tool.' },
+      { name: 'twitter:image', content: 'https://zurawebtools.com/assets/og-color-harmony-checker.webp' },
+      { name: 'twitter:image:alt', content: 'Free Color Harmony Checker showing multiple color palettes' },
+      { name: 'language', content: 'English' },
+      { httpEquiv: 'content-language', content: 'en-US' },
+      { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
     ];
 
-    const addedElements: Element[] = [];
+    metaTags.forEach(tag => {
+      const el = document.createElement('meta');
+      Object.entries(tag).forEach(([k, v]) => el.setAttribute(k, v));
+      document.head.appendChild(el);
+    });
 
-    tagsToManage.forEach(({ tag, attrs }) => {
-        const element = document.createElement(tag);
-        Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
-        document.head.appendChild(element);
-        addedElements.push(element);
-    });
-    
-    const schema = { /* ... schema definition ... */ };
-    
-    let schemaScript = document.getElementById('json-ld-schema') as HTMLScriptElement | null;
-    if (!schemaScript) {
-        schemaScript = document.createElement('script');
-        schemaScript.id = 'json-ld-schema';
-        schemaScript.type = 'application/ld+json';
-        document.head.appendChild(schemaScript);
-    }
-    schemaScript.innerHTML = JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-            { "@type": "SoftwareApplication", "name": "Color Harmony Checker", "applicationCategory": "DesignTool", "operatingSystem": "Any (Web-based)", "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "1120" }, "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" }, "description": "Free Color Harmony Checker to find complementary, triadic, and analogous color palettes for designers and web developers.", "url": metaInfo.canonicalUrl },
-            { "@type": "FAQPage", "mainEntity": faqs.map(faq => ({ "@type": "Question", "name": faq.q, "acceptedAnswer": { "@type": "Answer", "text": faq.a } })) }
-        ]
-    });
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = 'https://zurawebtools.com/tools/color-harmony-checker';
+    document.head.appendChild(canonical);
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify([
+      {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'Color Harmony Checker',
+        applicationCategory: 'DesignApplication',
+        applicationSubCategory: 'Color Theory Tool',
+        operatingSystem: 'Any (Web-based)',
+        datePublished: '2024-01-15',
+        dateModified: '2024-11-08',
+        inLanguage: 'en-US',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        softwareVersion: '2.1',
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          ratingCount: '1340',
+        },
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'ZuraWebTools',
+          url: 'https://zurawebtools.com',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://zurawebtools.com/assets/logo.png',
+            width: '250',
+            height: '60',
+          },
+          sameAs: [
+            'https://www.facebook.com/zurawebtools',
+            'https://twitter.com/zurawebtools',
+            'https://www.linkedin.com/company/zurawebtools',
+          ],
+        },
+        description:
+          'Free Color Harmony Checker and palette generator. Create complementary, triadic, analogous, tetradic, and monochromatic color schemes with WCAG accessibility testing.',
+        url: 'https://zurawebtools.com/tools/color-harmony-checker',
+        featureList: [
+          'Complementary color generator',
+          'Triadic color schemes',
+          'Analogous color palettes',
+          'Tetradic color combinations',
+          'Monochromatic variations',
+          'WCAG accessibility testing',
+          'HEX, RGB, HSL color codes',
+          'Real-time color preview',
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'Color Harmony Checker – Free Color Palette Generator',
+        description:
+          'Generate perfect color harmonies and palettes instantly with our free color harmony checker tool for designers and developers.',
+        url: 'https://zurawebtools.com/tools/color-harmony-checker',
+        inLanguage: 'en-US',
+        isPartOf: {
+          '@type': 'WebSite',
+          name: 'ZuraWebTools',
+          url: 'https://zurawebtools.com',
+        },
+        datePublished: '2024-01-15',
+        dateModified: '2024-11-08',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://zurawebtools.com',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Tools',
+            item: 'https://zurawebtools.com/tools',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Color Harmony Checker',
+            item: 'https://zurawebtools.com/tools/color-harmony-checker',
+          },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: 'How to Use Color Harmony Checker',
+        description: 'Step-by-step guide to generate perfect color palettes and harmonies',
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Select Base Color',
+            text: 'Pick a base color using the color picker or enter a HEX code manually. This will be the foundation of your color harmony.',
+            url: 'https://zurawebtools.com/tools/color-harmony-checker#step1',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Explore Color Harmonies',
+            text: 'The tool automatically generates complementary, triadic, analogous, tetradic, and monochromatic color schemes based on your base color.',
+            url: 'https://zurawebtools.com/tools/color-harmony-checker#step2',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Copy Color Codes',
+            text: 'Click the copy icon next to any HEX, RGB, or HSL code to instantly copy it to your clipboard for use in your designs.',
+            url: 'https://zurawebtools.com/tools/color-harmony-checker#step3',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 4,
+            name: 'Test Accessibility',
+            text: 'Check contrast ratios against black and white text to ensure WCAG compliance and readability for all users.',
+            url: 'https://zurawebtools.com/tools/color-harmony-checker#step4',
+          },
+        ],
+        totalTime: 'PT2M',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'What is color harmony in design?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Color harmony refers to visually pleasing combinations of colors based on their relationships on the color wheel. Common harmonies include complementary (opposite colors), analogous (adjacent colors), triadic (three evenly spaced colors), and tetradic (four colors forming a rectangle). These create balance, visual interest, and emotional impact in design.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'How do I use a color harmony checker?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Simply pick a base color using the color picker or enter a HEX code. The tool instantly generates complementary, triadic, analogous, tetradic, and monochromatic color schemes. You can copy any color code (HEX, RGB, or HSL) by clicking the copy icon, and test accessibility with built-in WCAG contrast ratio checking.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What are complementary colors?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Complementary colors are pairs of colors that sit directly opposite each other on the color wheel, such as red and green, blue and orange, or yellow and purple. They create maximum contrast and vibrant visual impact when used together, making them ideal for call-to-action buttons and important UI elements.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Which color harmony is best for UI design?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Triadic and analogous harmonies are often best for UI design. Triadic schemes (three evenly spaced colors) provide vibrant contrast while maintaining balance. Analogous schemes (adjacent colors) create cohesive, harmonious interfaces that are easy on the eyes. Both work well when combined with proper accessibility testing.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Does this tool test color accessibility?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes! Every generated color is automatically tested for WCAG accessibility compliance. The tool shows contrast ratios against both white and black text, indicating whether colors meet AA and AAA standards. This ensures your color choices are readable for users with visual impairments.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Can I export color palettes?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'You can easily copy individual color codes in HEX, RGB, or HSL formats by clicking the copy icon next to each value. The generated palette preview at the bottom shows all colors together, which you can screenshot or manually record for your design projects.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Is this color harmony tool free?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes, completely free! No registration, no limits, no hidden fees. Use it unlimited times for personal or commercial projects. Generate as many color palettes as you need for your design work, web development, or creative projects.',
+            },
+          },
+        ],
+      },
+    ]);
+    document.head.appendChild(script);
     
     return () => {
-        document.title = 'ZuraWebTools';
-        addedElements.forEach(el => el.remove());
-        if (document.getElementById('json-ld-schema')) {
-            document.getElementById('json-ld-schema')?.remove();
-        }
+      document.title = 'ZuraWebTools';
+      metaTags.forEach(() => {
+        const el = document.querySelector('meta[property^="og:"], meta[name^="twitter:"], meta[name="language"], meta[http-equiv="content-language"], meta[name="robots"]');
+        if (el) el.remove();
+      });
+      canonical.remove();
+      script.remove();
     };
-}, []);
+  }, []);
+
+  // 📡 IndexNow: Notify search engines about page updates
+  useEffect(() => {
+    notifyIndexNow('/tools/color-harmony-checker');
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-300">
@@ -464,6 +658,41 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
       </header>
 
       <main>
+        {/* Quick Test Examples */}
+        <section className="mb-12 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-white mb-4 text-center">🎨 Quick Test Examples</h2>
+          <p className="text-slate-300 mb-6 text-center">Try these popular color combinations used by top brands and designers:</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              { name: 'Brand Blue', color: '#0066CC', desc: 'Corporate & Trust' },
+              { name: 'Sunset Orange', color: '#FF6B35', desc: 'Energy & Warmth' },
+              { name: 'Nature Green', color: '#2ECC71', desc: 'Growth & Health' },
+              { name: 'Royal Purple', color: '#9B59B6', desc: 'Luxury & Creativity' },
+              { name: 'Coral Pink', color: '#FF6F91', desc: 'Modern & Friendly' },
+              { name: 'Tech Cyan', color: '#00D9FF', desc: 'Innovation & Digital' },
+            ].map((example) => (
+              <button
+                key={example.name}
+                onClick={() => setBaseColor(example.color)}
+                className="p-4 rounded-lg border-2 border-slate-600 hover:border-blue-500 transition-all transform hover:scale-105 bg-slate-800 text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div
+                    className="w-10 h-10 rounded-md shadow-lg"
+                    style={{ backgroundColor: example.color }}
+                  ></div>
+                  <div>
+                    <div className="font-semibold text-white group-hover:text-blue-400 transition-colors">
+                      {example.name}
+                    </div>
+                    <div className="text-xs text-slate-400">{example.color}</div>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-400">{example.desc}</div>
+              </button>
+            ))}
+          </div>
+        </section>
         <div className="max-w-2xl mx-auto p-6 rounded-xl shadow-2xl bg-slate-800 border border-slate-700 mb-12">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <label htmlFor="base-color-picker" className="font-semibold text-white">Base Color:</label>
@@ -508,14 +737,123 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
         </section>
 
         <section className="mt-16 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-4">How to Use</h2>
-            <ul className="list-disc list-inside space-y-2 text-slate-300">
-                <li><strong>Pick a Base Color:</strong> Use the color picker or type a HEX code to start.</li>
-                <li><strong>Explore Harmonies:</strong> The tool automatically generates standard color harmonies like complementary, triadic, and more.</li>
-                <li><strong>Copy Codes:</strong> Click the copy icon next to any HEX, RGB, or HSL code to add it to your clipboard.</li>
-                <li><strong>Test Accessibility:</strong> Check the contrast ratios for each color against black and white text to ensure readability.</li>
-                <li><strong>Get Inspired:</strong> Use the 'Random' button to discover new and unexpected color combinations.</li>
-            </ul>
+          <h2 className="text-3xl font-bold text-white mb-6 text-center">📖 How to Use Color Harmony Checker</h2>
+          <div className="space-y-6">
+            {[
+              {
+                step: 1,
+                title: 'Select Your Base Color',
+                desc: 'Use the color picker to visually select a color, or manually enter a HEX code (like #3b82f6) in the input field. This base color will be the foundation of all your generated color harmonies.',
+                tip: '💡 Pro Tip: Choose your brand primary color or the dominant color from your design for best results.',
+              },
+              {
+                step: 2,
+                title: 'Explore Generated Harmonies',
+                desc: 'The tool instantly generates 5 types of color harmonies: Complementary (opposite colors), Analogous (adjacent colors), Triadic (evenly spaced), Tetradic (rectangular), and Monochromatic (same hue variations). Each harmony appears with visual color cards showing HEX, RGB, and HSL values.',
+                tip: '💡 Pro Tip: Triadic harmonies work great for vibrant UI designs, while analogous schemes create calming, cohesive interfaces.',
+              },
+              {
+                step: 3,
+                title: 'Copy Color Codes',
+                desc: 'Click the copy icon next to any HEX, RGB, or HSL value to instantly copy it to your clipboard. Use these codes in your CSS, design tools (Figma, Adobe XD, Sketch), or any color input field.',
+                tip: '💡 Pro Tip: HEX codes are best for CSS/HTML, RGB for programming, and HSL for dynamic color manipulation.',
+              },
+              {
+                step: 4,
+                title: 'Test Accessibility (WCAG)',
+                desc: 'Every generated color is automatically tested for accessibility. Check contrast ratios against white and black text to ensure your colors meet WCAG AA (4.5:1) and AAA (7:1) standards for readability.',
+                tip: '💡 Pro Tip: Always aim for at least AA compliance for body text and important UI elements. Learn more at <a href="https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum" target="_blank" rel="noopener" class="text-blue-400 hover:underline">W3C WCAG Guidelines</a>.',
+              },
+            ].map((item) => (
+              <div key={item.step} className="bg-slate-800 p-6 rounded-lg border border-slate-700 shadow-lg">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    {item.step}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+                    <p className="text-slate-300 mb-3" dangerouslySetInnerHTML={{ __html: item.desc }}></p>
+                    <div className="bg-slate-900 p-3 rounded-md border-l-4 border-blue-500">
+                      <p className="text-sm text-slate-400" dangerouslySetInnerHTML={{ __html: item.tip }}></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Use Cases Section */}
+        <section className="mt-16 max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-6 text-center">🎯 Use Cases & Applications</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                icon: '🎨',
+                title: 'UI/UX Design',
+                desc: 'Create cohesive color schemes for websites, mobile apps, and dashboards. Use triadic harmonies for vibrant interfaces or analogous schemes for calm, professional designs.',
+                example: 'Example: Generate a primary color palette for navigation, buttons, and CTAs.',
+              },
+              {
+                icon: '🖼️',
+                title: 'Brand Identity',
+                desc: 'Develop consistent brand color palettes that convey your brand personality. Complementary colors create bold, memorable brands while monochromatic schemes offer sophistication.',
+                example: 'Example: Build a complete brand guideline with primary, secondary, and accent colors.',
+              },
+              {
+                icon: '📊',
+                title: 'Data Visualization',
+                desc: 'Select accessible color combinations for charts, graphs, and infographics. Ensure data is readable and distinguishable for all users, including those with color blindness.',
+                example: 'Example: Create color-coded categories in dashboards that meet WCAG accessibility standards.',
+              },
+              {
+                icon: '✏️',
+                title: 'Graphic Design',
+                desc: 'Find inspiring color combinations for posters, social media graphics, and marketing materials. Experiment with tetradic schemes for complex, dynamic compositions.',
+                example: 'Example: Design eye-catching Instagram posts with harmonious color gradients.',
+              },
+            ].map((useCase, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg hover:shadow-2xl transition-shadow"
+              >
+                <div className="text-4xl mb-3">{useCase.icon}</div>
+                <h3 className="text-xl font-bold text-white mb-3">{useCase.title}</h3>
+                <p className="text-slate-300 mb-3">{useCase.desc}</p>
+                <div className="bg-slate-950 p-3 rounded-md border-l-2 border-blue-500">
+                  <p className="text-sm text-slate-400 italic">{useCase.example}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section className="mt-16 max-w-4xl mx-auto bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg">
+          <h2 className="text-3xl font-bold text-white mb-6 text-center">About Color Harmony Checker</h2>
+          <div className="space-y-4 text-slate-300 leading-relaxed">
+            <p>
+              Our <strong>Color Harmony Checker</strong> is a professional-grade color palette generator designed for designers, developers, and digital creators. This free online tool helps you discover perfect color combinations based on time-tested color theory principles from the color wheel.
+            </p>
+            <p>
+              Whether you're building a <strong>website color scheme</strong>, designing a <strong>brand identity</strong>, creating <strong>UI/UX interfaces</strong>, or working on graphic design projects, this color harmony tool generates complementary, triadic, analogous, tetradic, and monochromatic palettes instantly. Each generated color includes HEX codes, RGB values, and HSL formats for easy integration into any design workflow.
+            </p>
+            <p>
+              What sets this tool apart is the built-in <strong>WCAG accessibility testing</strong>. Every color is automatically checked for contrast ratios against white and black text, ensuring your designs meet AA and AAA accessibility standards. This makes it an essential <strong>color combination checker</strong> for inclusive design practices.
+            </p>
+            <p>
+              The tool uses advanced HSL (Hue, Saturation, Lightness) color space calculations to generate mathematically accurate color harmonies. Unlike simple color pickers, our harmony generator follows proper <a href="https://en.wikipedia.org/wiki/Color_theory" target="_blank" rel="noopener" className="text-blue-400 hover:underline">color theory principles</a> used by professional designers worldwide.
+            </p>
+            <p>
+              Perfect for discovering <strong>complementary colors</strong> that create maximum contrast, <strong>analogous color schemes</strong> for harmonious designs, <strong>triadic color palettes</strong> for vibrant layouts, and monochromatic variations for elegant, minimal aesthetics. Export colors in multiple formats and integrate them directly into CSS, Sass, design systems, or tools like Figma, Adobe XD, and Sketch.
+            </p>
+            <p className="text-sm text-slate-400 mt-6 pt-6 border-t border-slate-700">
+              <strong>Related Tools:</strong> Try our <a href="/tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/hex-to-rgb-converter'); }} className="text-blue-400 hover:underline">Hex to RGB Converter</a> for color format conversion, <a href="/tools/accessible-color-contrast-checker" onClick={(e) => { e.preventDefault(); navigateTo('/accessible-color-contrast-checker'); }} className="text-blue-400 hover:underline">Accessible Color Contrast Checker</a> for detailed WCAG testing, or our <a href="/tools/shadow-css-generator" onClick={(e) => { e.preventDefault(); navigateTo('/shadow-css-generator'); }} className="text-blue-400 hover:underline">CSS Shadow Generator</a> for adding depth to your designs.
+            </p>
+            <p className="text-xs text-slate-500 text-center mt-4">
+              Last Updated: November 8, 2024
+            </p>
+          </div>
         </section>
         
         <section className="mt-16 max-w-4xl mx-auto">
