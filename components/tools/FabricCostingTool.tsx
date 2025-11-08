@@ -521,111 +521,7 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
                 </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 text-slate-300">
-                <section>
-                    <h2 className="text-2xl font-bold mb-4 text-white">🧩 How to Use</h2>
-                    <ol className="space-y-4 list-inside">
-                        <li className="space-y-1">
-                            <strong className="block">1️⃣ Enter Fabric Construction Values:</strong>
-                            <p className="text-slate-400">Read (EPI), Pick (PPI), Warp Count, Weft Count, and Fabric Width in inches.</p>
-                        </li>
-                        <li className="space-y-1">
-                            <strong className="block">2️⃣ Add Cost Parameters:</strong>
-                            <p className="text-slate-400">Quantity (mtrs), Warp Yarn Rate, Weft Yarn Rate, Conversion Rate, and Commission (%).</p>
-                        </li>
-                        <li className="space-y-1">
-                            <strong className="block">3️⃣ Review Calculated Results:</strong>
-                            <p className="text-slate-400">See warp/weft weight (kg/m), total weight, and cost breakdown per meter.</p>
-                        </li>
-                         <li className="space-y-1">
-                            <strong className="block">4️⃣ Check Order Totals:</strong>
-                            <p className="text-slate-400">View total warp & weft bags required and weights for 40m samples.</p>
-                        </li>
-                         <li className="space-y-1">
-                            <strong className="block">5️⃣ Adjust & Compare:</strong>
-                            <p className="text-slate-400">Modify parameters to simulate different constructions or yarn rates.</p>
-                        </li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2 className="text-2xl font-bold mb-4 text-white">💬 Frequently Asked Questions</h2>
-                    <div className="space-y-6">
-                        <div>
-                            <h4 className="font-semibold text-white">Q1: What does this Fabric Costing Tool calculate?</h4>
-                            <p className="text-slate-400 mt-1">A: It calculates warp/weft weights per meter, fabric cost, conversion, commission, and total order consumption — based on your entered construction and cost parameters.</p>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold text-white">Q2: How accurate are the results?</h4>
-                            <p className="text-slate-400 mt-1">A: The tool uses standard textile calculation formulas (with constant 0.001367) used across weaving and processing industries. Results are highly accurate for estimation and costing.</p>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold text-white">Q3: Can I use this for both woven and knitted fabrics?</h4>
-                            <p className="text-slate-400 mt-1">A: This version is optimized for woven fabrics. For knits, you can adapt by using equivalent GSM or construction ratios.</p>
-                        </div>
-                         <div>
-                            <h4 className="font-semibold text-white">Q4: Will my data be saved or uploaded?</h4>
-                            <p className="text-slate-400 mt-1">A: No — everything runs locally in your browser. Your data never leaves your device.</p>
-                        </div>
-                         <div>
-                            <h4 className="font-semibold text-white">Q5: Can I print or export the costing?</h4>
-                            <p className="text-slate-400 mt-1">A: You can print directly using your browser print function or take a screenshot of the results for your records.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            {/* About Section */}
-            <section className="mt-16 bg-slate-900/50 border border-slate-800 rounded-xl p-8">
-                <h2 className="text-3xl font-bold mb-6 text-white text-center">About Fabric Costing Calculator</h2>
-                <div className="space-y-4 text-slate-300 leading-relaxed max-w-5xl mx-auto">
-                    <p>
-                        Our <strong>Fabric Costing Calculator</strong> is a professional-grade textile calculator designed specifically for fabric manufacturers, textile engineers, designers, and production planners. This free online tool helps you calculate accurate <strong>warp and weft weights</strong>, <strong>yarn consumption</strong>, <strong>conversion costs</strong>, and <strong>per-meter pricing</strong> for woven fabrics instantly.
-                    </p>
-                    <p>
-                        Whether you're working on <strong>textile manufacturing</strong>, estimating production costs, planning yarn procurement, or quoting fabric prices to clients, this calculator uses industry-standard formulas (fabric constant 0.001367) to deliver precise results. Perfect for <strong>weaving cost estimation</strong>, <strong>fabric gsm calculation</strong>, and <strong>yarn requirement analysis</strong>.
-                    </p>
-                    <p>
-                        The tool calculates multiple critical parameters: warp weight per meter, weft weight per meter, total fabric weight, warp cost, weft cost, fabric cost, conversion cost per pick, commission, and final rate per meter. It also shows total warp and weft bags required for your order quantity (in 100kg bags) and sample weights for 40-meter calculations.
-                    </p>
-                    <p>
-                        What sets this <strong>textile cost calculator</strong> apart is its real-time calculation engine. As you adjust parameters like EPI (ends per inch), PPI (picks per inch), yarn counts (Ne), fabric width, yarn rates, or conversion rates, results update instantly. This allows you to compare different fabric constructions, test various yarn options, and optimize costs before production.
-                    </p>
-                    <p>
-                        Perfect for calculating costs for cotton fabrics, polyester fabrics, blended fabrics, shirting, suiting, denim, canvas, and any woven textile. The tool supports various measurement units commonly used in the textile industry and follows standard <a href="https://en.wikipedia.org/wiki/Textile_manufacturing" target="_blank" rel="noopener" className="text-emerald-400 hover:underline">textile manufacturing practices</a> worldwide.
-                    </p>
-                    <p>
-                        All calculations are performed locally in your browser — no data is uploaded or stored on our servers. Your fabric costing information remains completely private and secure. Use it for unlimited calculations without any registration, fees, or limitations.
-                    </p>
-                    <p className="text-sm text-slate-400 mt-6 pt-6 border-t border-slate-700">
-                        <strong>Related Tools:</strong> Try our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/word-counter'); }} className="text-emerald-400 hover:underline">Word Counter</a> for document analysis, <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/case-converter'); }} className="text-emerald-400 hover:underline">Case Converter</a> for text formatting, or <a href="/tools/percentage-change-calculator" onClick={(e) => { e.preventDefault(); navigateTo('/percentage-change-calculator'); }} className="text-emerald-400 hover:underline">Percentage Calculator</a> for cost comparisons.
-                    </p>
-                    <p className="text-xs text-slate-500 text-center mt-4">
-                        Last Updated: November 8, 2024
-                    </p>
-                </div>
-            </section>
-
-            {/* Benefits Section */}
-            <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
-                    <div className="text-3xl mb-3">⚡</div>
-                    <h3 className="text-xl font-bold text-white mb-3">Instant Results</h3>
-                    <p className="text-slate-300">Real-time calculations as you type. No waiting, no manual formulas — just instant, accurate fabric costing results.</p>
-                </div>
-                <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
-                    <div className="text-3xl mb-3">🎯</div>
-                    <h3 className="text-xl font-bold text-white mb-3">Industry Standard</h3>
-                    <p className="text-slate-300">Uses proven textile formulas with fabric constant 0.001367, trusted by manufacturers worldwide for accurate cost estimation.</p>
-                </div>
-                <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
-                    <div className="text-3xl mb-3">🔒</div>
-                    <h3 className="text-xl font-bold text-white mb-3">100% Private</h3>
-                    <p className="text-slate-300">All calculations happen in your browser. No data uploads, no server storage — your fabric costing stays completely confidential.</p>
-                </div>
-            </section>
-
-            {/* Quick Examples Section */}
+            {/* Quick Examples Section - Moved here for instant value */}
             <section className="mt-12 bg-slate-900/50 border border-slate-800 rounded-xl p-8 max-w-5xl mx-auto">
                 <h2 className="text-2xl font-bold mb-6 text-white text-center">📊 Common Fabric Examples</h2>
                 <p className="text-slate-300 mb-6 text-center">Try these preset values for popular fabric constructions:</p>
@@ -660,16 +556,217 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
                 </div>
             </section>
 
-                    <RelatedTools
-                        navigateTo={navigateTo}
-                        relatedSlugs={['word-counter', 'case-converter', 'percentage-change-calculator']}
-                        currentSlug="fabric-costing-tool"
-                    />
+            {/* Benefits Section */}
+            <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
+                    <div className="text-3xl mb-3">⚡</div>
+                    <h3 className="text-xl font-bold text-white mb-3">Instant Results</h3>
+                    <p className="text-slate-300">Real-time calculations as you type. No waiting, no manual formulas — just instant, accurate fabric costing results.</p>
+                </div>
+                <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
+                    <div className="text-3xl mb-3">🎯</div>
+                    <h3 className="text-xl font-bold text-white mb-3">Industry Standard</h3>
+                    <p className="text-slate-300">Uses proven textile formulas with fabric constant 0.001367, trusted by manufacturers worldwide for accurate cost estimation.</p>
+                </div>
+                <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
+                    <div className="text-3xl mb-3">🔒</div>
+                    <h3 className="text-xl font-bold text-white mb-3">100% Private</h3>
+                    <p className="text-slate-300">All calculations happen in your browser. No data uploads, no server storage — your fabric costing stays completely confidential.</p>
+                </div>
+            </section>
 
-                    <footer className="text-center mt-12 text-white text-sm">
-                        <p>Powered by ZuraWebTools</p>
-                        <p>Created by Rana Abdul Rehman / Zahidan Fabrics Laal Mill Faisalabad</p>
-                    </footer>
+            {/* Enhanced How to Use Section */}
+            <section className="mt-16 max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold text-white mb-8 text-center">📖 How to Use Fabric Costing Calculator</h2>
+                <div className="space-y-6">
+                    <div className="flex gap-6 items-start">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            1
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-semibold text-white mb-2">Enter Fabric Construction Values</h3>
+                            <p className="text-slate-300 leading-relaxed">
+                                Input your fabric parameters: <strong>Read (EPI)</strong> for ends per inch, <strong>Pick (PPI)</strong> for picks per inch, <strong>Warp Count</strong> and <strong>Weft Count</strong> in Ne (English count), and <strong>Fabric Width</strong> in inches. These define your fabric structure.
+                            </p>
+                            <p className="text-sm text-emerald-400 mt-2">💡 Pro Tip: Common shirting uses 80x80 EPI/PPI with 60s count</p>
+                        </div>
+                    </div>
+
+                    <div className="flex gap-6 items-start">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            2
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-semibold text-white mb-2">Add Cost Parameters</h3>
+                            <p className="text-slate-300 leading-relaxed">
+                                Enter <strong>Quantity</strong> in meters for your order, <strong>Warp/Weft Yarn Rates</strong> per kg, <strong>Conversion Rate</strong> per pick (weaving cost), and <strong>Commission</strong> percentage. These determine your final pricing.
+                            </p>
+                            <p className="text-sm text-emerald-400 mt-2">💡 Pro Tip: Conversion rates vary by loom type (air-jet vs rapier)</p>
+                        </div>
+                    </div>
+
+                    <div className="flex gap-6 items-start">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            3
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-semibold text-white mb-2">Review Calculated Results</h3>
+                            <p className="text-slate-300 leading-relaxed">
+                                Instantly view <strong>warp/weft weight per meter</strong>, <strong>total fabric weight</strong>, and detailed <strong>cost breakdown</strong> including yarn cost, conversion cost, commission, and final rate per meter. All calculations update in real-time.
+                            </p>
+                            <p className="text-sm text-emerald-400 mt-2">💡 Pro Tip: Compare multiple constructions to optimize cost-quality ratio</p>
+                        </div>
+                    </div>
+
+                    <div className="flex gap-6 items-start">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            4
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-semibold text-white mb-2">Check Order Totals</h3>
+                            <p className="text-slate-300 leading-relaxed">
+                                See <strong>total warp and weft bags required</strong> for your order quantity (in 100kg bags) plus weights for 40-meter sample calculations. Perfect for procurement planning and inventory management.
+                            </p>
+                            <p className="text-sm text-emerald-400 mt-2">💡 Pro Tip: Add 5-10% extra for wastage and selvedge</p>
+                        </div>
+                    </div>
+
+                    <div className="flex gap-6 items-start">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            5
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-semibold text-white mb-2">Adjust & Compare</h3>
+                            <p className="text-slate-300 leading-relaxed">
+                                Modify parameters to simulate different fabric constructions, yarn options, or quantities. Compare scenarios side-by-side to find the most cost-effective solution for your production needs.
+                            </p>
+                            <p className="text-sm text-emerald-400 mt-2">💡 Pro Tip: Test with different yarn counts to balance cost and quality</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Use Cases Section */}
+            <section className="mt-16 max-w-6xl mx-auto">
+                <h2 className="text-3xl font-bold text-white mb-8 text-center">🎯 Who Uses This Fabric Costing Calculator?</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 transition-all duration-300 group">
+                        <div className="text-4xl mb-4 text-center">🏭</div>
+                        <h3 className="text-xl font-bold text-white mb-3 text-center group-hover:text-emerald-400 transition-colors">Textile Manufacturers</h3>
+                        <p className="text-slate-300 text-sm text-center">Plan production schedules, calculate bulk order requirements, and optimize yarn procurement for large-scale weaving operations.</p>
+                    </div>
+                    <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 transition-all duration-300 group">
+                        <div className="text-4xl mb-4 text-center">🎨</div>
+                        <h3 className="text-xl font-bold text-white mb-3 text-center group-hover:text-emerald-400 transition-colors">Fabric Designers</h3>
+                        <p className="text-slate-300 text-sm text-center">Estimate costs for custom fabric designs, test different construction options, and provide accurate quotes to clients.</p>
+                    </div>
+                    <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 transition-all duration-300 group">
+                        <div className="text-4xl mb-4 text-center">🔧</div>
+                        <h3 className="text-xl font-bold text-white mb-3 text-center group-hover:text-emerald-400 transition-colors">Weaving Units</h3>
+                        <p className="text-slate-300 text-sm text-center">Calculate order quotes quickly, determine conversion costs, and manage commission calculations for buyer negotiations.</p>
+                    </div>
+                    <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 transition-all duration-300 group">
+                        <div className="text-4xl mb-4 text-center">🎓</div>
+                        <h3 className="text-xl font-bold text-white mb-3 text-center group-hover:text-emerald-400 transition-colors">Textile Students</h3>
+                        <p className="text-slate-300 text-sm text-center">Learn fabric costing calculations, understand yarn consumption formulas, and practice real-world textile engineering scenarios.</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* About Section */}
+            <section className="mt-16 bg-slate-900/50 border border-slate-800 rounded-xl p-8 max-w-5xl mx-auto">
+                <h2 className="text-3xl font-bold mb-6 text-white text-center">About Fabric Costing Calculator</h2>
+                <div className="space-y-4 text-slate-300 leading-relaxed max-w-5xl mx-auto">
+                    <p>
+                        Our <strong>Fabric Costing Calculator</strong> is a professional-grade textile calculator designed specifically for fabric manufacturers, textile engineers, designers, and production planners. This free online tool helps you calculate accurate <strong>warp and weft weights</strong>, <strong>yarn consumption</strong>, <strong>conversion costs</strong>, and <strong>per-meter pricing</strong> for woven fabrics instantly.
+                    </p>
+                    <p>
+                        Whether you're working on <strong>textile manufacturing</strong>, estimating production costs, planning yarn procurement, or quoting fabric prices to clients, this calculator uses industry-standard formulas (fabric constant 0.001367) to deliver precise results. Perfect for <strong>weaving cost estimation</strong>, <strong>fabric gsm calculation</strong>, and <strong>yarn requirement analysis</strong>.
+                    </p>
+                    <p>
+                        The tool calculates multiple critical parameters: warp weight per meter, weft weight per meter, total fabric weight, warp cost, weft cost, fabric cost, conversion cost per pick, commission, and final rate per meter. It also shows total warp and weft bags required for your order quantity (in 100kg bags) and sample weights for 40-meter calculations.
+                    </p>
+                    <p>
+                        What sets this <strong>textile cost calculator</strong> apart is its real-time calculation engine. As you adjust parameters like EPI (ends per inch), PPI (picks per inch), yarn counts (Ne), fabric width, yarn rates, or conversion rates, results update instantly. This allows you to compare different fabric constructions, test various yarn options, and optimize costs before production.
+                    </p>
+                    <p>
+                        Perfect for calculating costs for cotton fabrics, polyester fabrics, blended fabrics, shirting, suiting, denim, canvas, and any woven textile. The tool supports various measurement units commonly used in the textile industry and follows standard <a href="https://en.wikipedia.org/wiki/Textile_manufacturing" target="_blank" rel="noopener" className="text-emerald-400 hover:underline">textile manufacturing practices</a> worldwide.
+                    </p>
+                    <p>
+                        All calculations are performed locally in your browser — no data is uploaded or stored on our servers. Your fabric costing information remains completely private and secure. Use it for unlimited calculations without any registration, fees, or limitations.
+                    </p>
+                </div>
+            </section>
+
+            {/* External Links Section */}
+            <section className="mt-12 max-w-4xl mx-auto">
+                <h2 className="text-2xl font-bold text-white mb-6 text-center">🔗 Helpful Resources</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a 
+                        href="https://en.wikipedia.org/wiki/Textile_manufacturing" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 transition-colors duration-300 group"
+                    >
+                        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-emerald-400">📚 Textile Manufacturing – Wikipedia</h3>
+                        <p className="text-sm text-slate-400">Comprehensive guide to textile manufacturing processes, weaving techniques, and industry standards.</p>
+                    </a>
+                    <a 
+                        href="https://en.wikipedia.org/wiki/Yarn" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 transition-colors duration-300 group"
+                    >
+                        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-emerald-400">🧵 Yarn Count Systems – Wikipedia</h3>
+                        <p className="text-sm text-slate-400">Understanding yarn counts (Ne, Nm, Tex) and how they affect fabric weight and costing calculations.</p>
+                    </a>
+                </div>
+            </section>
+
+            {/* Last Updated */}
+            <div className="mt-8 text-center">
+                <p className="text-xs text-slate-500">
+                    Last Updated: November 8, 2024
+                </p>
+            </div>
+
+            {/* FAQs Section */}
+            <section className="mt-16 max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold text-white mb-8 text-center">💬 Frequently Asked Questions</h2>
+                <div className="space-y-6">
+                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h4 className="text-lg font-semibold text-white mb-2">Q1: What does this Fabric Costing Tool calculate?</h4>
+                        <p className="text-slate-400">A: It calculates warp/weft weights per meter, fabric cost, conversion, commission, and total order consumption — based on your entered construction and cost parameters.</p>
+                    </div>
+                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h4 className="text-lg font-semibold text-white mb-2">Q2: How accurate are the results?</h4>
+                        <p className="text-slate-400">A: The tool uses standard textile calculation formulas (with constant 0.001367) used across weaving and processing industries. Results are highly accurate for estimation and costing.</p>
+                    </div>
+                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h4 className="text-lg font-semibold text-white mb-2">Q3: Can I use this for both woven and knitted fabrics?</h4>
+                        <p className="text-slate-400">A: This version is optimized for woven fabrics. For knits, you can adapt by using equivalent GSM or construction ratios.</p>
+                    </div>
+                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h4 className="text-lg font-semibold text-white mb-2">Q4: Will my data be saved or uploaded?</h4>
+                        <p className="text-slate-400">A: No — everything runs locally in your browser. Your data never leaves your device.</p>
+                    </div>
+                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h4 className="text-lg font-semibold text-white mb-2">Q5: Can I print or export the costing?</h4>
+                        <p className="text-slate-400">A: You can print directly using your browser print function or take a screenshot of the results for your records.</p>
+                    </div>
+                </div>
+            </section>
+
+            <RelatedTools
+                navigateTo={navigateTo}
+                relatedSlugs={['word-counter', 'case-converter', 'percentage-change-calculator']}
+                currentSlug="fabric-costing-tool"
+            />
+
+            <footer className="text-center mt-12 text-white text-sm">
+                <p>Powered by ZuraWebTools</p>
+                <p>Created by Rana Abdul Rehman / Zahidan Fabrics Laal Mill Faisalabad</p>
+            </footer>
                 </div>
             </div>
         </section>

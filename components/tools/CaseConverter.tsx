@@ -477,6 +477,25 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
           </div>
         </div>
 
+        {/* Benefits Section */}
+        <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
+            <div className="text-3xl mb-3">⚡</div>
+            <h3 className="text-xl font-bold text-white mb-3">Instant Conversion</h3>
+            <p className="text-slate-300">Real-time text case conversion as you type. No waiting, no delays — just instant uppercase, lowercase, title case, and sentence case results.</p>
+          </div>
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
+            <div className="text-3xl mb-3">🆓</div>
+            <h3 className="text-xl font-bold text-white mb-3">100% Free</h3>
+            <p className="text-slate-300">Completely free text case converter with no registration required. No hidden fees, no limitations — unlimited conversions forever.</p>
+          </div>
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
+            <div className="text-3xl mb-3">🔒</div>
+            <h3 className="text-xl font-bold text-white mb-3">100% Private</h3>
+            <p className="text-slate-300">All conversions happen in your browser. No data uploads, no server storage — your text stays completely confidential and secure.</p>
+          </div>
+        </section>
+
         {/* About Section */}
         <div className="max-w-4xl mx-auto mt-16">
           <div className="bg-gradient-to-r from-slate-900/70 to-slate-800/70 p-8 rounded-xl shadow-lg border border-slate-700">
@@ -611,6 +630,31 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
              </div>
            </div>
         </div>
+
+        {/* External Links Section */}
+        <section className="mt-12 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">🔗 Writing & SEO Resources</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a 
+              href="https://en.wikipedia.org/wiki/Letter_case" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-cyan-500 transition-colors duration-300 group"
+            >
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-400">📚 Letter Case – Wikipedia</h3>
+              <p className="text-sm text-slate-400">Comprehensive guide to letter case systems, capitalization rules, and typography conventions across different writing systems.</p>
+            </a>
+            <a 
+              href="https://en.wikipedia.org/wiki/Title_case" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-cyan-500 transition-colors duration-300 group"
+            >
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-400">✍️ Title Case Rules – Wikipedia</h3>
+              <p className="text-sm text-slate-400">Learn professional title case formatting rules for headlines, book titles, and SEO optimization in different style guides.</p>
+            </a>
+          </div>
+        </section>
 
         {/* FAQ Section */}
         <div className="max-w-4xl mx-auto mt-16">
