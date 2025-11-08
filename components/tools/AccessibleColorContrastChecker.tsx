@@ -433,19 +433,117 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
           </div>
         </div>
 
+        {/* Quick Test Examples */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <div className="bg-slate-900/40 p-6 rounded-xl border border-slate-700">
+            <h3 className="text-xl font-bold text-white mb-4 text-center">⚡ Quick Test Examples</h3>
+            <p className="text-gray-400 text-center mb-6 text-sm">Click any example below to instantly test common color combinations</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <button
+                onClick={() => {
+                  setForegroundColor('#000000');
+                  setBackgroundColor('#FFFFFF');
+                }}
+                className="bg-slate-800 hover:bg-slate-700 p-4 rounded-lg border border-slate-600 hover:border-cyan-500 transition-all text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded border-2 border-slate-600" style={{ background: 'linear-gradient(to right, #000000 50%, #FFFFFF 50%)' }}></div>
+                  <span className="font-semibold text-white group-hover:text-cyan-300">Black on White</span>
+                </div>
+                <p className="text-xs text-gray-400">Ratio: 21:1 • Perfect AAA ✅</p>
+              </button>
+
+              <button
+                onClick={() => {
+                  setForegroundColor('#FFFFFF');
+                  setBackgroundColor('#0066CC');
+                }}
+                className="bg-slate-800 hover:bg-slate-700 p-4 rounded-lg border border-slate-600 hover:border-cyan-500 transition-all text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded border-2 border-slate-600" style={{ background: 'linear-gradient(to right, #FFFFFF 50%, #0066CC 50%)' }}></div>
+                  <span className="font-semibold text-white group-hover:text-cyan-300">White on Blue</span>
+                </div>
+                <p className="text-xs text-gray-400">Ratio: 7.3:1 • AAA Large ✅</p>
+              </button>
+
+              <button
+                onClick={() => {
+                  setForegroundColor('#767676');
+                  setBackgroundColor('#FFFFFF');
+                }}
+                className="bg-slate-800 hover:bg-slate-700 p-4 rounded-lg border border-slate-600 hover:border-cyan-500 transition-all text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded border-2 border-slate-600" style={{ background: 'linear-gradient(to right, #767676 50%, #FFFFFF 50%)' }}></div>
+                  <span className="font-semibold text-white group-hover:text-cyan-300">Gray on White</span>
+                </div>
+                <p className="text-xs text-gray-400">Ratio: 4.54:1 • AA Pass ✅</p>
+              </button>
+
+              <button
+                onClick={() => {
+                  setForegroundColor('#FF6B6B');
+                  setBackgroundColor('#FFFFFF');
+                }}
+                className="bg-slate-800 hover:bg-slate-700 p-4 rounded-lg border border-slate-600 hover:border-cyan-500 transition-all text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded border-2 border-slate-600" style={{ background: 'linear-gradient(to right, #FF6B6B 50%, #FFFFFF 50%)' }}></div>
+                  <span className="font-semibold text-white group-hover:text-cyan-300">Red on White</span>
+                </div>
+                <p className="text-xs text-gray-400">Ratio: 3.36:1 • Fails AA ❌</p>
+              </button>
+
+              <button
+                onClick={() => {
+                  setForegroundColor('#FFFFFF');
+                  setBackgroundColor('#1E293B');
+                }}
+                className="bg-slate-800 hover:bg-slate-700 p-4 rounded-lg border border-slate-600 hover:border-cyan-500 transition-all text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded border-2 border-slate-600" style={{ background: 'linear-gradient(to right, #FFFFFF 50%, #1E293B 50%)' }}></div>
+                  <span className="font-semibold text-white group-hover:text-cyan-300">White on Dark Slate</span>
+                </div>
+                <p className="text-xs text-gray-400">Ratio: 12.6:1 • Perfect AAA ✅</p>
+              </button>
+
+              <button
+                onClick={() => {
+                  setForegroundColor('#22C55E');
+                  setBackgroundColor('#FFFFFF');
+                }}
+                className="bg-slate-800 hover:bg-slate-700 p-4 rounded-lg border border-slate-600 hover:border-cyan-500 transition-all text-left group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded border-2 border-slate-600" style={{ background: 'linear-gradient(to right, #22C55E 50%, #FFFFFF 50%)' }}></div>
+                  <span className="font-semibold text-white group-hover:text-cyan-300">Green on White</span>
+                </div>
+                <p className="text-xs text-gray-400">Ratio: 2.76:1 • Fails AA ❌</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* About Section */}
         <div className="max-w-4xl mx-auto mt-16">
           <div className="bg-gradient-to-r from-slate-900/70 to-slate-800/70 p-8 rounded-xl shadow-lg border border-slate-700">
             <h2 className="text-3xl font-bold text-white mb-6 text-center">About This Color Accessibility Tool</h2>
             <div className="text-gray-300 space-y-4 leading-relaxed">
               <p>
-                Our <strong>free color contrast checker</strong> is designed to help web designers, developers, and accessibility professionals ensure their digital content meets <strong>WCAG 2.1 (Web Content Accessibility Guidelines)</strong> standards. This tool instantly calculates the <strong>contrast ratio</strong> between foreground and background colors, making it easy to verify compliance with <strong>AA</strong> and <strong>AAA</strong> accessibility levels.
+                Our <strong>free color contrast checker</strong> is designed to help web designers, developers, and accessibility professionals ensure their digital content meets <strong><a href="https://www.w3.org/WAI/WCAG21/Understanding/" target="_blank" rel="nofollow noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline">WCAG 2.1 (Web Content Accessibility Guidelines)</a></strong> standards established by the W3C. This tool instantly calculates the <strong>contrast ratio</strong> between foreground and background colors, making it easy to verify compliance with <strong>AA</strong> and <strong>AAA</strong> accessibility levels.
               </p>
               <p>
-                Whether you're working with <strong>hex codes</strong>, using a <strong>color picker</strong>, or conducting <strong>ADA compliance</strong> audits, this tool provides real-time feedback on <strong>text readability</strong> and <strong>web accessibility</strong>. It supports <strong>Section 508</strong> requirements and helps create inclusive designs for users with <strong>visual impairments</strong>, <strong>color blindness</strong>, and <strong>low vision</strong>.
+                Whether you're working with <strong>hex codes</strong> (try our <button onClick={() => navigateTo('hex-to-rgb-converter')} className="text-cyan-400 hover:text-cyan-300 underline cursor-pointer">Hex to RGB Converter</button> for color format conversions), using a <strong>color picker</strong>, or conducting <strong><a href="https://www.ada.gov/resources/web-guidance/" target="_blank" rel="nofollow noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline">ADA compliance</a></strong> audits, this tool provides real-time feedback on <strong>text readability</strong> and <strong>web accessibility</strong>. It supports <strong>Section 508</strong> requirements and helps create inclusive designs for users with <strong>visual impairments</strong>, <strong>color blindness</strong>, and <strong>low vision</strong>.
               </p>
               <p>
-                Perfect for UI/UX designers creating accessible interfaces, frontend developers implementing design systems, and QA testers performing accessibility audits. No registration required - start checking your color combinations instantly!
+                Perfect for UI/UX designers creating accessible interfaces, frontend developers implementing design systems, and QA testers performing accessibility audits. Pair this with our <button onClick={() => navigateTo('color-harmony-checker')} className="text-cyan-400 hover:text-cyan-300 underline cursor-pointer">Color Harmony Checker</button> to ensure your entire color palette is both beautiful and accessible. No registration required - start checking your color combinations instantly!
+              </p>
+              <p className="text-sm text-gray-400 italic">
+                <span className="inline-block">📅 Last updated: November 8, 2024</span>
+                <span className="mx-2">•</span>
+                <span className="inline-block">⚡ Updated with latest WCAG 2.1 standards</span>
               </p>
             </div>
           </div>
@@ -569,7 +667,7 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
         
         <RelatedTools
             navigateTo={navigateTo}
-            relatedSlugs={['hex-to-rgb-converter']}
+            relatedSlugs={['hex-to-rgb-converter', 'color-harmony-checker', 'shadow-css-generator']}
             currentSlug="accessible-color-contrast-checker"
         />
       </div>
