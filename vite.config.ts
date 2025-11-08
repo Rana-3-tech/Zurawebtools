@@ -22,25 +22,43 @@ export default defineConfig(({ mode }) => {
       build: {
         rollupOptions: {
           output: {
-            manualChunks: {
-              vendor: ['react', 'react-dom'],
-              tools: [
-                './components/tools/WordCounter',
-                './components/tools/RemoveExtraSpaces',
-                './components/tools/CaseConverter',
-                './components/tools/LoremIpsumGenerator',
-                './components/tools/TimeDifferenceCalculator',
-                './components/tools/PercentageChangeCalculator',
-                './components/tools/HexToRGBConverter',
-                './components/tools/AccessibleColorContrastChecker',
-                './components/tools/JSONFormatterValidator',
-                './components/tools/ShadowCSSGenerator',
-                './components/tools/ColorHarmonyChecker'
-              ]
+            manualChunks(id) {
+              // Vendor chunk for React and core libraries
+              if (id.includes('node_modules')) {
+                if (id.includes('react') || id.includes('react-dom')) {
+                  return 'vendor';
+                }
+                // Google AI SDK in separate chunk (loaded on-demand)
+                if (id.includes('@google/genai')) {
+                  return 'ai-sdk';
+                }
+                // Other node_modules
+                return 'vendor-libs';
+              }
+              
+              // Split each tool into its own chunk for lazy loading
+              if (id.includes('/components/tools/')) {
+                const toolName = id.split('/components/tools/')[1]?.split('.')[0];
+                return toolName ? `tool-${toolName.toLowerCase()}` : 'tools';
+              }
+              
+              // Page components in separate chunks
+              if (id.includes('/components/') && !id.includes('/components/tools/')) {
+                if (id.includes('ToolsPage') || id.includes('BlogPage') || id.includes('CategoryPage')) {
+                  return 'pages';
+                }
+              }
             }
           }
         },
-        chunkSizeWarningLimit: 1000
+        chunkSizeWarningLimit: 500, // Lower threshold for better splitting
+        minify: 'terser', // Better minification
+        terserOptions: {
+          compress: {
+            drop_console: true, // Remove console.logs in production
+            drop_debugger: true
+          }
+        }
       },
       publicDir: 'public',
       assetsInclude: ['**/*.xml', '**/*.txt']

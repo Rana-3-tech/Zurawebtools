@@ -42,6 +42,16 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0f172a">
 
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://aistudiocdn.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://aistudiocdn.com" crossorigin>
+    
+    <!-- Preload critical resources -->
+    <link rel="modulepreload" href="/index.tsx">
+
     <!-- Custom Animation Styles -->
     <style>
       @keyframes fade-in-word {
@@ -106,8 +116,14 @@
 </head>
 <body class="bg-slate-900 text-slate-300 font-sans">
     <div id="root">
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; color: #cbd5e1;">
-            Loading ZuraWebTools...
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; color: #cbd5e1; background: #0f172a;">
+            <div style="width: 64px; height: 64px; border: 4px solid #22d3ee; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            <p style="margin-top: 16px; font-size: 18px; color: #94a3b8;">Loading ZuraWebTools...</p>
+            <style>
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
+                }
+            </style>
         </div>
     </div>
     <script type="module" src="/index.tsx"></script>
