@@ -41,12 +41,19 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: 'ZuraWebTools' },
       { property: 'og:url', content: 'https://zurawebtools.com/tools/accessible-color-contrast-checker' },
+      { property: 'og:locale', content: 'en_US' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Accessible Color Contrast Checker | ZuraWebTools' },
       { name: 'twitter:description', content: 'Free WCAG contrast checker to test color accessibility for designers and developers.' },
       { name: 'twitter:image', content: 'https://zurawebtools.com/assets/og-accessible-color-contrast-checker.webp' },
       { name: 'twitter:image:alt', content: 'Free Accessible Color Contrast Checker showing WCAG compliance results' },
+      { name: 'language', content: 'English' },
+      { httpEquiv: 'content-language', content: 'en-US' },
+      { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
     ];
+
+    // Set HTML lang attribute
+    document.documentElement.setAttribute('lang', 'en');
 
     metaTags.forEach(tag => {
       const el = document.createElement('meta');
@@ -69,11 +76,122 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
         applicationCategory: 'AccessibilityTool',
         applicationSubCategory: 'Accessibility Testing',
         operatingSystem: 'Any (Web-based)',
+        datePublished: '2024-01-10',
+        dateModified: '2024-11-08',
+        inLanguage: 'en-US',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        softwareVersion: '2.0',
         aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', ratingCount: '1270' },
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        publisher: { '@type': 'Organization', name: 'ZuraWebTools', url: 'https://zurawebtools.com' },
+        publisher: {
+          '@type': 'Organization',
+          name: 'ZuraWebTools',
+          url: 'https://zurawebtools.com',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://zurawebtools.com/assets/logo.png',
+            width: '250',
+            height: '60',
+          },
+          sameAs: [
+            'https://www.facebook.com/zurawebtools',
+            'https://twitter.com/zurawebtools',
+            'https://www.linkedin.com/company/zurawebtools',
+          ],
+        },
         description: 'A free WCAG color contrast checker that helps designers and developers test color accessibility for text and UI elements.',
         url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'Accessible Color Contrast Checker',
+        description: 'Free WCAG color contrast checker for testing accessibility compliance. Check AA and AAA standards instantly.',
+        url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker',
+        datePublished: '2024-01-10',
+        dateModified: '2024-11-08',
+        inLanguage: 'en-US',
+        isPartOf: {
+          '@type': 'WebSite',
+          name: 'ZuraWebTools',
+          url: 'https://zurawebtools.com',
+        },
+        about: {
+          '@type': 'Thing',
+          name: 'Web Accessibility',
+          description: 'WCAG color contrast compliance testing',
+        },
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: 'https://zurawebtools.com/assets/og-accessible-color-contrast-checker.webp',
+          description: 'Accessible Color Contrast Checker interface',
+        },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://zurawebtools.com',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Tools',
+            item: 'https://zurawebtools.com/tools',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Accessible Color Contrast Checker',
+            item: 'https://zurawebtools.com/tools/accessible-color-contrast-checker',
+          },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: 'How to Check Color Contrast for Accessibility',
+        description: 'Step-by-step guide to checking WCAG color contrast ratios',
+        totalTime: 'PT2M',
+        estimatedCost: {
+          '@type': 'MonetaryAmount',
+          currency: 'USD',
+          value: '0',
+        },
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Select Foreground Color',
+            text: 'Select your foreground and background colors using color pickers or hex inputs.',
+            url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker#step1',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'View Live Preview',
+            text: 'View the live preview and contrast ratio instantly.',
+            url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker#step2',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Check WCAG Standards',
+            text: 'Ensure your design meets WCAG AA or AAA accessibility standards.',
+            url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker#step3',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 4,
+            name: 'Copy Results',
+            text: 'Copy the contrast ratio for documentation or audits.',
+            url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker#step4',
+          },
+        ],
       },
       {
         '@context': 'https://schema.org',
@@ -110,6 +228,7 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
 
     return () => {
       document.title = 'ZuraWebTools | Free AI Tools for SEO & Social Media Growth';
+      document.documentElement.removeAttribute('lang');
       metaDescription.remove();
       metaTags.forEach(tag => {
         const key = Object.keys(tag)[0];
