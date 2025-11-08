@@ -658,7 +658,41 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
       </header>
 
       <main>
-        {/* Quick Test Examples */}
+        <div className="max-w-2xl mx-auto p-6 rounded-xl shadow-2xl bg-slate-800 border border-slate-700 mb-12">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <label htmlFor="base-color-picker" className="font-semibold text-white">Base Color:</label>
+                <input type="color" id="base-color-picker" value={baseColor} onChange={e => setBaseColor(e.target.value)} className="w-16 h-10 p-1 bg-white border-none rounded-md cursor-pointer" aria-label="Base color picker" />
+                <input type="text" value={baseColor} onChange={e => setBaseColor(e.target.value)} className="font-mono w-32 px-3 py-2 text-center border-2 border-slate-600 rounded-md bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" aria-label="Base color hex input" />
+                <button onClick={handleRandomColor} className="flex items-center gap-2 px-4 py-2 font-semibold text-white bg-slate-700 border border-slate-600 rounded-md shadow-sm hover:bg-slate-600 transition-colors" aria-label="Generate random color">
+                    <span className="text-xl">🎲</span> Random
+                </button>
+                <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-slate-700 transition-colors" aria-label="Toggle dark mode">
+                    {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+                </button>
+            </div>
+        </div>
+        
+        <div className="space-y-12">
+            {harmonies.map(harmony => (
+                <section key={harmony.name}>
+                    <h2 className="text-2xl font-bold text-white mb-4 border-b-2 border-blue-500 pb-2">{harmony.name}</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <ColorCard hex={baseColor} onCopy={handleCopy}/>
+                        {harmony.colors.map(color => <ColorCard key={color} hex={color} onCopy={handleCopy} />)}
+                    </div>
+                </section>
+            ))}
+            
+            <section>
+                <h2 className="text-2xl font-bold text-white mb-4 border-b-2 border-green-500 pb-2">Accessibility Test</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <AccessibilityResult color={baseColor}/>
+                    {harmonies[0].colors.map(color => <AccessibilityResult key={color} color={color}/>)}
+                </div>
+            </section>
+        </div>
+        
+        {/* Quick Test Examples - Moved after main tool */}
         <section className="mb-12 max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-white mb-4 text-center">🎨 Quick Test Examples</h2>
           <p className="text-slate-300 mb-6 text-center">Try these popular color combinations used by top brands and designers:</p>
@@ -693,39 +727,6 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
             ))}
           </div>
         </section>
-        <div className="max-w-2xl mx-auto p-6 rounded-xl shadow-2xl bg-slate-800 border border-slate-700 mb-12">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <label htmlFor="base-color-picker" className="font-semibold text-white">Base Color:</label>
-                <input type="color" id="base-color-picker" value={baseColor} onChange={e => setBaseColor(e.target.value)} className="w-16 h-10 p-1 bg-white border-none rounded-md cursor-pointer" aria-label="Base color picker" />
-                <input type="text" value={baseColor} onChange={e => setBaseColor(e.target.value)} className="font-mono w-32 px-3 py-2 text-center border-2 border-slate-600 rounded-md bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" aria-label="Base color hex input" />
-                <button onClick={handleRandomColor} className="flex items-center gap-2 px-4 py-2 font-semibold text-white bg-slate-700 border border-slate-600 rounded-md shadow-sm hover:bg-slate-600 transition-colors" aria-label="Generate random color">
-                    <span className="text-xl">🎲</span> Random
-                </button>
-                <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-slate-700 transition-colors" aria-label="Toggle dark mode">
-                    {theme === 'light' ? <MoonIcon /> : <SunIcon />}
-                </button>
-            </div>
-        </div>
-        
-        <div className="space-y-12">
-            {harmonies.map(harmony => (
-                <section key={harmony.name}>
-                    <h2 className="text-2xl font-bold text-white mb-4 border-b-2 border-blue-500 pb-2">{harmony.name}</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        <ColorCard hex={baseColor} onCopy={handleCopy}/>
-                        {harmony.colors.map(color => <ColorCard key={color} hex={color} onCopy={handleCopy} />)}
-                    </div>
-                </section>
-            ))}
-            
-            <section>
-                <h2 className="text-2xl font-bold text-white mb-4 border-b-2 border-green-500 pb-2">Accessibility Test</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <AccessibilityResult color={baseColor}/>
-                    {harmonies[0].colors.map(color => <AccessibilityResult key={color} color={color}/>)}
-                </div>
-            </section>
-        </div>
         
         <section className="mt-16">
             <h2 className="text-3xl font-bold text-center mb-8">Generated Palette Preview</h2>
