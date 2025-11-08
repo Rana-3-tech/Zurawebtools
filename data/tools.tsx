@@ -157,7 +157,7 @@ const SnowDayCalculatorIcon = () => (
 const SATScoreCalculatorIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="satScoreCalculatorIconTitle">
         <title id="satScoreCalculatorIconTitle">SAT Score Calculator Icon</title>
-        <defs><linearGradient id="toolGrad14" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#ec4899" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
+        <defs><linearGradient id="toolGrad14" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#001BB7" /><stop offset="100%" stopColor="#60A5FA" /></linearGradient></defs>
         <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V10H9V17ZM13 17H11V7H13V17ZM17 17H15V13H17V17Z" fill="url(#toolGrad14)" />
     </svg>
 );
@@ -254,7 +254,7 @@ export const toolCategories: Category[] = [
                 description: 'Digital SAT raw to scaled score converter for 2024-2025. Calculate your total SAT score (400-1600) with percentile estimates and ACT concordance.',
                 link: 'sat-score-calculator',
                 icon: <SATScoreCalculatorIcon />,
-                gradientColors: { from: '#ec4899', to: '#8b5cf6' }, // Pink to Purple
+                gradientColors: { from: '#001BB7', to: '#60A5FA' }, // Deep Blue to Light Blue
             },
         ]
     },
