@@ -204,6 +204,9 @@ const ProRVLoanCalculator: React.FC<{ navigateTo?: (path: string) => void }> = (
 
   // SEO & JSON-LD EFFECT
   useEffect(() => {
+    // HTML lang attribute
+    document.documentElement.setAttribute('lang', 'en');
+
     // Title
     document.title = 'Pro RV Loan Calculator – Monthly Payments, Interest & Amortization | ZuraFinanceTools';
 
@@ -215,6 +218,15 @@ const ProRVLoanCalculator: React.FC<{ navigateTo?: (path: string) => void }> = (
       document.head.appendChild(metaDesc);
     }
     metaDesc.setAttribute('content', 'Use the free Pro RV Loan Calculator to estimate RV financing costs, amortization schedules, interest, and balloon payments. Compare scenarios and export your report instantly.');
+
+    // Robots meta
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.setAttribute('name', 'robots');
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
     // Keywords
     let metaKeywords = document.querySelector('meta[name="keywords"]');
@@ -268,6 +280,15 @@ const ProRVLoanCalculator: React.FC<{ navigateTo?: (path: string) => void }> = (
     }
     ogType.setAttribute('content', 'website');
 
+    // OG Locale
+    let ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (!ogLocale) {
+      ogLocale = document.createElement('meta');
+      ogLocale.setAttribute('property', 'og:locale');
+      document.head.appendChild(ogLocale);
+    }
+    ogLocale.setAttribute('content', 'en_US');
+
     // JSON-LD Schema
     const schemas = [
         {
@@ -295,7 +316,7 @@ const ProRVLoanCalculator: React.FC<{ navigateTo?: (path: string) => void }> = (
                     "name": "How do I calculate my RV monthly payment?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "The calculator uses the standard amortization formula, factoring in loan amount, APR, and term, with optional taxes and fees."
+                        "text": "The calculator uses the standard amortization formula, factoring in loan amount, APR, and term, with optional taxes and fees. The formula is: M = P * [r(1 + r)^n] / [(1 + r)^n - 1], where M is monthly payment, P is principal, r is monthly interest rate, and n is number of payments."
                     }
                 },
                 {
@@ -303,7 +324,7 @@ const ProRVLoanCalculator: React.FC<{ navigateTo?: (path: string) => void }> = (
                     "name": "Can I reduce my RV loan interest?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Yes, increasing your down payment or making extra payments can reduce the total interest significantly."
+                        "text": "Yes, increasing your down payment or making extra payments can reduce the total interest significantly. Even adding $50-100 per month can save thousands in interest and shorten your loan term by years."
                     }
                 },
                 {
@@ -322,11 +343,89 @@ const ProRVLoanCalculator: React.FC<{ navigateTo?: (path: string) => void }> = (
                         "text": "Yes, you can use it for motorhomes, camper vans, or luxury RVs — just adjust purchase price and interest rate accordingly."
                     }
                 }
+            ],
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Pro RV Loan Calculator",
+            "description": "Advanced RV loan calculator with amortization schedules, balloon payments, and extra payment calculations.",
+            "url": "https://zurafinancetools.com/tools/pro-rv-loan-calculator",
+            "breadcrumb": {
+              "@id": "https://zurafinancetools.com/tools/pro-rv-loan-calculator#breadcrumb"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "ZuraFinanceTools",
+              "url": "https://zurafinancetools.com"
+            }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "@id": "https://zurafinancetools.com/tools/pro-rv-loan-calculator#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://zurafinancetools.com"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Finance Tools",
+                    "item": "https://zurafinancetools.com/tools"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Pro RV Loan Calculator",
+                    "item": "https://zurafinancetools.com/tools/pro-rv-loan-calculator"
+                }
+            ]
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Calculate RV Loan Payments",
+            "description": "Step-by-step guide to calculating your RV loan monthly payment and total cost",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "position": 1,
+                    "name": "Enter RV Purchase Price",
+                    "text": "Enter the total price of the RV you want to finance. This is your starting loan value before any deductions."
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 2,
+                    "name": "Set Down Payment",
+                    "text": "Enter the amount or percentage you plan to pay upfront. A larger down payment reduces your loan amount and total interest."
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 3,
+                    "name": "Include Trade-in and Fees",
+                    "text": "Add trade-in value, sales tax percentage, and any additional fees to see your total financed amount."
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 4,
+                    "name": "Set Interest Rate and Term",
+                    "text": "Enter the APR offered by your lender and select your loan term in years or months."
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 5,
+                    "name": "Review Results",
+                    "text": "View your monthly payment, total interest, amortization schedule, and visual charts showing loan breakdown over time."
+                }
             ]
         }
     ];
 
-    const scriptIds = ['json-ld-software', 'json-ld-faq'];
+    const scriptIds = ['json-ld-software', 'json-ld-faq', 'json-ld-webpage', 'json-ld-breadcrumb', 'json-ld-howto'];
     scriptIds.forEach((id, index) => {
         let script = document.getElementById(id) as HTMLScriptElement | null;
         if (!script) {
@@ -343,11 +442,13 @@ const ProRVLoanCalculator: React.FC<{ navigateTo?: (path: string) => void }> = (
       document.title = 'ZuraFinanceTools'; // Set a more appropriate default title
       if (metaDesc) metaDesc.remove();
       if (metaKeywords) metaKeywords.remove();
+      if (metaRobots) metaRobots.remove();
       if (canonicalLink) canonicalLink.remove();
       if (ogTitle) ogTitle.remove();
       if (ogDesc) ogDesc.remove();
       if (ogUrl) ogUrl.remove();
       if (ogType) ogType.remove();
+      if (ogLocale) ogLocale.remove();
       scriptIds.forEach(id => {
         const script = document.getElementById(id);
         if (script) script.remove();
@@ -1068,6 +1169,391 @@ const LineChart = ({ data }: { data: AmortizationRow[] }) => {
           </div>
         </main>
 
+        {/* Quick Examples Section */}
+        <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-center mb-6">Quick RV Loan Examples - Try These Scenarios</h2>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+            Click any example below to instantly load it into the calculator and see real financing details
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <button 
+              onClick={() => {
+                setRvPrice(50000);
+                setDownPayment(10000);
+                setDownPaymentType('amount');
+                setInterestRate(7.5);
+                setLoanTerm(10);
+                setLoanTermType('years');
+                setTradeInValue(0);
+                setSalesTax(7);
+                setFees(1500);
+              }}
+              className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl border-2 border-blue-200 dark:border-blue-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">🚐</div>
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400">Standard Class C RV</h3>
+              <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                <p>Price: $50,000</p>
+                <p>Down: $10,000 (20%)</p>
+                <p>Rate: 7.5% APR</p>
+                <p>Term: 10 years</p>
+              </div>
+            </button>
+
+            <button 
+              onClick={() => {
+                setRvPrice(150000);
+                setDownPayment(30000);
+                setDownPaymentType('amount');
+                setInterestRate(6.0);
+                setLoanTerm(20);
+                setLoanTermType('years');
+                setTradeInValue(0);
+                setSalesTax(7);
+                setFees(2500);
+              }}
+              className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-xl border-2 border-purple-200 dark:border-purple-700 hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-lg transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">🏰</div>
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400">Luxury Class A Motorhome</h3>
+              <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                <p>Price: $150,000</p>
+                <p>Down: $30,000 (20%)</p>
+                <p>Rate: 6.0% APR</p>
+                <p>Term: 20 years</p>
+              </div>
+            </button>
+
+            <button 
+              onClick={() => {
+                setRvPrice(35000);
+                setDownPayment(7000);
+                setDownPaymentType('amount');
+                setInterestRate(8.0);
+                setLoanTerm(8);
+                setLoanTermType('years');
+                setTradeInValue(0);
+                setSalesTax(7);
+                setFees(1200);
+              }}
+              className="p-6 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl border-2 border-green-200 dark:border-green-700 hover:border-green-400 dark:hover:border-green-500 hover:shadow-lg transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">🚙</div>
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-green-600 dark:group-hover:text-green-400">Camper Van</h3>
+              <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                <p>Price: $35,000</p>
+                <p>Down: $7,000 (20%)</p>
+                <p>Rate: 8.0% APR</p>
+                <p>Term: 8 years</p>
+              </div>
+            </button>
+
+            <button 
+              onClick={() => {
+                setRvPrice(25000);
+                setDownPayment(5000);
+                setDownPaymentType('amount');
+                setInterestRate(9.0);
+                setLoanTerm(5);
+                setLoanTermType('years');
+                setTradeInValue(3000);
+                setSalesTax(7);
+                setFees(800);
+              }}
+              className="p-6 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 rounded-xl border-2 border-orange-200 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-500 hover:shadow-lg transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">♻️</div>
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400">Used Travel Trailer</h3>
+              <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                <p>Price: $25,000</p>
+                <p>Down: $5,000 + Trade-in $3,000</p>
+                <p>Rate: 9.0% APR</p>
+                <p>Term: 5 years</p>
+              </div>
+            </button>
+
+            <button 
+              onClick={() => {
+                setRvPrice(80000);
+                setDownPayment(16000);
+                setDownPaymentType('amount');
+                setInterestRate(7.0);
+                setLoanTerm(12);
+                setLoanTermType('years');
+                setTradeInValue(0);
+                setSalesTax(7);
+                setFees(1800);
+              }}
+              className="p-6 bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/30 dark:to-indigo-800/30 rounded-xl border-2 border-indigo-200 dark:border-indigo-700 hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-lg transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">🏕️</div>
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Fifth Wheel RV</h3>
+              <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                <p>Price: $80,000</p>
+                <p>Down: $16,000 (20%)</p>
+                <p>Rate: 7.0% APR</p>
+                <p>Term: 12 years</p>
+              </div>
+            </button>
+
+            <button 
+              onClick={() => {
+                setRvPrice(15000);
+                setDownPayment(3000);
+                setDownPaymentType('amount');
+                setInterestRate(8.5);
+                setLoanTerm(5);
+                setLoanTermType('years');
+                setTradeInValue(0);
+                setSalesTax(7);
+                setFees(600);
+              }}
+              className="p-6 bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/30 dark:to-pink-800/30 rounded-xl border-2 border-pink-200 dark:border-pink-700 hover:border-pink-400 dark:hover:border-pink-500 hover:shadow-lg transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">⛺</div>
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-400">Pop-up Camper</h3>
+              <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                <p>Price: $15,000</p>
+                <p>Down: $3,000 (20%)</p>
+                <p>Rate: 8.5% APR</p>
+                <p>Term: 5 years</p>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-center mb-6">Why Choose Our Pro RV Loan Calculator?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-xl hover:shadow-xl transition-shadow duration-300">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Advanced Features</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Calculate with precision using balloon payments, extra monthly payments, trade-ins, and state-specific sales tax. 
+                Compare scenarios side-by-side with our{' '}
+                <a 
+                  href="/tools/percentage-change-calculator" 
+                  onClick={(e) => { e.preventDefault(); if (navigateTo) navigateTo('/tools/percentage-change-calculator'); }} 
+                  className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                >
+                  percentage change calculator
+                </a>{' '}
+                to see potential savings.
+              </p>
+            </div>
+
+            <div className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/30 rounded-xl hover:shadow-xl transition-shadow duration-300">
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Accurate & Reliable</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Uses standard amortization formulas trusted by financial institutions. Get exact monthly payments, total interest, 
+                and complete amortization schedules with every calculation.
+              </p>
+            </div>
+
+            <div className="p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/30 dark:to-red-900/30 rounded-xl hover:shadow-xl transition-shadow duration-300">
+              <div className="text-4xl mb-4">🆓</div>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">100% Free Tool</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                No registration, no hidden fees, no credit card required. Export detailed PDF reports, download amortization 
+                schedules as CSV, and share scenarios with family or dealers — all completely free.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Use Cases Section */}
+        <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-center mb-6">Who Uses This RV Loan Calculator?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div className="p-6 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300">
+              <div className="text-4xl mb-3">🏕️</div>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">First-Time RV Buyers</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Planning your first RV purchase? Use this calculator to understand total costs, compare financing options, and 
+                determine what you can afford. Try our{' '}
+                <a 
+                  href="/tools/time-difference-calculator" 
+                  onClick={(e) => { e.preventDefault(); if (navigateTo) navigateTo('/tools/time-difference-calculator'); }} 
+                  className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                >
+                  time difference calculator
+                </a>{' '}
+                to plan your payment schedule timeline.
+              </p>
+            </div>
+
+            <div className="p-6 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-green-400 dark:hover:border-green-500 transition-all duration-300">
+              <div className="text-4xl mb-3">🚐</div>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Full-Time RVers</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Living full-time in your RV? Calculate refinancing options, see how extra payments reduce your term, and optimize 
+                your budget. Use our{' '}
+                <a 
+                  href="/tools/fabric-costing-tool" 
+                  onClick={(e) => { e.preventDefault(); if (navigateTo) navigateTo('/tools/fabric-costing-tool'); }} 
+                  className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                >
+                  professional calculators
+                </a>{' '}
+                for comprehensive financial planning.
+              </p>
+            </div>
+
+            <div className="p-6 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-300">
+              <div className="text-4xl mb-3">🌄</div>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Weekend Warriors</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Buying an RV for weekend getaways? Compare loan terms to find monthly payments that fit your lifestyle. Calculate 
+                exactly how much interest you'll pay over the life of your loan and explore shorter terms for faster payoff.
+              </p>
+            </div>
+
+            <div className="p-6 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-500 transition-all duration-300">
+              <div className="text-4xl mb-3">🌅</div>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Retirement Planning</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Planning to travel in retirement? Model different RV purchase scenarios and see how balloon payments or shorter 
+                terms affect your retirement budget. Factor in all costs including sales tax and fees for accurate planning.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-center mb-6">About the Pro RV Loan Calculator</h2>
+          <div className="max-w-4xl mx-auto space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p>
+              The <strong>Pro RV Loan Calculator</strong> is a comprehensive financing tool designed specifically for recreational vehicle purchases. 
+              Whether you're buying a Class A motorhome, camper van, fifth wheel, travel trailer, or pop-up camper, this calculator provides 
+              accurate monthly payment estimates, detailed amortization schedules, and total cost projections.
+            </p>
+
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 pt-4">What Makes This Calculator Different?</h3>
+            <p>
+              Unlike basic loan calculators, our Pro RV Loan Calculator includes advanced features specifically for RV financing:
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li><strong>Balloon Payment Support:</strong> Model loans with large final payments that reduce monthly costs</li>
+              <li><strong>Extra Payment Analysis:</strong> See exactly how additional principal payments save interest and shorten your loan term</li>
+              <li><strong>Trade-in Value Integration:</strong> Factor in your current vehicle's value to calculate net financing needed</li>
+              <li><strong>State-Specific Sales Tax:</strong> Choose from 50 US states with accurate sales tax rates</li>
+              <li><strong>Complete Amortization Tables:</strong> View payment-by-payment breakdowns with principal, interest, and remaining balance</li>
+              <li><strong>Visual Charts:</strong> Interactive donut charts and line graphs show cost breakdown and balance over time</li>
+              <li><strong>Export Options:</strong> Download detailed PDF reports and CSV amortization schedules</li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 pt-4">How It Works</h3>
+            <p>
+              The calculator uses the standard amortization formula: <code className="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">M = P × [r(1 + r)^n] / [(1 + r)^n - 1]</code>, 
+              where M is monthly payment, P is principal loan amount, r is monthly interest rate, and n is total number of payments. 
+              For balloon payments, it adjusts by deducting the present value of the balloon amount from the principal.
+            </p>
+            <p>
+              All calculations update in real-time as you adjust inputs. The calculator factors in your down payment, trade-in value, 
+              sales tax, and additional fees to give you the most accurate total cost projection. Use our{' '}
+              <a 
+                href="/tools/percentage-change-calculator" 
+                onClick={(e) => { e.preventDefault(); if (navigateTo) navigateTo('/tools/percentage-change-calculator'); }} 
+                className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+              >
+                percentage change calculator
+              </a>{' '}
+              to compare interest savings between different scenarios.
+            </p>
+
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 pt-4">Who Should Use This Tool?</h3>
+            <p>
+              This calculator is perfect for anyone considering RV financing — from first-time buyers researching options to experienced RVers 
+              looking to refinance. Dealers and financial advisors also use it to quickly generate loan scenarios for clients. 
+              The quick preset examples let you explore common RV types (standard, luxury, camper van, used trailer, fifth wheel, pop-up) 
+              with realistic pricing and terms.
+            </p>
+
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 pt-4">Why Trust Our Calculator?</h3>
+            <p>
+              Built by financial technology experts, this calculator uses industry-standard formulas verified against major lender systems. 
+              It's part of our suite of professional{' '}
+              <a 
+                href="/tools" 
+                onClick={(e) => { e.preventDefault(); if (navigateTo) navigateTo('/tools'); }} 
+                className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+              >
+                financial calculators
+              </a>{' '}
+              trusted by thousands of users monthly. We don't collect personal information, show ads, or require registration — 
+              just accurate, free calculations when you need them.
+            </p>
+
+            <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4 rounded mt-6">
+              <p className="text-blue-800 dark:text-blue-200">
+                <strong>Pro Tip:</strong> Always compare at least 3-4 loan scenarios before making a decision. Small changes in interest rate, 
+                down payment, or loan term can save thousands of dollars over the life of your RV loan.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* External Links Section */}
+        <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-center mb-6">Additional RV Financing Resources</h2>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+            Learn more about RV loans from these trusted financial authorities
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <a 
+              href="https://www.investopedia.com/rv-loans-5179933" 
+              target="_blank" 
+              rel="noopener noreferrer nofollow"
+              className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-xl border-2 border-blue-200 dark:border-blue-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="text-3xl">📚</div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                    Investopedia: RV Loans Guide
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Comprehensive guide covering RV loan basics, interest rates, terms, and tips for getting the best financing deals.
+                  </p>
+                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium mt-2 inline-block">
+                    Read on Investopedia →
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <a 
+              href="https://www.nerdwallet.com/article/loans/rv-loans" 
+              target="_blank" 
+              rel="noopener noreferrer nofollow"
+              className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-xl border-2 border-green-200 dark:border-green-700 hover:border-green-400 dark:hover:border-green-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="text-3xl">💰</div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-green-600 dark:group-hover:text-green-400">
+                    NerdWallet: Best RV Loans 2025
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Compare top RV loan lenders, rates, and terms. Expert reviews and recommendations for finding the best RV financing.
+                  </p>
+                  <span className="text-xs text-green-600 dark:text-green-400 font-medium mt-2 inline-block">
+                    Compare Lenders →
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              <strong>Last Updated:</strong> November 8, 2025
+            </p>
+          </div>
+        </section>
+
         <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 space-y-6">
           <h2 className="text-2xl font-bold text-center mb-6">RV Loan Guide: Understanding, Tips & Smart Financing</h2>
           
@@ -1237,15 +1723,27 @@ const LineChart = ({ data }: { data: AmortizationRow[] }) => {
               <p className="text-gray-600 dark:text-gray-300 mt-1">A balloon payment is a large final payment that lowers your monthly installments. It's the remaining balance of the loan that's due in a lump sum at the end of the term, which can be risky if you're not prepared for it.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg">4. Is this calculator accurate for all RV types?</h3>
-              <p className="text-gray-600 dark:text-gray-300 mt-1">Yes, you can use it for any type of recreational vehicle, including motorhomes, camper vans, fifth wheels, or luxury RVs. Simply adjust the purchase price, interest rate, and other variables to match your specific scenario.</p>
+              <h3 className="font-semibold text-lg text-cyan-600 dark:text-cyan-400">4. Is this calculator accurate for all RV types?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">Yes, you can use it for any type of recreational vehicle, including motorhomes, camper vans, fifth wheels, travel trailers, or luxury RVs. Simply adjust the purchase price, interest rate, and other variables to match your specific scenario. The calculator works for any recreational vehicle financing scenario.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg text-cyan-600 dark:text-cyan-400">5. What is a good interest rate for an RV loan?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">As of 2025, good RV loan rates typically range from 6% to 9% depending on credit score, loan term, and RV type. New RVs often get lower rates than used ones, and shorter terms typically have better rates than longer terms. Your credit score is the biggest factor — excellent credit (740+) can qualify for rates as low as 5-6%.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg text-cyan-600 dark:text-cyan-400">6. How long can you finance an RV?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">RV loan terms typically range from 5 to 20 years, depending on the loan amount and RV type. Luxury and new RVs can qualify for longer terms (15-20 years), while used or smaller RVs may be limited to shorter terms (5-12 years). Longer terms mean lower monthly payments but significantly more interest paid over time.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg text-cyan-600 dark:text-cyan-400">7. Should I make extra payments on my RV loan?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">Yes, making extra principal payments can save significant interest and pay off your RV loan faster. Use the calculator's extra payment feature to see exactly how much you'll save and how many months you can cut from your loan term. For example, an extra $100/month on a $50,000 loan at 7% can save over $7,000 in interest and pay off the loan 3+ years early.</p>
             </div>
           </div>
         </section>
 
         <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-bold text-center mb-8">Related Tools</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-center mb-8">Related Financial & Calculation Tools</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 <a href="/tools/percentage-change-calculator" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-brand-secondary dark:hover:border-brand-secondary transition-all duration-300 group">
                     <div className="flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg mb-4">
                         <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1254,7 +1752,7 @@ const LineChart = ({ data }: { data: AmortizationRow[] }) => {
                         </svg>
                     </div>
                     <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100 group-hover:text-brand-primary dark:group-hover:text-brand-secondary">Percentage Change Calculator</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Calculate percentage increase or decrease between two numbers.</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Calculate percentage increase or decrease to compare interest savings.</p>
                 </a>
                 <a href="/tools/time-difference-calculator" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-brand-secondary dark:hover:border-brand-secondary transition-all duration-300 group">
                     <div className="flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg mb-4">
@@ -1264,7 +1762,27 @@ const LineChart = ({ data }: { data: AmortizationRow[] }) => {
                         </svg>
                     </div>
                     <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100 group-hover:text-brand-primary dark:group-hover:text-brand-secondary">Date Difference Calculator</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Calculate exact duration between two dates in years, months, and days.</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Calculate loan duration and payment schedule timelines precisely.</p>
+                </a>
+                <a href="/tools/word-counter" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-brand-secondary dark:hover:border-brand-secondary transition-all duration-300 group">
+                    <div className="flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg mb-4">
+                        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs><linearGradient id="wordGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3b82f6" /><stop offset="100%" stopColor="#06b6d4" /></linearGradient></defs>
+                            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM6 20V4H13V9H18V20H6ZM8 12H16V14H8V12ZM8 16H16V18H8V16Z" fill="url(#wordGrad)"/>
+                        </svg>
+                    </div>
+                    <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100 group-hover:text-brand-primary dark:group-hover:text-brand-secondary">Word Counter Tool</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Count words and characters in loan documents and contracts.</p>
+                </a>
+                <a href="/tools/case-converter" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-brand-secondary dark:hover:border-brand-secondary transition-all duration-300 group">
+                    <div className="flex items-center justify-center w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg mb-4">
+                        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs><linearGradient id="caseGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#6366f1" /><stop offset="100%" stopColor="#a855f7" /></linearGradient></defs>
+                            <path d="M2.5 4V7H7.5V19H10.5V7H15.5V4H2.5ZM21.5 9H12.5V12H15.5V19H18.5V12H21.5V9Z" fill="url(#caseGrad)"/>
+                        </svg>
+                    </div>
+                    <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100 group-hover:text-brand-primary dark:group-hover:text-brand-secondary">Case Converter</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Format text for loan applications and financial documents.</p>
                 </a>
                 <a href="/tools/fabric-costing-tool" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-brand-secondary dark:hover:border-brand-secondary transition-all duration-300 group">
                     <div className="flex items-center justify-center w-12 h-12 bg-orange-100 dark:bg-orange-900/50 rounded-lg mb-4">
@@ -1274,7 +1792,7 @@ const LineChart = ({ data }: { data: AmortizationRow[] }) => {
                         </svg>
                     </div>
                     <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100 group-hover:text-brand-primary dark:group-hover:text-brand-secondary">Fabric Costing Calculator</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Professional fabric costing tool with yarn consumption calculations.</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Professional costing tool for business expense calculations.</p>
                 </a>
             </div>
         </section>
