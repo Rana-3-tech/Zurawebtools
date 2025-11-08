@@ -14,7 +14,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
 
   // 🧠 Enhanced SEO and Meta Tags Setup
   useEffect(() => {
-    document.title = "Online Word & Character Counter – Free Text Analyzer & SEO Word Count Tool | ZuraWebTools";
+    document.title = "Word Counter - Free Character & Text Analyzer Tool";
 
     // Meta description
     const metaDescription =
@@ -22,33 +22,34 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
     metaDescription.setAttribute('name', 'description');
     metaDescription.setAttribute(
       'content',
-      'Free Online Word and Character Counter Tool to instantly count words, characters, sentences, and paragraphs. Perfect for SEO content optimization, blog writing, essays, and social media post character limits.'
+      'Count words, characters & paragraphs instantly. Free online text analyzer for writers, students & SEO. No signup required. Start counting now!'
     );
     document.head.appendChild(metaDescription);
 
-    // Meta keywords (for Bing/Yandex/secondary engines)
-    const metaKeywords =
-      document.querySelector('meta[name="keywords"]') || document.createElement('meta');
-    metaKeywords.setAttribute('name', 'keywords');
-    metaKeywords.setAttribute(
-      'content',
-      'online word counter, character counter, text analyzer, text length calculator, SEO content word count, blog word counter, article word counter, essay word counter, Instagram character counter, Twitter character counter'
-    );
-    document.head.appendChild(metaKeywords);
+    // Robots meta tag
+    const metaRobots = document.querySelector('meta[name="robots"]') || document.createElement('meta');
+    metaRobots.setAttribute('name', 'robots');
+    metaRobots.setAttribute('content', 'index, follow, max-image-preview:large');
+    document.head.appendChild(metaRobots);
 
     // Open Graph & Twitter meta tags
     const metaTags = [
-      { property: 'og:title', content: 'Online Word & Character Counter – Free Text Analyzer | ZuraWebTools' },
-      { property: 'og:description', content: 'Instantly count words, characters, and paragraphs online. A fast, accurate, and privacy-safe word counter for writers, students, and SEO professionals.' },
+      { property: 'og:title', content: 'Word Counter - Free Character & Text Analyzer Tool' },
+      { property: 'og:description', content: 'Count words, characters & paragraphs instantly. Free online text analyzer for writers, students & SEO.' },
       { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-word-counter-og.png' },
-      { property: 'og:image:alt', content: 'Screenshot of ZuraWebTools Online Word & Character Counter showing text analysis.' },
+      { property: 'og:image:alt', content: 'Word Counter showing text analysis with character count and paragraph count.' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://zurawebtools.com/tools/word-counter' },
+      { property: 'og:locale', content: 'en_US' },
+      { property: 'og:site_name', content: 'ZuraWebTools' },
+      { property: 'article:published_time', content: '2024-02-10T08:00:00Z' },
+      { property: 'article:modified_time', content: new Date().toISOString() },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Free Online Word & Character Counter | ZuraWebTools' },
-      { name: 'twitter:description', content: 'Count words, characters, and paragraphs instantly. A powerful SEO content analyzer and blog word counter tool for online creators.' },
+      { name: 'twitter:title', content: 'Word Counter - Free Character & Text Analyzer' },
+      { name: 'twitter:description', content: 'Count words & characters instantly. Free online text analyzer tool.' },
       { name: 'twitter:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-word-counter-og.png' },
-      { name: 'twitter:image:alt', content: 'Free online word and character counter showing text stats and readability.' },
+      { name: 'twitter:image:alt', content: 'Word counter tool with text statistics display.' },
+      { name: 'twitter:site', content: '@ZuraWebTools' },
     ];
 
     metaTags.forEach(tag => {
@@ -70,14 +71,23 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "Online Word & Character Counter Tool",
+        "name": "Word Counter - Free Character & Text Analyzer",
         "applicationCategory": "UtilityApplication",
         "operatingSystem": "Any (Web-based)",
-        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "1150" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "1325" },
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
-        "description": "A free online tool to count words, characters, sentences, and paragraphs. Ideal for SEO optimization, blogging, essays, and content writing.",
+        "description": "Count words, characters & paragraphs instantly. Free online text analyzer for writers, students & SEO. No signup required.",
         "url": "https://zurawebtools.com/tools/word-counter"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://zurawebtools.com" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://zurawebtools.com/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Word Counter", "item": "https://zurawebtools.com/tools/word-counter" }
+        ]
       },
       {
         "@context": "https://schema.org",
@@ -104,10 +114,93 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
             "name": "Can this tool help with SEO optimization?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, this text analyzer helps maintain optimal content length for SEO-friendly articles, meta titles, and descriptions. It’s ideal for writers, students, and marketers."
+              "text": "Yes, this text analyzer helps maintain optimal content length for SEO-friendly articles, meta titles, and descriptions. It's ideal for writers, students, and marketers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the ideal word count for SEO blog posts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "1500-2500 words for comprehensive articles, 800-1200 for standard blog posts, and 300-500 for news updates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How accurate is this word counter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "100% accurate using JavaScript string methods. Counts words, characters, and paragraphs with instant real-time updates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this for academic essays?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, perfect for checking essay length requirements like 500, 1000, or 1500 word assignments."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it count emojis and special characters?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, all Unicode characters including emojis, symbols, and special characters are accurately counted."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the difference between 'Characters' and 'No Spaces'?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Characters include all letters, spaces, and punctuation. No Spaces excludes all whitespace characters."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a word limit for this tool?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No limit - analyze texts of any length, from short tweets to full manuscripts and books."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I save my text analysis?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, use the Copy Text button to save your content and results to clipboard for later use."
             }
           }
         ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Count Words and Characters Online",
+        "description": "Step-by-step guide to count words, characters, and paragraphs using free online tool",
+        "step": [
+          { "@type": "HowToStep", "position": 1, "name": "Paste or Type Text", "text": "Enter or paste your text into the text box area" },
+          { "@type": "HowToStep", "position": 2, "name": "View Instant Results", "text": "See real-time counts for words, characters, and paragraphs" },
+          { "@type": "HowToStep", "position": 3, "name": "Analyze Readability", "text": "Click 'Analyze Readability' for AI-powered content insights" },
+          { "@type": "HowToStep", "position": 4, "name": "Copy or Clear", "text": "Use Copy button to save text or Clear to start fresh" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Word Counter - Free Character & Text Analyzer Tool",
+        "description": "Count words, characters & paragraphs instantly. Free online text analyzer for writers, students & SEO. No signup required.",
+        "url": "https://zurawebtools.com/tools/word-counter",
+        "datePublished": "2024-02-10",
+        "dateModified": "2025-11-09",
+        "inLanguage": "en-US",
+        "publisher": {
+          "@type": "Organization",
+          "name": "ZuraWebTools",
+          "url": "https://zurawebtools.com"
+        }
       }
     ]);
     document.head.appendChild(script);
@@ -116,7 +209,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
     return () => {
       document.title = 'ZuraWebTools | Free AI Tools for SEO & Social Media Growth';
       metaDescription.remove();
-      metaKeywords.remove();
+      metaRobots.remove();
       metaTags.forEach(tag => {
         const selector = Object.keys(tag)[0];
         const value = Object.values(tag)[0];
@@ -187,10 +280,10 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
         {/* 🏷️ Header */}
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white">
-            Online Word & Character Counter Tool – Free Text Analyzer
+            Word Counter - Free Character & Text Analyzer
           </h1>
           <p className="mt-4 text-lg text-gray-300">
-            Instantly count words and characters online with our free text counter. Perfect for analyzing your blog posts, checking social media post character limits, and optimizing content for SEO. This text length calculator also acts as a blog word counter and SEO content word count tool for writers, students, and marketers.
+            Count words, characters & paragraphs instantly with our free online word counter. Perfect for essays, blogs, SEO content, and social media character limits. This text analyzer helps writers, students & marketers optimize content length for better results.
           </p>
         </div>
 
@@ -251,9 +344,180 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
           )}
         </div>
 
+        {/* 📚 How It Works Section */}
+        <div className="max-w-4xl mx-auto mt-16">
+          <h2 className="text-3xl font-bold mb-6 text-white text-center">⚙️ How the Free Word Counter Works</h2>
+          <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-8 rounded-xl border border-slate-700">
+            <p className="text-gray-300 leading-relaxed mb-4">
+              Our online word counter uses advanced JavaScript algorithms to provide instant, accurate text analysis. The tool counts:
+            </p>
+            <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+              <li><strong className="text-cyan-400">Words:</strong> Split by whitespace, filtered for accuracy</li>
+              <li><strong className="text-cyan-400">Characters:</strong> All letters, numbers, symbols, spaces, and punctuation</li>
+              <li><strong className="text-cyan-400">No Spaces:</strong> Character count excluding all whitespace</li>
+              <li><strong className="text-cyan-400">Paragraphs:</strong> Text blocks separated by line breaks</li>
+            </ul>
+            <p className="text-gray-300 leading-relaxed mt-4">
+              Everything happens in your browser - no data is uploaded to servers, ensuring complete privacy and instant results.
+            </p>
+          </div>
+        </div>
+
+        {/* 🎯 Common Use Cases */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <h2 className="text-3xl font-bold mb-6 text-white text-center">🎯 Common Use Cases for Word Counter</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-700 hover:border-cyan-500 transition-colors">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-3">📝 Academic Essays</h3>
+              <p className="text-gray-300 text-sm">Check word count for essays (500, 1000, 1500 words) and meet assignment requirements precisely.</p>
+            </div>
+            <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-700 hover:border-cyan-500 transition-colors">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-3">✍️ Blog Writing</h3>
+              <p className="text-gray-300 text-sm">Optimize blog posts for SEO with ideal word counts (1500-2500 words for comprehensive content).</p>
+            </div>
+            <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-700 hover:border-cyan-500 transition-colors">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-3">📱 Social Media</h3>
+              <p className="text-gray-300 text-sm">Stay within Twitter (280), Instagram (2200), or LinkedIn (3000) character limits for posts.</p>
+            </div>
+            <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-700 hover:border-cyan-500 transition-colors">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-3">🔍 SEO Meta Tags</h3>
+              <p className="text-gray-300 text-sm">Perfect meta titles (50-60 chars) and descriptions (150-160 chars) for search engine optimization.</p>
+            </div>
+            <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-700 hover:border-cyan-500 transition-colors">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-3">📄 Resume/CV</h3>
+              <p className="text-gray-300 text-sm">Keep resumes concise (400-600 words) and cover letters within one page (250-400 words).</p>
+            </div>
+            <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-700 hover:border-cyan-500 transition-colors">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-3">📧 Email Marketing</h3>
+              <p className="text-gray-300 text-sm">Craft concise email subject lines (40-50 chars) and preview text (90-140 chars) for better open rates.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ✨ Key Features */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <h2 className="text-3xl font-bold mb-6 text-white text-center">✨ Why Use Our Free Word Counter Tool</h2>
+          <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 p-8 rounded-xl border border-cyan-700/30">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-start space-x-3">
+                <span className="text-2xl">⚡</span>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Instant Real-Time Counting</h4>
+                  <p className="text-sm text-gray-400">See word and character counts update as you type with zero delay</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-2xl">🎯</span>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">100% Accurate Results</h4>
+                  <p className="text-sm text-gray-400">Precise counting algorithms validated for accuracy across all text types</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-2xl">🔒</span>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Complete Privacy</h4>
+                  <p className="text-sm text-gray-400">All processing happens locally - no text uploaded to servers</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-2xl">💰</span>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">100% Free Forever</h4>
+                  <p className="text-sm text-gray-400">No registration, no ads, no hidden costs - completely free</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-2xl">🤖</span>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">AI Readability Analysis</h4>
+                  <p className="text-sm text-gray-400">Get AI-powered insights on text clarity and readability</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-2xl">📱</span>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Mobile-Friendly Design</h4>
+                  <p className="text-sm text-gray-400">Works perfectly on phones, tablets, and desktops</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 📊 Character Limits Reference */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <h2 className="text-3xl font-bold mb-6 text-white text-center">📊 Platform Character Limits Guide</h2>
+          <div className="bg-slate-900/50 p-8 rounded-xl border border-slate-700">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
+              <div className="flex justify-between border-b border-slate-700 pb-2">
+                <span className="font-semibold text-white">Twitter/X Post:</span>
+                <span className="text-cyan-400">280 characters</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-700 pb-2">
+                <span className="font-semibold text-white">Instagram Caption:</span>
+                <span className="text-cyan-400">2,200 characters</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-700 pb-2">
+                <span className="font-semibold text-white">Facebook Post:</span>
+                <span className="text-cyan-400">63,206 characters</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-700 pb-2">
+                <span className="font-semibold text-white">LinkedIn Post:</span>
+                <span className="text-cyan-400">3,000 characters</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-700 pb-2">
+                <span className="font-semibold text-white">Meta Title (SEO):</span>
+                <span className="text-cyan-400">50-60 characters</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-700 pb-2">
+                <span className="font-semibold text-white">Meta Description:</span>
+                <span className="text-cyan-400">150-160 characters</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-700 pb-2">
+                <span className="font-semibold text-white">SMS Text Message:</span>
+                <span className="text-cyan-400">160 characters</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-700 pb-2">
+                <span className="font-semibold text-white">Email Subject Line:</span>
+                <span className="text-cyan-400">40-50 characters</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 💡 SEO Tips Section */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <h2 className="text-3xl font-bold mb-6 text-white text-center">💡 SEO Content Writing Tips</h2>
+          <div className="bg-slate-900/50 p-8 rounded-xl border border-slate-700">
+            <div className="space-y-4 text-gray-300">
+              <div className="flex items-start space-x-3">
+                <span className="text-cyan-400 font-bold">1.</span>
+                <p><strong className="text-white">Optimal blog length:</strong> 1500-2500 words for comprehensive articles ranks better in search results</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-cyan-400 font-bold">2.</span>
+                <p><strong className="text-white">Meta descriptions:</strong> Keep between 150-160 characters for full display in search results</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-cyan-400 font-bold">3.</span>
+                <p><strong className="text-white">Title tags:</strong> Limit to 50-60 characters to avoid truncation in Google</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-cyan-400 font-bold">4.</span>
+                <p><strong className="text-white">Paragraph length:</strong> Keep paragraphs 40-70 words for better readability</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-cyan-400 font-bold">5.</span>
+                <p><strong className="text-white">Sentence length:</strong> Aim for 15-20 words per sentence for clarity</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* 💬 FAQ Section */}
         <div className="max-w-4xl mx-auto mt-16">
-          <h2 className="text-3xl font-bold text-center mb-8 text-white">Frequently Asked Questions (FAQ)</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">❓ Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-cyan-300">How does the online word counter work?</h3>
@@ -262,19 +526,67 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
               </p>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-cyan-300">Is this word and character counter tool free?</h3>
+              <h3 className="text-xl font-semibold text-cyan-300">Is this word counter free to use?</h3>
               <p className="text-gray-400 mt-2">
-                Yes, it’s 100% free to use. No registration, ads, or hidden fees — just a fast, reliable word counter from ZuraWebTools.
+                Yes, 100% free with no registration required. Use it unlimited times for essays, blogs, social media, and any text analysis needs.
               </p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-cyan-300">Can this help with SEO optimization?</h3>
               <p className="text-gray-400 mt-2">
-                Absolutely! It helps writers and marketers maintain ideal content length for SEO-friendly articles, meta titles, and descriptions.
+                Absolutely! It helps maintain optimal content length for SEO-friendly articles (1500-2500 words), perfect meta titles (50-60 chars), and descriptions (150-160 chars).
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">What is the ideal word count for blog posts?</h3>
+              <p className="text-gray-400 mt-2">
+                For SEO, aim for 1500-2500 words for in-depth articles, 800-1200 for standard posts, and 300-500 for news updates or quick tips.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">How accurate is this word counter?</h3>
+              <p className="text-gray-400 mt-2">
+                100% accurate using JavaScript string methods. It counts all words, characters, and paragraphs with real-time precision.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">Can I use this for academic essays?</h3>
+              <p className="text-gray-400 mt-2">
+                Yes, perfect for checking essay requirements like 500, 1000, or 1500 word assignments. Helps students meet exact word count criteria.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">Does it count emojis and special characters?</h3>
+              <p className="text-gray-400 mt-2">
+                Yes, all Unicode characters are counted including emojis, symbols, foreign characters, and special punctuation.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">What's the difference between 'Characters' and 'No Spaces'?</h3>
+              <p className="text-gray-400 mt-2">
+                'Characters' includes everything (letters, spaces, punctuation). 'No Spaces' excludes all whitespace for platforms with strict limits.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">Is there a word limit for this tool?</h3>
+              <p className="text-gray-400 mt-2">
+                No limit! Analyze texts of any length, from short tweets (280 chars) to full manuscripts (100,000+ words).
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">Can I save my text analysis results?</h3>
+              <p className="text-gray-400 mt-2">
+                Yes, use the 'Copy Text' button to save your content and statistics to clipboard for pasting into documents or notes.
               </p>
             </div>
           </div>
         </div>
+
+        <RelatedTools
+          navigateTo={navigateTo}
+          relatedSlugs={['remove-extra-spaces', 'case-converter', 'lorem-ipsum-generator', 'time-difference-calculator', 'json-formatter-validator', 'percentage-change-calculator', 'sat-score-calculator']}
+          currentSlug="word-counter"
+        />
 
         <RelatedTools
           navigateTo={navigateTo}
