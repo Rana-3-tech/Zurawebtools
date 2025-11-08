@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RelatedTools from '../RelatedTools';
 import { Page } from '../../App';
+import { notifyIndexNow } from '../../utils/indexNow';
 
 interface CaseConverterProps {
   navigateTo: (page: Page) => void;
@@ -261,6 +262,11 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
       canonical.remove();
       script.remove();
     };
+  }, []);
+
+  // 📡 IndexNow: Notify search engines about page updates
+  useEffect(() => {
+    notifyIndexNow('/tools/case-converter');
   }, []);
 
   // ✍️ Case Conversion Logic

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import RelatedTools from '../RelatedTools';
 import { Page } from '../../App';
+import { notifyIndexNow } from '../../utils/indexNow';
 
 interface ContrastCheckResult {
   ratio: string | null;
@@ -271,6 +272,11 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
       canonical.remove();
       script.remove();
     };
+  }, []);
+
+  // 📡 IndexNow: Notify search engines about page updates
+  useEffect(() => {
+    notifyIndexNow('/tools/accessible-color-contrast-checker');
   }, []);
 
   // Contrast Calculation Logic
