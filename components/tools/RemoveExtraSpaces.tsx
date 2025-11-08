@@ -15,9 +15,20 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
     removeBlankLines: true,
   });
   const [copySuccess, setCopySuccess] = useState(false);
+  const [stats, setStats] = useState({
+    inputChars: 0,
+    inputWords: 0,
+    outputChars: 0,
+    outputWords: 0,
+    charsRemoved: 0,
+    reductionPercent: 0
+  });
 
   // 🧠 Enhanced SEO & Meta Tags Setup
   useEffect(() => {
+    // HTML lang attribute
+    document.documentElement.setAttribute('lang', 'en');
+
     document.title =
       "Remove Extra Spaces from Text – Free Online Whitespace Remover Tool | ZuraWebTools";
 
@@ -30,6 +41,12 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
       'Free online whitespace remover tool to remove extra spaces, tabs, and blank lines from text. Instantly clean and format your text for SEO, blogs, or code with our fast online text cleaner.'
     );
     document.head.appendChild(metaDescription);
+
+    // Robots meta
+    const metaRobots = document.querySelector('meta[name="robots"]') || document.createElement('meta');
+    metaRobots.setAttribute('name', 'robots');
+    metaRobots.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    document.head.appendChild(metaRobots);
 
     // 🏷️ Meta Keywords for LSI coverage
     const metaKeywords =
@@ -49,6 +66,7 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
       { property: 'og:image:alt', content: 'Screenshot of ZuraWebTools Remove Extra Spaces tool cleaning messy text.' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://zurawebtools.com/tools/remove-extra-spaces' },
+      { property: 'og:locale', content: 'en_US' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Remove Extra Spaces from Text – Free Online Whitespace Remover Tool' },
       { name: 'twitter:description', content: 'Use this free online whitespace remover to delete extra spaces, tabs, and blank lines. Clean and format text for SEO, blogs, or coding.' },
@@ -67,7 +85,7 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
     canonical.setAttribute('href', 'https://zurawebtools.com/tools/remove-extra-spaces');
     document.head.appendChild(canonical);
 
-    // 📜 JSON-LD (SoftwareApplication + FAQ)
+    // 📜 JSON-LD (SoftwareApplication + FAQ + WebPage + Breadcrumb + HowTo)
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify([
@@ -82,6 +100,72 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
         "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
         "description": "A free online text cleaner tool to remove extra spaces, tabs, and blank lines from text. Perfect for formatting SEO content, blogs, or clean code snippets.",
         "url": "https://zurawebtools.com/tools/remove-extra-spaces"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Remove Extra Spaces Tool",
+        "description": "Free online whitespace remover to clean text by removing extra spaces, tabs, and blank lines",
+        "url": "https://zurawebtools.com/tools/remove-extra-spaces",
+        "breadcrumb": {
+          "@id": "https://zurawebtools.com/tools/remove-extra-spaces#breadcrumb"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "ZuraWebTools",
+          "url": "https://zurawebtools.com"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://zurawebtools.com/tools/remove-extra-spaces#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://zurawebtools.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://zurawebtools.com/tools"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Remove Extra Spaces",
+            "item": "https://zurawebtools.com/tools/remove-extra-spaces"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Remove Extra Spaces from Text",
+        "description": "Step-by-step guide to clean text by removing extra spaces, tabs, and blank lines",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Paste Your Text",
+            "text": "Paste your messy text with extra spaces into the input area on the left"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Choose Cleaning Options",
+            "text": "Select your preferred options: Remove Extra Spaces, Trim Each Line, or Remove Blank Lines"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Get Cleaned Text",
+            "text": "Your cleaned text appears instantly in the output area. Click Copy Result to use it"
+          }
+        ]
       },
       {
         "@context": "https://schema.org",
@@ -110,6 +194,38 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
               "@type": "Answer",
               "text": "Absolutely. This online space cleaner helps improve readability and SEO by maintaining clean, consistent text structure for websites and blogs."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the difference between removing extra spaces and trimming lines?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Removing extra spaces deletes multiple consecutive spaces between words, leaving only one. Trimming lines removes spaces at the start and end of each line. You can use both options together for maximum cleaning."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool remove tabs and newlines?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The 'Remove Extra Spaces' option treats tabs as spaces and removes extra ones. The 'Remove Blank Lines' option eliminates multiple consecutive newlines. Use 'Remove All Whitespace' button to delete everything including tabs and newlines."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my data safe when using this text cleaner?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, 100% safe. All text processing happens locally in your browser using JavaScript. Your text never leaves your device or gets sent to any server, ensuring complete privacy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this for cleaning code or JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! This tool is perfect for cleaning code snippets, JSON data, or any text format. Use the trim and blank line removal options to clean up indentation and formatting issues in your code."
+            }
           }
         ]
       }
@@ -121,6 +237,7 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
       document.title = 'ZuraWebTools | Free AI Tools for SEO & Social Media Growth';
       metaDescription.remove();
       metaKeywords.remove();
+      metaRobots.remove();
       metaTags.forEach((tag) => {
         const selector = Object.keys(tag)[0];
         const value = Object.values(tag)[0];
@@ -151,6 +268,21 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
 
     processedText = processedText.trim();
     setOutputText(processedText);
+
+    // Calculate statistics
+    const inputWords = inputText.trim() ? inputText.trim().split(/\s+/).filter(w => w.length > 0).length : 0;
+    const outputWords = processedText.trim() ? processedText.trim().split(/\s+/).filter(w => w.length > 0).length : 0;
+    const charsRemoved = inputText.length - processedText.length;
+    const reductionPercent = inputText.length > 0 ? ((charsRemoved / inputText.length) * 100) : 0;
+
+    setStats({
+      inputChars: inputText.length,
+      inputWords: inputWords,
+      outputChars: processedText.length,
+      outputWords: outputWords,
+      charsRemoved: charsRemoved,
+      reductionPercent: reductionPercent
+    });
   }, [inputText, options]);
 
   useEffect(() => {
@@ -172,6 +304,20 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
 
   const handleRemoveAllWhitespace = () => {
     setOutputText(inputText.replace(/\s/g, ''));
+  };
+
+  const handleDownload = () => {
+    if (outputText) {
+      const blob = new Blob([outputText], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `cleaned-text-${new Date().toISOString().split('T')[0]}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
   };
 
   const CheckboxOption: React.FC<{
@@ -204,7 +350,7 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
         </div>
 
         {/* Input & Output Panels */}
-        <div className="max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-6xl mx-auto mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <label htmlFor="inputText" className="block text-lg font-semibold mb-2 text-gray-200">
               Input Text
@@ -214,10 +360,15 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
                 id="inputText"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="Paste your text here to remove extra spaces..."
-                className="w-full h-72 p-4 text-base bg-slate-900 text-gray-200 rounded-lg border-2 border-transparent focus:outline-none focus:ring-4 focus:ring-cyan-400/50 transition resize-y"
+                placeholder="Paste  messy   text  with    extra     spaces...
+Or click an example below to try it out!"
+                className="w-full h-64 p-4 text-base bg-slate-900 text-gray-200 rounded-lg border-2 border-transparent focus:outline-none focus:ring-4 focus:ring-cyan-400/50 transition resize-y"
                 aria-label="Input text area"
               />
+            </div>
+            <div className="text-sm text-gray-400 mt-2 flex justify-between">
+              <span>{stats.inputChars} characters</span>
+              <span>{stats.inputWords} words</span>
             </div>
           </div>
 
@@ -230,20 +381,52 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
                 id="outputText"
                 value={outputText}
                 readOnly
-                placeholder="Your cleaned text will appear here..."
-                className="w-full h-72 p-4 text-base bg-slate-900 text-gray-300 rounded-lg border-2 border-transparent focus:outline-none focus:ring-4 focus:ring-slate-500/50 transition resize-y cursor-not-allowed"
+                placeholder="✨ Your cleaned text will appear here instantly
+as you type or select options"
+                className="w-full h-64 p-4 text-base bg-slate-900 text-gray-300 rounded-lg border-2 border-transparent focus:outline-none focus:ring-4 focus:ring-slate-500/50 transition resize-y cursor-not-allowed"
                 aria-label="Output text area"
               />
+            </div>
+            <div className="text-sm text-gray-400 mt-2 flex justify-between">
+              <span>{stats.outputChars} characters</span>
+              <span>{stats.outputWords} words</span>
             </div>
           </div>
         </div>
 
-        {/* Options and Buttons */}
-        <div className="max-w-6xl mx-auto mt-6 bg-slate-900/50 p-6 rounded-lg shadow-lg">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        {/* Statistics Panel */}
+        {stats.inputChars > 0 && (
+          <div className="max-w-6xl mx-auto mt-6 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 p-6 rounded-xl border border-cyan-500/30">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div className="text-3xl font-bold text-cyan-400">{stats.charsRemoved}</div>
+                <div className="text-sm text-gray-300 mt-1">Characters Removed</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-green-400">
+                  {stats.reductionPercent.toFixed(1)}%
+                </div>
+                <div className="text-sm text-gray-300 mt-1">Size Reduction</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-purple-400">
+                  {stats.inputWords === stats.outputWords ? '✓' : stats.outputWords}
+                </div>
+                <div className="text-sm text-gray-300 mt-1">
+                  {stats.inputWords === stats.outputWords ? 'Words Preserved' : 'Words Remaining'}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Options and Buttons - Compact */}
+        <div className="max-w-6xl mx-auto mt-4 bg-slate-900/50 p-4 rounded-lg shadow-lg">
+          <div className="space-y-3">
+            {/* Options - Horizontal Layout */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-3">Options</h3>
-              <div className="space-y-3">
+              <h3 className="text-base font-semibold text-white mb-2 text-center">Cleaning Options</h3>
+              <div className="flex flex-wrap justify-center gap-4">
                 <CheckboxOption
                   label="Remove Extra Spaces"
                   checked={options.removeExtraSpaces}
@@ -262,28 +445,311 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
               </div>
             </div>
 
-            <div className="md:col-span-2 flex flex-wrap justify-center md:justify-end gap-4">
-              <button
-                onClick={handleRemoveAllWhitespace}
-                className="bg-red-600 text-white font-bold py-3 px-6 rounded-full hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                Remove All Whitespace
-              </button>
+            {/* Buttons - Centered */}
+            <div className="flex flex-wrap justify-center gap-2 pt-3 border-t border-slate-700">
               <button
                 onClick={handleCopy}
-                className={`font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg ${
-                  copySuccess ? 'bg-green-600 text-white' : 'bg-cyan-500 text-white hover:bg-cyan-600'
+                disabled={!outputText}
+                className={`font-semibold py-2 px-5 rounded-lg transition-all duration-200 text-sm shadow disabled:opacity-50 disabled:cursor-not-allowed ${
+                  copySuccess ? 'bg-green-600 text-white ring-2 ring-green-400' : 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-600 hover:to-blue-600'
                 }`}
               >
-                {copySuccess ? 'Copied!' : 'Copy Result'}
+                {copySuccess ? '✓ Copied!' : '📋 Copy Result'}
+              </button>
+              <button
+                onClick={handleDownload}
+                disabled={!outputText}
+                className="bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold py-2 px-5 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 text-sm shadow disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                📥 Download
+              </button>
+              <button
+                onClick={handleRemoveAllWhitespace}
+                disabled={!inputText}
+                className="bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold py-2 px-5 rounded-lg hover:from-orange-700 hover:to-red-700 transition-all duration-200 text-sm shadow disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                🔥 Remove All
               </button>
               <button
                 onClick={handleClear}
-                className="bg-slate-700 text-white font-bold py-3 px-6 rounded-full hover:bg-slate-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                disabled={!inputText && !outputText}
+                className="bg-slate-700 text-white font-semibold py-2 px-5 rounded-lg hover:bg-slate-600 transition-all duration-200 text-sm shadow disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Clear
+                🗑️ Clear
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Quick Examples Section */}
+        <div className="max-w-5xl mx-auto mt-12">
+          <h2 className="text-3xl font-bold text-center mb-6 text-white">
+            Try These Examples – Click to Load Instantly
+          </h2>
+          <p className="text-center text-gray-300 mb-8 max-w-2xl mx-auto">
+            Click any example below to see how the tool cleans different types of text
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <button 
+              onClick={() => setInputText("This   is    a  messy   paragraph   with    extra     spaces    everywhere.")}
+              className="p-6 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">📝</div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">Messy Paragraph</h3>
+              <p className="text-sm text-gray-300">Multiple spaces between words</p>
+            </button>
+
+            <button 
+              onClick={() => setInputText("function example() {\n\t\t\treturn true;\n\t\t\t\tconsole.log('test');\n\t}")}
+              className="p-6 bg-gradient-to-br from-purple-600 to-purple-700 rounded-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">💻</div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">Code with Tabs</h3>
+              <p className="text-sm text-gray-300">Clean indentation issues</p>
+            </button>
+
+            <button 
+              onClick={() => setInputText("   Leading spaces here   \n\n\n   And trailing spaces   \n\n   With blank lines   ")}
+              className="p-6 bg-gradient-to-br from-green-600 to-green-700 rounded-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">✂️</div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">Trim Lines</h3>
+              <p className="text-sm text-gray-300">Remove leading/trailing spaces</p>
+            </button>
+
+            <button 
+              onClick={() => setInputText("Line one\n\n\n\nLine two\n\n\n\n\nLine three")}
+              className="p-6 bg-gradient-to-br from-orange-600 to-orange-700 rounded-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">🗑️</div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">Remove Blank Lines</h3>
+              <p className="text-sm text-gray-300">Delete multiple empty lines</p>
+            </button>
+
+            <button 
+              onClick={() => setInputText("Dear   Customer,\n\n\n   Thank you    for  your    order.\n\n   Best   regards,\n   Support  Team   ")}
+              className="p-6 bg-gradient-to-br from-pink-600 to-pink-700 rounded-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">📧</div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">Email Template</h3>
+              <p className="text-sm text-gray-300">Clean email formatting</p>
+            </button>
+
+            <button 
+              onClick={() => setInputText('{\n  "name":    "John",\n  "age":     25,\n\n  "city":    "New York"\n}')}
+              className="p-6 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 text-left group"
+            >
+              <div className="text-3xl mb-3">🔧</div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">JSON Data</h3>
+              <p className="text-sm text-gray-300">Clean JSON formatting</p>
+            </button>
+          </div>
+        </div>
+
+        {/* About Section */}
+        <div className="max-w-4xl mx-auto mt-16 bg-slate-900/50 p-8 rounded-2xl border border-slate-700">
+          <h2 className="text-3xl font-bold text-center mb-6 text-white">
+            About the Remove Extra Spaces Tool
+          </h2>
+          <div className="space-y-6 text-gray-300 leading-relaxed">
+            <p>
+              The <strong>Remove Extra Spaces Tool</strong> is a free online whitespace remover that helps you clean messy text instantly. 
+              Whether you're a writer formatting blog content, a developer cleaning code snippets, or a student preparing research papers, 
+              this tool removes redundant spaces, trims lines, and eliminates blank lines in seconds.
+            </p>
+
+            <h3 className="text-xl font-semibold text-white pt-4">How It Works</h3>
+            <p>
+              Our text cleaner uses advanced JavaScript regular expressions (regex) to identify and remove different types of whitespace characters. 
+              The tool processes your text entirely in your browser—no server uploads, no data storage, no privacy concerns. Here's what each option does:
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li><strong>Remove Extra Spaces:</strong> Finds sequences of 2+ spaces and replaces them with a single space</li>
+              <li><strong>Trim Each Line:</strong> Removes leading and trailing whitespace from every line</li>
+              <li><strong>Remove Blank Lines:</strong> Eliminates consecutive empty lines, keeping text compact</li>
+              <li><strong>Remove All Whitespace:</strong> Deletes every space, tab, and newline character (use carefully!)</li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-white pt-4">Common Use Cases</h3>
+            <p>
+              This whitespace remover is perfect for cleaning text copied from PDFs (which often adds extra spaces), 
+              formatting email templates, preparing code for documentation, cleaning CSV data, optimizing SEO meta tags, 
+              and ensuring consistent text structure across documents. Many users combine this with our{' '}
+              <a 
+                href="/tools/word-counter" 
+                onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }}
+                className="text-cyan-400 hover:underline font-medium"
+              >
+                word counter
+              </a>{' '}
+              and{' '}
+              <a 
+                href="/tools/case-converter" 
+                onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }}
+                className="text-cyan-400 hover:underline font-medium"
+              >
+                case converter
+              </a>{' '}
+              for complete text processing workflows.
+            </p>
+
+            <h3 className="text-xl font-semibold text-white pt-4">Why Choose This Tool?</h3>
+            <p>
+              Unlike other text cleaners that require uploads or registrations, our tool works instantly in your browser. 
+              It's 100% free, requires no sign-up, shows no ads, and processes unlimited text. The real-time preview lets you 
+              see changes as you adjust options, making it easy to get exactly the formatting you need. Perfect for anyone who 
+              values speed, privacy, and simplicity.
+            </p>
+
+            <div className="bg-cyan-900/30 border-l-4 border-cyan-500 p-4 rounded mt-6">
+              <p className="text-cyan-200">
+                <strong>Pro Tip:</strong> Use the Quick Examples above to see how different options affect various text types. 
+                This helps you understand which combination works best for your specific use case.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Use Cases Section */}
+        <div className="max-w-5xl mx-auto mt-16">
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">
+            Who Uses This Text Cleaner?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 bg-slate-900/50 rounded-xl border border-slate-700 hover:border-cyan-500 transition-all duration-300">
+              <div className="text-4xl mb-3">✍️</div>
+              <h3 className="text-xl font-bold text-white mb-3">Content Writers & Bloggers</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Clean up messy text copied from various sources before publishing. Maintain consistent formatting for better SEO and readability. Use our{' '}
+                <a 
+                  href="/tools/word-counter" 
+                  onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }}
+                  className="text-cyan-400 hover:underline font-medium"
+                >
+                  word counter tool
+                </a>{' '}
+                to check your content length after cleaning.
+              </p>
+            </div>
+
+            <div className="p-6 bg-slate-900/50 rounded-xl border border-slate-700 hover:border-purple-500 transition-all duration-300">
+              <div className="text-4xl mb-3">👨‍💻</div>
+              <h3 className="text-xl font-bold text-white mb-3">Developers & Programmers</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Clean code snippets, remove inconsistent indentation, and format JSON data. Perfect for preparing code for documentation or sharing on Stack Overflow.
+              </p>
+            </div>
+
+            <div className="p-6 bg-slate-900/50 rounded-xl border border-slate-700 hover:border-green-500 transition-all duration-300">
+              <div className="text-4xl mb-3">🎓</div>
+              <h3 className="text-xl font-bold text-white mb-3">Students & Researchers</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Format research papers, clean up quoted text, and prepare citations. Remove extra spaces from PDF copy-paste text that often contains formatting errors.
+              </p>
+            </div>
+
+            <div className="p-6 bg-slate-900/50 rounded-xl border border-slate-700 hover:border-orange-500 transition-all duration-300">
+              <div className="text-4xl mb-3">📊</div>
+              <h3 className="text-xl font-bold text-white mb-3">SEO Professionals</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Clean meta descriptions, title tags, and schema markup. Ensure consistent formatting across all on-page SEO elements. Try our{' '}
+                <a 
+                  href="/tools/case-converter" 
+                  onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }}
+                  className="text-cyan-400 hover:underline font-medium"
+                >
+                  case converter
+                </a>{' '}
+                for text transformation.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Benefits Section */}
+        <div className="max-w-5xl mx-auto mt-16">
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">
+            Why Use Our Remove Extra Spaces Tool?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl hover:shadow-xl transition-shadow duration-300 border border-cyan-500/30">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-bold text-white mb-3">Instant Cleaning</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Remove extra spaces in milliseconds with real-time processing. No waiting, no uploading—instant results as you type.
+              </p>
+            </div>
+
+            <div className="p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl hover:shadow-xl transition-shadow duration-300 border border-purple-500/30">
+              <div className="text-4xl mb-4">🔒</div>
+              <h3 className="text-xl font-bold text-white mb-3">100% Private</h3>
+              <p className="text-gray-300 leading-relaxed">
+                All text processing happens locally in your browser. Your data never touches our servers, ensuring complete privacy and security.
+              </p>
+            </div>
+
+            <div className="p-6 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-xl hover:shadow-xl transition-shadow duration-300 border border-orange-500/30">
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="text-xl font-bold text-white mb-3">Flexible Options</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Choose exactly what to clean: extra spaces, line trimming, blank lines, or remove all whitespace with one click.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* External Links Section */}
+        <div className="max-w-4xl mx-auto mt-16">
+          <h2 className="text-3xl font-bold text-center mb-6 text-white">
+            Learn More About Whitespace & Text Processing
+          </h2>
+          <p className="text-center text-gray-300 mb-8 max-w-2xl mx-auto">
+            Explore these trusted resources to understand whitespace characters and text formatting
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a 
+              href="https://en.wikipedia.org/wiki/Whitespace_character" 
+              target="_blank" 
+              rel="noopener noreferrer nofollow"
+              className="p-6 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-xl border-2 border-blue-500/30 hover:border-blue-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="text-3xl">📚</div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">
+                    Wikipedia: Whitespace Characters
+                  </h3>
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    Comprehensive guide to whitespace characters including spaces, tabs, and newlines in computing and typography.
+                  </p>
+                  <span className="text-xs text-cyan-400 font-medium mt-2 inline-block">
+                    Read on Wikipedia →
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <a 
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim" 
+              target="_blank" 
+              rel="noopener noreferrer nofollow"
+              className="p-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl border-2 border-purple-500/30 hover:border-purple-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="text-3xl">💻</div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">
+                    MDN: String.trim() Method
+                  </h3>
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    Technical documentation on JavaScript's trim() method for removing whitespace from strings.
+                  </p>
+                  <span className="text-xs text-cyan-400 font-medium mt-2 inline-block">
+                    Read on MDN Web Docs →
+                  </span>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
 
@@ -295,36 +761,115 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-cyan-300">
-                How does this Remove Extra Spaces tool work?
+                1. How does this Remove Extra Spaces tool work?
               </h3>
               <p className="text-gray-400 mt-2">
-                The tool processes your text directly in your browser and removes redundant spaces, blank lines, and tabs based on your preferences. No data ever leaves your device.
+                The tool processes your text directly in your browser using smart regex patterns. It removes double spaces, trims lines, and cleans up unnecessary blank lines safely—no data ever leaves your device.
               </p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-cyan-300">
-                Is this whitespace remover free to use?
+                2. Is this whitespace remover free to use?
               </h3>
               <p className="text-gray-400 mt-2">
-                Yes! This online space cleaner is 100% free to use. You can use it anytime to format your text for SEO, blogs, or clean code snippets.
+                Yes! ZuraWebTools provides this text cleaner completely free. Use it anytime to format content for SEO, blogs, or code without any restrictions.
               </p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-cyan-300">
-                Can I use it to format text for SEO or blogs?
+                3. Can I use this for SEO or blog formatting?
               </h3>
               <p className="text-gray-400 mt-2">
-                Absolutely! Clean, consistent text formatting helps improve your on-page SEO and makes blog content more readable for search engines and visitors.
+                Absolutely. This online space cleaner helps improve readability and SEO by maintaining clean, consistent text structure for websites and blogs.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">
+                4. What's the difference between removing extra spaces and trimming lines?
+              </h3>
+              <p className="text-gray-400 mt-2">
+                Removing extra spaces deletes multiple consecutive spaces between words, leaving only one. Trimming lines removes spaces at the start and end of each line. You can use both options together for maximum cleaning.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">
+                5. Does this tool remove tabs and newlines?
+              </h3>
+              <p className="text-gray-400 mt-2">
+                The 'Remove Extra Spaces' option treats tabs as spaces and removes extra ones. The 'Remove Blank Lines' option eliminates multiple consecutive newlines. Use 'Remove All Whitespace' button to delete everything including tabs and newlines.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">
+                6. Is my data safe when using this text cleaner?
+              </h3>
+              <p className="text-gray-400 mt-2">
+                Yes, 100% safe. All text processing happens locally in your browser using JavaScript. Your text never leaves your device or gets sent to any server, ensuring complete privacy.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300">
+                7. Can I use this for cleaning code or JSON?
+              </h3>
+              <p className="text-gray-400 mt-2">
+                Yes! This tool is perfect for cleaning code snippets, JSON data, or any text format. Use the trim and blank line removal options to clean up indentation and formatting issues in your code.
               </p>
             </div>
           </div>
         </div>
 
-        <RelatedTools
-          navigateTo={navigateTo}
-          relatedSlugs={['word-counter', 'case-converter', 'json-formatter']}
-          currentSlug="remove-extra-spaces"
-        />
+        {/* Related Tools */}
+        <div className="max-w-4xl mx-auto mt-16">
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">
+            Related Text Processing Tools
+          </h2>
+          <RelatedTools
+            navigateTo={navigateTo}
+            relatedSlugs={['word-counter', 'case-converter', 'json-formatter', 'lorem-ipsum-generator']}
+            currentSlug="remove-extra-spaces"
+          />
+        </div>
+
+        {/* External Resources */}
+        <div className="max-w-4xl mx-auto mt-12 text-center bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h3 className="text-lg font-semibold text-white mb-3">📚 Learn More About Whitespace</h3>
+          <p className="text-sm text-gray-400 mb-4">
+            Explore these authoritative resources to understand whitespace handling in text and code:
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <a 
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim" 
+              target="_blank" 
+              rel="nofollow noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 hover:underline transition-colors"
+            >
+              MDN Web Docs - String.trim() →
+            </a>
+            <a 
+              href="https://www.w3.org/TR/xml/#sec-white-space" 
+              target="_blank" 
+              rel="nofollow noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 hover:underline transition-colors"
+            >
+              W3C - Whitespace Handling →
+            </a>
+            <a 
+              href="https://en.wikipedia.org/wiki/Whitespace_character" 
+              target="_blank" 
+              rel="nofollow noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 hover:underline transition-colors"
+            >
+              Wikipedia - Whitespace Characters →
+            </a>
+          </div>
+        </div>
+
+        {/* Last Updated Footer */}
+        <div className="max-w-4xl mx-auto mt-8 text-center">
+          <p className="text-sm text-gray-500">
+            Last Updated: <time dateTime="2025-11-08">November 8, 2025</time>
+          </p>
+        </div>
       </div>
     </section>
   );

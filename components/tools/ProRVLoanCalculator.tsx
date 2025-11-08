@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback, FC, useRef } from 'react';
+﻿import React, { useState, useMemo, useEffect, useCallback, FC, useRef } from 'react';
 
 // TYPES
 type Currency = 'USD' | 'CAD' | 'EUR' | 'GBP';
@@ -991,7 +991,7 @@ const LineChart = ({ data }: { data: AmortizationRow[] }) => {
         <header className="text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-brand-primary dark:text-brand-secondary">Pro RV Loan Calculator</h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300">
-            Estimate your RV financing costs, amortization schedules, and total interest with our advanced calculator. Perfect for planning your motorhome, camper van, or luxury RV purchase.
+            Calculate RV monthly payments, total interest, and amortization schedules instantly with our free online calculator. Supports balloon payments, extra principal payments, trade-ins, and state-specific sales tax for accurate RV financing estimates.
           </p>
         </header>
         
@@ -1711,16 +1711,16 @@ const LineChart = ({ data }: { data: AmortizationRow[] }) => {
           <h2 className="text-2xl font-bold text-center mb-6">Frequently Asked Questions</h2>
           <div className="space-y-4 max-w-3xl mx-auto">
             <div>
-              <h3 className="font-semibold text-lg">1. How do I calculate my RV monthly payment?</h3>
-              <p className="text-gray-600 dark:text-gray-300 mt-1">The calculator uses the standard amortization formula, factoring in loan amount (purchase price minus down payment/trade-in plus taxes and fees), APR, and loan term to determine your monthly installment.</p>
+              <h3 className="font-semibold text-lg text-cyan-600 dark:text-cyan-400">1. How do I calculate my RV monthly payment?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">The calculator uses the standard amortization formula, factoring in loan amount (purchase price minus down payment/trade-in plus taxes and fees), APR, and loan term to determine your monthly installment. The formula is: M = P × [r(1 + r)^n] / [(1 + r)^n - 1], where M is monthly payment, P is principal, r is monthly interest rate, and n is number of payments.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg">2. Can I reduce my RV loan interest?</h3>
-              <p className="text-gray-600 dark:text-gray-300 mt-1">Yes, increasing your down payment, choosing a shorter loan term, or making extra monthly payments toward the principal can significantly reduce the total interest paid over the life of the loan.</p>
+              <h3 className="font-semibold text-lg text-cyan-600 dark:text-cyan-400">2. Can I reduce my RV loan interest?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">Yes, increasing your down payment, choosing a shorter loan term, or making extra monthly payments toward the principal can significantly reduce the total interest paid over the life of the loan. Even adding $50-100 per month can save thousands in interest and shorten your loan term by years.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg">3. What’s a balloon payment?</h3>
-              <p className="text-gray-600 dark:text-gray-300 mt-1">A balloon payment is a large final payment that lowers your monthly installments. It's the remaining balance of the loan that's due in a lump sum at the end of the term, which can be risky if you're not prepared for it.</p>
+              <h3 className="font-semibold text-lg text-cyan-600 dark:text-cyan-400">3. What's a balloon payment on an RV loan?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">A balloon payment is a large final payment that lowers your monthly installments. It's the remaining balance of the loan that's due in a lump sum at the end of the term. It defers part of the principal until the end of the loan term, which can reduce monthly costs but requires planning for the large final payment.</p>
             </div>
             <div>
               <h3 className="font-semibold text-lg text-cyan-600 dark:text-cyan-400">4. Is this calculator accurate for all RV types?</h3>

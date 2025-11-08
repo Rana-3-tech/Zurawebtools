@@ -242,6 +242,9 @@ const SATScoreCalculator: React.FC = () => {
     useEffect(() => {
         document.title = "Free SAT Score Calculator 2024-2025 - Digital SAT Converter | ZuraWebTools";
         
+        // Set HTML lang attribute
+        document.documentElement.setAttribute('lang', 'en');
+        
         const setMeta = (name: string, content: string, isProperty = false) => {
             const attr = isProperty ? 'property' : 'name';
             let element = document.querySelector(`meta[${attr}='${name}']`);
@@ -269,6 +272,7 @@ const SATScoreCalculator: React.FC = () => {
         const metaDesc = setMeta('description', "Free SAT score calculator for Digital SAT 2024-2025. Convert raw scores to scaled (200-800) instantly. Get percentiles, ACT equivalents & downloadable reports.");
         const metaKeywords = setMeta('keywords', "SAT score calculator, digital SAT 2024, raw to scaled score converter, SAT percentile calculator, ACT to SAT conversion, SAT score estimator, college entrance exam calculator, standardized test scores");
         const metaAuthor = setMeta('author', 'ZuraWebTools');
+        const metaRobots = setMeta('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
         const canonicalLink = setLink('canonical', 'https://zurawebtools.com/tools/sat-score-calculator');
         
         // Open Graph Meta Tags
@@ -276,6 +280,7 @@ const SATScoreCalculator: React.FC = () => {
         const ogDesc = setMeta('og:description', 'Calculate your SAT score instantly! Convert raw scores to scaled scores (200-800), get percentile rankings, ACT equivalents, and detailed score reports for Digital SAT 2024-2025.', true);
         const ogType = setMeta('og:type', 'website', true);
         const ogUrl = setMeta('og:url', 'https://zurawebtools.com/tools/sat-score-calculator', true);
+        const ogLocale = setMeta('og:locale', 'en_US', true);
         const ogSiteName = setMeta('og:site_name', 'ZuraWebTools', true);
         const ogImage = setMeta('og:image', 'https://zurawebtools.com/images/sat-calculator-preview.jpg', true);
         const ogImageAlt = setMeta('og:image:alt', 'SAT Score Calculator Interface - Digital SAT 2024-2025', true);
@@ -727,6 +732,136 @@ const SATScoreCalculator: React.FC = () => {
 
             {/* Below-the-fold Content */}
             <div className="w-full max-w-4xl mx-auto mt-16 space-y-12">
+                {/* Quick Examples Section */}
+                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Try These Example Scores</h2>
+                    <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">Click any preset to instantly see the calculated SAT score and percentile ranking</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <button 
+                            onClick={() => {
+                                setTestMode('digital');
+                                setIsMathCombined(true);
+                                setDifficulty('auto');
+                                setScores({ readingWriting: 54, mathNoCalc: null, mathCalc: null, mathCombined: 44 });
+                                setErrors({});
+                            }}
+                            className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-200 dark:border-green-700 rounded-xl hover:scale-105 hover:shadow-xl transition-all duration-300 text-left group"
+                        >
+                            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">1600</div>
+                            <div className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">🏆 Perfect Score</div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400">All questions correct (54 R&W + 44 Math)</p>
+                        </button>
+
+                        <button 
+                            onClick={() => {
+                                setTestMode('digital');
+                                setIsMathCombined(true);
+                                setDifficulty('auto');
+                                setScores({ readingWriting: 50, mathNoCalc: null, mathCalc: null, mathCombined: 40 });
+                                setErrors({});
+                            }}
+                            className="p-6 bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/20 dark:to-sky-900/20 border-2 border-blue-200 dark:border-blue-700 rounded-xl hover:scale-105 hover:shadow-xl transition-all duration-300 text-left group"
+                        >
+                            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">~1500</div>
+                            <div className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">🎓 Ivy League Target</div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400">Competitive for top universities</p>
+                        </button>
+
+                        <button 
+                            onClick={() => {
+                                setTestMode('digital');
+                                setIsMathCombined(true);
+                                setDifficulty('auto');
+                                setScores({ readingWriting: 45, mathNoCalc: null, mathCalc: null, mathCombined: 35 });
+                                setErrors({});
+                            }}
+                            className="p-6 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 border-2 border-purple-200 dark:border-purple-700 rounded-xl hover:scale-105 hover:shadow-xl transition-all duration-300 text-left group"
+                        >
+                            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">~1400</div>
+                            <div className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">⭐ Excellent Score</div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400">93rd-99th percentile nationwide</p>
+                        </button>
+
+                        <button 
+                            onClick={() => {
+                                setTestMode('digital');
+                                setIsMathCombined(true);
+                                setDifficulty('auto');
+                                setScores({ readingWriting: 33, mathNoCalc: null, mathCalc: null, mathCombined: 25 });
+                                setErrors({});
+                            }}
+                            className="p-6 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border-2 border-orange-200 dark:border-orange-700 rounded-xl hover:scale-105 hover:shadow-xl transition-all duration-300 text-left group"
+                        >
+                            <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">~1200</div>
+                            <div className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">👍 Good Score</div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400">70th-92nd percentile range</p>
+                        </button>
+
+                        <button 
+                            onClick={() => {
+                                setTestMode('digital');
+                                setIsMathCombined(true);
+                                setDifficulty('auto');
+                                setScores({ readingWriting: 27, mathNoCalc: null, mathCalc: null, mathCombined: 22 });
+                                setErrors({});
+                            }}
+                            className="p-6 bg-gradient-to-br from-slate-50 to-gray-50 dark:from-slate-800 dark:to-gray-800 border-2 border-slate-200 dark:border-slate-600 rounded-xl hover:scale-105 hover:shadow-xl transition-all duration-300 text-left group"
+                        >
+                            <div className="text-3xl font-bold text-slate-600 dark:text-slate-300 mb-2">~1050</div>
+                            <div className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">📊 Average Score</div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400">Around 50th percentile (median)</p>
+                        </button>
+
+                        <button 
+                            onClick={() => {
+                                setTestMode('paper');
+                                setIsMathCombined(false);
+                                setDifficulty('normal');
+                                setScores({ readingWriting: 45, mathNoCalc: 15, mathCalc: 23, mathCombined: null });
+                                setErrors({});
+                            }}
+                            className="p-6 bg-gradient-to-br from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20 border-2 border-cyan-200 dark:border-cyan-700 rounded-xl hover:scale-105 hover:shadow-xl transition-all duration-300 text-left group"
+                        >
+                            <div className="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-2">~1350</div>
+                            <div className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">📝 Paper SAT Example</div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400">Old format with No-Calc + Calc sections</p>
+                        </button>
+                    </div>
+                </section>
+
+                {/* Benefits Section */}
+                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Why Use Our SAT Calculator?</h2>
+                    <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">Get instant, accurate SAT score estimates with features designed for modern test-takers</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/20 dark:to-sky-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-700/50">
+                            <div className="w-12 h-12 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] rounded-lg flex items-center justify-center mb-4">
+                                <span className="text-2xl">⚡</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Instant Results</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Real-time score calculation as you type. No waiting, no sign-up required. Get your scaled scores (200-800) and total score (400-1600) immediately.</p>
+                        </div>
+
+                        <div className="bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 p-6 rounded-xl border border-purple-200 dark:border-purple-700/50">
+                            <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-violet-600 rounded-lg flex items-center justify-center mb-4">
+                                <span className="text-2xl">📊</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Comprehensive Analysis</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Beyond basic scoring, get percentile rankings, ACT score concordance, and downloadable CSV reports. Perfect for tracking progress over time.</p>
+                        </div>
+
+                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-xl border border-green-200 dark:border-green-700/50">
+                            <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center mb-4">
+                                <span className="text-2xl">🎯</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Digital SAT Adaptive</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Unique adaptive difficulty detection for Digital SAT 2024-2025. Automatically adjusts for Easy, Normal, or Hard module performance.</p>
+                        </div>
+                    </div>
+                </section>
+                
                 <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">About the Digital SAT</h2>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-4">The <strong>Digital SAT</strong>, introduced in 2024, represents a major shift from the traditional paper-and-pencil <strong>standardized test</strong>. It's an <strong>adaptive test</strong> administered on a computer, meaning the difficulty of the second module in each section (Reading & Writing, and Math) adjusts based on your performance in the first module.</p>
@@ -873,6 +1008,8 @@ const SATScoreCalculator: React.FC = () => {
                 <footer className="text-center text-sm text-slate-500 dark:text-slate-400 pt-8 border-t border-slate-200 dark:border-slate-700 space-y-3">
                     <p><strong>Disclaimer:</strong> This <strong>SAT score estimator</strong> is for estimation purposes only and is not affiliated with the College Board. Scores are based on approximated conversion tables. Official scores may vary.</p>
                     <p><strong>Data Sources:</strong> Official concordance tables from the <a href="https://collegereadiness.collegeboard.org/sat" target="_blank" rel="nofollow noopener noreferrer" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">College Board</a> and <a href="https://www.act.org/content/act/en/products-and-services/the-act/scores/act-sat-concordance.html" target="_blank" rel="nofollow noopener noreferrer" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">ACT, Inc.</a></p>
+                    <p><strong>Additional Resources:</strong> <a href="https://www.khanacademy.org/test-prep/sat" target="_blank" rel="nofollow noopener noreferrer" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">Khan Academy SAT Prep</a> | <a href="https://satsuite.collegeboard.org/digital/digital-practice-preparation" target="_blank" rel="nofollow noopener noreferrer" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">Official SAT Practice Tests</a></p>
+                    <p className="text-xs text-slate-400 dark:text-slate-500">Last Updated: November 8, 2025</p>
                     <p>&copy; {new Date().getFullYear()} <a href="/" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">ZuraWebTools</a>. All rights reserved. | <a href="/tools" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">All Tools</a> | <a href="/tools/math-and-calculation" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">Math & Calculation Tools</a></p>
                 </footer>
             </div>
