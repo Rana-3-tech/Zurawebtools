@@ -21,8 +21,16 @@ const Hero: React.FC<HeroProps> = ({ navigateTo, onSearch }) => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-brand-blue/10 rounded-full blur-3xl"></div>
             
             <div className="container mx-auto px-6 text-center relative z-10">
-                <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-brand-blue to-brand-cyan bg-clip-text text-transparent">
-                    {heroTitle}
+                <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight">
+                    {heroTitle.split(" ").map((word, index) => (
+                        <span 
+                            key={index} 
+                            className="inline-block animate-fade-in-word bg-gradient-to-r from-brand-blue to-brand-cyan bg-clip-text text-transparent"
+                            style={{ animationDelay: `${index * 0.2}s` }}
+                        >
+                            {word}&nbsp;
+                        </span>
+                    ))}
                 </h1>
                 <p className="mt-6 text-xl text-slate-400 max-w-3xl mx-auto">
                     Boost your productivity and online presence with our collection of smart, free-to-use tools for SEO, content creation, and more.
