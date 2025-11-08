@@ -29,7 +29,7 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
     metaDescription.setAttribute('name', 'description');
     metaDescription.setAttribute(
       'content',
-      'Check color contrast ratios for accessibility compliance (WCAG AA/AAA). Free online contrast checker for designers, developers, and accessibility testing.'
+      'Free WCAG 2.1 color contrast checker tool for web accessibility testing. Check AA/AAA compliance, contrast ratios, hex codes, and ADA Section 508 requirements. Perfect for designers and developers ensuring color accessibility for visually impaired users and color blindness.'
     );
     document.head.appendChild(metaDescription);
 
@@ -202,7 +202,7 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
             name: 'What is a color contrast checker?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'A color contrast checker calculates the contrast ratio between two colors and determines whether they meet WCAG accessibility standards.',
+              text: 'A color contrast checker calculates the contrast ratio between two colors and determines whether they meet WCAG accessibility standards. It helps designers ensure text and UI elements are readable for all users, including those with visual impairments.',
             },
           },
           {
@@ -210,7 +210,7 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
             name: 'Why is color contrast important?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Color contrast ensures that text and UI elements are readable by users with visual impairments, making websites accessible for all.',
+              text: 'Color contrast ensures that text and UI elements are readable by users with visual impairments, color blindness, and low vision. Good contrast makes websites accessible for all users and helps meet legal requirements like ADA and Section 508 compliance.',
             },
           },
           {
@@ -218,7 +218,39 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
             name: 'What are the WCAG contrast ratio levels?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'WCAG 2.1 defines contrast ratio thresholds: AA (4.5:1 for normal text, 3:1 for large text) and AAA (7:1 for normal text, 4.5:1 for large text).',
+              text: 'WCAG 2.1 defines contrast ratio thresholds: AA level requires 4.5:1 for normal text and 3:1 for large text, while AAA level requires 7:1 for normal text and 4.5:1 for large text. Large text is defined as 18pt (24px) or 14pt (18.66px) bold.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Is this color contrast checker free to use?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes! This tool is completely free to use with no registration required. You can check unlimited color combinations and use it for personal or commercial projects without any restrictions.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: "What's the difference between WCAG AA and AAA?",
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'WCAG AA is the minimum recommended level for most websites (4.5:1 ratio), while AAA is the enhanced level (7:1 ratio) providing even better accessibility. AA is legally required in many jurisdictions, while AAA is optional but recommended for critical content.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Can I use hex codes in this tool?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes! You can input colors using hex codes (like #FFFFFF or #000000), or use the color picker to visually select colors. The tool instantly calculates the contrast ratio and shows WCAG compliance results for both input methods.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What does "pass" or "fail" mean in the results?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '"Pass" means your color combination meets the WCAG requirements for that specific level and text size. "Fail" indicates the contrast ratio is too low and should be adjusted to improve accessibility and readability for users with visual impairments.',
             },
           },
         ],
@@ -401,16 +433,91 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
           </div>
         </div>
 
+        {/* About Section */}
+        <div className="max-w-4xl mx-auto mt-16">
+          <div className="bg-gradient-to-r from-slate-900/70 to-slate-800/70 p-8 rounded-xl shadow-lg border border-slate-700">
+            <h2 className="text-3xl font-bold text-white mb-6 text-center">About This Color Accessibility Tool</h2>
+            <div className="text-gray-300 space-y-4 leading-relaxed">
+              <p>
+                Our <strong>free color contrast checker</strong> is designed to help web designers, developers, and accessibility professionals ensure their digital content meets <strong>WCAG 2.1 (Web Content Accessibility Guidelines)</strong> standards. This tool instantly calculates the <strong>contrast ratio</strong> between foreground and background colors, making it easy to verify compliance with <strong>AA</strong> and <strong>AAA</strong> accessibility levels.
+              </p>
+              <p>
+                Whether you're working with <strong>hex codes</strong>, using a <strong>color picker</strong>, or conducting <strong>ADA compliance</strong> audits, this tool provides real-time feedback on <strong>text readability</strong> and <strong>web accessibility</strong>. It supports <strong>Section 508</strong> requirements and helps create inclusive designs for users with <strong>visual impairments</strong>, <strong>color blindness</strong>, and <strong>low vision</strong>.
+              </p>
+              <p>
+                Perfect for UI/UX designers creating accessible interfaces, frontend developers implementing design systems, and QA testers performing accessibility audits. No registration required - start checking your color combinations instantly!
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* How to Use */}
         <div className="max-w-4xl mx-auto mt-16">
-          <h2 className="text-3xl font-bold text-center mb-6 text-white">How to Use the Contrast Checker</h2>
-          <div className="bg-slate-900/30 p-8 rounded-lg">
-            <ol className="list-decimal list-inside space-y-3 text-gray-300">
-              <li>Select your foreground and background colors using color pickers or hex inputs.</li>
-              <li>View the live preview and contrast ratio instantly.</li>
-              <li>Ensure your design meets WCAG AA or AAA accessibility standards.</li>
-              <li>Copy the contrast ratio for documentation or audits.</li>
-            </ol>
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">How to Use the Contrast Checker</h2>
+          <div className="bg-slate-900/30 p-8 rounded-xl shadow-lg space-y-6">
+            <div className="space-y-5">
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Choose Your Colors</h3>
+                  <p className="text-gray-300 mb-2">Select your foreground and background colors using the color pickers or enter hex codes directly.</p>
+                  <div className="bg-slate-800/50 p-3 rounded border-l-4 border-cyan-500">
+                    <p className="text-sm text-gray-400"><strong>Example:</strong> Foreground: <code className="bg-slate-700 px-2 py-1 rounded">#FFFFFF</code> (white), Background: <code className="bg-slate-700 px-2 py-1 rounded">#1E293B</code> (dark slate)</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Check Live Preview</h3>
+                  <p className="text-gray-300 mb-2">View the live preview to see how your text appears with the selected colors. The contrast ratio is calculated instantly.</p>
+                  <div className="bg-slate-800/50 p-3 rounded border-l-4 border-cyan-500">
+                    <p className="text-sm text-gray-400"><strong>Example:</strong> A ratio of <strong>12.63:1</strong> means excellent contrast - easily readable for all users</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Verify WCAG Compliance</h3>
+                  <p className="text-gray-300 mb-2">Check if your design meets WCAG AA or AAA standards. Green badges show "PASS" for compliant combinations.</p>
+                  <div className="bg-slate-800/50 p-3 rounded border-l-4 border-cyan-500">
+                    <p className="text-sm text-gray-400"><strong>Example:</strong> Normal Text (AA): <span className="text-green-400 font-bold">PASS</span> means your color combo works for body text. <span className="text-red-400 font-bold">FAIL</span> means you need higher contrast.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  4
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Copy & Document</h3>
+                  <p className="text-gray-300 mb-2">Copy the contrast ratio for your accessibility documentation, design system, or audit reports.</p>
+                  <div className="bg-slate-800/50 p-3 rounded border-l-4 border-cyan-500">
+                    <p className="text-sm text-gray-400"><strong>Tip:</strong> Include contrast ratios in your style guide to ensure consistent accessibility across your project</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 bg-cyan-900/20 border border-cyan-700/30 rounded-lg">
+              <p className="text-cyan-300 font-semibold mb-2">💡 Pro Tips:</p>
+              <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm">
+                <li>Use darker backgrounds with lighter text for better readability</li>
+                <li>Aim for AAA compliance (7:1) for important content like body text</li>
+                <li>Test your colors with common color blindness simulations</li>
+                <li>Remember: Large headings can pass with lower contrast (3:1 for AA)</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -420,11 +527,31 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
           <div className="space-y-4">
             <div className="bg-slate-900/30 p-5 rounded-lg">
               <h3 className="text-xl font-semibold text-cyan-300">What is a color contrast checker?</h3>
-              <p className="text-gray-400 mt-2">It calculates the contrast ratio between two colors and checks if they meet WCAG standards.</p>
+              <p className="text-gray-400 mt-2">A color contrast checker calculates the contrast ratio between two colors and determines whether they meet WCAG accessibility standards. It helps designers ensure text and UI elements are readable for all users, including those with visual impairments.</p>
             </div>
             <div className="bg-slate-900/30 p-5 rounded-lg">
               <h3 className="text-xl font-semibold text-cyan-300">Why is color contrast important?</h3>
-              <p className="text-gray-400 mt-2">Good contrast ensures your text and elements are readable for everyone, including visually impaired users.</p>
+              <p className="text-gray-400 mt-2">Color contrast ensures that text and UI elements are readable by users with visual impairments, color blindness, and low vision. Good contrast makes websites accessible for all users and helps meet legal requirements like ADA and Section 508 compliance.</p>
+            </div>
+            <div className="bg-slate-900/30 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold text-cyan-300">What are the WCAG contrast ratio levels?</h3>
+              <p className="text-gray-400 mt-2">WCAG 2.1 defines contrast ratio thresholds: AA level requires 4.5:1 for normal text and 3:1 for large text, while AAA level requires 7:1 for normal text and 4.5:1 for large text. Large text is defined as 18pt (24px) or 14pt (18.66px) bold.</p>
+            </div>
+            <div className="bg-slate-900/30 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold text-cyan-300">Is this color contrast checker free to use?</h3>
+              <p className="text-gray-400 mt-2">Yes! This tool is completely free to use with no registration required. You can check unlimited color combinations and use it for personal or commercial projects without any restrictions.</p>
+            </div>
+            <div className="bg-slate-900/30 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold text-cyan-300">What's the difference between WCAG AA and AAA?</h3>
+              <p className="text-gray-400 mt-2">WCAG AA is the minimum recommended level for most websites (4.5:1 ratio), while AAA is the enhanced level (7:1 ratio) providing even better accessibility. AA is legally required in many jurisdictions, while AAA is optional but recommended for critical content.</p>
+            </div>
+            <div className="bg-slate-900/30 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold text-cyan-300">Can I use hex codes in this tool?</h3>
+              <p className="text-gray-400 mt-2">Yes! You can input colors using hex codes (like #FFFFFF or #000000), or use the color picker to visually select colors. The tool instantly calculates the contrast ratio and shows WCAG compliance results for both input methods.</p>
+            </div>
+            <div className="bg-slate-900/30 p-5 rounded-lg">
+              <h3 className="text-xl font-semibold text-cyan-300">What does "pass" or "fail" mean in the results?</h3>
+              <p className="text-gray-400 mt-2">"Pass" means your color combination meets the WCAG requirements for that specific level and text size. "Fail" indicates the contrast ratio is too low and should be adjusted to improve accessibility and readability for users with visual impairments.</p>
             </div>
           </div>
         </div>
