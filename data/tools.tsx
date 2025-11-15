@@ -62,6 +62,45 @@ const DeveloperIcon = () => (
   </svg>
 );
 
+const EducationExamIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="educationIconTitle">
+    <title id="educationIconTitle">Education & Exam Tools Icon</title>
+    <defs>
+        <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#001BB7" />
+            <stop offset="100%" stopColor="#60A5FA" />
+        </linearGradient>
+    </defs>
+    <path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#grad5)" />
+  </svg>
+);
+
+const ConstructionEngineeringIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="constructionIconTitle">
+    <title id="constructionIconTitle">Construction & Engineering Tools Icon</title>
+    <defs>
+        <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#f59e0b" />
+            <stop offset="100%" stopColor="#dc2626" />
+        </linearGradient>
+    </defs>
+    <path d="M22.61 18.97L13.54 9.9L15.66 7.78L14.24 6.36L12.12 8.48L10.59 6.95L12.71 4.83L11.29 3.41L9.17 5.53L7.29 3.66C6.11 2.47 4.21 2.47 3.03 3.66C1.84 4.84 1.84 6.74 3.03 7.93L4.9 9.8L2.78 11.92L4.2 13.34L6.32 11.22L7.85 12.75L5.73 14.87L7.15 16.29L9.27 14.17L18.34 23.24C19.13 24.03 20.4 24.03 21.19 23.24L23.24 21.19C24.03 20.4 24.03 19.13 23.24 18.34L22.61 18.97ZM4.44 7.93C3.65 7.14 3.65 5.88 4.44 5.09C5.23 4.3 6.49 4.3 7.28 5.09L9.15 6.96L5.73 10.38L4.44 7.93Z" fill="url(#grad6)" />
+  </svg>
+);
+
+const AudioMediaIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="audioMediaIconTitle">
+    <title id="audioMediaIconTitle">Audio & Media Tools Icon</title>
+    <defs>
+        <linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ec4899" />
+            <stop offset="100%" stopColor="#8b5cf6" />
+        </linearGradient>
+    </defs>
+    <path d="M12 3V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17C6 19.21 7.79 21 10 21C12.21 21 14 19.21 14 17V7H18V3H12ZM10 19C8.9 19 8 18.1 8 17C8 15.9 8.9 15 10 15C11.1 15 12 15.9 12 17C12 18.1 11.1 19 10 19Z" fill="url(#grad7)" />
+  </svg>
+);
+
 // Individual Tool Icons (with colorful gradients)
 const WordCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="wordCounterIconTitle">
@@ -161,6 +200,62 @@ const SATScoreCalculatorIcon = () => (
         <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V10H9V17ZM13 17H11V7H13V17ZM17 17H15V13H17V17Z" fill="url(#toolGrad14)" />
     </svg>
 );
+const BerkeleyGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="berkeleyGPAIconTitle">
+        <title id="berkeleyGPAIconTitle">Berkeley GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGrad15" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#0033A0" /><stop offset="100%" stopColor="#FDB515" /></linearGradient></defs>
+        <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18ZM12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="url(#toolGrad15)" />
+    </svg>
+);
+const ISACGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="isacGPAIconTitle">
+        <title id="isacGPAIconTitle">ISAC GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGrad16" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#6366f1" /><stop offset="100%" stopColor="#ec4899" /></linearGradient></defs>
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#toolGrad16)" />
+    </svg>
+);
+const FillDirtIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fillDirtIconTitle">
+        <title id="fillDirtIconTitle">Fill Dirt Calculator Icon</title>
+        <defs><linearGradient id="toolGrad17" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#92400e" /><stop offset="100%" stopColor="#f59e0b" /></linearGradient></defs>
+        <path d="M19 12H22L12 3L2 12H5V20H19V12ZM7.21 10H16.79L12 5.52L7.21 10ZM17 18H7V12H17V18Z" fill="url(#toolGrad17)" />
+    </svg>
+);
+const QuiltBackingIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="quiltBackingIconTitle">
+        <title id="quiltBackingIconTitle">Quilt Backing Calculator Icon</title>
+        <defs><linearGradient id="toolGrad18" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#ec4899" /><stop offset="100%" stopColor="#f59e0b" /></linearGradient></defs>
+        <path d="M4 4H11V11H4V4ZM13 4H20V11H13V4ZM4 13H11V20H4V13ZM13 13H20V20H13V13Z" fill="url(#toolGrad18)" />
+    </svg>
+);
+const AudiobookSpeedIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="audiobookSpeedIconTitle">
+        <title id="audiobookSpeedIconTitle">Audiobook Speed Calculator Icon</title>
+        <defs><linearGradient id="toolGrad19" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#a855f7" /><stop offset="100%" stopColor="#ec4899" /></linearGradient></defs>
+        <path d="M4 6H2V20C2 21.1 2.9 22 4 22H18V20H4V6ZM20 2H8C6.9 2 6 2.9 6 4V16C6 17.1 6.9 18 8 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM19 11H9V9H19V11ZM15 15H9V13H15V15ZM19 7H9V5H19V7Z" fill="url(#toolGrad19)" />
+    </svg>
+);
+const ReverbIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="reverbIconTitle">
+        <title id="reverbIconTitle">Reverb Calculator Icon</title>
+        <defs><linearGradient id="toolGrad20" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#06b6d4" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
+        <path d="M3 9V15H7L12 20V4L7 9H3ZM16.5 12C16.5 10.23 15.48 8.71 14 7.97V16.02C15.48 15.29 16.5 13.77 16.5 12ZM14 3.23V5.29C16.89 6.15 19 8.83 19 12C19 15.17 16.89 17.85 14 18.71V20.77C18.01 19.86 21 16.28 21 12C21 7.72 18.01 4.14 14 3.23Z" fill="url(#toolGrad20)" />
+    </svg>
+);
+const CodeSimilarityIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="codeSimilarityIconTitle">
+        <title id="codeSimilarityIconTitle">Code Similarity Checker Icon</title>
+        <defs><linearGradient id="toolGrad21" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#10b981" /><stop offset="100%" stopColor="#06b6d4" /></linearGradient></defs>
+        <path d="M9.4 16.6L4.8 12L9.4 7.4L8 6L2 12L8 18L9.4 16.6ZM14.6 16.6L19.2 12L14.6 7.4L16 6L22 12L16 18L14.6 16.6Z" fill="url(#toolGrad21)" />
+    </svg>
+);
+const PowerToMassIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="powerToMassIconTitle">
+        <title id="powerToMassIconTitle">Power to Mass Ratio Calculator Icon</title>
+        <defs><linearGradient id="toolGrad22" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#ef4444" /><stop offset="100%" stopColor="#f59e0b" /></linearGradient></defs>
+        <path d="M7 2V13H10V22L17 10H13L17 2H7Z" fill="url(#toolGrad22)" />
+    </svg>
+);
 
 
 export interface Category {
@@ -242,20 +337,6 @@ export const toolCategories: Category[] = [
                 icon: <SnowDayCalculatorIcon />,
                 gradientColors: { from: '#3b82f6', to: '#06b6d4' }, // Blue to Cyan
             },
-            {
-                title: 'Pro RV Loan Calculator',
-                description: 'Calculate RV loan payments with detailed amortization schedule, payment breakdown, and comparison tools. Perfect for RV financing decisions.',
-                link: 'pro-rv-loan-calculator',
-                icon: <PercentageChangeIcon />,
-                gradientColors: { from: '#10b981', to: '#06b6d4' }, // Green to Cyan
-            },
-            {
-                title: 'SAT Score Calculator',
-                description: 'Digital SAT raw to scaled score converter for 2024-2025. Calculate your total SAT score (400-1600) with percentile estimates and ACT concordance.',
-                link: 'sat-score-calculator',
-                icon: <SATScoreCalculatorIcon />,
-                gradientColors: { from: '#001BB7', to: '#60A5FA' }, // Deep Blue to Light Blue
-            },
         ]
     },
     {
@@ -306,6 +387,93 @@ export const toolCategories: Category[] = [
                 link: 'json-formatter',
                 icon: <JsonFormatterIcon />,
                 gradientColors: { from: '#06b6d4', to: '#3b82f6' }, // Cyan to Blue
+            },
+            {
+                title: 'Code Similarity Checker',
+                description: 'Compare two code snippets and detect similarities. Perfect for checking code duplication and plagiarism detection.',
+                link: 'code-similarity-checker',
+                icon: <CodeSimilarityIcon />,
+                gradientColors: { from: '#10b981', to: '#06b6d4' }, // Green to Cyan
+            },
+        ]
+    },
+    {
+        slug: 'education-and-exam-tools',
+        title: 'Education & Exam Tools',
+        description: 'Essential calculators and tools for students, teachers, and academic professionals.',
+        icon: <EducationExamIcon />,
+        tools: [
+            {
+                title: 'SAT Score Calculator',
+                description: 'Digital SAT raw to scaled score converter for 2024-2025. Calculate your total SAT score (400-1600) with percentile estimates and ACT concordance.',
+                link: 'sat-score-calculator',
+                icon: <SATScoreCalculatorIcon />,
+                gradientColors: { from: '#001BB7', to: '#60A5FA' }, // Deep Blue to Light Blue
+            },
+            {
+                title: 'Berkeley GPA Calculator',
+                description: 'Calculate your UC Berkeley GPA with accurate grade point conversions. Supports letter grades, plus/minus system, and weighted courses.',
+                link: 'berkeley-gpa-calculator',
+                icon: <BerkeleyGPAIcon />,
+                gradientColors: { from: '#0033A0', to: '#FDB515' }, // Berkeley Blue to Gold
+            },
+            {
+                title: 'ISAC GPA Calculator',
+                description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
+                link: 'isac-gpa-calculator',
+                icon: <ISACGPAIcon />,
+                gradientColors: { from: '#6366f1', to: '#ec4899' }, // Indigo to Pink
+            },
+        ]
+    },
+    {
+        slug: 'construction-and-engineering-tools',
+        title: 'Construction & Engineering Tools',
+        description: 'Professional calculators for construction projects, engineering calculations, and DIY home improvements.',
+        icon: <ConstructionEngineeringIcon />,
+        tools: [
+            {
+                title: 'Fill Dirt Calculator',
+                description: 'Calculate the amount of fill dirt needed for your landscaping or construction project. Supports various measurement units and provides cost estimates.',
+                link: 'fill-dirt-calculator',
+                icon: <FillDirtIcon />,
+                gradientColors: { from: '#92400e', to: '#f59e0b' }, // Brown to Amber
+            },
+            {
+                title: 'Quilt Backing Calculator',
+                description: 'Calculate fabric requirements for quilt backing. Perfect for quilters to determine backing sizes and fabric yardage needed.',
+                link: 'quilt-backing-calculator',
+                icon: <QuiltBackingIcon />,
+                gradientColors: { from: '#ec4899', to: '#f59e0b' }, // Pink to Amber
+            },
+            {
+                title: 'Power to Mass Ratio Calculator',
+                description: 'Calculate power-to-weight ratio for vehicles, engines, and machinery. Essential for performance analysis and engineering calculations.',
+                link: 'power-to-mass-ratio-calculator',
+                icon: <PowerToMassIcon />,
+                gradientColors: { from: '#ef4444', to: '#f59e0b' }, // Red to Amber
+            },
+        ]
+    },
+    {
+        slug: 'audio-and-media-tools',
+        title: 'Audio & Media Tools',
+        description: 'Powerful tools for audio processing, media calculations, and content creation.',
+        icon: <AudioMediaIcon />,
+        tools: [
+            {
+                title: 'Audiobook Speed Calculator',
+                description: 'Calculate how long it takes to finish an audiobook at different playback speeds. Save time with optimized listening schedules.',
+                link: 'audiobook-speed-calculator',
+                icon: <AudiobookSpeedIcon />,
+                gradientColors: { from: '#a855f7', to: '#ec4899' }, // Purple to Pink
+            },
+            {
+                title: 'Reverb Calculator',
+                description: 'Calculate optimal reverb time (RT60) for rooms and recording studios. Essential tool for acoustics and audio engineering.',
+                link: 'reverb-calculator',
+                icon: <ReverbIcon />,
+                gradientColors: { from: '#06b6d4', to: '#8b5cf6' }, // Cyan to Purple
             },
         ]
     },

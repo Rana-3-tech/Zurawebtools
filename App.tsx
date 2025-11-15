@@ -36,8 +36,15 @@ import ShadowCSSGenerator from './components/tools/ShadowCSSGenerator';
 import ColorHarmonyChecker from './components/tools/ColorHarmonyChecker';
 import FabricCostingTool from './components/tools/FabricCostingTool';
 import SnowDayCalculator from './components/tools/SnowDayCalculator';
-import ProRVLoanCalculator from './components/tools/ProRVLoanCalculator';
 import SATScoreCalculator from './components/tools/SATScoreCalculator';
+import BerkeleyGPACalculator from './components/tools/BerkeleyGPACalculator';
+import ISACGPA from './components/tools/ISACGPA';
+import FillDirtCalculator from './components/tools/FillDirtCalculator';
+import QuiltBackingCalculator from './components/tools/QuiltBackingCalculator';
+import PowerToMassRatioCalculator from './components/tools/PowerToMassRatioCalculator';
+import AudiobookSpeedCalculator from './components/tools/AudiobookSpeedCalculator';
+import ReverbCalculator from './components/tools/ReverbCalculator';
+import CodeSimilarityChecker from './components/tools/CodeSimilarityChecker';
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -196,11 +203,32 @@ const App: React.FC = () => {
         if (path === 'snow-day-calculator') {
             return <SnowDayCalculator navigateTo={navigateTo} />;
         }
-        if (path === 'pro-rv-loan-calculator') {
-            return <ProRVLoanCalculator navigateTo={navigateTo} />;
-        }
         if (path === 'sat-score-calculator') {
             return <SATScoreCalculator />;
+        }
+        if (path === 'berkeley-gpa-calculator') {
+            return <BerkeleyGPACalculator navigateTo={navigateTo} />;
+        }
+        if (path === 'isac-gpa-calculator') {
+            return <ISACGPA navigateTo={navigateTo} />;
+        }
+        if (path === 'fill-dirt-calculator') {
+            return <FillDirtCalculator navigateTo={navigateTo} />;
+        }
+        if (path === 'quilt-backing-calculator') {
+            return <QuiltBackingCalculator navigateTo={navigateTo} />;
+        }
+        if (path === 'power-to-mass-ratio-calculator') {
+            return <PowerToMassRatioCalculator navigateTo={navigateTo} />;
+        }
+        if (path === 'audiobook-speed-calculator') {
+            return <AudiobookSpeedCalculator navigateTo={navigateTo} />;
+        }
+        if (path === 'reverb-calculator') {
+            return <ReverbCalculator navigateTo={navigateTo} />;
+        }
+        if (path === 'code-similarity-checker') {
+            return <CodeSimilarityChecker navigateTo={navigateTo} />;
         }
         
         const category = toolCategories.find(cat => cat.slug === path);

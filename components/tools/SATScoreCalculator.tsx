@@ -321,6 +321,7 @@ const SATScoreCalculator: React.FC = () => {
               "@type": "SoftwareApplication",
               "name": "SAT Score Calculator",
               "applicationCategory": "EducationApplication",
+              "applicationSubCategory": "Exam Score Calculator",
               "operatingSystem": "Any (Web-based)",
               "offers": {
                 "@type": "Offer",
@@ -350,7 +351,7 @@ const SATScoreCalculator: React.FC = () => {
               },
               "description": "Free SAT Score Calculator for Digital SAT 2024–2025. Convert raw SAT answers to scaled scores instantly and get your total out of 1600 with percentile estimates.",
               "url": "https://zurawebtools.com/tools/sat-score-calculator",
-              "keywords": "SAT calculator, digital SAT, score converter, college entrance exam",
+              "keywords": "SAT score calculator, digital SAT 2024, raw to scaled score converter, SAT percentile calculator, ACT to SAT conversion, SAT score estimator",
               "datePublished": "2024-01-15",
               "dateModified": "2024-11-08",
               "inLanguage": "en-US",
@@ -525,6 +526,14 @@ const SATScoreCalculator: React.FC = () => {
         );
     };
 
+    // Helper function for score-based colors
+    const getScoreColor = (score: number) => {
+        if (score >= 1400) return "text-green-600 dark:text-green-400"; // Excellent
+        if (score >= 1200) return "text-blue-600 dark:text-blue-400"; // Good
+        if (score >= 1000) return "text-amber-600 dark:text-amber-400"; // Average
+        return "text-red-600 dark:text-red-400"; // Needs improvement
+    };
+
     const renderConversionTable = (table: ConversionTable) => {
         const sortedKeys = Object.keys(table).map(Number).sort((a, b) => b - a); // Sort from highest raw to lowest
 
@@ -564,7 +573,7 @@ const SATScoreCalculator: React.FC = () => {
             <div className="w-full max-w-6xl mx-auto">
                 <header className="text-center mb-10">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                        <span className="bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Free SAT Score Calculator 2024-2025</span>
+                        <span className="text-white">Free SAT Score Calculator 2024-2025</span>
                     </h1>
                     <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Convert raw SAT scores to scaled scores instantly. Get accurate percentile rankings and ACT equivalents for the Digital SAT.</p>
                 </header>
@@ -645,7 +654,9 @@ const SATScoreCalculator: React.FC = () => {
                         {calculationResult ? (
                             <div className="space-y-6">
                                 <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/20 dark:to-sky-900/20 rounded-xl border-2 border-blue-200 dark:border-blue-800/50">
-                                    <div className="text-7xl lg:text-8xl font-extrabold bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent transition-all duration-300">{calculationResult.scores.total}</div>
+                                    <div className={`text-7xl lg:text-8xl font-extrabold ${getScoreColor(calculationResult.scores.total)} transition-all duration-300`}>
+                                        {calculationResult.scores.total}
+                                    </div>
                                     <div className="text-lg font-medium text-slate-600 dark:text-slate-400">out of 1600</div>
                                 </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
@@ -1003,6 +1014,16 @@ const SATScoreCalculator: React.FC = () => {
                             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Professional fabric costing for textile engineers.</p>
                         </a>
                     </div>
+                </section>
+                
+                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 mb-8">
+                    <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+                        Students calculating SAT scores may also find our 
+                        <a href="/tools/uc-berkeley-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">UC Berkeley GPA Calculator</a> 
+                        and 
+                        <a href="/tools/isac-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">ISAC GPA Calculator</a> 
+                        useful for academic planning.
+                    </p>
                 </section>
                 
                 <footer className="text-center text-sm text-slate-500 dark:text-slate-400 pt-8 border-t border-slate-200 dark:border-slate-700 space-y-3">
