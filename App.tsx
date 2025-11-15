@@ -45,6 +45,7 @@ import PowerToMassRatioCalculator from './components/tools/PowerToMassRatioCalcu
 import AudiobookSpeedCalculator from './components/tools/AudiobookSpeedCalculator';
 import ReverbCalculator from './components/tools/ReverbCalculator';
 import CodeSimilarityChecker from './components/tools/CodeSimilarityChecker';
+import CollegeGPACalculator from './components/tools/CollegeGPACalculator';
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -229,6 +230,9 @@ const App: React.FC = () => {
         }
         if (path === 'code-similarity-checker') {
             return <CodeSimilarityChecker navigateTo={navigateTo} />;
+        }
+        if (path === 'college-gpa-calculator') {
+            return <CollegeGPACalculator navigateTo={navigateTo} />;
         }
         
         const category = toolCategories.find(cat => cat.slug === path);

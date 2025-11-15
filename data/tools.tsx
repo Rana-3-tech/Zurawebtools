@@ -256,6 +256,13 @@ const PowerToMassIcon = () => (
         <path d="M7 2V13H10V22L17 10H13L17 2H7Z" fill="url(#toolGrad22)" />
     </svg>
 );
+const CollegeGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="collegeGPAIconTitle">
+        <title id="collegeGPAIconTitle">College GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGrad23" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3b82f6" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGrad23)" />
+    </svg>
+);
 
 
 export interface SubCategory {
@@ -450,6 +457,13 @@ export const toolCategories: Category[] = [
                 slug: 'gpa-tools',
                 title: 'GPA Tools',
                 tools: [
+                    {
+                        title: 'College GPA Calculator',
+                        description: 'Free college GPA calculator with credit hours. Calculate semester GPA, cumulative GPA, and overall college GPA instantly with accurate grade point average calculator.',
+                        link: 'college-gpa-calculator',
+                        icon: <CollegeGPAIcon />,
+                        gradientColors: { from: '#3b82f6', to: '#8b5cf6' },
+                    },
                     {
                         title: 'ISAC GPA Calculator',
                         description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
