@@ -552,11 +552,96 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">How to Use This GPA Calculator</h2>
+          <div className="space-y-4">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg">1</div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Enter Course Information</h3>
+                <p className="text-gray-600">Add your courses by typing the course name or selecting from popular courses. Input the letter grade you received (A+, A, A-, B+, etc.) and the number of credit hours for each course.</p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg">2</div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Select Your GPA Scale</h3>
+                <p className="text-gray-600">Choose between 4.0 or 4.3 scale depending on your institution's grading system. Most colleges use 4.0 scale, but some honor programs use 4.3 where A+ equals 4.3 points.</p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg">3</div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">View Your Semester GPA</h3>
+                <p className="text-gray-600">The calculator automatically computes your semester GPA as you enter courses. You'll see your grade point average and total credit hours in real-time.</p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg">4</div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Calculate Cumulative GPA (Optional)</h3>
+                <p className="text-gray-600">To see how this semester affects your overall GPA, enter your previous cumulative GPA and total completed credits. The tool will calculate your new combined GPA instantly.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">Common Use Cases</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Current Students</h3>
+              <p className="text-gray-600">Track your academic performance throughout the semester. Calculate your GPA after midterms or finals to monitor your progress and maintain scholarship requirements.</p>
+            </div>
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Academic Planning</h3>
+              <p className="text-gray-600">Plan future semesters by testing different grade scenarios. See what grades you need to achieve your target cumulative GPA for graduation or graduate school applications.</p>
+            </div>
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Transfer Students</h3>
+              <p className="text-gray-600">Calculate your new cumulative GPA after transferring schools. Combine your previous institution's GPA with current semester grades to understand your standing.</p>
+            </div>
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">GPA Recovery</h3>
+              <p className="text-gray-600">If you had a difficult semester, use this calculator to project how strong future performance can improve your cumulative GPA over time.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">About College GPA Calculator</h2>
           <div className="prose max-w-none text-gray-700 space-y-4 leading-relaxed">
             <p>Our <strong>college GPA calculator</strong> is a comprehensive free tool designed to help students accurately calculate their <strong>grade point average</strong> using credit hours. Whether you need a <strong>semester GPA calculator</strong> or want to compute your <strong>cumulative GPA</strong>, this tool provides instant, precise calculations based on commonly used grading scales.</p>
+            
             <h3 className="text-2xl font-bold text-gray-900 mt-6 mb-3">Understanding GPA Scales and Grading Systems</h3>
-            <p>Many institutions use a 4.0 scale; some use a 4.3 scale where A+ = 4.3. This calculator supports both via the GPA Scale toggle above.</p>
+            <p>Most American colleges and universities use a <strong>4.0 GPA scale</strong> where an A equals 4.0 grade points, B equals 3.0, C equals 2.0, and so on. Some institutions, particularly those with honors programs, use a <strong>4.3 scale</strong> where A+ receives 4.3 points. This calculator supports both systems, allowing you to select the appropriate scale for your institution.</p>
+            
+            <h3 className="text-2xl font-bold text-gray-900 mt-6 mb-3">How GPA Calculation Works</h3>
+            <p>Your GPA is calculated by multiplying each course's <strong>grade points</strong> by its <strong>credit hours</strong>, summing these values (called quality points), and dividing by total credit hours. For example, an A (4.0) in a 3-credit course contributes 12 quality points. The <strong>weighted average</strong> ensures that courses with more credits have appropriate impact on your overall GPA.</p>
+            
+            <h3 className="text-2xl font-bold text-gray-900 mt-6 mb-3">Why GPA Matters</h3>
+            <p>Your <strong>college GPA</strong> plays a crucial role in academic standing, scholarship eligibility, honor society membership, and graduate school admissions. Many employers also consider GPA when evaluating recent graduates. Understanding how to calculate and improve your GPA helps you make informed decisions about course selection and academic goals.</p>
+            
+            <p className="mt-6">For more tools to help with your academic journey, check out our <a href="/berkeley-gpa-calculator" className="text-indigo-600 hover:underline font-medium">Berkeley GPA Calculator</a> for UC-specific calculations, or explore our <a href="/sat-score-calculator" className="text-indigo-600 hover:underline font-medium">SAT Score Calculator</a> for standardized test planning.</p>
           </div>
         </div>
 
@@ -579,7 +664,31 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
           <div className="space-y-6">
             <div className="border-b border-gray-200 pb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">How do I calculate my college GPA with this calculator?</h3>
-              <p className="text-gray-600 leading-relaxed">Enter courses, choose letter grades, input credit hours (or select popular courses), then use the Calculate Cumulative button if you want to include previous credits. The calculator validates inputs and shows results when values are valid.</p>
+              <p className="text-gray-600 leading-relaxed">Enter your course names, select letter grades (A+, A, A-, B+, etc.), and input credit hours for each class. The calculator automatically computes your semester GPA in real-time. To calculate cumulative GPA, enter your previous GPA and completed credits in the optional section below the course list.</p>
+            </div>
+            <div className="border-b border-gray-200 pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">What's the difference between 4.0 and 4.3 GPA scales?</h3>
+              <p className="text-gray-600 leading-relaxed">The 4.0 scale is the most common system where A and A+ both equal 4.0 points. The 4.3 scale assigns 4.3 points to A+ grades, rewarding exceptional performance. Check your institution's grading policy to determine which scale applies to you. Most colleges use the 4.0 scale, but some honors programs use 4.3.</p>
+            </div>
+            <div className="border-b border-gray-200 pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">How are credit hours weighted in GPA calculations?</h3>
+              <p className="text-gray-600 leading-relaxed">Credit hours determine the weight of each course in your GPA. A 4-credit course has more impact than a 1-credit course. The calculator multiplies each grade point by its credit hours to get quality points, then divides total quality points by total credit hours. This ensures larger courses appropriately influence your overall average.</p>
+            </div>
+            <div className="border-b border-gray-200 pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Can I calculate my cumulative GPA across multiple semesters?</h3>
+              <p className="text-gray-600 leading-relaxed">Yes! Enter your current cumulative GPA and total completed credit hours in the optional section. Then add your current semester courses. The calculator will compute your new combined cumulative GPA by properly weighing all credits. This helps you track academic progress throughout your college career.</p>
+            </div>
+            <div className="border-b border-gray-200 pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">What GPA do I need for scholarships and honors?</h3>
+              <p className="text-gray-600 leading-relaxed">Requirements vary by institution. Many scholarships require maintaining a 3.0 GPA (B average), while competitive scholarships may need 3.5 or higher. Dean's List typically requires 3.5-3.7, and summa cum laude graduation honors usually need 3.8-4.0. Check your school's specific requirements for accurate information.</p>
+            </div>
+            <div className="border-b border-gray-200 pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">How do plus and minus grades affect my GPA?</h3>
+              <p className="text-gray-600 leading-relaxed">Plus and minus grades create gradations between letter grades. A- equals 3.7, B+ equals 3.3, B equals 3.0, B- equals 2.7, and so on. These incremental differences can significantly impact your GPA over time. Our calculator includes all standard plus/minus grades for accurate calculations.</p>
+            </div>
+            <div className="pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Is this GPA calculator accurate for all colleges?</h3>
+              <p className="text-gray-600 leading-relaxed">This calculator uses standard 4.0 and 4.3 grading scales adopted by most American colleges and universities. However, some institutions use unique grading systems or exclude certain courses from GPA calculations. Always verify your calculated GPA against your official transcript and consult your registrar's office for institution-specific policies.</p>
             </div>
           </div>
         </div>
