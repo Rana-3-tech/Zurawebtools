@@ -236,6 +236,26 @@ const App: React.FC = () => {
             return <CategoryPage category={category} navigateTo={navigateTo} />;
         }
         
+        // Check for sub-category pages (e.g., /education-and-exam-tools/test-score-tools)
+        const pathParts = path.split('/');
+        if (pathParts.length === 2) {
+            const parentCategory = toolCategories.find(cat => cat.slug === pathParts[0]);
+            if (parentCategory?.subCategories) {
+                const subCategory = parentCategory.subCategories.find(sub => sub.slug === pathParts[1]);
+                if (subCategory) {
+                    // Create a temporary category object for sub-category page
+                    const subCategoryAsCategory: Category = {
+                        slug: subCategory.slug,
+                        title: subCategory.title,
+                        description: `Explore ${subCategory.title} under ${parentCategory.title}`,
+                        icon: parentCategory.icon,
+                        tools: subCategory.tools
+                    };
+                    return <CategoryPage category={subCategoryAsCategory} navigateTo={navigateTo} />;
+                }
+            }
+        }
+        
         const post = posts.find(p => p.slug === path);
         if (post) {
             return <BlogPostPage post={post} />;

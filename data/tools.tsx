@@ -258,12 +258,19 @@ const PowerToMassIcon = () => (
 );
 
 
+export interface SubCategory {
+    slug: string;
+    title: string;
+    tools: Tool[];
+}
+
 export interface Category {
     slug: string;
     title: string;
     description: string;
     icon: React.ReactNode;
     tools: Tool[];
+    subCategories?: SubCategory[];
 }
 
 export const toolCategories: Category[] = [
@@ -423,6 +430,52 @@ export const toolCategories: Category[] = [
                 link: 'isac-gpa-calculator',
                 icon: <ISACGPAIcon />,
                 gradientColors: { from: '#6366f1', to: '#ec4899' }, // Indigo to Pink
+            },
+        ],
+        subCategories: [
+            {
+                slug: 'test-score-tools',
+                title: 'Test Score Tools',
+                tools: [
+                    {
+                        title: 'SAT Score Calculator',
+                        description: 'Digital SAT raw to scaled score converter for 2024-2025. Calculate your total SAT score (400-1600) with percentile estimates and ACT concordance.',
+                        link: 'sat-score-calculator',
+                        icon: <SATScoreCalculatorIcon />,
+                        gradientColors: { from: '#001BB7', to: '#60A5FA' },
+                    },
+                ]
+            },
+            {
+                slug: 'gpa-tools',
+                title: 'GPA Tools',
+                tools: [
+                    {
+                        title: 'ISAC GPA Calculator',
+                        description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
+                        link: 'isac-gpa-calculator',
+                        icon: <ISACGPAIcon />,
+                        gradientColors: { from: '#6366f1', to: '#ec4899' },
+                    },
+                ]
+            },
+            {
+                slug: 'university-gpa-tools',
+                title: 'University GPA Tools',
+                tools: [
+                    {
+                        title: 'Berkeley GPA Calculator',
+                        description: 'Calculate your UC Berkeley GPA with accurate grade point conversions. Supports letter grades, plus/minus system, and weighted courses.',
+                        link: 'berkeley-gpa-calculator',
+                        icon: <BerkeleyGPAIcon />,
+                        gradientColors: { from: '#0033A0', to: '#FDB515' },
+                    },
+                ]
+            },
+            {
+                slug: 'admission-tools',
+                title: 'Admission Tools',
+                tools: []
             },
         ]
     },
