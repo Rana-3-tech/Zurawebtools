@@ -1,6 +1,6 @@
 // FIX: Implement the main App component to provide a valid module and application structure.
 // This resolves the "not a module" errors in other files that import from App.tsx.
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import PopularTools from './components/PopularTools';
@@ -18,35 +18,35 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import SearchResultsPage from './components/SearchResultsPage';
 import AboutUs from './components/AboutUs';
+import LoadingSpinner from './components/LoadingSpinner';
 import { toolCategories, Category, Tool } from './data/tools';
 import { posts, Post } from './data/posts';
-
-
-// Import tool pages
-import WordCounter from './components/tools/WordCounter';
-import RemoveExtraSpaces from './components/tools/RemoveExtraSpaces';
-import CaseConverter from './components/tools/CaseConverter';
-import LoremIpsumGenerator from './components/tools/LoremIpsumGenerator';
-import TimeDifferenceCalculator from './components/tools/TimeDifferenceCalculator';
-import PercentageChangeCalculator from './components/tools/PercentageChangeCalculator';
-import HexToRGBConverter from './components/tools/HexToRGBConverter';
-import AccessibleColorContrastChecker from './components/tools/AccessibleColorContrastChecker';
-import JSONFormatterValidator from './components/tools/JSONFormatterValidator';
-import ShadowCSSGenerator from './components/tools/ShadowCSSGenerator';
-import ColorHarmonyChecker from './components/tools/ColorHarmonyChecker';
-import FabricCostingTool from './components/tools/FabricCostingTool';
-import SnowDayCalculator from './components/tools/SnowDayCalculator';
-import SATScoreCalculator from './components/tools/SATScoreCalculator';
-import BerkeleyGPACalculator from './components/tools/BerkeleyGPACalculator';
-import ISACGPA from './components/tools/ISACGPA';
-import FillDirtCalculator from './components/tools/FillDirtCalculator';
-import QuiltBackingCalculator from './components/tools/QuiltBackingCalculator';
-import PowerToMassRatioCalculator from './components/tools/PowerToMassRatioCalculator';
-import AudiobookSpeedCalculator from './components/tools/AudiobookSpeedCalculator';
-import ReverbCalculator from './components/tools/ReverbCalculator';
-import CodeSimilarityChecker from './components/tools/CodeSimilarityChecker';
-import CollegeGPACalculator from './components/tools/CollegeGPACalculator';
 import NotFoundPage from './components/NotFoundPage';
+
+// Lazy load tool pages for better performance - each tool loads only when needed
+const WordCounter = lazy(() => import('./components/tools/WordCounter'));
+const RemoveExtraSpaces = lazy(() => import('./components/tools/RemoveExtraSpaces'));
+const CaseConverter = lazy(() => import('./components/tools/CaseConverter'));
+const LoremIpsumGenerator = lazy(() => import('./components/tools/LoremIpsumGenerator'));
+const TimeDifferenceCalculator = lazy(() => import('./components/tools/TimeDifferenceCalculator'));
+const PercentageChangeCalculator = lazy(() => import('./components/tools/PercentageChangeCalculator'));
+const HexToRGBConverter = lazy(() => import('./components/tools/HexToRGBConverter'));
+const AccessibleColorContrastChecker = lazy(() => import('./components/tools/AccessibleColorContrastChecker'));
+const JSONFormatterValidator = lazy(() => import('./components/tools/JSONFormatterValidator'));
+const ShadowCSSGenerator = lazy(() => import('./components/tools/ShadowCSSGenerator'));
+const ColorHarmonyChecker = lazy(() => import('./components/tools/ColorHarmonyChecker'));
+const FabricCostingTool = lazy(() => import('./components/tools/FabricCostingTool'));
+const SnowDayCalculator = lazy(() => import('./components/tools/SnowDayCalculator'));
+const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalculator'));
+const BerkeleyGPACalculator = lazy(() => import('./components/tools/BerkeleyGPACalculator'));
+const ISACGPA = lazy(() => import('./components/tools/ISACGPA'));
+const FillDirtCalculator = lazy(() => import('./components/tools/FillDirtCalculator'));
+const QuiltBackingCalculator = lazy(() => import('./components/tools/QuiltBackingCalculator'));
+const PowerToMassRatioCalculator = lazy(() => import('./components/tools/PowerToMassRatioCalculator'));
+const AudiobookSpeedCalculator = lazy(() => import('./components/tools/AudiobookSpeedCalculator'));
+const ReverbCalculator = lazy(() => import('./components/tools/ReverbCalculator'));
+const CodeSimilarityChecker = lazy(() => import('./components/tools/CodeSimilarityChecker'));
+const CollegeGPACalculator = lazy(() => import('./components/tools/CollegeGPACalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -198,7 +198,11 @@ const App: React.FC = () => {
         
         if (toolComponentMap[toolSlug]) {
             const ToolComponent = toolComponentMap[toolSlug];
-            return <ToolComponent navigateTo={navigateTo} />;
+            return (
+                <Suspense fallback={<LoadingSpinner />}>
+                    <ToolComponent navigateTo={navigateTo} />
+                </Suspense>
+            );
         }
         
         const category = toolCategories.find(cat => cat.slug === path);

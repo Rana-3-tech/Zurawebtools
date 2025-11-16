@@ -22,21 +22,13 @@ export default defineConfig(({ mode }) => {
       build: {
         rollupOptions: {
           output: {
-            manualChunks: {
-              vendor: ['react', 'react-dom'],
-              tools: [
-                './components/tools/WordCounter',
-                './components/tools/RemoveExtraSpaces',
-                './components/tools/CaseConverter',
-                './components/tools/LoremIpsumGenerator',
-                './components/tools/TimeDifferenceCalculator',
-                './components/tools/PercentageChangeCalculator',
-                './components/tools/HexToRGBConverter',
-                './components/tools/AccessibleColorContrastChecker',
-                './components/tools/JSONFormatterValidator',
-                './components/tools/ShadowCSSGenerator',
-                './components/tools/ColorHarmonyChecker'
-              ]
+            manualChunks(id) {
+              // Split vendor libraries (React, etc.) into separate chunk
+              if (id.includes('node_modules')) {
+                return 'vendor';
+              }
+              // Each tool component becomes its own chunk automatically via lazy()
+              // This ensures minimal bundle size on each page load
             }
           }
         },
