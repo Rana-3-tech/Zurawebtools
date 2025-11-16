@@ -11,7 +11,10 @@ interface RelatedToolsProps {
 const allTools = toolCategories.flatMap(cat => cat.tools);
 
 const RelatedTools: React.FC<RelatedToolsProps> = ({ relatedSlugs, navigateTo, currentSlug }) => {
-    const relatedTools = allTools.filter(tool => relatedSlugs.includes(tool.link) && tool.link !== currentSlug).slice(0, 3);
+    const relatedTools = allTools.filter(tool => {
+        const toolSlug = tool.link.split('/').pop() || '';
+        return relatedSlugs.includes(toolSlug) && toolSlug !== currentSlug;
+    }).slice(0, 3);
     
     if (relatedTools.length === 0) {
         return null;
