@@ -610,17 +610,33 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                         </div>
                         
                         <div className="mt-8 flex flex-wrap gap-3 justify-center">
-                            <button onClick={() => navigator.clipboard.writeText(getSummaryText())} className="px-5 py-2.5 bg-[#FF6B35] hover:bg-[#e55a2b] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">?? Copy Summary</button>
-                            <a href={createCSV(resultsForExport)} download="fill-dirt-results.csv" className="px-5 py-2.5 bg-[#2E8B57] hover:bg-[#2a7a4f] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">?? Download CSV</a>
-                            <button onClick={() => handleCopy(resultsForExport)} className="px-5 py-2.5 bg-[#4682B4] hover:bg-[#3f7ba3] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">?? Copy JSON</button>
-                            <button onClick={() => window.print()} className="px-5 py-2.5 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">??? Print</button>
-                            <button onClick={handleReset} className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">?? Reset</button>
+                            <button onClick={() => navigator.clipboard.writeText(getSummaryText())} className="px-5 py-2.5 bg-[#FF6B35] hover:bg-[#e55a2b] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                                <svg className="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                Copy Summary
+                            </button>
+                            <a href={createCSV(resultsForExport)} download="fill-dirt-results.csv" className="px-5 py-2.5 bg-[#2E8B57] hover:bg-[#2a7a4f] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                                <svg className="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                                Download CSV
+                            </a>
+                            <button onClick={() => handleCopy(resultsForExport)} className="px-5 py-2.5 bg-[#4682B4] hover:bg-[#3f7ba3] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                                <svg className="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                Copy JSON
+                            </button>
+                            <button onClick={() => window.print()} className="px-5 py-2.5 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                                <svg className="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                                Print
+                            </button>
+                            <button onClick={handleReset} className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                                <svg className="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                                Reset
+                            </button>
                         </div>
                     </div>
 
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border-2 border-gray-300 dark:border-gray-600">
                         <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-white flex items-center gap-2">
-                            <span>??</span> Calculation Summary
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                            Calculation Summary
                         </h3>
                         <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{getSummaryText()}</p>
                         <button onClick={() => setShowJson(!showJson)} className="text-sm text-[#10b981] hover:text-[#059669] mt-3 font-bold">{showJson ? '? Hide' : '? Show'} JSON Output</button>
@@ -821,7 +837,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                     {/* Commercial Foundation Fill */}
                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-8 rounded-2xl border-2 border-blue-200 dark:border-blue-800">
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="text-3xl">???</span>
+                            <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.5L19 12v7h-2v-6h-6v6H9v-7h2v-2H9V9.5l3-2.5z"/></svg>
                             <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-200">Commercial Foundation Fill</h3>
                         </div>
                         <div className="space-y-3 mb-6">
@@ -913,22 +929,22 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                 <h2 className="text-3xl font-bold text-center mb-8 text-light-text dark:text-dark-text">Who Uses This Calculator?</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div className="bg-light-card dark:bg-dark-card p-6 rounded-xl shadow-lg border-l-4 border-[#FF6B35] hover:shadow-xl transition-shadow">
-                        <div className="text-4xl mb-4">???</div>
+                        <div className="text-4xl mb-4">👷</div>
                         <h3 className="text-xl font-bold mb-3 text-light-text dark:text-dark-text">Contractors</h3>
                         <p className="text-sm text-light-text/80 dark:text-dark-text/80">Use this calculator for dirt fill estimation and calculating fill dirt quantities for foundation work, site grading, excavation backfill, and landscape leveling projects with precision. Generate professional documentation using our <a href="/text-and-writing-tools/word-counter" className="text-[#FF6B35] hover:text-[#e55a2b] dark:text-[#F7931E] dark:hover:text-[#FF6B35] font-semibold underline">Word Counter</a> for project reports and proposals.</p>
                     </div>
                     <div className="bg-light-card dark:bg-dark-card p-6 rounded-xl shadow-lg border-l-4 border-[#2E8B57] hover:shadow-xl transition-shadow">
-                        <div className="text-4xl mb-4">??</div>
+                        <div className="text-4xl mb-4">🏡</div>
                         <h3 className="text-xl font-bold mb-3 text-light-text dark:text-dark-text">Homeowners</h3>
                         <p className="text-sm text-light-text/80 dark:text-dark-text/80">Plan DIY yard leveling, pool backfilling, raised bed construction, or drainage improvement projects with accurate material estimates.</p>
                     </div>
                     <div className="bg-light-card dark:bg-dark-card p-6 rounded-xl shadow-lg border-l-4 border-[#4682B4] hover:shadow-xl transition-shadow">
-                        <div className="text-4xl mb-4">??</div>
+                        <div className="text-4xl mb-4">🌳</div>
                         <h3 className="text-xl font-bold mb-3 text-light-text dark:text-dark-text">Landscapers</h3>
                         <p className="text-sm text-light-text/80 dark:text-dark-text/80">Calculate topsoil, gravel, and fill dirt for landscape installations, garden beds, pathways, and terrain reshaping projects.</p>
                     </div>
                     <div className="bg-light-card dark:bg-dark-card p-6 rounded-xl shadow-lg border-l-4 border-[#FF6B35] hover:shadow-xl transition-shadow">
-                        <div className="text-4xl mb-4">??</div>
+                        <div className="text-4xl mb-4">👨‍💼</div>
                         <h3 className="text-xl font-bold mb-3 text-light-text dark:text-dark-text">Engineers</h3>
                         <p className="text-sm text-light-text/80 dark:text-dark-text/80">Perform earthwork volume calculations for civil engineering projects including road construction, site development, and erosion control.</p>
                     </div>
