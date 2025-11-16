@@ -290,28 +290,28 @@ export const toolCategories: Category[] = [
             {
                 title: 'Online Word & Character Counter Tool',
                 description: 'Instantly count words, characters, sentences, and paragraphs in your text. Perfect for essays, social media posts, and SEO content.',
-                link: 'word-counter',
+                link: 'text-and-writing-tools/word-counter',
                 icon: <WordCounterIcon />,
                 gradientColors: { from: '#3b82f6', to: '#22d3ee' }, // Blue to Cyan
             },
             {
                 title: 'Remove Extra Spaces from Text',
                 description: 'Clean up your text by automatically removing unnecessary spaces, tabs, and line breaks. A simple tool for tidying up copied content.',
-                link: 'remove-extra-spaces',
+                link: 'text-and-writing-tools/remove-extra-spaces',
                 icon: <RemoveSpacesIcon />,
                 gradientColors: { from: '#10b981', to: '#14b8a6' }, // Green to Teal
             },
             {
                 title: 'Online Case Converter',
                 description: 'Easily convert text between UPPERCASE, lowercase, Title Case, and Sentence case with a single click.',
-                link: 'case-converter',
+                link: 'text-and-writing-tools/case-converter',
                 icon: <CaseConverterIcon />,
                 gradientColors: { from: '#8b5cf6', to: '#ec4899' }, // Purple to Pink
             },
              {
                 title: 'Lorem Ipsum Generator',
                 description: 'Generate placeholder text for your design mockups and layouts. Customize by paragraphs, sentences, or words.',
-                link: 'lorem-ipsum-generator',
+                link: 'text-and-writing-tools/lorem-ipsum-generator',
                 icon: <LoremIpsumIcon />,
                 gradientColors: { from: '#f97316', to: '#f59e0b' }, // Orange to Amber
             },
@@ -326,28 +326,28 @@ export const toolCategories: Category[] = [
             {
                 title: 'Date Difference Calculator',
                 description: 'Calculate the exact duration between two dates, broken down into years, months, and days.',
-                link: 'time-difference-calculator',
+                link: 'math-and-calculation-tools/time-difference-calculator',
                 icon: <TimeDifferenceIcon />,
                 gradientColors: { from: '#d946ef', to: '#8b5cf6' }, // Fuchsia to Purple
             },
             {
                 title: 'Percentage Change Calculator',
                 description: 'Quickly calculate the percentage increase or decrease between two numbers. Ideal for finance, business, and math.',
-                link: 'percentage-change-calculator',
+                link: 'math-and-calculation-tools/percentage-change-calculator',
                 icon: <PercentageChangeIcon />,
                 gradientColors: { from: '#22c55e', to: '#3b82f6' }, // Green to Blue
             },
             {
                 title: 'Fabric Costing Calculator',
                 description: 'Professional fabric costing tool for textile engineers. Calculate warp/weft weight, yarn consumption, and per-meter pricing with accurate cost breakdown.',
-                link: 'fabric-costing-tool',
+                link: 'math-and-calculation-tools/fabric-costing-tool',
                 icon: <FabricCostingIcon />,
                 gradientColors: { from: '#f59e0b', to: '#ef4444' }, // Amber to Red
             },
             {
                 title: 'Snow Day Calculator',
                 description: 'Predict the likelihood of school closures due to weather conditions. Advanced algorithm analyzes snowfall, temperature, wind, and school district policies.',
-                link: 'snow-day-calculator',
+                link: 'math-and-calculation-tools/snow-day-calculator',
                 icon: <SnowDayCalculatorIcon />,
                 gradientColors: { from: '#3b82f6', to: '#06b6d4' }, // Blue to Cyan
             },
@@ -362,28 +362,28 @@ export const toolCategories: Category[] = [
             {
                 title: 'Hex to RGB Color Converter',
                 description: 'Instantly convert Hex color codes to RGB values with a live color preview. A must-have tool for designers and developers.',
-                link: 'hex-to-rgb-converter',
+                link: 'color-and-design-tools/hex-to-rgb-converter',
                 icon: <HexToRgbIcon />,
                 gradientColors: { from: '#ef4444', to: '#f59e0b' }, // Red to Amber
             },
             {
                 title: 'Accessible Color Contrast Checker',
                 description: 'Check color contrast ratios for accessibility compliance (WCAG AA/AAA). Essential for creating inclusive web designs.',
-                link: 'accessible-color-contrast-checker',
+                link: 'color-and-design-tools/accessible-color-contrast-checker',
                 icon: <ContrastCheckerIcon />,
                 gradientColors: { from: '#6366f1', to: '#a855f7' }, // Indigo to Purple
             },
             {
                 title: 'CSS Shadow Generator',
                 description: 'Create realistic box-shadow and text-shadow effects with live preview. Perfect for modern UI design and neumorphism.',
-                link: 'shadow-css-generator',
+                link: 'color-and-design-tools/shadow-css-generator',
                 icon: <ShadowGeneratorIcon />,
                 gradientColors: { from: '#8b5cf6', to: '#06b6d4' }, // Purple to Cyan
             },
             {
                 title: 'Color Harmony Checker',
                 description: 'Generate beautiful color palettes and harmonies using color theory. Perfect for designers creating cohesive color schemes.',
-                link: 'color-harmony-checker',
+                link: 'color-and-design-tools/color-harmony-checker',
                 icon: <ColorHarmonyIcon />,
                 gradientColors: { from: '#ff6b6b', to: '#4ecdc4' }, // Red to Teal
             },
@@ -398,14 +398,14 @@ export const toolCategories: Category[] = [
             {
                 title: 'JSON Formatter & Validator',
                 description: 'Format, beautify, and validate your JSON data. A crucial tool for checking API responses and cleaning up JSON files.',
-                link: 'json-formatter',
+                link: 'developer-tools/json-formatter',
                 icon: <JsonFormatterIcon />,
                 gradientColors: { from: '#06b6d4', to: '#3b82f6' }, // Cyan to Blue
             },
             {
                 title: 'Code Similarity Checker',
                 description: 'Compare two code snippets and detect similarities. Perfect for checking code duplication and plagiarism detection.',
-                link: 'code-similarity-checker',
+                link: 'developer-tools/code-similarity-checker',
                 icon: <CodeSimilarityIcon />,
                 gradientColors: { from: '#10b981', to: '#06b6d4' }, // Green to Cyan
             },
@@ -420,21 +420,21 @@ export const toolCategories: Category[] = [
             {
                 title: 'SAT Score Calculator',
                 description: 'Digital SAT raw to scaled score converter for 2024-2025. Calculate your total SAT score (400-1600) with percentile estimates and ACT concordance.',
-                link: 'sat-score-calculator',
+                link: 'education-and-exam-tools/test-score-tools/sat-score-calculator',
                 icon: <SATScoreCalculatorIcon />,
                 gradientColors: { from: '#001BB7', to: '#60A5FA' }, // Deep Blue to Light Blue
             },
             {
                 title: 'Berkeley GPA Calculator',
                 description: 'Calculate your UC Berkeley GPA with accurate grade point conversions. Supports letter grades, plus/minus system, and weighted courses.',
-                link: 'berkeley-gpa-calculator',
+                link: 'education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
                 icon: <BerkeleyGPAIcon />,
                 gradientColors: { from: '#0033A0', to: '#FDB515' }, // Berkeley Blue to Gold
             },
             {
                 title: 'ISAC GPA Calculator',
                 description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
-                link: 'isac-gpa-calculator',
+                link: 'education-and-exam-tools/gpa-tools/isac-gpa-calculator',
                 icon: <ISACGPAIcon />,
                 gradientColors: { from: '#6366f1', to: '#ec4899' }, // Indigo to Pink
             },
@@ -447,7 +447,7 @@ export const toolCategories: Category[] = [
                     {
                         title: 'SAT Score Calculator',
                         description: 'Digital SAT raw to scaled score converter for 2024-2025. Calculate your total SAT score (400-1600) with percentile estimates and ACT concordance.',
-                        link: 'sat-score-calculator',
+                        link: 'education-and-exam-tools/test-score-tools/sat-score-calculator',
                         icon: <SATScoreCalculatorIcon />,
                         gradientColors: { from: '#001BB7', to: '#60A5FA' },
                     },
@@ -460,14 +460,14 @@ export const toolCategories: Category[] = [
                     {
                         title: 'College GPA Calculator',
                         description: 'Free college GPA calculator with credit hours. Calculate semester GPA, cumulative GPA, and overall college GPA instantly with accurate grade point average calculator.',
-                        link: 'college-gpa-calculator',
+                        link: 'education-and-exam-tools/gpa-tools/college-gpa-calculator',
                         icon: <CollegeGPAIcon />,
                         gradientColors: { from: '#3b82f6', to: '#8b5cf6' },
                     },
                     {
                         title: 'ISAC GPA Calculator',
                         description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
-                        link: 'isac-gpa-calculator',
+                        link: 'education-and-exam-tools/gpa-tools/isac-gpa-calculator',
                         icon: <ISACGPAIcon />,
                         gradientColors: { from: '#6366f1', to: '#ec4899' },
                     },
@@ -480,7 +480,7 @@ export const toolCategories: Category[] = [
                     {
                         title: 'Berkeley GPA Calculator',
                         description: 'Calculate your UC Berkeley GPA with accurate grade point conversions. Supports letter grades, plus/minus system, and weighted courses.',
-                        link: 'berkeley-gpa-calculator',
+                        link: 'education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
                         icon: <BerkeleyGPAIcon />,
                         gradientColors: { from: '#0033A0', to: '#FDB515' },
                     },
@@ -502,21 +502,21 @@ export const toolCategories: Category[] = [
             {
                 title: 'Fill Dirt Calculator',
                 description: 'Calculate the amount of fill dirt needed for your landscaping or construction project. Supports various measurement units and provides cost estimates.',
-                link: 'fill-dirt-calculator',
+                link: 'construction-and-engineering-tools/fill-dirt-calculator',
                 icon: <FillDirtIcon />,
                 gradientColors: { from: '#92400e', to: '#f59e0b' }, // Brown to Amber
             },
             {
                 title: 'Quilt Backing Calculator',
                 description: 'Calculate fabric requirements for quilt backing. Perfect for quilters to determine backing sizes and fabric yardage needed.',
-                link: 'quilt-backing-calculator',
+                link: 'construction-and-engineering-tools/quilt-backing-calculator',
                 icon: <QuiltBackingIcon />,
                 gradientColors: { from: '#ec4899', to: '#f59e0b' }, // Pink to Amber
             },
             {
                 title: 'Power to Mass Ratio Calculator',
                 description: 'Calculate power-to-weight ratio for vehicles, engines, and machinery. Essential for performance analysis and engineering calculations.',
-                link: 'power-to-mass-ratio-calculator',
+                link: 'construction-and-engineering-tools/power-to-mass-ratio-calculator',
                 icon: <PowerToMassIcon />,
                 gradientColors: { from: '#ef4444', to: '#f59e0b' }, // Red to Amber
             },
@@ -531,14 +531,14 @@ export const toolCategories: Category[] = [
             {
                 title: 'Audiobook Speed Calculator',
                 description: 'Calculate how long it takes to finish an audiobook at different playback speeds. Save time with optimized listening schedules.',
-                link: 'audiobook-speed-calculator',
+                link: 'audio-and-media-tools/audiobook-speed-calculator',
                 icon: <AudiobookSpeedIcon />,
                 gradientColors: { from: '#a855f7', to: '#ec4899' }, // Purple to Pink
             },
             {
                 title: 'Reverb Calculator',
                 description: 'Calculate optimal reverb time (RT60) for rooms and recording studios. Essential tool for acoustics and audio engineering.',
-                link: 'reverb-calculator',
+                link: 'audio-and-media-tools/reverb-calculator',
                 icon: <ReverbIcon />,
                 gradientColors: { from: '#06b6d4', to: '#8b5cf6' }, // Cyan to Purple
             },

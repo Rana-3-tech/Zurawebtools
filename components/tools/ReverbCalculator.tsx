@@ -197,7 +197,7 @@ const ReverbCalculator: React.FC = () => {
 
         const metaDesc = updateMetaTag('description', 'Convert BPM to reverb and delay times instantly. Advanced calculator with stereo pre-delay, custom presets, and rhythmic synchronization. Free tool for producers and audio engineers.');
         const metaKeywords = updateMetaTag('keywords', 'reverb calculator, bpm to ms converter, reverb time calculator, delay sync tool, stereo pre-delay, custom reverb, bpm calculator, reverb decay ms, music production tools');
-        const canonicalLink = updateLinkTag('canonical', 'https://zurawebtools.com/tools/reverb-calculator');
+        const canonicalLink = updateLinkTag('canonical', 'https://zurawebtools.com/audio-and-media-tools/reverb-calculator');
 
         // Structured data
         let structuredDataScript = document.querySelector('script[type="application/ld+json"]#reverb-calculator-schema') as HTMLScriptElement;
@@ -230,7 +230,7 @@ const ReverbCalculator: React.FC = () => {
                 "url": "https://zurawebtools.com"
             },
             "description": "Advanced BPM-based reverb calculator that converts tempo to pre-delay, decay, and total reverb time. Includes stereo, delay sync, and custom modes.",
-            "url": "https://zurawebtools.com/tools/reverb-calculator"
+            "url": "https://zurawebtools.com/audio-and-media-tools/reverb-calculator"
         };
 
         const faqSchema = {

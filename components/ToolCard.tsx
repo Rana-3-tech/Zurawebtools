@@ -18,6 +18,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ title, description, link, icon, gra
             return;
         }
         e.preventDefault();
+        // Link now contains full path (e.g., "category/tool" or "category/subcategory/tool")
         navigateTo(`/${link}`);
     };
 

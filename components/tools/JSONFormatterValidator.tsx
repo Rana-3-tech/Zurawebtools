@@ -33,7 +33,7 @@ const JSONFormatterValidator: React.FC<JSONFormatterValidatorProps> = ({ navigat
             { property: 'og:image', content: 'https://zurawebtools.com/assets/og-json-formatter.webp' },
             { property: 'og:image:alt', content: 'Free JSON Formatter & Validator preview from ZuraWebTools' },
             { property: 'og:type', content: 'website' },
-            { property: 'og:url', content: 'https://zurawebtools.com/tools/json-formatter' },
+            { property: 'og:url', content: 'https://zurawebtools.com/developer-tools/json-formatter' },
             { name: 'twitter:card', content: 'summary_large_image' },
             { name: 'twitter:title', content: 'JSON Formatter & Validator | ZuraWebTools' },
             { name: 'twitter:description', content: 'Free JSON formatter and validator to check, beautify, and format JSON online instantly.' },
@@ -47,11 +47,9 @@ const JSONFormatterValidator: React.FC<JSONFormatterValidatorProps> = ({ navigat
         });
 
         const canonical = document.createElement('link');
-        canonical.setAttribute('rel', 'canonical');
-        canonical.setAttribute('href', 'https://zurawebtools.com/tools/json-formatter');
-        document.head.appendChild(canonical);
-
-        const script = document.createElement('script');
+    canonical.setAttribute('rel', 'canonical');
+    canonical.setAttribute('href', 'https://zurawebtools.com/developer-tools/json-formatter');
+    document.head.appendChild(canonical);        const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.textContent = JSON.stringify([
             {
@@ -59,14 +57,14 @@ const JSONFormatterValidator: React.FC<JSONFormatterValidatorProps> = ({ navigat
               "@type": "WebPage",
               "name": "JSON Formatter & Validator – Free Online JSON Beautifier Tool",
               "description": "Instantly format, validate, and beautify JSON data online. Free JSON formatter and validator for developers to check and clean JSON syntax errors.",
-              "url": "https://zurawebtools.com/tools/json-formatter",
-              "breadcrumb": { "@id": "https://zurawebtools.com/tools/json-formatter#breadcrumb" },
+              "url": "https://zurawebtools.com/developer-tools/json-formatter",
+              "breadcrumb": { "@id": "https://zurawebtools.com/developer-tools/json-formatter#breadcrumb" },
               "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" }
             },
             {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
-              "@id": "https://zurawebtools.com/tools/json-formatter#breadcrumb",
+              "@id": "https://zurawebtools.com/developer-tools/json-formatter#breadcrumb",
               "itemListElement": [
                 { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://zurawebtools.com" },
                 { "@type": "ListItem", "position": 2, "name": "Developer Tools", "item": "https://zurawebtools.com/developer-tools" },
@@ -83,7 +81,7 @@ const JSONFormatterValidator: React.FC<JSONFormatterValidatorProps> = ({ navigat
               "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
               "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
               "description": "A free online tool to format, beautify, and validate JSON data instantly for developers.",
-              "url": "https://zurawebtools.com/tools/json-formatter"
+              "url": "https://zurawebtools.com/developer-tools/json-formatter"
             },
             {
               "@context": "https://schema.org",
@@ -339,7 +337,7 @@ const JSONFormatterValidator: React.FC<JSONFormatterValidatorProps> = ({ navigat
                         <div className="bg-gradient-to-br from-emerald-500 to-cyan-500 p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow hover:-translate-y-1 duration-300">
                             <div className="bg-slate-900 p-6 rounded-lg h-full">
                                 <h3 className="text-xl font-bold text-white mb-3">⚡ Instant Validation</h3>
-                                <p className="text-gray-300">Validate your JSON data in real-time with instant error detection. Get immediate feedback on syntax errors, missing brackets, and formatting issues for rapid debugging. Perfect for working with other <a href="/tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/tools/remove-extra-spaces'); }} className="text-cyan-400 hover:text-cyan-300 underline">text cleaning tools</a>.</p>
+                                <p className="text-gray-300">Validate your JSON data in real-time with instant error detection. Get immediate feedback on syntax errors, missing brackets, and formatting issues for rapid debugging. Perfect for working with other <a href="/text-and-writing-tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/remove-extra-spaces'); }} className="text-cyan-400 hover:text-cyan-300 underline">text cleaning tools</a>.</p>
                             </div>
                         </div>
                         <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow hover:-translate-y-1 duration-300">
@@ -375,22 +373,22 @@ const JSONFormatterValidator: React.FC<JSONFormatterValidatorProps> = ({ navigat
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-purple-400 transition-all duration-300">
                             <h3 className="text-xl font-bold text-white mb-3">💻 API Developers</h3>
                             <p className="text-gray-300 mb-3">Debug REST API responses, validate JSON payloads, and test webhook data. Perfect for ensuring API integrations work smoothly with properly formatted JSON.</p>
-                            <p className="text-sm text-purple-300">Also try: <a href="/tools/word-counter" className="underline hover:text-purple-200">Word Counter</a></p>
+                            <p className="text-sm text-purple-300">Also try: <a href="/text-and-writing-tools/word-counter" className="underline hover:text-purple-200">Word Counter</a></p>
                         </div>
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-blue-400 transition-all duration-300">
                             <h3 className="text-xl font-bold text-white mb-3">🎨 Frontend Developers</h3>
                             <p className="text-gray-300 mb-3">Format configuration files, validate data structures from fetch requests, and debug React/Vue component props with complex JSON schemas.</p>
-                            <p className="text-sm text-blue-300">Also try: <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }} className="underline hover:text-blue-200">Case Converter</a></p>
+                            <p className="text-sm text-blue-300">Also try: <a href="/text-and-writing-tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/case-converter'); }} className="underline hover:text-blue-200">Case Converter</a></p>
                         </div>
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-green-400 transition-all duration-300">
                             <h3 className="text-xl font-bold text-white mb-3">🧪 QA Engineers</h3>
                             <p className="text-gray-300 mb-3">Test JSON outputs from automated tests, verify data integrity in API responses, and validate mock data for testing scenarios.</p>
-                            <p className="text-sm text-green-300">Also try: <a href="/tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/tools/remove-extra-spaces'); }} className="underline hover:text-green-200">Remove Extra Spaces</a></p>
+                            <p className="text-sm text-green-300">Also try: <a href="/text-and-writing-tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/remove-extra-spaces'); }} className="underline hover:text-green-200">Remove Extra Spaces</a></p>
                         </div>
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-orange-400 transition-all duration-300">
                             <h3 className="text-xl font-bold text-white mb-3">🛠️ DevOps Engineers</h3>
                             <p className="text-gray-300 mb-3">Validate deployment configurations, debug Kubernetes manifests, verify Docker Compose files, and format CI/CD pipeline JSON outputs.</p>
-                            <p className="text-sm text-orange-300">Also try: <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }} className="underline hover:text-orange-200">Word Counter Tool</a></p>
+                            <p className="text-sm text-orange-300">Also try: <a href="/text-and-writing-tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/word-counter'); }} className="underline hover:text-orange-200">Word Counter Tool</a></p>
                         </div>
                     </div>
                 </div>
@@ -400,13 +398,13 @@ const JSONFormatterValidator: React.FC<JSONFormatterValidatorProps> = ({ navigat
                     <h2 className="text-3xl font-bold text-center mb-8 text-white">📚 About JSON Formatter & Validator Tool</h2>
                     <div className="bg-slate-900/30 p-8 rounded-lg text-gray-300 space-y-4 leading-relaxed">
                         <p>
-                            Our <strong>JSON formatter</strong> is a comprehensive online tool designed to help developers work efficiently with JavaScript Object Notation (JSON) data. Whether you need to <strong>format JSON</strong>, <strong>validate JSON syntax</strong>, or beautify messy JSON code, this free <strong>JSON validator</strong> provides all essential features in one place. Combine it with our <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }} className="text-cyan-400 hover:text-cyan-300 underline">text case converter</a> for formatting JSON keys and values.
+                            Our <strong>JSON formatter</strong> is a comprehensive online tool designed to help developers work efficiently with JavaScript Object Notation (JSON) data. Whether you need to <strong>format JSON</strong>, <strong>validate JSON syntax</strong>, or beautify messy JSON code, this free <strong>JSON validator</strong> provides all essential features in one place. Combine it with our <a href="/text-and-writing-tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/case-converter'); }} className="text-cyan-400 hover:text-cyan-300 underline">text case converter</a> for formatting JSON keys and values.
                         </p>
                         <p>
-                            As a powerful <strong>JSON beautifier</strong>, our tool automatically indents and organizes your JSON data with proper spacing and line breaks. The built-in <strong>JSON parser</strong> can detect and report various syntax errors including missing brackets, incorrect comma placement, unquoted keys, and invalid data types. Unlike basic formatters, our <strong>JSON editor</strong> includes intelligent auto-fix capabilities that attempt to correct common formatting mistakes automatically. Use our <a href="/tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/tools/remove-extra-spaces'); }} className="text-cyan-400 hover:text-cyan-300 underline">remove extra spaces tool</a> to clean up messy JSON strings before formatting.
+                            As a powerful <strong>JSON beautifier</strong>, our tool automatically indents and organizes your JSON data with proper spacing and line breaks. The built-in <strong>JSON parser</strong> can detect and report various syntax errors including missing brackets, incorrect comma placement, unquoted keys, and invalid data types. Unlike basic formatters, our <strong>JSON editor</strong> includes intelligent auto-fix capabilities that attempt to correct common formatting mistakes automatically. Use our <a href="/text-and-writing-tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/remove-extra-spaces'); }} className="text-cyan-400 hover:text-cyan-300 underline">remove extra spaces tool</a> to clean up messy JSON strings before formatting.
                         </p>
                         <p>
-                            This <strong>online JSON tool</strong> is particularly useful for developers working with APIs, configuration files, and data interchange formats. The <strong>JSON syntax checker</strong> provides real-time validation feedback, highlighting errors instantly as you paste your data. Use it as a <strong>JSON minifier</strong> and <strong>JSON prettifier</strong> to switch between compact and readable formats with a single click. For analyzing your formatted JSON output, try our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter</a> to track character and word counts in your JSON strings.
+                            This <strong>online JSON tool</strong> is particularly useful for developers working with APIs, configuration files, and data interchange formats. The <strong>JSON syntax checker</strong> provides real-time validation feedback, highlighting errors instantly as you paste your data. Use it as a <strong>JSON minifier</strong> and <strong>JSON prettifier</strong> to switch between compact and readable formats with a single click. For analyzing your formatted JSON output, try our <a href="/text-and-writing-tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter</a> to track character and word counts in your JSON strings.
                         </p>
                         <p>
                             Our <strong>free JSON formatter</strong> processes everything locally in your browser, ensuring complete privacy and security for sensitive data like API keys, authentication tokens, and confidential configuration files. The tool supports large JSON files and provides detailed error messages with line numbers to help you quickly identify and fix validation issues.

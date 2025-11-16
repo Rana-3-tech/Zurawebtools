@@ -37,7 +37,7 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
             { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-lorem-ipsum-og.png' },
             { property: 'og:image:alt', content: 'A preview of the Online Lorem Ipsum Generator from ZuraWebTools, showing generated placeholder text.' },
             { property: 'og:type', content: 'website' },
-            { property: 'og:url', content: 'https://zurawebtools.com/tools/lorem-ipsum-generator' },
+            { property: 'og:url', content: 'https://zurawebtools.com/text-and-writing-tools/lorem-ipsum-generator' },
             { name: 'twitter:card', content: 'summary_large_image' },
             { name: 'twitter:title', content: 'Online Lorem Ipsum Generator | ZuraWebTools' },
             { name: 'twitter:description', content: 'Free placeholder text and dummy content generator for designers and developers.' },
@@ -51,11 +51,9 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
         });
 
         const canonical = document.createElement('link');
-        canonical.setAttribute('rel', 'canonical');
-        canonical.setAttribute('href', 'https://zurawebtools.com/tools/lorem-ipsum-generator');
-        document.head.appendChild(canonical);
-
-        const script = document.createElement('script');
+    canonical.setAttribute('rel', 'canonical');
+    canonical.setAttribute('href', 'https://zurawebtools.com/text-and-writing-tools/lorem-ipsum-generator');
+    document.head.appendChild(canonical);        const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.textContent = JSON.stringify([
             {
@@ -63,14 +61,14 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
               "@type": "WebPage",
               "name": "Online Lorem Ipsum Generator – Free Placeholder Text Creator",
               "description": "Generate dummy text for mockups, design layouts, and content previews. Free placeholder text generator for designers and developers.",
-              "url": "https://zurawebtools.com/tools/lorem-ipsum-generator",
-              "breadcrumb": { "@id": "https://zurawebtools.com/tools/lorem-ipsum-generator#breadcrumb" },
+              "url": "https://zurawebtools.com/text-and-writing-tools/lorem-ipsum-generator",
+              "breadcrumb": { "@id": "https://zurawebtools.com/text-and-writing-tools/lorem-ipsum-generator#breadcrumb" },
               "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" }
             },
             {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
-              "@id": "https://zurawebtools.com/tools/lorem-ipsum-generator#breadcrumb",
+              "@id": "https://zurawebtools.com/text-and-writing-tools/lorem-ipsum-generator#breadcrumb",
               "itemListElement": [
                 { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://zurawebtools.com" },
                 { "@type": "ListItem", "position": 2, "name": "Design Tools", "item": "https://zurawebtools.com/design-tools" },
@@ -86,7 +84,7 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                 "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "2150" },
                 "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
                 "description": "A free online lorem ipsum generator to create placeholder text for designers and developers. Generate dummy content, mockup text, and fake text for websites and layouts.",
-                "url": "https://zurawebtools.com/tools/lorem-ipsum-generator"
+                "url": "https://zurawebtools.com/text-and-writing-tools/lorem-ipsum-generator"
             },
             {
               "@context": "https://schema.org",
@@ -298,7 +296,7 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                         <div className="bg-gradient-to-br from-blue-500 to-cyan-500 p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow hover:-translate-y-1 duration-300">
                             <div className="bg-slate-900 p-6 rounded-lg h-full">
                                 <h3 className="text-xl font-bold text-white mb-3">⚡ Time-Saving</h3>
-                                <p className="text-gray-300">Instantly generate Lorem Ipsum placeholder text without typing manually. Perfect for designers and developers who need dummy text quickly for mockups, wireframes, and prototypes. Compatible with tools like our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter</a>.</p>
+                                <p className="text-gray-300">Instantly generate Lorem Ipsum placeholder text without typing manually. Perfect for designers and developers who need dummy text quickly for mockups, wireframes, and prototypes. Compatible with tools like our <a href="/text-and-writing-tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter</a>.</p>
                             </div>
                         </div>
                         <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow hover:-translate-y-1 duration-300">
@@ -323,22 +321,22 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-blue-400 transition-all duration-300">
                             <h3 className="text-xl font-bold text-white mb-3">🎨 Web Designers</h3>
                             <p className="text-gray-300 mb-3">Create website mockups, landing page designs, and UI layouts with realistic Lorem Ipsum placeholder text to demonstrate typography, spacing, and visual hierarchy before final content arrives.</p>
-                            <p className="text-sm text-blue-300">Also try: <a href="/tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/hex-to-rgb-converter'); }} className="underline hover:text-blue-200">Color Converter</a></p>
+                            <p className="text-sm text-blue-300">Also try: <a href="/color-and-design-tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/color-and-design-tools/hex-to-rgb-converter'); }} className="underline hover:text-blue-200">Color Converter</a></p>
                         </div>
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-purple-400 transition-all duration-300">
                             <h3 className="text-xl font-bold text-white mb-3">🖼️ UI/UX Designers</h3>
                             <p className="text-gray-300 mb-3">Design wireframes, prototypes, and user interfaces with dummy text to test readability, content flow, and layout balance without being distracted by actual content meaning.</p>
-                            <p className="text-sm text-purple-300">Also try: <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }} className="underline hover:text-purple-200">Text Case Converter</a></p>
+                            <p className="text-sm text-purple-300">Also try: <a href="/text-and-writing-tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/case-converter'); }} className="underline hover:text-purple-200">Text Case Converter</a></p>
                         </div>
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-green-400 transition-all duration-300">
                             <h3 className="text-xl font-bold text-white mb-3">✍️ Content Writers</h3>
                             <p className="text-gray-300 mb-3">Use Lorem Ipsum filler text as temporary placeholders in content management systems, blog templates, and article drafts to visualize final layout and structure before writing actual content.</p>
-                            <p className="text-sm text-green-300">Also try: <a href="/tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/tools/remove-extra-spaces'); }} className="underline hover:text-green-200">Remove Extra Spaces</a></p>
+                            <p className="text-sm text-green-300">Also try: <a href="/text-and-writing-tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/remove-extra-spaces'); }} className="underline hover:text-green-200">Remove Extra Spaces</a></p>
                         </div>
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-orange-400 transition-all duration-300">
                             <h3 className="text-xl font-bold text-white mb-3">💻 Developers</h3>
                             <p className="text-gray-300 mb-3">Test frontend layouts, responsive designs, and database content displays with Lorem Ipsum sample text to ensure proper rendering, overflow handling, and dynamic content integration.</p>
-                            <p className="text-sm text-orange-300">Also try: <a href="/tools/json-formatter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/json-formatter'); }} className="underline hover:text-orange-200">JSON Formatter</a></p>
+                            <p className="text-sm text-orange-300">Also try: <a href="/developer-tools/json-formatter" onClick={(e) => { e.preventDefault(); navigateTo('/developer-tools/json-formatter'); }} className="underline hover:text-orange-200">JSON Formatter</a></p>
                         </div>
                     </div>
                 </div>
@@ -362,13 +360,13 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                     <h2 className="text-3xl font-bold text-center mb-8 text-white">📚 About Lorem Ipsum Generator Tool</h2>
                     <div className="bg-slate-900/30 p-8 rounded-lg text-gray-300 space-y-4 leading-relaxed">
                         <p>
-                            Our <strong>Lorem Ipsum generator</strong> is a comprehensive online tool designed to create <strong>placeholder text</strong> for designers, developers, and content creators. Whether you need <strong>dummy text</strong> for mockups, wireframes, or website layouts, this free <strong>Lorem Ipsum text</strong> generator provides customizable options to match your exact requirements. Generate classic Lorem Ipsum paragraphs or switch to Random English text for more realistic <strong>filler text</strong> in your designs. Combine it with our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter tool</a> to track the exact length of your generated placeholder content.
+                            Our <strong>Lorem Ipsum generator</strong> is a comprehensive online tool designed to create <strong>placeholder text</strong> for designers, developers, and content creators. Whether you need <strong>dummy text</strong> for mockups, wireframes, or website layouts, this free <strong>Lorem Ipsum text</strong> generator provides customizable options to match your exact requirements. Generate classic Lorem Ipsum paragraphs or switch to Random English text for more realistic <strong>filler text</strong> in your designs. Combine it with our <a href="/text-and-writing-tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter tool</a> to track the exact length of your generated placeholder content.
                         </p>
                         <p>
-                            As a powerful <strong>Lorem Ipsum online</strong> generator, our tool offers complete control over text generation. You can specify the number of paragraphs (1-20) and words per paragraph (5-200) to create <strong>sample text</strong> that perfectly fits your layout dimensions. The <strong>mock text generator</strong> uses authentic Lorem Ipsum vocabulary derived from Cicero's "de Finibus Bonorum et Malorum" written in 45 BC, maintaining natural letter frequency distribution that resembles real content. Unlike basic placeholder tools, our <strong>text placeholder</strong> generator includes an intelligent Random English mode for creating more realistic-looking dummy content. Use our <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }} className="text-cyan-400 hover:text-cyan-300 underline">case converter</a> to adjust the capitalization of your generated Lorem Ipsum text.
+                            As a powerful <strong>Lorem Ipsum online</strong> generator, our tool offers complete control over text generation. You can specify the number of paragraphs (1-20) and words per paragraph (5-200) to create <strong>sample text</strong> that perfectly fits your layout dimensions. The <strong>mock text generator</strong> uses authentic Lorem Ipsum vocabulary derived from Cicero's "de Finibus Bonorum et Malorum" written in 45 BC, maintaining natural letter frequency distribution that resembles real content. Unlike basic placeholder tools, our <strong>text placeholder</strong> generator includes an intelligent Random English mode for creating more realistic-looking dummy content. Use our <a href="/text-and-writing-tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/case-converter'); }} className="text-cyan-400 hover:text-cyan-300 underline">case converter</a> to adjust the capitalization of your generated Lorem Ipsum text.
                         </p>
                         <p>
-                            This <strong>fake text generator</strong> is particularly valuable for web designers creating landing pages, blog templates, and e-commerce product layouts. The <strong>Lorem Ipsum tool</strong> helps visualize typography, spacing, and content hierarchy without meaningful text distractions during the design phase. Our <strong>dummy content generator</strong> processes everything locally in your browser, ensuring instant generation without server delays. The tool supports both Classic Latin-based Lorem Ipsum and Random English text modes, giving you flexibility to choose <strong>design placeholder text</strong> that best suits your project needs. For cleaning up text formatting issues, try our <a href="/tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/tools/remove-extra-spaces'); }} className="text-cyan-400 hover:text-cyan-300 underline">remove extra spaces tool</a> to perfect your placeholder content.
+                            This <strong>fake text generator</strong> is particularly valuable for web designers creating landing pages, blog templates, and e-commerce product layouts. The <strong>Lorem Ipsum tool</strong> helps visualize typography, spacing, and content hierarchy without meaningful text distractions during the design phase. Our <strong>dummy content generator</strong> processes everything locally in your browser, ensuring instant generation without server delays. The tool supports both Classic Latin-based Lorem Ipsum and Random English text modes, giving you flexibility to choose <strong>design placeholder text</strong> that best suits your project needs. For cleaning up text formatting issues, try our <a href="/text-and-writing-tools/remove-extra-spaces" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/remove-extra-spaces'); }} className="text-cyan-400 hover:text-cyan-300 underline">remove extra spaces tool</a> to perfect your placeholder content.
                         </p>
                         <p>
                             Our <strong>Lorem Ipsum creator</strong> includes convenient preset templates for common use cases like blog posts (5 paragraphs × 100 words), product descriptions (2 paragraphs × 75 words), email templates (3 paragraphs × 60 words), landing pages (4 paragraphs × 80 words), long articles (10 paragraphs × 120 words), and short bios (1 paragraph × 50 words). Simply click any template to instantly load pre-configured settings and generate appropriate <strong>mockup text</strong> for your specific project type. The one-click copy button lets you quickly paste <strong>Lorem Ipsum paragraphs</strong> into your design software, content management system, or code editor.

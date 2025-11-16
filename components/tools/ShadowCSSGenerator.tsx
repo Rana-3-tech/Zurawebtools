@@ -121,7 +121,7 @@ const ShadowCSSGenerator: React.FC<ShadowCSSGeneratorProps> = ({ navigateTo }) =
     const title = 'Realistic CSS Shadow Generator – Free Box & Text Shadow Builder | ZuraWebTools';
     const description = 'Create realistic box-shadow and text-shadow effects with live preview, multi-layer support, and easy CSS copy. Free online CSS shadow generator for designers and developers.';
     const keywords = 'css shadow generator, box shadow generator, text shadow generator, realistic css shadow, neumorphism shadow tool, css shadow builder, shadow css online, ui shadow generator, css shadow preview, free css shadow generator';
-    const canonicalUrl = 'https://zurawebtools.com/tools/shadow-css-generator';
+    const canonicalUrl = 'https://zurawebtools.com/color-and-design-tools/shadow-css-generator';
 
     document.title = title;
     
@@ -156,7 +156,7 @@ const ShadowCSSGenerator: React.FC<ShadowCSSGeneratorProps> = ({ navigateTo }) =
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
       "description": "A free online tool to create realistic CSS box-shadow and text-shadow effects with live preview and easy copy.",
-      "url": "https://zurawebtools.com/tools/shadow-css-generator"
+      "url": "https://zurawebtools.com/color-and-design-tools/shadow-css-generator"
     };
 
     const socialMetaTags = [
@@ -165,7 +165,7 @@ const ShadowCSSGenerator: React.FC<ShadowCSSGeneratorProps> = ({ navigateTo }) =
       { id: 'og-image-shadow', attrs: { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-shadow-generator-og.png' } },
       { id: 'og-image-alt-shadow', attrs: { property: 'og:image:alt', content: 'CSS Shadow Generator Tool by ZuraWebTools showing live preview' } },
       { id: 'og-type-shadow', attrs: { property: 'og:type', content: 'website' } },
-      { id: 'og-url-shadow', attrs: { property: 'og:url', content: 'https://zurawebtools.com/tools/shadow-css-generator' } },
+      { id: 'og-url-shadow', attrs: { property: 'og:url', content: 'https://zurawebtools.com/color-and-design-tools/shadow-css-generator' } },
       { id: 'og-locale-shadow', attrs: { property: 'og:locale', content: 'en_US' } },
       { id: 'twitter-card-shadow', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
       { id: 'twitter-title-shadow', attrs: { name: 'twitter:title', content: 'Realistic CSS Shadow Generator | ZuraWebTools' } },
@@ -188,7 +188,7 @@ const ShadowCSSGenerator: React.FC<ShadowCSSGeneratorProps> = ({ navigateTo }) =
       "@type": "WebPage",
       "name": "CSS Shadow Generator - Create Box & Text Shadows",
       "description": "Free online tool to generate CSS box-shadow and text-shadow effects with real-time preview",
-      "url": "https://zurawebtools.com/tools/shadow-css-generator",
+      "url": "https://zurawebtools.com/color-and-design-tools/shadow-css-generator",
       "inLanguage": "en-US",
       "isPartOf": {
         "@type": "WebSite",
@@ -219,7 +219,7 @@ const ShadowCSSGenerator: React.FC<ShadowCSSGeneratorProps> = ({ navigateTo }) =
           "@type": "ListItem",
           "position": 3,
           "name": "CSS Shadow Generator",
-          "item": "https://zurawebtools.com/tools/shadow-css-generator"
+          "item": "https://zurawebtools.com/color-and-design-tools/shadow-css-generator"
         }
       ]
     };

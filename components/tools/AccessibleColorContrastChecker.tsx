@@ -41,7 +41,7 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
       { property: 'og:image:alt', content: 'Free Accessible Color Contrast Checker showing WCAG compliance results' },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: 'ZuraWebTools' },
-      { property: 'og:url', content: 'https://zurawebtools.com/tools/accessible-color-contrast-checker' },
+      { property: 'og:url', content: 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker' },
       { property: 'og:locale', content: 'en_US' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Accessible Color Contrast Checker | ZuraWebTools' },
@@ -62,9 +62,8 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
       document.head.appendChild(el);
     });
 
-    const canonical = document.createElement('link');
-    canonical.rel = 'canonical';
-    canonical.href = 'https://zurawebtools.com/tools/accessible-color-contrast-checker';
+    canonical.setAttribute('rel', 'canonical');
+    canonical.setAttribute('href', 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker');
     document.head.appendChild(canonical);
 
     const script = document.createElement('script');
@@ -101,14 +100,14 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
           ],
         },
         description: 'A free WCAG color contrast checker that helps designers and developers test color accessibility for text and UI elements.',
-        url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker',
+        url: 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker',
       },
       {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Accessible Color Contrast Checker',
         description: 'Free WCAG color contrast checker for testing accessibility compliance. Check AA and AAA standards instantly.',
-        url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker',
+        url: 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker',
         datePublished: '2024-01-10',
         dateModified: '2024-11-08',
         inLanguage: 'en-US',
@@ -148,7 +147,7 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
             '@type': 'ListItem',
             position: 3,
             name: 'Accessible Color Contrast Checker',
-            item: 'https://zurawebtools.com/tools/accessible-color-contrast-checker',
+            item: 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker',
           },
         ],
       },
@@ -169,28 +168,28 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
             position: 1,
             name: 'Select Foreground Color',
             text: 'Select your foreground and background colors using color pickers or hex inputs.',
-            url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker#step1',
+            url: 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker#step1',
           },
           {
             '@type': 'HowToStep',
             position: 2,
             name: 'View Live Preview',
             text: 'View the live preview and contrast ratio instantly.',
-            url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker#step2',
+            url: 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker#step2',
           },
           {
             '@type': 'HowToStep',
             position: 3,
             name: 'Check WCAG Standards',
             text: 'Ensure your design meets WCAG AA or AAA accessibility standards.',
-            url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker#step3',
+            url: 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker#step3',
           },
           {
             '@type': 'HowToStep',
             position: 4,
             name: 'Copy Results',
             text: 'Copy the contrast ratio for documentation or audits.',
-            url: 'https://zurawebtools.com/tools/accessible-color-contrast-checker#step4',
+            url: 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker#step4',
           },
         ],
       },
@@ -276,7 +275,7 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
 
   // 📡 IndexNow: Notify search engines about page updates
   useEffect(() => {
-    notifyIndexNow('/tools/accessible-color-contrast-checker');
+    notifyIndexNow('/color-and-design-tools/accessible-color-contrast-checker');
   }, []);
 
   // Contrast Calculation Logic
@@ -735,10 +734,10 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
         <div className="max-w-4xl mx-auto mt-12 text-center">
           <p className="font-semibold text-gray-400 mb-2">Share This Tool:</p>
           <div className="flex justify-center items-center space-x-6">
-            <ShareButton network="Facebook" url="https://zurawebtools.com/tools/accessible-color-contrast-checker" text="Check your website's WCAG color contrast easily with this free tool!" />
-            <ShareButton network="Twitter" url="https://zurawebtools.com/tools/accessible-color-contrast-checker" text="Free WCAG color contrast checker by @ZuraWebTools!" />
-            <ShareButton network="LinkedIn" url="https://zurawebtools.com/tools/accessible-color-contrast-checker" text="Ensure your website colors meet WCAG accessibility standards." />
-            <ShareButton network="WhatsApp" url="https://zurawebtools.com/tools/accessible-color-contrast-checker" text="Free WCAG color contrast checker tool by ZuraWebTools." />
+            <ShareButton network="Facebook" url="https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker" text="Check your website's WCAG color contrast easily with this free tool!" />
+            <ShareButton network="Twitter" url="https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker" text="Free WCAG color contrast checker by @ZuraWebTools!" />
+            <ShareButton network="LinkedIn" url="https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker" text="Ensure your website colors meet WCAG accessibility standards." />
+            <ShareButton network="WhatsApp" url="https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker" text="Free WCAG color contrast checker tool by ZuraWebTools." />
           </div>
         </div>
         

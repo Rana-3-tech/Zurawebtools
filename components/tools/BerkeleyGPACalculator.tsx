@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 
 type Course = {
   name: string;
@@ -50,6 +51,70 @@ const BerkeleyGPACalculator: React.FC = () => {
   ]);
 
   const [isWeighted, setIsWeighted] = useState<boolean>(false);
+
+  // TOC sections configuration
+  const tocSections: TOCSection[] = [
+    {
+      id: 'examples',
+      emoji: '📝',
+      title: 'Examples',
+      subtitle: 'Sample calculations',
+      gradientFrom: 'from-blue-50',
+      gradientTo: 'to-indigo-50',
+      hoverBorder: 'border-indigo-400',
+      hoverText: 'text-indigo-600'
+    },
+    {
+      id: 'benefits',
+      emoji: '⭐',
+      title: 'Benefits',
+      subtitle: 'Why use this',
+      gradientFrom: 'from-purple-50',
+      gradientTo: 'to-pink-50',
+      hoverBorder: 'border-purple-400',
+      hoverText: 'text-purple-600'
+    },
+    {
+      id: 'how-to-use',
+      emoji: '📖',
+      title: 'How to Use',
+      subtitle: 'Step-by-step',
+      gradientFrom: 'from-green-50',
+      gradientTo: 'to-emerald-50',
+      hoverBorder: 'border-green-400',
+      hoverText: 'text-green-600'
+    },
+    {
+      id: 'use-cases',
+      emoji: '💡',
+      title: 'Use Cases',
+      subtitle: 'Who uses this',
+      gradientFrom: 'from-orange-50',
+      gradientTo: 'to-amber-50',
+      hoverBorder: 'border-orange-400',
+      hoverText: 'text-orange-600'
+    },
+    {
+      id: 'about',
+      emoji: 'ℹ️',
+      title: 'About',
+      subtitle: 'Understanding',
+      gradientFrom: 'from-cyan-50',
+      gradientTo: 'to-blue-50',
+      hoverBorder: 'border-cyan-400',
+      hoverText: 'text-cyan-600'
+    },
+    {
+      id: 'faq',
+      emoji: '❓',
+      title: 'FAQs',
+      subtitle: 'Common questions',
+      gradientFrom: 'from-violet-50',
+      gradientTo: 'to-purple-50',
+      hoverBorder: 'border-violet-400',
+      hoverText: 'text-violet-600'
+    }
+  ];
 
   // Common UC Berkeley Courses
   const commonCourses = [
@@ -142,10 +207,10 @@ const BerkeleyGPACalculator: React.FC = () => {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "@id": "https://zurawebtools.com/tools/berkeley-gpa-calculator#software",
+    "@id": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator#software",
     "name": "UC Berkeley GPA Calculator",
     "description": "UC Berkeley GPA Calculator using the official Berkeley grading scale with A+ capped at 4.0 and honors/AP weighting. Calculate your semester and cumulative GPA accurately for academic planning and college admissions.",
-    "url": "https://zurawebtools.com/tools/berkeley-gpa-calculator",
+    "url": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator",
     "softwareVersion": "1.0",
     "applicationCategory": "EducationalApplication",
     "applicationSubCategory": "GPA Calculator Tool",
@@ -168,15 +233,15 @@ const BerkeleyGPACalculator: React.FC = () => {
     "mentions": [
       {
         "@type": "SoftwareApplication",
-        "@id": "https://zurawebtools.com/tools/isac-gpa-calculator",
+        "@id": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator",
         "name": "ISAC GPA Calculator",
-        "url": "https://zurawebtools.com/tools/isac-gpa-calculator"
+        "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator"
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://zurawebtools.com/tools/sat-score-calculator",
+        "@id": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator",
         "name": "SAT Score Calculator",
-        "url": "https://zurawebtools.com/tools/sat-score-calculator"
+        "url": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator"
       }
     ]
   };
@@ -207,7 +272,7 @@ const BerkeleyGPACalculator: React.FC = () => {
         "@type": "ListItem",
         "position": 4,
         "name": "UC Berkeley GPA Calculator",
-        "item": "https://zurawebtools.com/tools/berkeley-gpa-calculator"
+        "item": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator"
       }
     ]
   };
@@ -296,7 +361,7 @@ const BerkeleyGPACalculator: React.FC = () => {
     setMetaTag('og:title', 'UC Berkeley GPA Calculator - Free Academic Grade Point Average Calculator', true);
     setMetaTag('og:description', 'UC Berkeley GPA Calculator using the official Berkeley grading scale with A+ capped at 4.0 and honors/AP weighting. Calculate your semester and cumulative GPA accurately for academic planning and college admissions.', true);
     setMetaTag('og:image', 'https://zurawebtools.com/images/berkeley-gpa-calculator-og.png', true);
-    setMetaTag('og:url', 'https://zurawebtools.com/tools/berkeley-gpa-calculator', true);
+    setMetaTag('og:url', 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator', true);
     setMetaTag('og:type', 'website', true);
     setMetaTag('twitter:card', 'summary_large_image');
     setMetaTag('twitter:title', 'UC Berkeley GPA Calculator - Free Academic Grade Point Average Calculator');
@@ -309,7 +374,7 @@ const BerkeleyGPACalculator: React.FC = () => {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', 'https://zurawebtools.com/tools/berkeley-gpa-calculator');
+    canonical.setAttribute('href', 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator');
 
     const schemas = [softwareSchema, breadcrumbSchema, faqSchema];
     schemas.forEach((schema, index) => {
@@ -325,6 +390,11 @@ const BerkeleyGPACalculator: React.FC = () => {
 
   return (
     <>
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <header className="relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900"></div>
@@ -374,7 +444,7 @@ const BerkeleyGPACalculator: React.FC = () => {
               Share
             </button>
             <button
-              onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/tools/berkeley-gpa-calculator')}`, '_blank', 'noopener,noreferrer')}
+              onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator')}`, '_blank', 'noopener,noreferrer')}
               className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Share on Facebook"
             >
@@ -384,7 +454,7 @@ const BerkeleyGPACalculator: React.FC = () => {
               Share
             </button>
             <button
-              onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://zurawebtools.com/tools/berkeley-gpa-calculator')}`, '_blank', 'noopener,noreferrer')}
+              onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator')}`, '_blank', 'noopener,noreferrer')}
               className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Share on LinkedIn"
             >
@@ -394,7 +464,7 @@ const BerkeleyGPACalculator: React.FC = () => {
               Share
             </button>
             <button
-              onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent('Check out this UC Berkeley GPA Calculator: https://zurawebtools.com/tools/berkeley-gpa-calculator')}`, '_blank', 'noopener,noreferrer')}
+              onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent('Check out this UC Berkeley GPA Calculator: https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator')}`, '_blank', 'noopener,noreferrer')}
               className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Share on WhatsApp"
             >
@@ -404,7 +474,7 @@ const BerkeleyGPACalculator: React.FC = () => {
               Share
             </button>
             <button
-              onClick={() => navigator.clipboard.writeText('https://zurawebtools.com/tools/berkeley-gpa-calculator')}
+              onClick={() => navigator.clipboard.writeText('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator')}
               className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Copy link to clipboard"
             >
@@ -553,8 +623,11 @@ const BerkeleyGPACalculator: React.FC = () => {
             </div>
           </div>
 
+          {/* Table of Contents */}
+          <TableOfContents sections={tocSections} />
+
           {/* Quick Examples */}
-          <div className="mb-12">
+          <div id="examples" className="mb-12 scroll-mt-24">
             <div className="text-center mb-8">
               <h2 className="text-4xl font-bold text-gray-800 mb-4">Quick GPA Examples for UC Berkeley Students</h2>
               <p className="text-gray-600 text-lg">See how the calculator works with these common Berkeley scenarios</p>
@@ -615,7 +688,7 @@ const BerkeleyGPACalculator: React.FC = () => {
           </div>
 
           {/* Benefits */}
-          <div className="mb-12">
+          <div id="benefits" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Why Use Our UC Berkeley GPA Calculator?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <BenefitCard
@@ -640,7 +713,7 @@ const BerkeleyGPACalculator: React.FC = () => {
           </div>
 
           {/* How to Use */}
-          <div className="mb-12">
+          <div id="how-to-use" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">How to Calculate Your UC Berkeley GPA</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <HowToStep
@@ -677,7 +750,7 @@ const BerkeleyGPACalculator: React.FC = () => {
           </div>
 
           {/* Use Cases */}
-          <div className="mb-12">
+          <div id="use-cases" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Who Uses Our UC Berkeley GPA Calculator?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <UseCaseCard
@@ -708,7 +781,7 @@ const BerkeleyGPACalculator: React.FC = () => {
           </div>
 
           {/* About Section */}
-          <div className="mb-12">
+          <div id="about" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
               UC Berkeley GPA Calculator Summary
             </h2>
@@ -808,7 +881,7 @@ const BerkeleyGPACalculator: React.FC = () => {
           </div>
 
           {/* FAQs */}
-          <div className="mb-12">
+          <div id="faq" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">UC Berkeley GPA Calculator FAQs</h2>
             <div className="max-w-4xl mx-auto space-y-6">
               <FAQItem
@@ -849,14 +922,14 @@ const BerkeleyGPACalculator: React.FC = () => {
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">SAT Score Calculator</h3>
                 <p className="text-gray-600 mb-4">Digital SAT raw to scaled score converter for 2024-2025. Calculate your total SAT score (400-1600) with percentile estimates and ACT concordance.</p>
-                <a href="/tools/sat-score-calculator" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
+                <a href="/education-and-exam-tools/test-score-tools/sat-score-calculator" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
                   Use SAT Calculator
                 </a>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">ISAC GPA Calculator</h3>
                 <p className="text-gray-600 mb-4">Free GPA calculator for students to calculate grade point average with weighted and unweighted options. Perfect for high school and college academic planning.</p>
-                <a href="/tools/isac-gpa-calculator" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
+                <a href="/education-and-exam-tools/gpa-tools/isac-gpa-calculator" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
                   Use ISAC GPA Calculator
                 </a>
               </div>

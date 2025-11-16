@@ -46,6 +46,7 @@ import AudiobookSpeedCalculator from './components/tools/AudiobookSpeedCalculato
 import ReverbCalculator from './components/tools/ReverbCalculator';
 import CodeSimilarityChecker from './components/tools/CodeSimilarityChecker';
 import CollegeGPACalculator from './components/tools/CollegeGPACalculator';
+import NotFoundPage from './components/NotFoundPage';
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -164,75 +165,40 @@ const App: React.FC = () => {
             return <SearchResultsPage query={searchQuery} results={searchResults} navigateTo={navigateTo} />;
         }
 
-        // Check for individual tool pages
-        if (path === 'word-counter') {
-            return <WordCounter navigateTo={navigateTo} />;
-        }
-        if (path === 'remove-extra-spaces') {
-            return <RemoveExtraSpaces navigateTo={navigateTo} />;
-        }
-        if (path === 'case-converter') {
-            return <CaseConverter navigateTo={navigateTo} />;
-        }
-        if (path === 'lorem-ipsum-generator') {
-            return <LoremIpsumGenerator navigateTo={navigateTo} />;
-        }
-        if (path === 'time-difference-calculator') {
-            return <TimeDifferenceCalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'percentage-change-calculator') {
-            return <PercentageChangeCalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'hex-to-rgb-converter') {
-            return <HexToRGBConverter navigateTo={navigateTo} />;
-        }
-        if (path === 'accessible-color-contrast-checker') {
-            return <AccessibleColorContrastChecker navigateTo={navigateTo} />;
-        }
-        if (path === 'json-formatter') {
-            return <JSONFormatterValidator navigateTo={navigateTo} />;
-        }
-        if (path === 'shadow-css-generator') {
-            return <ShadowCSSGenerator navigateTo={navigateTo} />;
-        }
-        if (path === 'color-harmony-checker') {
-            return <ColorHarmonyChecker navigateTo={navigateTo} />;
-        }
-        if (path === 'fabric-costing-tool') {
-            return <FabricCostingTool navigateTo={navigateTo} />;
-        }
-        if (path === 'snow-day-calculator') {
-            return <SnowDayCalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'sat-score-calculator') {
-            return <SATScoreCalculator />;
-        }
-        if (path === 'berkeley-gpa-calculator') {
-            return <BerkeleyGPACalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'isac-gpa-calculator') {
-            return <ISACGPA navigateTo={navigateTo} />;
-        }
-        if (path === 'fill-dirt-calculator') {
-            return <FillDirtCalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'quilt-backing-calculator') {
-            return <QuiltBackingCalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'power-to-mass-ratio-calculator') {
-            return <PowerToMassRatioCalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'audiobook-speed-calculator') {
-            return <AudiobookSpeedCalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'reverb-calculator') {
-            return <ReverbCalculator navigateTo={navigateTo} />;
-        }
-        if (path === 'code-similarity-checker') {
-            return <CodeSimilarityChecker navigateTo={navigateTo} />;
-        }
-        if (path === 'college-gpa-calculator') {
-            return <CollegeGPACalculator navigateTo={navigateTo} />;
+        // Dynamic tool routing - supports both 2-level (category/tool) and 3-level (category/subcategory/tool) paths
+        const toolComponentMap: { [key: string]: React.ComponentType<any> } = {
+            'word-counter': WordCounter,
+            'remove-extra-spaces': RemoveExtraSpaces,
+            'case-converter': CaseConverter,
+            'lorem-ipsum-generator': LoremIpsumGenerator,
+            'time-difference-calculator': TimeDifferenceCalculator,
+            'percentage-change-calculator': PercentageChangeCalculator,
+            'fabric-costing-tool': FabricCostingTool,
+            'snow-day-calculator': SnowDayCalculator,
+            'hex-to-rgb-converter': HexToRGBConverter,
+            'accessible-color-contrast-checker': AccessibleColorContrastChecker,
+            'shadow-css-generator': ShadowCSSGenerator,
+            'color-harmony-checker': ColorHarmonyChecker,
+            'json-formatter': JSONFormatterValidator,
+            'code-similarity-checker': CodeSimilarityChecker,
+            'sat-score-calculator': SATScoreCalculator,
+            'berkeley-gpa-calculator': BerkeleyGPACalculator,
+            'isac-gpa-calculator': ISACGPA,
+            'college-gpa-calculator': CollegeGPACalculator,
+            'fill-dirt-calculator': FillDirtCalculator,
+            'quilt-backing-calculator': QuiltBackingCalculator,
+            'power-to-mass-ratio-calculator': PowerToMassRatioCalculator,
+            'audiobook-speed-calculator': AudiobookSpeedCalculator,
+            'reverb-calculator': ReverbCalculator,
+        };
+
+        // Extract tool slug from path (handles both 2-level and 3-level paths)
+        const pathParts = path.split('/');
+        const toolSlug = pathParts[pathParts.length - 1]; // Last segment is always the tool slug
+        
+        if (toolComponentMap[toolSlug]) {
+            const ToolComponent = toolComponentMap[toolSlug];
+            return <ToolComponent navigateTo={navigateTo} />;
         }
         
         const category = toolCategories.find(cat => cat.slug === path);
@@ -241,11 +207,11 @@ const App: React.FC = () => {
         }
         
         // Check for sub-category pages (e.g., /education-and-exam-tools/test-score-tools)
-        const pathParts = path.split('/');
-        if (pathParts.length === 2) {
-            const parentCategory = toolCategories.find(cat => cat.slug === pathParts[0]);
+        const categoryPathParts = path.split('/');
+        if (categoryPathParts.length === 2) {
+            const parentCategory = toolCategories.find(cat => cat.slug === categoryPathParts[0]);
             if (parentCategory?.subCategories) {
-                const subCategory = parentCategory.subCategories.find(sub => sub.slug === pathParts[1]);
+                const subCategory = parentCategory.subCategories.find(sub => sub.slug === categoryPathParts[1]);
                 if (subCategory) {
                     // Create a temporary category object for sub-category page
                     const subCategoryAsCategory: Category = {
@@ -263,6 +229,11 @@ const App: React.FC = () => {
         const post = posts.find(p => p.slug === path);
         if (post) {
             return <BlogPostPage post={post} />;
+        }
+
+        // Show 404 page for unmatched routes (except root path)
+        if (path !== '') {
+            return <NotFoundPage navigateTo={navigateTo} />;
         }
 
         // Fallback to home page if no route matches

@@ -151,7 +151,7 @@ const generateRandomColor = (): string => {
 
 const SocialShareButtons: React.FC = () => {
     const [copied, setCopied] = useState(false);
-    const url = "https://zurawebtools.com/tools/color-harmony-checker";
+    const url = "https://zurawebtools.com/color-and-design-tools/color-harmony-checker";
     const text = "Discover perfect color harmonies with this free Color Harmony Checker! A great tool for designers and developers. #ColorTheory #WebDesign #UIUX";
 
     const copyLink = () => {
@@ -404,7 +404,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
       { property: 'og:image:alt', content: 'Free Color Harmony Checker showing complementary and triadic color palettes' },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: 'ZuraWebTools' },
-      { property: 'og:url', content: 'https://zurawebtools.com/tools/color-harmony-checker' },
+      { property: 'og:url', content: 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker' },
       { property: 'og:locale', content: 'en_US' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Color Harmony Checker – Free Palette Generator' },
@@ -424,7 +424,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
 
     const canonical = document.createElement('link');
     canonical.rel = 'canonical';
-    canonical.href = 'https://zurawebtools.com/tools/color-harmony-checker';
+    canonical.href = 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker';
     document.head.appendChild(canonical);
 
     const script = document.createElement('script');
@@ -470,7 +470,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
         },
         description:
           'Free Color Harmony Checker and palette generator. Create complementary, triadic, analogous, tetradic, and monochromatic color schemes with WCAG accessibility testing.',
-        url: 'https://zurawebtools.com/tools/color-harmony-checker',
+        url: 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker',
         featureList: [
           'Complementary color generator',
           'Triadic color schemes',
@@ -488,7 +488,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
         name: 'Color Harmony Checker – Free Color Palette Generator',
         description:
           'Generate perfect color harmonies and palettes instantly with our free color harmony checker tool for designers and developers.',
-        url: 'https://zurawebtools.com/tools/color-harmony-checker',
+        url: 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker',
         inLanguage: 'en-US',
         isPartOf: {
           '@type': 'WebSite',
@@ -518,7 +518,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
             '@type': 'ListItem',
             position: 3,
             name: 'Color Harmony Checker',
-            item: 'https://zurawebtools.com/tools/color-harmony-checker',
+            item: 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker',
           },
         ],
       },
@@ -533,28 +533,28 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
             position: 1,
             name: 'Select Base Color',
             text: 'Pick a base color using the color picker or enter a HEX code manually. This will be the foundation of your color harmony.',
-            url: 'https://zurawebtools.com/tools/color-harmony-checker#step1',
+            url: 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker#step1',
           },
           {
             '@type': 'HowToStep',
             position: 2,
             name: 'Explore Color Harmonies',
             text: 'The tool automatically generates complementary, triadic, analogous, tetradic, and monochromatic color schemes based on your base color.',
-            url: 'https://zurawebtools.com/tools/color-harmony-checker#step2',
+            url: 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker#step2',
           },
           {
             '@type': 'HowToStep',
             position: 3,
             name: 'Copy Color Codes',
             text: 'Click the copy icon next to any HEX, RGB, or HSL code to instantly copy it to your clipboard for use in your designs.',
-            url: 'https://zurawebtools.com/tools/color-harmony-checker#step3',
+            url: 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker#step3',
           },
           {
             '@type': 'HowToStep',
             position: 4,
             name: 'Test Accessibility',
             text: 'Check contrast ratios against black and white text to ensure WCAG compliance and readability for all users.',
-            url: 'https://zurawebtools.com/tools/color-harmony-checker#step4',
+            url: 'https://zurawebtools.com/color-and-design-tools/color-harmony-checker#step4',
           },
         ],
         totalTime: 'PT2M',
@@ -637,7 +637,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
 
   // 📡 IndexNow: Notify search engines about page updates
   useEffect(() => {
-    notifyIndexNow('/tools/color-harmony-checker');
+    notifyIndexNow('/color-and-design-tools/color-harmony-checker');
   }, []);
 
   return (
@@ -697,7 +697,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
           <h3 className="text-lg font-semibold text-white mb-4">Share this Tool</h3>
           <div className="flex justify-center items-center space-x-4">
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/tools/color-harmony-checker')}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/color-and-design-tools/color-harmony-checker')}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Share on Facebook"
@@ -706,7 +706,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
             <a
-              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent('https://zurawebtools.com/tools/color-harmony-checker')}&text=${encodeURIComponent('Check out this amazing Color Harmony Checker!')}`}
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent('https://zurawebtools.com/color-and-design-tools/color-harmony-checker')}&text=${encodeURIComponent('Check out this amazing Color Harmony Checker!')}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Share on Twitter"
@@ -715,7 +715,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
             </a>
             <a
-              href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent('https://zurawebtools.com/tools/color-harmony-checker')}&title=${encodeURIComponent('Color Harmony Checker')}`}
+              href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent('https://zurawebtools.com/color-and-design-tools/color-harmony-checker')}&title=${encodeURIComponent('Color Harmony Checker')}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Share on LinkedIn"
@@ -724,7 +724,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
             <a
-              href={`https://api.whatsapp.com/send?text=${encodeURIComponent('Check out this Color Harmony Checker! https://zurawebtools.com/tools/color-harmony-checker')}`}
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent('Check out this Color Harmony Checker! https://zurawebtools.com/color-and-design-tools/color-harmony-checker')}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Share on WhatsApp"
@@ -1005,7 +1005,7 @@ const ColorHarmonyChecker: React.FC<ColorHarmonyCheckerProps> = ({ navigateTo })
               Perfect for discovering <strong>complementary colors</strong> that create maximum contrast, <strong>analogous color schemes</strong> for harmonious designs, <strong>triadic color palettes</strong> for vibrant layouts, and monochromatic variations for elegant, minimal aesthetics. Export colors in multiple formats and integrate them directly into CSS, Sass, design systems, or tools like Figma, Adobe XD, and Sketch.
             </p>
             <p className="text-sm text-slate-400 mt-6 pt-6 border-t border-slate-700">
-              <strong>Related Tools:</strong> Try our <a href="/tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/hex-to-rgb-converter'); }} className="text-blue-400 hover:underline">Hex to RGB Converter</a> for color format conversion, <a href="/tools/accessible-color-contrast-checker" onClick={(e) => { e.preventDefault(); navigateTo('/accessible-color-contrast-checker'); }} className="text-blue-400 hover:underline">Accessible Color Contrast Checker</a> for detailed WCAG testing, <a href="/tools/shadow-css-generator" onClick={(e) => { e.preventDefault(); navigateTo('/shadow-css-generator'); }} className="text-blue-400 hover:underline">CSS Shadow Generator</a> for adding depth to your designs, <a href="/tools/lorem-ipsum-generator" onClick={(e) => { e.preventDefault(); navigateTo('/lorem-ipsum-generator'); }} className="text-blue-400 hover:underline">Lorem Ipsum Generator</a> for placeholder content, or our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/word-counter'); }} className="text-blue-400 hover:underline">Word Counter</a> for content analysis.
+              <strong>Related Tools:</strong> Try our <a href="/color-and-design-tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/hex-to-rgb-converter'); }} className="text-blue-400 hover:underline">Hex to RGB Converter</a> for color format conversion, <a href="/color-and-design-tools/accessible-color-contrast-checker" onClick={(e) => { e.preventDefault(); navigateTo('/accessible-color-contrast-checker'); }} className="text-blue-400 hover:underline">Accessible Color Contrast Checker</a> for detailed WCAG testing, <a href="/tools/shadow-css-generator" onClick={(e) => { e.preventDefault(); navigateTo('/shadow-css-generator'); }} className="text-blue-400 hover:underline">CSS Shadow Generator</a> for adding depth to your designs, <a href="/text-and-writing-tools/lorem-ipsum-generator" onClick={(e) => { e.preventDefault(); navigateTo('/lorem-ipsum-generator'); }} className="text-blue-400 hover:underline">Lorem Ipsum Generator</a> for placeholder content, or our <a href="/text-and-writing-tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/word-counter'); }} className="text-blue-400 hover:underline">Word Counter</a> for content analysis.
             </p>
             <p className="text-xs text-slate-500 text-center mt-4">
               Last Updated: November 8, 2024

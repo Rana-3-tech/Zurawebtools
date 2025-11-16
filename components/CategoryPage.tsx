@@ -22,7 +22,24 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo }) => 
                     </p>
                 </div>
 
-                {category.tools.length > 0 ? (
+                {/* Show subcategories if they exist */}
+                {category.subCategories && category.subCategories.length > 0 ? (
+                    <div className="space-y-16">
+                        {category.subCategories.map(subCategory => (
+                            <div key={subCategory.slug}>
+                                <h2 className="text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-brand-blue">
+                                    {subCategory.title}
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    {subCategory.tools.map(tool => (
+                                        <ToolCard key={tool.title} {...tool} navigateTo={navigateTo} />
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : category.tools.length > 0 ? (
+                    /* Show tools directly if no subcategories */
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {category.tools.map(tool => (
                             <ToolCard key={tool.title} {...tool} navigateTo={navigateTo} />

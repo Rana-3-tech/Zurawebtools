@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Page } from '../../App';
+import RelatedTools from '../RelatedTools';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 
 interface CollegeGPACalculatorProps {
   navigateTo: (page: Page) => void;
@@ -11,31 +13,6 @@ interface Course {
   grade: string;
   credits: string; // keep as string, validate/parse during calculation
 }
-
-// --- Local fallback for RelatedTools ---
-// The original project expected a ../RelatedTools import which may not exist
-// in every environment. To avoid build-time errors, provide a minimal local
-// implementation here. If you have a real RelatedTools component, remove
-// this local stub and import the real one instead.
-const RelatedTools: React.FC<{ currentSlug: string; relatedSlugs: string[]; navigateTo: (p: Page) => void }> = ({ currentSlug, relatedSlugs, navigateTo }) => {
-  return (
-    <div className="bg-white rounded-lg p-4 border border-gray-200">
-      <h4 className="text-sm font-semibold text-gray-900 mb-2">Related Tools</h4>
-      <ul className="text-sm text-gray-700 space-y-1">
-        {relatedSlugs.map(slug => (
-          <li key={slug}>
-            <button
-              onClick={() => navigateTo?.((slug as unknown) as Page)}
-              className="text-indigo-600 hover:underline"
-            >
-              {slug.replace(/-/g, ' ')}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
 
 const gradePoints40: { [key: string]: number } = {
   'A+': 4.0, 'A': 4.0, 'A-': 3.7,
@@ -63,15 +40,19 @@ const popularCourses = [
   'Finance', 'Management', 'International Relations', 'American History', 'World History'
 ];
 
-// Utility validators
+// Utility validators - STRICT validation, no silent failures
 const isValidCreditsString = (s: string) => {
   const trimmed = s.trim();
   if (!trimmed) return false;
-  return /^\d+(?:\.\d+)?$/.test(trimmed);
+  // Only allow: digit or digit.digit (1 decimal max, no leading/trailing dot, max 6 credits)
+  if (!/^\d+(\.\d)?$/.test(trimmed)) return false;
+  const num = parseFloat(trimmed);
+  return num > 0 && num <= 6;
 };
 
 const safeParseCredits = (s: string) => {
-  if (!isValidCreditsString(s)) return NaN;
+  if (!s.trim()) return NaN; // Empty = NaN (must be filled)
+  if (!isValidCreditsString(s)) return NaN; // Invalid = NaN (error state)
   return parseFloat(s);
 };
 
@@ -96,8 +77,83 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
   const [semesterGPA, setSemesterGPA] = useState<number | null>(null);
   const [cumulativeGPA, setCumulativeGPA] = useState<string>('');
   const [cumulativeCredits, setCumulativeCredits] = useState<string>('');
+  const [creditErrors, setCreditErrors] = useState<{ [key: string]: boolean }>({});
   const [totalGPA, setTotalGPA] = useState<number | null>(null);
   const [scale, setScale] = useState<'4.0' | '4.3'>('4.0');
+
+  // TOC sections configuration
+  const tocSections: TOCSection[] = [
+    {
+      id: 'examples',
+      emoji: '📝',
+      title: 'Examples',
+      subtitle: 'Sample calculations',
+      gradientFrom: 'from-blue-50',
+      gradientTo: 'to-indigo-50',
+      hoverBorder: 'border-indigo-400',
+      hoverText: 'text-indigo-600'
+    },
+    {
+      id: 'benefits',
+      emoji: '⭐',
+      title: 'Benefits',
+      subtitle: 'Why use this',
+      gradientFrom: 'from-purple-50',
+      gradientTo: 'to-pink-50',
+      hoverBorder: 'border-purple-400',
+      hoverText: 'text-purple-600'
+    },
+    {
+      id: 'how-to-use',
+      emoji: '📖',
+      title: 'How to Use',
+      subtitle: 'Step-by-step',
+      gradientFrom: 'from-green-50',
+      gradientTo: 'to-emerald-50',
+      hoverBorder: 'border-green-400',
+      hoverText: 'text-green-600'
+    },
+    {
+      id: 'use-cases',
+      emoji: '💡',
+      title: 'Use Cases',
+      subtitle: 'Common scenarios',
+      gradientFrom: 'from-orange-50',
+      gradientTo: 'to-amber-50',
+      hoverBorder: 'border-orange-400',
+      hoverText: 'text-orange-600'
+    },
+    {
+      id: 'about',
+      emoji: 'ℹ️',
+      title: 'About GPA',
+      subtitle: 'Understanding',
+      gradientFrom: 'from-cyan-50',
+      gradientTo: 'to-blue-50',
+      hoverBorder: 'border-cyan-400',
+      hoverText: 'text-cyan-600'
+    },
+    {
+      id: 'resources',
+      emoji: '🔗',
+      title: 'Resources',
+      subtitle: 'External links',
+      gradientFrom: 'from-red-50',
+      gradientTo: 'to-rose-50',
+      hoverBorder: 'border-red-400',
+      hoverText: 'text-red-600'
+    },
+    {
+      id: 'faq',
+      emoji: '❓',
+      title: 'FAQs',
+      subtitle: 'Common questions',
+      gradientFrom: 'from-violet-50',
+      gradientTo: 'to-purple-50',
+      hoverBorder: 'border-violet-400',
+      hoverText: 'text-violet-600'
+    }
+  ];
 
   // --- Metadata (left as manual DOM manipulation per request) ---
   useEffect(() => {
@@ -113,16 +169,15 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
       element.setAttribute('content', content);
     };
 
-    const metaDescription = 'Free college GPA calculator with credit hours. Calculate semester GPA, cumulative GPA, and overall GPA instantly. Supports A+ to F grading scale with plus/minus grades.';
+    const metaDescription = 'Calculate your college GPA with credit hours for accurate semester and cumulative results. Supports 4.0 and 4.3 scales with plus/minus grading. Free, instant, and easy to use.';
     setMetaTag('description', metaDescription);
-    setMetaTag('keywords', 'college gpa calculator, cumulative gpa calculator, semester gpa calculator, gpa calculator with credits, calculate college gpa, university gpa calculator, academic performance, grade point average, college grades, quality points, credit hours');
     setMetaTag('robots', 'index, follow, max-image-preview:large');
 
     const ogTags = [
       { property: 'og:title', content: 'College GPA Calculator - Free Cumulative & Semester GPA Calculator' },
       { property: 'og:description', content: metaDescription },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://zurawebtools.com/college-gpa-calculator' },
+      { property: 'og:url', content: 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator' },
       { property: 'og:image', content: 'https://zurawebtools.com/og-image.png' },
     ];
 
@@ -150,7 +205,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', 'https://zurawebtools.com/college-gpa-calculator');
+    canonical.setAttribute('href', 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator');
 
     const schema = {
       "@context": "https://schema.org",
@@ -163,13 +218,36 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
       "description": "Free college GPA calculator with credit hours for calculating semester and cumulative GPA"
     };
 
+    // Add WebPage schema with sections for TOC rich results
+    const webPageSchema = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "College GPA Calculator - Free Cumulative & Semester GPA Calculator",
+      "description": "Calculate your college GPA with credit hours for accurate semester and cumulative results. Supports 4.0 and 4.3 scales.",
+      "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator",
+      "mainEntity": {
+        "@type": "SoftwareApplication",
+        "name": "College GPA Calculator"
+      },
+      "hasPart": [
+        { "@type": "WebPageElement", "name": "GPA Calculator Tool", "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator#calculator" },
+        { "@type": "WebPageElement", "name": "Quick Examples", "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator#examples" },
+        { "@type": "WebPageElement", "name": "Why Use This Calculator", "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator#benefits" },
+        { "@type": "WebPageElement", "name": "How to Use Guide", "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator#how-to-use" },
+        { "@type": "WebPageElement", "name": "Common Use Cases", "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator#use-cases" },
+        { "@type": "WebPageElement", "name": "About GPA Calculation", "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator#about" },
+        { "@type": "WebPageElement", "name": "Frequently Asked Questions", "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator#faq" }
+      ]
+    };
+
     let scriptTag = document.querySelector('script[type="application/ld+json"]');
     if (!scriptTag) {
       scriptTag = document.createElement('script');
       scriptTag.setAttribute('type', 'application/ld+json');
       document.head.appendChild(scriptTag);
     }
-    scriptTag.textContent = JSON.stringify(schema);
+    // Combine both schemas in array format
+    scriptTag.textContent = JSON.stringify([schema, webPageSchema]);
 
     return () => {
       // minimal cleanup: reset title only (per original pattern)
@@ -177,12 +255,9 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
     };
   }, []);
 
-  // Debounced semester GPA calculation: waits until user pauses typing
+  // Sync semester GPA calculation - no debounce to avoid race conditions
   useEffect(() => {
-    const timer = setTimeout(() => {
-      calculateSemesterGPA();
-    }, 300);
-    return () => clearTimeout(timer);
+    calculateSemesterGPA();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courses, scale]);
 
@@ -191,60 +266,103 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
   };
 
   const removeCourse = (id: string) => {
-    setCourses(prev => (prev.length > 1 ? prev.filter(c => c.id !== id) : prev));
+    setCourses(prev => {
+      if (prev.length === 1) return prev;
+      return prev.filter(c => c.id !== id);
+    });
+
+    // FIX: Remove stale error entry to prevent UI glitches
+    setCreditErrors(prev => {
+      if (!prev[id]) return prev;
+      const copy = { ...prev };
+      delete copy[id];
+      return copy;
+    });
   };
 
   const updateCourse = (id: string, field: keyof Course, value: string) => {
     setCourses(prev => prev.map(c => (c.id === id ? { ...c, [field]: value } : c)));
   };
 
-  // Improved credit input handler with sanitization
+  // Credit input handler - allow natural typing with sanitization
   const handleCreditChange = (id: string, value: string) => {
-    // Allow only numbers and one decimal point
-    const sanitized = value.replace(/[^0-9.]/g, '');
-    // Remove multiple decimal points
+    // Allow user to type, but sanitize and normalize into a safe intermediate state.
+    let sanitized = value.replace(/[^0-9.]/g, '');
+
+    // Collapse extra dots: keep first two parts only
     const parts = sanitized.split('.');
-    const finalValue = parts.length > 2 
-      ? parts[0] + '.' + parts.slice(1).join('') 
-      : sanitized;
-    
-    updateCourse(id, 'credits', finalValue);
-  };
+    if (parts.length > 2) {
+      sanitized = parts[0] + '.' + parts.slice(1).join('');
+    }
+
+    // If starts with multiple zeros like "00" -> collapse to single "0" (allow "0.x")
+    sanitized = sanitized.replace(/^0+(?=\d)/, '');
+
+    // If leading '.' put a leading '0' to make it a valid partial number "0." -> better UX
+    if (sanitized.startsWith('.')) sanitized = '0' + sanitized;
+
+    // If decimal exists, limit to one digit after decimal (you required 1 dec)
+    if (sanitized.includes('.')) {
+      const [whole, decimal] = sanitized.split('.');
+      sanitized = whole + '.' + (decimal ? decimal.slice(0, 1) : '');
+    }
+
+    // If numeric and > 6, clamp to '6' (or ignore update — clamping is friendlier)
+    const numVal = parseFloat(sanitized);
+    if (!isNaN(numVal) && numVal > 6) {
+      sanitized = '6';
+    }
+
+    updateCourse(id, 'credits', sanitized);
+  }
 
   const calculateSemesterGPA = () => {
     const gradePoints = scale === '4.3' ? gradePoints43 : gradePoints40;
 
     let totalPoints = 0;
     let totalCredits = 0;
+    const errors: { [key: string]: boolean } = {};
 
     for (const course of courses) {
-      const credits = safeParseCredits(course.credits);
-      if (course.grade && !isNaN(credits) && credits > 0) {
-        const gp = gradePoints[course.grade];
-        if (typeof gp === 'number') {
-          totalPoints += gp * credits;
-          totalCredits += credits;
-        }
-      } else if (course.credits.trim() !== '' && !isValidCreditsString(course.credits)) {
-        // invalid credit string => don't compute; keep semesterGPA null and exit
-        setSemesterGPA(null);
-        return;
+      const trimmed = course.credits.trim();
+      
+      // Skip completely empty courses (user might add extra rows)
+      if (!trimmed) {
+        continue; // Don't mark as error, just skip
+      }
+      
+      // Mark invalid credits
+      if (!isValidCreditsString(trimmed)) {
+        errors[course.id] = true;
+        continue;
+      }
+      
+      const credits = parseFloat(trimmed);
+      const gp = gradePoints[course.grade];
+      
+      // Validate grade exists in grading scale
+      if (typeof gp !== 'number') {
+        // Grade invalid or undefined - flag error
+        errors[course.id] = true;
+        continue;
+      }
+      
+      if (credits > 0) {
+        totalPoints += gp * credits;
+        totalCredits += credits;
       }
     }
 
-    if (totalCredits === 0) {
-      // No valid credits entered yet
+    setCreditErrors(errors);
+
+    // Don't calculate if any filled course has invalid credits
+    if (Object.keys(errors).length > 0 || totalCredits === 0) {
       setSemesterGPA(null);
       return;
     }
 
     const semGPA = totalPoints / totalCredits;
-    // Better error handling
-    if (totalCredits > 0 && !isNaN(semGPA) && isFinite(semGPA)) {
-      setSemesterGPA(Number(semGPA.toFixed(2)));
-    } else {
-      setSemesterGPA(null);
-    }
+    setSemesterGPA(Number(semGPA.toFixed(2)));
   };
 
   const calculateCumulativeGPA = () => {
@@ -261,7 +379,14 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
 
     const maxScale = scale === '4.3' ? 4.3 : 4.0;
 
+    // Strict validation - no NaN hiding
     if (isNaN(prevGPA) || isNaN(prevCredits) || prevGPA < 0 || prevGPA > maxScale || prevCredits < 0) {
+      setTotalGPA(null);
+      return;
+    }
+
+    // Cumulative credits must be whole number
+    if (prevCredits !== Math.floor(prevCredits)) {
       setTotalGPA(null);
       return;
     }
@@ -271,18 +396,28 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
     let semesterCredits = 0;
 
     for (const course of courses) {
-      const credits = safeParseCredits(course.credits);
-      if (course.credits.trim() !== '' && !isValidCreditsString(course.credits)) {
-        // invalid course credits -> abort
+      const trimmed = course.credits.trim();
+      if (!trimmed) continue;
+      
+      if (!isValidCreditsString(trimmed)) {
+        // Invalid course credits -> abort
         setTotalGPA(null);
         return;
       }
-      if (!isNaN(credits) && credits > 0) {
-        const gp = gradePoints[course.grade];
-        if (typeof gp === 'number') {
-          semesterPoints += gp * credits;
-          semesterCredits += credits;
-        }
+      
+      const credits = parseFloat(trimmed);
+      const gp = gradePoints[course.grade];
+      
+      // Validate grade exists
+      if (typeof gp !== 'number') {
+        // Invalid grade -> abort
+        setTotalGPA(null);
+        return;
+      }
+      
+      if (credits > 0) {
+        semesterPoints += gp * credits;
+        semesterCredits += credits;
       }
     }
 
@@ -295,17 +430,19 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
       return;
     }
 
-    setTotalGPA(Number.isFinite(combinedPoints / combinedCredits) ? combinedPoints / combinedCredits : null);
+    // Round cumulative GPA output to 2 decimals for consistency
+    const cumulativeResult = combinedPoints / combinedCredits;
+    setTotalGPA(Number(cumulativeResult.toFixed(2)));
   };
 
-  // Auto-calculate cumulative GPA when inputs change
+  // Auto-calculate cumulative GPA when inputs change - sync, no race conditions
   useEffect(() => {
     if (cumulativeGPA.trim() && cumulativeCredits.trim()) {
-      const timer = setTimeout(() => {
-        calculateCumulativeGPA();
-      }, 500);
-      return () => clearTimeout(timer);
+      calculateCumulativeGPA();
+    } else {
+      setTotalGPA(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cumulativeGPA, cumulativeCredits, courses, scale]);
 
   const resetCalculator = () => {
@@ -314,20 +451,21 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
     setCumulativeCredits('');
     setSemesterGPA(null);
     setTotalGPA(null);
+    setCreditErrors({}); // Clear all error states
   };
 
   const shareOnTwitter = () => {
-    if (!semesterGPA) return;
+    if (semesterGPA === null) return;
     const text = `Just calculated my college GPA using this free calculator! My semester GPA: ${semesterGPA.toFixed(2)}`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent('https://zurawebtools.com/college-gpa-calculator')}`, '_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator')}`, '_blank');
   };
 
   const shareOnFacebook = () => {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/college-gpa-calculator')}`, '_blank');
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator')}`, '_blank');
   };
 
   const shareOnLinkedIn = () => {
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://zurawebtools.com/college-gpa-calculator')}`, '_blank');
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/gpa-tools/college-gpa-calculator')}`, '_blank');
   };
 
   // Helpers for UI display
@@ -339,23 +477,30 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
   const combinedCreditsDisplay = () => {
     const prev = parseFloat(cumulativeCredits);
     const prevVal = isNaN(prev) ? 0 : prev;
-    return (prevVal + semesterCreditsTotal).toFixed(1);
+    const combined = prevVal + semesterCreditsTotal;
+    // Show decimal if semester has fractional credits, otherwise show whole number
+    return Number.isInteger(combined) ? combined.toString() : combined.toFixed(1);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">College GPA Calculator</h1>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">Free online college GPA calculator with credit hours. Calculate your semester GPA, cumulative GPA, and overall college GPA instantly with our accurate grade point average calculator.</p>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">Calculate your academic performance with precision. Enter your courses, grades, and credit hours to instantly see your semester and cumulative results on both 4.0 and 4.3 scales.</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">Calculate Your GPA</h2>
-            <div className="flex items-center gap-3">
+        <div id="calculator" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 scroll-mt-24">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Calculate Your GPA</h2>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
               <label className="text-sm font-medium text-gray-700">GPA Scale:</label>
-              <div className="flex bg-gray-100 rounded-lg p-1">
+              <div className="flex bg-gray-100 rounded-lg p-1 w-full sm:w-auto">
                 <button
                   onClick={() => setScale('4.0')}
                   type="button"
@@ -374,8 +519,8 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
 
           <div className="space-y-4 mb-6">
             {courses.map((course, index) => (
-              <div key={course.id} className="flex flex-wrap gap-3 items-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div className="flex-1 min-w-[200px]">
+              <div key={course.id} className="flex flex-wrap gap-3 items-end p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div className="flex-1 w-full sm:min-w-[200px]">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Course Name</label>
                   <input
                     list={`courses-list`}
@@ -386,7 +531,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
                   />
                 </div>
 
-                <div className="w-32">
+                <div className="w-full sm:w-32">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Grade</label>
                   <select
                     value={course.grade}
@@ -402,7 +547,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
                   </select>
                 </div>
 
-                <div className="w-32">
+                <div className="w-full sm:w-32">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Credits</label>
                   <input
                     type="text"
@@ -411,14 +556,19 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
                     onChange={(e) => handleCreditChange(course.id, e.target.value)}
                     min="0"
                     placeholder="3"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-gray-900"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white text-gray-900 ${
+                      creditErrors[course.id] ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-indigo-500'
+                    }`}
                   />
+                  {creditErrors[course.id] && (
+                    <p className="text-xs text-red-600 mt-1">Invalid (max 6, 1 decimal digit)</p>
+                  )}
                 </div>
 
                 <button
                   onClick={() => removeCourse(course.id)}
                   disabled={courses.length === 1}
-                  className="mt-6 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto sm:mt-6 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   aria-label="Remove course"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -437,7 +587,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
 
           <div className="mt-8 pt-8 border-t border-gray-200">
             <h3 className="text-xl font-bold text-gray-800 mb-4">Previous Cumulative GPA (Optional)</h3>
-            <p className="text-sm text-gray-600 mb-4">Enter your current cumulative GPA and click Calculate to see how this semester affects your overall GPA.</p>
+            <p className="text-sm text-gray-600 mb-4">Enter your current cumulative GPA and total credits to instantly see how this semester affects your overall GPA. Results update automatically as you type!</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
@@ -446,31 +596,38 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
                   type="text"
                   inputMode="decimal"
                   value={cumulativeGPA}
-                  onChange={(e) => setCumulativeGPA(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^0-9.]/g, '');
+                    // Allow only valid GPA format
+                    if (val === '' || /^\d*\.?\d{0,2}$/.test(val)) {
+                      setCumulativeGPA(val);
+                    }
+                  }}
                   placeholder="e.g., 3.5"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-gray-900"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Total Credits Completed</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Total Credits Completed (whole number)</label>
                 <input
                   type="text"
                   inputMode="numeric"
                   value={cumulativeCredits}
-                  onChange={(e) => setCumulativeCredits(e.target.value)}
+                  onChange={(e) => {
+                    // Only allow whole numbers for cumulative credits
+                    const val = e.target.value.replace(/[^0-9]/g, '');
+                    setCumulativeCredits(val);
+                  }}
                   placeholder="e.g., 60"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-gray-900"
                 />
               </div>
             </div>
 
-            <button
-              onClick={calculateCumulativeGPA}
-              disabled={cumulativeGPA.trim() === '' || cumulativeCredits.trim() === ''}
-              className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Calculate Cumulative GPA
-            </button>
+            <div className="text-sm text-gray-600 bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <p className="font-medium text-blue-800">Auto-Calculation Enabled</p>
+              <p className="text-blue-700 mt-1">Your cumulative GPA will update automatically as you enter values above and add semester courses.</p>
+            </div>
           </div>
 
           {semesterGPA !== null && (
@@ -499,6 +656,9 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
           </div>
         </div>
 
+        {/* Table of Contents */}
+        <TableOfContents sections={tocSections} />
+
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-8">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Share This Calculator</h3>
           <div className="flex flex-wrap gap-3">
@@ -508,7 +668,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+        <div id="examples" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 scroll-mt-24">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Quick Examples</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
@@ -533,7 +693,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+        <div id="benefits" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 scroll-mt-24">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Use Our College GPA Calculator?</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-6 rounded-xl text-white">
@@ -551,7 +711,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+        <div id="how-to-use" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 scroll-mt-24">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">How to Use This GPA Calculator</h2>
           <div className="space-y-4">
             <div className="flex gap-4">
@@ -578,14 +738,14 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
             <div className="flex gap-4">
               <div className="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg">4</div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Calculate Cumulative GPA (Optional)</h3>
-                <p className="text-gray-600">To see how this semester affects your overall GPA, enter your previous cumulative GPA and total completed credits. The tool will calculate your new combined GPA instantly.</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Add Cumulative GPA (Optional)</h3>
+                <p className="text-gray-600">Want to see your overall GPA? Simply enter your previous cumulative GPA and total completed credits. As soon as you type both values, your new combined cumulative GPA appears automatically—no button click needed!</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+        <div id="use-cases" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 scroll-mt-24">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Common Use Cases</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
@@ -627,25 +787,25 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+        <div id="about" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 scroll-mt-24">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">About College GPA Calculator</h2>
           <div className="prose max-w-none text-gray-700 space-y-4 leading-relaxed">
-            <p>Our <strong>college GPA calculator</strong> is a comprehensive free tool designed to help students accurately calculate their <strong>grade point average</strong> using credit hours. Whether you need a <strong>semester GPA calculator</strong> or want to compute your <strong>cumulative GPA</strong>, this tool provides instant, precise calculations based on commonly used grading scales.</p>
+            <p>This comprehensive tool helps students calculate their grade point average using credit hours. Whether you're tracking a single semester or your overall academic performance, get instant and precise results based on standard grading scales used by most colleges.</p>
             
             <h3 className="text-2xl font-bold text-gray-900 mt-6 mb-3">Understanding GPA Scales and Grading Systems</h3>
-            <p>Most American colleges and universities use a <strong>4.0 GPA scale</strong> where an A equals 4.0 grade points, B equals 3.0, C equals 2.0, and so on. Some institutions, particularly those with honors programs, use a <strong>4.3 scale</strong> where A+ receives 4.3 points. This calculator supports both systems, allowing you to select the appropriate scale for your institution.</p>
+            <p>Most American colleges use a 4.0 scale where an A equals 4.0 grade points, B equals 3.0, C equals 2.0, and so on. Some institutions with honors programs use a 4.3 scale where A+ receives 4.3 points. This calculator supports both systems, letting you select the one your institution uses.</p>
             
             <h3 className="text-2xl font-bold text-gray-900 mt-6 mb-3">How GPA Calculation Works</h3>
-            <p>Your GPA is calculated by multiplying each course's <strong>grade points</strong> by its <strong>credit hours</strong>, summing these values (called quality points), and dividing by total credit hours. For example, an A (4.0) in a 3-credit course contributes 12 quality points. The <strong>weighted average</strong> ensures that courses with more credits have appropriate impact on your overall GPA.</p>
+            <p>Your GPA is calculated by multiplying each course's grade points by its credit hours, summing these values (called quality points), and dividing by total credit hours. For example, an A (4.0) in a 3-credit course contributes 12 quality points. This weighted average ensures larger courses have proportional impact on your overall average.</p>
             
             <h3 className="text-2xl font-bold text-gray-900 mt-6 mb-3">Why GPA Matters</h3>
-            <p>Your <strong>college GPA</strong> plays a crucial role in academic standing, scholarship eligibility, honor society membership, and graduate school admissions. Many employers also consider GPA when evaluating recent graduates. Understanding how to calculate and improve your GPA helps you make informed decisions about course selection and academic goals.</p>
+            <p>Your academic performance plays a crucial role in scholarship eligibility, honor society membership, and graduate school admissions. Many employers also consider it when evaluating recent graduates. Understanding how to track and improve your grades helps you make informed decisions about course selection and academic goals.</p>
             
             <p className="mt-6">For more tools to help with your academic journey, check out our <a href="/berkeley-gpa-calculator" className="text-indigo-600 hover:underline font-medium">Berkeley GPA Calculator</a> for UC-specific calculations, or explore our <a href="/sat-score-calculator" className="text-indigo-600 hover:underline font-medium">SAT Score Calculator</a> for standardized test planning.</p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl p-6 md:p-8 mb-8 border border-gray-200">
+        <div id="resources" className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl p-6 md:p-8 mb-8 border border-gray-200 scroll-mt-24">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Learn More About GPA and College Academics</h2>
           <p className="text-gray-600 mb-6">Explore these authoritative resources for more information about GPA calculation and academic success:</p>
           <ul className="space-y-3">
@@ -659,12 +819,12 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
           <p className="text-sm text-gray-600 text-center"><strong>Last Updated:</strong> November 15, 2025 | <span className="ml-2">Reviewed for accuracy and current academic standards</span></p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+        <div id="faq" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 scroll-mt-24">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div className="border-b border-gray-200 pb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">How do I calculate my college GPA with this calculator?</h3>
-              <p className="text-gray-600 leading-relaxed">Enter your course names, select letter grades (A+, A, A-, B+, etc.), and input credit hours for each class. The calculator automatically computes your semester GPA in real-time. To calculate cumulative GPA, enter your previous GPA and completed credits in the optional section below the course list.</p>
+              <p className="text-gray-600 leading-relaxed">Enter your course names, select letter grades (A+, A, A-, B+, etc.), and input credit hours for each class. The calculator automatically computes your semester GPA in real-time as you type. For cumulative GPA, enter your previous GPA and completed credits—results update instantly without clicking any buttons.</p>
             </div>
             <div className="border-b border-gray-200 pb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">What's the difference between 4.0 and 4.3 GPA scales?</h3>
@@ -676,7 +836,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
             </div>
             <div className="border-b border-gray-200 pb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Can I calculate my cumulative GPA across multiple semesters?</h3>
-              <p className="text-gray-600 leading-relaxed">Yes! Enter your current cumulative GPA and total completed credit hours in the optional section. Then add your current semester courses. The calculator will compute your new combined cumulative GPA by properly weighing all credits. This helps you track academic progress throughout your college career.</p>
+              <p className="text-gray-600 leading-relaxed">Yes! Enter your current cumulative GPA and total completed credit hours (whole number) in the optional section. Then add your current semester courses with grades and credits. The calculator automatically computes your new combined cumulative GPA in real-time by properly weighing all credits. Results update instantly as you type—perfect for tracking academic progress throughout your college career.</p>
             </div>
             <div className="border-b border-gray-200 pb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">What GPA do I need for scholarships and honors?</h3>
@@ -693,9 +853,11 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
           </div>
         </div>
 
-        <div className="mb-8">
-          <RelatedTools currentSlug="college-gpa-calculator" relatedSlugs={["berkeley-gpa-calculator", "isac-gpa-calculator", "sat-score-calculator"]} navigateTo={navigateTo} />
-        </div>
+        <RelatedTools 
+          currentSlug="college-gpa-calculator" 
+          relatedSlugs={["berkeley-gpa-calculator", "isac-gpa-calculator", "sat-score-calculator"]} 
+          navigateTo={navigateTo} 
+        />
 
       </div>
     </div>

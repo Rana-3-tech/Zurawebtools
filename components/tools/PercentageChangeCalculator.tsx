@@ -47,7 +47,7 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
       { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-percentage-change-calculator-og.png' },
       { property: 'og:image:alt', content: 'Free percentage change calculator showing percent increase or decrease online.' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://zurawebtools.com/tools/percentage-change-calculator' },
+      { property: 'og:url', content: 'https://zurawebtools.com/math-and-calculation-tools/percentage-change-calculator' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Percentage Change Calculator | ZuraWebTools' },
       { name: 'twitter:description', content: 'Instantly calculate percent increase or decrease between two numbers. 100% free and accurate online calculator.' },
@@ -63,7 +63,7 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
     // 🔗 Canonical
     const canonical = document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
-    canonical.setAttribute('href', 'https://zurawebtools.com/tools/percentage-change-calculator');
+    canonical.setAttribute('href', 'https://zurawebtools.com/math-and-calculation-tools/percentage-change-calculator');
     document.head.appendChild(canonical);
 
     // 📘 Structured Data (Schema)
@@ -75,14 +75,14 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
         "@type": "WebPage",
         "name": "Percentage Change Calculator – Calculate Percent Increase & Decrease",
         "description": "Free online percentage change calculator to compute percent increase, decrease, or growth between two values.",
-        "url": "https://zurawebtools.com/tools/percentage-change-calculator",
-        "breadcrumb": { "@id": "https://zurawebtools.com/tools/percentage-change-calculator#breadcrumb" },
+        "url": "https://zurawebtools.com/math-and-calculation-tools/percentage-change-calculator",
+        "breadcrumb": { "@id": "https://zurawebtools.com/math-and-calculation-tools/percentage-change-calculator#breadcrumb" },
         "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" }
       },
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "@id": "https://zurawebtools.com/tools/percentage-change-calculator#breadcrumb",
+        "@id": "https://zurawebtools.com/math-and-calculation-tools/percentage-change-calculator#breadcrumb",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://zurawebtools.com" },
           { "@type": "ListItem", "position": 2, "name": "Finance Tools", "item": "https://zurawebtools.com/finance-tools" },
@@ -99,7 +99,7 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
         "description": "A free online percentage change calculator to compute percent increase, decrease, or growth between two values. Ideal for business, finance, and academic use.",
-        "url": "https://zurawebtools.com/tools/percentage-change-calculator"
+        "url": "https://zurawebtools.com/math-and-calculation-tools/percentage-change-calculator"
       },
       {
         "@context": "https://schema.org",
@@ -339,7 +339,7 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
             <div className="bg-gradient-to-br from-blue-500 to-cyan-500 p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow hover:-translate-y-1 duration-300">
               <div className="bg-slate-900 p-6 rounded-lg h-full">
                 <h3 className="text-xl font-bold text-white mb-3">⚡ Instant Calculations</h3>
-                <p className="text-gray-300">Calculate percentage increase or decrease in real-time without manual formulas. Perfect for quick financial analysis, business metrics tracking, and educational purposes. Works seamlessly with our <a href="/tools/time-difference-calculator" onClick={(e) => { e.preventDefault(); navigateTo('/tools/time-difference-calculator'); }} className="text-cyan-400 hover:text-cyan-300 underline">time calculator</a> for comprehensive data analysis.</p>
+                <p className="text-gray-300">Calculate percentage increase or decrease in real-time without manual formulas. Perfect for quick financial analysis, business metrics tracking, and educational purposes. Works seamlessly with our <a href="/math-and-calculation-tools/time-difference-calculator" onClick={(e) => { e.preventDefault(); navigateTo('/math-and-calculation-tools/time-difference-calculator'); }} className="text-cyan-400 hover:text-cyan-300 underline">time calculator</a> for comprehensive data analysis.</p>
               </div>
             </div>
             <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow hover:-translate-y-1 duration-300">
@@ -364,22 +364,22 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
             <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-blue-400 transition-all duration-300">
               <h3 className="text-xl font-bold text-white mb-3">💼 Finance Professionals</h3>
               <p className="text-gray-300 mb-3">Calculate investment returns, portfolio growth, stock price changes, profit margins, and financial KPIs. Essential for analyzing revenue growth, expense reductions, and ROI calculations in business finance and accounting.</p>
-              <p className="text-sm text-blue-300">Also try: <a href="/tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/hex-to-rgb-converter'); }} className="underline hover:text-blue-200">Color Tools</a></p>
+              <p className="text-sm text-blue-300">Also try: <a href="/color-and-design-tools/hex-to-rgb-converter" onClick={(e) => { e.preventDefault(); navigateTo('/color-and-design-tools/hex-to-rgb-converter'); }} className="underline hover:text-blue-200">Color Tools</a></p>
             </div>
             <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-purple-400 transition-all duration-300">
               <h3 className="text-xl font-bold text-white mb-3">📊 Business Analysts</h3>
               <p className="text-gray-300 mb-3">Track sales performance, market share changes, customer growth rates, conversion rate improvements, and business metrics. Perfect for quarterly reports, KPI dashboards, and performance analysis presentations.</p>
-              <p className="text-sm text-purple-300">Also try: <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }} className="underline hover:text-purple-200">Word Counter</a></p>
+              <p className="text-sm text-purple-300">Also try: <a href="/text-and-writing-tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/word-counter'); }} className="underline hover:text-purple-200">Word Counter</a></p>
             </div>
             <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-green-400 transition-all duration-300">
               <h3 className="text-xl font-bold text-white mb-3">🎓 Students & Teachers</h3>
               <p className="text-gray-300 mb-3">Solve math homework, understand percentage concepts, calculate grade improvements, analyze statistical data, and verify manual calculations. Ideal for mathematics, economics, and science coursework at all educational levels.</p>
-              <p className="text-sm text-green-300">Also try: <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }} className="underline hover:text-green-200">Text Case Converter</a></p>
+              <p className="text-sm text-green-300">Also try: <a href="/text-and-writing-tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/case-converter'); }} className="underline hover:text-green-200">Text Case Converter</a></p>
             </div>
             <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-orange-400 transition-all duration-300">
               <h3 className="text-xl font-bold text-white mb-3">🏋️ Personal Use</h3>
               <p className="text-gray-300 mb-3">Track weight loss percentage, fitness progress, calorie reduction, savings account growth, budget changes, and personal goal achievements. Monitor your health metrics, financial goals, and lifestyle improvements over time.</p>
-              <p className="text-sm text-orange-300">Also try: <a href="/tools/lorem-ipsum-generator" onClick={(e) => { e.preventDefault(); navigateTo('/tools/lorem-ipsum-generator'); }} className="underline hover:text-orange-200">Lorem Ipsum Generator</a></p>
+              <p className="text-sm text-orange-300">Also try: <a href="/text-and-writing-tools/lorem-ipsum-generator" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/lorem-ipsum-generator'); }} className="underline hover:text-orange-200">Lorem Ipsum Generator</a></p>
             </div>
           </div>
         </div>
@@ -419,7 +419,7 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
                 <span className="text-purple-400 mr-2">⚙️</span> How Does It Work?
               </h3>
               <p className="text-gray-300">
-                Simply enter your original and new values, and the <strong>percent increase calculator</strong> automatically detects if it's an increase (positive) or decrease (negative). Results are color-coded for easy reading: <span className="text-green-400 font-semibold">green for increases</span> and <span className="text-red-400 font-semibold">red for decreases</span>. The calculator supports whole numbers and decimals, making it perfect for any calculation scenario. Use it with our <a href="/tools/time-difference-calculator" onClick={(e) => { e.preventDefault(); navigateTo('/tools/time-difference-calculator'); }} className="text-cyan-400 hover:text-cyan-300 underline">time difference calculator</a> for complete data analysis.
+                Simply enter your original and new values, and the <strong>percent increase calculator</strong> automatically detects if it's an increase (positive) or decrease (negative). Results are color-coded for easy reading: <span className="text-green-400 font-semibold">green for increases</span> and <span className="text-red-400 font-semibold">red for decreases</span>. The calculator supports whole numbers and decimals, making it perfect for any calculation scenario. Use it with our <a href="/math-and-calculation-tools/time-difference-calculator" onClick={(e) => { e.preventDefault(); navigateTo('/math-and-calculation-tools/time-difference-calculator'); }} className="text-cyan-400 hover:text-cyan-300 underline">time difference calculator</a> for complete data analysis.
               </p>
             </div>
 
@@ -442,7 +442,7 @@ const PercentageChangeCalculator: React.FC<PercentageChangeCalculatorProps> = ({
                 <span className="text-orange-400 mr-2">📊</span> Ready-to-Use Examples
               </h3>
               <p className="text-gray-300">
-                We've included 6 clickable templates for common scenarios: <strong>Investment Growth</strong> ($10K → $12.5K), <strong>Sales Performance</strong> (200 → 250 units), <strong>Price Discounts</strong> ($500 → $400), <strong>Weight Loss</strong> (180 → 162 lbs), <strong>Revenue Growth</strong> ($50K → $65K), and <strong>Test Scores</strong> (70 → 84). Just click any example to see instant results! Check out our <a href="/tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter</a> and <a href="/tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }} className="text-cyan-400 hover:text-cyan-300 underline">case converter</a> for more helpful tools.
+                We've included 6 clickable templates for common scenarios: <strong>Investment Growth</strong> ($10K → $12.5K), <strong>Sales Performance</strong> (200 → 250 units), <strong>Price Discounts</strong> ($500 → $400), <strong>Weight Loss</strong> (180 → 162 lbs), <strong>Revenue Growth</strong> ($50K → $65K), and <strong>Test Scores</strong> (70 → 84). Just click any example to see instant results! Check out our <a href="/text-and-writing-tools/word-counter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/word-counter'); }} className="text-cyan-400 hover:text-cyan-300 underline">word counter</a> and <a href="/text-and-writing-tools/case-converter" onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/case-converter'); }} className="text-cyan-400 hover:text-cyan-300 underline">case converter</a> for more helpful tools.
               </p>
             </div>
 

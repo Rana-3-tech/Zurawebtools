@@ -49,7 +49,10 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
                     <div 
                         className="relative"
                         onMouseEnter={() => setIsToolsDropdownOpen(true)}
-                        onMouseLeave={() => setIsToolsDropdownOpen(false)}
+                        onMouseLeave={() => {
+                            setIsToolsDropdownOpen(false);
+                            setHoveredCategorySlug(null);
+                        }}
                     >
                         <a href="/tools" onClick={(e) => handleNavClick(e, '/tools')} className="text-gray-600 hover:text-brand-blue font-semibold transition-colors flex items-center">
                             Tools <ChevronDownIcon />
@@ -61,18 +64,28 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
                                         key={cat.slug}
                                         className="relative"
                                         onMouseEnter={() => cat.subCategories && setHoveredCategorySlug(cat.slug)}
-                                        onMouseLeave={() => setHoveredCategorySlug(null)}
+                                        onMouseLeave={(e) => {
+                                            // Only clear hover if not moving to subcategory menu
+                                            const relatedTarget = e.relatedTarget as HTMLElement;
+                                            if (!relatedTarget?.closest('.subcategory-menu')) {
+                                                setHoveredCategorySlug(null);
+                                            }
+                                        }}
                                     >
                                         <a 
                                             href={`/${cat.slug}`}
-                                            onClick={(e) => { e.preventDefault(); navigateTo(`/${cat.slug}`); setIsToolsDropdownOpen(false); }}
+                                            onClick={(e) => { e.preventDefault(); navigateTo(`/${cat.slug}`); setIsToolsDropdownOpen(false); setHoveredCategorySlug(null); }}
                                             className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-blue transition-colors flex items-center justify-between"
                                         >
                                             <span>{cat.title}</span>
                                             {cat.subCategories && <ChevronDownIcon />}
                                         </a>
                                         {cat.subCategories && hoveredCategorySlug === cat.slug && (
-                                            <div className="absolute left-full top-0 ml-1 w-56 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-100">
+                                            <div 
+                                                className="subcategory-menu absolute left-full top-0 ml-1 w-56 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-100"
+                                                onMouseEnter={() => setHoveredCategorySlug(cat.slug)}
+                                                onMouseLeave={() => setHoveredCategorySlug(null)}
+                                            >
                                                 {cat.subCategories.map(subCat => (
                                                     <a 
                                                         key={subCat.slug}

@@ -38,7 +38,7 @@ const TimeDifferenceCalculator: React.FC<TimeDifferenceCalculatorProps> = ({ nav
       { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-date-difference-calculator-og.png' },
       { property: 'og:image:alt', content: 'Time Difference Calculator showing years, months, and days between two dates.' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://zurawebtools.com/tools/time-difference-calculator' },
+      { property: 'og:url', content: 'https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator' },
       { property: 'og:locale', content: 'en_US' },
       { property: 'og:site_name', content: 'ZuraWebTools' },
       { property: 'article:published_time', content: '2024-01-15T08:00:00Z' },
@@ -59,7 +59,7 @@ const TimeDifferenceCalculator: React.FC<TimeDifferenceCalculatorProps> = ({ nav
     // 🔗 Canonical URL
     const canonical = document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
-    canonical.setAttribute('href', 'https://zurawebtools.com/tools/time-difference-calculator');
+    canonical.setAttribute('href', 'https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator');
     document.head.appendChild(canonical);
 
     // 📘 Structured Data (BreadcrumbList + SoftwareApplication + FAQPage + HowTo + WebPage)
@@ -72,7 +72,7 @@ const TimeDifferenceCalculator: React.FC<TimeDifferenceCalculatorProps> = ({ nav
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://zurawebtools.com" },
           { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://zurawebtools.com/tools" },
-          { "@type": "ListItem", "position": 3, "name": "Time Difference Calculator", "item": "https://zurawebtools.com/tools/time-difference-calculator" }
+          { "@type": "ListItem", "position": 3, "name": "Time Difference Calculator", "item": "https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator" }
         ]
       },
       {
@@ -89,7 +89,7 @@ const TimeDifferenceCalculator: React.FC<TimeDifferenceCalculatorProps> = ({ nav
           "url": "https://zurawebtools.com"
         },
         "description": "Calculate time between two dates instantly. Get accurate results in years, months, and days. Free online calculator for age, duration & date difference.",
-        "url": "https://zurawebtools.com/tools/time-difference-calculator"
+        "url": "https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator"
       },
       {
         "@context": "https://schema.org",
@@ -171,7 +171,7 @@ const TimeDifferenceCalculator: React.FC<TimeDifferenceCalculatorProps> = ({ nav
         "@type": "WebPage",
         "name": "Time Difference Calculator - Calculate Years, Months & Days",
         "description": "Calculate time between two dates instantly. Get accurate results in years, months, and days. Free online calculator for age, duration & date difference.",
-        "url": "https://zurawebtools.com/tools/time-difference-calculator",
+        "url": "https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator",
         "datePublished": "2024-01-15",
         "dateModified": "2025-11-09",
         "inLanguage": "en-US",
@@ -464,10 +464,10 @@ const TimeDifferenceCalculator: React.FC<TimeDifferenceCalculatorProps> = ({ nav
         <div className="max-w-4xl mx-auto mt-12 text-center">
           <p className="font-semibold text-gray-400 mb-2">Share This Tool:</p>
           <div className="flex justify-center items-center space-x-6">
-            <ShareButton network="Facebook" url="https://zurawebtools.com/tools/time-difference-calculator" text="Calculate date differences easily with this free tool!" />
-            <ShareButton network="Twitter" url="https://zurawebtools.com/tools/time-difference-calculator" text="Calculate date differences easily with this free tool from @ZuraWebTools!" />
-            <ShareButton network="LinkedIn" url="https://zurawebtools.com/tools/time-difference-calculator" text="Calculate date differences easily with this free tool!" />
-            <ShareButton network="WhatsApp" url="https://zurawebtools.com/tools/time-difference-calculator" text="Calculate date differences easily with this free tool!" />
+            <ShareButton network="Facebook" url="https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator" text="Calculate date differences easily with this free tool!" />
+            <ShareButton network="Twitter" url="https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator" text="Calculate date differences easily with this free tool from @ZuraWebTools!" />
+            <ShareButton network="LinkedIn" url="https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator" text="Calculate date differences easily with this free tool!" />
+            <ShareButton network="WhatsApp" url="https://zurawebtools.com/math-and-calculation-tools/time-difference-calculator" text="Calculate date differences easily with this free tool!" />
           </div>
         </div>
 

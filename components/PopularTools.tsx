@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { Page } from '../App';
 import { toolCategories, Tool } from '../data/tools';
 
@@ -20,6 +20,18 @@ interface PopularTool extends Tool {
 
 const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
     const [activeTab, setActiveTab] = useState('all');
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    const scroll = (direction: 'left' | 'right') => {
+        if (scrollContainerRef.current) {
+            const scrollAmount = 300;
+            const newScrollPosition = scrollContainerRef.current.scrollLeft + (direction === 'right' ? scrollAmount : -scrollAmount);
+            scrollContainerRef.current.scrollTo({
+                left: newScrollPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
 
     const categoryColors: { [key: string]: { bg: string; text: string } } = {
         'text-and-writing-tools': { bg: 'bg-rose-100', text: 'text-rose-600' },
@@ -36,16 +48,37 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
         { id: 'developer-tools', name: 'Developer', icon: <DevIcon /> },
     ];
     
-    const allTools: PopularTool[] = useMemo(() =>
-        toolCategories.flatMap(category =>
-            category.tools.map(tool => ({
-                ...tool,
-                categorySlug: category.slug,
-                categoryTitle: category.title.replace(' Tools', ''),
-            }))
-        ), []);
+    const allTools: PopularTool[] = useMemo(() => {
+        const tools: PopularTool[] = [];
         
-    const popularToolLinks = [
+        toolCategories.forEach(category => {
+            // Add main category tools
+            category.tools.forEach(tool => {
+                tools.push({
+                    ...tool,
+                    categorySlug: category.slug,
+                    categoryTitle: category.title.replace(' Tools', '').replace(' & ', ' and '),
+                });
+            });
+            
+            // Add subcategory tools if they exist
+            if (category.subCategories) {
+                category.subCategories.forEach(subCategory => {
+                    subCategory.tools.forEach(tool => {
+                        tools.push({
+                            ...tool,
+                            categorySlug: category.slug,
+                            categoryTitle: category.title.replace(' Tools', '').replace(' & ', ' and '),
+                        });
+                    });
+                });
+            }
+        });
+        
+        return tools;
+    }, []);
+        
+    const popularToolSlugs = [
         'word-counter', 'remove-extra-spaces', 'case-converter', 'lorem-ipsum-generator',
         'json-formatter', 'accessible-color-contrast-checker', 'hex-to-rgb-converter',
         'percentage-change-calculator', 'time-difference-calculator'
@@ -54,8 +87,16 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
     const displayedTools = useMemo(() => {
         if (activeTab === 'all') {
             return allTools
-                .filter(tool => popularToolLinks.includes(tool.link))
-                .sort((a, b) => popularToolLinks.indexOf(a.link) - popularToolLinks.indexOf(b.link));
+                .filter(tool => {
+                    // Extract the tool slug from the full path (last segment)
+                    const toolSlug = tool.link.split('/').pop() || '';
+                    return popularToolSlugs.includes(toolSlug);
+                })
+                .sort((a, b) => {
+                    const slugA = a.link.split('/').pop() || '';
+                    const slugB = b.link.split('/').pop() || '';
+                    return popularToolSlugs.indexOf(slugA) - popularToolSlugs.indexOf(slugB);
+                });
         }
         return allTools.filter(tool => tool.categorySlug === activeTab);
     }, [activeTab, allTools]);
@@ -106,10 +147,44 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                   {displayedTools.slice(0, 12).map(tool => (
-                        <ToolCardComponent key={tool.link} tool={tool} />
-                    ))}
+                <div className="relative">
+                    {/* Left Arrow */}
+                    <button
+                        onClick={() => scroll('left')}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 hidden lg:block"
+                        aria-label="Scroll left"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    {/* Slider Container */}
+                    <div 
+                        ref={scrollContainerRef}
+                        className="flex gap-6 overflow-x-auto scroll-smooth px-2 py-4 scrollbar-hide"
+                        style={{
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                        }}
+                    >
+                        {displayedTools.map(tool => (
+                            <div key={tool.link} className="flex-shrink-0 w-64">
+                                <ToolCardComponent tool={tool} />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Right Arrow */}
+                    <button
+                        onClick={() => scroll('right')}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 hidden lg:block"
+                        aria-label="Scroll right"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>

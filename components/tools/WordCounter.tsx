@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { GoogleGenAI } from "@google/genai";
 import RelatedTools from '../RelatedTools';
 import { Page } from '../../App';
 
@@ -9,7 +8,6 @@ interface WordCounterProps {
 
 const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
   const [text, setText] = useState('');
-  const [isThinking, setIsThinking] = useState(false);
   const [readabilityResult, setReadabilityResult] = useState('');
 
   // 🧠 Enhanced SEO and Meta Tags Setup
@@ -39,7 +37,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
       { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-word-counter-og.png' },
       { property: 'og:image:alt', content: 'Word Counter showing text analysis with character count and paragraph count.' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://zurawebtools.com/tools/word-counter' },
+      { property: 'og:url', content: 'https://zurawebtools.com/text-and-writing-tools/word-counter' },
       { property: 'og:locale', content: 'en_US' },
       { property: 'og:site_name', content: 'ZuraWebTools' },
       { property: 'article:published_time', content: '2024-02-10T08:00:00Z' },
@@ -61,7 +59,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
     // Canonical URL
     const canonical = document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
-    canonical.setAttribute('href', 'https://zurawebtools.com/tools/word-counter');
+    canonical.setAttribute('href', 'https://zurawebtools.com/text-and-writing-tools/word-counter');
     document.head.appendChild(canonical);
 
     // JSON-LD Structured Data
@@ -78,7 +76,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
         "description": "Count words, characters & paragraphs instantly. Free online text analyzer for writers, students & SEO. No signup required.",
-        "url": "https://zurawebtools.com/tools/word-counter"
+        "url": "https://zurawebtools.com/text-and-writing-tools/word-counter"
       },
       {
         "@context": "https://schema.org",
@@ -86,7 +84,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://zurawebtools.com" },
           { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://zurawebtools.com/tools" },
-          { "@type": "ListItem", "position": 3, "name": "Word Counter", "item": "https://zurawebtools.com/tools/word-counter" }
+          { "@type": "ListItem", "position": 3, "name": "Word Counter", "item": "https://zurawebtools.com/text-and-writing-tools/word-counter" }
         ]
       },
       {
@@ -192,7 +190,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
         "@type": "WebPage",
         "name": "Word Counter - Free Character & Text Analyzer Tool",
         "description": "Count words, characters & paragraphs instantly. Free online text analyzer for writers, students & SEO. No signup required.",
-        "url": "https://zurawebtools.com/tools/word-counter",
+        "url": "https://zurawebtools.com/text-and-writing-tools/word-counter",
         "datePublished": "2024-02-10",
         "dateModified": "2025-11-09",
         "inLanguage": "en-US",
@@ -234,43 +232,36 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
   const handleCopy = () => navigator.clipboard.writeText(text);
   const handleClear = () => setText('');
 
-  const handleAnalyzeReadability = async () => {
+  const handleAnalyzeReadability = () => {
     if (!text.trim()) {
       setReadabilityResult('Please enter some text to analyze.');
       return;
     }
-    setIsThinking(true);
-    setReadabilityResult('');
-    try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: `Analyze the readability of this text and provide a one-sentence summary: "${text}"`,
-      });
-      setReadabilityResult(response.text);
-    } catch (error) {
-      console.error("Error analyzing readability:", error);
-      setReadabilityResult('Sorry, there was an error analyzing the text.');
-    } finally {
-      setIsThinking(false);
+    
+    // Basic readability analysis without AI
+    const { words, characters, charsNoSpaces, paragraphs } = stats;
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+    const avgWordsPerSentence = sentences > 0 ? Math.round(words / sentences) : 0;
+    const avgCharsPerWord = words > 0 ? Math.round(charsNoSpaces / words) : 0;
+    
+    let readabilityLevel = '';
+    if (avgWordsPerSentence < 15 && avgCharsPerWord < 5) {
+      readabilityLevel = 'Easy to read - Suitable for general audience';
+    } else if (avgWordsPerSentence < 20 && avgCharsPerWord < 6) {
+      readabilityLevel = 'Moderate - Suitable for high school level and above';
+    } else {
+      readabilityLevel = 'Complex - Requires college-level reading skills';
     }
+    
+    setReadabilityResult(
+      `Readability Analysis: ${readabilityLevel}. Your text has ${sentences} sentences with an average of ${avgWordsPerSentence} words per sentence and ${avgCharsPerWord} characters per word.`
+    );
   };
 
   const StatCard: React.FC<{ label: string; value: number }> = ({ label, value }) => (
     <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg text-center shadow-md">
       <p className="text-lg font-semibold text-gray-200">{label}</p>
       <p className="text-4xl font-bold text-white mt-1">{value}</p>
-    </div>
-  );
-
-  const ThinkingIndicator = () => (
-    <div className="flex items-center justify-center space-x-2">
-      <span className="text-lg text-gray-300">Analyzing Readability</span>
-      <div className="flex items-center space-x-1">
-        <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-        <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-        <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
-      </div>
     </div>
   );
 
@@ -333,14 +324,12 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
           </button>
         </div>
 
-        {/* ✨ AI Readability Analysis */}
+        {/* ✨ Readability Analysis */}
         <div className="max-w-4xl mx-auto mt-8 min-h-[60px] flex items-center justify-center bg-slate-900/50 p-4 rounded-lg shadow-inner">
-          {isThinking ? (
-            <ThinkingIndicator />
-          ) : readabilityResult ? (
+          {readabilityResult ? (
             <p className="text-center text-cyan-300 text-lg">{readabilityResult}</p>
           ) : (
-            <p className="text-center text-gray-500">Click "Analyze Readability" to get an AI-powered summary.</p>
+            <p className="text-center text-gray-500">Click "Analyze Readability" to get instant readability analysis.</p>
           )}
         </div>
 

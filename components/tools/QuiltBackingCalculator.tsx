@@ -218,7 +218,7 @@ const QuiltBackingCalculator: React.FC = () => {
         document.title = 'Quilt Backing Calculator — Free Fabric Yardage & Backing Calculator for Quilts';
         const metaDesc = 'Free quilt backing calculator: Calculate backing fabric for quilts instantly. Supports 42", 44", 54", 60", 108" wide fabric. Get yardage, cutting plans & cost estimates for backing calculator quilt projects.';
         const metaKeywords = 'quilt backing calculator, backing calculator quilt, calculating backing for a quilt, quilt calculator for backing, calculate backing for quilt, how to calculate quilt backing, quilt backing fabric calculator, 108 quilt backing calculator, backing calculator for quilts, calculate fabric for quilt backing, quilt back calculator, backing quilt calculator, how to calculate backing for quilts, simple quilt backing calculator, fabric calculator for quilt backing';
-        const canonicalUrl = 'https://zurawebtools.com/tools/quilt-backing-calculator';
+        const canonicalUrl = 'https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator';
         
         const setMeta = (name: string, content: string) => {
             let element = document.querySelector(`meta[name='${name}']`);
@@ -290,7 +290,7 @@ const QuiltBackingCalculator: React.FC = () => {
             "itemListElement": [
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://zurawebtools.com" },
               { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://zurawebtools.com/tools" },
-              { "@type": "ListItem", "position": 3, "name": "Quilt Backing Calculator", "item": "https://zurawebtools.com/tools/quilt-backing-calculator" }
+              { "@type": "ListItem", "position": 3, "name": "Quilt Backing Calculator", "item": "https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator" }
             ]
           },
           {
@@ -303,7 +303,7 @@ const QuiltBackingCalculator: React.FC = () => {
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
             "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
             "description": "Free backing calculator for quilts with 42\", 44\", 54\", 60\", 108\" fabric support. Calculate backing fabric yardage, cutting plans, and cost estimates for quilt backing projects.",
-            "url": "https://zurawebtools.com/tools/quilt-backing-calculator"
+            "url": "https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator"
           },
           {
             "@context": "https://schema.org",
@@ -347,35 +347,35 @@ const QuiltBackingCalculator: React.FC = () => {
                 "position": 1,
                 "name": "Enter Quilt Dimensions",
                 "text": "Measure your finished quilt top width and length. Add 4-6 inches extra on all sides for quilting allowance.",
-                "url": "https://zurawebtools.com/tools/quilt-backing-calculator#step1"
+                "url": "https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator#step1"
               },
               {
                 "@type": "HowToStep",
                 "position": 2,
                 "name": "Select Fabric Width",
                 "text": "Choose your fabric width: 42\", 44\", 54\", 60\", or 108\". Wider fabric reduces the number of seams needed.",
-                "url": "https://zurawebtools.com/tools/quilt-backing-calculator#step2"
+                "url": "https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator#step2"
               },
               {
                 "@type": "HowToStep",
                 "position": 3,
                 "name": "Set Seam Allowance",
                 "text": "Enter your seam allowance (typically 0.5 inches). This accounts for fabric lost in seams when piecing panels.",
-                "url": "https://zurawebtools.com/tools/quilt-backing-calculator#step3"
+                "url": "https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator#step3"
               },
               {
                 "@type": "HowToStep",
                 "position": 4,
                 "name": "Adjust Wastage Buffer",
                 "text": "Set wastage buffer (default 10%). This covers fabric shrinkage, cutting irregularities, and quilting frame tension.",
-                "url": "https://zurawebtools.com/tools/quilt-backing-calculator#step4"
+                "url": "https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator#step4"
               },
               {
                 "@type": "HowToStep",
                 "position": 5,
                 "name": "Get Results",
                 "text": "View total yardage needed, cutting plan with panel layout, cost estimate, and downloadable summary.",
-                "url": "https://zurawebtools.com/tools/quilt-backing-calculator#step5"
+                "url": "https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator#step5"
               }
             ]
           },
@@ -383,7 +383,7 @@ const QuiltBackingCalculator: React.FC = () => {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "Quilt Backing Calculator",
-            "url": "https://zurawebtools.com/tools/quilt-backing-calculator",
+            "url": "https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator",
             "description": "Free quilt backing calculator: Calculate backing fabric for quilts instantly. Supports 42\", 44\", 54\", 60\", 108\" wide fabric. Get yardage, cutting plans & cost estimates.",
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -722,7 +722,7 @@ ${warning || ''}`;
                     <p className="text-gray-600 dark:text-gray-400 mb-6">Help other quilters by sharing this free calculator!</p>
                     <div className="flex justify-center items-center gap-4 flex-wrap">
                         <a
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/tools/quilt-backing-calculator')}`}
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator')}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors shadow-md hover:shadow-lg"
@@ -734,7 +734,7 @@ ${warning || ''}`;
                             <span>Facebook</span>
                         </a>
                         <a
-                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent('https://zurawebtools.com/tools/quilt-backing-calculator')}&text=${encodeURIComponent('Calculate quilt backing fabric instantly with this free tool! 🧵✂️')}`}
+                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent('https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator')}&text=${encodeURIComponent('Calculate quilt backing fabric instantly with this free tool! 🧵✂️')}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-lg transition-colors shadow-md hover:shadow-lg"
@@ -746,7 +746,7 @@ ${warning || ''}`;
                             <span>Twitter</span>
                         </a>
                         <a
-                            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://zurawebtools.com/tools/quilt-backing-calculator')}`}
+                            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator')}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 px-6 py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-lg transition-colors shadow-md hover:shadow-lg"
@@ -758,7 +758,7 @@ ${warning || ''}`;
                             <span>LinkedIn</span>
                         </a>
                         <a
-                            href={`https://wa.me/?text=${encodeURIComponent('Check out this free Quilt Backing Calculator! https://zurawebtools.com/tools/quilt-backing-calculator')}`}
+                            href={`https://wa.me/?text=${encodeURIComponent('Check out this free Quilt Backing Calculator! https://zurawebtools.com/construction-and-engineering-tools/quilt-backing-calculator')}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors shadow-md hover:shadow-lg"
@@ -1041,7 +1041,7 @@ ${warning || ''}`;
                 <section className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
                     <h2 className="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-gray-100">Related Quilting & Calculation Tools</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                        <a href="/tools/fabric-costing-tool" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 group">
+                        <a href="/math-and-calculation-tools/fabric-costing-tool" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 group">
                             <div className="flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg mb-4 group-hover:scale-110 transition-transform">
                                 <svg className="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -1051,7 +1051,7 @@ ${warning || ''}`;
                             <p className="text-sm text-gray-600 dark:text-gray-400">Calculate total fabric costs for quilting projects with GSM and consumption analysis.</p>
                         </a>
 
-                        <a href="/tools/percentage-change-calculator" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 group">
+                        <a href="/math-and-calculation-tools/percentage-change-calculator" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 group">
                             <div className="flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg mb-4 group-hover:scale-110 transition-transform">
                                 <svg className="w-7 h-7 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
@@ -1061,7 +1061,7 @@ ${warning || ''}`;
                             <p className="text-sm text-gray-600 dark:text-gray-400">Calculate percentage increases and decreases for fabric pricing and discounts.</p>
                         </a>
 
-                        <a href="/tools/time-difference-calculator" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 group">
+                        <a href="/math-and-calculation-tools/time-difference-calculator" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 group">
                             <div className="flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg mb-4 group-hover:scale-110 transition-transform">
                                 <svg className="w-7 h-7 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1081,7 +1081,7 @@ ${warning || ''}`;
                             <p className="text-sm text-gray-600 dark:text-gray-400">Calculate loan payments for equipment financing and business investments.</p>
                         </a>
 
-                        <a href="/tools/word-counter" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 group">
+                        <a href="/text-and-writing-tools/word-counter" className="block p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 group">
                             <div className="flex items-center justify-center w-12 h-12 bg-pink-100 dark:bg-pink-900/50 rounded-lg mb-4 group-hover:scale-110 transition-transform">
                                 <svg className="w-7 h-7 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

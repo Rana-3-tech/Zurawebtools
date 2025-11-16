@@ -45,18 +45,17 @@ export const notifyIndexNow = async (urlPath: string): Promise<void> => {
     })
       .then((response) => {
         if (response.ok) {
-          console.log('[IndexNow] ✓ Notified:', fullUrl);
+          // Successfully notified search engines
           notifiedUrls.add(fullUrl);
-        } else {
-          console.warn('[IndexNow] Response:', response.status);
         }
+        // Silently handle non-OK responses in production
       })
-      .catch((error) => {
+      .catch(() => {
         // Silently fail - don't break user experience
-        console.warn('[IndexNow] Error (non-critical):', error.message);
+        // Error handling can be added here for monitoring tools
       });
   } catch (error) {
-    // Catch any unexpected errors
-    console.warn('[IndexNow] Initialization error:', error);
+    // Catch any unexpected errors silently
+    // Error tracking can be added here for production monitoring
   }
 };

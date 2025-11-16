@@ -60,17 +60,41 @@ const generateSitemap = () => {
   </url>`);
     });
     
-    // 3. Add individual tool pages
+    // 3. Add individual tool pages (tool.link now contains full path)
+    // Use Set to prevent duplicates
+    const addedTools = new Set<string>();
+    
     toolCategories.forEach(category => {
         category.tools.forEach(tool => {
-            urls.push(`
+            if (!addedTools.has(tool.link)) {
+                urls.push(`
   <url>
     <loc>${baseUrl}/${tool.link}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>`);
+                addedTools.add(tool.link);
+            }
         });
+        
+        // Also add tools from sub-categories if they exist
+        if (category.subCategories) {
+            category.subCategories.forEach(subCategory => {
+                subCategory.tools.forEach(tool => {
+                    if (!addedTools.has(tool.link)) {
+                        urls.push(`
+  <url>
+    <loc>${baseUrl}/${tool.link}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>`);
+                        addedTools.add(tool.link);
+                    }
+                });
+            });
+        }
     });
 
     // 4. Add blog post pages

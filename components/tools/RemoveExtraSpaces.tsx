@@ -65,7 +65,7 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
       { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-remove-extra-spaces-og.png' },
       { property: 'og:image:alt', content: 'Screenshot of ZuraWebTools Remove Extra Spaces tool cleaning messy text.' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://zurawebtools.com/tools/remove-extra-spaces' },
+      { property: 'og:url', content: 'https://zurawebtools.com/text-and-writing-tools/remove-extra-spaces' },
       { property: 'og:locale', content: 'en_US' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Remove Extra Spaces from Text – Free Online Whitespace Remover Tool' },
@@ -82,7 +82,7 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
     // Canonical URL
     const canonical = document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
-    canonical.setAttribute('href', 'https://zurawebtools.com/tools/remove-extra-spaces');
+    canonical.setAttribute('href', 'https://zurawebtools.com/text-and-writing-tools/remove-extra-spaces');
     document.head.appendChild(canonical);
 
     // 📜 JSON-LD (SoftwareApplication + FAQ + WebPage + Breadcrumb + HowTo)
@@ -99,16 +99,16 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
         "description": "A free online text cleaner tool to remove extra spaces, tabs, and blank lines from text. Perfect for formatting SEO content, blogs, or clean code snippets.",
-        "url": "https://zurawebtools.com/tools/remove-extra-spaces"
+        "url": "https://zurawebtools.com/text-and-writing-tools/remove-extra-spaces"
       },
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Remove Extra Spaces Tool",
         "description": "Free online whitespace remover to clean text by removing extra spaces, tabs, and blank lines",
-        "url": "https://zurawebtools.com/tools/remove-extra-spaces",
+        "url": "https://zurawebtools.com/text-and-writing-tools/remove-extra-spaces",
         "breadcrumb": {
-          "@id": "https://zurawebtools.com/tools/remove-extra-spaces#breadcrumb"
+          "@id": "https://zurawebtools.com/text-and-writing-tools/remove-extra-spaces#breadcrumb"
         },
         "publisher": {
           "@type": "Organization",
@@ -119,7 +119,7 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "@id": "https://zurawebtools.com/tools/remove-extra-spaces#breadcrumb",
+        "@id": "https://zurawebtools.com/text-and-writing-tools/remove-extra-spaces#breadcrumb",
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -137,7 +137,7 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
             "@type": "ListItem",
             "position": 3,
             "name": "Remove Extra Spaces",
-            "item": "https://zurawebtools.com/tools/remove-extra-spaces"
+            "item": "https://zurawebtools.com/text-and-writing-tools/remove-extra-spaces"
           }
         ]
       },
@@ -576,16 +576,16 @@ as you type or select options"
               formatting email templates, preparing code for documentation, cleaning CSV data, optimizing SEO meta tags, 
               and ensuring consistent text structure across documents. Many users combine this with our{' '}
               <a 
-                href="/tools/word-counter" 
-                onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }}
+                href="/text-and-writing-tools/word-counter" 
+                onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/word-counter'); }}
                 className="text-cyan-400 hover:underline font-medium"
               >
                 word counter
               </a>{' '}
               and{' '}
               <a 
-                href="/tools/case-converter" 
-                onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }}
+                href="/text-and-writing-tools/case-converter" 
+                onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/case-converter'); }}
                 className="text-cyan-400 hover:underline font-medium"
               >
                 case converter
@@ -622,8 +622,8 @@ as you type or select options"
               <p className="text-gray-300 leading-relaxed">
                 Clean up messy text copied from various sources before publishing. Maintain consistent formatting for better SEO and readability. Use our{' '}
                 <a 
-                  href="/tools/word-counter" 
-                  onClick={(e) => { e.preventDefault(); navigateTo('/tools/word-counter'); }}
+                  href="/text-and-writing-tools/word-counter" 
+                  onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/word-counter'); }}
                   className="text-cyan-400 hover:underline font-medium"
                 >
                   word counter tool
@@ -654,8 +654,8 @@ as you type or select options"
               <p className="text-gray-300 leading-relaxed">
                 Clean meta descriptions, title tags, and schema markup. Ensure consistent formatting across all on-page SEO elements. Try our{' '}
                 <a 
-                  href="/tools/case-converter" 
-                  onClick={(e) => { e.preventDefault(); navigateTo('/tools/case-converter'); }}
+                  href="/text-and-writing-tools/case-converter" 
+                  onClick={(e) => { e.preventDefault(); navigateTo('/text-and-writing-tools/case-converter'); }}
                   className="text-cyan-400 hover:underline font-medium"
                 >
                   case converter

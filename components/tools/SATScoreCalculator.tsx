@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback, useEffect, Fragment } from 'react';
 import type { ScoreState, ScaledScores, TestMode, Difficulty, Preset, FAQItem, ConversionTable } from '../types';
 import { MAX_RAW_SCORES, PAPER_RW_CONVERSION, PAPER_MATH_CONVERSION, DIGITAL_RW_CONVERSION, DIGITAL_MATH_CONVERSION, SAT_TO_ACT_CONCORDANCE, SAT_PERCENTILES, FAQ_DATA } from '../constants';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 
 // --- Helper Functions ---
 const getClosestValue = (table: Record<number, number>, value: number): number => {
@@ -63,6 +64,70 @@ const InputField = ({ label, field, value, max, error, onChange }: {
 const SATScoreCalculator: React.FC = () => {
     // --- State Management ---
     const [scores, setScores] = useState<ScoreState>({ readingWriting: null, mathNoCalc: null, mathCalc: null, mathCombined: null });
+
+    // TOC sections configuration
+    const tocSections: TOCSection[] = [
+        {
+            id: 'examples',
+            emoji: '📝',
+            title: 'Examples',
+            subtitle: 'Try presets',
+            gradientFrom: 'from-blue-50',
+            gradientTo: 'to-indigo-50',
+            hoverBorder: 'border-indigo-400',
+            hoverText: 'text-indigo-600'
+        },
+        {
+            id: 'benefits',
+            emoji: '⭐',
+            title: 'Benefits',
+            subtitle: 'Why use this',
+            gradientFrom: 'from-purple-50',
+            gradientTo: 'to-pink-50',
+            hoverBorder: 'border-purple-400',
+            hoverText: 'text-purple-600'
+        },
+        {
+            id: 'about-sat',
+            emoji: '📚',
+            title: 'About SAT',
+            subtitle: 'Understanding',
+            gradientFrom: 'from-green-50',
+            gradientTo: 'to-emerald-50',
+            hoverBorder: 'border-green-400',
+            hoverText: 'text-green-600'
+        },
+        {
+            id: 'how-to-calculate',
+            emoji: '🧮',
+            title: 'How to Calculate',
+            subtitle: 'Step-by-step',
+            gradientFrom: 'from-orange-50',
+            gradientTo: 'to-amber-50',
+            hoverBorder: 'border-orange-400',
+            hoverText: 'text-orange-600'
+        },
+        {
+            id: 'score-ranges',
+            emoji: '📊',
+            title: 'Score Ranges',
+            subtitle: 'What they mean',
+            gradientFrom: 'from-cyan-50',
+            gradientTo: 'to-blue-50',
+            hoverBorder: 'border-cyan-400',
+            hoverText: 'text-cyan-600'
+        },
+        {
+            id: 'faq',
+            emoji: '❓',
+            title: 'FAQs',
+            subtitle: 'Common questions',
+            gradientFrom: 'from-violet-50',
+            gradientTo: 'to-purple-50',
+            hoverBorder: 'border-violet-400',
+            hoverText: 'text-violet-600'
+        }
+    ];
     const [testMode, setTestMode] = useState<TestMode>('digital');
     const [difficulty, setDifficulty] = useState<Difficulty>('auto');
     const [isMathCombined, setIsMathCombined] = useState<boolean>(true);
@@ -223,7 +288,7 @@ const SATScoreCalculator: React.FC = () => {
     
     const getShareUrl = useCallback((platform: 'twitter' | 'facebook' | 'whatsapp') => {
         if (!calculationResult) return '#';
-        const url = 'https://zurawebtools.com/tools/sat-score-calculator';
+        const url = 'https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator';
         const text = `I just estimated my SAT score using the ZuraWebTools calculator! My estimated score is ${calculationResult.scores.total}. Check it out:`;
         const encodedText = encodeURIComponent(text);
         const encodedUrl = encodeURIComponent(url);
@@ -273,13 +338,13 @@ const SATScoreCalculator: React.FC = () => {
         const metaKeywords = setMeta('keywords', "SAT score calculator, digital SAT 2024, raw to scaled score converter, SAT percentile calculator, ACT to SAT conversion, SAT score estimator, college entrance exam calculator, standardized test scores");
         const metaAuthor = setMeta('author', 'ZuraWebTools');
         const metaRobots = setMeta('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
-        const canonicalLink = setLink('canonical', 'https://zurawebtools.com/tools/sat-score-calculator');
+        const canonicalLink = setLink('canonical', 'https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator');
         
         // Open Graph Meta Tags
         const ogTitle = setMeta('og:title', 'Free SAT Score Calculator 2024-2025 - Digital SAT Converter', true);
         const ogDesc = setMeta('og:description', 'Calculate your SAT score instantly! Convert raw scores to scaled scores (200-800), get percentile rankings, ACT equivalents, and detailed score reports for Digital SAT 2024-2025.', true);
         const ogType = setMeta('og:type', 'website', true);
-        const ogUrl = setMeta('og:url', 'https://zurawebtools.com/tools/sat-score-calculator', true);
+        const ogUrl = setMeta('og:url', 'https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator', true);
         const ogLocale = setMeta('og:locale', 'en_US', true);
         const ogSiteName = setMeta('og:site_name', 'ZuraWebTools', true);
         const ogImage = setMeta('og:image', 'https://zurawebtools.com/images/sat-calculator-preview.jpg', true);
@@ -350,7 +415,7 @@ const SATScoreCalculator: React.FC = () => {
                 "worstRating": "1"
               },
               "description": "Free SAT Score Calculator for Digital SAT 2024–2025. Convert raw SAT answers to scaled scores instantly and get your total out of 1600 with percentile estimates.",
-              "url": "https://zurawebtools.com/tools/sat-score-calculator",
+              "url": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator",
               "keywords": "SAT score calculator, digital SAT 2024, raw to scaled score converter, SAT percentile calculator, ACT to SAT conversion, SAT score estimator",
               "datePublished": "2024-01-15",
               "dateModified": "2024-11-08",
@@ -367,7 +432,7 @@ const SATScoreCalculator: React.FC = () => {
               "@type": "WebPage",
               "name": "SAT Score Calculator - Convert Raw to Scaled Scores",
               "description": "Free online SAT score calculator for Digital SAT 2024-2025. Instantly convert raw scores to scaled scores with percentile rankings and ACT equivalents.",
-              "url": "https://zurawebtools.com/tools/sat-score-calculator",
+              "url": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator",
               "inLanguage": "en-US",
               "isPartOf": {
                 "@type": "WebSite",
@@ -405,14 +470,14 @@ const SATScoreCalculator: React.FC = () => {
                     {
                         "@type": "ListItem",
                         "position": 3,
-                        "name": "Math & Calculation",
-                        "item": "https://zurawebtools.com/tools/math-and-calculation"
+                        "name": "Education & Exam Tools",
+                        "item": "https://zurawebtools.com/education-and-exam-tools"
                     },
                     {
                         "@type": "ListItem",
                         "position": 4,
                         "name": "SAT Score Calculator",
-                        "item": "https://zurawebtools.com/tools/sat-score-calculator"
+                        "item": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator"
                     }
                 ]
             },
@@ -443,28 +508,28 @@ const SATScoreCalculator: React.FC = () => {
                       "position": 1,
                       "name": "Select Test Mode",
                       "text": "Choose between 'Digital SAT' and 'Paper SAT' based on the test you took.",
-                      "url": "https://zurawebtools.com/tools/sat-score-calculator#step1"
+                      "url": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator#step1"
                     },
                     { 
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Raw Scores",
                       "text": "Input the number of correct answers for the Reading & Writing and Math sections.",
-                      "url": "https://zurawebtools.com/tools/sat-score-calculator#step2"
+                      "url": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator#step2"
                     },
                     { 
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Adjust Difficulty (Optional)",
                       "text": "For the Digital SAT, you can select a test difficulty or leave it on 'Auto' for an estimate.",
-                      "url": "https://zurawebtools.com/tools/sat-score-calculator#step3"
+                      "url": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator#step3"
                     },
                     { 
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "View Results",
                       "text": "Your scaled section scores, total score, estimated percentile, and ACT equivalent will be displayed instantly.",
-                      "url": "https://zurawebtools.com/tools/sat-score-calculator#step4"
+                      "url": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator#step4"
                     }
                 ]
             }
@@ -569,7 +634,13 @@ const SATScoreCalculator: React.FC = () => {
     }
     
     return (
-        <main className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8 bg-slate-50 dark:bg-gray-900">
+        <>
+            <style>{`
+                html {
+                    scroll-behavior: smooth;
+                }
+            `}</style>
+            <main className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8 bg-slate-50 dark:bg-gray-900">
             <div className="w-full max-w-6xl mx-auto">
                 <header className="text-center mb-10">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -743,8 +814,11 @@ const SATScoreCalculator: React.FC = () => {
 
             {/* Below-the-fold Content */}
             <div className="w-full max-w-4xl mx-auto mt-16 space-y-12">
+                {/* Table of Contents */}
+                <TableOfContents sections={tocSections} />
+
                 {/* Quick Examples Section */}
-                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                <section id="examples" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Try These Example Scores</h2>
                     <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">Click any preset to instantly see the calculated SAT score and percentile ranking</p>
                     
@@ -842,7 +916,7 @@ const SATScoreCalculator: React.FC = () => {
                 </section>
 
                 {/* Benefits Section */}
-                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                <section id="benefits" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Why Use Our SAT Calculator?</h2>
                     <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">Get instant, accurate SAT score estimates with features designed for modern test-takers</p>
                     
@@ -873,13 +947,13 @@ const SATScoreCalculator: React.FC = () => {
                     </div>
                 </section>
                 
-                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                <section id="about-sat" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">About the Digital SAT</h2>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-4">The <strong>Digital SAT</strong>, introduced in 2024, represents a major shift from the traditional paper-and-pencil <strong>standardized test</strong>. It's an <strong>adaptive test</strong> administered on a computer, meaning the difficulty of the second module in each section (Reading & Writing, and Math) adjusts based on your performance in the first module.</p>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">This makes the test shorter (about 2 hours instead of 3) and aims to provide a more precise measure of your skills for <strong>college admissions</strong>. Our <strong>SAT score calculator</strong> is updated to reflect the structure of this new test format, helping students with <strong>test preparation</strong> and score estimation.</p>
                 </section>
                 
-                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                <section id="how-to-calculate" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">How to Calculate SAT Scores from Raw Scores</h2>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-6">Understanding <strong>how SAT scores are calculated</strong> is key to interpreting your performance on this <strong>college entrance exam</strong>. The <strong>score conversion process</strong> involves three main steps:</p>
                     
@@ -942,7 +1016,7 @@ const SATScoreCalculator: React.FC = () => {
                     </div>
                 </section>
                 
-                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                <section id="score-ranges" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">SAT Score Ranges & What They Mean</h2>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-6">Understanding your <strong>SAT score range</strong> helps you set realistic goals for <strong>college admissions</strong>. Here's a breakdown of <strong>what is a good SAT score</strong> in 2024:</p>
                     
@@ -971,7 +1045,7 @@ const SATScoreCalculator: React.FC = () => {
                     </div>
                 </section>
                 
-                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                <section id="faq" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Frequently Asked Questions (FAQ)</h2>
                     <div className="space-y-4">
                         {FAQ_DATA.map((faq, index) => (
@@ -998,17 +1072,17 @@ const SATScoreCalculator: React.FC = () => {
                 <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Related Tools</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <a href="/tools/percentage-change-calculator" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
+                        <a href="/math-and-calculation-tools/percentage-change-calculator" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
                             <PercentageIcon className="h-8 w-8 text-[#001BB7]" />
                             <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Percentage Change Calculator</h4>
                             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Calculate percentage increase or decrease between numbers.</p>
                         </a>
-                         <a href="/tools/time-difference-calculator" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
+                         <a href="/math-and-calculation-tools/time-difference-calculator" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
                             <TimeDiffIcon className="h-8 w-8 text-[#60A5FA]" />
                             <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Date Difference Calculator</h4>
                             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Calculate duration between two dates accurately.</p>
                         </a>
-                         <a href="/tools/fabric-costing-tool" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
+                         <a href="/math-and-calculation-tools/fabric-costing-tool" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
                             <FabricIcon className="h-8 w-8 text-[#001BB7]" />
                             <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Fabric Costing Calculator</h4>
                             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Professional fabric costing for textile engineers.</p>
@@ -1021,7 +1095,7 @@ const SATScoreCalculator: React.FC = () => {
                         Students calculating SAT scores may also find our 
                         <a href="/tools/uc-berkeley-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">UC Berkeley GPA Calculator</a> 
                         and 
-                        <a href="/tools/isac-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">ISAC GPA Calculator</a> 
+                        <a href="/education-and-exam-tools/gpa-tools/isac-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">ISAC GPA Calculator</a> 
                         useful for academic planning.
                     </p>
                 </section>
@@ -1056,7 +1130,8 @@ const SATScoreCalculator: React.FC = () => {
                     </div>
                 </div>
             )}
-        </main>
+            </main>
+        </>
     );
 };
 

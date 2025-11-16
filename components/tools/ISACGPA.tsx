@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 
 type Course = {
   name: string;
@@ -15,6 +16,70 @@ const ISACGPACalculator: React.FC = () => {
 
   const [gpa, setGpa] = useState<number>(0);
   const [isWeighted, setIsWeighted] = useState<boolean>(false);
+
+  // TOC sections configuration
+  const tocSections: TOCSection[] = [
+    {
+      id: 'examples',
+      emoji: '📝',
+      title: 'Examples',
+      subtitle: 'Sample calculations',
+      gradientFrom: 'from-blue-50',
+      gradientTo: 'to-indigo-50',
+      hoverBorder: 'border-indigo-400',
+      hoverText: 'text-indigo-600'
+    },
+    {
+      id: 'benefits',
+      emoji: '⭐',
+      title: 'Benefits',
+      subtitle: 'Why use this',
+      gradientFrom: 'from-purple-50',
+      gradientTo: 'to-pink-50',
+      hoverBorder: 'border-purple-400',
+      hoverText: 'text-purple-600'
+    },
+    {
+      id: 'how-to-use',
+      emoji: '📖',
+      title: 'How to Use',
+      subtitle: 'Step-by-step',
+      gradientFrom: 'from-green-50',
+      gradientTo: 'to-emerald-50',
+      hoverBorder: 'border-green-400',
+      hoverText: 'text-green-600'
+    },
+    {
+      id: 'use-cases',
+      emoji: '💡',
+      title: 'Use Cases',
+      subtitle: 'Who uses this',
+      gradientFrom: 'from-orange-50',
+      gradientTo: 'to-amber-50',
+      hoverBorder: 'border-orange-400',
+      hoverText: 'text-orange-600'
+    },
+    {
+      id: 'about',
+      emoji: 'ℹ️',
+      title: 'About',
+      subtitle: 'Understanding GPA',
+      gradientFrom: 'from-cyan-50',
+      gradientTo: 'to-blue-50',
+      hoverBorder: 'border-cyan-400',
+      hoverText: 'text-cyan-600'
+    },
+    {
+      id: 'faq',
+      emoji: '❓',
+      title: 'FAQs',
+      subtitle: 'Common questions',
+      gradientFrom: 'from-violet-50',
+      gradientTo: 'to-purple-50',
+      hoverBorder: 'border-violet-400',
+      hoverText: 'text-violet-600'
+    }
+  ];
 
   // Grade Points Configuration
   const gradePoints: { [key: string]: number } = {
@@ -72,7 +137,7 @@ const ISACGPACalculator: React.FC = () => {
     "@type": "SoftwareApplication",
     "name": "ISAC GPA Calculator",
     "description": "Free GPA calculator for students to calculate grade point average with weighted and unweighted options. Perfect for high school and college academic planning.",
-    "url": "https://zurawebtools.com/tools/isac-gpa-calculator",
+    "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator",
     "applicationCategory": "EducationalApplication",
     "applicationSubCategory": "GPA Calculator Tool",
     "operatingSystem": "Web Browser",
@@ -103,15 +168,15 @@ const ISACGPACalculator: React.FC = () => {
     "mentions": [
        {
          "@type": "SoftwareApplication",
-         "@id": "https://zurawebtools.com/tools/berkeley-gpa-calculator",
+         "@id": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator",
          "name": "UC Berkeley GPA Calculator",
-         "url": "https://zurawebtools.com/tools/berkeley-gpa-calculator"
+         "url": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator"
        },
        {
          "@type": "SoftwareApplication",
-         "@id": "https://zurawebtools.com/tools/sat-score-calculator",
+         "@id": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator",
          "name": "SAT Score Calculator",
-         "url": "https://zurawebtools.com/tools/sat-score-calculator"
+         "url": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/sat-score-calculator"
        }
     ]
   };
@@ -142,7 +207,7 @@ const ISACGPACalculator: React.FC = () => {
         "@type": "ListItem",
         "position": 4,
         "name": "ISAC GPA Calculator",
-        "item": "https://zurawebtools.com/tools/isac-gpa-calculator"
+        "item": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator"
       }
     ]
   };
@@ -246,7 +311,7 @@ const ISACGPACalculator: React.FC = () => {
     setMetaTag('og:title', 'ISAC GPA Calculator - Free Academic Grade Point Average Calculator', true);
     setMetaTag('og:description', 'Free GPA calculator for students to calculate grade point average with weighted and unweighted options. Perfect for high school and college academic planning.', true);
     setMetaTag('og:image', 'https://zurawebtools.com/images/gpa-calculator-og.png', true);
-    setMetaTag('og:url', 'https://zurawebtools.com/tools/isac-gpa-calculator', true);
+    setMetaTag('og:url', 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator', true);
     setMetaTag('og:type', 'website', true);
 
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
@@ -255,7 +320,7 @@ const ISACGPACalculator: React.FC = () => {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', 'https://zurawebtools.com/tools/isac-gpa-calculator');
+    canonical.setAttribute('href', 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator');
 
     const schemas = [softwareSchema, breadcrumbSchema, faqSchema];
     schemas.forEach((schema, index) => {
@@ -271,6 +336,11 @@ const ISACGPACalculator: React.FC = () => {
 
   return (
     <>
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         {/* SEO Setup */}
 
@@ -333,7 +403,7 @@ const ISACGPACalculator: React.FC = () => {
               Share
             </button>
             <button
-              onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/tools/isac-gpa-calculator')}`, '_blank')}
+              onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator')}`, '_blank')}
               className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Share on Facebook"
             >
@@ -343,7 +413,7 @@ const ISACGPACalculator: React.FC = () => {
               Share
             </button>
             <button
-              onClick={() => navigator.clipboard.writeText('https://zurawebtools.com/tools/isac-gpa-calculator')}
+              onClick={() => navigator.clipboard.writeText('https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator')}
               className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Copy link to clipboard"
             >
@@ -488,8 +558,11 @@ const ISACGPACalculator: React.FC = () => {
             </div>
           </div>
 
+          {/* Table of Contents */}
+          <TableOfContents sections={tocSections} />
+
           {/* Quick Examples */}
-          <div className="mb-12">
+          <div id="examples" className="mb-12 scroll-mt-24">
             <div className="text-center mb-8">
               <h2 className="text-4xl font-bold text-gray-800 mb-4">Quick GPA Examples</h2>
               <p className="text-gray-600 text-lg">See how the calculator works with these common scenarios</p>
@@ -550,7 +623,7 @@ const ISACGPACalculator: React.FC = () => {
           </div>
 
           {/* Benefits */}
-          <div className="mb-12">
+          <div id="benefits" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Why Use Our GPA Calculator?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl text-center">
@@ -584,7 +657,7 @@ const ISACGPACalculator: React.FC = () => {
           </div>
 
           {/* How to Use */}
-          <div className="mb-12">
+          <div id="how-to-use" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">How to Calculate Your GPA</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="text-center">
@@ -621,7 +694,7 @@ const ISACGPACalculator: React.FC = () => {
           </div>
 
           {/* Use Cases */}
-          <div className="mb-12">
+          <div id="use-cases" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Who Uses Our GPA Calculator?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 text-center">
@@ -664,7 +737,7 @@ const ISACGPACalculator: React.FC = () => {
           </div>
 
           {/* About Section */}
-          <div className="mb-12">
+          <div id="about" className="mb-12 scroll-mt-24">
             <div className="bg-gradient-to-br from-white via-blue-50 to-indigo-50 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">
               <div className="text-center mb-12">
                 <div className="inline-flex items-center gap-3 bg-blue-600 text-white px-6 py-3 rounded-full mb-6">
@@ -685,7 +758,7 @@ const ISACGPACalculator: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-blue-500">
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">What Is the ISAC GPA Calculator?</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">The ISAC GPA Calculator is a precision-grade academic tool that calculates semester GPA, cumulative GPA, weighted GPA, and unweighted GPA using the standard 4.0 scale. It converts letter grades into grade points, applies credit-hour weighting, and generates accurate results for students who need reliable GPA evaluation for scholarships, admissions, and academic planning. If you need UC-specific calculations like A+ caps and honors weighting rules, check out our <a href="/tools/berkeley-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline">UC Berkeley GPA Calculator</a>.</p>
+                  <p className="text-gray-600 text-lg leading-relaxed">The ISAC GPA Calculator is a precision-grade academic tool that calculates semester GPA, cumulative GPA, weighted GPA, and unweighted GPA using the standard 4.0 scale. It converts letter grades into grade points, applies credit-hour weighting, and generates accurate results for students who need reliable GPA evaluation for scholarships, admissions, and academic planning. If you need UC-specific calculations like A+ caps and honors weighting rules, check out our <a href="/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline">UC Berkeley GPA Calculator</a>.</p>
                 </div>
 
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-green-500">
@@ -715,7 +788,7 @@ const ISACGPACalculator: React.FC = () => {
 
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-indigo-500">
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">How Students Use the ISAC GPA Calculator</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">Students use the ISAC tool to track semester performance, calculate cumulative GPA, forecast future GPA, estimate grade impact, and plan strategically for academic goals. For standardized test preparation alongside GPA insights, try our <a href="/tools/sat-score-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline">SAT Score Calculator</a>.</p>
+                  <p className="text-gray-600 text-lg leading-relaxed">Students use the ISAC tool to track semester performance, calculate cumulative GPA, forecast future GPA, estimate grade impact, and plan strategically for academic goals. For standardized test preparation alongside GPA insights, try our <a href="/education-and-exam-tools/test-score-tools/sat-score-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline">SAT Score Calculator</a>.</p>
                 </div>
 
               </div>
@@ -755,7 +828,7 @@ const ISACGPACalculator: React.FC = () => {
           </div>
 
           {/* FAQs */}
-          <div className="mb-12">
+          <div id="faq" className="mb-12 scroll-mt-24">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">GPA Calculator FAQs</h2>
             <div className="max-w-4xl mx-auto space-y-6">
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
@@ -796,21 +869,21 @@ const ISACGPACalculator: React.FC = () => {
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">SAT Score Calculator</h3>
                 <p className="text-gray-600 mb-4">Calculate your SAT scores and percentile rankings for college admissions preparation.</p>
-                <a href="/tools/sat-score-calculator" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
+                <a href="/education-and-exam-tools/test-score-tools/sat-score-calculator" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
                   Use SAT Calculator
                 </a>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">Percentage Change Calculator</h3>
                 <p className="text-gray-600 mb-4">Calculate percentage increases or decreases for academic grade analysis.</p>
-                <a href="/tools/percentage-change-calculator" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
+                <a href="/math-and-calculation-tools/percentage-change-calculator" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
                   Use Percentage Calculator
                 </a>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">Word Counter Tool</h3>
                 <p className="text-gray-600 mb-4">Count words, characters, and reading time for essays and academic papers.</p>
-                <a href="/tools/word-counter" className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
+                <a href="/text-and-writing-tools/word-counter" className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
                   Use Word Counter
                 </a>
               </div>

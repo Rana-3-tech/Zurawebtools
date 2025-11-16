@@ -174,7 +174,7 @@ const AudiobookSpeedCalculator = () => {
 
         const ogUrl = document.createElement('meta');
         ogUrl.setAttribute('property', 'og:url');
-        ogUrl.content = 'https://zurawebtools.com/tools/audiobook-speed-calculator';
+        ogUrl.content = 'https://zurawebtools.com/audio-and-media-tools/audiobook-speed-calculator';
         document.head.appendChild(ogUrl);
 
         const ogType = document.createElement('meta');
@@ -220,7 +220,7 @@ const AudiobookSpeedCalculator = () => {
         
         const canonicalLink = document.createElement('link');
         canonicalLink.rel = 'canonical';
-        canonicalLink.href = 'https://zurawebtools.com/tools/audiobook-speed-calculator';
+        canonicalLink.href = 'https://zurawebtools.com/audio-and-media-tools/audiobook-speed-calculator';
         document.head.appendChild(canonicalLink);
 
         // Create and append JSON-LD script
@@ -238,7 +238,7 @@ const AudiobookSpeedCalculator = () => {
                 "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
                 "publisher": { "@type": "Organization", "name": "ZuraWebTools", "url": "https://zurawebtools.com" },
                 "description": "A free online calculator to find out how much time you save when listening to audiobooks faster. Enter duration and playback speed to get adjusted time instantly.",
-                "url": "https://zurawebtools.com/tools/audiobook-speed-calculator",
+                "url": "https://zurawebtools.com/audio-and-media-tools/audiobook-speed-calculator",
                 "featureList": [
                     "Instant time calculations",
                     "Multiple speed options",
@@ -251,7 +251,7 @@ const AudiobookSpeedCalculator = () => {
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
                 "name": "Audiobook Speed Calculator",
-                "url": "https://zurawebtools.com/tools/audiobook-speed-calculator",
+                "url": "https://zurawebtools.com/audio-and-media-tools/audiobook-speed-calculator",
                 "description": "Calculate how much time you save by listening to audiobooks at faster speeds. Free online tool for productivity enthusiasts.",
                 "applicationCategory": "ProductivityApplication",
                 "operatingSystem": "Web Browser",
@@ -363,7 +363,7 @@ const AudiobookSpeedCalculator = () => {
                         "@type": "ListItem",
                         "position": 3,
                         "name": "Audiobook Speed Calculator",
-                        "item": "https://zurawebtools.com/tools/audiobook-speed-calculator"
+                        "item": "https://zurawebtools.com/audio-and-media-tools/audiobook-speed-calculator"
                     }
                 ]
             }

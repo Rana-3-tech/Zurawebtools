@@ -37,7 +37,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
         { property: 'og:image', content: 'https://storage.googleapis.com/aai-web-samples/zura-case-converter-og.png' },
         { property: 'og:image:alt', content: 'A preview of the Online Case Converter Tool from ZuraWebTools, with conversion buttons.' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://zurawebtools.com/tools/case-converter' },
+        { property: 'og:url', content: 'https://zurawebtools.com/text-and-writing-tools/case-converter' },
         { property: 'og:locale', content: 'en_US' },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Online Case Converter Tool | ZuraWebTools' },
@@ -60,7 +60,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
     // Canonical URL
     const canonical = document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
-    canonical.setAttribute('href', 'https://zurawebtools.com/tools/case-converter');
+    canonical.setAttribute('href', 'https://zurawebtools.com/text-and-writing-tools/case-converter');
     document.head.appendChild(canonical);
     
     // 📜 JSON-LD Schema
@@ -97,14 +97,14 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
           ]
         },
         "description": "A free online text case changer to convert text to uppercase, lowercase, title case, sentence case, and capitalized case. This text capitalization tool is ideal for writers, developers, and for SEO content formatting.",
-        "url": "https://zurawebtools.com/tools/case-converter"
+        "url": "https://zurawebtools.com/text-and-writing-tools/case-converter"
       },
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Online Case Converter Tool",
         "description": "Free text case converter and formatter for uppercase, lowercase, title case, and sentence case conversion",
-        "url": "https://zurawebtools.com/tools/case-converter",
+        "url": "https://zurawebtools.com/text-and-writing-tools/case-converter",
         "datePublished": "2024-01-05",
         "dateModified": "2024-11-08",
         "inLanguage": "en-US",
@@ -144,7 +144,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
             "@type": "ListItem",
             "position": 3,
             "name": "Case Converter",
-            "item": "https://zurawebtools.com/tools/case-converter"
+            "item": "https://zurawebtools.com/text-and-writing-tools/case-converter"
           }
         ]
       },
@@ -165,21 +165,21 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
             "position": 1,
             "name": "Paste Your Text",
             "text": "Copy the text you want to convert and paste it into the left input box.",
-            "url": "https://zurawebtools.com/tools/case-converter#step1"
+            "url": "https://zurawebtools.com/text-and-writing-tools/case-converter#step1"
           },
           {
             "@type": "HowToStep",
             "position": 2,
             "name": "Choose a Case Format",
             "text": "Click on one of the case format buttons like Uppercase, Lowercase, Title Case, or Sentence Case.",
-            "url": "https://zurawebtools.com/tools/case-converter#step2"
+            "url": "https://zurawebtools.com/text-and-writing-tools/case-converter#step2"
           },
           {
             "@type": "HowToStep",
             "position": 3,
             "name": "Copy the Result",
             "text": "The converted text will instantly appear in the right output box. Click the Copy Result button to copy it to your clipboard.",
-            "url": "https://zurawebtools.com/tools/case-converter#step3"
+            "url": "https://zurawebtools.com/text-and-writing-tools/case-converter#step3"
           }
         ]
       },
@@ -266,7 +266,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
 
   // 📡 IndexNow: Notify search engines about page updates
   useEffect(() => {
-    notifyIndexNow('/tools/case-converter');
+    notifyIndexNow('/text-and-writing-tools/case-converter');
   }, []);
 
   // ✍️ Case Conversion Logic
@@ -696,7 +696,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
           <p className="font-semibold text-gray-400 mb-4">Share This Tool:</p>
           <div className="flex justify-center items-center space-x-6">
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/tools/case-converter')}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/text-and-writing-tools/case-converter')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
@@ -704,7 +704,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
               Facebook
             </a>
             <a
-              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent('https://zurawebtools.com/tools/case-converter')}&text=${encodeURIComponent('Free online case converter tool - instantly change text case!')}`}
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent('https://zurawebtools.com/text-and-writing-tools/case-converter')}&text=${encodeURIComponent('Free online case converter tool - instantly change text case!')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
@@ -712,7 +712,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
               Twitter
             </a>
             <a
-              href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent('https://zurawebtools.com/tools/case-converter')}&title=${encodeURIComponent('Online Case Converter Tool')}`}
+              href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent('https://zurawebtools.com/text-and-writing-tools/case-converter')}&title=${encodeURIComponent('Online Case Converter Tool')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
@@ -720,7 +720,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
               LinkedIn
             </a>
             <a
-              href={`https://api.whatsapp.com/send?text=${encodeURIComponent('Check out this free case converter tool: https://zurawebtools.com/tools/case-converter')}`}
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent('Check out this free case converter tool: https://zurawebtools.com/text-and-writing-tools/case-converter')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"

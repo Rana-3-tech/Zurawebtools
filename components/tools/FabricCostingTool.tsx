@@ -149,7 +149,7 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
             { property: 'og:image:alt', content: 'Free fabric costing calculator for textile cost calculation and yarn consumption analysis.' },
             { property: 'og:type', content: 'website' },
             { property: 'og:site_name', content: 'ZuraWebTools' },
-            { property: 'og:url', content: 'https://zurawebtools.com/tools/fabric-costing-tool' },
+            { property: 'og:url', content: 'https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool' },
             { property: 'og:locale', content: 'en_US' },
             { name: 'twitter:card', content: 'summary_large_image' },
             { name: 'twitter:title', content: 'Fabric Costing Calculator – Free Textile Cost Calculator | ZuraWebTools' },
@@ -169,7 +169,7 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
         // 🔗 Canonical
         const canonical = document.createElement('link');
         canonical.setAttribute('rel', 'canonical');
-        canonical.setAttribute('href', 'https://zurawebtools.com/tools/fabric-costing-tool');
+        canonical.setAttribute('href', 'https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool');
         document.head.appendChild(canonical);
 
         // 📘 Structured Data (Schema)
@@ -215,7 +215,7 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
                     ]
                 },
                 "description": "Professional fabric costing calculator for textile engineers to calculate warp/weft weight, yarn consumption, and per-meter fabric pricing with accurate conversion costs.",
-                "url": "https://zurawebtools.com/tools/fabric-costing-tool",
+                "url": "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool",
                 "featureList": [
                     "Warp and Weft weight calculation",
                     "Yarn consumption per meter",
@@ -231,7 +231,7 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
                 "@type": "WebPage",
                 "name": "Fabric Costing Calculator – Free Textile Cost Calculator",
                 "description": "Calculate fabric costs, yarn consumption, and per-meter pricing for textile manufacturing with our professional fabric costing tool.",
-                "url": "https://zurawebtools.com/tools/fabric-costing-tool",
+                "url": "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool",
                 "inLanguage": "en-US",
                 "isPartOf": {
                     "@type": "WebSite",
@@ -254,14 +254,14 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
                     {
                         "@type": "ListItem",
                         "position": 2,
-                        "name": "Tools",
-                        "item": "https://zurawebtools.com/tools"
+                        "name": "Math & Calculation Tools",
+                        "item": "https://zurawebtools.com/math-and-calculation-tools"
                     },
                     {
                         "@type": "ListItem",
                         "position": 3,
                         "name": "Fabric Costing Calculator",
-                        "item": "https://zurawebtools.com/tools/fabric-costing-tool"
+                        "item": "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool"
                     }
                 ]
             },
@@ -276,35 +276,35 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
                         "position": 1,
                         "name": "Enter Fabric Construction",
                         "text": "Input Read (EPI), Pick (PPI), Warp Count, Weft Count, and Fabric Width in inches to define your fabric structure.",
-                        "url": "https://zurawebtools.com/tools/fabric-costing-tool#step1"
+                        "url": "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool#step1"
                     },
                     {
                         "@type": "HowToStep",
                         "position": 2,
                         "name": "Add Cost Parameters",
                         "text": "Enter Quantity (meters), Warp Yarn Rate, Weft Yarn Rate, Conversion Rate per pick, and Commission percentage.",
-                        "url": "https://zurawebtools.com/tools/fabric-costing-tool#step2"
+                        "url": "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool#step2"
                     },
                     {
                         "@type": "HowToStep",
                         "position": 3,
                         "name": "Review Calculated Results",
                         "text": "View warp/weft weight per meter, total fabric weight, and detailed cost breakdown including conversion and commission.",
-                        "url": "https://zurawebtools.com/tools/fabric-costing-tool#step3"
+                        "url": "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool#step3"
                     },
                     {
                         "@type": "HowToStep",
                         "position": 4,
                         "name": "Check Order Totals",
                         "text": "See total warp and weft bags required for your order quantity, plus weights for 40-meter sample calculations.",
-                        "url": "https://zurawebtools.com/tools/fabric-costing-tool#step4"
+                        "url": "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool#step4"
                     },
                     {
                         "@type": "HowToStep",
                         "position": 5,
                         "name": "Adjust and Compare",
                         "text": "Modify parameters to simulate different fabric constructions, yarn rates, or quantities for comparison and optimization.",
-                        "url": "https://zurawebtools.com/tools/fabric-costing-tool#step5"
+                        "url": "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool#step5"
                     }
                 ],
                 "totalTime": "PT3M"
@@ -376,7 +376,7 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
 
     // 📡 IndexNow: Notify search engines about page updates
     useEffect(() => {
-        notifyIndexNow('/tools/fabric-costing-tool');
+        notifyIndexNow('/math-and-calculation-tools/fabric-costing-tool');
     }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -430,7 +430,7 @@ const FabricCostingTool: React.FC<FabricCostingToolProps> = ({ navigateTo }) => 
 
     const format = (num: number, digits = 3) => num.toLocaleString(undefined, { minimumFractionDigits: digits, maximumFractionDigits: digits });
 
-    const shareUrl = "https://zurawebtools.com/fabric-costing-tool";
+    const shareUrl = "https://zurawebtools.com/math-and-calculation-tools/fabric-costing-tool";
     const shareTitle = "Fabric Costing Tool – Fabric Cost Calculator, Yarn Cost & Production Rate | ZuraWebTools";
 
     const socialLinks = [
