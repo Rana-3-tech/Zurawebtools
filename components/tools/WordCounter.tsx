@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import RelatedTools from '../RelatedTools';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 import { Page } from '../../App';
 
 interface WordCounterProps {
@@ -9,6 +10,14 @@ interface WordCounterProps {
 const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
   const [text, setText] = useState('');
   const [readabilityResult, setReadabilityResult] = useState('');
+
+  // TOC sections configuration
+  const tocSections: TOCSection[] = [
+    { id: 'how-to-use', emoji: '📖', title: 'How to Use', subtitle: 'Step-by-step guide', gradientFrom: 'from-green-50', gradientTo: 'to-emerald-50', hoverBorder: 'border-green-400', hoverText: 'text-green-600' },
+    { id: 'benefits', emoji: '⭐', title: 'Benefits', subtitle: 'Why use this', gradientFrom: 'from-purple-50', gradientTo: 'to-pink-50', hoverBorder: 'border-purple-400', hoverText: 'text-purple-600' },
+    { id: 'features', emoji: '✨', title: 'Features', subtitle: 'What it offers', gradientFrom: 'from-blue-50', gradientTo: 'to-indigo-50', hoverBorder: 'border-indigo-400', hoverText: 'text-indigo-600' },
+    { id: 'faq', emoji: '❓', title: 'FAQ', subtitle: 'Common questions', gradientFrom: 'from-orange-50', gradientTo: 'to-amber-50', hoverBorder: 'border-orange-400', hoverText: 'text-orange-600' }
+  ];
 
   // 🧠 Enhanced SEO and Meta Tags Setup
   useEffect(() => {
@@ -332,8 +341,13 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
           )}
         </div>
 
+        {/* Table of Contents */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <TableOfContents sections={tocSections} />
+        </div>
+
         {/* 📚 How It Works Section */}
-        <div className="max-w-4xl mx-auto mt-16">
+        <div id="how-to-use" className="max-w-4xl mx-auto mt-16">
           <h2 className="text-3xl font-bold mb-6 text-white text-center">⚙️ How the Free Word Counter Works</h2>
           <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-8 rounded-xl border border-slate-700">
             <p className="text-gray-300 leading-relaxed mb-4">
@@ -352,7 +366,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
         </div>
 
         {/* 🎯 Common Use Cases */}
-        <div className="max-w-4xl mx-auto mt-12">
+        <div id="benefits" className="max-w-4xl mx-auto mt-12">
           <h2 className="text-3xl font-bold mb-6 text-white text-center">🎯 Common Use Cases for Word Counter</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-700 hover:border-cyan-500 transition-colors">
@@ -383,7 +397,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
         </div>
 
         {/* ✨ Key Features */}
-        <div className="max-w-4xl mx-auto mt-12">
+        <div id="features" className="max-w-4xl mx-auto mt-12">
           <h2 className="text-3xl font-bold mb-6 text-white text-center">✨ Why Use Our Free Word Counter Tool</h2>
           <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 p-8 rounded-xl border border-cyan-700/30">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -504,7 +518,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
         </div>
 
         {/* 💬 FAQ Section */}
-        <div className="max-w-4xl mx-auto mt-16">
+        <div id="faq" className="max-w-4xl mx-auto mt-16">
           <h2 className="text-3xl font-bold text-center mb-8 text-white">❓ Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div>

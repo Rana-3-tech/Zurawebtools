@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import RelatedTools from '../RelatedTools';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 import { Page } from '../../App';
 
 interface RemoveExtraSpacesProps {
@@ -23,6 +24,14 @@ const RemoveExtraSpaces: React.FC<RemoveExtraSpacesProps> = ({ navigateTo }) => 
     charsRemoved: 0,
     reductionPercent: 0
   });
+
+  // TOC sections configuration
+  const tocSections: TOCSection[] = [
+    { id: 'how-to-use', emoji: '📖', title: 'How to Use', subtitle: 'Quick guide', gradientFrom: 'from-green-50', gradientTo: 'to-emerald-50', hoverBorder: 'border-green-400', hoverText: 'text-green-600' },
+    { id: 'benefits', emoji: '⭐', title: 'Benefits', subtitle: 'Why choose this', gradientFrom: 'from-purple-50', gradientTo: 'to-pink-50', hoverBorder: 'border-purple-400', hoverText: 'text-purple-600' },
+    { id: 'features', emoji: '✨', title: 'Features', subtitle: 'What you get', gradientFrom: 'from-blue-50', gradientTo: 'to-indigo-50', hoverBorder: 'border-indigo-400', hoverText: 'text-indigo-600' },
+    { id: 'faq', emoji: '❓', title: 'FAQ', subtitle: 'Get answers', gradientFrom: 'from-orange-50', gradientTo: 'to-amber-50', hoverBorder: 'border-orange-400', hoverText: 'text-orange-600' }
+  ];
 
   // 🧠 Enhanced SEO & Meta Tags Setup
   useEffect(() => {
@@ -546,8 +555,13 @@ as you type or select options"
           </div>
         </div>
 
+        {/* Table of Contents */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <TableOfContents sections={tocSections} />
+        </div>
+
         {/* About Section */}
-        <div className="max-w-4xl mx-auto mt-16 bg-slate-900/50 p-8 rounded-2xl border border-slate-700">
+        <div id="how-to-use" className="max-w-4xl mx-auto mt-16 bg-slate-900/50 p-8 rounded-2xl border border-slate-700">
           <h2 className="text-3xl font-bold text-center mb-6 text-white">
             About the Remove Extra Spaces Tool
           </h2>
@@ -611,7 +625,7 @@ as you type or select options"
         </div>
 
         {/* Use Cases Section */}
-        <div className="max-w-5xl mx-auto mt-16">
+        <div id="benefits" className="max-w-5xl mx-auto mt-16">
           <h2 className="text-3xl font-bold text-center mb-8 text-white">
             Who Uses This Text Cleaner?
           </h2>
@@ -667,7 +681,7 @@ as you type or select options"
         </div>
 
         {/* Benefits Section */}
-        <div className="max-w-5xl mx-auto mt-16">
+        <div id="features" className="max-w-5xl mx-auto mt-16">
           <h2 className="text-3xl font-bold text-center mb-8 text-white">
             Why Use Our Remove Extra Spaces Tool?
           </h2>
@@ -754,7 +768,7 @@ as you type or select options"
         </div>
 
         {/* FAQ Section */}
-        <div className="max-w-4xl mx-auto mt-16">
+        <div id="faq" className="max-w-4xl mx-auto mt-16">
           <h2 className="text-3xl font-bold text-center mb-8 text-white">
             Frequently Asked Questions
           </h2>

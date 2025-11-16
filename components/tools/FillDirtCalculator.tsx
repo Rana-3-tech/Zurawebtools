@@ -473,13 +473,28 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                 </ol>
             </nav>
             <header className="text-center mb-10 print:hidden bg-gradient-to-r from-[#FF6B35] to-[#F7931E] p-8 rounded-3xl shadow-2xl">
-                <h1 className="text-4xl sm:text-5xl font-extrabold text-white drop-shadow-lg">??? Fill Dirt Calculator</h1>
+                <h1 className="text-4xl sm:text-5xl font-extrabold text-white drop-shadow-lg">
+                    <svg className="w-12 h-12 inline-block mr-3 -mt-1" fill="currentColor" viewBox="0 0 24 24" aria-label="Construction Icon">
+                        <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                    </svg>
+                    Fill Dirt Calculator
+                </h1>
                 <p className="mt-3 text-xl text-white/90 font-medium">Calculate fill dirt volume, weight, cost, and truckloads - How much fill dirt do I need calculator for excavation, grading & landscaping projects</p>
                  <div className="flex justify-center items-center mt-6 gap-4">
                     <span className="text-white font-bold text-lg">Select Units:</span>
                     <div className="inline-flex rounded-xl shadow-lg overflow-hidden">
-                        <button onClick={() => setUnitSystem('imperial')} className={`px-6 py-3 text-base font-bold transition-all ${unitSystem === 'imperial' ? 'bg-white text-[#FF6B35] shadow-inner' : 'bg-white/20 hover:bg-white/30 text-white'}`}>?? Imperial</button>
-                        <button onClick={() => setUnitSystem('metric')} className={`px-6 py-3 text-base font-bold transition-all border-l-2 border-white/30 ${unitSystem === 'metric' ? 'bg-white text-[#FF6B35] shadow-inner' : 'bg-white/20 hover:bg-white/30 text-white'}`}>?? Metric</button>
+                        <button onClick={() => setUnitSystem('imperial')} className={`px-6 py-3 text-base font-bold transition-all ${unitSystem === 'imperial' ? 'bg-white text-[#FF6B35] shadow-inner' : 'bg-white/20 hover:bg-white/30 text-white'}`}>
+                            <svg className="w-5 h-5 inline-block mr-2 -mt-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Imperial
+                        </button>
+                        <button onClick={() => setUnitSystem('metric')} className={`px-6 py-3 text-base font-bold transition-all border-l-2 border-white/30 ${unitSystem === 'metric' ? 'bg-white text-[#FF6B35] shadow-inner' : 'bg-white/20 hover:bg-white/30 text-white'}`}>
+                            <svg className="w-5 h-5 inline-block mr-2 -mt-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Metric
+                        </button>
                     </div>
                 </div>
             </header>
@@ -489,7 +504,11 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                 <div className="w-full lg:w-[60%] space-y-6 print:hidden">
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border-2 border-[#06b6d4] dark:border-[#22d3ee]">
                         <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white flex items-center gap-3">
-                            <span className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#F7931E] rounded-lg flex items-center justify-center text-white text-xl">??</span>
+                            <span className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#F7931E] rounded-lg flex items-center justify-center text-white text-xl">
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                                </svg>
+                            </span>
                             Project Areas
                         </h3>
                         <div className="space-y-5">

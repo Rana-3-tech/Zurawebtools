@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RelatedTools from '../RelatedTools';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 import { Page } from '../../App';
 import { notifyIndexNow } from '../../utils/indexNow';
 
@@ -16,6 +17,14 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
   const charCount = inputText.length;
   const wordCount = inputText.trim() === '' ? 0 : inputText.trim().split(/\s+/).length;
   const lineCount = inputText.split('\n').length;
+
+  // TOC sections configuration
+  const tocSections: TOCSection[] = [
+    { id: 'how-to-use', emoji: '📖', title: 'How to Use', subtitle: 'Quick tutorial', gradientFrom: 'from-green-50', gradientTo: 'to-emerald-50', hoverBorder: 'border-green-400', hoverText: 'text-green-600' },
+    { id: 'benefits', emoji: '⭐', title: 'Benefits', subtitle: 'Key advantages', gradientFrom: 'from-purple-50', gradientTo: 'to-pink-50', hoverBorder: 'border-purple-400', hoverText: 'text-purple-600' },
+    { id: 'use-cases', emoji: '💼', title: 'Use Cases', subtitle: 'When to use', gradientFrom: 'from-blue-50', gradientTo: 'to-indigo-50', hoverBorder: 'border-indigo-400', hoverText: 'text-indigo-600' },
+    { id: 'faq', emoji: '❓', title: 'FAQ', subtitle: 'Common questions', gradientFrom: 'from-orange-50', gradientTo: 'to-amber-50', hoverBorder: 'border-orange-400', hoverText: 'text-orange-600' }
+  ];
 
   // 🧠 SEO & Meta Tags Setup
   useEffect(() => {
@@ -477,8 +486,13 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
           </div>
         </div>
 
+        {/* Table of Contents */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <TableOfContents sections={tocSections} />
+        </div>
+
         {/* Benefits Section */}
-        <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <section id="benefits" className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
             <div className="text-3xl mb-3">⚡</div>
             <h3 className="text-xl font-bold text-white mb-3">Instant Conversion</h3>
@@ -520,7 +534,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
         </div>
 
         {/* Use Cases Section */}
-        <div className="max-w-4xl mx-auto mt-16">
+        <div id="use-cases" className="max-w-4xl mx-auto mt-16">
           <h2 className="text-3xl font-bold text-center mb-8 text-white">Common Use Cases</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-slate-900/40 p-6 rounded-lg border border-slate-700">
@@ -574,7 +588,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
         </div>
 
         {/* How-to */}
-        <div className="max-w-4xl mx-auto mt-16 text-left">
+        <div id="how-to-use" className="max-w-4xl mx-auto mt-16 text-left">
            <h2 className="text-3xl font-bold text-center mb-8 text-white">How to Use This Case Converter</h2>
            <div className="bg-slate-900/30 p-8 rounded-xl shadow-lg space-y-6">
              <div className="space-y-5">
@@ -657,7 +671,7 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ navigateTo }) => {
         </section>
 
         {/* FAQ Section */}
-        <div className="max-w-4xl mx-auto mt-16">
+        <div id="faq" className="max-w-4xl mx-auto mt-16">
            <h2 className="text-3xl font-bold text-center mb-8 text-white">Frequently Asked Questions</h2>
            <div className="space-y-4">
                <div className="bg-slate-900/30 p-6 rounded-lg">

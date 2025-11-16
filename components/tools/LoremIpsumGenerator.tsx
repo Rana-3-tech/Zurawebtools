@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import RelatedTools from '../RelatedTools';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 import { Page } from '../../App';
 
 // Data for text generation
@@ -16,6 +17,14 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
     const [textType, setTextType] = useState<'lorem' | 'english'>('lorem');
     const [generatedText, setGeneratedText] = useState('');
     const [copySuccess, setCopySuccess] = useState(false);
+
+    // TOC sections configuration
+    const tocSections: TOCSection[] = [
+      { id: 'how-to-use', emoji: '📖', title: 'How to Use', subtitle: 'Generate text', gradientFrom: 'from-green-50', gradientTo: 'to-emerald-50', hoverBorder: 'border-green-400', hoverText: 'text-green-600' },
+      { id: 'benefits', emoji: '⭐', title: 'Benefits', subtitle: 'Why use Lorem', gradientFrom: 'from-purple-50', gradientTo: 'to-pink-50', hoverBorder: 'border-purple-400', hoverText: 'text-purple-600' },
+      { id: 'use-cases', emoji: '💼', title: 'Use Cases', subtitle: 'When to use', gradientFrom: 'from-blue-50', gradientTo: 'to-indigo-50', hoverBorder: 'border-indigo-400', hoverText: 'text-indigo-600' },
+      { id: 'faq', emoji: '❓', title: 'FAQ', subtitle: 'Get answers', gradientFrom: 'from-orange-50', gradientTo: 'to-amber-50', hoverBorder: 'border-orange-400', hoverText: 'text-orange-600' }
+    ];
 
     // 🧠 SEO & Meta Tags Setup
     useEffect(() => {
@@ -259,6 +268,11 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                     </div>
                 </div>
 
+                {/* Table of Contents */}
+                <div className="max-w-6xl mx-auto mt-16">
+                    <TableOfContents sections={tocSections} />
+                </div>
+
                 {/* Quick Examples Section */}
                 <div className="max-w-6xl mx-auto mt-16">
                     <h2 className="text-3xl font-bold text-center mb-8 text-white">⚡ Quick Lorem Ipsum Templates</h2>
@@ -290,7 +304,7 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                 </div>
 
                 {/* Benefits Section */}
-                <div className="max-w-6xl mx-auto mt-16">
+                <div id="benefits" className="max-w-6xl mx-auto mt-16">
                     <h2 className="text-3xl font-bold text-center mb-8 text-white">✨ Why Use Our Lorem Ipsum Generator?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="bg-gradient-to-br from-blue-500 to-cyan-500 p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow hover:-translate-y-1 duration-300">
@@ -315,7 +329,7 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                 </div>
 
                 {/* Use Cases Section */}
-                <div className="max-w-6xl mx-auto mt-16">
+                <div id="use-cases" className="max-w-6xl mx-auto mt-16">
                     <h2 className="text-3xl font-bold text-center mb-8 text-white">👥 Who Uses Lorem Ipsum Generators?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 hover:border-blue-400 transition-all duration-300">
@@ -342,7 +356,7 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                 </div>
 
                 {/* How to Use Section */}
-                <div className="max-w-4xl mx-auto mt-16 text-left">
+                <div id="how-to-use" className="max-w-4xl mx-auto mt-16 text-left">
                     <h2 className="text-3xl font-bold text-center mb-8 text-white">How to Use the Lorem Ipsum Generator</h2>
                     <div className="bg-slate-900/30 p-8 rounded-lg">
                         <ol className="list-decimal list-inside space-y-3 text-gray-300">
@@ -410,7 +424,7 @@ const LoremIpsumGenerator: React.FC<LoremIpsumGeneratorProps> = ({ navigateTo })
                 </div>
 
                 {/* FAQ */}
-                <div className="max-w-4xl mx-auto mt-16">
+                <div id="faq" className="max-w-4xl mx-auto mt-16">
                     <h2 className="text-3xl font-bold text-center mb-8 text-white">Frequently Asked Questions</h2>
                     <div className="space-y-4">
                         <div className="bg-slate-900/30 p-5 rounded-lg"><h3 className="text-xl font-semibold text-cyan-300">What is a Lorem Ipsum Generator?</h3><p className="text-gray-400 mt-2">It's a tool that creates placeholder or 'dummy' text for designers and developers to use in layouts and mockups before final content is available.</p></div>
