@@ -317,8 +317,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
           </button>
           <button
             onClick={handleAnalyzeReadability}
-            disabled={isThinking}
-            className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-bold py-3 px-8 rounded-full hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-bold py-3 px-8 rounded-full hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             Analyze Readability
           </button>
@@ -573,13 +572,7 @@ const WordCounter: React.FC<WordCounterProps> = ({ navigateTo }) => {
 
         <RelatedTools
           navigateTo={navigateTo}
-          relatedSlugs={['remove-extra-spaces', 'case-converter', 'lorem-ipsum-generator', 'time-difference-calculator', 'json-formatter-validator', 'percentage-change-calculator', 'sat-score-calculator']}
-          currentSlug="word-counter"
-        />
-
-        <RelatedTools
-          navigateTo={navigateTo}
-          relatedSlugs={['remove-extra-spaces', 'case-converter', 'lorem-ipsum-generator']}
+          relatedSlugs={['remove-extra-spaces', 'case-converter', 'lorem-ipsum-generator', 'time-difference-calculator', 'json-formatter', 'percentage-change-calculator', 'sat-score-calculator']}
           currentSlug="word-counter"
         />
       </div>
