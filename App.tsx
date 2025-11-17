@@ -47,6 +47,7 @@ const AudiobookSpeedCalculator = lazy(() => import('./components/tools/Audiobook
 const ReverbCalculator = lazy(() => import('./components/tools/ReverbCalculator'));
 const CodeSimilarityChecker = lazy(() => import('./components/tools/CodeSimilarityChecker'));
 const CollegeGPACalculator = lazy(() => import('./components/tools/CollegeGPACalculator'));
+const CSUGPACalculator = lazy(() => import('./components/tools/CSUGPACalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -185,6 +186,7 @@ const App: React.FC = () => {
             'berkeley-gpa-calculator': BerkeleyGPACalculator,
             'isac-gpa-calculator': ISACGPA,
             'college-gpa-calculator': CollegeGPACalculator,
+            'csu-gpa-calculator': CSUGPACalculator,
             'fill-dirt-calculator': FillDirtCalculator,
             'quilt-backing-calculator': QuiltBackingCalculator,
             'power-to-mass-ratio-calculator': PowerToMassRatioCalculator,

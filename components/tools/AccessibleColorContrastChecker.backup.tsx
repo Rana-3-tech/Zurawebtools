@@ -62,7 +62,6 @@ const AccessibleColorContrastChecker: React.FC<AccessibleColorContrastCheckerPro
       document.head.appendChild(el);
     });
 
-    const canonical = document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
     canonical.setAttribute('href', 'https://zurawebtools.com/color-and-design-tools/accessible-color-contrast-checker');
     document.head.appendChild(canonical);

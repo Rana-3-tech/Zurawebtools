@@ -521,7 +521,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
 
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border-2 border-[#2E8B57] dark:border-[#3CB371]">
                         <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white flex items-center gap-3">
-                            <span className="w-10 h-10 bg-gradient-to-r from-[#2E8B57] to-[#3CB371] rounded-lg flex items-center justify-center text-white text-xl">💵</span>
+                            <span className="w-10 h-10 bg-gradient-to-r from-[#2E8B57] to-[#3CB371] rounded-lg flex items-center justify-center text-white text-xl">??</span>
                             Material & Cost
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -538,7 +538,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
 
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border-2 border-[#4682B4] dark:border-[#5F9EA0]">
                         <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white flex items-center gap-3">
-                            <span className="w-10 h-10 bg-gradient-to-r from-[#4682B4] to-[#5F9EA0] rounded-lg flex items-center justify-center text-white text-xl">🚚</span>
+                            <span className="w-10 h-10 bg-gradient-to-r from-[#4682B4] to-[#5F9EA0] rounded-lg flex items-center justify-center text-white text-xl">??</span>
                             Truckloads
                         </h3>
                          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -553,7 +553,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border-2 border-gray-300 dark:border-gray-600">
                          <button onClick={() => setShowAdvanced(!showAdvanced)} className="font-bold text-xl w-full text-left flex justify-between items-center text-gray-800 dark:text-white hover:text-[#FF6B35] dark:hover:text-[#F7931E] transition-colors">
                             <span className="flex items-center gap-3">
-                                <span className="w-10 h-10 bg-gradient-to-r from-gray-400 to-gray-600 dark:from-gray-600 dark:to-gray-800 rounded-lg flex items-center justify-center text-white text-xl">⚙️</span>
+                                <span className="w-10 h-10 bg-gradient-to-r from-gray-400 to-gray-600 dark:from-gray-600 dark:to-gray-800 rounded-lg flex items-center justify-center text-white text-xl">??</span>
                                 Advanced Options
                             </span>
                             <span className={`transform transition-transform text-2xl ${showAdvanced ? 'rotate-180' : ''}`}>?</span>
@@ -574,12 +574,12 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                 <div className="w-full lg:w-[40%] space-y-6">
                     <div className="lg:sticky lg:top-8 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-blue-900/20 p-6 rounded-2xl shadow-2xl border-2 border-[#4682B4] dark:border-[#5F9EA0]">
                         <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white flex items-center gap-3">
-                            <span className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#F7931E] rounded-lg flex items-center justify-center text-white text-xl">🧮</span>
+                            <span className="w-10 h-10 bg-gradient-to-r from-[#FF6B35] to-[#F7931E] rounded-lg flex items-center justify-center text-white text-xl">??</span>
                             Estimated Results
                         </h3>
                         <div className="flex justify-between items-center mb-6 p-5 bg-gradient-to-r from-white to-blue-50 dark:from-gray-900/50 dark:to-blue-900/30 rounded-xl border-2 border-gray-300 dark:border-gray-600 print:hidden shadow-md">
                             <div className="flex items-center gap-3">
-                                <span className="text-2xl">⚖️</span>
+                                <span className="text-2xl">??</span>
                                 <div>
                                     <h4 className="font-bold text-gray-800 dark:text-white text-base">Compare Materials</h4>
                                     <p className="text-xs text-gray-600 dark:text-gray-400">Compare costs between different materials</p>
@@ -598,12 +598,12 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                         
                         <div className={`grid ${compareMode ? 'grid-cols-2 gap-6' : 'grid-cols-1'}`}>
                             <div className={compareMode ? 'bg-white dark:bg-gray-700/50 p-4 rounded-xl border-2 border-[#10b981]' : ''}>
-                                {compareMode && <h4 className="font-bold text-center text-lg mb-4 text-[#10b981] dark:text-[#34d399] bg-[#10b981]/10 dark:bg-[#10b981]/20 py-2 rounded-lg">📦 {material}</h4>}
+                                {compareMode && <h4 className="font-bold text-center text-lg mb-4 text-[#10b981] dark:text-[#34d399] bg-[#10b981]/10 dark:bg-[#10b981]/20 py-2 rounded-lg">?? {material}</h4>}
                                 <ResultDisplay results={results} unitSystem={unitSystem} />
                             </div>
                             {compareMode && compareResults &&
                                 <div className="bg-white dark:bg-gray-700/50 p-4 rounded-xl border-2 border-[#06b6d4]">
-                                    <h4 className="font-bold text-center text-lg mb-4 text-[#06b6d4] dark:text-[#22d3ee] bg-[#06b6d4]/10 dark:bg-[#06b6d4]/20 py-2 rounded-lg">📦 {compareMaterial}</h4>
+                                    <h4 className="font-bold text-center text-lg mb-4 text-[#06b6d4] dark:text-[#22d3ee] bg-[#06b6d4]/10 dark:bg-[#06b6d4]/20 py-2 rounded-lg">?? {compareMaterial}</h4>
                                     <ResultDisplay results={compareResults} unitSystem={unitSystem} />
                                 </div>
                             }
@@ -753,7 +753,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                 <h2 className="text-3xl font-bold text-center mb-8 text-light-text dark:text-dark-text">Imperial vs Metric - Unit Conversion Guide</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl border-2 border-blue-200 dark:border-blue-800">
-                        <h3 className="text-2xl font-bold mb-4 text-blue-800 dark:text-blue-200">🇺🇸 Imperial System</h3>
+                        <h3 className="text-2xl font-bold mb-4 text-blue-800 dark:text-blue-200">?? Imperial System</h3>
                         <ul className="space-y-2 text-blue-700 dark:text-blue-300">
                             <li><strong>Volume:</strong> Cubic yards (yd�)</li>
                             <li><strong>Weight:</strong> Pounds (lbs)</li>
@@ -763,7 +763,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                         </ul>
                     </div>
                     <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-xl border-2 border-green-200 dark:border-green-800">
-                        <h3 className="text-2xl font-bold mb-4 text-green-800 dark:text-green-200">🌍 Metric System</h3>
+                        <h3 className="text-2xl font-bold mb-4 text-green-800 dark:text-green-200">?? Metric System</h3>
                         <ul className="space-y-2 text-green-700 dark:text-green-300">
                             <li><strong>Volume:</strong> Cubic meters (m�)</li>
                             <li><strong>Weight:</strong> Kilograms (kg)</li>
@@ -794,12 +794,12 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                         <p className="text-white/90">Get precise volume, weight, and cost estimates in real-time without manual math errors. Save hours of planning time.</p>
                     </div>
                     <div className="bg-gradient-to-br from-[#2E8B57] to-[#3CB371] p-8 rounded-2xl shadow-xl text-white transform hover:scale-105 transition-transform">
-                        <div className="text-5xl mb-4">💰</div>
+                        <div className="text-5xl mb-4">??</div>
                         <h3 className="text-2xl font-bold mb-3">Cost Estimation</h3>
                         <p className="text-white/90">Compare multiple materials, factor in delivery fees, taxes, and get accurate budget forecasts before ordering.</p>
                     </div>
                     <div className="bg-gradient-to-br from-[#4682B4] to-[#5F9EA0] p-8 rounded-2xl shadow-xl text-white transform hover:scale-105 transition-transform">
-                        <div className="text-5xl mb-4">✓</div>
+                        <div className="text-5xl mb-4">??</div>
                         <h3 className="text-2xl font-bold mb-3">Professional Accuracy</h3>
                         <p className="text-white/90">Built-in compaction factors, wastage buffers, and moisture adjustments ensure you order the right amount every time.</p>
                     </div>
@@ -814,7 +814,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                     {/* Residential Backyard Leveling */}
                     <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-8 rounded-2xl border-2 border-green-200 dark:border-green-800">
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="text-3xl">🏡</span>
+                            <span className="text-3xl">??</span>
                             <h3 className="text-2xl font-bold text-green-800 dark:text-green-200">Residential Backyard Leveling</h3>
                         </div>
                         <div className="space-y-3 mb-6">
@@ -860,7 +860,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                     {/* Pool Backfill Project */}
                     <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-8 rounded-2xl border-2 border-purple-200 dark:border-purple-800">
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="text-3xl">🛣️</span>
+                            <span className="text-3xl">??</span>
                             <h3 className="text-2xl font-bold text-purple-800 dark:text-purple-200">Swimming Pool Backfill</h3>
                         </div>
                         <div className="space-y-3 mb-6">
@@ -883,7 +883,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                     {/* Driveway Construction */}
                     <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 p-8 rounded-2xl border-2 border-orange-200 dark:border-orange-800">
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="text-3xl">🚗</span>
+                            <span className="text-3xl">??</span>
                             <h3 className="text-2xl font-bold text-orange-800 dark:text-orange-200">Driveway Base Preparation</h3>
                         </div>
                         <div className="space-y-3 mb-6">
@@ -959,28 +959,28 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                         Our <strong>Fill Dirt Calculator</strong> is the most comprehensive, professional-grade earthwork estimation tool available online�completely free to use. Engineered for accuracy and ease of use, it serves contractors bidding on commercial developments, homeowners planning backyard leveling projects, landscapers designing outdoor spaces, and civil engineers calculating cut-and-fill volumes for infrastructure projects. Save thousands in material waste and avoid costly project delays with instant, precise calculations. This fill dirt volume calculator online provides everything you need to calculate cubic yards of fill dirt accurately.
                     </p>
                     
-                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">⭐ Why This Calculator Stands Out</h3>
+                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">?? Why This Calculator Stands Out</h3>
                     <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
                         Unlike basic volume calculators that provide rough estimates, our advanced tool incorporates <strong>compaction factor adjustment</strong> (10-30% soil settling compensation), <strong>wastage buffer</strong> (5-15% spillage and over-excavation allowance), <strong>moisture adjustment</strong> (wet vs. dry soil weight differences), and <strong>drainage offset</strong> (subtracting reserved drainage layer space). These industry-standard parameters ensure first-order accuracy, eliminating the guesswork and preventing budget overruns from under-ordering or excessive waste from over-ordering. Our fill dirt cost estimator includes all these professional features for accurate earthwork volume calculations.
                     </p>
                     
-                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">🧱 Material Types & Custom Densities</h3>
+                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">?? Material Types & Custom Densities</h3>
                     <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
                         Calculate for six common materials with pre-loaded industry-standard densities: <strong>Fill Dirt</strong> (95 lb/ft�), <strong>Topsoil</strong> (80 lb/ft�), <strong>Gravel</strong> (105 lb/ft�), <strong>Sand</strong> (100 lb/ft�), <strong>Clay</strong> (110 lb/ft�), and <strong>Crushed Rock</strong> (100 lb/ft�). Need specialized material? Use the <strong>Custom Density</strong> option for engineered fills, recycled materials, or regional soil variations. The <strong>Material Comparison Mode</strong> lets you evaluate two materials side-by-side, comparing volumes, weights, costs, and truckloads to optimize your material selection based on structural requirements and budget constraints.
                     </p>
                     
-                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">📐 Multi-Shape Support & Complex Sites</h3>
+                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">?? Multi-Shape Support & Complex Sites</h3>
                     <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
                         Handle complex project geometries effortlessly with multi-area calculations. Add unlimited areas with <strong>six shape options</strong>: <strong>Rectangle</strong> (length � width for standard plots, driveways, foundations), <strong>Circle</strong> (diameter input for ponds, silos, roundabouts), <strong>Triangle</strong> (base � height for sloped areas and corner plots), <strong>Trapezoid</strong> (parallel bases for sloped driveways, embankments, terraces), <strong>Oval/Ellipse</strong> (length � width for oval pools, elliptical gardens), and <strong>Irregular</strong> (enter known area for non-standard geometries). The calculator automatically aggregates volumes across all areas, applies compaction and wastage factors globally, and converts results to both <strong>Imperial</strong> (cubic yards, pounds, feet) and <strong>Metric</strong> (cubic meters, kilograms, meters) units seamlessly.
                     </p>
                     
-                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">🚛 Truckload Estimation & Logistics Planning</h3>
+                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">?? Truckload Estimation & Logistics Planning</h3>
                         <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
                         Plan material delivery efficiently with precise truckload calculations. Select from standard truck sizes�<strong>5 cubic yards</strong> (small dump truck), <strong>10 cubic yards</strong> (standard tandem), <strong>18 cubic yards</strong> (tri-axle), or <strong>Custom Size</strong>�and instantly see how many loads you'll need. This prevents over-scheduling deliveries, reduces trucking costs, and helps coordinate site logistics with contractors. Use our <a href="/tools/pro-rv-loan" className="text-[#FF6B35] hover:text-[#e55a2b] dark:text-[#F7931E] dark:hover:text-[#FF6B35] font-semibold underline">Loan Calculator</a> to plan equipment financing for trucks and machinery. The calculator factors in your adjusted volume (including compaction and wastage) to ensure adequate material arrives on-site.
-                    </p>                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">💳 Complete Cost Breakdown & Budget Management</h3>
+                    </p>                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">?? Complete Cost Breakdown & Budget Management</h3>
                         <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
                         Get itemized cost estimates before placing orders. Input price per cubic yard/meter, flat delivery fees, and local tax rates to see <strong>material cost</strong>, <strong>delivery charges</strong>, <strong>taxes</strong>, and <strong>total project expense</strong>. This transparency helps with accurate bid preparation, budget approval, and cost comparison between suppliers. Use our <a href="/tools/fabric-costing" className="text-[#FF6B35] hover:text-[#e55a2b] dark:text-[#F7931E] dark:hover:text-[#FF6B35] font-semibold underline">Fabric Costing Tool</a> for material cost calculations and <a href="/tools/percentage-change" className="text-[#FF6B35] hover:text-[#e55a2b] dark:text-[#F7931E] dark:hover:text-[#FF6B35] font-semibold underline">Percentage Change Calculator</a> to analyze cost variations.
-                    </p>                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">📱 Real-Time Calculations & Mobile Responsive</h3>
+                    </p>                    <h3 className="text-xl font-bold text-light-text dark:text-dark-text mt-6 mb-3">? Real-Time Calculations & Mobile Responsive</h3>
                     <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
                         Experience instant results as you type�no submit buttons or page reloads needed. The calculator updates volume, weight, cost, and truckloads in real-time, allowing rapid what-if scenario analysis. Fully responsive design works flawlessly on desktop, tablet, and mobile devices, letting you calculate fill dirt requirements directly from the job site. Dark mode support reduces eye strain during long estimation sessions. Use our <a href="/tools/time-difference" className="text-[#10b981] hover:text-[#059669] dark:text-[#34d399] dark:hover:text-[#10b981] font-semibold underline">Time Difference Calculator</a> to manage project timelines and delivery schedules. This is the most advanced free <strong>fill dirt estimator</strong>, <strong>earthwork calculator</strong>, <strong>soil volume calculator</strong>, and <strong>excavation planning tool</strong> trusted by construction professionals worldwide.
                     </p>
@@ -1032,7 +1032,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                 <Card title="How to Use This Fill Dirt Calculator - Complete Guide for Accurate Volume Calculations">
                     <div className="max-w-4xl mx-auto space-y-8 text-gray-700 dark:text-gray-300 leading-relaxed">
                         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl border-l-4 border-blue-500">
-                            <h3 className="text-xl font-bold text-blue-800 dark:text-blue-200 mb-3">🚀 Quick Start Guide</h3>
+                            <h3 className="text-xl font-bold text-blue-800 dark:text-blue-200 mb-3">?? Quick Start Guide</h3>
                             <p className="text-blue-700 dark:text-blue-300">Our professional fill dirt calculator online makes earthwork volume calculations simple. Whether you're a homeowner planning backyard leveling or a contractor estimating commercial projects, this guide will help you calculate cubic yards of fill dirt accurately.</p>
                         </div>
 
@@ -1040,9 +1040,9 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                         <li className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700">
                             <strong className="text-lg text-[#FF6B35]">Select Your Measurement System:</strong> Choose Imperial (feet, cubic yards, pounds) or Metric (meters, cubic meters, kilograms) based on your location and project specifications.
                             <div className="mt-3 ml-6 space-y-2">
-                                <p className="text-sm"><em>💡 Example: US construction projects typically use Imperial, while international projects use Metric.</em></p>
-                                <p className="text-sm"><em>📏 Imperial: Perfect for residential projects, landscaping, and US-based contractors</em></p>
-                                <p className="text-sm"><em>📐 Metric: Ideal for international projects, engineering firms, and global suppliers</em></p>
+                                <p className="text-sm"><em>?? Example: US construction projects typically use Imperial, while international projects use Metric.</em></p>
+                                <p className="text-sm"><em>?? Imperial: Perfect for residential projects, landscaping, and US-based contractors</em></p>
+                                <p className="text-sm"><em>?? Metric: Ideal for international projects, engineering firms, and global suppliers</em></p>
                             </div>
                         </li>
 
@@ -1053,54 +1053,54 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                                     <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-4 rounded-lg">
                                         <strong className="text-green-800 dark:text-green-200">Rectangle:</strong> Perfect for rectangular areas like driveways, foundations, and garden plots.
                                         <p className="mt-2 text-sm text-green-700 dark:text-green-300">
-                                            📐 <em>Visual: Four 90° corners, parallel sides, uniform depth throughout</em><br/>
-                                            📊 <strong>Example:</strong> A 30ft × 20ft × 1ft driveway needs 22.2 cubic yards of fill dirt<br/>
-                                            🏗️ <strong>Use Cases:</strong> Parking pads, building foundations, raised garden beds, rectangular pools
+                                            ?? <em>Visual: Four 90� corners, parallel sides, uniform depth throughout</em><br/>
+                                            ?? <strong>Example:</strong> A 30ft � 20ft � 1ft driveway needs 22.2 cubic yards of fill dirt<br/>
+                                            ?? <strong>Use Cases:</strong> Parking pads, building foundations, raised garden beds, rectangular pools
                                         </p>
                                     </div>
                                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-4 rounded-lg">
                                         <strong className="text-blue-800 dark:text-blue-200">Circle:</strong> Ideal for circular areas like ponds, silos, and round patios.
                                         <p className="mt-2 text-sm text-blue-700 dark:text-blue-300">
-                                            ⭕ <em>Visual: Perfectly round perimeter, measured by diameter, even depth across</em><br/>
-                                            📊 <strong>Example:</strong> A 15ft diameter × 3ft deep pond requires 15.7 cubic yards<br/>
-                                            🏗️ <strong>Use Cases:</strong> Decorative ponds, grain silos, circular planters, round fountains
+                                            ?? <em>Visual: Perfectly round perimeter, measured by diameter, even depth across</em><br/>
+                                            ?? <strong>Example:</strong> A 15ft diameter � 3ft deep pond requires 15.7 cubic yards<br/>
+                                            ?? <strong>Use Cases:</strong> Decorative ponds, grain silos, circular planters, round fountains
                                         </p>
                                     </div>
                                     <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-4 rounded-lg">
                                         <strong className="text-purple-800 dark:text-purple-200">Triangle:</strong> Best for triangular sections, sloped corners, or wedge-shaped areas.
                                         <p className="mt-2 text-sm text-purple-700 dark:text-purple-300">
-                                            🔺 <em>Visual: Three-sided polygon, requires base length and perpendicular height</em><br/>
-                                            📊 <strong>Example:</strong> A triangle with 20ft base × 15ft height × 2ft depth needs 11.1 cubic yards<br/>
-                                            🏗️ <strong>Use Cases:</strong> Corner lots, sloped embankments, triangular garden designs, pie-shaped yards
+                                            ?? <em>Visual: Three-sided polygon, requires base length and perpendicular height</em><br/>
+                                            ?? <strong>Example:</strong> A triangle with 20ft base � 15ft height � 2ft depth needs 11.1 cubic yards<br/>
+                                            ?? <strong>Use Cases:</strong> Corner lots, sloped embankments, triangular garden designs, pie-shaped yards
                                         </p>
                                     </div>
                                     <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 p-4 rounded-lg">
                                         <strong className="text-orange-800 dark:text-orange-200">Trapezoid:</strong> Designed for sloped areas with parallel top and bottom edges.
                                         <p className="mt-2 text-sm text-orange-700 dark:text-orange-300">
-                                            📏 <em>Visual: Four sides with two parallel bases (top and bottom), slanted sides</em><br/>
-                                            📊 <strong>Example:</strong> A 25ft top × 35ft bottom × 20ft height × 1.5ft depth = 33.3 cubic yards<br/>
-                                            🏗️ <strong>Use Cases:</strong> Terraced hillsides, embankments, retaining wall areas, sloped driveways
+                                            ?? <em>Visual: Four sides with two parallel bases (top and bottom), slanted sides</em><br/>
+                                            ?? <strong>Example:</strong> A 25ft top � 35ft bottom � 20ft height � 1.5ft depth = 33.3 cubic yards<br/>
+                                            ?? <strong>Use Cases:</strong> Terraced hillsides, embankments, retaining wall areas, sloped driveways
                                         </p>
                                     </div>
                                     <div className="bg-gradient-to-br from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20 p-4 rounded-lg">
                                         <strong className="text-cyan-800 dark:text-cyan-200">Oval:</strong> For elliptical shapes like oval pools, gardens, and tracks.
                                         <p className="mt-2 text-sm text-cyan-700 dark:text-cyan-300">
-                                            ⬭ <em>Visual: Elongated circle with longest (length) and shortest (width) diameters</em><br/>
-                                            📊 <strong>Example:</strong> A 30ft × 18ft × 4ft oval pool requires 62.8 cubic yards<br/>
-                                            🏗️ <strong>Use Cases:</strong> Elliptical pools, oval gardens, running tracks, decorative landscaping
+                                            ?? <em>Visual: Elongated circle with longest (length) and shortest (width) diameters</em><br/>
+                                            ?? <strong>Example:</strong> A 30ft � 18ft � 4ft oval pool requires 62.8 cubic yards<br/>
+                                            ?? <strong>Use Cases:</strong> Elliptical pools, oval gardens, running tracks, decorative landscaping
                                         </p>
                                     </div>
                                     <div className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-900/20 dark:to-slate-900/20 p-4 rounded-lg">
                                         <strong className="text-gray-800 dark:text-gray-200">Irregular:</strong> For non-standard shapes when you already know the surface area.
                                         <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-                                            🔷 <em>Visual: Any complex shape - you provide the pre-measured area</em><br/>
-                                            📊 <strong>Example:</strong> A 500 sq ft custom area × 2ft depth = 37 cubic yards<br/>
-                                            🏗️ <strong>Use Cases:</strong> L-shaped yards, curved pathways, multi-sided plots, architectural designs
+                                            ?? <em>Visual: Any complex shape - you provide the pre-measured area</em><br/>
+                                            ?? <strong>Example:</strong> A 500 sq ft custom area � 2ft depth = 37 cubic yards<br/>
+                                            ?? <strong>Use Cases:</strong> L-shaped yards, curved pathways, multi-sided plots, architectural designs
                                         </p>
                                     </div>
                                 </div>
                                 <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-400">
-                                    <p className="text-sm text-yellow-800 dark:text-yellow-200"><strong>💡 Pro Tip:</strong> For complex projects, break them into multiple simple shapes and add them together. Our calculator automatically aggregates all areas for total volume calculations.</p>
+                                    <p className="text-sm text-yellow-800 dark:text-yellow-200"><strong>?? Pro Tip:</strong> For complex projects, break them into multiple simple shapes and add them together. Our calculator automatically aggregates all areas for total volume calculations.</p>
                                 </div>
                             </div>
                         </li>
@@ -1108,10 +1108,10 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                         <li className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700">
                             <strong className="text-lg text-[#4682B4]">Choose Fill Material:</strong> Select from Fill Dirt, Topsoil, Gravel, Sand, Clay, Crushed Rock (with preset densities), or Custom for specialized materials.
                             <div className="mt-3 ml-6 space-y-2">
-                                <p className="text-sm"><em>💡 Pro Tip: Fill dirt (95 lb/ft³ ≈ 2,565 lbs/yd³) is denser than topsoil (80 lb/ft³ ≈ 2,160 lbs/yd³), affecting weight and cost calculations.</em></p>
-                                <p className="text-sm"><em>🏗️ For structural projects: Use fill dirt or gravel for maximum stability</em></p>
-                                <p className="text-sm"><em>🌱 For landscaping: Consider topsoil for plant growth and nutrient content</em></p>
-                                <p className="text-sm"><em>💰 Cost-conscious: Fill dirt is typically the most economical option</em></p>
+                                <p className="text-sm"><em>?? Pro Tip: Fill dirt (95 lb/ft� � 2,565 lbs/yd�) is denser than topsoil (80 lb/ft� � 2,160 lbs/yd�), affecting weight and cost calculations.</em></p>
+                                <p className="text-sm"><em>??? For structural projects: Use fill dirt or gravel for maximum stability</em></p>
+                                <p className="text-sm"><em>?? For landscaping: Consider topsoil for plant growth and nutrient content</em></p>
+                                <p className="text-sm"><em>?? Cost-conscious: Fill dirt is typically the most economical option</em></p>
                             </div>
                         </li>
 
@@ -1136,52 +1136,52 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                                         <p className="text-sm">Subtract space reserved for drainage layers from fill depth.</p>
                                     </div>
                                 </div>
-                                <p className="text-sm bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg"><em>🧮 Example: A project with 15% compaction and 10% wastage requires 1.265× the base volume.</em></p>
+                                <p className="text-sm bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg"><em>?? Example: A project with 15% compaction and 10% wastage requires 1.265� the base volume.</em></p>
                             </div>
                         </li>
 
                         <li className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700">
                             <strong className="text-lg text-[#FF6B35]">Enter Cost Details:</strong> Input price per unit, delivery fees, and tax rate for complete budget estimation including material, shipping, and taxes.
                             <div className="mt-3 ml-6 space-y-2">
-                                <p className="text-sm"><em>💵 Example: 50 yards × $30/yard + $150 delivery + 8% tax = $1,770 total project cost.</em></p>
-                                <p className="text-sm"><em>💰 Bulk pricing: Larger orders often qualify for volume discounts</em></p>
-                                <p className="text-sm"><em>🚚 Delivery costs: Factor in distance, truck size, and accessibility</em></p>
-                                <p className="text-sm"><em>📋 Tax considerations: Include local sales tax and any applicable fees</em></p>
+                                <p className="text-sm"><em>?? Example: 50 yards � $30/yard + $150 delivery + 8% tax = $1,770 total project cost.</em></p>
+                                <p className="text-sm"><em>?? Bulk pricing: Larger orders often qualify for volume discounts</em></p>
+                                <p className="text-sm"><em>?? Delivery costs: Factor in distance, truck size, and accessibility</em></p>
+                                <p className="text-sm"><em>?? Tax considerations: Include local sales tax and any applicable fees</em></p>
                             </div>
                         </li>
 
                         <li className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700">
                             <strong className="text-lg text-[#f59e0b]">Select Truck Capacity:</strong> Choose 5, 10, 18 cubic yards, or custom size to calculate exact truckloads needed for efficient delivery planning.
                             <div className="mt-3 ml-6 space-y-2">
-                                <p className="text-sm"><em>🚛 Example: 45 cubic yards ÷ 18-yard trucks = 2.5 trucks (order 3 truckloads).</em></p>
-                                <p className="text-sm"><em>🚐 Small trucks (5-7 yards): Residential projects, tight access</em></p>
-                                <p className="text-sm"><em>🚚 Standard trucks (10-12 yards): Most common for landscaping</em></p>
-                                <p className="text-sm"><em>🚛 Large trucks (15-18 yards): Commercial projects, bulk orders</em></p>
+                                <p className="text-sm"><em>?? Example: 45 cubic yards � 18-yard trucks = 2.5 trucks (order 3 truckloads).</em></p>
+                                <p className="text-sm"><em>?? Small trucks (5-7 yards): Residential projects, tight access</em></p>
+                                <p className="text-sm"><em>?? Standard trucks (10-12 yards): Most common for landscaping</em></p>
+                                <p className="text-sm"><em>??? Large trucks (15-18 yards): Commercial projects, bulk orders</em></p>
                             </div>
                         </li>
 
                         <li className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700">
                             <strong className="text-lg text-[#ef4444]">Review & Export Results:</strong> View volume, weight, costs, and truckloads. Copy summary, download CSV, save JSON, or print for contractors and suppliers.
                             <div className="mt-3 ml-6 space-y-2">
-                                <p className="text-sm"><em>📧 Use Case: Email CSV to suppliers for quotes, print for on-site reference, save JSON for project records.</em></p>
-                                <p className="text-sm"><em>📋 Copy Summary: Quick text format for sharing with team members</em></p>
-                                <p className="text-sm"><em>📊 CSV Download: Import into spreadsheets for detailed analysis</em></p>
-                                <p className="text-sm"><em>🖨️ Print Version: Professional documentation for clients</em></p>
+                                <p className="text-sm"><em>?? Use Case: Email CSV to suppliers for quotes, print for on-site reference, save JSON for project records.</em></p>
+                                <p className="text-sm"><em>?? Copy Summary: Quick text format for sharing with team members</em></p>
+                                <p className="text-sm"><em>?? CSV Download: Import into spreadsheets for detailed analysis</em></p>
+                                <p className="text-sm"><em>??? Print Version: Professional documentation for clients</em></p>
                             </div>
                         </li>
 
                         <li className="bg-white dark:bg-gray-800 p-6 rounded-xl border-2 border-gray-200 dark:border-gray-700">
                             <strong className="text-lg text-[#2E8B57]">Compare Materials (Optional):</strong> Enable comparison mode to evaluate two materials side-by-side for cost-effective decision making.
                             <div className="mt-3 ml-6 space-y-2">
-                                <p className="text-sm"><em>⚖️ Example: Compare fill dirt ($30/yd³) vs. topsoil ($45/yd³) to optimize your $3,000 budget.</em></p>
-                                <p className="text-sm"><em>💡 Use this feature to evaluate cost vs. performance trade-offs</em></p>
-                                <p className="text-sm"><em>✅ Perfect for value engineering and budget optimization</em></p>
+                                <p className="text-sm"><em>?? Example: Compare fill dirt ($30/yd�) vs. topsoil ($45/yd�) to optimize your $3,000 budget.</em></p>
+                                <p className="text-sm"><em>?? Use this feature to evaluate cost vs. performance trade-offs</em></p>
+                                <p className="text-sm"><em>?? Perfect for value engineering and budget optimization</em></p>
                             </div>
                         </li>
                     </ol>
 
                     <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-xl border-l-4 border-green-500 mt-8">
-                        <h3 className="text-xl font-bold text-green-800 dark:text-green-200 mb-3">✅ Success Tips for Accurate Calculations</h3>
+                        <h3 className="text-xl font-bold text-green-800 dark:text-green-200 mb-3">?? Success Tips for Accurate Calculations</h3>
                         <ul className="space-y-2 text-green-700 dark:text-green-300">
                             <li><strong>Measure Twice:</strong> Always double-check your measurements before ordering materials</li>
                             <li><strong>Account for Compaction:</strong> Loose dirt settles 10-30% after placement</li>
@@ -1251,7 +1251,7 @@ const FillDirtCalculator: React.FC<FillDirtCalculatorProps> = ({ navigateTo }) =
                         </div>
                     </a>
                     <a href="/tools/time-difference" className="flex items-center gap-3 p-4 bg-light-card dark:bg-dark-card rounded-lg hover:shadow-lg transition-shadow group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">⏰</div>
+                        <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">??</div>
                         <div>
                             <div className="font-semibold text-light-text dark:text-dark-text group-hover:text-green-600 dark:group-hover:text-green-400">Time Difference</div>
                             <div className="text-xs text-slate-600 dark:text-slate-400">Project timeline calculator</div>

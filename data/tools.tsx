@@ -264,6 +264,14 @@ const CollegeGPAIcon = () => (
     </svg>
 );
 
+const CSUGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="csuGPAIconTitle">
+        <title id="csuGPAIconTitle">CSU GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGrad24" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#dc2626" /><stop offset="100%" stopColor="#ea580c" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGrad24)" />
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -438,6 +446,13 @@ export const toolCategories: Category[] = [
                 icon: <ISACGPAIcon />,
                 gradientColors: { from: '#6366f1', to: '#ec4899' }, // Indigo to Pink
             },
+            {
+                title: 'CSU GPA Calculator',
+                description: 'Official California State University GPA calculator with A-G course verification. Calculate your CSU eligibility GPA with honors weighting caps and 10th-11th grade restrictions.',
+                link: 'education-and-exam-tools/gpa-tools/csu-gpa-calculator',
+                icon: <CSUGPAIcon />,
+                gradientColors: { from: '#dc2626', to: '#ea580c' }, // Red to Orange
+            },
         ],
         subCategories: [
             {
@@ -470,6 +485,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/isac-gpa-calculator',
                         icon: <ISACGPAIcon />,
                         gradientColors: { from: '#6366f1', to: '#ec4899' },
+                    },
+                    {
+                        title: 'CSU GPA Calculator',
+                        description: 'Official California State University GPA calculator with A-G course verification. Calculate your CSU eligibility GPA with honors weighting caps and 10th-11th grade restrictions.',
+                        link: 'education-and-exam-tools/gpa-tools/csu-gpa-calculator',
+                        icon: <CSUGPAIcon />,
+                        gradientColors: { from: '#dc2626', to: '#ea580c' },
                     },
                 ]
             },
