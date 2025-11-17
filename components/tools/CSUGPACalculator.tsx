@@ -615,96 +615,195 @@ const CSUGPACalculator: React.FC<CSUGPACalculatorProps> = ({ navigateTo }) => {
                 </button>
               </div>
 
-              {/* Course Input Table */}
-              <div className="overflow-x-auto mb-6">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-[#003DA5] text-white">
-                      <th className="p-3 text-left">Course Name</th>
-                      <th className="p-3 text-center">Grade</th>
-                      <th className="p-3 text-center">Credits</th>
-                      <th className="p-3 text-center">Grade Level</th>
-                      <th className="p-3 text-center">A-G Course</th>
-                      <th className="p-3 text-center">UC-Approved Honors/AP/IB</th>
-                      <th className="p-3 text-center">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {courses.map((course, index) => (
-                      <tr key={course.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                        <td className="p-3">
+              {/* Course Input - Mobile Optimized Cards */}
+              <div className="mb-6">
+                {/* Desktop Table View */}
+                <div className="hidden lg:block overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-[#003DA5] text-white">
+                        <th className="p-3 text-left">Course Name</th>
+                        <th className="p-3 text-center">Grade</th>
+                        <th className="p-3 text-center">Credits</th>
+                        <th className="p-3 text-center">Grade Level</th>
+                        <th className="p-3 text-center">A-G Course</th>
+                        <th className="p-3 text-center">Honors/AP/IB</th>
+                        <th className="p-3 text-center">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {courses.map((course, index) => (
+                        <tr key={course.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                          <td className="p-3">
+                            <input
+                              type="text"
+                              value={course.name}
+                              onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
+                              placeholder="e.g., English 10"
+                              className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900"
+                              list="courses"
+                            />
+                          </td>
+                          <td className="p-3">
+                            <select
+                              value={course.grade}
+                              onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
+                              className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900"
+                            >
+                              <option value="">Grade</option>
+                              {Object.keys(gradePoints).map(grade => (
+                                <option key={grade} value={grade}>{grade}</option>
+                              ))}
+                            </select>
+                          </td>
+                          <td className="p-3">
+                            <input
+                              type="number"
+                              value={course.credits}
+                              onChange={(e) => updateCourse(course.id, 'credits', e.target.value)}
+                              placeholder="4"
+                              min="0"
+                              max="6"
+                              step="0.5"
+                              className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900"
+                            />
+                          </td>
+                          <td className="p-3">
+                            <select
+                              value={course.gradeLevel}
+                              onChange={(e) => updateCourse(course.id, 'gradeLevel', e.target.value as '10' | '11' | '12')}
+                              className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900"
+                            >
+                              <option value="10">10th</option>
+                              <option value="11">11th</option>
+                              <option value="12">12th</option>
+                            </select>
+                          </td>
+                          <td className="p-3 text-center">
+                            <input
+                              type="checkbox"
+                              checked={course.isAGCourse}
+                              onChange={(e) => updateCourse(course.id, 'isAGCourse', e.target.checked)}
+                              className="w-5 h-5 text-[#003DA5] border-gray-300 rounded focus:ring-[#003DA5]"
+                            />
+                          </td>
+                          <td className="p-3 text-center">
+                            <input
+                              type="checkbox"
+                              checked={course.isHonors}
+                              onChange={(e) => updateCourse(course.id, 'isHonors', e.target.checked)}
+                              className="w-5 h-5 text-[#003DA5] border-gray-300 rounded focus:ring-[#003DA5]"
+                            />
+                          </td>
+                          <td className="p-3 text-center">
+                            <button
+                              onClick={() => removeCourse(course.id)}
+                              className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-sm"
+                            >
+                              Remove
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Mobile Card View */}
+                <div className="lg:hidden space-y-4">
+                  {courses.map((course, index) => (
+                    <div key={course.id} className="bg-white border-2 border-gray-200 rounded-xl p-4 shadow-sm">
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="text-sm font-bold text-[#003DA5]">Course #{index + 1}</span>
+                        <button
+                          onClick={() => removeCourse(course.id)}
+                          className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
+                        >
+                          Remove
+                        </button>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Course Name</label>
                           <input
                             type="text"
                             value={course.name}
                             onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
                             placeholder="e.g., English 10"
-                            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900 text-base"
                             list="courses"
                           />
-                        </td>
-                        <td className="p-3">
-                          <select
-                            value={course.grade}
-                            onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900"
-                          >
-                            <option value="">Select Grade</option>
-                            {Object.keys(gradePoints).map(grade => (
-                              <option key={grade} value={grade}>{grade}</option>
-                            ))}
-                          </select>
-                        </td>
-                        <td className="p-3">
-                          <input
-                            type="number"
-                            value={course.credits}
-                            onChange={(e) => updateCourse(course.id, 'credits', e.target.value)}
-                            placeholder="4"
-                            min="0"
-                            max="6"
-                            step="0.5"
-                            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900"
-                          />
-                        </td>
-                        <td className="p-3">
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Grade</label>
+                            <select
+                              value={course.grade}
+                              onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
+                              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900 text-base"
+                            >
+                              <option value="">Select</option>
+                              {Object.keys(gradePoints).map(grade => (
+                                <option key={grade} value={grade}>{grade}</option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Credits</label>
+                            <input
+                              type="number"
+                              value={course.credits}
+                              onChange={(e) => updateCourse(course.id, 'credits', e.target.value)}
+                              placeholder="4"
+                              min="0"
+                              max="6"
+                              step="0.5"
+                              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900 text-base"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Grade Level</label>
                           <select
                             value={course.gradeLevel}
                             onChange={(e) => updateCourse(course.id, 'gradeLevel', e.target.value as '10' | '11' | '12')}
-                            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#003DA5] focus:border-transparent text-gray-900 text-base"
                           >
                             <option value="10">10th Grade</option>
                             <option value="11">11th Grade</option>
                             <option value="12">12th Grade</option>
                           </select>
-                        </td>
-                        <td className="p-3 text-center">
-                          <input
-                            type="checkbox"
-                            checked={course.isAGCourse}
-                            onChange={(e) => updateCourse(course.id, 'isAGCourse', e.target.checked)}
-                            className="w-4 h-4 text-[#003DA5] border-gray-300 rounded focus:ring-[#003DA5]"
-                          />
-                        </td>
-                        <td className="p-3 text-center">
-                          <input
-                            type="checkbox"
-                            checked={course.isHonors}
-                            onChange={(e) => updateCourse(course.id, 'isHonors', e.target.checked)}
-                            className="w-4 h-4 text-[#003DA5] border-gray-300 rounded focus:ring-[#003DA5]"
-                          />
-                        </td>
-                        <td className="p-3 text-center">
-                          <button
-                            onClick={() => removeCourse(course.id)}
-                            className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-sm"
-                          >
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                        </div>
+
+                        <div className="flex gap-4 pt-2">
+                          <label className="flex items-center gap-2 flex-1">
+                            <input
+                              type="checkbox"
+                              checked={course.isAGCourse}
+                              onChange={(e) => updateCourse(course.id, 'isAGCourse', e.target.checked)}
+                              className="w-5 h-5 text-[#003DA5] border-gray-300 rounded focus:ring-[#003DA5]"
+                            />
+                            <span className="text-sm text-gray-700">A-G Course</span>
+                          </label>
+
+                          <label className="flex items-center gap-2 flex-1">
+                            <input
+                              type="checkbox"
+                              checked={course.isHonors}
+                              onChange={(e) => updateCourse(course.id, 'isHonors', e.target.checked)}
+                              className="w-5 h-5 text-[#003DA5] border-gray-300 rounded focus:ring-[#003DA5]"
+                            />
+                            <span className="text-sm text-gray-700">Honors/AP/IB</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <datalist id="courses">
