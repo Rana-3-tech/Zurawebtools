@@ -18,7 +18,7 @@ const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
                         <a href="/" onClick={(e) => handleNavClick(e, '/')} className="text-xl font-bold cursor-pointer">
-                            <span className="text-slate-900">Zura</span><span className="text-brand-blue">WebTools</span>
+                            <span className="text-slate-900">Zura</span><span style={{color: '#007BFF'}}>WebTools</span>
                         </a>
                         <p className="mt-4 text-gray-600">
                             Free AI-powered tools to improve visibility, rankings, and engagement.
