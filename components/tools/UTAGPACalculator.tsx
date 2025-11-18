@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RelatedTools from '../RelatedTools';
+import TableOfContents, { TOCSection } from '../TableOfContents';
 import { Page } from '../../App';
 
 interface UTAGPACalculatorProps {
@@ -24,6 +25,100 @@ interface GPDTableRow {
 
 const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
   const [activeTab, setActiveTab] = useState<'calculator' | 'raise' | 'gpd'>('calculator');
+
+  // Table of Contents sections
+  const tocSections: TOCSection[] = [
+    {
+      id: 'gpa-calculator',
+      emoji: '🎓',
+      title: 'GPA Calculator',
+      subtitle: 'Calculate semester GPA',
+      gradientFrom: 'from-blue-50',
+      gradientTo: 'to-cyan-50',
+      hoverBorder: 'border-blue-500',
+      hoverText: 'text-blue-600'
+    },
+    {
+      id: 'raise-gpa',
+      emoji: '📈',
+      title: 'Raise GPA',
+      subtitle: 'Plan GPA improvement',
+      gradientFrom: 'from-green-50',
+      gradientTo: 'to-emerald-50',
+      hoverBorder: 'border-green-500',
+      hoverText: 'text-green-600'
+    },
+    {
+      id: 'gpd-calculator',
+      emoji: '🎯',
+      title: 'GPD Calculator',
+      subtitle: 'Grade Point Deficiency',
+      gradientFrom: 'from-orange-50',
+      gradientTo: 'to-red-50',
+      hoverBorder: 'border-orange-500',
+      hoverText: 'text-orange-600'
+    },
+    {
+      id: 'grade-scale',
+      emoji: '📊',
+      title: 'Grade Scale',
+      subtitle: 'Official UTA grades',
+      gradientFrom: 'from-purple-50',
+      gradientTo: 'to-pink-50',
+      hoverBorder: 'border-purple-500',
+      hoverText: 'text-purple-600'
+    },
+    {
+      id: 'about-uta',
+      emoji: '🏫',
+      title: 'About UTA',
+      subtitle: 'University info',
+      gradientFrom: 'from-orange-50',
+      gradientTo: 'to-amber-50',
+      hoverBorder: 'border-orange-500',
+      hoverText: 'text-orange-600'
+    },
+    {
+      id: 'how-to-use',
+      emoji: '📖',
+      title: 'How to Use',
+      subtitle: 'Step-by-step guide',
+      gradientFrom: 'from-indigo-50',
+      gradientTo: 'to-blue-50',
+      hoverBorder: 'border-indigo-500',
+      hoverText: 'text-indigo-600'
+    },
+    {
+      id: 'gpd-guide',
+      emoji: '💡',
+      title: 'GPD Guide',
+      subtitle: 'Understanding GPD',
+      gradientFrom: 'from-yellow-50',
+      gradientTo: 'to-amber-50',
+      hoverBorder: 'border-yellow-500',
+      hoverText: 'text-yellow-600'
+    },
+    {
+      id: 'probation-help',
+      emoji: '🎓',
+      title: 'Probation Help',
+      subtitle: 'Get off probation',
+      gradientFrom: 'from-red-50',
+      gradientTo: 'to-orange-50',
+      hoverBorder: 'border-red-500',
+      hoverText: 'text-red-600'
+    },
+    {
+      id: 'faq',
+      emoji: '❓',
+      title: 'FAQ',
+      subtitle: 'Common questions',
+      gradientFrom: 'from-teal-50',
+      gradientTo: 'to-cyan-50',
+      hoverBorder: 'border-teal-500',
+      hoverText: 'text-teal-600'
+    }
+  ];
   
   // Basic Calculator State
   const [courses, setCourses] = useState<Course[]>([
@@ -99,8 +194,8 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
     const shareUrl = 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator';
     
     const metaTags = [
-      { name: 'description', content: 'Free UTA GPA calculator for University of Texas at Arlington students. Calculate semester GPA, raise cumulative GPA, and compute Grade Point Deficiency (GPD) with official UTA grade scales.' },
-      { name: 'keywords', content: 'UTA GPA calculator, University of Texas Arlington GPA, UTA grade calculator, GPD calculator, grade point deficiency UTA, raise GPA UTA, UTA cumulative GPA, MyMav GPA, UTA academic probation calculator, UT Arlington GPA tool' },
+      { name: 'description', content: 'Free UTA GPA calculator for University of Texas at Arlington students. Calculate semester GPA, raise cumulative GPA, and compute Grade Point Deficiency (GPD) with official UTA grade scales. Plan academic probation removal with GPD calculator.' },
+      { name: 'keywords', content: 'UTA GPA calculator, University of Texas Arlington GPA, UTA grade calculator, GPD calculator, grade point deficiency calculator, raise GPA UTA, cumulative GPA calculator, MyMav GPA, academic probation calculator, UTA semester GPA, calculate UTA GPA, GPA requirements, UTA grade scale, calculate grades needed, GPA improvement, Arlington GPA calculator free, UTA GPA planner, academic standing, UTA transcript GPA, Dean\'s List requirements, honors GPA requirements, calculate term GPA, plus minus grading scale, graduation GPA requirement, transfer GPA calculator, Arlington Texas university GPA' },
       { property: 'og:title', content: 'UTA GPA Calculator - University of Texas at Arlington | ZuraWebTools' },
       { property: 'og:description', content: 'Calculate your UTA GPA, determine Grade Point Deficiency (GPD), and plan how to raise your cumulative GPA at University of Texas Arlington.' },
       { property: 'og:url', content: shareUrl },
@@ -393,11 +488,17 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent">
-            UTA GPA Calculator
+            UTA GPA Calculator - University of Texas Arlington
           </h1>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Official <strong>University of Texas at Arlington</strong> GPA calculator. Calculate semester GPA, raise cumulative GPA, and compute <strong>Grade Point Deficiency (GPD)</strong> for academic probation planning.
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-4">
+            Official <strong>University of Texas at Arlington GPA calculator</strong> with <strong>Grade Point Deficiency (GPD)</strong> computation. Calculate semester GPA, plan cumulative GPA improvements, and determine grades needed for academic probation removal.
           </p>
+          <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-600">
+            <span className="px-3 py-1 bg-orange-100 rounded-full">✓ Free Forever</span>
+            <span className="px-3 py-1 bg-blue-100 rounded-full">✓ No Login Required</span>
+            <span className="px-3 py-1 bg-green-100 rounded-full">✓ Official UTA Scale</span>
+            <span className="px-3 py-1 bg-purple-100 rounded-full">✓ GPD Calculator</span>
+          </div>
         </div>
 
         {/* Tab Navigation */}
@@ -438,8 +539,9 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
 
         {/* GPA Calculator Tab */}
         {activeTab === 'calculator' && (
-          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Calculate Semester GPA</h2>
+          <div id="gpa-calculator" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">📊 Calculate Semester GPA</h2>
+            <p className="text-gray-600 mb-6">Enter your current courses with credit hours and grades to calculate your UTA semester GPA instantly.</p>
             
             <div className="space-y-4 mb-6">
               {courses.map((course, index) => (
@@ -453,7 +555,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                       value={course.name}
                       onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
                       placeholder="e.g., Calculus I"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                     />
                   </div>
                   
@@ -468,7 +570,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                       placeholder="3"
                       min="0"
                       step="0.5"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                     />
                   </div>
                   
@@ -479,7 +581,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     <select
                       value={course.grade}
                       onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                     >
                       <option value="">Select</option>
                       {Object.keys(gradePoints).map(grade => (
@@ -523,8 +625,26 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
               <div className="bg-gradient-to-r from-orange-100 to-red-100 border-l-4 border-orange-600 p-6 rounded-lg">
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Your Semester GPA</h3>
                 <p className="text-5xl font-bold text-orange-600">{calculatedGPA.toFixed(3)}</p>
-                <p className="text-sm text-gray-600 mt-2">
-                  Total Credit Hours: {courses.reduce((sum, c) => sum + (parseFloat(c.creditHours) || 0), 0).toFixed(1)}
+                <div className="mt-3 flex flex-wrap gap-4 text-sm text-gray-700">
+                  <div>
+                    <span className="font-semibold">Total Credit Hours:</span>{' '}
+                    <span className="text-orange-600 font-bold">
+                      {courses.reduce((sum, c) => sum + (parseFloat(c.creditHours) || 0), 0).toFixed(1)}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-semibold">Total Grade Points:</span>{' '}
+                    <span className="text-orange-600 font-bold">
+                      {courses.reduce((sum, c) => {
+                        const hours = parseFloat(c.creditHours) || 0;
+                        const grade = gradePoints[c.grade];
+                        return sum + (grade !== undefined ? hours * grade : 0);
+                      }, 0).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  💡 Grade Points = Credit Hours × Grade Point Value
                 </p>
               </div>
             )}
@@ -533,8 +653,9 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
 
         {/* Raise GPA Tab */}
         {activeTab === 'raise' && (
-          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Raise Your Cumulative GPA</h2>
+          <div id="raise-gpa" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">📈 Raise Your Cumulative GPA</h2>
+            <p className="text-gray-600 mb-6">Plan your path to improve your cumulative GPA at UTA. Calculate how many credit hours or what average you need to reach your target GPA.</p>
             
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
               <p className="text-sm text-gray-700">
@@ -555,7 +676,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   step="0.01"
                   min="0"
                   max="4"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                 />
               </div>
               
@@ -569,7 +690,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   onChange={(e) => setAttemptedHours(e.target.value)}
                   placeholder="45"
                   min="0"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                 />
                 <p className="text-xs text-gray-500 mt-1">Do not include current semester hours</p>
               </div>
@@ -592,7 +713,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     step="0.01"
                     min="0"
                     max="4"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                   />
                 </div>
                 
@@ -608,7 +729,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     step="0.1"
                     min="0"
                     max="4"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                   />
                 </div>
               </div>
@@ -647,7 +768,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     onChange={(e) => setCurrentHours(e.target.value)}
                     placeholder="15"
                     min="0"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                   />
                 </div>
                 
@@ -663,7 +784,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     step="0.01"
                     min="0"
                     max="4"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                   />
                 </div>
               </div>
@@ -699,8 +820,9 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
 
         {/* GPD Calculator Tab */}
         {activeTab === 'gpd' && (
-          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Grade Point Deficiency (GPD) Calculator</h2>
+          <div id="gpd-calculator" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">🎯 Grade Point Deficiency (GPD) Calculator</h2>
+            <p className="text-gray-600 mb-4">Calculate your GPD and determine exactly how many A's, B's, or C's you need to reach a 2.0 GPA and be removed from academic probation at UTA.</p>
             
             <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
               <h3 className="font-bold text-gray-800 mb-2">What is GPD?</h3>
@@ -721,7 +843,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   onChange={(e) => setGpdAttemptedHours(e.target.value)}
                   placeholder="45"
                   min="0"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                 />
               </div>
               
@@ -736,7 +858,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   placeholder="83"
                   min="0"
                   step="0.01"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                 />
               </div>
               
@@ -747,7 +869,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                 <select
                   value={desiredGPAForGPD}
                   onChange={(e) => setDesiredGPAForGPD(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                 >
                   {gpdTable.map(row => (
                     <option key={row.desiredGPA} value={row.desiredGPA.toFixed(2)}>
@@ -767,14 +889,37 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
 
             {gpdResult.gpd !== null && (
               <div className="space-y-4">
-                <div className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg">
+                <div className={`border-l-4 p-6 rounded-lg ${
+                  gpdResult.gpd > 0 
+                    ? 'bg-orange-50 border-orange-500' 
+                    : 'bg-green-50 border-green-500'
+                }`}>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">Your Grade Point Deficiency</h3>
-                  <p className="text-4xl font-bold text-orange-600">{gpdResult.gpd}</p>
-                  <p className="text-sm text-gray-600 mt-2">
-                    {gpdResult.gpd > 0 
-                      ? `You need ${gpdResult.gpd} grade points to reach a ${desiredGPAForGPD} GPA`
-                      : 'You have met or exceeded your target GPA!'}
-                  </p>
+                  <p className={`text-4xl font-bold ${
+                    gpdResult.gpd > 0 ? 'text-orange-600' : 'text-green-600'
+                  }`}>{gpdResult.gpd > 0 ? gpdResult.gpd : '0.00'}</p>
+                  
+                  {gpdResult.gpd > 0 ? (
+                    <div className="mt-3 space-y-2">
+                      <p className="text-base font-semibold text-orange-700">
+                        ⚠️ You have a Grade Point Deficiency of {gpdResult.gpd} points.
+                      </p>
+                      <p className="text-sm text-gray-700">
+                        You need {gpdResult.gpd} grade points to reach a {desiredGPAForGPD} GPA. 
+                        This means you need <strong>{gpdResult.aGrades} A's</strong> or <strong>{gpdResult.bGrades} B's</strong> (in 3-hour courses) to be removed from academic probation.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="mt-3">
+                      <p className="text-base font-semibold text-green-700">
+                        ✅ You are GPD Positive and are off probation!
+                      </p>
+                      <p className="text-sm text-gray-700 mt-2">
+                        Your current GPA of {(parseFloat(currentGradePoints) / parseFloat(gpdAttemptedHours)).toFixed(3)} meets or exceeds the {desiredGPAForGPD} requirement. 
+                        You are in good academic standing at UTA.
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 {gpdResult.gpd > 0 && (
@@ -834,9 +979,17 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
           </div>
         )}
 
+        {/* Table of Contents */}
+        <TableOfContents 
+          sections={tocSections}
+          title="📚 Quick Navigation"
+          description="Jump to any calculator or guide section"
+        />
+
         {/* UTA Grade Scale */}
-        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Official UTA Grade Scale</h2>
+        <div id="grade-scale" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">📊 Official UTA Grade Scale</h2>
+          <p className="text-gray-600 mb-4">University of Texas at Arlington uses the standard 4.0 grading scale with plus/minus system.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(gradePoints).map(([grade, points]) => (
               <div key={grade} className="bg-gray-50 p-3 rounded-lg text-center">
@@ -847,24 +1000,144 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
           </div>
         </div>
 
-        {/* SEO Content */}
-        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">About UTA GPA Calculator</h2>
+        {/* About UTA Section */}
+        <div id="about-uta" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">🏫 About University of Texas at Arlington</h2>
+          <p className="text-gray-600 mb-6">Comprehensive guide to UTA's academic policies, grading system, and student resources for maintaining strong academic standing.</p>
           
-          <div className="prose max-w-none text-gray-700 space-y-4">
+          <div className="prose max-w-none text-gray-700 space-y-6">
             <p>
-              This <strong>UTA GPA calculator</strong> is designed specifically for <strong>University of Texas at Arlington</strong> students to accurately calculate semester GPA, 
-              plan cumulative GPA improvements, and compute <strong>Grade Point Deficiency (GPD)</strong> for academic probation management.
+              The <strong>University of Texas at Arlington (UTA)</strong> is a premier public research university located in <a href="https://www.uta.edu/" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 underline">Arlington, Texas</a>. 
+              With over 60,000 students enrolled across multiple colleges, UTA is one of the largest institutions in the <a href="https://www.utsystem.edu/" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 underline">University of Texas System</a>. 
+              The university maintains rigorous academic standards while providing comprehensive support services to help students achieve their educational goals.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">How to Use the UTA GPA Calculator</h3>
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Understanding UTA's Grading System</h3>
+            <p>
+              UTA employs a standard 4.0 grading scale with a plus/minus system that provides nuanced assessment of student performance. This grading structure allows for precise calculation of both term and cumulative grades. 
+              Each letter grade corresponds to specific quality points: A (4.0), A- (3.67), B+ (3.33), B (3.0), and so forth. Understanding this scale is essential for accurate GPA planning and meeting graduation requirements.
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Academic Standing Requirements</h3>
+            <p>
+              Maintaining good academic standing requires a <strong>minimum 2.0 cumulative GPA</strong>. Students who fall below this threshold are placed on probation and must develop an improvement plan with their academic advisor. 
+              The university reviews student progress each semester, and consistent performance below 2.0 may result in academic suspension. Transfer students should note that only UTA coursework factors into institutional calculations.
+            </p>
+
+            <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded my-4">
+              <p className="font-semibold text-orange-900 mb-2">🎯 Key Academic Milestones at UTA</p>
+              <ul className="text-sm space-y-1">
+                <li>• <strong>Good Standing:</strong> Maintain 2.0 or higher cumulative average</li>
+                <li>• <strong>Dean's List Honor:</strong> Achieve 3.5+ average with 12+ credit hours per semester</li>
+                <li>• <strong>Probationary Status:</strong> Below 2.0 average requires academic intervention</li>
+                <li>• <strong>Graduation Honors:</strong> Summa Cum Laude (3.9+), Magna Cum Laude (3.7-3.89), Cum Laude (3.5-3.69)</li>
+                <li>• <strong>Transfer Requirements:</strong> Minimum 2.5 average for most competitive programs</li>
+              </ul>
+            </div>
+
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">MyMav Portal: Your Academic Dashboard</h3>
+            <p>
+              <a href="https://mymav.uta.edu/" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 underline"><strong>MyMav</strong></a> serves as the central hub for all academic information. 
+              Through this portal, students can view official transcripts, access current term grades, calculate semester averages, register for courses, and track progress toward degree completion. 
+              The system updates regularly throughout each term, allowing students to monitor their standing and make informed decisions about course loads and academic planning.
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Academic Support Services</h3>
+            <p>
+              UTA provides extensive support through the <a href="https://www.uta.edu/student-success/programs/smart" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 underline">SMART Program (Student Mentoring and Academic Resources for Transition)</a>, 
+              which offers free tutoring, study groups, and academic coaching. Students struggling with specific courses can access subject-specific tutors, while those on probation receive personalized intervention plans. 
+              The <a href="https://www.uta.edu/library" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 underline">UTA Library</a> also provides research assistance and quiet study spaces conducive to academic success.
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Strategic GPA Planning</h3>
+            <p>
+              This calculator serves as a planning tool to complement official records in MyMav. Students can model different scenarios: calculating what term average is needed to reach target cumulative values, 
+              determining how many credit hours of A-level work can offset previous lower performance, or planning course selections to maintain honors eligibility. For transfer students considering UTA, 
+              use this alongside our{' '}
+              <button onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/college-gpa-calculator')} className="text-orange-600 hover:text-orange-700 underline">
+                College GPA Calculator
+              </button> to understand how previous coursework might translate to the UTA grading system.
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Comparing University Systems</h3>
+            <p>
+              Students considering multiple institutions or planning transfers can compare calculation methods across universities. Our{' '}
+              <button onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator')} className="text-orange-600 hover:text-orange-700 underline">
+                Rutgers GPA Calculator
+              </button> and{' '}
+              <button onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator')} className="text-orange-600 hover:text-orange-700 underline">
+                Berkeley GPA Calculator
+              </button> demonstrate how different institutions may weight grades differently. Understanding these variations helps with transfer credit evaluation and application planning.
+            </p>
+
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Complementary Academic Tools</h3>
+            <p>
+              Successful students often need multiple planning resources. Beyond grade calculation, consider our{' '}
+              <button onClick={() => navigateTo('/education-and-exam-tools/sat-score-calculator')} className="text-orange-600 hover:text-orange-700 underline">
+                SAT Score Calculator
+              </button> for admissions planning or graduate school applications. The{' '}
+              <button onClick={() => navigateTo('/text-tools/word-counter')} className="text-orange-600 hover:text-orange-700 underline">
+                Word Counter
+              </button> assists with essay assignments and research papers. 
+              Browse our complete collection of{' '}
+              <button onClick={() => navigateTo('/education-and-exam-tools')} className="text-orange-600 hover:text-orange-700 underline">
+                education and exam tools
+              </button> for comprehensive academic support throughout your university experience.
+            </p>
+
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded my-4">
+              <p className="font-semibold text-blue-900 mb-2">📚 Proven Strategies for Academic Excellence</p>
+              <ul className="text-sm space-y-1">
+                <li>• Schedule regular meetings with your <a href="https://www.uta.edu/academics/schools-colleges" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-800 underline">academic advisor</a> each semester</li>
+                <li>• Participate in study groups and peer tutoring sessions through SMART Program</li>
+                <li>• Review unofficial transcripts in MyMav weekly to track progress</li>
+                <li>• Balance challenging courses with manageable credit loads (12-15 hours recommended)</li>
+                <li>• Request help early when struggling—waiting until midterms limits recovery options</li>
+                <li>• Understand withdrawal deadlines and their impact on academic standing</li>
+                <li>• Consider pass/fail options strategically for courses outside your major</li>
+              </ul>
+            </div>
+
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Graduation Requirements and Planning</h3>
+            <p>
+              Most UTA degree programs require a minimum 2.0 overall average, though many departments set higher standards for major coursework—typically 2.5 or above. 
+              Graduating with honors requires planning throughout your academic career, as it's difficult to significantly raise cumulative averages in final semesters. 
+              Use this calculator during advising sessions to project final cumulative values based on remaining coursework and planned term loads.
+            </p>
+          </div>
+        </div>
+
+        {/* How to Use Guide */}
+        <div id="how-to-use" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">📖 How to Use UTA GPA Calculator</h2>
+          <p className="text-gray-600 mb-6">Complete step-by-step guide to calculate your GPA, plan improvements, and understand Grade Point Deficiency at University of Texas Arlington.</p>
+          
+          <div className="prose max-w-none text-gray-700 space-y-6">
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+              <p className="font-semibold text-blue-900 mb-2">💡 Quick Start</p>
+              <p className="text-sm">
+                This <strong>UTA GPA calculator</strong> is designed specifically for <strong>University of Texas at Arlington</strong> students to accurately calculate semester GPA, 
+                plan cumulative GPA improvements, and compute <strong>Grade Point Deficiency (GPD)</strong> for academic probation management.
+              </p>
+            </div>
+
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">📝 Step-by-Step Instructions</h3>
             <ol className="list-decimal list-inside space-y-2">
               <li><strong>Semester GPA:</strong> Enter your current courses with credit hours and expected grades to calculate your term GPA.</li>
               <li><strong>Raise GPA:</strong> Input your cumulative GPA from MyMav and determine how many credit hours or what average you need to reach your target GPA.</li>
               <li><strong>GPD Calculator:</strong> Calculate your Grade Point Deficiency and see exactly how many A's, B's, or C's you need to reach a 2.0 GPA.</li>
             </ol>
 
-            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Understanding Grade Point Deficiency at UTA</h3>
+          </div>
+        </div>
+
+        {/* GPD Guide */}
+        <div id="gpd-guide" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">💡 Understanding Grade Point Deficiency at UTA</h2>
+          <p className="text-gray-600 mb-6">Complete guide to UTA's Grade Point Deficiency system and how to calculate what you need for academic success.</p>
+          
+          <div className="prose max-w-none text-gray-700 space-y-4">
+            <h3 className="text-xl font-bold text-gray-800 mb-3">What is Grade Point Deficiency (GPD)?</h3>
             <p>
               <strong>Grade Point Deficiency (GPD)</strong> is a key metric for UTA students on academic probation. GPD represents the number of grade points needed to achieve a 2.0 cumulative GPA, 
               which is required to be removed from probation. The calculation is: <code className="bg-gray-100 px-2 py-1 rounded">(Attempted Hours × 2.0) - Current Grade Points</code>.
@@ -875,25 +1148,43 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
               <strong>D = -3 points</strong>, and <strong>F = -6 points</strong>.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">UTA Academic Probation Guidelines</h3>
+          </div>
+        </div>
+
+        {/* Academic Probation Help */}
+        <div id="probation-help" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">🎓 UTA Academic Probation Guidelines</h2>
+          <p className="text-gray-600 mb-6">Everything you need to know about academic probation at University of Texas Arlington and how to get removed from it.</p>
+          
+          <div className="prose max-w-none text-gray-700 space-y-4">
+            <h3 className="text-xl font-bold text-gray-800 mb-3">Academic Probation Requirements</h3>
             <p>
               Students at the University of Texas at Arlington are placed on academic probation when their cumulative GPA falls below 2.0. To be removed from probation, 
               students must achieve a 2.0 GPA or higher. Use the GPD calculator to determine your path to academic good standing.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Finding Your GPA in MyMav</h3>
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">🔍 Finding Your GPA in MyMav</h3>
             <p>
               Your official <strong>cumulative GPA</strong> and <strong>attempted credit hours</strong> are available in <strong>MyMav</strong>, UTA's student portal. 
               Navigate to Academic Records → View GPA to access this information. This data is essential for accurate GPA planning and GPD calculations.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">UTA GPA Calculation Method</h3>
+            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">🧮 UTA GPA Calculation Method</h3>
             <p>
               UTA uses the standard 4.0 scale for GPA calculation. Your GPA is computed by dividing total grade points by total credit hours attempted. 
               Grade points are calculated by multiplying each course's credit hours by the grade point value (A=4.0, B=3.0, C=2.0, D=1.0, F=0.0).
             </p>
 
-            <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">Frequently Asked Questions</h3>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div id="faq" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">❓ Frequently Asked Questions</h2>
+          <p className="text-gray-600 mb-6">Common questions about UTA GPA calculation, Grade Point Deficiency, and academic probation answered.</p>
+          
+          <div className="prose max-w-none text-gray-700 space-y-6">
+            <h3 className="text-xl font-bold text-gray-800 mb-3">Common UTA GPA Questions</h3>
             
             <h4 className="font-bold text-gray-800 mt-4">How accurate is this UTA GPA calculator?</h4>
             <p>
