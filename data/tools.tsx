@@ -272,6 +272,14 @@ const CSUGPAIcon = () => (
     </svg>
 );
 
+const RutgersGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
+        <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGrad25" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#cc0033" /><stop offset="100%" stopColor="#ff0000" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGrad25)" />
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -440,6 +448,13 @@ export const toolCategories: Category[] = [
                 gradientColors: { from: '#0033A0', to: '#FDB515' }, // Berkeley Blue to Gold
             },
             {
+                title: 'Rutgers GPA Calculator',
+                description: 'Calculate your Rutgers University GPA using official grade scales. Engineering major average calculator with scenario planner and honors graduation requirements.',
+                link: 'education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator',
+                icon: <RutgersGPAIcon />,
+                gradientColors: { from: '#cc0033', to: '#ff0000' }, // Rutgers Scarlet Red
+            },
+            {
                 title: 'ISAC GPA Calculator',
                 description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
                 link: 'education-and-exam-tools/gpa-tools/isac-gpa-calculator',
@@ -505,6 +520,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
                         icon: <BerkeleyGPAIcon />,
                         gradientColors: { from: '#0033A0', to: '#FDB515' },
+                    },
+                    {
+                        title: 'Rutgers GPA Calculator',
+                        description: 'Calculate your Rutgers University GPA using official grade scales. Engineering major average calculator with scenario planner and honors graduation requirements.',
+                        link: 'education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator',
+                        icon: <RutgersGPAIcon />,
+                        gradientColors: { from: '#cc0033', to: '#ff0000' },
                     },
                 ]
             },
