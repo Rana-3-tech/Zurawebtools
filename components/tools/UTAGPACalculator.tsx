@@ -147,6 +147,8 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
   const [raiseResults, setRaiseResults] = useState<{
     hoursNeeded: number | null;
     requiredAverage: number | null;
+    newGPAAfterCurrent?: number;
+    currentCoursesHours?: number;
   }>({ hoursNeeded: null, requiredAverage: null });
 
   // GPD Calculator State
@@ -434,11 +436,83 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
     const target = parseFloat(targetGPA);
     const average = parseFloat(maintainAverage);
 
-    if (!isNaN(currentGPA) && !isNaN(hours) && !isNaN(target) && !isNaN(average) && hours > 0) {
-      const currentPoints = currentGPA * hours;
-      const hoursNeeded = Math.ceil((target * hours - currentPoints) / (average - target));
-      setRaiseResults(prev => ({ ...prev, hoursNeeded: hoursNeeded > 0 ? hoursNeeded : 0 }));
+    if (
+      isNaN(currentGPA) ||
+      isNaN(hours) ||
+      isNaN(target) ||
+      isNaN(average) ||
+      hours <= 0
+    ) {
+      return;
     }
+
+    const currentPoints = currentGPA * hours;
+
+    // Step 2: Calculate current-term course contribution
+    let currentCoursesPoints = 0;
+    let currentCoursesHours = 0;
+
+    currentCourses.forEach(course => {
+      const courseHours = parseFloat(course.creditHours);
+      const courseGrade = gradePoints[course.grade];
+
+      if (!isNaN(courseHours) && courseGrade !== undefined && courseHours > 0) {
+        currentCoursesPoints += courseHours * courseGrade;
+        currentCoursesHours += courseHours;
+      }
+    });
+
+    // Step 3: If no current courses entered → do NOT compute newGPAAfterCurrent
+    let newGPAAfterCurrent;
+    if (currentCoursesHours > 0) {
+      const totalHoursAfterCurrent = hours + currentCoursesHours;
+      const totalPointsAfterCurrent = currentPoints + currentCoursesPoints;
+      newGPAAfterCurrent =
+        totalHoursAfterCurrent > 0
+          ? totalPointsAfterCurrent / totalHoursAfterCurrent
+          : currentGPA;
+    } else {
+      newGPAAfterCurrent = undefined;
+    }
+
+    // EARLY TARGET CHECK (if new-GPA exists)
+    if (
+      newGPAAfterCurrent !== undefined &&
+      target <= newGPAAfterCurrent
+    ) {
+      setRaiseResults({
+        hoursNeeded: 0,
+        requiredAverage: null,
+        newGPAAfterCurrent,
+        currentCoursesHours
+      });
+      return;
+    }
+
+    // If no current courses, treat as original hours for equation
+    const baseHours = newGPAAfterCurrent !== undefined ? hours + currentCoursesHours : hours;
+    const basePoints = newGPAAfterCurrent !== undefined ? (currentPoints + currentCoursesPoints) : currentPoints;
+    const baseGPA = newGPAAfterCurrent !== undefined ? newGPAAfterCurrent : currentGPA;
+
+    if (average <= target) {
+      setRaiseResults({
+        hoursNeeded: null,
+        requiredAverage: null,
+        newGPAAfterCurrent,
+        currentCoursesHours
+      });
+      return;
+    }
+
+    const hoursNeeded =
+      (baseHours * (target - baseGPA)) / (average - target);
+
+    setRaiseResults({
+      hoursNeeded: hoursNeeded > 0 ? Math.ceil(hoursNeeded) : 0,
+      requiredAverage: null,
+      newGPAAfterCurrent,
+      currentCoursesHours
+    });
   };
 
   const calculateTermAverage = () => {
@@ -447,14 +521,58 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
     const termHours = parseFloat(currentHours);
     const target = parseFloat(termTargetGPA);
 
-    if (!isNaN(currentGPA) && !isNaN(hours) && !isNaN(termHours) && !isNaN(target) && hours > 0 && termHours > 0) {
-      const currentPoints = currentGPA * hours;
-      const requiredPoints = target * (hours + termHours);
-      const neededPoints = requiredPoints - currentPoints;
-      const requiredAverage = neededPoints / termHours;
-      
-      setRaiseResults(prev => ({ ...prev, requiredAverage: requiredAverage }));
+    if (isNaN(currentGPA) || isNaN(hours) || isNaN(termHours) || isNaN(target)) {
+      return;
     }
+
+    if (hours <= 0) return;
+
+    if (termHours <= 0) {
+      setRaiseResults(prev => ({
+        ...prev,
+        requiredAverage: -3
+      }));
+      return;
+    }
+
+    const currentPoints = currentGPA * hours;
+    const requiredTotalPoints = target * (hours + termHours);
+    const pointsNeededThisTerm = requiredTotalPoints - currentPoints;
+
+    const requiredAverage = pointsNeededThisTerm / termHours;
+
+    // ---- FIXED LOGIC (NO ROUNDING ABUSE) ----
+    if (requiredAverage < 0) {
+      setRaiseResults(prev => ({
+        ...prev,
+        requiredAverage: -2 // above target
+      }));
+      return;
+    }
+
+    if (requiredAverage === 0) {
+      setRaiseResults(prev => ({
+        ...prev,
+        requiredAverage: 0 // exact match
+      }));
+      return;
+    }
+
+    const rounded = Number(requiredAverage.toFixed(4));
+
+    if (rounded > 4.0) {
+      setRaiseResults(prev => ({
+        ...prev,
+        requiredAverage: -1 // impossible
+      }));
+      return;
+    }
+
+    // Valid required average
+    setRaiseResults(prev => ({
+      ...prev,
+      requiredAverage: rounded
+    }));
   };
 
   // GPD Calculator Functions
@@ -469,15 +587,20 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
       
       const row = gpdTable.find(r => r.desiredGPA === desired) || gpdTable.find(r => r.desiredGPA === 2.0)!;
       
-      const aGrades = gpd > 0 ? Math.ceil(gpd / row.A) : 0;
-      const bGrades = gpd > 0 ? Math.ceil(gpd / row.B) : 0;
-      const cGrades = row.C > 0 ? Math.ceil(gpd / row.C) : 0;
+      // Guard against negative or zero values (e.g., at 3.50 GPA: B=-1.5, at 4.00: A=0, B=-3)
+      // Only calculate if GPD is positive AND the grade value is positive
+      const aGrades = gpd > 0 && row.A > 0 ? Math.ceil(gpd / row.A) : 0;
+      const bGrades = gpd > 0 && row.B > 0 ? Math.ceil(gpd / row.B) : 0;
+      
+      // C grades maintain 2.0 GPA but DO NOT reduce GPD
+      // Official UTA logic: C's have zero effect on GPD reduction
+      const cGrades = null; // Always null - C's don't help with GPD
 
       setGpdResult({
         gpd: parseFloat(gpd.toFixed(2)),
         aGrades,
         bGrades,
-        cGrades: cGrades > 0 ? cGrades : null
+        cGrades
       });
     }
   };
@@ -555,7 +678,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                       value={course.name}
                       onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
                       placeholder="e.g., Calculus I"
-                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                     />
                   </div>
                   
@@ -570,7 +693,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                       placeholder="3"
                       min="0"
                       step="0.5"
-                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                     />
                   </div>
                   
@@ -581,7 +704,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     <select
                       value={course.grade}
                       onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
-                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                     >
                       <option value="">Select</option>
                       {Object.keys(gradePoints).map(grade => (
@@ -663,6 +786,76 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
               </p>
             </div>
 
+            {/* Current Courses Section */}
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-gray-800 mb-4">📚 Enter Your Current Courses (Optional)</h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Add your current semester courses with expected grades. The calculator will show your new GPA after this term.
+              </p>
+              
+              <div className="space-y-4">
+                {currentCourses.map((course, index) => (
+                  <div key={course.id} className="grid grid-cols-1 md:grid-cols-10 gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div className="md:col-span-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Course {index + 1} Name (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={course.name}
+                        onChange={(e) => {
+                          setCurrentCourses(currentCourses.map(c => 
+                            c.id === course.id ? { ...c, name: e.target.value } : c
+                          ));
+                        }}
+                        placeholder={`Course ${index + 1}`}
+                        className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
+                      />
+                    </div>
+                    
+                    <div className="md:col-span-3">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Credit Hours
+                      </label>
+                      <input
+                        type="number"
+                        value={course.creditHours}
+                        onChange={(e) => {
+                          setCurrentCourses(currentCourses.map(c => 
+                            c.id === course.id ? { ...c, creditHours: e.target.value } : c
+                          ));
+                        }}
+                        placeholder="3"
+                        min="0"
+                        step="0.5"
+                        className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
+                      />
+                    </div>
+                    
+                    <div className="md:col-span-3">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Expected Grade
+                      </label>
+                      <select
+                        value={course.grade}
+                        onChange={(e) => {
+                          setCurrentCourses(currentCourses.map(c => 
+                            c.id === course.id ? { ...c, grade: e.target.value } : c
+                          ));
+                        }}
+                        className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
+                      >
+                        <option value="">Select</option>
+                        {Object.keys(gradePoints).map(grade => (
+                          <option key={grade} value={grade}>{grade} ({gradePoints[grade].toFixed(2)})</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -676,7 +869,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   step="0.01"
                   min="0"
                   max="4"
-                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                 />
               </div>
               
@@ -690,7 +883,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   onChange={(e) => setAttemptedHours(e.target.value)}
                   placeholder="45"
                   min="0"
-                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                 />
                 <p className="text-xs text-gray-500 mt-1">Do not include current semester hours</p>
               </div>
@@ -713,7 +906,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     step="0.01"
                     min="0"
                     max="4"
-                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                   />
                 </div>
                 
@@ -729,7 +922,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     step="0.1"
                     min="0"
                     max="4"
-                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                   />
                 </div>
               </div>
@@ -741,13 +934,62 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                 Calculate Hours Needed
               </button>
 
-              {raiseResults.hoursNeeded !== null && (
+              {raiseResults.newGPAAfterCurrent !== undefined && raiseResults.currentCoursesHours !== undefined && raiseResults.currentCoursesHours > 0 && (
+                <div className="mt-4 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+                  <p className="text-lg font-bold text-gray-800">
+                    📊 GPA After Current Courses
+                  </p>
+                  <p className="text-3xl font-bold text-blue-600 mt-2">
+                    {raiseResults.newGPAAfterCurrent.toFixed(3)}
+                  </p>
+                  <p className="text-sm text-gray-600 mt-2">
+                    After completing {raiseResults.currentCoursesHours} credit hours this term, your new cumulative GPA will be {raiseResults.newGPAAfterCurrent.toFixed(3)}.
+                  </p>
+                </div>
+              )}
+
+              {raiseResults.hoursNeeded !== null && raiseResults.hoursNeeded === 0 && (
+                <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                  <p className="text-lg font-bold text-gray-800">
+                    🎉 Target Achieved!
+                  </p>
+                  <p className="text-sm text-gray-600 mt-2">
+                    {raiseResults.currentCoursesHours !== undefined && raiseResults.currentCoursesHours > 0
+                      ? `After completing your current courses, your GPA of ${raiseResults.newGPAAfterCurrent?.toFixed(3)} will meet or exceed your target of ${targetGPA}. No additional credit hours needed!`
+                      : `Your current GPA of ${cumulativeGPA} already meets or exceeds your target of ${targetGPA}. No additional credit hours needed.`
+                    }
+                  </p>
+                </div>
+              )}
+              
+              {raiseResults.hoursNeeded !== null && raiseResults.hoursNeeded > 0 && (
                 <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
                   <p className="text-lg font-bold text-gray-800">
                     You need approximately <span className="text-green-600 text-2xl">{raiseResults.hoursNeeded}</span> additional credit hours
                   </p>
                   <p className="text-sm text-gray-600 mt-2">
-                    This assumes you maintain a {maintainAverage} average on all future courses.
+                    {raiseResults.currentCoursesHours !== undefined && raiseResults.currentCoursesHours > 0
+                      ? `After your current ${raiseResults.currentCoursesHours} hours (new GPA: ${raiseResults.newGPAAfterCurrent?.toFixed(3)}), you'll need ${raiseResults.hoursNeeded} more hours while maintaining a ${maintainAverage} average to reach ${targetGPA}.`
+                      : `Maintain a ${maintainAverage} average on ${raiseResults.hoursNeeded} credit hours to reach your target GPA of ${targetGPA}.`
+                    }
+                  </p>
+                </div>
+              )}
+              
+              {raiseResults.hoursNeeded === null && (
+                <div className="mt-4 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+                  <p className="text-lg font-bold text-gray-800">
+                    ⚠️ Target Not Achievable
+                  </p>
+                  <p className="text-sm text-red-600 mt-2">
+                    {raiseResults.currentCoursesHours !== undefined && raiseResults.currentCoursesHours > 0
+                      ? `Even after your current courses (new GPA: ${raiseResults.newGPAAfterCurrent?.toFixed(3)}), your target of ${targetGPA} cannot be reached by maintaining a ${maintainAverage} average.`
+                      : `Your target GPA of ${targetGPA} cannot be reached by maintaining a ${maintainAverage} average.`
+                    }
+                    {' '}The average you maintain must be <strong>higher than your target GPA</strong> to raise it.
+                  </p>
+                  <p className="text-sm text-gray-600 mt-2">
+                    💡 <strong>Tip:</strong> Set a higher "maintain average" (e.g., 4.0) to see realistic results.
                   </p>
                 </div>
               )}
@@ -768,7 +1010,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     onChange={(e) => setCurrentHours(e.target.value)}
                     placeholder="15"
                     min="0"
-                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                   />
                 </div>
                 
@@ -784,7 +1026,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                     step="0.01"
                     min="0"
                     max="4"
-                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                   />
                 </div>
               </div>
@@ -796,22 +1038,78 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                 Calculate Required Average
               </button>
 
-              {raiseResults.requiredAverage !== null && (
-                <div className={`mt-4 border-l-4 p-4 rounded-lg ${
-                  raiseResults.requiredAverage <= 4.0 
-                    ? 'bg-green-50 border-green-500' 
-                    : 'bg-red-50 border-red-500'
-                }`}>
+              {raiseResults.requiredAverage === -2 && (
+                <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
                   <p className="text-lg font-bold text-gray-800">
-                    You need an average of <span className={`text-2xl ${raiseResults.requiredAverage <= 4.0 ? 'text-green-600' : 'text-red-600'}`}>
+                    🎉 You're Already Above Your Target!
+                  </p>
+                  <p className="text-sm text-gray-600 mt-2">
+                    Your current GPA of {cumulativeGPA} is already higher than your target of {termTargetGPA}. 
+                    You can earn <strong>any grade</strong> (even below passing) in {currentHours} hours and still remain above your target.
+                  </p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    💡 No minimum average required - you have a comfortable buffer above your goal.
+                  </p>
+                </div>
+              )}
+
+              {raiseResults.requiredAverage !== null && raiseResults.requiredAverage === 0 && (
+                <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                  <p className="text-lg font-bold text-gray-800">
+                    ✅ Target Exactly Achieved
+                  </p>
+                  <p className="text-sm text-gray-600 mt-2">
+                    Your current GPA of {cumulativeGPA} exactly matches your target of {termTargetGPA}. 
+                    Maintain any passing grade to stay at or above your target.
+                  </p>
+                </div>
+              )}
+
+              {raiseResults.requiredAverage !== null && raiseResults.requiredAverage > 0 && raiseResults.requiredAverage <= 4.0 && (
+                <div className="mt-4 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                  <p className="text-lg font-bold text-gray-800">
+                    You need an average of <span className="text-green-600 text-2xl">
                       {raiseResults.requiredAverage.toFixed(2)}
                     </span> this term
                   </p>
-                  {raiseResults.requiredAverage > 4.0 && (
-                    <p className="text-sm text-red-600 mt-2">
-                      ⚠️ This target is not achievable (exceeds 4.0). Consider adjusting your target GPA or taking more credit hours.
-                    </p>
-                  )}
+                  <p className="text-sm text-gray-600 mt-2">
+                    Maintain this average in {currentHours} credit hours to reach a cumulative GPA of {termTargetGPA}.
+                  </p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    📊 Calculation: ({termTargetGPA} × {parseFloat(attemptedHours) + parseFloat(currentHours)} total hours) - 
+                    ({cumulativeGPA} × {attemptedHours} current hours) = {(raiseResults.requiredAverage * parseFloat(currentHours)).toFixed(2)} points needed ÷ {currentHours} hours
+                  </p>
+                </div>
+              )}
+
+              {raiseResults.requiredAverage === -3 && (
+                <div className="mt-4 bg-orange-50 border-l-4 border-orange-500 p-4 rounded-lg">
+                  <p className="text-lg font-bold text-gray-800">
+                    ⚠️ Invalid Input
+                  </p>
+                  <p className="text-sm text-orange-600 mt-2">
+                    Please enter a valid number of credit hours above 0. You cannot calculate required average for 0 credit hours.
+                  </p>
+                </div>
+              )}
+
+              {raiseResults.requiredAverage === -1 && (
+                <div className="mt-4 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+                  <p className="text-lg font-bold text-gray-800">
+                    ⚠️ Target Not Achievable
+                  </p>
+                  <p className="text-sm text-red-600 mt-2">
+                    Your target GPA of {termTargetGPA} cannot be reached with {currentHours} credit hours this term. 
+                    The required average would exceed 4.0 (maximum possible).
+                  </p>
+                  <div className="mt-3 text-sm text-gray-700 space-y-1">
+                    <p className="font-semibold">💡 Solutions:</p>
+                    <ul className="list-disc list-inside ml-2">
+                      <li>Lower your target GPA to a more realistic level</li>
+                      <li>Take more credit hours this term (increase from {currentHours})</li>
+                      <li>Plan to reach your goal over multiple semesters</li>
+                    </ul>
+                  </div>
                 </div>
               )}
             </div>
@@ -843,7 +1141,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   onChange={(e) => setGpdAttemptedHours(e.target.value)}
                   placeholder="45"
                   min="0"
-                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                 />
               </div>
               
@@ -858,7 +1156,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   placeholder="83"
                   min="0"
                   step="0.01"
-                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                 />
               </div>
               
@@ -869,7 +1167,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                 <select
                   value={desiredGPAForGPD}
                   onChange={(e) => setDesiredGPAForGPD(e.target.value)}
-                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                  className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900"
                 >
                   {gpdTable.map(row => (
                     <option key={row.desiredGPA} value={row.desiredGPA.toFixed(2)}>
@@ -923,26 +1221,35 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                 </div>
 
                 {gpdResult.gpd > 0 && (
+                <>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
                       <p className="text-sm text-gray-600 mb-1">A's Needed (3-hour courses)</p>
-                      <p className="text-3xl font-bold text-green-600">{gpdResult.aGrades}</p>
-                      <p className="text-xs text-gray-500 mt-1">Each A = +6 points</p>
+                      <p className="text-3xl font-bold text-green-600">{gpdResult.aGrades > 0 ? gpdResult.aGrades : 'N/A'}</p>
+                      <p className="text-xs text-gray-500 mt-1">{gpdResult.aGrades > 0 ? 'Each A = +6 points' : 'Not applicable at this GPA'}</p>
                     </div>
                     
                     <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
                       <p className="text-sm text-gray-600 mb-1">B's Needed (3-hour courses)</p>
-                      <p className="text-3xl font-bold text-blue-600">{gpdResult.bGrades}</p>
-                      <p className="text-xs text-gray-500 mt-1">Each B = +3 points</p>
+                      <p className="text-3xl font-bold text-blue-600">{gpdResult.bGrades > 0 ? gpdResult.bGrades : 'N/A'}</p>
+                      <p className="text-xs text-gray-500 mt-1">{gpdResult.bGrades > 0 ? 'Each B = +3 points' : 'Not applicable at this GPA'}</p>
                     </div>
                     
-                    <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600 mb-1">C's Impact</p>
-                      <p className="text-3xl font-bold text-yellow-600">0</p>
-                      <p className="text-xs text-gray-500 mt-1">C's maintain 2.0 GPA</p>
+                    <div className="bg-gray-50 border border-gray-300 p-4 rounded-lg">
+                      <p className="text-sm text-gray-600 mb-1">C's Effect on GPD</p>
+                      <p className="text-2xl font-bold text-gray-500">N/A</p>
+                      <p className="text-xs text-gray-500 mt-1">C's maintain 2.0 but don't reduce GPD</p>
                     </div>
                   </div>
-                )}
+                  
+                  <div className="mt-4 bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-lg">
+                    <p className="text-sm text-gray-700">
+                      <strong>💡 Important:</strong> C grades (2.0) maintain your current GPA at 2.0 but do NOT reduce your Grade Point Deficiency. 
+                      To eliminate GPD and get off probation, you need grades <strong>above 2.0</strong> (B's or A's).
+                    </p>
+                  </div>
+                </>
+              )}
               </div>
             )}
 
@@ -1054,7 +1361,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
               This calculator serves as a planning tool to complement official records in MyMav. Students can model different scenarios: calculating what term average is needed to reach target cumulative values, 
               determining how many credit hours of A-level work can offset previous lower performance, or planning course selections to maintain honors eligibility. For transfer students considering UTA, 
               use this alongside our{' '}
-              <button onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/college-gpa-calculator')} className="text-orange-600 hover:text-orange-700 underline">
+              <button onClick={() => navigateTo('/education-and-exam-tools/college-gpa-calculator')} className="text-orange-600 hover:text-orange-700 underline">
                 College GPA Calculator
               </button> to understand how previous coursework might translate to the UTA grading system.
             </p>
@@ -1076,7 +1383,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
               <button onClick={() => navigateTo('/education-and-exam-tools/sat-score-calculator')} className="text-orange-600 hover:text-orange-700 underline">
                 SAT Score Calculator
               </button> for admissions planning or graduate school applications. The{' '}
-              <button onClick={() => navigateTo('/text-tools/word-counter')} className="text-orange-600 hover:text-orange-700 underline">
+              <button onClick={() => navigateTo('/text-and-writing-tools/word-counter')} className="text-orange-600 hover:text-orange-700 underline">
                 Word Counter
               </button> assists with essay assignments and research papers. 
               Browse our complete collection of{' '}
