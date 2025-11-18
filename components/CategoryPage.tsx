@@ -6,10 +6,11 @@ import { Page } from '../App';
 interface CategoryPageProps {
     category: Category;
     navigateTo: (page: Page) => void;
+    fullPath?: string; // Optional full path for subcategories
 }
 
-const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo }) => {
-    const categoryUrl = `https://zurawebtools.com/${category.slug}`;
+const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo, fullPath }) => {
+    const categoryUrl = fullPath ? `https://zurawebtools.com/${fullPath}` : `https://zurawebtools.com/${category.slug}`;
 
     useEffect(() => {
         // Set page title
@@ -21,6 +22,43 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo }) => 
             metaDescription.setAttribute('content', category.description);
         }
 
+        // Build breadcrumb items - handle subcategories
+        const breadcrumbItems = [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://zurawebtools.com"
+            }
+        ];
+
+        // Check if this is a subcategory (fullPath contains /)
+        if (fullPath && fullPath.includes('/')) {
+            const pathParts = fullPath.split('/');
+            // Add parent category
+            breadcrumbItems.push({
+                "@type": "ListItem",
+                "position": 2,
+                "name": pathParts[0].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+                "item": `https://zurawebtools.com/${pathParts[0]}`
+            });
+            // Add current subcategory
+            breadcrumbItems.push({
+                "@type": "ListItem",
+                "position": 3,
+                "name": category.title,
+                "item": categoryUrl
+            });
+        } else {
+            // Regular category
+            breadcrumbItems.push({
+                "@type": "ListItem",
+                "position": 2,
+                "name": category.title,
+                "item": categoryUrl
+            });
+        }
+
         // Add BreadcrumbList structured data
         const breadcrumbScript = document.createElement('script');
         breadcrumbScript.type = 'application/ld+json';
@@ -29,20 +67,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo }) => 
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "@id": `${categoryUrl}#breadcrumb`,
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://zurawebtools.com"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": category.title,
-                    "item": categoryUrl
-                }
-            ]
+            "itemListElement": breadcrumbItems
         });
         document.head.appendChild(breadcrumbScript);
 

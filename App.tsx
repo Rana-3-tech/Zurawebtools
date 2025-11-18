@@ -268,7 +268,8 @@ const App: React.FC = () => {
                         icon: parentCategory.icon,
                         tools: subCategory.tools
                     };
-                    return <CategoryPage category={subCategoryAsCategory} navigateTo={navigateTo} />;
+                    const fullPath = `${categoryPathParts[0]}/${categoryPathParts[1]}`;
+                    return <CategoryPage category={subCategoryAsCategory} navigateTo={navigateTo} fullPath={fullPath} />;
                 }
             }
         }
