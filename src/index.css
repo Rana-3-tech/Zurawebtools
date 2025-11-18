@@ -1,3 +1,6 @@
+@import "tailwindcss";
+
+/* Custom Styles */
 /* Hide scrollbar for slider */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
