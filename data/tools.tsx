@@ -280,6 +280,14 @@ const RutgersGPAIcon = () => (
     </svg>
 );
 
+const UTAGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="utaGPAIconTitle">
+        <title id="utaGPAIconTitle">UTA GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGrad26" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#FF8200" /><stop offset="100%" stopColor="#0064B0" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGrad26)" />
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -455,6 +463,13 @@ export const toolCategories: Category[] = [
                 gradientColors: { from: '#cc0033', to: '#ff0000' }, // Rutgers Scarlet Red
             },
             {
+                title: 'UTA GPA Calculator',
+                description: 'University of Texas at Arlington GPA calculator with Grade Point Deficiency (GPD) computation. Calculate semester GPA, raise cumulative GPA, and plan academic probation removal.',
+                link: 'education-and-exam-tools/university-gpa-tools/uta-gpa-calculator',
+                icon: <UTAGPAIcon />,
+                gradientColors: { from: '#FF8200', to: '#0064B0' }, // UTA Orange and Blue
+            },
+            {
                 title: 'ISAC GPA Calculator',
                 description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
                 link: 'education-and-exam-tools/gpa-tools/isac-gpa-calculator',
@@ -527,6 +542,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator',
                         icon: <RutgersGPAIcon />,
                         gradientColors: { from: '#cc0033', to: '#ff0000' },
+                    },
+                    {
+                        title: 'UTA GPA Calculator',
+                        description: 'University of Texas at Arlington GPA calculator with Grade Point Deficiency (GPD) computation. Calculate semester GPA, raise cumulative GPA, and plan academic probation removal.',
+                        link: 'education-and-exam-tools/university-gpa-tools/uta-gpa-calculator',
+                        icon: <UTAGPAIcon />,
+                        gradientColors: { from: '#FF8200', to: '#0064B0' },
                     },
                 ]
             },
