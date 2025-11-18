@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Category } from '../data/tools';
 import ToolCard from './ToolCard';
 import { Page } from '../App';
@@ -9,6 +9,65 @@ interface CategoryPageProps {
 }
 
 const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo }) => {
+    const categoryUrl = `https://zurawebtools.com/${category.slug}`;
+
+    useEffect(() => {
+        // Set page title
+        document.title = `${category.title} - Free Online Tools | ZuraWebTools`;
+
+        // Set meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', category.description);
+        }
+
+        // Add BreadcrumbList structured data
+        const breadcrumbScript = document.createElement('script');
+        breadcrumbScript.type = 'application/ld+json';
+        breadcrumbScript.id = 'category-breadcrumb-schema';
+        breadcrumbScript.text = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "@id": `${categoryUrl}#breadcrumb`,
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://zurawebtools.com"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": category.title,
+                    "item": categoryUrl
+                }
+            ]
+        });
+        document.head.appendChild(breadcrumbScript);
+
+        // Add CollectionPage structured data
+        const collectionScript = document.createElement('script');
+        collectionScript.type = 'application/ld+json';
+        collectionScript.id = 'category-collection-schema';
+        collectionScript.text = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": category.title,
+            "description": category.description,
+            "url": categoryUrl
+        });
+        document.head.appendChild(collectionScript);
+
+        // Cleanup on unmount
+        return () => {
+            const breadcrumb = document.getElementById('category-breadcrumb-schema');
+            const collection = document.getElementById('category-collection-schema');
+            if (breadcrumb) breadcrumb.remove();
+            if (collection) collection.remove();
+        };
+    }, [category, categoryUrl]);
+
     return (
         <section className="py-20 bg-gray-50">
             <div className="container mx-auto px-6">
