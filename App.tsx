@@ -126,6 +126,42 @@ const App: React.FC = () => {
     const renderPage = () => {
         const path = currentPath === '/' ? 'home' : currentPath.substring(1);
 
+        // OLD URL REDIRECT LOGIC - Redirect old flat URLs to new category-based structure
+        const oldToNewUrlMap: { [key: string]: string } = {
+            'word-counter': '/text-and-writing-tools/word-counter',
+            'remove-extra-spaces': '/text-and-writing-tools/remove-extra-spaces',
+            'case-converter': '/text-and-writing-tools/case-converter',
+            'lorem-ipsum-generator': '/text-and-writing-tools/lorem-ipsum-generator',
+            'time-difference-calculator': '/calculators/time-difference-calculator',
+            'percentage-change-calculator': '/calculators/percentage-change-calculator',
+            'fabric-costing-tool': '/calculators/fabric-costing-tool',
+            'snow-day-calculator': '/calculators/snow-day-calculator',
+            'hex-to-rgb-converter': '/color-tools/hex-to-rgb-converter',
+            'accessible-color-contrast-checker': '/color-tools/accessible-color-contrast-checker',
+            'shadow-css-generator': '/developer-tools/shadow-css-generator',
+            'color-harmony-checker': '/color-tools/color-harmony-checker',
+            'json-formatter': '/developer-tools/json-formatter',
+            'code-similarity-checker': '/developer-tools/code-similarity-checker',
+            'sat-score-calculator': '/education-and-exam-tools/sat-score-calculator',
+            'berkeley-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
+            'rutgers-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator',
+            'isac-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/isac-gpa-calculator',
+            'college-gpa-calculator': '/education-and-exam-tools/college-gpa-calculator',
+            'csu-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/csu-gpa-calculator',
+            'fill-dirt-calculator': '/calculators/fill-dirt-calculator',
+            'quilt-backing-calculator': '/calculators/quilt-backing-calculator',
+            'power-to-mass-ratio-calculator': '/calculators/power-to-mass-ratio-calculator',
+            'audiobook-speed-calculator': '/calculators/audiobook-speed-calculator',
+            'reverb-calculator': '/calculators/reverb-calculator',
+        };
+
+        // Check if this is an old flat URL and redirect
+        if (oldToNewUrlMap[path]) {
+            console.log(`Redirecting from old URL: /${path} to new URL: ${oldToNewUrlMap[path]}`);
+            navigateTo(oldToNewUrlMap[path]);
+            return null; // Return null while redirecting
+        }
+
         if (path === 'home') {
             return (
                 <>
