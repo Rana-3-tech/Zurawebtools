@@ -782,22 +782,22 @@ const ShadowCSSGenerator: React.FC<ShadowCSSGeneratorProps> = ({ navigateTo }) =
         <div className="flex justify-center items-center space-x-6">
           <ShareButton 
             network="Facebook" 
-            url="https://zurawebtools.com/shadow-css-generator" 
+            url="https://zurawebtools.com/color-and-design-tools/shadow-css-generator" 
             text="Create realistic CSS shadows with this free generator tool!" 
           />
           <ShareButton 
             network="Twitter" 
-            url="https://zurawebtools.com/shadow-css-generator" 
+            url="https://zurawebtools.com/color-and-design-tools/shadow-css-generator" 
             text="Free CSS Shadow Generator by @ZuraWebTools! Create box-shadow and text-shadow effects easily." 
           />
           <ShareButton 
             network="LinkedIn" 
-            url="https://zurawebtools.com/shadow-css-generator" 
+            url="https://zurawebtools.com/color-and-design-tools/shadow-css-generator" 
             text="Professional CSS Shadow Generator for web designers and developers." 
           />
           <ShareButton 
             network="WhatsApp" 
-            url="https://zurawebtools.com/shadow-css-generator" 
+            url="https://zurawebtools.com/color-and-design-tools/shadow-css-generator" 
             text="Check out this free CSS Shadow Generator tool by ZuraWebTools." 
           />
         </div>
