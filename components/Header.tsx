@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
         <header className="bg-white shadow-md sticky top-0 z-50">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="/" onClick={(e) => handleNavClick(e, '/')} className="text-2xl font-extrabold cursor-pointer">
-                    <span className="text-slate-900">Zura</span><span className="text-brand-blue">WebTools</span>
+                    <span className="text-slate-900">Zura</span><span style={{color: '#007BFF'}}>WebTools</span>
                 </a>
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center space-x-6">
