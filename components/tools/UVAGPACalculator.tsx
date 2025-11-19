@@ -446,17 +446,17 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
               Official University of Virginia GPA calculator with UVA grade scale (A+ = 4.0). Calculate semester GPA, cumulative GPA, and track Latin honors eligibility for Cum Laude, Magna Cum Laude, and Summa Cum Laude.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-5 py-2.5 text-white flex items-center gap-2 shadow-lg">
-                <span className="text-xl">🏫</span>
-                <span className="font-semibold">Official UVA Scale</span>
+              <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2.5 shadow-xl border-2 border-orange-200">
+                <span className="text-2xl">🏫</span>
+                <span className="font-bold text-gray-800 text-base">Official UVA Scale</span>
               </div>
-              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-5 py-2.5 text-white flex items-center gap-2 shadow-lg">
-                <span className="text-xl">📊</span>
-                <span className="font-semibold">Multi-Semester Tracking</span>
+              <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2.5 shadow-xl border-2 border-blue-200">
+                <span className="text-2xl">📊</span>
+                <span className="font-bold text-gray-800 text-base">Multi-Semester Tracking</span>
               </div>
-              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-5 py-2.5 text-white flex items-center gap-2 shadow-lg">
-                <span className="text-xl">🏆</span>
-                <span className="font-semibold">Honors Calculator</span>
+              <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2.5 shadow-xl border-2 border-orange-200">
+                <span className="text-2xl">🏆</span>
+                <span className="font-bold text-gray-800 text-base">Honors Calculator</span>
               </div>
             </div>
           </div>
@@ -542,7 +542,7 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                             placeholder="e.g., MATH 1310"
                             value={course.name}
                             onChange={(e) => updateCourse(semester.id, courseIndex, 'name', e.target.value)}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium placeholder:text-gray-400"
                             aria-label="Course name"
                           />
                           <datalist id={`uva-course-list-${semester.id}-${courseIndex}`}>
@@ -557,7 +557,7 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                           <select
                             value={course.grade}
                             onChange={(e) => updateCourse(semester.id, courseIndex, 'grade', e.target.value)}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium"
                             aria-label="Grade"
                           >
                             {Object.keys(gradeScale).map(grade => (
@@ -575,7 +575,7 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                             step="0.5"
                             value={course.credits}
                             onChange={(e) => updateCourse(semester.id, courseIndex, 'credits', parseFloat(e.target.value) || 0)}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium"
                             aria-label="Credit hours"
                           />
                         </div>
