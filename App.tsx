@@ -41,7 +41,7 @@ const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalcula
 const BerkeleyGPACalculator = lazy(() => import('./components/tools/BerkeleyGPACalculator'));
 const UTAGPACalculator = lazy(() => import('./components/tools/UTAGPACalculator'));
 const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACalculator'));
-const ISACGPA = lazy(() => import('./components/tools/ISACGPA'));
+const LSACGPA = lazy(() => import('./components/tools/LSACGPA'));
 const FillDirtCalculator = lazy(() => import('./components/tools/FillDirtCalculator'));
 const QuiltBackingCalculator = lazy(() => import('./components/tools/QuiltBackingCalculator'));
 const PowerToMassRatioCalculator = lazy(() => import('./components/tools/PowerToMassRatioCalculator'));
