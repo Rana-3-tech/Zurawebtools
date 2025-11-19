@@ -41,6 +41,7 @@ const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalcula
 const BerkeleyGPACalculator = lazy(() => import('./components/tools/BerkeleyGPACalculator'));
 const UTAGPACalculator = lazy(() => import('./components/tools/UTAGPACalculator'));
 const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACalculator'));
+const UVAGPACalculator = lazy(() => import('./components/tools/UVAGPACalculator'));
 const LSACGPA = lazy(() => import('./components/tools/LSACGPA'));
 const FillDirtCalculator = lazy(() => import('./components/tools/FillDirtCalculator'));
 const QuiltBackingCalculator = lazy(() => import('./components/tools/QuiltBackingCalculator'));
@@ -147,6 +148,7 @@ const App: React.FC = () => {
             'berkeley-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
             'rutgers-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator',
             'uta-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator',
+            'uva-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator',
             'lsac-gpa-calculator': '/education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
             'college-gpa-calculator': '/education-and-exam-tools/college-gpa-calculator',
             'csu-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/csu-gpa-calculator',
@@ -225,6 +227,7 @@ const App: React.FC = () => {
             'berkeley-gpa-calculator': BerkeleyGPACalculator,
             'rutgers-gpa-calculator': RutgersGPACalculator,
             'uta-gpa-calculator': UTAGPACalculator,
+            'uva-gpa-calculator': UVAGPACalculator,
             'lsac-gpa-calculator': LSACGPA,
             'college-gpa-calculator': CollegeGPACalculator,
             'csu-gpa-calculator': CSUGPACalculator,
