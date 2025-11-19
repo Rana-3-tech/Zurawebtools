@@ -465,18 +465,18 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
             <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-6">
               Official LSAC Credential Assembly Service (CAS) GPA Calculator using Law School Admission Council grade scale with A+ (4.33) conversion for accurate law school application GPA.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white flex items-center gap-2">
-                <span>🎓</span>
-                <span>Law School Application</span>
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 text-sm">
+              <div className="bg-white rounded-full px-5 py-2.5 flex items-center gap-2 shadow-xl border-2 border-blue-200">
+                <span className="text-xl">🎓</span>
+                <span className="font-bold text-gray-800 text-sm md:text-base">Law School Application</span>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white flex items-center gap-2">
-                <span>📊</span>
-                <span>Official LSAC Scale</span>
+              <div className="bg-white rounded-full px-5 py-2.5 flex items-center gap-2 shadow-xl border-2 border-purple-200">
+                <span className="text-xl">📊</span>
+                <span className="font-bold text-gray-800 text-sm md:text-base">Official LSAC Scale</span>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white flex items-center gap-2">
-                <span>⚖️</span>
-                <span>A+ Support (4.33)</span>
+              <div className="bg-white rounded-full px-5 py-2.5 flex items-center gap-2 shadow-xl border-2 border-blue-200">
+                <span className="text-xl">⚖️</span>
+                <span className="font-bold text-gray-800 text-sm md:text-base">A+ Support (4.33)</span>
               </div>
             </div>
           </div>
@@ -484,10 +484,10 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
 
         <div className="max-w-5xl mx-auto px-6 py-12">
           {/* Social Share Buttons */}
-          <div className="flex justify-center gap-4 mb-8">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
             <button
               onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('Calculate your law school GPA with LSAC CAS GPA Calculator! Perfect for law school applications 🎓⚖️')}`, '_blank')}
-              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors text-sm md:text-base"
               aria-label="Share on Twitter"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -497,7 +497,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
             </button>
             <button
               onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator')}`, '_blank')}
-              className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg transition-colors text-sm md:text-base"
               aria-label="Share on Facebook"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -507,7 +507,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
             </button>
             <button
               onClick={() => navigator.clipboard.writeText('https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator')}
-              className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors text-sm md:text-base"
               aria-label="Copy link to clipboard"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -518,7 +518,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
           </div>
 
           {/* Main GPA Calculator Interface */}
-          <div className="bg-white rounded-3xl shadow-2xl p-8 mb-12 border border-gray-100 relative overflow-hidden">
+          <div className="bg-white rounded-2xl md:rounded-3xl shadow-2xl p-4 md:p-8 mb-12 border border-gray-100 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-green-100 to-blue-100 rounded-full -ml-12 -mb-12 opacity-50"></div>
             <div className="relative z-10">
@@ -533,7 +533,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
 
               {/* GPA Type Toggle */}
               <div className="mb-6">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4">
                   <label className="flex items-center gap-2">
                     <input
                       type="radio"
@@ -542,7 +542,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
                       onChange={() => setIsWeighted(false)}
                       className="text-blue-600 focus:ring-blue-500"
                     />
-                    <span className="text-gray-700 font-medium">Unweighted GPA (4.0 scale)</span>
+                    <span className="text-gray-700 font-medium text-sm md:text-base">Unweighted GPA (4.0 scale)</span>
                   </label>
                   <label className="flex items-center gap-2">
                     <input
@@ -552,7 +552,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
                       onChange={() => setIsWeighted(true)}
                       className="text-blue-600 focus:ring-blue-500"
                     />
-                    <span className="text-gray-700 font-medium">Weighted GPA (5.0 scale)</span>
+                    <span className="text-gray-700 font-medium text-sm md:text-base">Weighted GPA (5.0 scale)</span>
                   </label>
                 </div>
               </div>
@@ -560,15 +560,16 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
               {/* Course Input Section */}
               <div className="space-y-4 mb-6">
                 {courses.map((course, index) => (
-                  <div key={index} className="flex gap-4 items-center p-4 bg-gray-50 rounded-lg">
+                  <div key={index} className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center p-4 bg-gray-50 rounded-lg">
                     <div className="flex-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1 md:hidden">Course Name</label>
                       <input
                         type="text"
                         list={`course-list-${index}`}
                         placeholder="Course Name (type or select)"
                         value={course.name}
                         onChange={(e) => updateCourse(index, 'name', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+                        className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium"
                         aria-label="Course name"
                       />
                       <datalist id={`course-list-${index}`}>
@@ -577,11 +578,12 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
                         ))}
                       </datalist>
                     </div>
-                    <div className="w-24">
+                    <div className="w-full md:w-32">
+                      <label className="block text-xs font-medium text-gray-600 mb-1 md:hidden">Grade</label>
                       <select
                         value={course.grade}
                         onChange={(e) => updateCourse(index, 'grade', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+                        className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium"
                         aria-label="Grade"
                       >
                         {Object.entries(gradePoints).map(([grade, value]) => (
@@ -591,38 +593,45 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
                         ))}
                       </select>
                     </div>
-                    <div className="w-20">
+                    <div className="w-full md:w-24">
+                      <label className="block text-xs font-medium text-gray-600 mb-1 md:hidden">Credits</label>
                       <input
                         type="number"
                         placeholder="Credits"
-                        value={course.credits}
-                        onChange={(e) => updateCourse(index, 'credits', Number(e.target.value))}
+                        value={course.credits === 0 ? '' : course.credits}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const parsed = value === '' ? 0 : parseFloat(value);
+                          updateCourse(index, 'credits', isNaN(parsed) ? 0 : Math.max(0, parsed));
+                        }}
                         min="0"
                         max="10"
                         step="1"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+                        className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium"
                         aria-label="Credit hours"
                       />
                     </div>
                     {isWeighted && (
-                      <label className="flex items-center gap-2 text-sm">
-                        <input
-                          type="checkbox"
-                          checked={course.isHonors}
-                          onChange={(e) => updateCourse(index, 'isHonors', e.target.checked)}
-                          className="text-blue-600 focus:ring-blue-500"
-                          aria-label="Mark as Honors or AP course"
-                        />
-                        <span>Honors/AP</span>
-                      </label>
+                      <div className="w-full md:w-auto">
+                        <label className="flex items-center gap-2 text-sm md:text-base font-medium text-gray-700">
+                          <input
+                            type="checkbox"
+                            checked={course.isHonors}
+                            onChange={(e) => updateCourse(index, 'isHonors', e.target.checked)}
+                            className="text-blue-600 focus:ring-blue-500 w-4 h-4"
+                            aria-label="Mark as Honors or AP course"
+                          />
+                          <span>Honors/AP</span>
+                        </label>
+                      </div>
                     )}
                     {courses.length > 1 && (
                       <button
                         onClick={() => removeCourse(index)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        className="p-2 md:p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors self-center md:self-auto"
                         aria-label="Remove course"
                       >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 h-6 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                         </svg>
                       </button>
@@ -632,10 +641,10 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
               </div>
 
               {/* Add Course Button */}
-              <div className="mb-6 flex gap-3">
+              <div className="mb-6 flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={addCourse}
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                  className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-colors font-medium text-sm md:text-base"
                   aria-label="Add new course"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -651,7 +660,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
                         localStorage.removeItem('lsac-gpa-courses');
                       }
                     }}
-                    className="flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+                    className="flex items-center justify-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2.5 rounded-lg transition-colors font-medium text-sm md:text-base"
                     aria-label="Clear all courses"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -663,7 +672,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
               </div>
 
               {/* GPA Result */}
-              <div className="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 text-white p-8 rounded-3xl shadow-xl">
+              <div className="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 text-white p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl">
                 <div className="text-center">
                   <div className="inline-flex items-center gap-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
