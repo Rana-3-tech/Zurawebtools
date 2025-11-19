@@ -9,13 +9,31 @@ type Course = {
 };
 
 const LSACGPACalculator: React.FC = () => {
-  // State Management
-  const [courses, setCourses] = useState<Course[]>([
-    { name: '', grade: 'A', credits: 0, isHonors: false }
-  ]);
+  // State Management with localStorage persistence
+  const [courses, setCourses] = useState<Course[]>(() => {
+    // Load saved courses from localStorage on initial mount
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('lsac-gpa-courses');
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error('Failed to parse saved courses:', e);
+        }
+      }
+    }
+    return [{ name: '', grade: 'A', credits: 0, isHonors: false }];
+  });
 
   const [gpa, setGpa] = useState<number>(0);
-  const [isWeighted, setIsWeighted] = useState<boolean>(false);
+  const [isWeighted, setIsWeighted] = useState<boolean>(() => {
+    // Load weighted setting from localStorage
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('lsac-gpa-weighted');
+      return saved === 'true';
+    }
+    return false;
+  });
 
   // TOC sections configuration
   const tocSections: TOCSection[] = [
@@ -112,6 +130,50 @@ const LSACGPACalculator: React.FC = () => {
   useEffect(() => {
     setGpa(computedGPA);
   }, [computedGPA]);
+
+  // Auto-save courses to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('lsac-gpa-courses', JSON.stringify(courses));
+    }
+  }, [courses]);
+
+  // Auto-save weighted setting to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('lsac-gpa-weighted', String(isWeighted));
+    }
+  }, [isWeighted]);
+
+  // Common course names for LSAC undergraduate transcripts
+  const commonCourses = [
+    'English Composition',
+    'Calculus I',
+    'Calculus II',
+    'Statistics',
+    'General Chemistry',
+    'Organic Chemistry',
+    'General Biology',
+    'Physics I',
+    'Physics II',
+    'Microeconomics',
+    'Macroeconomics',
+    'American History',
+    'World History',
+    'Psychology',
+    'Philosophy',
+    'Political Science',
+    'Sociology',
+    'Public Speaking',
+    'Business Law',
+    'Constitutional Law',
+    'Spanish I',
+    'Spanish II',
+    'French I',
+    'Computer Science',
+    'Art History',
+    'Music Theory'
+  ];
 
   // Course Management Functions
   const addCourse = () => {
@@ -216,6 +278,38 @@ const LSACGPACalculator: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is LSAC CAS GPA and why is it different?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LSAC CAS (Credential Assembly Service) GPA is the official GPA calculated by the Law School Admission Council for all law school applications. It differs from college GPA because LSAC uses a unique scale that awards A+ grades 4.33 points and includes D- (0.67) grades. LSAC recalculates your entire undergraduate transcript using this standardized scale."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does LSAC use 4.33 for A+ grades?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LSAC awards 4.33 grade points for A+ to recognize exceptional academic performance and create more differentiation at the top of the grading scale. This official LSAC scale rewards students who earned A+ grades by giving them credit above the standard 4.0 scale, which can significantly boost their CAS GPA."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do all law schools only use LSAC CAS GPA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all ABA-approved law schools in the United States require applicants to submit transcripts through LSAC's Credential Assembly Service. Law schools use your LSAC CAS GPA (not your college GPA) for admissions decisions, scholarship awards, and statistical reporting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is LSAC GPA calculated differently from college GPA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LSAC recalculates your GPA by converting all letter grades to the official LSAC scale (A+=4.33, A=4.00, A-=3.67), multiplying each grade by credit hours and dividing by total credits. LSAC includes A+ at 4.33, uses precise decimals, excludes graduate coursework, and counts all undergraduate courses including repeated classes."
+        }
+      },
       {
         "@type": "Question",
         "name": "What is the difference between weighted and unweighted GPA?",
@@ -379,21 +473,11 @@ const LSACGPACalculator: React.FC = () => {
           </div>
         </div>
 
-        {/* ISAC GPA Calculator Summary */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
-            ISAC GPA Calculator Summary
-          </h2>
-          <p className="text-gray-700 text-lg leading-relaxed max-w-4xl mx-auto">
-            The ISAC GPA Calculator helps high school and college students calculate semester GPA, cumulative GPA, weighted GPA, and unweighted GPA with accurate credit-hour weighting. It's designed for academic planning, scholarship eligibility, admissions preparation, and GPA forecasting.
-          </p>
-        </div>
-
         <div className="max-w-5xl mx-auto px-6 py-12">
           {/* Social Share Buttons */}
           <div className="flex justify-center gap-4 mb-8">
             <button
-              onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('Calculate your GPA instantly with ISAC GPA Calculator! 🎓')}`, '_blank')}
+              onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('Calculate your law school GPA with LSAC CAS GPA Calculator! Perfect for law school applications 🎓⚖️')}`, '_blank')}
               className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Share on Twitter"
             >
@@ -471,17 +555,25 @@ const LSACGPACalculator: React.FC = () => {
                     <div className="flex-1">
                       <input
                         type="text"
-                        placeholder="Course Name"
+                        list={`course-list-${index}`}
+                        placeholder="Course Name (type or select)"
                         value={course.name}
                         onChange={(e) => updateCourse(index, 'name', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+                        aria-label="Course name"
                       />
+                      <datalist id={`course-list-${index}`}>
+                        {commonCourses.map((courseName) => (
+                          <option key={courseName} value={courseName} />
+                        ))}
+                      </datalist>
                     </div>
                     <div className="w-24">
                       <select
                         value={course.grade}
                         onChange={(e) => updateCourse(index, 'grade', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+                        aria-label="Grade"
                       >
                         {Object.entries(gradePoints).map(([grade, value]) => (
                           <option key={grade} value={grade}>
@@ -498,7 +590,9 @@ const LSACGPACalculator: React.FC = () => {
                         onChange={(e) => updateCourse(index, 'credits', Number(e.target.value))}
                         min="0"
                         max="10"
+                        step="1"
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+                        aria-label="Credit hours"
                       />
                     </div>
                     {isWeighted && (
@@ -508,8 +602,9 @@ const LSACGPACalculator: React.FC = () => {
                           checked={course.isHonors}
                           onChange={(e) => updateCourse(index, 'isHonors', e.target.checked)}
                           className="text-blue-600 focus:ring-blue-500"
+                          aria-label="Mark as Honors or AP course"
                         />
-                        Honors/AP
+                        <span>Honors/AP</span>
                       </label>
                     )}
                     {courses.length > 1 && (
@@ -528,16 +623,34 @@ const LSACGPACalculator: React.FC = () => {
               </div>
 
               {/* Add Course Button */}
-              <div className="mb-6">
+              <div className="mb-6 flex gap-3">
                 <button
                   onClick={addCourse}
                   className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                  aria-label="Add new course"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
                   Add Course
                 </button>
+                {courses.length > 1 && (
+                  <button
+                    onClick={() => {
+                      if (window.confirm('Clear all courses and start fresh?')) {
+                        setCourses([{ name: '', grade: 'A', credits: 0, isHonors: false }]);
+                        localStorage.removeItem('lsac-gpa-courses');
+                      }
+                    }}
+                    className="flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+                    aria-label="Clear all courses"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Clear All
+                  </button>
+                )}
               </div>
 
               {/* GPA Result */}
@@ -648,8 +761,8 @@ const LSACGPACalculator: React.FC = () => {
                 <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-3">College Admission Ready</h3>
                 <p className="text-purple-100">Prepare for college admissions with detailed GPA reports that showcase your academic achievements and help you meet scholarship requirements.</p>
               </div>
@@ -767,18 +880,18 @@ const LSACGPACalculator: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-purple-500">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">How the ISAC GPA Calculator Computes GPA</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">The ISAC GPA Calculator uses an academically accurate, multi-step GPA calculation method designed for high school and college students:</p>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">How the LSAC CAS GPA Calculator Works</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">The LSAC CAS GPA Calculator uses the official Law School Admission Council grade conversion method. Unlike standard calculators, LSAC's system:</p>
                   <ul className="text-gray-600 text-lg leading-relaxed list-disc list-inside mb-4">
-                    <li>converts letter grades to numerical grade points</li>
-                    <li>multiplies grade points by course credit hours</li>
-                    <li>calculates semester GPA and cumulative GPA</li>
-                    <li>supports weighted GPA for Honors/AP/Advanced courses</li>
-                    <li>includes unweighted GPA on the 4.0 scale</li>
-                    <li>offers future GPA forecasting for "what-if" scenarios</li>
-                    <li>provides credit-hour impact analysis for academic planning</li>
+                    <li>Recognizes A+ grades as 4.33 (most schools cap at 4.0)</li>
+                    <li>Includes D- (0.67) in the official LSAC grade scale</li>
+                    <li>Uses precise decimal values (3.67, 2.67) instead of rounded numbers</li>
+                    <li>Converts all undergraduate coursework to a standardized scale</li>
+                    <li>Calculates the official CAS GPA used by ABA-approved law schools</li>
+                    <li>Provides accurate predictions for law school application GPA</li>
+                    <li>Follows the same formula used in LSAC's official grade conversion</li>
                   </ul>
-                  <p className="text-gray-600 text-lg leading-relaxed">This makes it far more precise than generic GPA tools that ignore grading scale differences or credit-weight effects.</p>
+                  <p className="text-gray-600 text-lg leading-relaxed">This official LSAC scale ensures your calculated GPA matches exactly what law schools will see on your LSAC CAS report.</p>
                 </div>
 
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-orange-500">
@@ -787,8 +900,8 @@ const LSACGPACalculator: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-indigo-500">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">How Students Use the ISAC GPA Calculator</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">Students use the ISAC tool to track semester performance, calculate cumulative GPA, forecast future GPA, estimate grade impact, and plan strategically for academic goals. For standardized test preparation alongside GPA insights, try our <a href="/education-and-exam-tools/test-score-tools/sat-score-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline">SAT Score Calculator</a>.</p>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">How Law School Applicants Use LSAC CAS GPA Calculator</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">Pre-law students use this LSAC CAS GPA Calculator to predict their official law school application GPA before submitting transcripts to LSAC. This helps with realistic law school selection, understanding admissions competitiveness, and identifying which grades have the most impact on CAS GPA. Since LSAC's A+ (4.33) bonus can significantly boost your GPA, this calculator helps you understand your true academic standing for law school admissions.</p>
                 </div>
 
               </div>
@@ -829,8 +942,24 @@ const LSACGPACalculator: React.FC = () => {
 
           {/* FAQs */}
           <div id="faq" className="mb-12 scroll-mt-24">
-            <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">GPA Calculator FAQs</h2>
+            <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">LSAC CAS GPA Calculator FAQs</h2>
             <div className="max-w-4xl mx-auto space-y-6">
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">What is LSAC CAS GPA and why is it different?</h3>
+                <p className="text-gray-600">LSAC CAS (Credential Assembly Service) GPA is the official GPA calculated by the Law School Admission Council for all law school applications. It differs from college GPA because LSAC uses a unique scale that awards A+ grades 4.33 points (instead of capping at 4.0) and includes D- (0.67) grades. LSAC recalculates your entire undergraduate transcript using this standardized scale, which is why your LSAC GPA may differ from your college GPA.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">Why does LSAC use 4.33 for A+ grades?</h3>
+                <p className="text-gray-600">LSAC awards 4.33 grade points for A+ to recognize exceptional academic performance and create more differentiation at the top of the grading scale. This official LSAC scale rewards students who earned A+ grades (typically 97-100%) by giving them credit above the standard 4.0 scale. This is particularly beneficial for law school applicants with multiple A+ grades, as it can significantly boost their CAS GPA above what their college transcript shows.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">Do all law schools only use LSAC CAS GPA?</h3>
+                <p className="text-gray-600">Yes, all ABA-approved law schools in the United States require applicants to submit transcripts through LSAC's Credential Assembly Service. Law schools use your LSAC CAS GPA (not your college GPA) for admissions decisions, scholarship awards, and statistical reporting. This standardized system ensures fair comparison across applicants from different undergraduate institutions with varying grading policies.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">How is LSAC GPA calculated differently from college GPA?</h3>
+                <p className="text-gray-600">LSAC recalculates your GPA by converting all letter grades to the official LSAC scale (A+=4.33, A=4.00, A-=3.67, B+=3.33, etc.), then multiplying each grade by credit hours and dividing by total credits. Key differences: LSAC includes A+ at 4.33, uses precise decimals (3.67 not 3.7), excludes graduate coursework, and counts all undergraduate courses including repeated classes. Your LSAC GPA appears on your LSAC CAS report sent to law schools.</p>
+              </div>
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">What is the difference between weighted and unweighted GPA?</h3>
                 <p className="text-gray-600">Weighted GPA gives extra points for honors, AP, or IB courses (typically 5.0 scale), while unweighted GPA uses the standard 4.0 scale. Weighted GPA better reflects course difficulty.</p>
