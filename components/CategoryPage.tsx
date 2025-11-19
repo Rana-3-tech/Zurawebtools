@@ -59,17 +59,19 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo, fullP
             });
         }
 
-        // Add BreadcrumbList structured data
-        const breadcrumbScript = document.createElement('script');
-        breadcrumbScript.type = 'application/ld+json';
-        breadcrumbScript.id = 'category-breadcrumb-schema';
-        breadcrumbScript.text = JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "@id": `${categoryUrl}#breadcrumb`,
-            "itemListElement": breadcrumbItems
-        });
-        document.head.appendChild(breadcrumbScript);
+        // Add BreadcrumbList structured data (only if items exist)
+        if (breadcrumbItems.length > 0) {
+            const breadcrumbScript = document.createElement('script');
+            breadcrumbScript.type = 'application/ld+json';
+            breadcrumbScript.id = 'category-breadcrumb-schema';
+            breadcrumbScript.text = JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "@id": `${categoryUrl}#breadcrumb`,
+                "itemListElement": breadcrumbItems
+            });
+            document.head.appendChild(breadcrumbScript);
+        }
 
         // Add CollectionPage structured data
         const collectionScript = document.createElement('script');
