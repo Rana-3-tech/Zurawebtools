@@ -8,7 +8,7 @@ type Course = {
   isHonors: boolean;
 };
 
-const ISACGPACalculator: React.FC = () => {
+const LSACGPACalculator: React.FC = () => {
   // State Management
   const [courses, setCourses] = useState<Course[]>([
     { name: '', grade: 'A', credits: 0, isHonors: false }
@@ -81,15 +81,15 @@ const ISACGPACalculator: React.FC = () => {
     }
   ];
 
-  // Grade Points Configuration
+  // LSAC CAS Official Grade Points Configuration
   const gradePoints: { [key: string]: number } = {
-    'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7,
-    'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'F': 0.0,
+    'A+': 4.33, 'A': 4.0, 'A-': 3.67, 'B+': 3.33, 'B': 3.0, 'B-': 2.67,
+    'C+': 2.33, 'C': 2.0, 'C-': 1.67, 'D+': 1.33, 'D': 1.0, 'D-': 0.67, 'F': 0.0,
   };
 
   const weightedGradePoints: { [key: string]: number } = {
-    'A': 5.0, 'A-': 4.7, 'B+': 4.3, 'B': 4.0, 'B-': 3.7,
-    'C+': 3.3, 'C': 3.0, 'C-': 2.7, 'D+': 2.3, 'D': 2.0, 'F': 0.0,
+    'A+': 5.33, 'A': 5.0, 'A-': 4.67, 'B+': 4.33, 'B': 4.0, 'B-': 3.67,
+    'C+': 3.33, 'C': 3.0, 'C-': 2.67, 'D+': 2.33, 'D': 2.0, 'D-': 1.67, 'F': 0.0,
   };
 
   // GPA Calculation Logic
@@ -135,11 +135,11 @@ const ISACGPACalculator: React.FC = () => {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "ISAC GPA Calculator",
-    "description": "Free GPA calculator for students to calculate grade point average with weighted and unweighted options. Perfect for high school and college academic planning.",
+    "name": "LSAC CAS GPA Calculator",
+    "description": "Official LSAC CAS GPA Calculator using Law School Admission Council grade scale. Calculate your law school application GPA with A+ (4.33) conversion for accurate LSAC credential assembly service GPA.",
     "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator",
     "applicationCategory": "EducationalApplication",
-    "applicationSubCategory": "GPA Calculator Tool",
+    "applicationSubCategory": "LSAC GPA Calculator",
     "operatingSystem": "Web Browser",
     "offers": {
       "@type": "Offer",
@@ -156,15 +156,15 @@ const ISACGPACalculator: React.FC = () => {
       "url": "https://zurawebtools.com"
     },
     "features": [
-      "weighted GPA calculator",
-      "unweighted GPA calculator",
-      "cumulative GPA calculator",
-      "semester GPA calculation",
-      "grade point conversion",
-      "credit hour weighted GPA",
-      "academic performance tracker"
+      "LSAC CAS GPA calculator",
+      "Law school GPA calculator",
+      "A+ grade 4.33 conversion",
+      "LSAC official grade scale",
+      "Credential Assembly Service GPA",
+      "Law school application GPA",
+      "LSAT GPA calculator"
     ],
-    "keywords": "ISAC GPA Calculator, GPA calculator, calculate GPA, semester GPA calculator, cumulative GPA calculator, weighted vs unweighted GPA, how to calculate GPA, GPA improvement calculator, high school GPA calculator, college GPA calculator, ISAC GPA tool",
+    "keywords": "LSAC GPA Calculator, CAS GPA calculator, Law School GPA, LSAC grade conversion, A+ 4.33 GPA, law school admission GPA, credential assembly service GPA, LSAT GPA calculator, law school application GPA, LSAC official scale, how to calculate LSAC GPA",
     "mentions": [
        {
          "@type": "SoftwareApplication",
@@ -205,8 +205,8 @@ const ISACGPACalculator: React.FC = () => {
       },
       {
         "@type": "ListItem",
-        "position": 4,
-        "name": "ISAC GPA Calculator",
+        "position": 3,
+        "name": "LSAC CAS GPA Calculator",
         "item": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator"
       }
     ]
@@ -293,7 +293,7 @@ const ISACGPACalculator: React.FC = () => {
 
   // SEO Setup
   useEffect(() => {
-    document.title = "ISAC GPA Calculator - Free Academic Grade Point Average Calculator";
+    document.title = "LSAC CAS GPA Calculator - Official Law School GPA with A+ (4.33) | ZuraWebTools";
     
     const setMetaTag = (name: string, content: string, isProperty = false) => {
       const attr = isProperty ? 'property' : 'name';
@@ -306,10 +306,10 @@ const ISACGPACalculator: React.FC = () => {
       meta.setAttribute('content', content);
     };
 
-    setMetaTag('description', 'Free GPA calculator for students to calculate grade point average with weighted and unweighted options. Perfect for high school and college academic planning.');
-    setMetaTag('keywords', 'ISAC GPA Calculator, GPA calculator, how to calculate GPA, semester GPA calculator, cumulative GPA calculator, weighted GPA calculator, unweighted GPA calculator, GPA step by step, credit hour GPA calculator, college GPA calculator, high school GPA calculator, GPA forecasting tool, GPA conversion calculator, calculate GPA with honors, ISAC GPA tool');
-    setMetaTag('og:title', 'ISAC GPA Calculator - Free Academic Grade Point Average Calculator', true);
-    setMetaTag('og:description', 'Free GPA calculator for students to calculate grade point average with weighted and unweighted options. Perfect for high school and college academic planning.', true);
+    setMetaTag('description', 'Official LSAC CAS GPA Calculator for law school applications. Uses authentic LSAC grade scale with A+ (4.33) conversion. Calculate your credential assembly service GPA accurately for law school admissions.');
+    setMetaTag('keywords', 'LSAC GPA Calculator, CAS GPA calculator, Law School GPA, LSAC grade conversion, A+ 4.33 GPA, law school admission GPA, credential assembly service GPA, LSAT GPA calculator, law school application GPA, LSAC official scale, how to calculate LSAC GPA, law school CAS GPA, LSAC GPA conversion chart');
+    setMetaTag('og:title', 'LSAC CAS GPA Calculator - Official Law School GPA Calculator | ZuraWebTools', true);
+    setMetaTag('og:description', 'Free LSAC CAS GPA calculator using official Law School Admission Council grade scale. Calculate your law school application GPA with A+ (4.33) conversion for accurate credential assembly service GPA.', true);
     setMetaTag('og:image', 'https://zurawebtools.com/images/gpa-calculator-og.png', true);
     setMetaTag('og:url', 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator', true);
     setMetaTag('og:type', 'website', true);
@@ -360,10 +360,10 @@ const ISACGPACalculator: React.FC = () => {
               <span className="text-white text-sm font-medium">Academic Excellence Tool</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
-              ISAC GPA Calculator
+              LSAC CAS GPA Calculator
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-6">
-              Calculate your Grade Point Average instantly with our intelligent academic calculator. Designed for high school and college students who need accurate GPA tracking for academic planning and college admissions.
+              Official LSAC Credential Assembly Service (CAS) GPA Calculator using Law School Admission Council grade scale with A+ (4.33) conversion for accurate law school application GPA.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white">
@@ -746,19 +746,19 @@ const ISACGPACalculator: React.FC = () => {
                   </svg>
                   <span className="font-semibold">About Our Tool</span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Understanding ISAC GPA Calculations for Academic Success</h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">Master the fundamentals of grade point average calculations and take control of your academic journey</p>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Understanding LSAC CAS GPA for Law School Admissions</h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">Master the official LSAC grade conversion scale and calculate your law school application GPA accurately</p>
               </div>
 
               <div className="max-w-4xl mx-auto space-y-8">
                 <div className="max-w-4xl mx-auto mb-8">
                   <p className="text-gray-700 text-lg leading-relaxed">
-                    The ISAC GPA Calculator helps high school and college students calculate semester GPA, cumulative GPA, weighted GPA, and unweighted GPA with accurate credit-hour weighting. It's designed for academic planning, scholarship eligibility, admissions preparation, and GPA forecasting. For UC-specific grade policies, see our UC Berkeley GPA Calculator.
+                    The LSAC CAS GPA Calculator uses the official Law School Admission Council (LSAC) Credential Assembly Service grade conversion scale for law school applications. Unlike standard calculators, this tool recognizes A+ (4.33) and D- (0.67) grades according to LSAC's official conversion chart used by all ABA-approved law schools.
                   </p>
                 </div>
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-blue-500">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">What Is the ISAC GPA Calculator?</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">The ISAC GPA Calculator is a precision-grade academic tool that calculates semester GPA, cumulative GPA, weighted GPA, and unweighted GPA using the standard 4.0 scale. It converts letter grades into grade points, applies credit-hour weighting, and generates accurate results for students who need reliable GPA evaluation for scholarships, admissions, and academic planning. If you need UC-specific calculations like A+ caps and honors weighting rules, check out our <a href="/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline">UC Berkeley GPA Calculator</a>.</p>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">What Is the LSAC CAS GPA Calculator?</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">The LSAC CAS GPA Calculator uses the official Law School Admission Council (LSAC) Credential Assembly Service grade conversion scale to calculate your law school application GPA. Unlike standard 4.0 scales, LSAC recognizes <strong>A+ grades as 4.33</strong> and includes D- (0.67) in its grading system. This calculator is essential for law school applicants who need to accurately predict their CAS GPA before applying through LSAC. All calculations follow the official LSAC grade conversion chart used by law schools nationwide for admissions decisions.</p>
                 </div>
 
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-green-500">
@@ -900,4 +900,4 @@ const ISACGPACalculator: React.FC = () => {
   );
 };
 
-export default ISACGPACalculator;
+export default LSACGPACalculator;
