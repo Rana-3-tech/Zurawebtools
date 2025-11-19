@@ -1032,10 +1032,10 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
             <p className="text-gray-500 text-sm">© 2025 ZuraWebTools — All rights reserved.</p>
           </div>
         </div>
-      </div>
 
-      <RelatedTools currentToolPath="/lsac-gpa-calculator" navigateTo={navigateTo} />
-    </div>
+        <RelatedTools currentToolPath="/lsac-gpa-calculator" navigateTo={navigateTo} />
+      </div>
+    </>
   );
 };
 
