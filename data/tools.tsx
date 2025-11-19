@@ -207,9 +207,9 @@ const BerkeleyGPAIcon = () => (
         <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18ZM12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="url(#toolGrad15)" />
     </svg>
 );
-const ISACGPAIcon = () => (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="isacGPAIconTitle">
-        <title id="isacGPAIconTitle">ISAC GPA Calculator Icon</title>
+const LSACGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="lsacGPAIconTitle">
+        <title id="lsacGPAIconTitle">LSAC GPA Calculator Icon</title>
         <defs><linearGradient id="toolGrad16" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#6366f1" /><stop offset="100%" stopColor="#ec4899" /></linearGradient></defs>
         <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#toolGrad16)" />
     </svg>
@@ -473,7 +473,7 @@ export const toolCategories: Category[] = [
                 title: 'LSAC GPA Calculator',
                 description: 'Calculate your Law School Admission Council (LSAC) CAS GPA for law school applications. Official LSAC grade conversion with A+ (4.33) support.',
                 link: 'education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
-                icon: <ISACGPAIcon />,
+                icon: <LSACGPAIcon />,
                 gradientColors: { from: '#6366f1', to: '#ec4899' }, // Indigo to Pink
             },
             {
@@ -510,10 +510,10 @@ export const toolCategories: Category[] = [
                         gradientColors: { from: '#3b82f6', to: '#8b5cf6' },
                     },
                     {
-                        title: 'ISAC GPA Calculator',
-                        description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
+                        title: 'LSAC CAS GPA Calculator',
+                        description: 'Official Law School Admission Council (LSAC) GPA calculator with A+ (4.33) support. Calculate your CAS GPA for law school applications.',
                         link: 'education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
-                        icon: <ISACGPAIcon />,
+                        icon: <LSACGPAIcon />,
                         gradientColors: { from: '#6366f1', to: '#ec4899' },
                     },
                     {

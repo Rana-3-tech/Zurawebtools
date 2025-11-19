@@ -466,14 +466,17 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
               Official LSAC Credential Assembly Service (CAS) GPA Calculator using Law School Admission Council grade scale with A+ (4.33) conversion for accurate law school application GPA.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white">
-                🎓 Academic Performance
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white flex items-center gap-2">
+                <span>🎓</span>
+                <span>Law School Application</span>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white">
-                📊 Instant Calculations
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white flex items-center gap-2">
+                <span>📊</span>
+                <span>Official LSAC Scale</span>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white">
-                🎯 College Ready
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 text-white flex items-center gap-2">
+                <span>⚖️</span>
+                <span>A+ Support (4.33)</span>
               </div>
             </div>
           </div>
