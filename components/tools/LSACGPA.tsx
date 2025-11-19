@@ -1031,7 +1031,11 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
           </div>
         </div>
 
-        <RelatedTools currentToolPath="/lsac-gpa-calculator" navigateTo={navigateTo} />
+        <RelatedTools 
+          currentSlug="lsac-gpa-calculator" 
+          relatedSlugs={["berkeley-gpa-calculator", "college-gpa-calculator", "sat-score-calculator"]} 
+          navigateTo={navigateTo} 
+        />
       </div>
     </>
   );
