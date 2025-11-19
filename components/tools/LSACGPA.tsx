@@ -10,7 +10,11 @@ type Course = {
   isHonors: boolean;
 };
 
-const LSACGPACalculator: React.FC = () => {
+interface LSACGPAProps {
+  navigateTo: (page: Page) => void;
+}
+
+const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
   // State Management with localStorage persistence
   const [courses, setCourses] = useState<Course[]>(() => {
     // Load saved courses from localStorage on initial mount
@@ -176,12 +180,6 @@ const LSACGPACalculator: React.FC = () => {
     'Art History',
     'Music Theory'
   ];
-
-interface LSACGPAProps {
-  navigateTo: (page: Page) => void;
-}
-
-const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
 
   // Course Management Functions
   const addCourse = () => {
