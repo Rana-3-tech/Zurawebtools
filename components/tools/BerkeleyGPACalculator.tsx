@@ -233,9 +233,9 @@ const BerkeleyGPACalculator: React.FC = () => {
     "mentions": [
       {
         "@type": "SoftwareApplication",
-        "@id": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator",
-        "name": "ISAC GPA Calculator",
-        "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator"
+        "@id": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator",
+        "name": "LSAC GPA Calculator",
+        "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator"
       },
       {
         "@type": "SoftwareApplication",
@@ -816,7 +816,7 @@ const BerkeleyGPACalculator: React.FC = () => {
                     <li>B+=3.3</li>
                     <li>B=3.0 …and continues downward.</li>
                   </ul>
-                  <p className="text-gray-600 text-lg leading-relaxed">This calculator also functions as a GPA conversion tool for students coming from different grading systems. Weighted GPA applies higher values to approved honors/AP courses. Pass/No Pass classes do not factor into GPA calculations. For alternative calculation formats, see the ISAC GPA Calculator.</p>
+                  <p className="text-gray-600 text-lg leading-relaxed">This calculator also functions as a GPA conversion tool for students coming from different grading systems. Weighted GPA applies higher values to approved honors/AP courses. Pass/No Pass classes do not factor into GPA calculations. For alternative calculation formats, see the LSAC GPA Calculator.</p>
                 </div>
 
                 <div className="bg-white rounded-2xl p-8 shadow-lg border-l-4 border-indigo-500">
@@ -842,7 +842,7 @@ const BerkeleyGPACalculator: React.FC = () => {
                     <li>semester + cumulative scenarios,</li>
                     <li>real-time GPA forecasting for future planning.</li>
                   </ul>
-                  <p className="text-gray-600 text-lg leading-relaxed">For broader academic analysis, you can also use the ISAC GPA Calculator or SAT Score Calculator to understand how test performance aligns with GPA trends.</p>
+                  <p className="text-gray-600 text-lg leading-relaxed">For broader academic analysis, you can also use the LSAC GPA Calculator or SAT Score Calculator to understand how test performance aligns with GPA trends.</p>
                 </div>
               </div>
             </div>
@@ -927,10 +927,10 @@ const BerkeleyGPACalculator: React.FC = () => {
                 </a>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">ISAC GPA Calculator</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">LSAC GPA Calculator</h3>
                 <p className="text-gray-600 mb-4">Free GPA calculator for students to calculate grade point average with weighted and unweighted options. Perfect for high school and college academic planning.</p>
-                <a href="/education-and-exam-tools/gpa-tools/isac-gpa-calculator" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
-                  Use ISAC GPA Calculator
+                <a href="/education-and-exam-tools/gpa-tools/lsac-gpa-calculator" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
+                  Use LSAC GPA Calculator
                 </a>
               </div>
             </div>

@@ -470,9 +470,9 @@ export const toolCategories: Category[] = [
                 gradientColors: { from: '#FF8200', to: '#0064B0' }, // UTA Orange and Blue
             },
             {
-                title: 'ISAC GPA Calculator',
-                description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
-                link: 'education-and-exam-tools/gpa-tools/isac-gpa-calculator',
+                title: 'LSAC GPA Calculator',
+                description: 'Calculate your Law School Admission Council (LSAC) CAS GPA for law school applications. Official LSAC grade conversion with A+ (4.33) support.',
+                link: 'education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
                 icon: <ISACGPAIcon />,
                 gradientColors: { from: '#6366f1', to: '#ec4899' }, // Indigo to Pink
             },
@@ -512,7 +512,7 @@ export const toolCategories: Category[] = [
                     {
                         title: 'ISAC GPA Calculator',
                         description: 'Calculate your Illinois Student Assistance Commission (ISAC) GPA for scholarship applications. Accurate GPA computation based on ISAC guidelines.',
-                        link: 'education-and-exam-tools/gpa-tools/isac-gpa-calculator',
+                        link: 'education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
                         icon: <ISACGPAIcon />,
                         gradientColors: { from: '#6366f1', to: '#ec4899' },
                     },

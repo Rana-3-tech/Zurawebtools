@@ -1095,7 +1095,7 @@ const SATScoreCalculator: React.FC = () => {
                         Students calculating SAT scores may also find our 
                         <a href="/tools/uc-berkeley-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">UC Berkeley GPA Calculator</a> 
                         and 
-                        <a href="/education-and-exam-tools/gpa-tools/isac-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">ISAC GPA Calculator</a> 
+                        <a href="/education-and-exam-tools/gpa-tools/lsac-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">LSAC GPA Calculator</a> 
                         useful for academic planning.
                     </p>
                 </section>

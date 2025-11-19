@@ -1388,7 +1388,7 @@ const CSUGPACalculator: React.FC<CSUGPACalculatorProps> = ({ navigateTo }) => {
           {/* Related Tools */}
           <RelatedTools 
             currentSlug="csu-gpa-calculator" 
-            relatedSlugs={["college-gpa-calculator", "berkeley-gpa-calculator", "isac-gpa-calculator"]} 
+            relatedSlugs={["college-gpa-calculator", "berkeley-gpa-calculator", "lsac-gpa-calculator"]} 
             navigateTo={navigateTo} 
           />
 

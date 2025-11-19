@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import TableOfContents, { TOCSection } from '../TableOfContents';
+import RelatedTools from '../RelatedTools';
+import { Page } from '../../App';
 
 type Course = {
   name: string;
@@ -175,6 +177,12 @@ const LSACGPACalculator: React.FC = () => {
     'Music Theory'
   ];
 
+interface LSACGPAProps {
+  navigateTo: (page: Page) => void;
+}
+
+const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
+
   // Course Management Functions
   const addCourse = () => {
     setCourses([...courses, { name: '', grade: 'A', credits: 0, isHonors: false }]);
@@ -199,7 +207,7 @@ const LSACGPACalculator: React.FC = () => {
     "@type": "SoftwareApplication",
     "name": "LSAC CAS GPA Calculator",
     "description": "Official LSAC CAS GPA Calculator using Law School Admission Council grade scale. Calculate your law school application GPA with A+ (4.33) conversion for accurate LSAC credential assembly service GPA.",
-    "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator",
+    "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator",
     "applicationCategory": "EducationalApplication",
     "applicationSubCategory": "LSAC GPA Calculator",
     "operatingSystem": "Web Browser",
@@ -269,7 +277,7 @@ const LSACGPACalculator: React.FC = () => {
         "@type": "ListItem",
         "position": 3,
         "name": "LSAC CAS GPA Calculator",
-        "item": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator"
+        "item": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator"
       }
     ]
   };
@@ -405,7 +413,7 @@ const LSACGPACalculator: React.FC = () => {
     setMetaTag('og:title', 'LSAC CAS GPA Calculator - Official Law School GPA Calculator | ZuraWebTools', true);
     setMetaTag('og:description', 'Free LSAC CAS GPA calculator using official Law School Admission Council grade scale. Calculate your law school application GPA with A+ (4.33) conversion for accurate credential assembly service GPA.', true);
     setMetaTag('og:image', 'https://zurawebtools.com/images/gpa-calculator-og.png', true);
-    setMetaTag('og:url', 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator', true);
+    setMetaTag('og:url', 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator', true);
     setMetaTag('og:type', 'website', true);
 
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
@@ -414,7 +422,7 @@ const LSACGPACalculator: React.FC = () => {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator');
+    canonical.setAttribute('href', 'https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator');
 
     const schemas = [softwareSchema, breadcrumbSchema, faqSchema];
     schemas.forEach((schema, index) => {
@@ -487,7 +495,7 @@ const LSACGPACalculator: React.FC = () => {
               Share
             </button>
             <button
-              onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator')}`, '_blank')}
+              onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator')}`, '_blank')}
               className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Share on Facebook"
             >
@@ -497,7 +505,7 @@ const LSACGPACalculator: React.FC = () => {
               Share
             </button>
             <button
-              onClick={() => navigator.clipboard.writeText('https://zurawebtools.com/education-and-exam-tools/gpa-tools/isac-gpa-calculator')}
+              onClick={() => navigator.clipboard.writeText('https://zurawebtools.com/education-and-exam-tools/gpa-tools/lsac-gpa-calculator')}
               className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
               aria-label="Copy link to clipboard"
             >
@@ -1025,8 +1033,10 @@ const LSACGPACalculator: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+
+      <RelatedTools currentToolPath="/lsac-gpa-calculator" navigateTo={navigateTo} />
+    </div>
   );
 };
 
-export default LSACGPACalculator;
+export default LSACGPA;

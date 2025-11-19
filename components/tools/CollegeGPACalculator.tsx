@@ -855,7 +855,7 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
 
         <RelatedTools 
           currentSlug="college-gpa-calculator" 
-          relatedSlugs={["berkeley-gpa-calculator", "isac-gpa-calculator", "sat-score-calculator"]} 
+          relatedSlugs={["berkeley-gpa-calculator", "lsac-gpa-calculator", "sat-score-calculator"]} 
           navigateTo={navigateTo} 
         />
 

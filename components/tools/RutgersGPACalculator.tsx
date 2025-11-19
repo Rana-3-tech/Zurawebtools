@@ -1119,7 +1119,7 @@ const RutgersGPACalculator: React.FC<RutgersGPACalculatorProps> = ({ navigateTo 
         {/* Related Tools */}
         <RelatedTools 
           currentSlug="rutgers-gpa-calculator"
-          relatedSlugs={['berkeley-gpa-calculator', 'college-gpa-calculator', 'isac-gpa-calculator', 'csu-gpa-calculator']}
+          relatedSlugs={['berkeley-gpa-calculator', 'college-gpa-calculator', 'lsac-gpa-calculator', 'csu-gpa-calculator']}
           navigateTo={navigateTo}
         />
       </div>
