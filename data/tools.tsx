@@ -555,6 +555,13 @@ export const toolCategories: Category[] = [
                         gradientColors: { from: '#6366f1', to: '#8b5cf6' },
                     },
                     {
+                        title: 'MCAT Score Calculator',
+                        description: 'Medical College Admission Test score calculator for 2025. Convert raw section scores to scaled scores (118-132) with total score, percentile rankings, and medical school competitiveness analysis.',
+                        link: 'education-and-exam-tools/test-score-tools/mcat-score-calculator',
+                        icon: <APUSHScoreCalculatorIcon />,
+                        gradientColors: { from: '#0ea5e9', to: '#06b6d4' },
+                    },
+                    {
                         title: 'APUSH Score Calculator',
                         description: 'Free AP US History score calculator for 2025. Convert MCQ, SAQ, DBQ, and LEQ scores to AP scores (1-5) with percentile rankings and college credit information.',
                         link: 'education-and-exam-tools/test-score-tools/apush-score-calculator',
