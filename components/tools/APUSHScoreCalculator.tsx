@@ -26,7 +26,7 @@ import type { FAQItem } from '../types';
 import TableOfContents, { TOCSection } from '../TableOfContents';
 import RelatedTools from '../RelatedTools';
 import { Page } from '../../App';
-import { useAPUSHCalculator, useDarkMode } from './hooks';
+import { useDarkMode } from './hooks';
 import { validateScore, type InputError } from './utils/apushValidation';
 
 // --- Error Boundary Component ---
@@ -111,7 +111,41 @@ const APUSHScoreCalculator: React.FC<APUSHScoreCalculatorProps> = ({ navigateTo 
 
     // Custom hooks for dark mode and calculations
     const { isDarkMode, toggleDarkMode } = useDarkMode();
-    const calculationResult = useAPUSHCalculator({ mcqScore, saqScore, dbqScore, leqScore });
+    
+    // Inline APUSH calculator (moved from deleted useAPUSHCalculator hook)
+    const calculationResult = React.useMemo(() => {
+        const composite = (mcqScore * 1.09) + (saqScore * 3) + (dbqScore * 5.35) + (leqScore * 3.75);
+        const clampedComposite = Math.min(150, Math.max(0, composite));
+        
+        let apScore = 1;
+        if (clampedComposite >= 117) apScore = 5;
+        else if (clampedComposite >= 92) apScore = 4;
+        else if (clampedComposite >= 74) apScore = 3;
+        else if (clampedComposite >= 60) apScore = 2;
+        
+        const percentile = apScore === 5 ? 95 : apScore === 4 ? 75 : apScore === 3 ? 50 : apScore === 2 ? 25 : 10;
+        
+        // Get distribution based on AP score
+        const distributions = [
+            { score: 5, description: 'Extremely Well Qualified', collegeCredit: 'Most colleges', percentage: 11.2 },
+            { score: 4, description: 'Well Qualified', collegeCredit: 'Many colleges', percentage: 16.9 },
+            { score: 3, description: 'Qualified', collegeCredit: 'Some colleges', percentage: 22.5 },
+            { score: 2, description: 'Possibly Qualified', collegeCredit: 'Few colleges', percentage: 22.1 },
+            { score: 1, description: 'No Recommendation', collegeCredit: 'No credit', percentage: 27.3 }
+        ];
+        const distribution = distributions.find(d => d.score === apScore) || distributions[4];
+        
+        return {
+            mcqScore,
+            saqScore,
+            dbqScore,
+            leqScore,
+            composite: Math.round(clampedComposite),
+            apScore,
+            percentile,
+            distribution
+        };
+    }, [mcqScore, saqScore, dbqScore, leqScore]);
 
     // Improved input handlers with validation
     const handleMcqChange = useCallback((value: string) => {
