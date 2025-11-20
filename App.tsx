@@ -38,6 +38,7 @@ const ColorHarmonyChecker = lazy(() => import('./components/tools/ColorHarmonyCh
 const FabricCostingTool = lazy(() => import('./components/tools/FabricCostingTool'));
 const SnowDayCalculator = lazy(() => import('./components/tools/SnowDayCalculator'));
 const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalculator'));
+const LSATScoreCalculator = lazy(() => import('./components/tools/LSATScoreCalculator'));
 const BerkeleyGPACalculator = lazy(() => import('./components/tools/BerkeleyGPACalculator'));
 const UTAGPACalculator = lazy(() => import('./components/tools/UTAGPACalculator'));
 const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACalculator'));
@@ -224,6 +225,7 @@ const App: React.FC = () => {
             'json-formatter': JSONFormatterValidator,
             'code-similarity-checker': CodeSimilarityChecker,
             'sat-score-calculator': SATScoreCalculator,
+            'lsat-score-calculator': LSATScoreCalculator,
             'berkeley-gpa-calculator': BerkeleyGPACalculator,
             'rutgers-gpa-calculator': RutgersGPACalculator,
             'uta-gpa-calculator': UTAGPACalculator,

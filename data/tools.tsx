@@ -200,6 +200,14 @@ const SATScoreCalculatorIcon = () => (
         <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V10H9V17ZM13 17H11V7H13V17ZM17 17H15V13H17V17Z" fill="url(#toolGrad14)" />
     </svg>
 );
+const LSATScoreCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="lsatScoreCalculatorIconTitle">
+        <title id="lsatScoreCalculatorIconTitle">LSAT Score Calculator Icon</title>
+        <defs><linearGradient id="toolGradLSAT" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#6366f1" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" fill="url(#toolGradLSAT)" />
+        <path d="M14 10H10V14H14V10Z" fill="url(#toolGradLSAT)" opacity="0.6" />
+    </svg>
+);
 const BerkeleyGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="berkeleyGPAIconTitle">
         <title id="berkeleyGPAIconTitle">Berkeley GPA Calculator Icon</title>
@@ -456,6 +464,13 @@ export const toolCategories: Category[] = [
                 gradientColors: { from: '#001BB7', to: '#60A5FA' }, // Deep Blue to Light Blue
             },
             {
+                title: 'LSAT Score Calculator',
+                description: 'Free LSAT raw to scaled score converter for law school admissions. Calculate your LSAT score (120-180) with percentile rankings and law school target analysis.',
+                link: 'education-and-exam-tools/test-score-tools/lsat-score-calculator',
+                icon: <LSATScoreCalculatorIcon />,
+                gradientColors: { from: '#6366f1', to: '#8b5cf6' }, // Indigo to Purple
+            },
+            {
                 title: 'Berkeley GPA Calculator',
                 description: 'Calculate your UC Berkeley GPA with accurate grade point conversions. Supports letter grades, plus/minus system, and weighted courses.',
                 link: 'education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
@@ -509,6 +524,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/test-score-tools/sat-score-calculator',
                         icon: <SATScoreCalculatorIcon />,
                         gradientColors: { from: '#001BB7', to: '#60A5FA' },
+                    },
+                    {
+                        title: 'LSAT Score Calculator',
+                        description: 'Free LSAT raw to scaled score converter for law school admissions. Calculate your LSAT score (120-180) with percentile rankings and law school target analysis.',
+                        link: 'education-and-exam-tools/test-score-tools/lsat-score-calculator',
+                        icon: <LSATScoreCalculatorIcon />,
+                        gradientColors: { from: '#6366f1', to: '#8b5cf6' },
                     },
                 ]
             },

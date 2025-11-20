@@ -156,3 +156,89 @@ export const FAQ_DATA: FAQItem[] = [
         answer: "Both tests are widely accepted. The SAT focuses more on evidence-based reading and problem-solving, while the ACT includes a Science section. Take practice tests for both to see which suits your strengths better. This calculator includes SAT to ACT concordance for comparison."
     }
 ];
+
+// ============================================
+// LSAT Score Calculator Constants
+// ============================================
+
+export const MAX_LSAT_RAW_SCORE = 101;
+
+// LSAT Raw to Scaled Score Conversion (120-180 scale)
+// Based on typical LSAT conversion tables (varies slightly by test administration)
+export const LSAT_CONVERSION_TABLE: { [raw: number]: number } = {
+    101: 180, 100: 180, 99: 180, 98: 179, 97: 178, 96: 177, 95: 176,
+    94: 175, 93: 174, 92: 173, 91: 172, 90: 171, 89: 170, 88: 169,
+    87: 168, 86: 167, 85: 166, 84: 165, 83: 164, 82: 164, 81: 163,
+    80: 162, 79: 161, 78: 161, 77: 160, 76: 159, 75: 158, 74: 158,
+    73: 157, 72: 156, 71: 156, 70: 155, 69: 154, 68: 154, 67: 153,
+    66: 152, 65: 152, 64: 151, 63: 150, 62: 150, 61: 149, 60: 148,
+    59: 148, 58: 147, 57: 146, 56: 146, 55: 145, 54: 144, 53: 144,
+    52: 143, 51: 142, 50: 142, 49: 141, 48: 140, 47: 140, 46: 139,
+    45: 138, 44: 138, 43: 137, 42: 136, 41: 136, 40: 135, 39: 134,
+    38: 134, 37: 133, 36: 132, 35: 132, 34: 131, 33: 130, 32: 130,
+    31: 129, 30: 128, 29: 128, 28: 127, 27: 126, 26: 126, 25: 125,
+    24: 124, 23: 124, 22: 123, 21: 122, 20: 122, 19: 121, 18: 121,
+    17: 120, 16: 120, 15: 120, 14: 120, 13: 120, 12: 120, 11: 120,
+    10: 120, 9: 120, 8: 120, 7: 120, 6: 120, 5: 120, 4: 120,
+    3: 120, 2: 120, 1: 120, 0: 120
+};
+
+// LSAT Percentile Rankings (Scaled Score to Percentile)
+export const LSAT_PERCENTILES: { [scaled: number]: number } = {
+    180: 99.9, 179: 99.9, 178: 99.9, 177: 99.8, 176: 99.7, 175: 99.5,
+    174: 99.3, 173: 99.0, 172: 98.7, 171: 98.3, 170: 97.5, 169: 96.8,
+    168: 96.0, 167: 95.0, 166: 93.8, 165: 92.5, 164: 91.0, 163: 89.3,
+    162: 87.4, 161: 85.4, 160: 80.4, 159: 77.8, 158: 74.8, 157: 71.7,
+    156: 68.3, 155: 64.8, 154: 61.1, 153: 57.3, 152: 53.5, 151: 49.7,
+    150: 44.3, 149: 40.3, 148: 36.3, 147: 32.5, 146: 28.9, 145: 25.5,
+    144: 22.3, 143: 19.4, 142: 16.8, 141: 14.4, 140: 12.0, 139: 10.2,
+    138: 8.5, 137: 7.0, 136: 5.8, 135: 4.7, 134: 3.8, 133: 3.0,
+    132: 2.4, 131: 1.9, 130: 1.5, 129: 1.2, 128: 0.9, 127: 0.7,
+    126: 0.5, 125: 0.4, 124: 0.3, 123: 0.2, 122: 0.2, 121: 0.1,
+    120: 0.0
+};
+
+// Law School Admission Tiers (Typical LSAT Score Ranges)
+export const LAW_SCHOOL_TIERS = {
+    t14: { min: 168, max: 180, label: 'T14 Law Schools', color: '#10b981' },
+    topRegional: { min: 160, max: 167, label: 'Top Regional Schools', color: '#3b82f6' },
+    regional: { min: 155, max: 159, label: 'Regional Schools', color: '#f59e0b' },
+    safety: { min: 145, max: 154, label: 'Safety Schools', color: '#ef4444' },
+    belowAverage: { min: 120, max: 144, label: 'Below Average', color: '#64748b' }
+};
+
+// LSAT FAQ Data
+export const LSAT_FAQ_DATA: FAQItem[] = [
+    {
+        question: "How is the LSAT scored?",
+        answer: "The LSAT is scored on a scale of 120 to 180, with 120 being the lowest possible score and 180 the highest. Your scaled score is calculated based on the number of questions you answer correctly (raw score), with no penalty for wrong answers. The median LSAT score is around 150-151."
+    },
+    {
+        question: "What is a good LSAT score for law school admissions?",
+        answer: "A 'good' LSAT score depends on your target law schools. For T14 schools (Harvard, Yale, Stanford), aim for 168-175+. Top regional schools typically require 160-167. Regional schools accept 155-159, and safety schools may accept 145-154. The national median is around 150-151."
+    },
+    {
+        question: "How many questions can I miss and still get a 170?",
+        answer: "To score 170 (97.5th percentile), you typically need to answer about 89 out of 101 questions correctly, meaning you can miss around 12 questions. However, this varies slightly by test administration due to equating adjustments."
+    },
+    {
+        question: "Is the LSAT curved?",
+        answer: "The LSAT uses 'equating' rather than a traditional curve. Each test is calibrated to ensure consistent scoring across different administrations. This means the raw-to-scaled conversion can vary slightly between tests to account for differences in difficulty."
+    },
+    {
+        question: "How long does it take to get LSAT scores?",
+        answer: "LSAT scores are typically released within 3 weeks after the test date. You'll receive an email notification when your score is available in your LSAC account. Score preview option allows you to cancel within 6 days if desired (for select test dates)."
+    },
+    {
+        question: "Can I retake the LSAT to improve my score?",
+        answer: "Yes! You can take the LSAT up to 3 times in a single testing year, 5 times within 5 years, and 7 times total over your lifetime. Most law schools consider your highest score or average multiple scores. Many test-takers improve 5-10 points with retakes and proper preparation."
+    },
+    {
+        question: "What LSAT score do I need for a full scholarship?",
+        answer: "Full-ride scholarships (full tuition + stipend) typically require scores at or above the school's 75th percentile, often 170+ for top schools. However, scholarship opportunities depend on multiple factors including GPA, diversity, work experience, and institutional priorities."
+    },
+    {
+        question: "How does my LSAT score compare to my practice test scores?",
+        answer: "Official LSAT practice test scores are generally accurate predictors of actual performance, typically within 2-3 points. Ensure you're taking tests under realistic conditions (timed, no distractions) for the most accurate predictions. This calculator uses official LSAC conversion tables."
+    }
+];
