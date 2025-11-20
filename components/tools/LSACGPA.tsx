@@ -453,11 +453,11 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-300 bg-opacity-20 rounded-full blur-3xl"></div>
           </div>
           <div className="relative max-w-6xl mx-auto px-6 py-12 text-center">
-            <div className="inline-flex items-center gap-2 bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-              <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+            <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 mb-6 shadow-xl border-2 border-yellow-200">
+              <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
-              <span className="text-white text-sm font-medium">Academic Excellence Tool</span>
+              <span className="text-gray-800 text-sm md:text-base font-bold">Academic Excellence Tool</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
               LSAC CAS GPA Calculator
