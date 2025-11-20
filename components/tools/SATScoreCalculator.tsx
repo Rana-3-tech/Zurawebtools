@@ -1,7 +1,66 @@
-import React, { useState, useMemo, useCallback, useEffect, Fragment } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, Fragment, Component, ErrorInfo, ReactNode } from 'react';
 import type { ScoreState, ScaledScores, TestMode, Difficulty, Preset, FAQItem, ConversionTable } from '../types';
 import { MAX_RAW_SCORES, PAPER_RW_CONVERSION, PAPER_MATH_CONVERSION, DIGITAL_RW_CONVERSION, DIGITAL_MATH_CONVERSION, SAT_TO_ACT_CONCORDANCE, SAT_PERCENTILES, FAQ_DATA } from '../constants';
 import TableOfContents, { TOCSection } from '../TableOfContents';
+
+// --- Error Boundary Component ---
+interface ErrorBoundaryProps {
+    children: ReactNode;
+}
+
+interface ErrorBoundaryState {
+    hasError: boolean;
+    error: Error | null;
+}
+
+class SATCalculatorErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+    constructor(props: ErrorBoundaryProps) {
+        super(props);
+        this.state = { hasError: false, error: null };
+    }
+
+    static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+        return { hasError: true, error };
+    }
+
+    componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+        console.error('SAT Calculator Error:', error, errorInfo);
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return (
+                <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900 p-6">
+                    <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-lg shadow-xl p-8 text-center">
+                        <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Something went wrong</h2>
+                        <p className="text-slate-600 dark:text-slate-400 mb-6">We're sorry, but the calculator encountered an error. Please refresh the page to try again.</p>
+                        <button
+                            onClick={() => window.location.reload()}
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                        >
+                            Refresh Page
+                        </button>
+                        {process.env.NODE_ENV === 'development' && this.state.error && (
+                            <details className="mt-4 text-left">
+                                <summary className="text-sm text-slate-500 cursor-pointer hover:text-slate-700">Error Details</summary>
+                                <pre className="mt-2 text-xs text-red-600 dark:text-red-400 overflow-auto max-h-40 bg-slate-50 dark:bg-slate-900 p-2 rounded">
+                                    {this.state.error.toString()}
+                                </pre>
+                            </details>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        return this.props.children;
+    }
+}
 
 // --- Helper Functions ---
 const getClosestValue = (table: Record<number, number>, value: number): number => {
@@ -17,18 +76,18 @@ const getClosestValue = (table: Record<number, number>, value: number): number =
 const clamp = (value: number, min: number, max: number): number => Math.max(min, Math.min(max, value));
 
 // --- SVG Icons (Moved outside component) ---
-const CheckIcon = ({ className = "h-4 w-4" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Check icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>;
-const ClipboardIcon = ({ className = "h-5 w-5" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Clipboard icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>;
-const DownloadIcon = ({ className = "h-5 w-5" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Download icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>;
-const UserIcon = ({ className = "h-5 w-5" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="User icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>;
-const ChartBarIcon = ({ className = "w-12 h-12" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className={className} aria-label="Chart icon"><path d="M11.5 6.25a.75.75 0 01.75.75v8.5a.75.75 0 01-1.5 0v-8.5a.75.75 0 01.75-.75zM8 8.25a.75.75 0 01.75.75v6.5a.75.75 0 01-1.5 0v-6.5A.75.75 0 018 8.25zM4.5 10.25a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5a.75.75 0 01.75-.75zM15 4.25a.75.75 0 01.75.75v10.5a.75.75 0 01-1.5 0V5a.75.75 0 01.75-.75z" /></svg>;
-const ChevronDownIcon = ({ className = "w-5 h-5 transition-transform duration-300 group-open:rotate-180" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className={className} aria-label="Chevron down icon"><path fillRule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clipRule="evenodd" /></svg>;
-const TwitterIcon = ({ className = "w-6 h-6" }: { className?: string }) => <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-label="Twitter icon"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.223.085a4.93 4.93 0 004.6 3.42 9.86 9.86 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" /></svg>;
-const FacebookIcon = ({ className = "w-6 h-6" }: { className?: string }) => <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-label="Facebook icon"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" /></svg>;
-const WhatsAppIcon = ({ className = "w-6 h-6" }: { className?: string }) => <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-label="WhatsApp icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.78.46 3.45 1.28 4.95L2 22l5.25-1.38c1.45.77 3.06 1.18 4.79 1.18h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm4.4 12.01c-.18.43-1.01.8-1.39.84-.38.04-1.01.03-1.56-.29-.55-.32-1.37-.88-2.52-2.03-1.15-1.15-1.88-2.12-2.12-2.52-.24-.4-.01-.63.18-.82.19-.19.4-.5.59-.69.19-.19.26-.32.18-.5s-.83-1.99-1.14-2.73c-.31-.74-.63-.64-.87-.64-.24 0-.5.09-.69.28-.19.19-.73.71-.93 1.25-.2.54-.39 1.27.09 2.11.48.84 1.52 2.53 3.69 4.7 2.17 2.17 3.19 2.59 3.86 2.78.67.19 1.27.16 1.75-.12.48-.28 1.02-1.27 1.16-1.75.14-.48.14-.9.09-1.01s-.18-.19-.36-.37z" /></svg>;
-const PercentageIcon = ({ className = "w-8 h-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Percentage calculator icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 4H8C6.9 4 6 4.9 6 6V18C6 19.1 6.9 20 8 20H16C17.1 20 18 19.1 18 18V6C18 4.9 17.1 4 16 4ZM8.5 7.5C9.33 7.5 10 8.17 10 9C10 9.83 9.33 10.5 8.5 10.5C7.67 10.5 7 9.83 7 9C7 8.17 7.67 7.5 8.5 7.5ZM15.5 16.5C14.67 16.5 14 15.83 14 15C14 14.17 14.67 13.5 15.5 13.5C16.33 13.5 17 14.17 17 15C17 15.83 16.33 16.5 15.5 16.5ZM16 12H8V10L16 6V8H8V10H16V12Z" /></svg>;
-const TimeDiffIcon = ({ className = "w-8 h-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Time calculator icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" /></svg>;
-const FabricIcon = ({ className = "w-8 h-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Fabric calculator icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17L12 12L2 17ZM2 12L12 17L22 12L12 7L2 12Z" /></svg>;
+const CheckIcon = ({ className = "h-4 w-4" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="SAT score validation checkmark icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>;
+const ClipboardIcon = ({ className = "h-5 w-5" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Copy SAT score results to clipboard icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>;
+const DownloadIcon = ({ className = "h-5 w-5" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Download SAT score report CSV icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>;
+const UserIcon = ({ className = "h-5 w-5" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="SAT test taker student profile icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>;
+const ChartBarIcon = ({ className = "w-12 h-12" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className={className} aria-label="SAT percentile ranking chart icon"><path d="M11.5 6.25a.75.75 0 01.75.75v8.5a.75.75 0 01-1.5 0v-8.5a.75.75 0 01.75-.75zM8 8.25a.75.75 0 01.75.75v6.5a.75.75 0 01-1.5 0v-6.5A.75.75 0 018 8.25zM4.5 10.25a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5a.75.75 0 01.75-.75zM15 4.25a.75.75 0 01.75.75v10.5a.75.75 0 01-1.5 0V5a.75.75 0 01.75-.75z" /></svg>;
+const ChevronDownIcon = ({ className = "w-5 h-5 transition-transform duration-300 group-open:rotate-180" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className={className} aria-label="Expand SAT score details dropdown icon"><path fillRule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clipRule="evenodd" /></svg>;
+const TwitterIcon = ({ className = "w-6 h-6" }: { className?: string }) => <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-label="Share SAT score on Twitter icon"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.223.085a4.93 4.93 0 004.6 3.42 9.86 9.86 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" /></svg>;
+const FacebookIcon = ({ className = "w-6 h-6" }: { className?: string }) => <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-label="Share SAT score on Facebook icon"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" /></svg>;
+const WhatsAppIcon = ({ className = "w-6 h-6" }: { className?: string }) => <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-label="Share SAT score on WhatsApp icon"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.78.46 3.45 1.28 4.95L2 22l5.25-1.38c1.45.77 3.06 1.18 4.79 1.18h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm4.4 12.01c-.18.43-1.01.8-1.39.84-.38.04-1.01.03-1.56-.29-.55-.32-1.37-.88-2.52-2.03-1.15-1.15-1.88-2.12-2.12-2.52-.24-.4-.01-.63.18-.82.19-.19.4-.5.59-.69.19-.19.26-.32.18-.5s-.83-1.99-1.14-2.73c-.31-.74-.63-.64-.87-.64-.24 0-.5.09-.69.28-.19.19-.73.71-.93 1.25-.2.54-.39 1.27.09 2.11.48.84 1.52 2.53 3.69 4.7 2.17 2.17 3.19 2.59 3.86 2.78.67.19 1.27.16 1.75-.12.48-.28 1.02-1.27 1.16-1.75.14-.48.14-.9.09-1.01s-.18-.19-.36-.37z" /></svg>;
+const PercentageIcon = ({ className = "w-8 h-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="SAT percentile calculator icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 4H8C6.9 4 6 4.9 6 6V18C6 19.1 6.9 20 8 20H16C17.1 20 18 19.1 18 18V6C18 4.9 17.1 4 16 4ZM8.5 7.5C9.33 7.5 10 8.17 10 9C10 9.83 9.33 10.5 8.5 10.5C7.67 10.5 7 9.83 7 9C7 8.17 7.67 7.5 8.5 7.5ZM15.5 16.5C14.67 16.5 14 15.83 14 15C14 14.17 14.67 13.5 15.5 13.5C16.33 13.5 17 14.17 17 15C17 15.83 16.33 16.5 15.5 16.5ZM16 12H8V10L16 6V8H8V10H16V12Z" /></svg>;
+const TimeDiffIcon = ({ className = "w-8 h-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="SAT test time calculator icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" /></svg>;
+const FabricIcon = ({ className = "w-8 h-8" }: { className?: string }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="SAT score layers visualization icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17L12 12L2 17ZM2 12L12 17L22 12L12 7L2 12Z" /></svg>;
 
 
 // --- InputField Component (Moved outside) ---
@@ -145,9 +204,10 @@ const SATScoreCalculator: React.FC = () => {
         if (isMathCombined) {
             mathRaw = scores.mathCombined ?? -1;
         } else {
-            const noCalc = scores.mathNoCalc ?? 0;
-            const calc = scores.mathCalc ?? 0;
-            mathRaw = (noCalc === 0 && calc === 0) ? -1 : noCalc + calc;
+            const noCalc = scores.mathNoCalc ?? -1;
+            const calc = scores.mathCalc ?? -1;
+            // Only consider invalid if both are null/unset
+            mathRaw = (noCalc === -1 && calc === -1) ? -1 : Math.max(noCalc, 0) + Math.max(calc, 0);
         }
 
         if (rwRaw < 0 || mathRaw < 0) return null;
@@ -158,12 +218,13 @@ const SATScoreCalculator: React.FC = () => {
 
         if (testMode === 'digital') {
             if (difficulty === 'auto') {
-                const totalRaw = rwRaw + mathRaw;
-                const totalPossible = MAX_RAW_SCORES.readingWriting + MAX_RAW_SCORES.mathCombinedDigital;
-                const percentage = totalRaw / totalPossible;
+                // Section-specific difficulty detection with equal weighting
+                const rwPercentage = rwRaw / MAX_RAW_SCORES.readingWriting;
+                const mathPercentage = mathRaw / MAX_RAW_SCORES.mathCombinedDigital;
+                const overallPercentage = (rwPercentage + mathPercentage) / 2;
                 
-                if (percentage >= 0.75) finalDifficulty = 'hard';
-                else if (percentage <= 0.35) finalDifficulty = 'easy';
+                if (overallPercentage >= 0.75) finalDifficulty = 'hard';
+                else if (overallPercentage <= 0.35) finalDifficulty = 'easy';
                 else finalDifficulty = 'normal';
             }
             scaledRW = DIGITAL_RW_CONVERSION[finalDifficulty as 'easy'|'normal'|'hard'][rwRaw] ?? 200;
@@ -267,24 +328,28 @@ const SATScoreCalculator: React.FC = () => {
     
     const handleExportCSV = useCallback(() => {
         if (!calculationResult) return;
-        const headers = "Category,Score\n";
+        const headers = "\"Category\",\"Score\"\n";
         const rows = [
-            `Test Mode,${testMode}`,
-            `Total Score,${calculationResult.scores.total}`,
-            `Reading & Writing Score,${calculationResult.scores.readingWriting}`,
-            `Math Score,${calculationResult.scores.math}`,
-            `Estimated Percentile,${percentile}`,
-            `Estimated ACT Equivalent,${actEquivalent}`
+            `\"Test Mode\",\"${testMode.charAt(0).toUpperCase() + testMode.slice(1)}\"`,
+            `\"Total Score\",\"${calculationResult.scores.total}\"`,
+            `\"Reading & Writing Score\",\"${calculationResult.scores.readingWriting}\"`,
+            `\"Math Score\",\"${calculationResult.scores.math}\"`,
+            `\"Estimated Percentile\",\"${percentile}%\"`,
+            `\"Estimated ACT Equivalent\",\"${actEquivalent}\"`,
+            `\"Difficulty Level\",\"${calculationResult.finalDifficulty}\"`,
+            `\"Raw R&W Score\",\"${scores.readingWriting ?? 'N/A'}\"`,
+            `\"Raw Math Score\",\"${isMathCombined ? (scores.mathCombined ?? 'N/A') : ((scores.mathNoCalc ?? 0) + (scores.mathCalc ?? 0))}\"`,
+            `\"Generated\",\"${new Date().toLocaleString()}\"` 
         ];
         const csvContent = "data:text/csv;charset=utf-8," + headers + rows.join("\n");
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "sat_score_report.csv");
+        link.setAttribute("download", `sat_score_report_${Date.now()}.csv`);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    }, [calculationResult, percentile, actEquivalent, testMode]);
+    }, [calculationResult, percentile, actEquivalent, testMode, scores, isMathCombined]);
     
     const getShareUrl = useCallback((platform: 'twitter' | 'facebook' | 'whatsapp') => {
         if (!calculationResult) return '#';
@@ -305,7 +370,7 @@ const SATScoreCalculator: React.FC = () => {
 
     // --- Side Effects for SEO and JSON-LD ---
     useEffect(() => {
-        document.title = "Free SAT Score Calculator 2024-2025 - Digital SAT Converter | ZuraWebTools";
+        document.title = "SAT Score Calculator 2024 - Digital SAT Converter";
         
         // Set HTML lang attribute
         document.documentElement.setAttribute('lang', 'en');
@@ -661,6 +726,7 @@ const SATScoreCalculator: React.FC = () => {
                         </div>
 
                         <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">How to Convert SAT Raw Scores to Scaled Scores</h2>
                             <h3 className="text-base font-semibold text-slate-900 dark:text-white">Raw Scores</h3>
                             <InputField 
                                 label="Reading & Writing Raw Correct" 
@@ -720,11 +786,14 @@ const SATScoreCalculator: React.FC = () => {
                     </div>
 
                     {/* Right Side: Results */}
-                    <div className="lg:col-span-3 bg-white dark:bg-slate-800/50 dark:backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 space-y-6" aria-live="polite">
-                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white text-center">Your Estimated Score</h2>
+                    <div className="lg:col-span-3 bg-white dark:bg-slate-800/50 dark:backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 space-y-6" aria-live="polite" aria-atomic="true">
+                        <div className="text-center">
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Your Estimated SAT Score & Percentile Ranking</h2>
+                            <p className="text-sm text-slate-600 dark:text-slate-300">Digital SAT 2024-2025 Score Conversion Results</p>
+                        </div>
                         {calculationResult ? (
                             <div className="space-y-6">
-                                <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/20 dark:to-sky-900/20 rounded-xl border-2 border-blue-200 dark:border-blue-800/50">
+                                <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/20 dark:to-sky-900/20 rounded-xl border-2 border-blue-200 dark:border-blue-800/50" role="status" aria-label={`Your total SAT score is ${calculationResult.scores.total} out of 1600`}>
                                     <div className={`text-7xl lg:text-8xl font-extrabold ${getScoreColor(calculationResult.scores.total)} transition-all duration-300`}>
                                         {calculationResult.scores.total}
                                     </div>
@@ -775,7 +844,7 @@ const SATScoreCalculator: React.FC = () => {
                                     </div>
                                 </details>
                                 <div className="border-t border-slate-200 dark:border-slate-700 pt-6 space-y-4">
-                                    <h3 className="text-lg font-semibold text-center text-slate-800 dark:text-slate-200">"What-If" Simulator</h3>
+                                    <h3 className="text-lg font-semibold text-center text-slate-800 dark:text-slate-200">SAT Score "What-If" Simulator</h3>
                                     {renderWhatIfSlider('Reading & Writing Raw', 'readingWriting', scores.readingWriting, MAX_RAW_SCORES.readingWriting)}
                                     {isMathCombined ? (
                                         renderWhatIfSlider('Math Raw (Combined)', 'mathCombined', scores.mathCombined, maxMathRaw)
@@ -793,8 +862,8 @@ const SATScoreCalculator: React.FC = () => {
                                 <div className="mx-auto h-12 w-12 text-slate-400 dark:text-slate-500">
                                     <ChartBarIcon />
                                 </div>
-                                <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white">Enter your raw scores</h3>
-                                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Your results will appear here instantly.</p>
+                                <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white">Enter Your SAT Raw Scores Above</h3>
+                                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Your Digital SAT score conversion results will appear here instantly.</p>
                             </div>
                         )}
                         <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-slate-200 dark:border-slate-700">
@@ -917,7 +986,7 @@ const SATScoreCalculator: React.FC = () => {
 
                 {/* Benefits Section */}
                 <section id="benefits" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Why Use Our SAT Calculator?</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Why Use Our Free SAT Score Calculator & Converter?</h2>
                     <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">Get instant, accurate SAT score estimates with features designed for modern test-takers</p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1135,4 +1204,11 @@ const SATScoreCalculator: React.FC = () => {
     );
 };
 
-export default SATScoreCalculator;
+// Wrap with Error Boundary for production safety
+const SATScoreCalculatorWithErrorBoundary: React.FC = () => (
+    <SATCalculatorErrorBoundary>
+        <SATScoreCalculator />
+    </SATCalculatorErrorBoundary>
+);
+
+export default SATScoreCalculatorWithErrorBoundary;
