@@ -370,7 +370,7 @@ const SATScoreCalculator: React.FC = () => {
 
     // --- Side Effects for SEO and JSON-LD ---
     useEffect(() => {
-        document.title = "SAT Score Calculator 2024 - Digital SAT Converter";
+        document.title = "SAT Score Calculator 2025 - Digital SAT Converter";
         
         // Set HTML lang attribute
         document.documentElement.setAttribute('lang', 'en');
