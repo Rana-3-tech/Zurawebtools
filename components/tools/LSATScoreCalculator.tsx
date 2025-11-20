@@ -148,7 +148,7 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
 
     // SEO Meta Tags Setup
     useEffect(() => {
-        document.title = "LSAT Score Calculator 2025 - Raw to Scaled Converter";
+        document.title = "LSAT Score Calculator 2025 - Raw to Scaled Converter | ZuraWebTools";
         document.documentElement.setAttribute('lang', 'en');
 
         const setMeta = (name: string, content: string, isProperty = false) => {
@@ -175,8 +175,8 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
         };
 
         // Standard Meta Tags
-        setMeta('description', "Free LSAT score calculator for law school admissions. Convert raw scores to scaled scores (120-180) instantly. Get percentile rankings and law school target analysis.");
-        setMeta('keywords', "LSAT score calculator, LSAT raw score converter, law school admission test calculator, LSAT percentile, LSAT scaled score, law school admissions");
+        setMeta('description', "Free LSAT score calculator for law school admissions 2025. Convert raw scores to scaled scores (120-180) instantly. Get percentile rankings, T14 law school targets, and detailed admission analysis.");
+        setMeta('keywords', "LSAT score calculator, LSAT raw score converter, law school admission test calculator, LSAT percentile, LSAT scaled score, law school admissions, LSAT prep, law school calculator");
         setMeta('author', 'ZuraWebTools');
         setMeta('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
         setLink('canonical', 'https://zurawebtools.com/education-and-exam-tools/test-score-tools/lsat-score-calculator');
@@ -235,6 +235,36 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
             },
             {
                 "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://zurawebtools.com"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Education & Exam Tools",
+                        "item": "https://zurawebtools.com/education-and-exam-tools"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Test Score Tools",
+                        "item": "https://zurawebtools.com/education-and-exam-tools/test-score-tools"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 4,
+                        "name": "LSAT Score Calculator",
+                        "item": "https://zurawebtools.com/education-and-exam-tools/test-score-tools/lsat-score-calculator"
+                    }
+                ]
+            },
+            {
+                "@context": "https://schema.org",
                 "@type": "FAQPage",
                 "mainEntity": faqJsonLd
             }
@@ -259,20 +289,20 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
     // Table of Contents sections
     const tocSections: TOCSection[] = [
         {
-            id: 'calculator',
-            emoji: '🧮',
-            title: 'Calculator',
-            subtitle: 'Enter your score',
+            id: 'examples',
+            emoji: '📝',
+            title: 'Examples',
+            subtitle: 'Quick samples',
             gradientFrom: 'from-blue-50',
             gradientTo: 'to-indigo-50',
             hoverBorder: 'border-blue-400',
             hoverText: 'text-blue-600'
         },
         {
-            id: 'law-school-tiers',
-            emoji: '🎓',
-            title: 'Law School Tiers',
-            subtitle: 'Target schools',
+            id: 'benefits',
+            emoji: '⭐',
+            title: 'Benefits',
+            subtitle: 'Why use this',
             gradientFrom: 'from-purple-50',
             gradientTo: 'to-pink-50',
             hoverBorder: 'border-purple-400',
@@ -282,27 +312,47 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
             id: 'how-to-use',
             emoji: '📖',
             title: 'How to Use',
-            subtitle: 'Step-by-step guide',
+            subtitle: 'Step-by-step',
             gradientFrom: 'from-green-50',
             gradientTo: 'to-emerald-50',
             hoverBorder: 'border-green-400',
             hoverText: 'text-green-600'
         },
         {
-            id: 'faq',
-            emoji: '❓',
-            title: 'FAQ',
-            subtitle: 'Common questions',
+            id: 'use-cases',
+            emoji: '💡',
+            title: 'Use Cases',
+            subtitle: 'Who uses this',
             gradientFrom: 'from-orange-50',
             gradientTo: 'to-amber-50',
             hoverBorder: 'border-orange-400',
             hoverText: 'text-orange-600'
+        },
+        {
+            id: 'about',
+            emoji: 'ℹ️',
+            title: 'About',
+            subtitle: 'LSAT scoring',
+            gradientFrom: 'from-cyan-50',
+            gradientTo: 'to-blue-50',
+            hoverBorder: 'border-cyan-400',
+            hoverText: 'text-cyan-600'
+        },
+        {
+            id: 'faq',
+            emoji: '❓',
+            title: 'FAQ',
+            subtitle: 'Common questions',
+            gradientFrom: 'from-violet-50',
+            gradientTo: 'to-purple-50',
+            hoverBorder: 'border-violet-400',
+            hoverText: 'text-violet-600'
         }
     ];
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-            <div className="container mx-auto px-4 py-12 max-w-7xl">
+            <div className="container mx-auto px-4 py-12 max-w-5xl">
                 {/* Hero Section */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-4 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">
@@ -312,9 +362,6 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
                         Free raw to scaled score converter for Law School Admission Test. Calculate your LSAT score (120-180), get percentile rankings, and analyze law school targets instantly.
                     </p>
                 </div>
-
-                {/* Table of Contents */}
-                <TableOfContents sections={tocSections} />
 
                 {/* Main Calculator Section */}
                 <div id="calculator" className="mb-16 scroll-mt-24">
@@ -386,7 +433,7 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
                         <div className="lg:col-span-3 bg-white dark:bg-slate-800/50 dark:backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 space-y-6" aria-live="polite" aria-atomic="true">
                             <div className="text-center">
                                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Your Estimated LSAT Score</h2>
-                                <p className="text-sm text-slate-600 dark:text-slate-300">Law School Admission Test 2025 Score Report</p>
+                                <h3 className="text-sm text-slate-600 dark:text-slate-300">Law School Admission Test 2025 Score Report</h3>
                             </div>
 
                             {rawScore > 0 ? (
@@ -473,6 +520,9 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
                     </div>
                 </div>
 
+                {/* Table of Contents */}
+                <TableOfContents sections={tocSections} />
+
                 {/* Law School Tiers Section */}
                 <div id="law-school-tiers" className="mb-16 scroll-mt-24">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">
@@ -493,6 +543,57 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
                                 </p>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* Quick Examples Section */}
+                <div id="examples" className="mb-16 scroll-mt-24">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">
+                        LSAT Score Examples - What Does Each Score Mean?
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-xl border border-green-200 dark:border-green-800">
+                            <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">170+</div>
+                            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Elite Score</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">~89-90+ correct answers. Opens doors to Harvard, Yale, Stanford Law. 97.5th percentile or higher.</p>
+                            <button onClick={() => setRawScore(89)} className="text-sm text-green-600 dark:text-green-400 font-semibold hover:underline">Try This Score →</button>
+                        </div>
+                        <div className="bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/20 dark:to-sky-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-800">
+                            <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">160</div>
+                            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Competitive Score</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">~77 correct answers. Strong for top regional schools like Georgetown, UCLA. 80th percentile.</p>
+                            <button onClick={() => setRawScore(77)} className="text-sm text-blue-600 dark:text-blue-400 font-semibold hover:underline">Try This Score →</button>
+                        </div>
+                        <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 p-6 rounded-xl border border-amber-200 dark:border-amber-800">
+                            <div className="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">150</div>
+                            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Median Score</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">~63 correct answers. National median. Good for many accredited law schools. 44th percentile.</p>
+                            <button onClick={() => setRawScore(63)} className="text-sm text-amber-600 dark:text-amber-400 font-semibold hover:underline">Try This Score →</button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Benefits Section */}
+                <div id="benefits" className="mb-16 scroll-mt-24">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">
+                        Why Use Our Free LSAT Score Calculator?
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-800 hover:shadow-xl transition-all">
+                            <div className="text-3xl mb-3">⚡</div>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Instant Results</h3>
+                            <p className="text-slate-600 dark:text-slate-400">Get your scaled LSAT score (120-180) and percentile ranking instantly. No registration or email required.</p>
+                        </div>
+                        <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl border border-purple-200 dark:border-purple-800 hover:shadow-xl transition-all">
+                            <div className="text-3xl mb-3">🎯</div>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Law School Targets</h3>
+                            <p className="text-slate-600 dark:text-slate-400">Match your score to T14, top regional, and safety schools. See exactly where you stand for admissions.</p>
+                        </div>
+                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-xl border border-green-200 dark:border-green-800 hover:shadow-xl transition-all">
+                            <div className="text-3xl mb-3">📊</div>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">What-If Scenarios</h3>
+                            <p className="text-slate-600 dark:text-slate-400">Simulate score improvements. See how answering 5 more questions correctly impacts your law school options.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -533,6 +634,120 @@ const LSATScoreCalculator: React.FC<LSATScoreCalculatorProps> = ({ navigateTo })
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Use Cases Section */}
+                <div id="use-cases" className="mb-16 scroll-mt-24">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">
+                        Who Uses the LSAT Score Calculator?
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">
+                            <div className="flex items-start gap-4">
+                                <div className="text-3xl">👨‍🎓</div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Pre-Law Students</h3>
+                                    <p className="text-sm text-slate-600 dark:text-slate-400">Planning law school applications? Use this calculator to convert practice test raw scores to scaled scores and identify target schools within your score range.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">
+                            <div className="flex items-start gap-4">
+                                <div className="text-3xl">📚</div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">LSAT Test Takers</h3>
+                                    <p className="text-sm text-slate-600 dark:text-slate-400">Taking official or practice LSATs? Calculate your score immediately after completing a test to track progress and measure improvement over time.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">
+                            <div className="flex items-start gap-4">
+                                <div className="text-3xl">🎓</div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Law School Advisors</h3>
+                                    <p className="text-sm text-slate-600 dark:text-slate-400">Counseling students on law school admissions? Quickly demonstrate score impacts and help students set realistic target schools based on LSAT performance.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">
+                            <div className="flex items-start gap-4">
+                                <div className="text-3xl">💼</div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Career Changers</h3>
+                                    <p className="text-sm text-slate-600 dark:text-slate-400">Considering law school after working? Evaluate your practice test scores and understand what LSAT performance is needed for your target law schools.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* About LSAT Scoring Section */}
+                <div id="about" className="mb-16 scroll-mt-24">
+                    <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 text-center">Understanding LSAT Scoring & Law School Admissions</h2>
+                        <div className="prose prose-slate dark:prose-invert max-w-none">
+                            <p className="text-slate-600 dark:text-slate-400 mb-4">
+                                The <strong>Law School Admission Test (LSAT)</strong> is a standardized test administered by the <strong>Law School Admission Council (LSAC)</strong> and is a crucial component of law school admissions in the United States, Canada, and beyond. The LSAT measures critical reading comprehension, analytical reasoning skills, logical reasoning abilities, and argumentative writing proficiency—all essential competencies for success in law school and legal practice. Our <a href="#calculator" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">free LSAT calculator</a> helps you instantly convert your raw score to the official scaled score format used by ABA-accredited law schools.
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-400 mb-4">
+                                <strong>LSAT scoring methodology</strong> uses a scaled score system ranging from <strong>120 to 180</strong>, with the national median score typically falling around 150-151. Your scaled score is calculated by converting your raw score (the total number of questions answered correctly) using an official LSAC conversion table that accounts for test difficulty and equating across different test administrations. There is <strong>no penalty for incorrect answers or guessing</strong>, so it's strategically beneficial to attempt every question. You can see <a href="#examples" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">quick score examples</a> showing what different raw scores translate to in terms of scaled scores and national percentiles.
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-400 mb-4">
+                                The LSAT consists of multiple sections: two <strong>Logical Reasoning</strong> sections, one <strong>Reading Comprehension</strong> section, one <strong>Analytical Reasoning (Logic Games)</strong> section, plus an unscored experimental section and an unscored writing sample. Approximately 100-101 questions contribute to your final scaled score. Use our <a href="#how-to-use" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">step-by-step guide</a> to learn how to calculate your score from practice tests.
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-400 mb-4">
+                                <strong>Percentile rankings</strong> show how your score compares to other test takers. For example, a score of 170 places you in the 97.5th percentile, meaning you scored higher than 97.5% of test takers. Top law schools (T14 schools like Harvard, Yale, Stanford) typically admit students with scores of 168-175+, while competitive regional schools may accept scores in the 155-167 range. Check our <a href="#law-school-tiers" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">law school tier breakdown</a> to see where your score stands for different types of law schools.
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-400 mb-4">
+                                Law school admissions use LSAT scores alongside your <strong>undergraduate GPA</strong>, personal statements, letters of recommendation, and work experience. The <strong>LSAC Credential Assembly Service (CAS)</strong> standardizes your academic records and LSAT score into a comprehensive report for law schools. Many schools use <strong>index scores</strong> combining LSAT and GPA to determine admission competitiveness. Understanding your <a href="#use-cases" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">specific use case</a>—whether you're a pre-law student, career changer, or working with an advisor—can help you better strategize your law school applications.
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-400">
+                                This calculator uses official LSAC conversion tables to provide accurate scaled scores, percentile rankings, and law school tier matching. Whether you're taking the <strong>LSAT for the first time</strong> or planning a retake to improve your score (you can take it up to 3 times per year, 5 times in 5 years, and 7 times total), understanding your score is the first step toward law school success. Explore the <a href="#benefits" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">key benefits</a> of using our calculator, or check the <a href="#faq" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">FAQ section</a> for answers to common LSAT scoring questions.
+                            </p>
+                        </div>
+                        
+                        {/* External Authority Links */}
+                        <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Official LSAT Resources</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <a href="https://www.lsac.org/lsat" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                                    <span className="text-2xl">🔗</span>
+                                    <div>
+                                        <div className="font-semibold text-slate-900 dark:text-white">LSAC Official Site</div>
+                                        <div className="text-xs text-slate-500 dark:text-slate-400">lsac.org - Test information & registration</div>
+                                    </div>
+                                </a>
+                                <a href="https://www.lsac.org/lsat/lsat-dates-deadlines-score-release-dates" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                                    <span className="text-2xl">📅</span>
+                                    <div>
+                                        <div className="font-semibold text-slate-900 dark:text-white">LSAT Test Dates</div>
+                                        <div className="text-xs text-slate-500 dark:text-slate-400">Official test schedule & score release</div>
+                                    </div>
+                                </a>
+                                <a href="https://www.lsac.org/lsat/prep" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                                    <span className="text-2xl">📖</span>
+                                    <div>
+                                        <div className="font-semibold text-slate-900 dark:text-white">LSAT Prep Resources</div>
+                                        <div className="text-xs text-slate-500 dark:text-slate-400">Official practice tests & study materials</div>
+                                    </div>
+                                </a>
+                                <a href="https://www.americanbar.org/groups/legal_education/resources/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                                    <span className="text-2xl">⚖️</span>
+                                    <div>
+                                        <div className="font-semibold text-slate-900 dark:text-white">ABA Law Schools</div>
+                                        <div className="text-xs text-slate-500 dark:text-slate-400">American Bar Association accreditation</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Last Updated */}
+                        <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700 text-center">
+                            <p className="text-sm text-slate-500 dark:text-slate-400">
+                                <strong>Last Updated:</strong> November 20, 2025 | LSAT conversion tables updated for 2024-2025 test cycle
+                            </p>
                         </div>
                     </div>
                 </div>
