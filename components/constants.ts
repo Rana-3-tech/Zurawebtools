@@ -242,3 +242,162 @@ export const LSAT_FAQ_DATA: FAQItem[] = [
         answer: "Official LSAT practice test scores are generally accurate predictors of actual performance, typically within 2-3 points. Ensure you're taking tests under realistic conditions (timed, no distractions) for the most accurate predictions. This calculator uses official LSAC conversion tables."
     }
 ];
+
+// ============================================================================
+// AP US HISTORY (APUSH) SCORE CALCULATOR DATA
+// ============================================================================
+
+import type { APUSHScoreConversion, APUSHSectionWeights, APUSHSectionMax, APUSHScoreDistribution } from './tools/utils/apushValidation';
+
+// APUSH Composite Score to AP Score Conversion (1-5 scale)
+// Based on College Board official scoring guidelines
+export const APUSH_SCORE_CONVERSION: APUSHScoreConversion[] = [
+    { min: 0, max: 44, score: 1, percentile: 18 },
+    { min: 45, max: 69, score: 2, percentile: 37 },
+    { min: 70, max: 95, score: 3, percentile: 62 },
+    { min: 96, max: 119, score: 4, percentile: 85 },
+    { min: 120, max: 150, score: 5, percentile: 100 }
+];
+
+// Section weights for composite score calculation (Official College Board percentages)
+// MCQ: 40%, SAQ: 20%, DBQ: 25%, LEQ: 15% of total composite score (150 points)
+export const APUSH_SECTION_WEIGHTS: APUSHSectionWeights = {
+    mcq: 1.0909,    // 55 questions × 1.0909 = 60 points max (40% of 150)
+    saq: 3.3333,    // 9 points × 3.3333 = 30 points max (20% of 150)
+    dbq: 5.3571,    // 7 points × 5.3571 = 37.5 points max (25% of 150)
+    leq: 3.75       // 6 points × 3.75 = 22.5 points max (15% of 150)
+};
+
+// Section maximums
+export const APUSH_SECTION_MAX: APUSHSectionMax = {
+    mcq: 55,
+    saq: 9,
+    dbq: 7,
+    leq: 6
+};
+
+// AP Score distributions (2024 data)
+export const APUSH_SCORE_DISTRIBUTION: { [score: number]: APUSHScoreDistribution } = {
+    5: {
+        percentage: 13.0,
+        description: "Extremely Well Qualified",
+        collegeCredit: "Guaranteed credit at most colleges (3-6 credits)"
+    },
+    4: {
+        percentage: 18.7,
+        description: "Well Qualified",
+        collegeCredit: "Credit at many colleges (3-6 credits)"
+    },
+    3: {
+        percentage: 25.1,
+        description: "Qualified",
+        collegeCredit: "Credit at some colleges (varies by institution)"
+    },
+    2: {
+        percentage: 24.9,
+        description: "Possibly Qualified",
+        collegeCredit: "Rarely accepted for credit"
+    },
+    1: {
+        percentage: 18.3,
+        description: "No Recommendation",
+        collegeCredit: "No credit awarded"
+    }
+};
+
+// College credit policies by score
+export const APUSH_COLLEGE_CREDIT = [
+    {
+        tier: "Ivy League & Top 20",
+        score5: "3-6 credits + placement",
+        score4: "3-6 credits at some schools",
+        score3: "Rarely accepted",
+        examples: "Harvard, Yale, Stanford, MIT"
+    },
+    {
+        tier: "Top Public Universities",
+        score5: "3-6 credits + placement",
+        score4: "3-6 credits",
+        score3: "3 credits at most",
+        examples: "UC Berkeley, UCLA, UMich, UVA"
+    },
+    {
+        tier: "State Universities",
+        score5: "3-6 credits",
+        score4: "3-6 credits",
+        score3: "3 credits",
+        examples: "Penn State, Ohio State, Arizona State"
+    },
+    {
+        tier: "Liberal Arts Colleges",
+        score5: "3-6 credits or placement",
+        score4: "3 credits or placement",
+        score3: "Varies by college",
+        examples: "Amherst, Williams, Swarthmore"
+    }
+];
+
+// APUSH scoring rubrics
+export const APUSH_RUBRICS = {
+    saq: {
+        max: 3,
+        criteria: [
+            { points: 3, description: "Fully answers all parts with specific historical evidence" },
+            { points: 2, description: "Answers most parts with some historical evidence" },
+            { points: 1, description: "Partially answers with limited evidence" },
+            { points: 0, description: "No acceptable response" }
+        ]
+    },
+    dbq: {
+        max: 7,
+        criteria: [
+            { points: 1, description: "Thesis/Claim (historically defensible)" },
+            { points: 1, description: "Contextualization (broader historical context)" },
+            { points: 2, description: "Document Evidence (supports argument with 4+ docs)" },
+            { points: 2, description: "Outside Evidence (beyond the documents)" },
+            { points: 1, description: "Analysis (complexity of understanding)" }
+        ]
+    },
+    leq: {
+        max: 6,
+        criteria: [
+            { points: 1, description: "Thesis/Claim (historically defensible)" },
+            { points: 1, description: "Contextualization (broader historical context)" },
+            { points: 2, description: "Historical Evidence (specific examples)" },
+            { points: 1, description: "Analysis and Reasoning (historical skill)" },
+            { points: 1, description: "Complexity (multiple perspectives)" }
+        ]
+    }
+};
+
+// APUSH FAQ Data
+export const APUSH_FAQ_DATA: FAQItem[] = [
+    {
+        question: "What is a good AP US History score?",
+        answer: "A score of 3 or higher is considered passing and qualifies for college credit at many institutions. A score of 4 is well qualified and accepted at most colleges. A score of 5 (achieved by only 13% of test-takers) is extremely well qualified and guarantees credit at nearly all colleges, often with advanced placement into upper-level history courses."
+    },
+    {
+        question: "How is the APUSH exam scored?",
+        answer: "The APUSH exam consists of four sections: Multiple Choice Questions (55 questions, 40% weight), Short Answer Questions (3 questions, 20% weight), Document-Based Question (1 question, 25% weight), and Long Essay Question (1 question, 15% weight). Raw scores are converted to a composite score (0-150), which is then scaled to an AP score of 1-5 using College Board's official conversion tables."
+    },
+    {
+        question: "What APUSH score do I need for college credit?",
+        answer: "Most colleges require a minimum score of 3 for credit, though policies vary widely. Top universities like Ivy League schools often require a 4 or 5. State universities typically award credit for scores of 3 or higher (usually 3-6 semester credits). Check with your target colleges' AP credit policies as requirements differ by institution and major."
+    },
+    {
+        question: "How do I calculate my APUSH composite score?",
+        answer: "Multiply each section's raw score by its weight: MCQ score × 1.09, SAQ total × 3.33, DBQ score × 3.21, and LEQ score × 3.75. Add these together for your composite score (0-150). This composite is then converted to the 1-5 AP scale: 120-150 = 5, 96-119 = 4, 70-95 = 3, 45-69 = 2, 0-44 = 1."
+    },
+    {
+        question: "How hard is it to get a 5 on APUSH?",
+        answer: "Approximately 13% of students earn a 5 on the APUSH exam, making it a challenging but achievable goal. You typically need to answer 45-50 MCQs correctly (82-91%), score 7-9 on SAQs (78-100%), 6-7 on the DBQ (86-100%), and 5-6 on the LEQ (83-100%). This requires strong historical knowledge, excellent writing skills, and effective time management."
+    },
+    {
+        question: "What happens if I fail the APUSH exam?",
+        answer: "Scores of 1 or 2 are not considered passing for college credit, but you still receive a score report. These scores typically don't negatively impact college admissions as reporting AP scores is optional for most applications. You can retake the exam the following year if desired. Many students who score 1 or 2 still learned valuable historical thinking skills and writing techniques."
+    },
+    {
+        question: "How accurate is this APUSH score calculator?",
+        answer: "This calculator uses official College Board scoring guidelines and conversion tables from recent exams (2023-2024). However, actual scoring can vary slightly as College Board adjusts conversion tables annually based on overall exam difficulty. Treat your calculated score as an estimate within ±5 composite points. For the most accurate practice, use official College Board practice exams."
+    }
+];

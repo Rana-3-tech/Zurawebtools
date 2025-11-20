@@ -208,6 +208,14 @@ const LSATScoreCalculatorIcon = () => (
         <path d="M14 10H10V14H14V10Z" fill="url(#toolGradLSAT)" opacity="0.6" />
     </svg>
 );
+const APUSHScoreCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="apushScoreCalculatorIconTitle">
+        <title id="apushScoreCalculatorIconTitle">APUSH Score Calculator Icon</title>
+        <defs><linearGradient id="toolGradAPUSH" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#dc2626" /><stop offset="100%" stopColor="#2563eb" /></linearGradient></defs>
+        <path d="M12 2L1 21H23L12 2ZM13 18H11V16H13V18ZM13 14H11V10H13V14Z" fill="url(#toolGradAPUSH)" opacity="0.2" />
+        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM14 17H10V15H14V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z" fill="url(#toolGradAPUSH)" />
+    </svg>
+);
 const BerkeleyGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="berkeleyGPAIconTitle">
         <title id="berkeleyGPAIconTitle">Berkeley GPA Calculator Icon</title>
@@ -471,6 +479,13 @@ export const toolCategories: Category[] = [
                 gradientColors: { from: '#6366f1', to: '#8b5cf6' }, // Indigo to Purple
             },
             {
+                title: 'APUSH Score Calculator',
+                description: 'Free AP US History score calculator for 2025. Convert MCQ, SAQ, DBQ, and LEQ scores to AP scores (1-5) with percentile rankings and college credit information.',
+                link: 'education-and-exam-tools/test-score-tools/apush-score-calculator',
+                icon: <APUSHScoreCalculatorIcon />,
+                gradientColors: { from: '#dc2626', to: '#2563eb' }, // Red to Blue (American colors)
+            },
+            {
                 title: 'Berkeley GPA Calculator',
                 description: 'Calculate your UC Berkeley GPA with accurate grade point conversions. Supports letter grades, plus/minus system, and weighted courses.',
                 link: 'education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
@@ -531,6 +546,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/test-score-tools/lsat-score-calculator',
                         icon: <LSATScoreCalculatorIcon />,
                         gradientColors: { from: '#6366f1', to: '#8b5cf6' },
+                    },
+                    {
+                        title: 'APUSH Score Calculator',
+                        description: 'Free AP US History score calculator for 2025. Convert MCQ, SAQ, DBQ, and LEQ scores to AP scores (1-5) with percentile rankings and college credit information.',
+                        link: 'education-and-exam-tools/test-score-tools/apush-score-calculator',
+                        icon: <APUSHScoreCalculatorIcon />,
+                        gradientColors: { from: '#dc2626', to: '#2563eb' },
                     },
                 ]
             },
