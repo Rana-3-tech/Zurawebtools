@@ -486,6 +486,13 @@ export const toolCategories: Category[] = [
                 gradientColors: { from: '#dc2626', to: '#2563eb' }, // Red to Blue (American colors)
             },
             {
+                title: 'MCAT Score Calculator',
+                description: 'Medical College Admission Test score calculator for 2025. Convert raw section scores to scaled scores (118-132) with total score, percentile rankings, and medical school competitiveness analysis.',
+                link: 'education-and-exam-tools/test-score-tools/mcat-score-calculator',
+                icon: <APUSHScoreCalculatorIcon />,
+                gradientColors: { from: '#0ea5e9', to: '#06b6d4' }, // Medical blue/cyan
+            },
+            {
                 title: 'Berkeley GPA Calculator',
                 description: 'Calculate your UC Berkeley GPA with accurate grade point conversions. Supports letter grades, plus/minus system, and weighted courses.',
                 link: 'education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',

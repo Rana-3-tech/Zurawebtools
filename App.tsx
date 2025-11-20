@@ -40,6 +40,7 @@ const SnowDayCalculator = lazy(() => import('./components/tools/SnowDayCalculato
 const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalculator'));
 const LSATScoreCalculator = lazy(() => import('./components/tools/LSATScoreCalculator'));
 const APUSHScoreCalculator = lazy(() => import('./components/tools/APUSHScoreCalculator'));
+const MCATScoreCalculator = lazy(() => import('./components/tools/MCATScoreCalculator'));
 const BerkeleyGPACalculator = lazy(() => import('./components/tools/BerkeleyGPACalculator'));
 const UTAGPACalculator = lazy(() => import('./components/tools/UTAGPACalculator'));
 const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACalculator'));
@@ -228,6 +229,7 @@ const App: React.FC = () => {
             'sat-score-calculator': SATScoreCalculator,
             'lsat-score-calculator': LSATScoreCalculator,
             'apush-score-calculator': APUSHScoreCalculator,
+            'mcat-score-calculator': MCATScoreCalculator,
             'berkeley-gpa-calculator': BerkeleyGPACalculator,
             'rutgers-gpa-calculator': RutgersGPACalculator,
             'uta-gpa-calculator': UTAGPACalculator,

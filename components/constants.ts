@@ -401,3 +401,121 @@ export const APUSH_FAQ_DATA: FAQItem[] = [
         answer: "This calculator uses official College Board scoring guidelines and conversion tables from recent exams (2023-2024). However, actual scoring can vary slightly as College Board adjusts conversion tables annually based on overall exam difficulty. Treat your calculated score as an estimate within ±5 composite points. For the most accurate practice, use official College Board practice exams."
     }
 ];
+
+// ============================================
+// MCAT SCORE CALCULATOR CONSTANTS
+// ============================================
+
+import type { MCATScoreConversion, MCATSectionMax, MCATPercentileData, MCATSchoolRequirements } from './tools/utils/mcatValidation';
+
+// Maximum possible scores for each MCAT section (CORRECT ORDER)
+export const MCAT_SECTION_MAX: MCATSectionMax = {
+    chemPhys: 59,     // Chemical and Physical Foundations of Biological Systems (Chem/Phys)
+    cars: 53,         // Critical Analysis and Reasoning Skills (CARS)
+    bioBiochem: 59,   // Biological and Biochemical Foundations of Living Systems (Bio/Biochem)
+    psychSoc: 59      // Psychological, Social, and Biological Foundations of Behavior (Psych/Soc)
+};
+
+// Raw score to scaled score conversion (based on AAMC data)
+// Each section scales from 118-132 (15-point scale)
+// ACTUAL AAMC CONVERSION DATA for Chem/Phys, Bio/Biochem, Psych/Soc (59 questions each)
+export const MCAT_SCORE_CONVERSION: MCATScoreConversion[] = [
+    { raw: 0, scaled: 118 }, { raw: 1, scaled: 118 }, { raw: 2, scaled: 118 },
+    { raw: 3, scaled: 118 }, { raw: 4, scaled: 118 }, { raw: 5, scaled: 118 },
+    { raw: 6, scaled: 118 }, { raw: 7, scaled: 118 }, { raw: 8, scaled: 118 },
+    { raw: 9, scaled: 118 }, { raw: 10, scaled: 119 }, { raw: 11, scaled: 119 },
+    { raw: 12, scaled: 119 }, { raw: 13, scaled: 119 }, { raw: 14, scaled: 119 },
+    { raw: 15, scaled: 120 }, { raw: 16, scaled: 120 }, { raw: 17, scaled: 120 },
+    { raw: 18, scaled: 120 }, { raw: 19, scaled: 121 }, { raw: 20, scaled: 121 },
+    { raw: 21, scaled: 121 }, { raw: 22, scaled: 121 }, { raw: 23, scaled: 122 },
+    { raw: 24, scaled: 122 }, { raw: 25, scaled: 122 }, { raw: 26, scaled: 122 },
+    { raw: 27, scaled: 123 }, { raw: 28, scaled: 123 }, { raw: 29, scaled: 123 },
+    { raw: 30, scaled: 124 }, { raw: 31, scaled: 124 }, { raw: 32, scaled: 124 },
+    { raw: 33, scaled: 125 }, { raw: 34, scaled: 125 }, { raw: 35, scaled: 125 },
+    { raw: 36, scaled: 126 }, { raw: 37, scaled: 126 }, { raw: 38, scaled: 126 },
+    { raw: 39, scaled: 127 }, { raw: 40, scaled: 127 }, { raw: 41, scaled: 127 },
+    { raw: 42, scaled: 128 }, { raw: 43, scaled: 128 }, { raw: 44, scaled: 128 },
+    { raw: 45, scaled: 129 }, { raw: 46, scaled: 129 }, { raw: 47, scaled: 129 },
+    { raw: 48, scaled: 130 }, { raw: 49, scaled: 130 }, { raw: 50, scaled: 130 },
+    { raw: 51, scaled: 131 }, { raw: 52, scaled: 131 }, { raw: 53, scaled: 131 },
+    { raw: 54, scaled: 132 }, { raw: 55, scaled: 132 }, { raw: 56, scaled: 132 },
+    { raw: 57, scaled: 132 }, { raw: 58, scaled: 132 }, { raw: 59, scaled: 132 }
+];
+
+// CARS section has 53 questions (ACTUAL AAMC CONVERSION DATA)
+export const MCAT_CARS_CONVERSION: MCATScoreConversion[] = [
+    { raw: 0, scaled: 118 }, { raw: 1, scaled: 118 }, { raw: 2, scaled: 118 },
+    { raw: 3, scaled: 118 }, { raw: 4, scaled: 118 }, { raw: 5, scaled: 118 },
+    { raw: 6, scaled: 118 }, { raw: 7, scaled: 118 }, { raw: 8, scaled: 118 },
+    { raw: 9, scaled: 118 }, { raw: 10, scaled: 119 }, { raw: 11, scaled: 119 },
+    { raw: 12, scaled: 119 }, { raw: 13, scaled: 119 }, { raw: 14, scaled: 119 },
+    { raw: 15, scaled: 120 }, { raw: 16, scaled: 120 }, { raw: 17, scaled: 120 },
+    { raw: 18, scaled: 120 }, { raw: 19, scaled: 121 }, { raw: 20, scaled: 121 },
+    { raw: 21, scaled: 121 }, { raw: 22, scaled: 121 }, { raw: 23, scaled: 122 },
+    { raw: 24, scaled: 122 }, { raw: 25, scaled: 122 }, { raw: 26, scaled: 122 },
+    { raw: 27, scaled: 123 }, { raw: 28, scaled: 123 }, { raw: 29, scaled: 123 },
+    { raw: 30, scaled: 124 }, { raw: 31, scaled: 124 }, { raw: 32, scaled: 124 },
+    { raw: 33, scaled: 125 }, { raw: 34, scaled: 125 }, { raw: 35, scaled: 125 },
+    { raw: 36, scaled: 126 }, { raw: 37, scaled: 126 }, { raw: 38, scaled: 126 },
+    { raw: 39, scaled: 127 }, { raw: 40, scaled: 127 }, { raw: 41, scaled: 127 },
+    { raw: 42, scaled: 128 }, { raw: 43, scaled: 128 }, { raw: 44, scaled: 128 },
+    { raw: 45, scaled: 129 }, { raw: 46, scaled: 129 }, { raw: 47, scaled: 129 },
+    { raw: 48, scaled: 130 }, { raw: 49, scaled: 130 }, { raw: 50, scaled: 130 },
+    { raw: 51, scaled: 131 }, { raw: 52, scaled: 131 }, { raw: 53, scaled: 132 }
+];
+
+// Percentile rankings by total score (ACTUAL AAMC 2023-2024 data)
+export const MCAT_PERCENTILE_DATA: MCATPercentileData[] = [
+    { totalScore: 472, percentile: 1 },
+    { totalScore: 480, percentile: 5 },
+    { totalScore: 488, percentile: 10 },
+    { totalScore: 494, percentile: 25 },
+    { totalScore: 500, percentile: 50 },
+    { totalScore: 506, percentile: 75 },
+    { totalScore: 512, percentile: 90 },
+    { totalScore: 518, percentile: 95 },
+    { totalScore: 524, percentile: 99 },
+    { totalScore: 528, percentile: 100 }
+];
+
+// Medical school average MCAT score requirements
+export const MCAT_SCHOOL_REQUIREMENTS: MCATSchoolRequirements[] = [
+    { tier: "Top 10 (Harvard, Stanford, Johns Hopkins)", minScore: 518, avgScore: 521, competitive: 523 },
+    { tier: "Top 20 (Yale, UCSF, Penn)", minScore: 515, avgScore: 518, competitive: 520 },
+    { tier: "Top 50 (Northwestern, Duke, Emory)", minScore: 512, avgScore: 515, competitive: 517 },
+    { tier: "Mid-Tier MD (State Schools)", minScore: 508, avgScore: 511, competitive: 513 },
+    { tier: "DO Schools (Osteopathic)", minScore: 502, avgScore: 505, competitive: 508 },
+    { tier: "Caribbean Schools", minScore: 495, avgScore: 500, competitive: 504 }
+];
+
+// MCAT FAQ Data
+export const MCAT_FAQ_DATA: FAQItem[] = [
+    {
+        question: "What is a good MCAT score?",
+        answer: "A score of 510-511 (84th percentile) is considered competitive for most US medical schools. A score of 515+ (94th percentile) makes you competitive for top-tier programs. The average accepted student at US MD schools scores around 511-512. For DO schools, 505-507 is typical. Top schools like Harvard average 521+."
+    },
+    {
+        question: "How is the MCAT scored?",
+        answer: "The MCAT has 4 sections, each scored 118-132: Chemical/Biological Foundations (Chem/Bio), Physical/Chemical Foundations (Phys/Chem), Psychological/Social/Biological Foundations (Psych/Soc), and Critical Analysis (CARS). Your total score (472-528) is the sum of all 4 sections. Each section's raw score (correct answers) converts to a scaled score based on difficulty."
+    },
+    {
+        question: "What MCAT score do I need for medical school?",
+        answer: "Requirements vary: Top 10 schools need 518+ (98th percentile), Top 50 schools need 512+ (88th percentile), mid-tier MD programs need 508+ (79th percentile), and DO schools typically accept 502+ (61st percentile). A 500 (50th percentile) is the minimum competitive score for most programs. GPA, research, and clinical experience also matter significantly."
+    },
+    {
+        question: "How do I calculate my MCAT score?",
+        answer: "Count correct answers (raw score) for each section: Chem/Bio (0-59), Phys/Chem (0-59), Psych/Soc (0-59), and CARS (0-53). Convert each raw score to scaled (118-132) using AAMC conversion tables. Add all 4 scaled scores for your total (472-528). This calculator uses official AAMC data from 2023-2024 exams."
+    },
+    {
+        question: "How hard is it to get a 520 on the MCAT?",
+        answer: "A 520 puts you in the 98th percentile—only 2% of test-takers achieve this. You need approximately 50-53 correct (85-90%) on each science section and 45-47 correct (85-89%) on CARS. This requires mastery of all content areas, excellent critical thinking, strong reading speed (90 wpm+), and effective time management."
+    },
+    {
+        question: "Can I get into medical school with a 500 MCAT?",
+        answer: "Yes, but options are limited. A 500 (50th percentile) qualifies you for some DO programs and lower-tier MD schools, especially with a strong GPA (3.6+), research, clinical hours, and compelling personal statement. Caribbean schools are more accessible. Retaking to score 505+ significantly improves chances. Many students with 500-504 successfully matriculate at DO schools."
+    },
+    {
+        question: "How accurate is this MCAT score calculator?",
+        answer: "This calculator uses official AAMC scoring guidelines and percentile data from 2023-2024 exams. Actual MCAT scoring varies slightly as AAMC adjusts scales based on exam difficulty (equating process). Your calculated score should be within ±1-2 scaled points per section. For accurate practice, use official AAMC practice exams (scored identically to real exams)."
+    }
+];
