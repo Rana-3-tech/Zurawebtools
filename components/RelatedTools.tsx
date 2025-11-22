@@ -8,7 +8,11 @@ interface RelatedToolsProps {
     currentSlug: string;
 }
 
-const allTools = toolCategories.flatMap(cat => cat.tools);
+const allTools = toolCategories.flatMap(cat => {
+    const categoryTools = cat.tools || [];
+    const subCategoryTools = cat.subCategories?.flatMap(sub => sub.tools || []) || [];
+    return [...categoryTools, ...subCategoryTools];
+});
 
 const RelatedTools: React.FC<RelatedToolsProps> = ({ relatedSlugs, navigateTo, currentSlug }) => {
     const relatedTools = allTools.filter(tool => {

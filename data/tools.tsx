@@ -329,6 +329,18 @@ const UCATScoreCalculatorIcon = () => (
     </svg>
 );
 
+const CommonAppWordCounterIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="commonAppWordCounterIconTitle">
+        <title id="commonAppWordCounterIconTitle">Common App Essay Word Counter Icon</title>
+        <defs><linearGradient id="toolGradCommonApp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3b82f6" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
+        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="url(#toolGradCommonApp)" />
+        <path d="M14 2V8H20" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16 13H8M16 17H8M10 9H8" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="18" cy="18" r="4" fill="#059669" />
+        <text x="18" y="20" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">W</text>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -666,7 +678,15 @@ export const toolCategories: Category[] = [
             {
                 slug: 'admission-tools',
                 title: 'Admission Tools',
-                tools: []
+                tools: [
+                    {
+                        title: 'Common App Essay Word Counter',
+                        description: 'Free Common App essay word counter 2026. Track 650-word limit with real-time character count, sentence analysis, and reading time for college application personal statements.',
+                        link: 'education-and-exam-tools/admission-tools/common-app-essay-word-counter',
+                        icon: <CommonAppWordCounterIcon />,
+                        gradientColors: { from: '#3b82f6', to: '#8b5cf6' },
+                    },
+                ]
             },
         ]
     },
