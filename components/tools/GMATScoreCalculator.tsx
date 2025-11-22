@@ -83,7 +83,7 @@ const GMATScoreCalculator: React.FC<GMATScoreCalculatorProps> = ({ navigateTo })
   };
 
   useEffect(() => {
-    document.title = 'GMAT Score Calculator 2025 - Free Percentile Estimator & Converter | MBA Admissions Tool';
+    document.title = 'GMAT Score Calculator 2025 - Free Percentile Estimator';
     const setMeta = (name: string, content: string) => {
       let element = document.querySelector(`meta[name="${name}"]`);
       if (!element) {
