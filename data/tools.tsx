@@ -364,6 +364,16 @@ const StudentVisaFeeCalculatorAustraliaIcon = () => (
     </svg>
 );
 
+const CollegeAdmissionsCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="collegeAdmissionsIconTitle">
+        <title id="collegeAdmissionsIconTitle">College Admissions Calculator Icon</title>
+        <defs><linearGradient id="toolGradCollegeAdm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#6366f1" /><stop offset="100%" stopColor="#a855f7" /></linearGradient></defs>
+        <path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L23 9L12 3Z" fill="url(#toolGradCollegeAdm)" />
+        <circle cx="12" cy="12" r="3" fill="#fbbf24" />
+        <text x="12" y="13.5" fontSize="3.5" fill="white" textAnchor="middle" fontWeight="bold">A</text>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -722,6 +732,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia',
                         icon: <StudentVisaFeeCalculatorAustraliaIcon />,
                         gradientColors: { from: '#10b981', to: '#14b8a6' },
+                    },
+                    {
+                        title: 'College Admissions Calculator',
+                        description: 'Free college admissions calculator. Calculate admission chances based on GPA, SAT/ACT scores, and extracurriculars. Find safety, match, and reach schools instantly.',
+                        link: 'education-and-exam-tools/admission-tools/college-admissions-calculator',
+                        icon: <CollegeAdmissionsCalculatorIcon />,
+                        gradientColors: { from: '#6366f1', to: '#a855f7' },
                     },
                 ]
             },
