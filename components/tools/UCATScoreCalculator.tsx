@@ -319,7 +319,7 @@ const UCATScoreCalculator: React.FC<UCATScoreCalculatorProps> = ({ navigateTo })
         {/* H1 + Description */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
-            Free UCAT Score Calculator 2026 - Cognitive Total Estimator for Medical School Admissions
+            UCAT Score Calculator 2026 - Free Cognitive Total Estimator
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Calculate your UCAT cognitive total (1200-3600) from raw scores across Verbal Reasoning, Decision Making, Quantitative Reasoning, and Abstract Reasoning subtests. Get scaled scores and competitiveness analysis for UK medical and dental school applications.
