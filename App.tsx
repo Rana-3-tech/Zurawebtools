@@ -57,6 +57,7 @@ const CSUGPACalculator = lazy(() => import('./components/tools/CSUGPACalculator'
 const GMATScoreCalculator = lazy(() => import('./components/tools/GMATScoreCalculator'));
 const UCATScoreCalculator = lazy(() => import('./components/tools/UCATScoreCalculator'));
 const CommonAppEssayWordCounter = lazy(() => import('./components/tools/CommonAppEssayWordCounter'));
+const UCASPointsCalculator = lazy(() => import('./components/tools/UCASPointsCalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -248,6 +249,7 @@ const App: React.FC = () => {
             'gmat-score-calculator': GMATScoreCalculator,
             'ucat-score-calculator': UCATScoreCalculator,
             'common-app-essay-word-counter': CommonAppEssayWordCounter,
+            'ucas-points-calculator': UCASPointsCalculator,
         };
 
         // Extract tool slug from path (handles both 2-level and 3-level paths)

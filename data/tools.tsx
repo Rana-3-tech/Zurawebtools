@@ -341,6 +341,17 @@ const CommonAppWordCounterIcon = () => (
     </svg>
 );
 
+const UCASPointsIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ucasPointsIconTitle">
+        <title id="ucasPointsIconTitle">UCAS Points Calculator Icon</title>
+        <defs><linearGradient id="toolGradUCAS" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#10b981" /><stop offset="100%" stopColor="#3b82f6" /></linearGradient></defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" fill="url(#toolGradUCAS)" />
+        <path d="M7 8H17M7 12H17M7 16H13" stroke="white" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="17" cy="16" r="3.5" fill="#f59e0b" />
+        <text x="17" y="18" fontSize="5" fill="white" textAnchor="middle" fontWeight="bold">UK</text>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -685,6 +696,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/admission-tools/common-app-essay-word-counter',
                         icon: <CommonAppWordCounterIcon />,
                         gradientColors: { from: '#3b82f6', to: '#8b5cf6' },
+                    },
+                    {
+                        title: 'UCAS Points Calculator 2026',
+                        description: 'Free UCAS points calculator for UK university admissions. Convert A-Levels, BTEC, IB, Scottish Highers, T-Levels to UCAS tariff points instantly. Official 2026 system.',
+                        link: 'education-and-exam-tools/admission-tools/ucas-points-calculator',
+                        icon: <UCASPointsIcon />,
+                        gradientColors: { from: '#10b981', to: '#3b82f6' },
                     },
                 ]
             },
