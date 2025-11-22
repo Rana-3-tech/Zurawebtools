@@ -352,6 +352,18 @@ const UCASPointsIcon = () => (
     </svg>
 );
 
+const StudentVisaFeeCalculatorAustraliaIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="visaFeeIconTitle">
+        <title id="visaFeeIconTitle">Australia Student Visa Fee Calculator Icon</title>
+        <defs><linearGradient id="toolGradVisa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#10b981" /><stop offset="100%" stopColor="#14b8a6" /></linearGradient></defs>
+        <rect x="2" y="5" width="20" height="14" rx="2" fill="url(#toolGradVisa)" />
+        <path d="M2 9H22" stroke="white" strokeWidth="1.5" />
+        <circle cx="7" cy="14" r="2" fill="#fbbf24" />
+        <text x="7" y="15.5" fontSize="3" fill="white" textAnchor="middle" fontWeight="bold">$</text>
+        <path d="M12 12H19M12 15H17" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -703,6 +715,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/admission-tools/ucas-points-calculator',
                         icon: <UCASPointsIcon />,
                         gradientColors: { from: '#10b981', to: '#3b82f6' },
+                    },
+                    {
+                        title: 'Australia Student Visa Fee Calculator 2026',
+                        description: 'Free Australia student visa fee calculator for 2026. Calculate Subclass 500 visa costs including application fees, biometrics, health checks, OSHC insurance. Accurate cost estimator.',
+                        link: 'education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia',
+                        icon: <StudentVisaFeeCalculatorAustraliaIcon />,
+                        gradientColors: { from: '#10b981', to: '#14b8a6' },
                     },
                 ]
             },
