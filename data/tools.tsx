@@ -311,6 +311,15 @@ const UTAGPAIcon = () => (
     </svg>
 );
 
+const GMATScoreCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="gmatScoreCalculatorIconTitle">
+        <title id="gmatScoreCalculatorIconTitle">GMAT Score Calculator Icon</title>
+        <defs><linearGradient id="toolGradGMAT" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#1e40af" /><stop offset="100%" stopColor="#3b82f6" /></linearGradient></defs>
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#toolGradGMAT)" />
+        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM14 17H10V15H14V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z" fill="url(#toolGradGMAT)" opacity="0.8" />
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -567,6 +576,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/test-score-tools/apush-score-calculator',
                         icon: <APUSHScoreCalculatorIcon />,
                         gradientColors: { from: '#dc2626', to: '#2563eb' },
+                    },
+                    {
+                        title: 'GMAT Score Calculator',
+                        description: 'Free GMAT score calculator for 2025. Estimate your total GMAT score from Quantitative, Verbal, and Data Insights section scores with percentile rankings.',
+                        link: 'education-and-exam-tools/test-score-tools/gmat-score-calculator',
+                        icon: <GMATScoreCalculatorIcon />,
+                        gradientColors: { from: '#1e40af', to: '#3b82f6' },
                     },
                 ]
             },

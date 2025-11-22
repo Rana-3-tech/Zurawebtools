@@ -54,6 +54,7 @@ const ReverbCalculator = lazy(() => import('./components/tools/ReverbCalculator'
 const CodeSimilarityChecker = lazy(() => import('./components/tools/CodeSimilarityChecker'));
 const CollegeGPACalculator = lazy(() => import('./components/tools/CollegeGPACalculator'));
 const CSUGPACalculator = lazy(() => import('./components/tools/CSUGPACalculator'));
+const GMATScoreCalculator = lazy(() => import('./components/tools/GMATScoreCalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -242,6 +243,7 @@ const App: React.FC = () => {
             'power-to-mass-ratio-calculator': PowerToMassRatioCalculator,
             'audiobook-speed-calculator': AudiobookSpeedCalculator,
             'reverb-calculator': ReverbCalculator,
+            'gmat-score-calculator': GMATScoreCalculator,
         };
 
         // Extract tool slug from path (handles both 2-level and 3-level paths)
