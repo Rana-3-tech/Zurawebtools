@@ -610,27 +610,67 @@ As I prepare for college, I carry with me the lessons learned from my family's s
         {/* About Section */}
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-center mb-8 text-slate-900 dark:text-white">About Common App Essay Word Counter</h2>
-          <div className="bg-white dark:bg-slate-800/50 p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
-            <div className="prose prose-lg max-w-none text-slate-700 dark:text-slate-300">
-              <p className="mb-6">
-                The Common Application essay is one of the most critical components of your college admissions application. With a strict 650-word limit, every word counts when telling your unique story to admissions officers. Our free Common App Essay Word Counter helps you stay within this limit while crafting a compelling personal statement that showcases your personality, experiences, and potential.
-              </p>
+          <div className="bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 dark:from-slate-800/50 dark:via-slate-800/50 dark:to-slate-800/50 p-8 md:p-10 rounded-2xl shadow-xl border-2 border-blue-100 dark:border-slate-700">
+            <div className="prose prose-lg max-w-none">
+              {/* Introduction Card */}
+              <div className="bg-white/70 dark:bg-slate-900/50 p-6 rounded-xl mb-6 border-l-4 border-blue-600">
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-0">
+                  The <strong className="text-blue-600 dark:text-blue-400">Common Application essay</strong> is one of the most critical components of your college admissions application. With a strict 650-word limit, every word counts when telling your unique story to admissions officers. Our free Common App Essay Word Counter helps you stay within this limit while crafting a compelling personal statement that showcases your personality, experiences, and potential.
+                </p>
+              </div>
 
-              <p className="mb-6">
-                The Common Application essay, also known as the personal statement, allows you to choose from seven different prompts designed to help you share meaningful aspects of your background, identity, interests, or talents. Whether you're writing about overcoming challenges, pursuing your passion, or questioning a belief, maintaining the correct word count is essential. Admissions committees at selective universities carefully review thousands of applications, and essays that exceed the word limit may be cut off or reflect poorly on your attention to detail.
-              </p>
+              {/* Main Content Grid */}
+              <div className="grid md:grid-cols-2 gap-6 mb-6">
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-800">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                    <span className="text-2xl">📝</span> Essay Writing Essentials
+                  </h3>
+                  <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm">
+                    The Common Application essay, also known as the personal statement, allows you to choose from seven different prompts designed to help you share meaningful aspects of your background, identity, interests, or talents. Whether you're writing about overcoming challenges, pursuing your passion, or questioning a belief, maintaining the correct word count is essential. Similar to our <button onClick={() => navigateTo('/text-tools/word-counter')} className="text-blue-600 dark:text-blue-400 hover:underline font-medium">advanced word counter</button>, this tool ensures precision for college applications.
+                  </p>
+                </div>
 
-              <p className="mb-6">
-                Our word counter tool provides real-time analysis of your essay, tracking not just word count but also characters, sentences, paragraphs, and estimated reading time. This comprehensive approach helps you understand your essay's structure and pacing. The tool uses the same counting method as the Common Application portal, ensuring accuracy when you submit your final application. Unlike word processors that may count differently, our counter matches the official Common App system exactly.
-              </p>
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl border border-purple-200 dark:border-purple-800">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                    <span className="text-2xl">🎯</span> Real-Time Accuracy
+                  </h3>
+                  <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm">
+                    Our word counter tool provides real-time analysis of your essay, tracking not just word count but also characters, sentences, paragraphs, and estimated reading time. This comprehensive approach helps you understand your essay's structure and pacing. The tool uses the same counting method as the Common Application portal, ensuring accuracy when you submit your final application.
+                  </p>
+                </div>
+              </div>
 
-              <p className="mb-6">
-                For college-bound students, transfer applicants, and international students alike, the Common App essay represents an opportunity to stand out from the crowd. Most competitive colleges and universities in the United States accept the Common Application, making this essay your chance to speak directly to admissions officers across multiple institutions. The 650-word limit challenges you to be concise, focused, and impactful—skills that colleges value highly. Our tool helps you achieve this balance by providing instant feedback on your progress toward the word limit.
-              </p>
+              {/* Statistics Highlight */}
+              <div className="bg-gradient-to-r from-green-50 via-emerald-50 to-teal-50 dark:from-green-900/20 dark:via-emerald-900/20 dark:to-teal-900/20 p-6 rounded-xl border-2 border-green-200 dark:border-green-800 mb-6">
+                <div className="flex items-start gap-4">
+                  <div className="text-4xl">🎓</div>
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Perfect for College Admissions</h3>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm mb-3">
+                      For college-bound students, transfer applicants, and international students alike, the Common App essay represents an opportunity to stand out from the crowd. Most competitive colleges and universities in the United States accept the Common Application, making this essay your chance to speak directly to admissions officers across multiple institutions.
+                    </p>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm">
+                      If you're also preparing for standardized tests, check out our <button onClick={() => navigateTo('/education-and-exam-tools/sat-score-calculator')} className="text-green-600 dark:text-green-400 hover:underline font-medium">SAT Score Calculator</button> and <button onClick={() => navigateTo('/education-and-exam-tools/gpa-calculator')} className="text-green-600 dark:text-green-400 hover:underline font-medium">GPA Calculator</button> to track your complete college application profile.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-              <p className="mb-6">
-                Beyond word counting, understanding essay structure is crucial for college admissions success. The ideal Common App essay typically ranges from 500 to 650 words, allowing enough space to develop your ideas fully while maintaining reader engagement. Essays significantly shorter than 500 words may appear underdeveloped, while those exceeding 650 words will be truncated by the Common App system. Our counter helps you find the sweet spot where your narrative is complete, compelling, and within limits.
-              </p>
+              {/* Best Practices */}
+              <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 p-6 rounded-xl border border-orange-200 dark:border-orange-800">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                  <span className="text-2xl">💡</span> Writing Best Practices
+                </h3>
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm mb-3">
+                  Beyond word counting, understanding essay structure is crucial for college admissions success. The ideal Common App essay typically ranges from 500 to 650 words, allowing enough space to develop your ideas fully while maintaining reader engagement. Essays significantly shorter than 500 words may appear underdeveloped, while those exceeding 650 words will be truncated by the Common App system.
+                </p>
+                <div className="bg-white/60 dark:bg-slate-900/40 p-4 rounded-lg mt-4">
+                  <p className="text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">📌 Pro Tip:</p>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm">
+                    Use our <button onClick={() => navigateTo('/text-tools/remove-extra-spaces')} className="text-orange-600 dark:text-orange-400 hover:underline font-medium">Remove Extra Spaces tool</button> to clean up formatting issues before pasting your essay into the Common App portal. Proper formatting ensures accurate word counting and professional presentation.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
