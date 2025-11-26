@@ -7,19 +7,19 @@
 
   <url>
     <loc>https://zurawebtools.com</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
   </url>
   <url>
     <loc>https://zurawebtools.com/tools</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://zurawebtools.com/blog</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -187,19 +187,49 @@
   </url>
   <url>
     <loc>https://zurawebtools.com/education-and-exam-tools/test-score-tools/apush-score-calculator</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://zurawebtools.com/education-and-exam-tools/test-score-tools/mcat-score-calculator</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://zurawebtools.com/education-and-exam-tools/test-score-tools/gre-score-calculator</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://zurawebtools.com/education-and-exam-tools/test-score-tools/a-level-score-calculator</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://zurawebtools.com/education-and-exam-tools/test-score-tools/ap-calculus-score-calculator</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://zurawebtools.com/education-and-exam-tools/test-score-tools/gmat-score-calculator</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://zurawebtools.com/education-and-exam-tools/test-score-tools/ucat-score-calculator</loc>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -270,26 +300,32 @@
     <priority>0.90</priority>
   </url>
   <url>
+    <loc>https://zurawebtools.com/education-and-exam-tools/admission-tools/personal-statement-character-counter</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://zurawebtools.com/education-and-exam-tools/admission-tools/common-app-essay-word-counter</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://zurawebtools.com/education-and-exam-tools/admission-tools/ucas-points-calculator</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://zurawebtools.com/education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://zurawebtools.com/education-and-exam-tools/admission-tools/college-admissions-calculator</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
