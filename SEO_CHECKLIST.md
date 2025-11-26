@@ -362,20 +362,33 @@ useEffect(() => {
 - [ ] Verify no duplicate entries exist
 - [ ] Run `npx ts-node-esm scripts/generate-sitemap.ts` to auto-generate (recommended)
 
-#### 4. Apache Redirects (if migrating old URL) - `public/.htaccess`
+#### 4. Apache Redirects - `public/.htaccess` ⚠️ **ONLY if old URL exists**
+> **Note:** Naye tools ke liye redirect ki zarurat NAHI hai. Sirf tab add karo jab:
+> - Purana tool URL change ho raha hai
+> - Tool ko migrate kar rahe ho different category mein
+> - URL structure update kar rahe ho
+
+**If old URL exists (URL migration):**
 - [ ] Add 301 redirect for old URL:
   ```apache
   Redirect 301 /old-tool-name https://zurawebtools.com/category/subcategory/tool-name
   ```
+- [ ] Add client-side redirect in `App.tsx` `oldToNewUrlMap`:
+  ```tsx
+  '/old-tool-name': '/category/subcategory/tool-name',
+  ```
 - [ ] Test redirect works (old URL → new URL)
 - [ ] Verify redirect is permanent (301, not 302)
 
+**For brand new tools:** Skip this step entirely ✅
+
 #### 5. Path Consistency Verification
-- [ ] **Confirm all paths match exactly across:**
-  - `data/tools.tsx` - `path` field
-  - `App.tsx` - route match string AND `oldToNewUrlMap` new path
-  - `sitemap.xml` - `<loc>` URL
-  - `public/.htaccess` - redirect target URL (if applicable)
+- [ ] **Confirm all paths match exactly across (minimum 3 files):**
+  - ✅ `data/tools.tsx` - `path` field
+  - ✅ `App.tsx` - route match string
+  - ✅ `sitemap.xml` - `<loc>` URL
+  - ⚠️ `App.tsx` - `oldToNewUrlMap` (only if old URL exists)
+  - ⚠️ `public/.htaccess` - redirect target (only if old URL exists)
 - [ ] **URL Format Requirements:**
   - All lowercase letters
   - Use hyphens (not underscores)
@@ -422,9 +435,10 @@ grep -n "your-tool-path" public/.htaccess
 - ✅ Fix: Add route match in `App.tsx` `renderPage()` function
 - ✅ Verify path matches `tools.tsx` exactly (case-sensitive)
 
-**Issue 3: Old URL not redirecting**
+**Issue 3: Old URL not redirecting** (only for migrated tools)
 - ✅ Fix: Add 301 redirect in `public/.htaccess`
 - ✅ Add client-side redirect in `App.tsx` `oldToNewUrlMap`
+- 💡 Note: Naye tools ke liye redirect ki zarurat nahi
 
 **Issue 4: Tool missing from sitemap**
 - ✅ Fix: Run `npx ts-node-esm scripts/generate-sitemap.ts`
