@@ -1,0 +1,88 @@
+# Hostinger Apache Configuration for React SPA
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # 301 Redirects for Old URLs to New Structure
+  # Text and Writing Tools
+  Redirect 301 /word-counter /text-and-writing-tools/word-counter
+  Redirect 301 /remove-extra-spaces /text-and-writing-tools/remove-extra-spaces
+  Redirect 301 /case-converter /text-and-writing-tools/case-converter
+  Redirect 301 /lorem-ipsum-generator /text-and-writing-tools/lorem-ipsum-generator
+  
+  # Math and Calculation Tools
+  Redirect 301 /time-difference-calculator /math-and-calculation-tools/time-difference-calculator
+  Redirect 301 /percentage-change-calculator /math-and-calculation-tools/percentage-change-calculator
+  Redirect 301 /fabric-costing-tool /math-and-calculation-tools/fabric-costing-tool
+  Redirect 301 /snow-day-calculator /math-and-calculation-tools/snow-day-calculator
+  
+  # Color and Design Tools
+  Redirect 301 /hex-to-rgb-converter /color-and-design-tools/hex-to-rgb-converter
+  Redirect 301 /accessible-color-contrast-checker /color-and-design-tools/accessible-color-contrast-checker
+  Redirect 301 /shadow-css-generator /color-and-design-tools/shadow-css-generator
+  Redirect 301 /color-harmony-checker /color-and-design-tools/color-harmony-checker
+  
+  # Developer Tools
+  Redirect 301 /json-formatter /developer-tools/json-formatter
+  Redirect 301 /code-similarity-checker /developer-tools/code-similarity-checker
+  
+  # Education and Exam Tools
+  Redirect 301 /sat-score-calculator /education-and-exam-tools/test-score-tools/sat-score-calculator
+  Redirect 301 /berkeley-gpa-calculator /education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator
+  Redirect 301 /lsac-gpa-calculator /education-and-exam-tools/gpa-tools/lsac-gpa-calculator
+  Redirect 301 /college-gpa-calculator /education-and-exam-tools/gpa-tools/college-gpa-calculator
+  Redirect 301 /act-score-calculator /education-and-exam-tools/test-score-tools/act-score-calculator
+  Redirect 301 /ielts-band-score-calculator /education-and-exam-tools/test-score-tools/ielts-band-score-calculator
+  Redirect 301 /toefl-score-calculator /education-and-exam-tools/test-score-tools/toefl-score-calculator
+  
+  # Construction and Engineering Tools
+  Redirect 301 /fill-dirt-calculator /construction-and-engineering-tools/fill-dirt-calculator
+  Redirect 301 /quilt-backing-calculator /construction-and-engineering-tools/quilt-backing-calculator
+  Redirect 301 /power-to-mass-ratio-calculator /construction-and-engineering-tools/power-to-mass-ratio-calculator
+  
+  # Audio and Media Tools
+  Redirect 301 /audiobook-speed-calculator /audio-and-media-tools/audiobook-speed-calculator
+  Redirect 301 /reverb-calculator /audio-and-media-tools/reverb-calculator
+  
+  # Don't rewrite files or directories that exist
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  # Rewrite everything else to index.html to allow html5 state links
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "DENY"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Caching for static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Images
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  
+  # CSS and JavaScript
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType application/x-javascript "access plus 1 year"
+  
+  # HTML - no cache
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# Gzip Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>

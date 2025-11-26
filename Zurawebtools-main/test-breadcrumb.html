@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Breadcrumb Schema</title>
+</head>
+<body>
+    <h1>Expected Breadcrumb Schema for /education-and-exam-tools/university-gpa-tools</h1>
+    
+    <pre id="expected-schema"></pre>
+    
+    <script>
+        const expectedSchema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "@id": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://zurawebtools.com"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Education And Exam Tools",
+                    "item": "https://zurawebtools.com/education-and-exam-tools"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "University GPA Tools",
+                    "item": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools"
+                }
+            ]
+        };
+        
+        document.getElementById('expected-schema').textContent = JSON.stringify(expectedSchema, null, 2);
+        
+        console.log('✅ This is what should be in the page HEAD when visiting:');
+        console.log('http://localhost:3000/education-and-exam-tools/university-gpa-tools');
+        console.log('\n📋 Expected Schema:');
+        console.log(JSON.stringify(expectedSchema, null, 2));
+    </script>
+</body>
+</html>

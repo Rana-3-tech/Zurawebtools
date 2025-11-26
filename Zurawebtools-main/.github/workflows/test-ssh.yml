@@ -1,0 +1,39 @@
+name: Test SSH Connection
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Debug secrets
+        run: |
+          echo "Checking if secrets are available..."
+          echo "VPS_HOST length: ${#VPS_HOST}"
+          echo "VPS_USER length: ${#VPS_USER}" 
+          echo "VPS_PRIVATE_KEY length: ${#VPS_PRIVATE_KEY}"
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PRIVATE_KEY: ${{ secrets.VPS_PRIVATE_KEY }}
+          
+      - name: Test SSH connection
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          port: 22
+          timeout: 30s
+          script: |
+            echo "SSH connection successful!"
+            hostname
+            uptime

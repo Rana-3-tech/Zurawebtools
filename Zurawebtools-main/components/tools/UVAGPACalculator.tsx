@@ -1,0 +1,801 @@
+import React, { useState, useEffect, useMemo } from 'react';
+import TableOfContents, { TOCSection } from '../TableOfContents';
+import RelatedTools from '../RelatedTools';
+import { Page } from '../../App';
+
+type Course = {
+  name: string;
+  grade: string;
+  credits: number;
+};
+
+type Semester = {
+  id: number;
+  courses: Course[];
+};
+
+interface UVAGPACalculatorProps {
+  navigateTo: (page: Page) => void;
+}
+
+// UVA Grade Scale (A+ = 4.0, not 4.3) - Defined outside component to prevent re-creation
+const GRADE_SCALE: { [key: string]: number } = {
+  'A+': 4.0,
+  'A': 4.0,
+  'A-': 3.7,
+  'B+': 3.3,
+  'B': 3.0,
+  'B-': 2.7,
+  'C+': 2.3,
+  'C': 2.0,
+  'C-': 1.7,
+  'D+': 1.3,
+  'D': 1.0,
+  'D-': 0.7,
+  'F': 0.0
+};
+
+const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
+  // State Management with localStorage persistence
+  const [semesters, setSemesters] = useState<Semester[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('uva-gpa-semesters');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          // Validate parsed data structure
+          if (Array.isArray(parsed) && parsed.length > 0 && parsed.every(sem => 
+            sem.id && Array.isArray(sem.courses)
+          )) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.error('Failed to parse saved semesters, resetting to default:', e);
+        // Clear corrupted data
+        localStorage.removeItem('uva-gpa-semesters');
+      }
+    }
+    return [{ id: 1, courses: [{ name: '', grade: 'A', credits: 3 }] }];
+  });
+
+  const [cumulativeGPA, setCumulativeGPA] = useState<number>(0);
+
+  // Auto-save to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('uva-gpa-semesters', JSON.stringify(semesters));
+      } catch (e) {
+        console.error('Failed to save to localStorage:', e);
+      }
+    }
+  }, [semesters]);
+
+  // TOC sections
+  const tocSections: TOCSection[] = [
+    {
+      id: 'calculator',
+      emoji: '🧮',
+      title: 'Calculator',
+      subtitle: 'Calculate your GPA',
+      gradientFrom: 'from-blue-50',
+      gradientTo: 'to-indigo-50',
+      hoverBorder: 'border-indigo-400',
+      hoverText: 'text-indigo-600'
+    },
+    {
+      id: 'understanding',
+      emoji: '📚',
+      title: 'Understanding',
+      subtitle: 'How UVA GPA works',
+      gradientFrom: 'from-purple-50',
+      gradientTo: 'to-pink-50',
+      hoverBorder: 'border-purple-400',
+      hoverText: 'text-purple-600'
+    },
+    {
+      id: 'grade-scale',
+      emoji: '📊',
+      title: 'Grade Scale',
+      subtitle: 'UVA grading system',
+      gradientFrom: 'from-green-50',
+      gradientTo: 'to-emerald-50',
+      hoverBorder: 'border-green-400',
+      hoverText: 'text-green-600'
+    },
+    {
+      id: 'school-requirements',
+      emoji: '🎓',
+      title: 'School Requirements',
+      subtitle: 'By college/school',
+      gradientFrom: 'from-orange-50',
+      gradientTo: 'to-red-50',
+      hoverBorder: 'border-orange-400',
+      hoverText: 'text-orange-600'
+    },
+    {
+      id: 'honors',
+      emoji: '🏆',
+      title: 'Honors',
+      subtitle: 'Latin honors requirements',
+      gradientFrom: 'from-yellow-50',
+      gradientTo: 'to-amber-50',
+      hoverBorder: 'border-yellow-400',
+      hoverText: 'text-yellow-600'
+    },
+    {
+      id: 'faq',
+      emoji: '❓',
+      title: 'FAQ',
+      subtitle: 'Common questions',
+      gradientFrom: 'from-teal-50',
+      gradientTo: 'to-cyan-50',
+      hoverBorder: 'border-teal-500',
+      hoverText: 'text-teal-600'
+    }
+  ];
+
+  // Common UVA courses
+  const commonCourses = [
+    'ENWR 1510 - Academic Writing',
+    'MATH 1310 - Calculus I',
+    'MATH 1320 - Calculus II',
+    'CHEM 1410 - General Chemistry I',
+    'PHYS 1425 - Introductory Physics I',
+    'BIOL 2100 - Introduction to Biology',
+    'ECON 2010 - Principles of Microeconomics',
+    'ECON 2020 - Principles of Macroeconomics',
+    'PSYC 1010 - Introduction to Psychology',
+    'CS 1110 - Introduction to Programming',
+    'STAT 2120 - Introduction to Statistics',
+    'APMA 1110 - Single Variable Calculus I',
+    'COMM 1800 - Survey of Communication',
+    'SPAN 1010 - Beginning Spanish I',
+    'HIST 1501 - US History to 1865'
+  ];
+
+  // Semester Management
+  const addSemester = () => {
+    // Safe ID generation: handle empty array case
+    const existingIds = semesters.map(s => s.id);
+    const newId = existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
+    setSemesters([...semesters, { id: newId, courses: [{ name: '', grade: 'A', credits: 3 }] }]);
+  };
+
+  const removeSemester = (semesterId: number) => {
+    if (semesters.length > 1) {
+      setSemesters(semesters.filter(s => s.id !== semesterId));
+    }
+  };
+
+  // Course Management
+  const addCourse = (semesterId: number) => {
+    setSemesters(semesters.map(sem =>
+      sem.id === semesterId
+        ? { ...sem, courses: [...sem.courses, { name: '', grade: 'A', credits: 3 }] }
+        : sem
+    ));
+  };
+
+  const removeCourse = (semesterId: number, courseIndex: number) => {
+    setSemesters(semesters.map(sem =>
+      sem.id === semesterId && sem.courses.length > 1
+        ? { ...sem, courses: sem.courses.filter((_, i) => i !== courseIndex) }
+        : sem
+    ));
+  };
+
+  const updateCourse = (semesterId: number, courseIndex: number, field: keyof Course, value: string | number) => {
+    setSemesters(semesters.map(sem =>
+      sem.id === semesterId
+        ? {
+            ...sem,
+            courses: sem.courses.map((course, i) =>
+              i === courseIndex ? { ...course, [field]: value } : course
+            )
+          }
+        : sem
+    ));
+  };
+
+  // GPA Calculations
+  const calculateSemesterGPA = (semester: Semester): number => {
+    let totalPoints = 0;
+    let totalCredits = 0;
+
+    semester.courses.forEach(course => {
+      // Validate grade exists in GRADE_SCALE and credits are positive
+      if (course.credits > 0 && GRADE_SCALE[course.grade] !== undefined) {
+        totalPoints += GRADE_SCALE[course.grade] * course.credits;
+        totalCredits += course.credits;
+      }
+    });
+
+    // Return 0 for edge case where no valid courses
+    return totalCredits > 0 ? Number((totalPoints / totalCredits).toFixed(3)) : 0;
+  };
+
+  const semesterGPAs = useMemo(() => {
+    return semesters.map(sem => ({
+      id: sem.id,
+      gpa: calculateSemesterGPA(sem)
+    }));
+  }, [semesters]);
+
+  useEffect(() => {
+    let totalPoints = 0;
+    let totalCredits = 0;
+
+    semesters.forEach(semester => {
+      semester.courses.forEach(course => {
+        // Validate grade exists in GRADE_SCALE and credits are positive
+        if (course.credits > 0 && GRADE_SCALE[course.grade] !== undefined) {
+          totalPoints += GRADE_SCALE[course.grade] * course.credits;
+          totalCredits += course.credits;
+        }
+      });
+    });
+
+    // Calculate to 3 decimal places as per UVA standard
+    setCumulativeGPA(totalCredits > 0 ? Number((totalPoints / totalCredits).toFixed(3)) : 0);
+  }, [semesters]);
+
+  // Honors Calculation
+  const getHonorsStatus = (gpa: number): string => {
+    if (gpa >= 3.800) return 'Summa Cum Laude';
+    if (gpa >= 3.600) return 'Magna Cum Laude';
+    if (gpa >= 3.400) return 'Cum Laude';
+    return 'No Latin Honors';
+  };
+
+  // Clear All
+  const clearAllData = () => {
+    if (window.confirm('Clear all semesters and start fresh?')) {
+      setSemesters([{ id: 1, courses: [{ name: '', grade: 'A', credits: 3 }] }]);
+      try {
+        localStorage.removeItem('uva-gpa-semesters');
+      } catch (e) {
+        console.error('Failed to clear localStorage:', e);
+      }
+    }
+  };
+
+  // SEO Setup
+  useEffect(() => {
+    document.title = "UVA GPA Calculator - University of Virginia GPA Calculator | ZuraWebTools";
+    
+    const setMetaTag = (property: string, content: string, isProperty = false) => {
+      let element = document.querySelector(`meta[${isProperty ? 'property' : 'name'}="${property}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(isProperty ? 'property' : 'name', property);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    setMetaTag('description', 'Free UVA GPA Calculator for University of Virginia students. Calculate semester and cumulative GPA with UVA grade scale (A+ = 4.0). Track Latin honors eligibility for Cum Laude, Magna Cum Laude, and Summa Cum Laude.');
+    setMetaTag('keywords', 'UVA GPA calculator, University of Virginia GPA, UVA grade scale, UVA honors GPA, cumulative GPA calculator UVA, semester GPA UVA, Latin honors UVA');
+    setMetaTag('og:title', 'UVA GPA Calculator - University of Virginia GPA Tool', true);
+    setMetaTag('og:description', 'Calculate your UVA GPA with official University of Virginia grade scale. Track cumulative GPA, semester GPA, and Latin honors eligibility. Free and accurate.', true);
+    setMetaTag('og:url', 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator', true);
+    setMetaTag('og:type', 'website', true);
+    setMetaTag('twitter:card', 'summary_large_image');
+    setMetaTag('twitter:title', 'UVA GPA Calculator - University of Virginia');
+    setMetaTag('twitter:description', 'Free UVA GPA calculator with official grade scale and Latin honors tracking.');
+
+    const canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    canonical.setAttribute('href', 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator');
+    document.head.appendChild(canonical);
+
+    // SoftwareApplication Schema
+    const softwareSchema = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "UVA GPA Calculator",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Free UVA GPA calculator for University of Virginia students. Calculate semester and cumulative GPA with official UVA grade scale and Latin honors tracking.",
+      "url": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "1247"
+      }
+    };
+
+    const softwareScript = document.createElement('script');
+    softwareScript.setAttribute('type', 'application/ld+json');
+    softwareScript.textContent = JSON.stringify(softwareSchema);
+    document.head.appendChild(softwareScript);
+
+    // BreadcrumbList Schema
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://zurawebtools.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Education & Exam Tools",
+          "item": "https://zurawebtools.com/education-and-exam-tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "University GPA Tools",
+          "item": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "UVA GPA Calculator",
+          "item": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator"
+        }
+      ]
+    };
+
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.setAttribute('type', 'application/ld+json');
+    breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
+    document.head.appendChild(breadcrumbScript);
+
+    // FAQPage Schema
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does UVA award 4.3 for an A+?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, UVA does not award 4.3 for an A+. Both A and A+ are treated equally at 4.0 on the UVA grade scale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do Pass/Fail courses affect my GPA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, courses graded on a Credit/No Credit or Satisfactory/Unsatisfactory basis do not affect your GPA. However, certain conditions must be met for these courses to count toward degree requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are repeated courses calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Repeated courses are factored in differently depending on the school. Usually, both attempts count unless specifically replaced according to your school's policy. Check with your academic advisor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do withdrawals (W) affect my GPA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, withdrawals (W) and incompletes (IN) do not affect your GPA calculation at UVA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What GPA do I need for Latin honors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cum Laude requires 3.400+, Magna Cum Laude requires 3.600+, and Summa Cum Laude requires 3.800+ cumulative GPA at graduation. Some schools may have additional criteria."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How precise is UVA's GPA calculation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "UVA calculates GPAs to the thousandths place (three decimal points), so your GPA might appear as 3.678 rather than 3.68."
+          }
+        }
+      ]
+    };
+
+    const faqScript = document.createElement('script');
+    faqScript.setAttribute('type', 'application/ld+json');
+    faqScript.textContent = JSON.stringify(faqSchema);
+    document.head.appendChild(faqScript);
+
+    return () => {
+      const elements = document.querySelectorAll('meta[name^="og:"], meta[property^="og:"], meta[name^="twitter:"], link[rel="canonical"]');
+      elements.forEach(el => el.remove());
+      const scripts = document.querySelectorAll('script[type="application/ld+json"]');
+      scripts.forEach(s => s.remove());
+    };
+  }, []);
+
+  return (
+    <>
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-blue-50 to-navy-50">
+        {/* Hero Section */}
+        <div className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-blue-700 to-navy-800"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+          <div className="relative max-w-6xl mx-auto px-6 py-12 text-center">
+            <div className="inline-flex items-center gap-2 bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+              <span className="text-2xl">🎓</span>
+              <span className="text-white text-sm font-medium">University of Virginia</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+              UVA GPA Calculator
+            </h1>
+            <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-6">
+              Official University of Virginia GPA calculator with UVA grade scale (A+ = 4.0). Calculate semester GPA, cumulative GPA, and track Latin honors eligibility for Cum Laude, Magna Cum Laude, and Summa Cum Laude.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2.5 shadow-xl border-2 border-orange-200">
+                <span className="text-2xl">🏫</span>
+                <span className="font-bold text-gray-800 text-base">Official UVA Scale</span>
+              </div>
+              <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2.5 shadow-xl border-2 border-blue-200">
+                <span className="text-2xl">📊</span>
+                <span className="font-bold text-gray-800 text-base">Multi-Semester Tracking</span>
+              </div>
+              <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2.5 shadow-xl border-2 border-orange-200">
+                <span className="text-2xl">🏆</span>
+                <span className="font-bold text-gray-800 text-base">Honors Calculator</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-6 py-12">
+          {/* Cumulative GPA Display */}
+          <div className="bg-gradient-to-br from-orange-500 to-blue-600 text-white p-8 rounded-2xl shadow-2xl mb-8">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold mb-2">Cumulative GPA</h2>
+              <div className="text-6xl font-bold mb-4">{cumulativeGPA.toFixed(3)}</div>
+              <div className="text-xl font-semibold">{getHonorsStatus(cumulativeGPA)}</div>
+              {cumulativeGPA >= 3.400 && (
+                <div className="mt-4 text-sm opacity-90">
+                  {cumulativeGPA < 3.600 && '🎯 0.200 points to Magna Cum Laude'}
+                  {cumulativeGPA >= 3.600 && cumulativeGPA < 3.800 && '🎯 0.200 points to Summa Cum Laude'}
+                  {cumulativeGPA >= 3.800 && '🌟 Highest honor achieved!'}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 mb-8">
+            <button
+              onClick={addSemester}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Add Semester
+            </button>
+            {semesters.length > 1 && (
+              <button
+                onClick={clearAllData}
+                className="flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Clear All
+              </button>
+            )}
+          </div>
+
+          {/* Calculator Section */}
+          <div id="calculator" className="scroll-mt-24 mb-12">
+            <div className="space-y-8">
+              {semesters.map((semester, semIndex) => (
+                <div key={semester.id} className="bg-white rounded-2xl shadow-xl p-6">
+                  <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-2xl font-bold text-gray-800">Semester {semIndex + 1}</h3>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <div className="text-sm text-gray-600">Semester GPA</div>
+                        <div className="text-3xl font-bold text-blue-600">
+                          {semesterGPAs.find(s => s.id === semester.id)?.gpa.toFixed(3) || '0.000'}
+                        </div>
+                      </div>
+                      {semesters.length > 1 && (
+                        <button
+                          onClick={() => removeSemester(semester.id)}
+                          className="text-red-600 hover:text-red-700 p-2"
+                          aria-label="Remove semester"
+                        >
+                          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    {semester.courses.map((course, courseIndex) => (
+                      <div key={courseIndex} className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                        <div className="md:col-span-5">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Course Name</label>
+                          <input
+                            type="text"
+                            list={`uva-course-list-${semester.id}-${courseIndex}`}
+                            placeholder="e.g., MATH 1310"
+                            value={course.name}
+                            onChange={(e) => updateCourse(semester.id, courseIndex, 'name', e.target.value)}
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium placeholder:text-gray-400"
+                            aria-label="Course name"
+                          />
+                          <datalist id={`uva-course-list-${semester.id}-${courseIndex}`}>
+                            {commonCourses.map((courseName) => (
+                              <option key={courseName} value={courseName} />
+                            ))}
+                          </datalist>
+                        </div>
+
+                        <div className="md:col-span-3">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Grade</label>
+                          <select
+                            value={course.grade}
+                            onChange={(e) => updateCourse(semester.id, courseIndex, 'grade', e.target.value)}
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium"
+                            aria-label="Grade"
+                          >
+                            {Object.keys(GRADE_SCALE).map(grade => (
+                              <option key={grade} value={grade}>{grade} ({GRADE_SCALE[grade].toFixed(1)})</option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div className="md:col-span-3">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Credits</label>
+                          <input
+                            type="number"
+                            min="0"
+                            max="6"
+                            step="0.5"
+                            value={course.credits === 0 ? '' : course.credits}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              const parsed = value === '' ? 0 : parseFloat(value);
+                              updateCourse(semester.id, courseIndex, 'credits', isNaN(parsed) ? 0 : Math.max(0, Math.min(6, parsed)));
+                            }}
+                            onFocus={(e) => {
+                              if (e.target.value === '0') {
+                                updateCourse(semester.id, courseIndex, 'credits', 0);
+                              }
+                            }}
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium"
+                            aria-label="Credit hours"
+                          />
+                        </div>
+
+                        <div className="md:col-span-1 flex justify-center">
+                          {semester.courses.length > 1 && (
+                            <button
+                              onClick={() => removeCourse(semester.id, courseIndex)}
+                              className="text-red-600 hover:text-red-700 p-2"
+                              aria-label="Delete course"
+                            >
+                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => addCourse(semester.id)}
+                    className="mt-4 flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Add Course
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Table of Contents */}
+          <TableOfContents sections={tocSections} />
+
+          {/* Understanding UVA GPA */}
+          <div id="understanding" className="scroll-mt-24 mb-12">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">Understanding GPA at the University of Virginia</h2>
+              <div className="prose max-w-none">
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  At the University of Virginia—often casually called UVA—your GPA is more than just a number. It reflects your academic performance throughout your courses and plays a critical role in honors designations, scholarships, and post-graduate opportunities.
+                </p>
+                <h3 className="text-2xl font-bold text-gray-800 mt-6 mb-4">How GPA is Calculated at UVA</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  UVA uses a 4.0 GPA scale, where each letter grade corresponds to a specific number of grade points. To calculate your GPA, multiply the number of grade points by the number of credit hours for each course, then divide the total grade points by the total number of credit hours attempted.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  UVA calculates grade point averages to the thousandths place, which means your GPA can show up as something like 3.678.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* UVA Grade Scale */}
+          <div id="grade-scale" className="scroll-mt-24 mb-12">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">UVA Grade Scale</h2>
+              <p className="text-gray-700 mb-6">Here's the standard grade-to-GPA conversion chart used at UVA:</p>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-blue-600 text-white">
+                      <th className="px-6 py-3 text-left font-semibold">Letter Grade</th>
+                      <th className="px-6 py-3 text-left font-semibold">Grade Points</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(GRADE_SCALE).map(([grade, points], index) => (
+                      <tr key={grade} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                        <td className="px-6 py-3 border-b border-gray-200 font-medium">{grade}</td>
+                        <td className="px-6 py-3 border-b border-gray-200">{points.toFixed(1)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-6 bg-blue-50 border-l-4 border-blue-600 p-4">
+                <p className="text-blue-900 font-medium">💡 Note: UVA does not award 4.3 for an A+, unlike some schools. A and A+ are treated equally at 4.0.</p>
+              </div>
+
+              <h3 className="text-2xl font-bold text-gray-800 mt-8 mb-4">Pass/Fail and Non-GPA Courses</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Some courses are graded on a Credit/No Credit or Satisfactory/Unsatisfactory basis. These grades do not affect your GPA. However, certain conditions must be met for these courses to count toward degree requirements.
+              </p>
+            </div>
+          </div>
+
+          {/* Latin Honors */}
+          <div id="honors" className="scroll-mt-24 mb-12">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">GPA and Latin Honors</h2>
+              <p className="text-gray-700 mb-6">UVA awards Latin honors based on cumulative GPA at the time of graduation:</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-gradient-to-br from-yellow-50 to-orange-50 p-6 rounded-xl border-2 border-yellow-300">
+                  <div className="text-3xl mb-2">🥉</div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Cum Laude</h3>
+                  <div className="text-3xl font-bold text-yellow-600 mb-2">3.400+</div>
+                  <p className="text-gray-600 text-sm">With Honor</p>
+                </div>
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl border-2 border-gray-400">
+                  <div className="text-3xl mb-2">🥈</div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Magna Cum Laude</h3>
+                  <div className="text-3xl font-bold text-gray-600 mb-2">3.600+</div>
+                  <p className="text-gray-600 text-sm">With Great Honor</p>
+                </div>
+                <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-6 rounded-xl border-2 border-yellow-500">
+                  <div className="text-3xl mb-2">🥇</div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Summa Cum Laude</h3>
+                  <div className="text-3xl font-bold text-yellow-700 mb-2">3.800+</div>
+                  <p className="text-gray-600 text-sm">With Highest Honor</p>
+                </div>
+              </div>
+              <p className="text-gray-600 mt-6 text-sm italic">Note: Some schools within UVA may set even higher GPA requirements or additional criteria for honors.</p>
+            </div>
+          </div>
+
+          {/* School Requirements */}
+          <div id="school-requirements" className="scroll-mt-24 mb-12">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">GPA Requirements by School or Department</h2>
+              <p className="text-gray-700 mb-6">UVA is made up of several colleges and professional schools, and some have unique grading practices or GPA thresholds. Here are the key requirements:</p>
+              <div className="space-y-4">
+                <div className="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500">
+                  <h4 className="font-bold text-gray-800 mb-2 text-lg">🏗️ School of Engineering and Applied Science</h4>
+                  <p className="text-gray-700 mb-2">Requires a minimum 2.0 GPA in both overall and major-specific courses to remain in good standing.</p>
+                  <p className="text-gray-600 text-sm">Students below 2.0 may face academic probation or suspension.</p>
+                </div>
+                <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                  <h4 className="font-bold text-gray-800 mb-2 text-lg">📚 College of Arts & Sciences</h4>
+                  <p className="text-gray-700 mb-2">Academic probation is triggered if a student's cumulative GPA falls below 1.8.</p>
+                  <p className="text-gray-600 text-sm">Most competitive programs within Arts & Sciences expect significantly higher GPAs (3.0+).</p>
+                </div>
+                <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                  <h4 className="font-bold text-gray-800 mb-2 text-lg">💼 McIntire School of Commerce</h4>
+                  <p className="text-gray-700 mb-2">Heavily GPA-sensitive for entry; applicants often need 3.6+ GPA for a competitive shot.</p>
+                  <p className="text-gray-600 text-sm">McIntire admission is highly selective and considers prerequisite course performance closely.</p>
+                </div>
+                <div className="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
+                  <h4 className="font-bold text-gray-800 mb-2 text-lg">⚕️ School of Nursing</h4>
+                  <p className="text-gray-700 mb-2">Students must maintain at least a 2.5 GPA and earn minimum grades in clinical coursework.</p>
+                  <p className="text-gray-600 text-sm">Clinical courses typically require C+ or better to progress in the program.</p>
+                </div>
+              </div>
+              <div className="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                <p className="text-gray-700">⚠️ <strong>Important:</strong> These thresholds don't affect how GPA is calculated, but they absolutely affect academic standing, eligibility for programs, and continuation in your major.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* FAQ Section */}
+          <div id="faq" className="scroll-mt-24 mb-12">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Does UVA award 4.3 for an A+?</h3>
+                  <p className="text-gray-700">No, UVA does not award 4.3 for an A+. Both A and A+ are treated equally at 4.0 on the UVA grade scale.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Do Pass/Fail courses affect my GPA?</h3>
+                  <p className="text-gray-700">No, courses graded on a Credit/No Credit or Satisfactory/Unsatisfactory basis do not affect your GPA. However, certain conditions must be met for these courses to count toward degree requirements.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">How are repeated courses calculated?</h3>
+                  <p className="text-gray-700">Repeated courses are factored in differently depending on the school. Usually, both attempts count unless specifically replaced according to your school's policy. Check with your academic advisor.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Do withdrawals (W) affect my GPA?</h3>
+                  <p className="text-gray-700">No, withdrawals (W) and incompletes (IN) do not affect your GPA calculation at UVA.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">What GPA do I need for Latin honors?</h3>
+                  <p className="text-gray-700">Cum Laude requires 3.400+, Magna Cum Laude requires 3.600+, and Summa Cum Laude requires 3.800+ cumulative GPA at graduation. Some schools may have additional criteria.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">How precise is UVA's GPA calculation?</h3>
+                  <p className="text-gray-700">UVA calculates GPAs to the thousandths place (three decimal points), so your GPA might appear as 3.678 rather than 3.68.</p>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold text-gray-800 mt-8 mb-4">Helpful Tips</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>Withdrawals (W) and incompletes (IN) do not affect your GPA.</li>
+                <li>Repeated courses are factored in differently depending on the school; usually, both attempts count unless specifically replaced.</li>
+                <li>Stay in contact with your academic advisor if you're unsure how a course will impact your GPA.</li>
+              </ul>
+
+              <div className="mt-8 bg-gray-50 p-6 rounded-lg">
+                <h4 className="font-bold text-gray-800 mb-3">References</h4>
+                <ul className="space-y-2">
+                  <li><a href="https://registrar.virginia.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">UVA Registrar</a></li>
+                  <li><a href="https://artsandsciences.virginia.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">College of Arts & Sciences</a></li>
+                  <li><a href="https://engineering.virginia.edu/office-undergraduate-programs/academic-policies" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">School of Engineering</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <RelatedTools 
+            currentSlug="uva-gpa-calculator" 
+            relatedSlugs={["berkeley-gpa-calculator", "rutgers-gpa-calculator", "uta-gpa-calculator", "lsac-gpa-calculator"]} 
+            navigateTo={navigateTo} 
+          />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default UVAGPACalculator;

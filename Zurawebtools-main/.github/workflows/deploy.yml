@@ -1,0 +1,40 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build project
+      run: npm run build
+    
+    - name: Setup SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.VPS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+    
+    - name: Deploy via rsync
+      run: |
+        rsync -avz --delete --timeout=60 ./dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/Zurawebtools/dist/
+        echo "✅ Deployment completed successfully!"
+        echo "🌐 Website is live at: http://${{ secrets.VPS_HOST }}"
+      timeout-minutes: 10
