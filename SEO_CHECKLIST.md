@@ -325,6 +325,151 @@ useEffect(() => {
 
 ---
 
+## 🆕 NEW TOOL ADDITION CHECKLIST
+
+### Critical: Before Tool Goes Live
+
+#### 1. Tool Registration in `data/tools.tsx`
+- [ ] Add tool to appropriate category in `toolCategories` array
+- [ ] Include all required fields:
+  - [ ] `name` - Tool display name
+  - [ ] `icon` - SVG icon component with gradient
+  - [ ] `path` - Full URL path (e.g., `/category/subcategory/tool-name`)
+  - [ ] `description` - Brief description (50-100 chars)
+  - [ ] `gradientColors` - Color scheme `{ from, to }`
+
+#### 2. Routing Setup in `App.tsx`
+- [ ] Import tool component (lazy load): `const YourTool = lazy(() => import('./components/tools/YourTool'));`
+- [ ] Add route match in `renderPage()` function:
+  ```tsx
+  if (path === 'category/subcategory/tool-name') {
+    return <YourTool navigateTo={navigateTo} />;
+  }
+  ```
+- [ ] If old URL exists, add redirect in `oldToNewUrlMap` object:
+  ```tsx
+  '/old-tool-name': '/category/subcategory/tool-name',
+  ```
+- [ ] Verify path matches exactly with `tools.tsx` registration
+
+#### 3. Sitemap Update (`sitemap.xml`)
+- [ ] Add new `<url>` entry with:
+  - [ ] `<loc>https://zurawebtools.com/full/path</loc>` - Exact URL matching routing
+  - [ ] `<lastmod>YYYY-MM-DD</lastmod>` - Current date in ISO format
+  - [ ] `<changefreq>monthly</changefreq>` - Update frequency
+  - [ ] `<priority>0.90</priority>` - Priority (0.90 for tools)
+- [ ] Place in correct category section (keep grouped by category)
+- [ ] Verify no duplicate entries exist
+- [ ] Run `npx ts-node-esm scripts/generate-sitemap.ts` to auto-generate (recommended)
+
+#### 4. Apache Redirects (if migrating old URL) - `public/.htaccess`
+- [ ] Add 301 redirect for old URL:
+  ```apache
+  Redirect 301 /old-tool-name https://zurawebtools.com/category/subcategory/tool-name
+  ```
+- [ ] Test redirect works (old URL → new URL)
+- [ ] Verify redirect is permanent (301, not 302)
+
+#### 5. Path Consistency Verification
+- [ ] **Confirm all paths match exactly across:**
+  - `data/tools.tsx` - `path` field
+  - `App.tsx` - route match string AND `oldToNewUrlMap` new path
+  - `sitemap.xml` - `<loc>` URL
+  - `public/.htaccess` - redirect target URL (if applicable)
+- [ ] **URL Format Requirements:**
+  - All lowercase letters
+  - Use hyphens (not underscores)
+  - No trailing slashes
+  - Format: `/category/tool-name` OR `/category/subcategory/tool-name`
+
+#### 6. Related Tools Configuration
+- [ ] Add `RelatedTools` component at bottom of tool page:
+  ```tsx
+  <RelatedTools currentToolPath="/category/subcategory/tool-name" navigateTo={navigateTo} />
+  ```
+- [ ] Verify `currentToolPath` matches routing path exactly
+
+#### 7. Navigation Testing
+- [ ] Test clicking tool card from category page → tool loads
+- [ ] Test direct URL navigation (paste in browser)
+- [ ] Test breadcrumb navigation (if implemented)
+- [ ] Test "Related Tools" links at bottom
+- [ ] Test old URL redirect (if applicable)
+- [ ] Test on mobile responsive view
+
+### URL Path Audit Command
+**Run this after adding any new tool:**
+```bash
+# Check tool is in tools.tsx
+grep -n "path: '/your-tool-path'" data/tools.tsx
+
+# Check route exists in App.tsx
+grep -n "your-tool-path" App.tsx
+
+# Check sitemap entry
+grep -n "your-tool-path" sitemap.xml
+
+# Check .htaccess (if old URL)
+grep -n "your-tool-path" public/.htaccess
+```
+
+### Common Issues & Fixes
+
+**Issue 1: Tool not appearing in navigation**
+- ✅ Fix: Add tool to `toolCategories` in `data/tools.tsx`
+
+**Issue 2: 404 error when clicking tool**
+- ✅ Fix: Add route match in `App.tsx` `renderPage()` function
+- ✅ Verify path matches `tools.tsx` exactly (case-sensitive)
+
+**Issue 3: Old URL not redirecting**
+- ✅ Fix: Add 301 redirect in `public/.htaccess`
+- ✅ Add client-side redirect in `App.tsx` `oldToNewUrlMap`
+
+**Issue 4: Tool missing from sitemap**
+- ✅ Fix: Run `npx ts-node-esm scripts/generate-sitemap.ts`
+- ✅ Or manually add `<url>` entry in correct category section
+
+**Issue 5: Related tools not showing**
+- ✅ Fix: Verify `currentToolPath` prop matches routing path
+- ✅ Check tool is registered in `tools.tsx`
+
+**Issue 6: Inconsistent URLs across site**
+- ✅ Fix: Run full audit comparing `tools.tsx`, `App.tsx`, `sitemap.xml`, `.htaccess`
+- ✅ Update all files to use same canonical path
+
+### Pre-Deployment Verification
+Before pushing to GitHub/production:
+
+```bash
+# 1. Check for duplicate sitemap entries
+cat sitemap.xml | grep '<loc>' | sort | uniq -d
+
+# 2. Verify tool count (should match tools.tsx count)
+grep -c '<loc>.*tools.*</loc>' sitemap.xml
+
+# 3. Check all oldToNewUrlMap redirects point to valid paths
+# (Manual check in App.tsx - ensure all new paths exist in tools.tsx)
+
+# 4. Test local build
+npm run build
+npm run preview
+```
+
+### Deployment Steps
+1. ✅ Commit all changes (tools.tsx, App.tsx, sitemap.xml, .htaccess)
+2. ✅ Push to GitHub
+3. ✅ Wait for deployment (Hostinger auto-deploy or manual)
+4. ✅ Test live site:
+   - New tool URL works
+   - Old URL redirects (if applicable)
+   - Sitemap accessible at `/sitemap.xml`
+   - Tool appears in category listing
+5. ✅ Submit sitemap to Google Search Console
+6. ✅ Monitor for 404 errors in next 24 hours
+
+---
+
 ## 🚀 Pro Tips
 
 1. **Content First**: Write quality content before worrying about technical SEO
@@ -335,6 +480,8 @@ useEffect(() => {
 6. **Monitor Competitors**: Check what top-ranking pages are doing
 7. **Test Everything**: Use Google's testing tools before launch
 8. **Be Patient**: SEO takes 3-6 months to show significant results
+9. **URL Consistency**: Always verify paths match across all 4 files (tools.tsx, App.tsx, sitemap.xml, .htaccess)
+10. **Auto-Generate Sitemap**: Use `generate-sitemap.ts` script to avoid manual errors
 
 ---
 
