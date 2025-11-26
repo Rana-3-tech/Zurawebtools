@@ -7,43 +7,109 @@
   # 301 Redirects for Old URLs to New Structure
   # Text and Writing Tools
   Redirect 301 /word-counter /text-and-writing-tools/word-counter
+  Redirect 301 /tools/word-counter /text-and-writing-tools/word-counter
   Redirect 301 /remove-extra-spaces /text-and-writing-tools/remove-extra-spaces
+  Redirect 301 /tools/remove-extra-spaces /text-and-writing-tools/remove-extra-spaces
   Redirect 301 /case-converter /text-and-writing-tools/case-converter
+  Redirect 301 /tools/case-converter /text-and-writing-tools/case-converter
   Redirect 301 /lorem-ipsum-generator /text-and-writing-tools/lorem-ipsum-generator
+  Redirect 301 /tools/lorem-ipsum-generator /text-and-writing-tools/lorem-ipsum-generator
   
   # Math and Calculation Tools
   Redirect 301 /time-difference-calculator /math-and-calculation-tools/time-difference-calculator
+  Redirect 301 /tools/time-difference-calculator /math-and-calculation-tools/time-difference-calculator
   Redirect 301 /percentage-change-calculator /math-and-calculation-tools/percentage-change-calculator
+  Redirect 301 /tools/percentage-change-calculator /math-and-calculation-tools/percentage-change-calculator
   Redirect 301 /fabric-costing-tool /math-and-calculation-tools/fabric-costing-tool
+  Redirect 301 /tools/fabric-costing-tool /math-and-calculation-tools/fabric-costing-tool
   Redirect 301 /snow-day-calculator /math-and-calculation-tools/snow-day-calculator
+  Redirect 301 /tools/snow-day-calculator /math-and-calculation-tools/snow-day-calculator
   
   # Color and Design Tools
   Redirect 301 /hex-to-rgb-converter /color-and-design-tools/hex-to-rgb-converter
+  Redirect 301 /tools/hex-to-rgb-converter /color-and-design-tools/hex-to-rgb-converter
   Redirect 301 /accessible-color-contrast-checker /color-and-design-tools/accessible-color-contrast-checker
+  Redirect 301 /tools/accessible-color-contrast-checker /color-and-design-tools/accessible-color-contrast-checker
   Redirect 301 /shadow-css-generator /color-and-design-tools/shadow-css-generator
+  Redirect 301 /tools/shadow-css-generator /color-and-design-tools/shadow-css-generator
   Redirect 301 /color-harmony-checker /color-and-design-tools/color-harmony-checker
+  Redirect 301 /tools/color-harmony-checker /color-and-design-tools/color-harmony-checker
   
   # Developer Tools
   Redirect 301 /json-formatter /developer-tools/json-formatter
+  Redirect 301 /tools/json-formatter /developer-tools/json-formatter
   Redirect 301 /code-similarity-checker /developer-tools/code-similarity-checker
+  Redirect 301 /tools/code-similarity-checker /developer-tools/code-similarity-checker
   
-  # Education and Exam Tools
+  # Education and Exam Tools - Test Scores
   Redirect 301 /sat-score-calculator /education-and-exam-tools/test-score-tools/sat-score-calculator
-  Redirect 301 /berkeley-gpa-calculator /education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator
-  Redirect 301 /lsac-gpa-calculator /education-and-exam-tools/gpa-tools/lsac-gpa-calculator
-  Redirect 301 /college-gpa-calculator /education-and-exam-tools/gpa-tools/college-gpa-calculator
+  Redirect 301 /tools/sat-score-calculator /education-and-exam-tools/test-score-tools/sat-score-calculator
   Redirect 301 /act-score-calculator /education-and-exam-tools/test-score-tools/act-score-calculator
+  Redirect 301 /tools/act-score-calculator /education-and-exam-tools/test-score-tools/act-score-calculator
+  Redirect 301 /lsat-score-calculator /education-and-exam-tools/test-score-tools/lsat-score-calculator
+  Redirect 301 /tools/lsat-score-calculator /education-and-exam-tools/test-score-tools/lsat-score-calculator
+  Redirect 301 /mcat-score-calculator /education-and-exam-tools/test-score-tools/mcat-score-calculator
+  Redirect 301 /tools/mcat-score-calculator /education-and-exam-tools/test-score-tools/mcat-score-calculator
+  Redirect 301 /apush-score-calculator /education-and-exam-tools/test-score-tools/apush-score-calculator
+  Redirect 301 /tools/apush-score-calculator /education-and-exam-tools/test-score-tools/apush-score-calculator
+  Redirect 301 /gmat-score-calculator /education-and-exam-tools/test-score-tools/gmat-score-calculator
+  Redirect 301 /tools/gmat-score-calculator /education-and-exam-tools/test-score-tools/gmat-score-calculator
+  Redirect 301 /ucat-score-calculator /education-and-exam-tools/test-score-tools/ucat-score-calculator
+  Redirect 301 /tools/ucat-score-calculator /education-and-exam-tools/test-score-tools/ucat-score-calculator
+  Redirect 301 /gre-score-calculator /education-and-exam-tools/test-score-tools/gre-score-calculator
+  Redirect 301 /tools/gre-score-calculator /education-and-exam-tools/test-score-tools/gre-score-calculator
+  Redirect 301 /a-level-score-calculator /education-and-exam-tools/test-score-tools/a-level-score-calculator
+  Redirect 301 /tools/a-level-score-calculator /education-and-exam-tools/test-score-tools/a-level-score-calculator
+  Redirect 301 /ap-calculus-score-calculator /education-and-exam-tools/test-score-tools/ap-calculus-score-calculator
+  Redirect 301 /tools/ap-calculus-score-calculator /education-and-exam-tools/test-score-tools/ap-calculus-score-calculator
   Redirect 301 /ielts-band-score-calculator /education-and-exam-tools/test-score-tools/ielts-band-score-calculator
+  Redirect 301 /tools/ielts-band-score-calculator /education-and-exam-tools/test-score-tools/ielts-band-score-calculator
   Redirect 301 /toefl-score-calculator /education-and-exam-tools/test-score-tools/toefl-score-calculator
+  Redirect 301 /tools/toefl-score-calculator /education-and-exam-tools/test-score-tools/toefl-score-calculator
+  
+  # Education and Exam Tools - University GPA
+  Redirect 301 /berkeley-gpa-calculator /education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator
+  Redirect 301 /tools/berkeley-gpa-calculator /education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator
+  Redirect 301 /rutgers-gpa-calculator /education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator
+  Redirect 301 /tools/rutgers-gpa-calculator /education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator
+  Redirect 301 /uta-gpa-calculator /education-and-exam-tools/university-gpa-tools/uta-gpa-calculator
+  Redirect 301 /tools/uta-gpa-calculator /education-and-exam-tools/university-gpa-tools/uta-gpa-calculator
+  Redirect 301 /uva-gpa-calculator /education-and-exam-tools/university-gpa-tools/uva-gpa-calculator
+  Redirect 301 /tools/uva-gpa-calculator /education-and-exam-tools/university-gpa-tools/uva-gpa-calculator
+  
+  # Education and Exam Tools - GPA Tools
+  Redirect 301 /lsac-gpa-calculator /education-and-exam-tools/gpa-tools/lsac-gpa-calculator
+  Redirect 301 /tools/lsac-gpa-calculator /education-and-exam-tools/gpa-tools/lsac-gpa-calculator
+  Redirect 301 /college-gpa-calculator /education-and-exam-tools/gpa-tools/college-gpa-calculator
+  Redirect 301 /tools/college-gpa-calculator /education-and-exam-tools/gpa-tools/college-gpa-calculator
+  Redirect 301 /csu-gpa-calculator /education-and-exam-tools/gpa-tools/csu-gpa-calculator
+  Redirect 301 /tools/csu-gpa-calculator /education-and-exam-tools/gpa-tools/csu-gpa-calculator
+  
+  # Education and Exam Tools - Admission Tools
+  Redirect 301 /personal-statement-character-counter /education-and-exam-tools/admission-tools/personal-statement-character-counter
+  Redirect 301 /tools/personal-statement-character-counter /education-and-exam-tools/admission-tools/personal-statement-character-counter
+  Redirect 301 /common-app-essay-word-counter /education-and-exam-tools/admission-tools/common-app-essay-word-counter
+  Redirect 301 /tools/common-app-essay-word-counter /education-and-exam-tools/admission-tools/common-app-essay-word-counter
+  Redirect 301 /ucas-points-calculator /education-and-exam-tools/admission-tools/ucas-points-calculator
+  Redirect 301 /tools/ucas-points-calculator /education-and-exam-tools/admission-tools/ucas-points-calculator
+  Redirect 301 /student-visa-fee-calculator-australia /education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia
+  Redirect 301 /tools/student-visa-fee-calculator-australia /education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia
+  Redirect 301 /college-admissions-calculator /education-and-exam-tools/admission-tools/college-admissions-calculator
+  Redirect 301 /tools/college-admissions-calculator /education-and-exam-tools/admission-tools/college-admissions-calculator
   
   # Construction and Engineering Tools
   Redirect 301 /fill-dirt-calculator /construction-and-engineering-tools/fill-dirt-calculator
+  Redirect 301 /tools/fill-dirt-calculator /construction-and-engineering-tools/fill-dirt-calculator
   Redirect 301 /quilt-backing-calculator /construction-and-engineering-tools/quilt-backing-calculator
+  Redirect 301 /tools/quilt-backing-calculator /construction-and-engineering-tools/quilt-backing-calculator
   Redirect 301 /power-to-mass-ratio-calculator /construction-and-engineering-tools/power-to-mass-ratio-calculator
+  Redirect 301 /tools/power-to-mass-ratio-calculator /construction-and-engineering-tools/power-to-mass-ratio-calculator
   
   # Audio and Media Tools
   Redirect 301 /audiobook-speed-calculator /audio-and-media-tools/audiobook-speed-calculator
+  Redirect 301 /tools/audiobook-speed-calculator /audio-and-media-tools/audiobook-speed-calculator
   Redirect 301 /reverb-calculator /audio-and-media-tools/reverb-calculator
+  Redirect 301 /tools/reverb-calculator /audio-and-media-tools/reverb-calculator
   
   # Don't rewrite files or directories that exist
   RewriteCond %{REQUEST_FILENAME} !-f

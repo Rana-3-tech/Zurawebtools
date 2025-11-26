@@ -144,36 +144,113 @@ const App: React.FC = () => {
     const renderPage = () => {
         const path = currentPath === '/' ? 'home' : currentPath.substring(1);
 
-        // OLD URL REDIRECT LOGIC - Redirect old flat URLs to new category-based structure
+        // OLD URL REDIRECT LOGIC - Redirect old flat URLs and /tools/ prefix to new category-based structure
         const oldToNewUrlMap: { [key: string]: string } = {
+            // Text and Writing Tools
             'word-counter': '/text-and-writing-tools/word-counter',
+            'tools/word-counter': '/text-and-writing-tools/word-counter',
             'remove-extra-spaces': '/text-and-writing-tools/remove-extra-spaces',
+            'tools/remove-extra-spaces': '/text-and-writing-tools/remove-extra-spaces',
             'case-converter': '/text-and-writing-tools/case-converter',
+            'tools/case-converter': '/text-and-writing-tools/case-converter',
             'lorem-ipsum-generator': '/text-and-writing-tools/lorem-ipsum-generator',
+            'tools/lorem-ipsum-generator': '/text-and-writing-tools/lorem-ipsum-generator',
+            
+            // Math and Calculation Tools
             'time-difference-calculator': '/math-and-calculation-tools/time-difference-calculator',
+            'tools/time-difference-calculator': '/math-and-calculation-tools/time-difference-calculator',
             'percentage-change-calculator': '/math-and-calculation-tools/percentage-change-calculator',
+            'tools/percentage-change-calculator': '/math-and-calculation-tools/percentage-change-calculator',
             'fabric-costing-tool': '/math-and-calculation-tools/fabric-costing-tool',
+            'tools/fabric-costing-tool': '/math-and-calculation-tools/fabric-costing-tool',
             'snow-day-calculator': '/math-and-calculation-tools/snow-day-calculator',
+            'tools/snow-day-calculator': '/math-and-calculation-tools/snow-day-calculator',
+            
+            // Color and Design Tools
             'hex-to-rgb-converter': '/color-and-design-tools/hex-to-rgb-converter',
+            'tools/hex-to-rgb-converter': '/color-and-design-tools/hex-to-rgb-converter',
             'accessible-color-contrast-checker': '/color-and-design-tools/accessible-color-contrast-checker',
+            'tools/accessible-color-contrast-checker': '/color-and-design-tools/accessible-color-contrast-checker',
             'shadow-css-generator': '/color-and-design-tools/shadow-css-generator',
+            'tools/shadow-css-generator': '/color-and-design-tools/shadow-css-generator',
             'color-harmony-checker': '/color-and-design-tools/color-harmony-checker',
+            'tools/color-harmony-checker': '/color-and-design-tools/color-harmony-checker',
+            
+            // Developer Tools
             'json-formatter': '/developer-tools/json-formatter',
+            'tools/json-formatter': '/developer-tools/json-formatter',
             'code-similarity-checker': '/developer-tools/code-similarity-checker',
-            'sat-score-calculator': '/education-and-exam-tools/sat-score-calculator',
+            'tools/code-similarity-checker': '/developer-tools/code-similarity-checker',
+            
+            // Education - Test Score Tools
+            'sat-score-calculator': '/education-and-exam-tools/test-score-tools/sat-score-calculator',
+            'tools/sat-score-calculator': '/education-and-exam-tools/test-score-tools/sat-score-calculator',
             'act-score-calculator': '/education-and-exam-tools/test-score-tools/act-score-calculator',
+            'tools/act-score-calculator': '/education-and-exam-tools/test-score-tools/act-score-calculator',
+            'lsat-score-calculator': '/education-and-exam-tools/test-score-tools/lsat-score-calculator',
+            'tools/lsat-score-calculator': '/education-and-exam-tools/test-score-tools/lsat-score-calculator',
+            'mcat-score-calculator': '/education-and-exam-tools/test-score-tools/mcat-score-calculator',
+            'tools/mcat-score-calculator': '/education-and-exam-tools/test-score-tools/mcat-score-calculator',
+            'apush-score-calculator': '/education-and-exam-tools/test-score-tools/apush-score-calculator',
+            'tools/apush-score-calculator': '/education-and-exam-tools/test-score-tools/apush-score-calculator',
+            'gmat-score-calculator': '/education-and-exam-tools/test-score-tools/gmat-score-calculator',
+            'tools/gmat-score-calculator': '/education-and-exam-tools/test-score-tools/gmat-score-calculator',
+            'ucat-score-calculator': '/education-and-exam-tools/test-score-tools/ucat-score-calculator',
+            'tools/ucat-score-calculator': '/education-and-exam-tools/test-score-tools/ucat-score-calculator',
+            'gre-score-calculator': '/education-and-exam-tools/test-score-tools/gre-score-calculator',
+            'tools/gre-score-calculator': '/education-and-exam-tools/test-score-tools/gre-score-calculator',
+            'a-level-score-calculator': '/education-and-exam-tools/test-score-tools/a-level-score-calculator',
+            'tools/a-level-score-calculator': '/education-and-exam-tools/test-score-tools/a-level-score-calculator',
+            'ap-calculus-score-calculator': '/education-and-exam-tools/test-score-tools/ap-calculus-score-calculator',
+            'tools/ap-calculus-score-calculator': '/education-and-exam-tools/test-score-tools/ap-calculus-score-calculator',
+            'ielts-band-score-calculator': '/education-and-exam-tools/test-score-tools/ielts-band-score-calculator',
+            'tools/ielts-band-score-calculator': '/education-and-exam-tools/test-score-tools/ielts-band-score-calculator',
+            'toefl-score-calculator': '/education-and-exam-tools/test-score-tools/toefl-score-calculator',
+            'tools/toefl-score-calculator': '/education-and-exam-tools/test-score-tools/toefl-score-calculator',
+            
+            // Education - University GPA Tools
             'berkeley-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
+            'tools/berkeley-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
             'rutgers-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator',
+            'tools/rutgers-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator',
             'uta-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator',
+            'tools/uta-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator',
             'uva-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator',
+            'tools/uva-gpa-calculator': '/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator',
+            
+            // Education - GPA Tools
             'lsac-gpa-calculator': '/education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
+            'tools/lsac-gpa-calculator': '/education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
             'college-gpa-calculator': '/education-and-exam-tools/gpa-tools/college-gpa-calculator',
+            'tools/college-gpa-calculator': '/education-and-exam-tools/gpa-tools/college-gpa-calculator',
             'csu-gpa-calculator': '/education-and-exam-tools/gpa-tools/csu-gpa-calculator',
+            'tools/csu-gpa-calculator': '/education-and-exam-tools/gpa-tools/csu-gpa-calculator',
+            
+            // Education - Admission Tools
+            'personal-statement-character-counter': '/education-and-exam-tools/admission-tools/personal-statement-character-counter',
+            'tools/personal-statement-character-counter': '/education-and-exam-tools/admission-tools/personal-statement-character-counter',
+            'common-app-essay-word-counter': '/education-and-exam-tools/admission-tools/common-app-essay-word-counter',
+            'tools/common-app-essay-word-counter': '/education-and-exam-tools/admission-tools/common-app-essay-word-counter',
+            'ucas-points-calculator': '/education-and-exam-tools/admission-tools/ucas-points-calculator',
+            'tools/ucas-points-calculator': '/education-and-exam-tools/admission-tools/ucas-points-calculator',
+            'student-visa-fee-calculator-australia': '/education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia',
+            'tools/student-visa-fee-calculator-australia': '/education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia',
+            'college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
+            'tools/college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
+            
+            // Construction and Engineering Tools
             'fill-dirt-calculator': '/construction-and-engineering-tools/fill-dirt-calculator',
+            'tools/fill-dirt-calculator': '/construction-and-engineering-tools/fill-dirt-calculator',
             'quilt-backing-calculator': '/construction-and-engineering-tools/quilt-backing-calculator',
+            'tools/quilt-backing-calculator': '/construction-and-engineering-tools/quilt-backing-calculator',
             'power-to-mass-ratio-calculator': '/construction-and-engineering-tools/power-to-mass-ratio-calculator',
+            'tools/power-to-mass-ratio-calculator': '/construction-and-engineering-tools/power-to-mass-ratio-calculator',
+            
+            // Audio and Media Tools
             'audiobook-speed-calculator': '/audio-and-media-tools/audiobook-speed-calculator',
+            'tools/audiobook-speed-calculator': '/audio-and-media-tools/audiobook-speed-calculator',
             'reverb-calculator': '/audio-and-media-tools/reverb-calculator',
+            'tools/reverb-calculator': '/audio-and-media-tools/reverb-calculator',
         };
 
         // Check if this is an old flat URL and redirect
