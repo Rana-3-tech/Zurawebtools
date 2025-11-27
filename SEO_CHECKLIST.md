@@ -362,25 +362,40 @@ useEffect(() => {
 - [ ] Verify no duplicate entries exist
 - [ ] Run `npx ts-node-esm scripts/generate-sitemap.ts` to auto-generate (recommended)
 
-#### 4. Apache Redirects - `public/.htaccess` ⚠️ **ONLY if old URL exists**
-> **Note:** Naye tools ke liye redirect ki zarurat NAHI hai. Sirf tab add karo jab:
-> - Purana tool URL change ho raha hai
-> - Tool ko migrate kar rahe ho different category mein
-> - URL structure update kar rahe ho
+#### 4. URL Redirect Policy ⚠️ **CRITICAL: Read Before Adding ANY Redirects**
 
-**If old URL exists (URL migration):**
-- [ ] Add 301 redirect for old URL:
+> **🚨 IMPORTANT RULE: Naye tools ke liye redirect KABHI add nahi karna!**
+> 
+> **Redirects ONLY for these specific cases:**
+> 1. ✅ Purana tool ka URL change ho raha hai (URL migration)
+> 2. ✅ Tool ko migrate kar rahe ho different category mein
+> 3. ✅ Company-wide URL restructuring (rare)
+> 4. ✅ Fixing broken links from external sites
+> 
+> **❌ NEVER add redirects for:**
+> - Brand new tools being added for the first time
+> - Flat URLs (`/tool-name`) - Use full categorized paths instead
+> - "Just in case" redirects - Only add when proven need exists
+> - Convenience redirects - Stick to one canonical URL
+
+**If old URL exists (URL migration only):**
+- [ ] Add 301 redirect in `public/.htaccess`:
   ```apache
-  Redirect 301 /old-tool-name https://zurawebtools.com/category/subcategory/tool-name
+  Redirect 301 /old-tool-name https://zurawebtools.com/category/subcategory/new-tool-name
   ```
 - [ ] Add client-side redirect in `App.tsx` `oldToNewUrlMap`:
   ```tsx
-  '/old-tool-name': '/category/subcategory/tool-name',
+  '/old-tool-name': '/category/subcategory/new-tool-name',
   ```
-- [ ] Test redirect works (old URL → new URL)
-- [ ] Verify redirect is permanent (301, not 302)
+- [ ] Document reason for redirect in code comments
+- [ ] Test redirect works (old URL → new URL with 301 status)
+- [ ] Set calendar reminder to remove redirect after 6-12 months
 
-**For brand new tools:** Skip this step entirely ✅
+**For brand new tools:** 
+- ✅ Skip this step entirely - NO redirects needed
+- ✅ Use ONLY the canonical categorized URL
+- ✅ Never add flat URL redirects (`/tool-name`)
+- ✅ Focus on consistent URL structure from day one
 
 #### 5. Path Consistency Verification
 - [ ] **Confirm all paths match exactly across (minimum 3 files):**
@@ -393,7 +408,15 @@ useEffect(() => {
   - All lowercase letters
   - Use hyphens (not underscores)
   - No trailing slashes
-  - Format: `/category/tool-name` OR `/category/subcategory/tool-name`
+  - ❌ **NEVER use flat URLs** (`/tool-name`) - ALWAYS use categorized paths
+  - ❌ **NEVER add redirects for new tools** - One canonical URL only
+  - ✅ **Required format:** `/category/tool-name` OR `/category/subcategory/tool-name`
+  - Examples:
+    - ❌ BAD: `/sat-score-calculator` (flat URL - not allowed)
+    - ✅ GOOD: `/education-and-exam-tools/test-score-tools/sat-score-calculator`
+    - ❌ BAD: `/tools/sat-score-calculator` (old structure - deprecated)
+    - ✅ GOOD: `/education-and-exam-tools/test-score-tools/sat-score-calculator`
+  - 🚨 **New Tool Rule:** Single canonical URL from day one, NO redirects/aliases
 
 #### 6. Related Tools Configuration
 - [ ] Add `RelatedTools` component at bottom of tool page:
@@ -438,7 +461,8 @@ grep -n "your-tool-path" public/.htaccess
 **Issue 3: Old URL not redirecting** (only for migrated tools)
 - ✅ Fix: Add 301 redirect in `public/.htaccess`
 - ✅ Add client-side redirect in `App.tsx` `oldToNewUrlMap`
-- 💡 Note: Naye tools ke liye redirect ki zarurat nahi
+- 🚨 **Important:** Naye tools ke liye redirect KABHI add nahi karna - direct canonical URL use karo
+- 💡 Redirects only for URL migration, not for new tools
 
 **Issue 4: Tool missing from sitemap**
 - ✅ Fix: Run `npx ts-node-esm scripts/generate-sitemap.ts`

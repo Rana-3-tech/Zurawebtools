@@ -331,6 +331,16 @@ const CSUGPAIcon = () => (
     </svg>
 );
 
+const HighSchoolGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="highSchoolGPAIconTitle">
+        <title id="highSchoolGPAIconTitle">High School GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradHSGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3b82f6" /><stop offset="100%" stopColor="#a855f7" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradHSGPA)" />
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradHSGPA)" opacity="0.7" />
+        <circle cx="12" cy="9" r="2" fill="#ffffff" opacity="0.9" />
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -791,6 +801,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/csu-gpa-calculator',
                         icon: <CSUGPAIcon />,
                         gradientColors: { from: '#dc2626', to: '#ea580c' },
+                    },
+                    {
+                        title: 'High School GPA Calculator',
+                        description: 'Free high school GPA calculator with weighted & unweighted options. Calculate semester GPA with AP, Honors courses. Track multiple semesters instantly.',
+                        link: 'education-and-exam-tools/gpa-tools/high-school-gpa-calculator',
+                        icon: <HighSchoolGPAIcon />,
+                        gradientColors: { from: '#3b82f6', to: '#a855f7' },
                     },
                 ]
             },

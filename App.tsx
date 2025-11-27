@@ -67,6 +67,7 @@ const CollegeAdmissionsCalculator = lazy(() => import('./components/tools/Colleg
 const GREScoreCalculator = lazy(() => import('./components/tools/GREScoreCalculator'));
 const ALevelScoreCalculator = lazy(() => import('./components/tools/ALevelScoreCalculator'));
 const APCalculusScoreCalculator = lazy(() => import('./components/tools/APCalculusScoreCalculator'));
+const HighSchoolGPACalculator = lazy(() => import('./components/tools/HighSchoolGPACalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -331,6 +332,7 @@ const App: React.FC = () => {
             'lsac-gpa-calculator': LSACGPA,
             'college-gpa-calculator': CollegeGPACalculator,
             'csu-gpa-calculator': CSUGPACalculator,
+            'high-school-gpa-calculator': HighSchoolGPACalculator,
             'fill-dirt-calculator': FillDirtCalculator,
             'quilt-backing-calculator': QuiltBackingCalculator,
             'power-to-mass-ratio-calculator': PowerToMassRatioCalculator,
