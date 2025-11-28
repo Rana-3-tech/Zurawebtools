@@ -112,7 +112,7 @@ const InputField = ({ label, field, value, max, error, onChange }: {
                 placeholder={`e.g. ${Math.floor(max * 0.7)}`}
                 min="0"
                 max={max}
-                className={`mt-1 block w-full rounded-md bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 shadow-sm focus:border-[#001BB7] focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/50 focus:ring-opacity-50 transition duration-150 ease-in-out text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-medium text-lg px-4 py-2.5 ${error ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : ''}`}
+                className={`mt-1 block w-full rounded-md bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/50 focus:ring-opacity-50 transition duration-150 ease-in-out text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-medium text-lg px-4 py-2.5 ${error ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : ''}`}
             />
             {error && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{error}</p>}
         </div>
@@ -705,11 +705,11 @@ const SATScoreCalculator: React.FC = () => {
                     scroll-behavior: smooth;
                 }
             `}</style>
-            <main className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8 bg-slate-50 dark:bg-gray-900">
+            <main className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 dark:bg-gradient-to-br dark:from-gray-900 dark:via-slate-900 dark:to-gray-900">
             <div className="w-full max-w-6xl mx-auto">
                 <header className="text-center mb-10">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                        <span className="text-white">Free SAT Score Calculator 2025-2026</span>
+                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Free SAT Score Calculator 2025-2026</span>
                     </h1>
                     <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Convert raw SAT scores to scaled scores instantly. Get accurate percentile rankings and ACT equivalents for the Digital SAT.</p>
                 </header>
@@ -720,13 +720,13 @@ const SATScoreCalculator: React.FC = () => {
                         <div>
                              <label className="block text-base font-semibold text-slate-900 dark:text-white mb-2">Test Mode</label>
                              <div className="flex gap-1 rounded-lg bg-slate-100 dark:bg-slate-900/50 p-1">
-                                <button onClick={() => setTestMode('digital')} className={`w-full py-2 px-3 rounded-md text-sm font-semibold transition-all duration-200 ${testMode === 'digital' ? 'bg-gradient-to-r from-[#001BB7] to-[#60A5FA] text-white shadow-lg' : 'text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-700/50'}`}>Digital (2025-2026)</button>
-                                <button onClick={() => setTestMode('paper')} className={`w-full py-2 px-3 rounded-md text-sm font-semibold transition-all duration-200 ${testMode === 'paper' ? 'bg-gradient-to-r from-[#001BB7] to-[#60A5FA] text-white shadow-lg' : 'text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-700/50'}`}>Paper</button>
+                                <button onClick={() => setTestMode('digital')} className={`w-full py-2 px-3 rounded-md text-sm font-semibold transition-all duration-200 ${testMode === 'digital' ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg' : 'text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-700/50'}`}>Digital (2025-2026)</button>
+                                <button onClick={() => setTestMode('paper')} className={`w-full py-2 px-3 rounded-md text-sm font-semibold transition-all duration-200 ${testMode === 'paper' ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg' : 'text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-700/50'}`}>Paper</button>
                              </div>
                         </div>
 
                         <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">How to Convert SAT Raw Scores to Scaled Scores</h2>
+                            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">How to Convert SAT Raw Scores to Scaled Scores</h2>
                             <h3 className="text-base font-semibold text-slate-900 dark:text-white">Raw Scores</h3>
                             <InputField 
                                 label="Reading & Writing Raw Correct" 
@@ -754,7 +754,7 @@ const SATScoreCalculator: React.FC = () => {
                             )}
 
                              <div className="flex items-center pt-2">
-                                <input type="checkbox" id="autosum" checked={isMathCombined} onChange={(e) => setIsMathCombined(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-[#001BB7] focus:ring-[#001BB7] dark:bg-slate-700 dark:border-slate-600" />
+                                <input type="checkbox" id="autosum" checked={isMathCombined} onChange={(e) => setIsMathCombined(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600 dark:bg-slate-700 dark:border-slate-600" />
                                 <label htmlFor="autosum" className="ml-3 block text-sm text-slate-900 dark:text-slate-300">Use Combined Math Score</label>
                             </div>
                         </div>
@@ -762,7 +762,7 @@ const SATScoreCalculator: React.FC = () => {
                         {testMode === 'digital' && (
                             <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
                                 <label htmlFor="difficulty" className="block text-sm font-medium text-slate-700 dark:text-slate-300">Difficulty Adjustment</label>
-                                <select id="difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value as Difficulty)} className="mt-1 block w-full pl-3 pr-10 py-2.5 text-base border-2 border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#001BB7] focus:border-[#001BB7] sm:text-sm rounded-md bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-medium">
+                                <select id="difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value as Difficulty)} className="mt-1 block w-full pl-3 pr-10 py-2.5 text-base border-2 border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 sm:text-sm rounded-md bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-medium">
                                     <option value="auto">Auto (Recommended)</option>
                                     <option value="easy">Easy Module</option>
                                     <option value="normal">Normal Module</option>
@@ -820,7 +820,7 @@ const SATScoreCalculator: React.FC = () => {
                                     </div>
                                 </div>
                                 <details className="group bg-slate-50 dark:bg-slate-800/60 rounded-lg p-3 border border-slate-200 dark:border-slate-700">
-                                    <summary className="cursor-pointer list-none flex items-center justify-between text-sm font-medium text-[#001BB7] dark:text-[#60A5FA] hover:underline">
+                                    <summary className="cursor-pointer list-none flex items-center justify-between text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">
                                         <span>Explain Score Conversion</span>
                                         <ChevronDownIcon />
                                     </summary>
@@ -873,7 +873,7 @@ const SATScoreCalculator: React.FC = () => {
                                 <button onClick={handleExportCSV} disabled={!calculationResult} className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 text-sm font-medium text-slate-700 bg-slate-100 rounded-lg border border-slate-200 hover:bg-slate-200 focus:ring-4 focus:ring-slate-100 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600 dark:hover:bg-slate-600 dark:focus:ring-slate-600 transition-colors">
                                     <DownloadIcon /> Export CSV
                                 </button>
-                                <button onClick={() => setIsPremiumModalOpen(true)} disabled={!calculationResult} className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 text-sm font-medium text-white bg-gradient-to-r from-[#001BB7] to-[#60A5FA] rounded-lg hover:from-blue-700 hover:to-sky-500 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed dark:focus:ring-blue-800 transition-colors shadow-sm hover:shadow-md">
+                                <button onClick={() => setIsPremiumModalOpen(true)} disabled={!calculationResult} className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed dark:focus:ring-blue-800 transition-colors shadow-sm hover:shadow-md">
                                     <UserIcon /> Save Report
                                 </button>
                         </div>
@@ -888,7 +888,7 @@ const SATScoreCalculator: React.FC = () => {
 
                 {/* Quick Examples Section */}
                 <section id="examples" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Try These Example Scores</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Try These Example Scores</h2>
                     <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">Click any preset to instantly see the calculated SAT score and percentile ranking</p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -986,12 +986,12 @@ const SATScoreCalculator: React.FC = () => {
 
                 {/* Benefits Section */}
                 <section id="benefits" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Why Use Our Free SAT Score Calculator & Converter?</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Why Use Our Free SAT Score Calculator & Converter?</h2>
                     <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">Get instant, accurate SAT score estimates with features designed for modern test-takers</p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/20 dark:to-sky-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-700/50">
-                            <div className="w-12 h-12 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] rounded-lg flex items-center justify-center mb-4">
+                            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-4">
                                 <span className="text-2xl">⚡</span>
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Instant Results</h3>
@@ -1017,24 +1017,24 @@ const SATScoreCalculator: React.FC = () => {
                 </section>
                 
                 <section id="about-sat" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">About the Digital SAT</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">About the Digital SAT</h2>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-4">The <strong>Digital SAT</strong>, introduced in 2024, represents a major shift from the traditional paper-and-pencil <strong>standardized test</strong>. It's an <strong>adaptive test</strong> administered on a computer, meaning the difficulty of the second module in each section (Reading & Writing, and Math) adjusts based on your performance in the first module.</p>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">This makes the test shorter (about 2 hours instead of 3) and aims to provide a more precise measure of your skills for <strong>college admissions</strong>. Our <strong>SAT score calculator</strong> is updated to reflect the structure of this new test format, helping students with <strong>test preparation</strong> and score estimation.</p>
                 </section>
                 
                 <section id="how-to-calculate" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">How to Calculate SAT Scores from Raw Scores</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">How to Calculate SAT Scores from Raw Scores</h2>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-6">Understanding <strong>how SAT scores are calculated</strong> is key to interpreting your performance on this <strong>college entrance exam</strong>. The <strong>score conversion process</strong> involves three main steps:</p>
                     
                     <div className="space-y-6">
                         <div className="bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/10 dark:to-sky-900/10 rounded-xl p-6 border border-blue-200 dark:border-blue-800/30">
                             <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-[#001BB7] to-[#60A5FA] text-white font-bold flex items-center justify-center text-lg">1</div>
+                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold flex items-center justify-center text-lg">1</div>
                                 <div className="flex-1">
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Determine Your Raw Score</h3>
                                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-3">This is simply the number of questions you answered correctly in each section. There are no penalties for incorrect answers on the SAT.</p>
                                     <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
-                                        <p className="text-sm font-semibold text-[#001BB7] dark:text-[#60A5FA] mb-2">Example:</p>
+                                        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">Example:</p>
                                         <p className="text-sm text-slate-700 dark:text-slate-300">• Reading & Writing: 45 correct out of 54 questions</p>
                                         <p className="text-sm text-slate-700 dark:text-slate-300">• Math: 38 correct out of 44 questions</p>
                                     </div>
@@ -1044,14 +1044,14 @@ const SATScoreCalculator: React.FC = () => {
 
                         <div className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/10 dark:to-blue-900/10 rounded-xl p-6 border border-sky-200 dark:border-sky-800/30">
                             <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-[#60A5FA] to-[#001BB7] text-white font-bold flex items-center justify-center text-lg">2</div>
+                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold flex items-center justify-center text-lg">2</div>
                                 <div className="flex-1">
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Convert to a Scaled Score</h3>
                                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-3">Your raw score for each section is then converted to a scaled score on a 200-800 point scale. This conversion uses "equating," which adjusts for slight differences in difficulty between test versions.</p>
                                     <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
-                                        <p className="text-sm font-semibold text-[#60A5FA] dark:text-[#93C5FD] mb-2">Example Conversion:</p>
-                                        <p className="text-sm text-slate-700 dark:text-slate-300">• Raw Score 45 (R&W) → Scaled Score: <span className="font-bold text-[#001BB7] dark:text-[#60A5FA]">650</span></p>
-                                        <p className="text-sm text-slate-700 dark:text-slate-300">• Raw Score 38 (Math) → Scaled Score: <span className="font-bold text-[#60A5FA] dark:text-[#93C5FD]">680</span></p>
+                                        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">Example Conversion:</p>
+                                        <p className="text-sm text-slate-700 dark:text-slate-300">• Raw Score 45 (R&W) → Scaled Score: <span className="font-bold text-blue-600 dark:text-blue-400">650</span></p>
+                                        <p className="text-sm text-slate-700 dark:text-slate-300">• Raw Score 38 (Math) → Scaled Score: <span className="font-bold text-purple-600 dark:text-purple-400">680</span></p>
                                         <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 italic">*Our calculator uses these conversion tables automatically</p>
                                     </div>
                                 </div>
@@ -1060,18 +1060,18 @@ const SATScoreCalculator: React.FC = () => {
 
                         <div className="bg-gradient-to-br from-blue-50 to-sky-50 dark:from-blue-900/10 dark:to-sky-900/10 rounded-xl p-6 border border-blue-200 dark:border-blue-800/30">
                             <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-[#001BB7] to-[#60A5FA] text-white font-bold flex items-center justify-center text-lg">3</div>
+                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold flex items-center justify-center text-lg">3</div>
                                 <div className="flex-1">
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Calculate Your Total Score</h3>
                                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-3">Your two section scores (Reading & Writing, and Math) are added together to get your total SAT score, which ranges from 400 to 1600.</p>
                                     <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
-                                        <p className="text-sm font-semibold text-[#001BB7] dark:text-[#60A5FA] mb-2">Final Calculation:</p>
+                                        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">Final Calculation:</p>
                                         <div className="flex items-center justify-center gap-3 text-lg font-bold">
-                                            <span className="text-[#001BB7] dark:text-[#60A5FA]">650</span>
+                                            <span className="text-blue-600 dark:text-blue-400">650</span>
                                             <span className="text-slate-400">+</span>
-                                            <span className="text-[#60A5FA] dark:text-[#93C5FD]">680</span>
+                                            <span className="text-purple-600 dark:text-purple-400">680</span>
                                             <span className="text-slate-400">=</span>
-                                            <span className="text-2xl bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">1330</span>
+                                            <span className="text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">1330</span>
                                         </div>
                                         <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 text-center italic">Total SAT Score</p>
                                     </div>
@@ -1086,19 +1086,19 @@ const SATScoreCalculator: React.FC = () => {
                 </section>
                 
                 <section id="score-ranges" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">SAT Score Ranges & What They Mean</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">SAT Score Ranges & What They Mean</h2>
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-6">Understanding your <strong>SAT score range</strong> helps you set realistic goals for <strong>college admissions</strong>. Here's a breakdown of <strong>what is a good SAT score</strong> in 2024:</p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                         <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
                             <div className="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2">1400-1600</div>
-                            <div className="text-sm font-semibold text-[#001BB7] dark:text-[#60A5FA] mb-3">Excellent Score</div>
+                            <div className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3">Excellent Score</div>
                             <p className="text-sm text-slate-600 dark:text-slate-400">Competitive for Ivy League and top-tier universities. Places you in the 93rd-99th percentile nationwide.</p>
                         </div>
                         
                         <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
                             <div className="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2">1200-1390</div>
-                            <div className="text-sm font-semibold text-[#60A5FA] dark:text-[#93C5FD] mb-3">Good Score</div>
+                            <div className="text-sm font-semibold text-purple-600 dark:text-purple-400 mb-3">Good Score</div>
                             <p className="text-sm text-slate-600 dark:text-slate-400">Competitive for most colleges and many scholarship opportunities. Places you in the 70th-92nd percentile.</p>
                         </div>
                         
@@ -1115,7 +1115,7 @@ const SATScoreCalculator: React.FC = () => {
                 </section>
                 
                 <section id="faq" className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 scroll-mt-24">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Frequently Asked Questions (FAQ)</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Frequently Asked Questions (FAQ)</h2>
                     <div className="space-y-4">
                         {FAQ_DATA.map((faq, index) => (
                             <details key={index} className="group p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700/50">
@@ -1130,7 +1130,7 @@ const SATScoreCalculator: React.FC = () => {
                 </section>
 
                 <section className="text-center bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Share Your Score</h3>
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Share Your Score</h3>
                     <div className="flex justify-center items-center gap-4">
                         <a href={getShareUrl('twitter')} target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-100 dark:bg-slate-800/50 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700/80 transition-colors text-slate-700 dark:text-slate-200"><TwitterIcon /></a>
                         <a href={getShareUrl('facebook')} target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-100 dark:bg-slate-800/50 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700/80 transition-colors text-slate-700 dark:text-slate-200"><FacebookIcon /></a>
@@ -1139,7 +1139,7 @@ const SATScoreCalculator: React.FC = () => {
                 </section>
 
                 <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-[#001BB7] to-[#60A5FA] bg-clip-text text-transparent">Related Tools</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Related Tools</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <a href="/math-and-calculation-tools/percentage-change-calculator" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
                             <PercentageIcon className="h-8 w-8 text-[#001BB7]" />
@@ -1147,12 +1147,12 @@ const SATScoreCalculator: React.FC = () => {
                             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Calculate percentage increase or decrease between numbers.</p>
                         </a>
                          <a href="/math-and-calculation-tools/time-difference-calculator" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
-                            <TimeDiffIcon className="h-8 w-8 text-[#60A5FA]" />
+                            <TimeDiffIcon className="h-8 w-8 text-purple-600" />
                             <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Date Difference Calculator</h4>
                             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Calculate duration between two dates accurately.</p>
                         </a>
                          <a href="/math-and-calculation-tools/fabric-costing-tool" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
-                            <FabricIcon className="h-8 w-8 text-[#001BB7]" />
+                            <FabricIcon className="h-8 w-8 text-blue-600" />
                             <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Fabric Costing Calculator</h4>
                             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Professional fabric costing for textile engineers.</p>
                         </a>
@@ -1162,19 +1162,19 @@ const SATScoreCalculator: React.FC = () => {
                 <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 mb-8">
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
                         Students calculating SAT scores may also find our 
-                        <a href="/tools/uc-berkeley-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">UC Berkeley GPA Calculator</a> 
+                        <a href="/tools/uc-berkeley-gpa-calculator" className="text-blue-600 dark:text-blue-400 hover:underline">UC Berkeley GPA Calculator</a> 
                         and 
-                        <a href="/education-and-exam-tools/gpa-tools/lsac-gpa-calculator" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">LSAC GPA Calculator</a> 
+                        <a href="/education-and-exam-tools/gpa-tools/lsac-gpa-calculator" className="text-blue-600 dark:text-blue-400 hover:underline">LSAC GPA Calculator</a> 
                         useful for academic planning.
                     </p>
                 </section>
                 
                 <footer className="text-center text-sm text-slate-500 dark:text-slate-400 pt-8 border-t border-slate-200 dark:border-slate-700 space-y-3">
                     <p><strong>Disclaimer:</strong> This <strong>SAT score estimator</strong> is for estimation purposes only and is not affiliated with the College Board. Scores are based on approximated conversion tables. Official scores may vary.</p>
-                    <p><strong>Data Sources:</strong> Official concordance tables from the <a href="https://collegereadiness.collegeboard.org/sat" target="_blank" rel="nofollow noopener noreferrer" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">College Board</a> and <a href="https://www.act.org/content/act/en/products-and-services/the-act/scores/act-sat-concordance.html" target="_blank" rel="nofollow noopener noreferrer" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">ACT, Inc.</a></p>
-                    <p><strong>Additional Resources:</strong> <a href="https://www.khanacademy.org/test-prep/sat" target="_blank" rel="nofollow noopener noreferrer" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">Khan Academy SAT Prep</a> | <a href="https://satsuite.collegeboard.org/digital/digital-practice-preparation" target="_blank" rel="nofollow noopener noreferrer" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">Official SAT Practice Tests</a></p>
+                    <p><strong>Data Sources:</strong> Official concordance tables from the <a href="https://collegereadiness.collegeboard.org/sat" target="_blank" rel="nofollow noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">College Board</a> and <a href="https://www.act.org/content/act/en/products-and-services/the-act/scores/act-sat-concordance.html" target="_blank" rel="nofollow noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">ACT, Inc.</a></p>
+                    <p><strong>Additional Resources:</strong> <a href="https://www.khanacademy.org/test-prep/sat" target="_blank" rel="nofollow noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Khan Academy SAT Prep</a> | <a href="https://satsuite.collegeboard.org/digital/digital-practice-preparation" target="_blank" rel="nofollow noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Official SAT Practice Tests</a></p>
                     <p className="text-xs text-slate-400 dark:text-slate-500">Last Updated: November 8, 2025</p>
-                    <p>&copy; {new Date().getFullYear()} <a href="/" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">ZuraWebTools</a>. All rights reserved. | <a href="/tools" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">All Tools</a> | <a href="/tools/math-and-calculation" className="text-[#001BB7] dark:text-[#60A5FA] hover:underline">Math & Calculation Tools</a></p>
+                    <p>&copy; {new Date().getFullYear()} <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">ZuraWebTools</a>. All rights reserved. | <a href="/tools" className="text-blue-600 dark:text-blue-400 hover:underline">All Tools</a> | <a href="/tools/math-and-calculation" className="text-blue-600 dark:text-blue-400 hover:underline">Math & Calculation Tools</a></p>
                 </footer>
             </div>
 
@@ -1182,15 +1182,15 @@ const SATScoreCalculator: React.FC = () => {
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity" onClick={() => setIsPremiumModalOpen(false)}>
                     <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl p-8 max-w-md w-full m-4 text-center border border-slate-200 dark:border-slate-700" onClick={(e) => e.stopPropagation()}>
                         <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-blue-100 to-sky-100 dark:from-blue-900/50 dark:to-sky-900/50">
-                            <UserIcon className="h-6 w-6 text-[#001BB7] dark:text-[#60A5FA]" />
+                            <UserIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                         </div>
                         <h3 className="mt-4 text-2xl font-bold text-slate-900 dark:text-white">Unlock Pro Features</h3>
                         <p className="mt-2 text-slate-600 dark:text-slate-400">Upgrade to ZuraWebTools Pro to supercharge your test prep.</p>
                         <ul className="mt-6 space-y-3 text-left text-slate-700 dark:text-slate-300">
-                            <li className="flex items-center gap-3"><CheckIcon className="h-4 w-4 text-[#001BB7]" /> Save and track unlimited score reports</li>
-                            <li className="flex items-center gap-3"><CheckIcon className="h-4 w-4 text-[#001BB7]" /> View historical score trends with charts</li>
-                            <li className="flex items-center gap-3"><CheckIcon className="h-4 w-4 text-[#001BB7]" /> Export professional PDF reports</li>
-                            <li className="flex items-center gap-3"><CheckIcon className="h-4 w-4 text-[#001BB7]" /> Advanced percentile analysis</li>
+                            <li className="flex items-center gap-3"><CheckIcon className="h-4 w-4 text-blue-600" /> Save and track unlimited score reports</li>
+                            <li className="flex items-center gap-3"><CheckIcon className="h-4 w-4 text-blue-600" /> View historical score trends with charts</li>
+                            <li className="flex items-center gap-3"><CheckIcon className="h-4 w-4 text-blue-600" /> Export professional PDF reports</li>
+                            <li className="flex items-center gap-3"><CheckIcon className="h-4 w-4 text-blue-600" /> Advanced percentile analysis</li>
                         </ul>
                         <div className="mt-8">
                             <button className="w-full py-3 px-6 text-white font-semibold bg-gradient-to-r from-[#001BB7] to-[#60A5FA] rounded-lg hover:from-blue-700 hover:to-sky-500 transition-colors shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50">Start Free Trial</button>
