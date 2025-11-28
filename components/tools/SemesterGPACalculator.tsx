@@ -437,18 +437,22 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
       },
       {
         "@context": "https://schema.org",
-        "@type": "Product",
+        "@type": "SoftwareApplication",
         "name": "Semester GPA Calculator",
         "description": "Free online semester GPA calculator for UK, Australia, Germany students. Calculate GPA by academic term with weighted/unweighted options and track cumulative progress.",
-        "brand": {
-          "@type": "Brand",
+        "applicationCategory": "EducationApplication",
+        "operatingSystem": "Any (Web-based)",
+        "image": "https://zurawebtools.com/images/semester-gpa-calculator.jpg",
+        "screenshot": "https://zurawebtools.com/images/semester-gpa-calculator-screenshot.jpg",
+        "url": "https://zurawebtools.com/education-and-exam-tools/gpa-tools/semester-gpa-calculator",
+        "author": {
+          "@type": "Organization",
           "name": "ZuraWebTools"
         },
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock"
+          "priceCurrency": "USD"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
