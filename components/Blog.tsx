@@ -43,7 +43,13 @@ const Blog: React.FC<BlogProps> = ({ navigateTo }) => {
                                         5 min read
                                     </span>
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{post.title}</h3>
+                                <a
+                                    href={`/${post.slug}`}
+                                    onClick={(e) => { e.preventDefault(); navigateTo(`/${post.slug}`); }}
+                                    className="block"
+                                >
+                                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors cursor-pointer">{post.title}</h3>
+                                </a>
                                 <p className="text-slate-600 leading-relaxed mb-4">{post.excerpt}</p>
                                 <a
                                     href={`/${post.slug}`}

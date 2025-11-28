@@ -315,6 +315,12 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
                         <li><a href="/" className="hover:text-blue-600">Home</a></li>
                         <li><span className="mx-2">/</span></li>
                         <li><a href="/blog" className="hover:text-blue-600">Blog</a></li>
+                        {post.slug.startsWith('education-guides/') && (
+                            <>
+                                <li><span className="mx-2">/</span></li>
+                                <li className="text-gray-600 hover:text-blue-600">Education Guides</li>
+                            </>
+                        )}
                         <li><span className="mx-2">/</span></li>
                         <li className="text-gray-900 font-semibold truncate">{post.title}</li>
                     </ol>
