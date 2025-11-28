@@ -361,14 +361,20 @@
   </url>
   <url>
     <loc>https://zurawebtools.com/5-ai-writing-tools</loc>
-    <lastmod>October 25, 2023</lastmod>
+    <lastmod>2023-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://zurawebtools.com/essential-developer-utilities</loc>
-    <lastmod>October 22, 2023</lastmod>
+    <lastmod>2023-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://zurawebtools.com/how-to-calculate-gpa-guide</loc>
+    <lastmod>2025-11-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
 </urlset>
