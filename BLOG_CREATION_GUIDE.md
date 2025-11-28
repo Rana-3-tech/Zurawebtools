@@ -26,11 +26,21 @@ This document contains all the guidelines, structure, and best practices for cre
 - **Length**: 50-60 characters
 - **Class**: `text-4xl md:text-5xl font-bold text-gray-900 text-center`
 
-### 2. **Meta Information**
+### 2. **Meta Information** ⚠️ CRITICAL for E-E-A-T
 - Author name
 - Publication date
+- **Last Updated date** (REQUIRED - improves freshness signals)
 - Reading time (optional)
 - **Class**: `text-center text-gray-500`
+- **Implementation**: 
+```tsx
+<div className="mt-6 text-center text-gray-500">
+    <span>By {post.author}</span> &bull; <span>{post.date}</span>
+    {post.lastUpdated && post.lastUpdated !== post.date && (
+        <span> &bull; Updated: {post.lastUpdated}</span>
+    )}
+</div>
+```
 
 ### 3. **Featured Image**
 - **Dimensions**: 1200x630px (Open Graph standard)
@@ -339,6 +349,18 @@ document.head.appendChild(breadcrumbSchema);
 - H4 for sub-subsections (in info boxes)
 - Never skip heading levels
 
+#### 11. **Required Schema Markups** (CRITICAL)
+- ✅ **Article Schema** - Basic article information
+- ✅ **BreadcrumbList Schema** - Navigation hierarchy
+- ✅ **FAQPage Schema** - For FAQ sections (increases chance of featured snippets)
+- ✅ **HowTo Schema** - For step-by-step guides (recipe for rich snippets)
+- All schemas must be valid JSON-LD format
+
+#### 12. **Last Updated Date** (E-E-A-T Signal)
+- Add `lastUpdated` field to Post interface
+- Display prominently at top of article (next to publish date)
+- Update `dateModified` in Article schema when content is refreshed
+
 ---
 
 ## Off-Page SEO Strategy
@@ -447,6 +469,7 @@ export interface Post {
     slug: string;
     excerpt: string;
     date: string;
+    lastUpdated?: string;  // Optional - shows "Updated: date" if different from publish date
     author: string;
     imageUrl: string;
     content: React.ReactNode;
@@ -606,6 +629,48 @@ useEffect(() => {
     });
     document.head.appendChild(breadcrumbSchema);
 
+    // JSON-LD Schema - FAQ (CRITICAL for featured snippets)
+    const faqSchema = document.createElement('script');
+    faqSchema.type = 'application/ld+json';
+    faqSchema.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Your FAQ question here?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Complete answer with details and context."
+                }
+            }
+            // Add 5-8 FAQ items matching your FAQ section
+        ]
+    });
+    document.head.appendChild(faqSchema);
+
+    // JSON-LD Schema - HowTo (for step-by-step guides)
+    const howToSchema = document.createElement('script');
+    howToSchema.type = 'application/ld+json';
+    howToSchema.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": post.title,
+        "description": post.excerpt,
+        "image": post.imageUrl,
+        "totalTime": "PT10M",  // Adjust based on read time
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Step 1 Title",
+                "text": "Detailed step description",
+                "position": 1
+            }
+            // Add 3-5 main steps from your guide
+        ]
+    });
+    document.head.appendChild(howToSchema);
+
     // Cleanup
     return () => {
         document.title = 'ZuraWebTools | Free AI Tools for SEO & Social Media Growth';
@@ -618,6 +683,8 @@ useEffect(() => {
         canonical.remove();
         articleSchema.remove();
         breadcrumbSchema.remove();
+        faqSchema.remove();
+        howToSchema.remove();
     };
 }, [post]);
 ```

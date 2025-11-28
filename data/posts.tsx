@@ -6,6 +6,7 @@ export interface Post {
     excerpt: string;
     author: string;
     date: string;
+    lastUpdated?: string;
     imageUrl: string;
     content: React.ReactNode;
 }
@@ -59,6 +60,7 @@ export const posts: Post[] = [
         excerpt: 'Learn how to calculate GPA with step-by-step formulas for weighted, unweighted, semester, and cumulative GPA. Includes examples, comparison tables, and free calculator tools.',
         author: 'Emily Parker',
         date: 'November 28, 2025',
+        lastUpdated: 'November 28, 2025',
         imageUrl: 'https://images.pexels.com/photos/5905857/pexels-photo-5905857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         content: (
             <>

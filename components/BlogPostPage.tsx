@@ -179,6 +179,112 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
         });
         document.head.appendChild(breadcrumbSchema);
 
+        // JSON-LD Schema - FAQ (for GPA guide)
+        const faqSchema = document.createElement('script');
+        faqSchema.type = 'application/ld+json';
+        faqSchema.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Can I calculate my GPA myself without a calculator?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes! Follow the step-by-step formulas in this guide. However, using a free GPA calculator saves time and reduces calculation errors, especially with many courses or credit hours."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do pass/fail classes affect my GPA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Typically no—pass/fail courses usually don't factor into GPA calculations. However, they do count toward credit hours earned. Check your school's specific policy, as some institutions handle this differently."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How can I raise my GPA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Focus on earning higher grades in future courses, especially high-credit classes. Retaking failed courses (if allowed) and maintaining straight A's can gradually improve your cumulative GPA."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What's the difference between weighted and unweighted GPA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Unweighted GPA uses a standard 4.0 scale where all A's equal 4.0. Weighted GPA adds bonus points (0.5 for Honors, 1.0 for AP/IB), allowing GPAs above 4.0. Most competitive colleges recalculate using their own system."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do colleges recalculate your GPA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, many colleges recalculate GPAs using their own formulas. They may remove non-academic courses (PE, health), apply their own weighting system, or focus only on core academic subjects (math, English, science, social studies, foreign language)."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How is college GPA different from high school GPA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "College GPAs use credit hours to weight each course's impact, while high school GPAs often treat all courses equally (unless weighted). A 4-credit college course affects your GPA more than a 1-credit course, even with the same grade."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What GPA do I need for scholarships?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Most merit-based scholarships require a minimum GPA of 3.0-3.5, with highly competitive scholarships expecting 3.7+. Requirements vary by scholarship program, so always check specific eligibility criteria."
+                    }
+                }
+            ]
+        });
+        document.head.appendChild(faqSchema);
+
+        // JSON-LD Schema - HowTo (for step-by-step guide)
+        const howToSchema = document.createElement('script');
+        howToSchema.type = 'application/ld+json';
+        howToSchema.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Calculate Your GPA",
+            "description": "Step-by-step guide to calculating weighted, unweighted, semester, and cumulative GPA with examples and formulas.",
+            "image": post.imageUrl,
+            "totalTime": "PT10M",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Convert Letter Grades to Numbers",
+                    "text": "Convert each of your letter grades to their corresponding numerical value using the 4.0 scale. For example: A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0.0",
+                    "position": 1
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add All Grade Points Together",
+                    "text": "Sum up all the numerical values you assigned to each class. This gives you your total grade points.",
+                    "position": 2
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Divide by Number of Classes",
+                    "text": "Take the total grade points and divide by the total number of classes you took. The result is your GPA on a 4.0 scale.",
+                    "position": 3
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "For College GPA: Multiply by Credit Hours",
+                    "text": "In college, multiply each grade point by the course's credit hours to get quality points. Add all quality points together and divide by total credit hours.",
+                    "position": 4
+                }
+            ]
+        });
+        document.head.appendChild(howToSchema);
+
         // Cleanup function
         return () => {
             document.title = 'ZuraWebTools | Free AI Tools for SEO & Social Media Growth';
@@ -191,11 +297,17 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
             canonical.remove();
             articleSchema.remove();
             breadcrumbSchema.remove();
+            faqSchema.remove();
+            howToSchema.remove();
         };
     }, [post]);
 
     return (
         <section className="py-20 bg-white">
+            {/* Skip to main content link for accessibility */}
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg">
+                Skip to main content
+            </a>
             <div className="container mx-auto px-6">
                 {/* Breadcrumb Navigation */}
                 <nav className="mb-8 max-w-4xl mx-auto">
@@ -212,6 +324,9 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
                     <h1 className="text-4xl md:text-5xl font-bold text-gray-900 text-center">{post.title}</h1>
                     <div className="mt-6 text-center text-gray-500">
                         <span>By {post.author}</span> &bull; <span>{post.date}</span>
+                        {post.lastUpdated && post.lastUpdated !== post.date && (
+                            <span> &bull; Updated: {post.lastUpdated}</span>
+                        )}
                     </div>
                     <img loading="lazy" src={post.imageUrl} alt={post.title} className="mt-12 w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg" />
                     
@@ -227,7 +342,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
                                         : 'bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600 shadow-sm'
                                 }`}
                             >
-                                <svg className="w-4 h-4" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 h-4" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                 </svg>
                                 <span>{likeCount > 0 ? likeCount : 'Helpful'}</span>
@@ -241,7 +356,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
                                         : 'bg-white text-gray-700 hover:bg-red-50 hover:text-red-600 shadow-sm'
                                 }`}
                             >
-                                <svg className="w-4 h-4" fill={disliked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 h-4" fill={disliked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
                                 </svg>
                                 <span>{dislikeCount > 0 ? dislikeCount : 'Not Helpful'}</span>
@@ -249,7 +364,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
                         </div>
                     </div>
 
-                    <div className="mt-12 prose lg:prose-lg max-w-none prose-h3:text-gray-800">
+                    <div id="main-content" className="mt-12 prose lg:prose-lg max-w-none prose-h3:text-gray-800">
                         {post.content}
                     </div>
                 </div>
