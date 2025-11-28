@@ -54,7 +54,7 @@ export const posts: Post[] = [
         ),
     },
     {
-        slug: 'how-to-calculate-gpa-guide',
+        slug: 'education-guides/how-to-calculate-gpa-guide',
         title: 'How to Calculate Your GPA: Complete Step-by-Step Guide (2026)',
         excerpt: 'Learn how to calculate GPA with step-by-step formulas for weighted, unweighted, semester, and cumulative GPA. Includes examples, comparison tables, and free calculator tools.',
         author: 'Emily Parker',

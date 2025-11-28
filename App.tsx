@@ -391,7 +391,12 @@ const App: React.FC = () => {
             }
         }
         
-        const post = posts.find(p => p.slug === path);
+        // Check for blog posts (supports category/slug pattern)
+        let post = posts.find(p => p.slug === path);
+        if (!post && pathParts.length === 2) {
+            // Try to find post with category/slug pattern
+            post = posts.find(p => p.slug === `${pathParts[0]}/${pathParts[1]}`);
+        }
         if (post) {
             return <BlogPostPage post={post} />;
         }
