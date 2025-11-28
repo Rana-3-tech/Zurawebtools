@@ -341,6 +341,17 @@ const HighSchoolGPAIcon = () => (
     </svg>
 );
 
+const SemesterGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="semesterGPAIconTitle">
+        <title id="semesterGPAIconTitle">Semester GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradSemesterGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#10b981" /><stop offset="100%" stopColor="#06b6d4" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradSemesterGPA)" />
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradSemesterGPA)" opacity="0.8" />
+        <rect x="8" y="6" width="8" height="1" fill="#ffffff" opacity="0.9" />
+        <rect x="8" y="8" width="6" height="1" fill="#ffffff" opacity="0.9" />
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -808,6 +819,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/high-school-gpa-calculator',
                         icon: <HighSchoolGPAIcon />,
                         gradientColors: { from: '#3b82f6', to: '#a855f7' },
+                    },
+                    {
+                        title: 'Semester GPA Calculator',
+                        description: 'Free semester GPA calculator for UK, Australia, Germany. Calculate semester GPA, cumulative GPA with accurate grade point conversions. Multi-semester tracking with print/download reports.',
+                        link: 'education-and-exam-tools/gpa-tools/semester-gpa-calculator',
+                        icon: <SemesterGPAIcon />,
+                        gradientColors: { from: '#10b981', to: '#06b6d4' },
                     },
                 ]
             },
