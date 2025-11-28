@@ -24,8 +24,11 @@ const Blog: React.FC<BlogProps> = ({ navigateTo }) => {
                         <div key={post.slug} className="group bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200 transition-all duration-300 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1">
                             <div className="relative overflow-hidden">
                                 <img loading="lazy" src={post.imageUrl} alt={post.title} className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110" />
-                                <div className="absolute top-4 left-4">
+                                <div className="absolute top-4 left-4 flex gap-2">
                                     <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">Blog</span>
+                                    {post.category && (
+                                        <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">{post.category}</span>
+                                    )}
                                 </div>
                             </div>
                             <div className="p-6">
@@ -54,10 +57,10 @@ const Blog: React.FC<BlogProps> = ({ navigateTo }) => {
                                 <a
                                     href={`/${post.slug}`}
                                     onClick={(e) => { e.preventDefault(); navigateTo(`/${post.slug}`); }}
-                                    className="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-700 transition-colors group"
+                                    className="inline-flex items-center gap-2 font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-cyan-700 transition-all group"
                                 >
                                     Read More
-                                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                     </svg>
                                 </a>

@@ -330,10 +330,37 @@ document.head.appendChild(breadcrumbSchema);
         <li><a href="/" className="hover:text-blue-600">Home</a></li>
         <li><span className="mx-2">/</span></li>
         <li><a href="/blog" className="hover:text-blue-600">Blog</a></li>
+        {post.slug.startsWith('education-guides/') && (
+            <>
+                <li><span className="mx-2">/</span></li>
+                <li><a href="/blog?category=education-guides" className="hover:text-blue-600">Education Guides</a></li>
+            </>
+        )}
         <li><span className="mx-2">/</span></li>
         <li className="text-gray-900 font-semibold truncate">{post.title}</li>
     </ol>
 </nav>
+```
+
+#### 8a. **Accessibility Features (WCAG 2.1 AA Compliance)**
+```tsx
+{/* Skip-to-main-content link for keyboard users */}
+<a 
+    href="#main-content" 
+    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg"
+>
+    Skip to main content
+</a>
+
+{/* Main content wrapper with ID for skip-link target */}
+<div id="main-content" className="max-w-4xl mx-auto prose prose-lg">
+    {/* Article content */}
+</div>
+
+{/* SVG icons with aria-hidden to prevent screen reader clutter */}
+<svg aria-hidden="true" className="w-5 h-5">
+    {/* Icon paths */}
+</svg>
 ```
 
 #### 9. **Internal Links**
@@ -470,6 +497,7 @@ export interface Post {
     excerpt: string;
     date: string;
     lastUpdated?: string;  // Optional - shows "Updated: date" if different from publish date
+    category?: string;     // Optional - displays category badge on blog cards (e.g., "AI Tools", "Education Guides")
     author: string;
     imageUrl: string;
     content: React.ReactNode;
@@ -838,6 +866,269 @@ rounded-lg shadow-lg                       ← Images/cards
 - [ ] Refresh images if needed
 - [ ] Check for broken links
 - [ ] Update "Last updated" date if content changed
+
+---
+
+## Performance & Core Web Vitals Optimization
+
+### Core Web Vitals Targets
+- **LCP (Largest Contentful Paint)**: < 2.5 seconds
+- **FID (First Input Delay)**: < 100 milliseconds
+- **CLS (Cumulative Layout Shift)**: < 0.1
+
+### Image Optimization
+```tsx
+{/* Lazy loading for images below the fold */}
+<img 
+    loading="lazy" 
+    src={post.imageUrl} 
+    alt="Descriptive alt text" 
+    width="1200" 
+    height="630"
+    className="w-full h-56 object-cover"
+/>
+
+{/* Use WebP format when possible */}
+<picture>
+    <source srcSet="image.webp" type="image/webp" />
+    <source srcSet="image.jpg" type="image/jpeg" />
+    <img src="image.jpg" alt="Alt text" />
+</picture>
+```
+
+### Code Splitting & Lazy Loading
+- Blog posts loaded as separate chunks (Vite automatically handles this)
+- Components lazy loaded with React.lazy() when appropriate
+- Heavy dependencies (like code editors) loaded only when needed
+
+### Font Optimization
+```css
+/* Preload critical fonts in index.html */
+<link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+
+/* Use font-display: swap to prevent invisible text */
+@font-face {
+    font-family: 'Inter';
+    font-display: swap;
+    src: url('/fonts/inter.woff2') format('woff2');
+}
+```
+
+### CSS Optimization
+- Tailwind CSS purges unused styles in production
+- Critical CSS inlined in `<head>`
+- Non-critical CSS loaded asynchronously
+
+### Performance Checklist
+- [ ] Images optimized (compressed, proper format)
+- [ ] Lazy loading enabled for below-fold content
+- [ ] Fonts preloaded and use font-display: swap
+- [ ] No render-blocking resources
+- [ ] Minified CSS/JS in production
+- [ ] CDN used for static assets (if applicable)
+- [ ] Proper caching headers configured
+
+### Testing Tools
+- **Google PageSpeed Insights**: https://pagespeed.web.dev/
+- **Chrome DevTools Lighthouse**: Built into Chrome browser
+- **WebPageTest**: https://www.webpagetest.org/
+- **GTmetrix**: https://gtmetrix.com/
+
+---
+
+## Complete Accessibility Checklist (WCAG 2.1 AA)
+
+### Semantic HTML
+```tsx
+{/* Use semantic elements */}
+<article>
+    <header>
+        <h1>{post.title}</h1>
+        <time dateTime={new Date(post.date).toISOString()}>{post.date}</time>
+    </header>
+    <main id="main-content">
+        {/* Blog content */}
+    </main>
+    <footer>
+        {/* Author info, share buttons */}
+    </footer>
+</article>
+```
+
+### Keyboard Navigation
+```tsx
+{/* Skip-to-main-content link */}
+<a 
+    href="#main-content" 
+    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg"
+>
+    Skip to main content
+</a>
+
+{/* Ensure all interactive elements are keyboard accessible */}
+<button 
+    onClick={handleLike}
+    onKeyDown={(e) => e.key === 'Enter' && handleLike()}
+    aria-label="Mark this article as helpful"
+>
+    Like
+</button>
+```
+
+### ARIA Labels & Roles
+```tsx
+{/* Add ARIA labels to icon-only buttons */}
+<button aria-label="Share on Twitter">
+    <svg aria-hidden="true">...</svg>
+</button>
+
+{/* Use aria-live for dynamic content */}
+<div aria-live="polite" aria-atomic="true">
+    {likeCount} people found this helpful
+</div>
+
+{/* Navigation landmarks */}
+<nav aria-label="Breadcrumb navigation">
+    <ol>...</ol>
+</nav>
+```
+
+### Color Contrast
+- **Text**: Minimum 4.5:1 contrast ratio for normal text
+- **Large Text**: Minimum 3:1 contrast ratio (18pt+)
+- **UI Components**: Minimum 3:1 contrast ratio
+
+**Approved Color Combinations:**
+- `text-gray-900` on `bg-white` ✅ (21:1 ratio)
+- `text-blue-600` on `bg-white` ✅ (8.6:1 ratio)
+- `text-white` on `bg-blue-600` ✅ (8.6:1 ratio)
+
+### Form Accessibility (for comment sections, contact forms)
+```tsx
+<form>
+    <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+        Email Address
+    </label>
+    <input 
+        id="email"
+        type="email"
+        name="email"
+        aria-describedby="email-error"
+        aria-invalid={errors.email ? "true" : "false"}
+        required
+    />
+    {errors.email && (
+        <p id="email-error" role="alert" className="text-red-600">
+            {errors.email}
+        </p>
+    )}
+</form>
+```
+
+### Focus Indicators
+```css
+/* Ensure visible focus indicators */
+button:focus, a:focus {
+    outline: 2px solid #2563eb; /* blue-600 */
+    outline-offset: 2px;
+}
+
+/* Or use Tailwind classes */
+className="focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+```
+
+### Accessibility Testing Checklist
+- [ ] Skip-to-main-content link works
+- [ ] All images have descriptive alt text
+- [ ] All interactive elements keyboard accessible (Tab, Enter, Space)
+- [ ] Focus indicators visible on all focusable elements
+- [ ] Color contrast meets WCAG AA standards (4.5:1 for text)
+- [ ] Heading hierarchy logical (no skipped levels)
+- [ ] ARIA labels on icon-only buttons
+- [ ] Forms have proper labels and error messages
+- [ ] No flashing/blinking content (can trigger seizures)
+- [ ] Text can be resized to 200% without loss of content
+
+### Testing Tools
+- **WAVE**: https://wave.webaim.org/ (browser extension)
+- **axe DevTools**: Chrome/Firefox extension
+- **Lighthouse Accessibility Audit**: Built into Chrome DevTools
+- **Screen Reader Testing**: NVDA (Windows), JAWS (Windows), VoiceOver (Mac/iOS)
+
+---
+
+## Blog Card Components Structure
+
+### Homepage Blog Section (Blog.tsx)
+
+**Features:**
+- Shows 2 most recent posts
+- Category badge with gradient (purple-pink)
+- Clickable title + "Read More" link
+- Hover effects: shadow, border color, scale, translate-y
+- Date and read time icons
+
+```tsx
+<div className="group bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200 transition-all duration-300 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1">
+    <div className="relative overflow-hidden">
+        <img loading="lazy" src={post.imageUrl} alt={post.title} className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110" />
+        <div className="absolute top-4 left-4 flex gap-2">
+            <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">Blog</span>
+            {post.category && (
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">{post.category}</span>
+            )}
+        </div>
+    </div>
+    <div className="p-6">
+        <div className="flex items-center gap-4 text-sm text-slate-500 mb-3">
+            <span className="flex items-center gap-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Nov 2025
+            </span>
+            <span className="flex items-center gap-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                5 min read
+            </span>
+        </div>
+        <a href={`/${post.slug}`} onClick={(e) => { e.preventDefault(); navigateTo(`/${post.slug}`); }} className="block">
+            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors cursor-pointer">{post.title}</h3>
+        </a>
+        <p className="text-slate-600 leading-relaxed mb-4">{post.excerpt}</p>
+        <a href={`/${post.slug}`} onClick={(e) => { e.preventDefault(); navigateTo(`/${post.slug}`); }} className="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-700 transition-all group">
+            Read More
+            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+        </a>
+    </div>
+</div>
+```
+
+### Blog Page Cards (BlogPage.tsx)
+
+**Features:**
+- Grid layout: 1 column mobile, 2 columns tablet, 3 columns desktop
+- Same styling as homepage cards
+- All posts displayed (not just recent 2)
+
+```tsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {posts.map(post => (
+        <div key={post.slug} className="group bg-white rounded-2xl shadow-md overflow-hidden flex flex-col border border-slate-200 transition-all duration-300 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1">
+            {/* Same structure as homepage cards */}
+        </div>
+    ))}
+</div>
+```
+
+**Category Badge Colors:**
+- Default "Blog" badge: `bg-blue-600 text-white`
+- Category badge: `bg-gradient-to-r from-purple-600 to-pink-600 text-white`
+- Alternative gradients: `from-green-600 to-emerald-600`, `from-orange-600 to-red-600`
 
 ---
 

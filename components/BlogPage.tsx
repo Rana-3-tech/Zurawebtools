@@ -19,18 +19,35 @@ const BlogPage: React.FC<BlogPageProps> = ({ posts, navigateTo }) => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {posts.map(post => (
-                        <div key={post.slug} className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                            <img loading="lazy" src={post.imageUrl} alt={post.title} className="w-full h-56 object-cover" />
+                        <div key={post.slug} className="group bg-white rounded-2xl shadow-md overflow-hidden flex flex-col border border-slate-200 transition-all duration-300 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1">
+                            <div className="relative overflow-hidden">
+                                <img loading="lazy" src={post.imageUrl} alt={post.title} className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110" />
+                                <div className="absolute top-4 left-4 flex gap-2">
+                                    <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">Blog</span>
+                                    {post.category && (
+                                        <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">{post.category}</span>
+                                    )}
+                                </div>
+                            </div>
                             <div className="p-6 flex flex-col flex-grow">
-                                <h3 className="text-2xl font-bold text-gray-900">{post.title}</h3>
-                                <p className="mt-3 text-gray-600 flex-grow">{post.excerpt}</p>
+                                <a
+                                    href={`/${post.slug}`}
+                                    onClick={(e) => { e.preventDefault(); navigateTo(`/${post.slug}`); }}
+                                    className="block"
+                                >
+                                    <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors cursor-pointer">{post.title}</h3>
+                                </a>
+                                <p className="mt-3 text-slate-600 flex-grow">{post.excerpt}</p>
                                 <div className="mt-6">
                                      <a
                                         href={`/${post.slug}`}
                                         onClick={(e) => { e.preventDefault(); navigateTo(`/${post.slug}`); }}
-                                        className="font-semibold text-brand-blue hover:text-blue-700"
+                                        className="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-700 transition-all group"
                                     >
-                                        Read More &rarr;
+                                        Read More
+                                        <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
                                     </a>
                                 </div>
                             </div>
