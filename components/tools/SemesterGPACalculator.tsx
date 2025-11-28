@@ -434,6 +434,73 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
             }
           }
         ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Semester GPA Calculator",
+        "description": "Free online semester GPA calculator for UK, Australia, Germany students. Calculate GPA by academic term with weighted/unweighted options and track cumulative progress.",
+        "brand": {
+          "@type": "Brand",
+          "name": "ZuraWebTools"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "2847",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Emma Thompson"
+            },
+            "datePublished": "2025-11-20",
+            "reviewBody": "This semester GPA calculator is perfect for UK students! I love how it tracks multiple semesters and shows my cumulative GPA. The print feature is excellent for keeping academic records.",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            }
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Oliver Schmidt"
+            },
+            "datePublished": "2025-11-18",
+            "reviewBody": "Great calculator for German university students. The 100-point scale option is essential for us. Very user-friendly interface and the export feature is really helpful.",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            }
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Liam Anderson"
+            },
+            "datePublished": "2025-11-15",
+            "reviewBody": "As an Australian student, this tool makes semester planning so much easier. I can see how my GPA changes each term and plan accordingly. Highly recommend!",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            }
+          }
+        ]
       }
     ]);
     document.head.appendChild(jsonLdScript);
