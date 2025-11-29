@@ -71,6 +71,7 @@ const APCalculusScoreCalculator = lazy(() => import('./components/tools/APCalcul
 const HighSchoolGPACalculator = lazy(() => import('./components/tools/HighSchoolGPACalculator'));
 const SemesterGPACalculator = lazy(() => import('./components/tools/SemesterGPACalculator'));
 const WeightedGPACalculator = lazy(() => import('./components/tools/WeightedGPACalculator'));
+const UnweightedGPACalculator = lazy(() => import('./components/tools/UnweightedGPACalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -341,6 +342,7 @@ const App: React.FC = () => {
             'high-school-gpa-calculator': HighSchoolGPACalculator,
             'semester-gpa-calculator': SemesterGPACalculator,
             'weighted-gpa-calculator': WeightedGPACalculator,
+            'unweighted-gpa-calculator': UnweightedGPACalculator,
             'fill-dirt-calculator': FillDirtCalculator,
             'quilt-backing-calculator': QuiltBackingCalculator,
             'power-to-mass-ratio-calculator': PowerToMassRatioCalculator,

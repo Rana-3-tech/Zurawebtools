@@ -370,6 +370,17 @@ const WeightedGPAIcon = () => (
     </svg>
 );
 
+const UnweightedGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="unweightedGPAIconTitle">
+        <title id="unweightedGPAIconTitle">Unweighted GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradUnweightedGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3b82f6" /><stop offset="100%" stopColor="#06b6d4" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradUnweightedGPA)" />
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradUnweightedGPA)" opacity="0.8" />
+        <rect x="9" y="8" width="6" height="1.5" rx="0.5" fill="#ffffff" opacity="0.9" />
+        <rect x="9" y="10.5" width="6" height="1.5" rx="0.5" fill="#ffffff" opacity="0.9" />
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -858,6 +869,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/weighted-gpa-calculator',
                         icon: <WeightedGPAIcon />,
                         gradientColors: { from: '#8b5cf6', to: '#ec4899' },
+                    },
+                    {
+                        title: 'Unweighted GPA Calculator',
+                        description: 'Free unweighted GPA calculator on standard 4.0 scale. Calculate GPA for high school and college with instant results. Used globally in UK, Australia, Germany, and USA.',
+                        link: 'education-and-exam-tools/gpa-tools/unweighted-gpa-calculator',
+                        icon: <UnweightedGPAIcon />,
+                        gradientColors: { from: '#3b82f6', to: '#06b6d4' },
                     },
                 ]
             },
