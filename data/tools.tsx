@@ -381,6 +381,17 @@ const UnweightedGPAIcon = () => (
     </svg>
 );
 
+const CumulativeGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cumulativeGPAIconTitle">
+        <title id="cumulativeGPAIconTitle">Cumulative GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradCumulativeGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#10b981" /><stop offset="100%" stopColor="#3b82f6" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradCumulativeGPA)" />
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradCumulativeGPA)" opacity="0.8" />
+        <circle cx="12" cy="9" r="2" fill="#ffffff" opacity="0.9" />
+        <path d="M8 13 L12 11 L16 13" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" opacity="0.9" />
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -876,6 +887,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/unweighted-gpa-calculator',
                         icon: <UnweightedGPAIcon />,
                         gradientColors: { from: '#3b82f6', to: '#06b6d4' },
+                    },
+                    {
+                        title: 'Cumulative GPA Calculator',
+                        description: 'Free cumulative GPA calculator to track overall academic performance across multiple semesters. Calculate lifetime GPA with total credits earned for college and high school students.',
+                        link: 'education-and-exam-tools/gpa-tools/cumulative-gpa-calculator',
+                        icon: <CumulativeGPAIcon />,
+                        gradientColors: { from: '#10b981', to: '#3b82f6' },
                     },
                 ]
             },
