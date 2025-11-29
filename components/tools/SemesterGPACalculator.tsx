@@ -129,11 +129,27 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
 
   // Remove course from semester
   const removeCourse = (semesterId: string, courseId: string) => {
-    setSemesters(semesters.map(semester =>
-      semester.id === semesterId
-        ? { ...semester, courses: semester.courses.filter(c => c.id !== courseId) }
-        : semester
-    ));
+    setSemesters(semesters.map(semester => {
+      if (semester.id === semesterId) {
+        const courseIndex = semester.courses.findIndex(c => c.id === courseId);
+        const filteredCourses = semester.courses.filter(c => c.id !== courseId);
+        
+        // Focus management after deletion
+        setTimeout(() => {
+          // Try to focus on previous course's remove button, or the Add Course button
+          const targetId = courseIndex > 0 
+            ? `remove-btn-${semester.courses[courseIndex - 1].id}`
+            : `add-course-${semesterId}`;
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.focus();
+          }
+        }, 0);
+        
+        return { ...semester, courses: filteredCourses };
+      }
+      return semester;
+    }));
   };
 
   // Update semester
@@ -686,10 +702,20 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
           </div>
 
           {/* Results */}
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6 mb-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Cumulative GPA</h3>
-            <div className="text-4xl font-extrabold text-blue-600">
-              {calculateCumulativeGPA} <span className="text-lg text-gray-500">/ {gradeScale === '4.0' ? '4.0' : '100'}</span>
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6 mb-6" role="region" aria-label="GPA Results">
+            <div className="flex items-center gap-3 mb-2">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="text-xl font-bold text-gray-900">Cumulative GPA</h3>
+            </div>
+            <div className="flex items-center gap-3">
+              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+              <div className="text-4xl font-extrabold text-blue-600">
+                {calculateCumulativeGPA} <span className="text-lg text-gray-500">/ {gradeScale === '4.0' ? '4.0' : '100'}</span>
+              </div>
             </div>
             <p className="text-sm text-gray-600 mt-1">
               Across {semesters.length} semester{semesters.length !== 1 ? 's' : ''} • {semesters.reduce((sum, s) => sum + s.courses.length, 0)} courses
@@ -708,15 +734,22 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
                         value={semester.name}
                         onChange={(e) => updateSemester(semester.id, 'name', e.target.value)}
                         className="text-lg font-bold text-gray-900 bg-transparent border-b-2 border-transparent hover:border-blue-500 focus:border-blue-500 focus:outline-none px-2 py-1 placeholder-gray-400"
+                        aria-label={`Edit semester name: ${semester.name}`}
                       />
                       <div className="flex items-center gap-3">
-                        <span className="text-sm font-medium text-gray-600">
-                          GPA: <span className="text-blue-600 font-bold">{calculateSemesterGPA(semester)}</span>
-                        </span>
+                        <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
+                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                          </svg>
+                          <span>
+                            GPA: <span className="text-blue-600 font-bold">{calculateSemesterGPA(semester)}</span>
+                          </span>
+                        </div>
                         {semesters.length > 1 && (
                           <button
                             onClick={() => removeSemester(semester.id)}
                             className="p-1 hover:bg-red-100 rounded-lg text-red-600 transition-colors"
+                            aria-label={`Remove ${semester.name}`}
                           >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -726,86 +759,98 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
                       </div>
                     </div>
 
-                    {/* Course Headers */}
-                    <div className="hidden md:grid grid-cols-12 gap-3 mb-3 text-sm font-semibold text-gray-700 px-2">
-                      <div className="col-span-5">Course Name</div>
-                      <div className="col-span-3">Grade</div>
-                      <div className="col-span-3">Credits</div>
-                      <div className="col-span-1"></div>
-                    </div>
+                    {/* Fieldset for grouping courses */}
+                    <fieldset>
+                      <legend className="sr-only">Courses for {semester.name}</legend>
+                      
+                      {/* Course Headers */}
+                      <div className="hidden md:grid grid-cols-12 gap-3 mb-3 text-sm font-semibold text-gray-700 px-2">
+                        <div className="col-span-5">Course Name</div>
+                        <div className="col-span-3">Grade</div>
+                        <div className="col-span-3">Credits</div>
+                        <div className="col-span-1"></div>
+                      </div>
 
-                    {/* Courses */}
-                    <div className="space-y-3">
-                      {semester.courses.map((course) => (
-                        <div key={course.id} className="grid grid-cols-1 md:grid-cols-12 gap-3 items-start md:items-center">
+                      {/* Courses */}
+                      <div className="space-y-3">
+                        {semester.courses.map((course) => (
+                          <div key={course.id} className="grid grid-cols-1 md:grid-cols-12 gap-3 items-start md:items-center">
 
-                          {/* Course Name */}
-                          <div className="md:col-span-5">
-                            <label className="block md:hidden text-xs font-semibold text-gray-600 mb-1">Course Name</label>
-                            <input
-                              type="text"
-                              value={course.name}
-                              onChange={(e) => updateCourse(semester.id, course.id, 'name', e.target.value)}
-                              placeholder="e.g., Mathematics, Physics, etc."
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-900 placeholder-gray-400"
-                            />
+                            {/* Course Name */}
+                            <div className="md:col-span-5">
+                              <label className="block md:hidden text-xs font-semibold text-gray-600 mb-1">Course Name</label>
+                              <input
+                                type="text"
+                                value={course.name}
+                                onChange={(e) => updateCourse(semester.id, course.id, 'name', e.target.value)}
+                                placeholder="e.g., Mathematics, Physics, etc."
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-900 placeholder-gray-400"
+                                aria-label={`Course name for ${course.name || 'new course'}`}
+                              />
+                            </div>
+
+                            {/* Grade */}
+                            <div className="md:col-span-3">
+                              <label className="block md:hidden text-xs font-semibold text-gray-600 mb-1">Grade</label>
+                              <select
+                                value={course.grade}
+                                onChange={(e) => updateCourse(semester.id, course.id, 'grade', e.target.value)}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-900"
+                                aria-label={`Grade for ${course.name || 'this course'}`}
+                              >
+                                <option value="">Select Grade</option>
+                                {(() => {
+                                  const points = gradeScale === '4.0' ? gradePoints4 : gradePoints100;
+                                  return Array.from(points.keys()).map(grade => (
+                                    <option key={grade} value={grade}>{grade}</option>
+                                  ));
+                                })()}
+                              </select>
+                            </div>
+
+                            {/* Credits */}
+                            <div className="md:col-span-3">
+                              <label className="block md:hidden text-xs font-semibold text-gray-600 mb-1">Credits</label>
+                              <input
+                                type="number"
+                                value={course.credits}
+                                onChange={(e) => updateCourse(semester.id, course.id, 'credits', e.target.value)}
+                                placeholder="1.0"
+                                min="0.5"
+                                max="10"
+                                step="0.5"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-900 placeholder-gray-400"
+                                aria-label={`Credits for ${course.name || 'this course'}`}
+                              />
+                            </div>
+
+                            {/* Remove Button */}
+                            <div className="md:col-span-1 flex justify-center">
+                              <button
+                                id={`remove-btn-${course.id}`}
+                                onClick={() => removeCourse(semester.id, course.id)}
+                                className="p-2 hover:bg-red-100 rounded-lg text-red-600 transition-colors"
+                                aria-label={`Remove ${course.name || 'this course'} from ${semester.name}`}
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                              </button>
+                            </div>
                           </div>
-
-                          {/* Grade */}
-                          <div className="md:col-span-3">
-                            <label className="block md:hidden text-xs font-semibold text-gray-600 mb-1">Grade</label>
-                            <select
-                              value={course.grade}
-                              onChange={(e) => updateCourse(semester.id, course.id, 'grade', e.target.value)}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-900"
-                            >
-                              <option value="">Select Grade</option>
-                              {(() => {
-                                const points = gradeScale === '4.0' ? gradePoints4 : gradePoints100;
-                                return Object.keys(points).map(grade => (
-                                  <option key={grade} value={grade}>{grade}</option>
-                                ));
-                              })()}
-                            </select>
-                          </div>
-
-                          {/* Credits */}
-                          <div className="md:col-span-3">
-                            <label className="block md:hidden text-xs font-semibold text-gray-600 mb-1">Credits</label>
-                            <input
-                              type="number"
-                              value={course.credits}
-                              onChange={(e) => updateCourse(semester.id, course.id, 'credits', e.target.value)}
-                              placeholder="1.0"
-                              min="0.5"
-                              max="10"
-                              step="0.5"
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-900 placeholder-gray-400"
-                            />
-                          </div>
-
-                          {/* Remove Button */}
-                          <div className="md:col-span-1 flex justify-center">
-                            <button
-                              onClick={() => removeCourse(semester.id, course.id)}
-                              className="p-2 hover:bg-red-100 rounded-lg text-red-600 transition-colors"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    </fieldset>
 
                     {/* Add Course Button */}
                     <div className="mt-4 pt-3 border-t border-gray-200">
                       <button
+                        id={`add-course-${semester.id}`}
                         onClick={() => addCourse(semester.id)}
                         className="flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg font-medium transition-colors"
+                        aria-label={`Add course to ${semester.name}`}
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                         </svg>
                         Add Course
