@@ -13,7 +13,6 @@ interface Course {
   name: string;
   grade: string;
   credits: number;
-  gradePoint: number;
 }
 
 interface Semester {
@@ -28,9 +27,9 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
       id: '1',
       name: 'Semester 1',
       courses: [
-        { id: '1', name: 'Mathematics', grade: 'A', credits: 3, gradePoint: 4.0 },
-        { id: '2', name: 'English', grade: 'B+', credits: 3, gradePoint: 3.3 },
-        { id: '3', name: 'Science', grade: 'A-', credits: 4, gradePoint: 3.7 }
+        { id: '1', name: 'Mathematics', grade: 'A', credits: 3 },
+        { id: '2', name: 'English', grade: 'B+', credits: 3 },
+        { id: '3', name: 'Science', grade: 'A-', credits: 4 }
       ]
     }
   ]);
@@ -38,60 +37,67 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
   const [gradeScale, setGradeScale] = useState<'4.0' | '100'>('4.0');
   const [showWeighted, setShowWeighted] = useState(true);
 
-  // Grade point mappings for different scales
-  const gradePoints4 = {
-    'A+': 4.0, 'A': 4.0, 'A-': 3.7,
-    'B+': 3.3, 'B': 3.0, 'B-': 2.7,
-    'C+': 2.3, 'C': 2.0, 'C-': 1.7,
-    'D+': 1.3, 'D': 1.0, 'F': 0.0
-  };
+  // Grade point mappings for different scales (using Map to prevent prototype pollution)
+  const gradePoints4 = useMemo(() => new Map([
+    ['A+', 4.0], ['A', 4.0], ['A-', 3.7],
+    ['B+', 3.3], ['B', 3.0], ['B-', 2.7],
+    ['C+', 2.3], ['C', 2.0], ['C-', 1.7],
+    ['D+', 1.3], ['D', 1.0], ['F', 0.0]
+  ]), []);
 
-  const gradePoints100 = {
-    'A+': 95, 'A': 90, 'A-': 85,
-    'B+': 80, 'B': 75, 'B-': 70,
-    'C+': 65, 'C': 60, 'C-': 55,
-    'D+': 50, 'D': 45, 'F': 35
-  };
+  const gradePoints100 = useMemo(() => new Map([
+    ['A+', 95], ['A', 90], ['A-', 85],
+    ['B+', 80], ['B', 75], ['B-', 70],
+    ['C+', 65], ['C', 60], ['C-', 55],
+    ['D+', 50], ['D', 45], ['F', 35]
+  ]), []);
 
   // Calculate GPA for a semester
   const calculateSemesterGPA = useCallback((semester: Semester) => {
     if (semester.courses.length === 0) return 0;
 
+    const totalCredits = semester.courses.reduce((sum, course) => sum + course.credits, 0);
+    
+    // Early return to prevent division by zero
+    if (totalCredits === 0) return 0;
+
     const totalPoints = semester.courses.reduce((sum, course) => {
-      const gradePoint = gradeScale === '4.0' ? gradePoints4[course.grade as keyof typeof gradePoints4] || 0 : gradePoints100[course.grade as keyof typeof gradePoints100] || 0;
+      const gradePoint = gradeScale === '4.0' 
+        ? (gradePoints4.get(course.grade) ?? 0) 
+        : (gradePoints100.get(course.grade) ?? 0);
       return sum + (gradePoint * course.credits);
     }, 0);
 
-    const totalCredits = semester.courses.reduce((sum, course) => sum + course.credits, 0);
-
-    if (totalCredits === 0) return 0;
-
     const gpa = totalPoints / totalCredits;
     return gradeScale === '4.0' ? Math.round(gpa * 100) / 100 : Math.round(gpa);
-  }, [gradeScale]);
+  }, [gradeScale, gradePoints4, gradePoints100]);
 
   // Calculate cumulative GPA
   const calculateCumulativeGPA = useMemo(() => {
     const allCourses = semesters.flatMap(semester => semester.courses);
     if (allCourses.length === 0) return 0;
 
+    const totalCredits = allCourses.reduce((sum, course) => sum + course.credits, 0);
+    
+    // Early return to prevent division by zero
+    if (totalCredits === 0) return 0;
+
     const totalPoints = allCourses.reduce((sum, course) => {
-      const gradePoint = gradeScale === '4.0' ? gradePoints4[course.grade as keyof typeof gradePoints4] || 0 : gradePoints100[course.grade as keyof typeof gradePoints100] || 0;
+      const gradePoint = gradeScale === '4.0' 
+        ? (gradePoints4.get(course.grade) ?? 0) 
+        : (gradePoints100.get(course.grade) ?? 0);
       return sum + (gradePoint * course.credits);
     }, 0);
 
-    const totalCredits = allCourses.reduce((sum, course) => sum + course.credits, 0);
-
-    if (totalCredits === 0) return 0;
-
     const gpa = totalPoints / totalCredits;
     return gradeScale === '4.0' ? Math.round(gpa * 100) / 100 : Math.round(gpa);
-  }, [semesters, gradeScale]);
+  }, [semesters, gradeScale, gradePoints4, gradePoints100]);
 
   // Add new semester
   const addSemester = () => {
+    const newId = Date.now().toString();
     const newSemester: Semester = {
-      id: Date.now().toString(),
+      id: newId,
       name: `Semester ${semesters.length + 1}`,
       courses: []
     };
@@ -111,8 +117,7 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
       id: Date.now().toString(),
       name: 'New Course',
       grade: 'A',
-      credits: 3,
-      gradePoint: gradeScale === '4.0' ? 4.0 : 90
+      credits: 3
     };
 
     setSemesters(semesters.map(semester =>
@@ -146,11 +151,18 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
       semester.id === semesterId
         ? {
             ...semester,
-            courses: semester.courses.map(course =>
-              course.id === courseId
-                ? { ...course, [field]: value }
-                : course
-            )
+            courses: semester.courses.map(course => {
+              if (course.id === courseId) {
+                // Sanitize credits input to prevent NaN and negative values
+                if (field === 'credits') {
+                  const numValue = typeof value === 'string' ? Number(value) : value;
+                  const sanitized = isNaN(numValue) ? 0 : Math.max(0.5, numValue);
+                  return { ...course, [field]: sanitized };
+                }
+                return { ...course, [field]: value };
+              }
+              return course;
+            })
           }
         : semester
     ));
@@ -203,14 +215,18 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
                   </tr>
                 </thead>
                 <tbody>
-                  ${semester.courses.map(course => `
+                  ${semester.courses.map(course => {
+                    const gradePoint = gradeScale === '4.0' 
+                      ? (gradePoints4.get(course.grade) ?? 0) 
+                      : (gradePoints100.get(course.grade) ?? 0);
+                    return `
                     <tr>
                       <td>${course.name}</td>
                       <td>${course.grade}</td>
                       <td>${course.credits}</td>
-                      <td>${gradeScale === '4.0' ? gradePoints4[course.grade as keyof typeof gradePoints4] || 0 : gradePoints100[course.grade as keyof typeof gradePoints100] || 0}</td>
+                      <td>${gradePoint}</td>
                     </tr>
-                  `).join('')}
+                  `}).join('')}
                 </tbody>
               </table>
             </div>
@@ -226,9 +242,11 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
 
     printWindow.document.write(html);
     printWindow.document.close();
-    setTimeout(() => {
+    
+    // Fix race condition: Wait for window to fully load before printing
+    printWindow.onload = () => {
       printWindow.print();
-    }, 250);
+    };
   };
 
   // Handle download
@@ -757,9 +775,9 @@ const SemesterGPACalculator: React.FC<SemesterGPACalculatorProps> = ({ navigateT
                             <input
                               type="number"
                               value={course.credits}
-                              onChange={(e) => updateCourse(semester.id, course.id, 'credits', parseInt(e.target.value) || 0)}
+                              onChange={(e) => updateCourse(semester.id, course.id, 'credits', e.target.value)}
                               placeholder="1.0"
-                              min="0"
+                              min="0.5"
                               max="10"
                               step="0.5"
                               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-900 placeholder-gray-400"
