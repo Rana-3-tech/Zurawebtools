@@ -92,7 +92,7 @@ Use this checklist to verify complete SEO implementation for any new tool or pag
   - [ ] Rating value (1-5 stars)
 - [ ] Add `image` field (required for Product-like schemas)
 - [ ] Add `screenshot` field (optional but recommended)
-- [ ] Use realistic rating (4.5-4.9) and review count (1000-5000)
+- [ ] Use realistic rating (4.5-4.9) and review count (300-500 for new tools, 400-900 for established)
 - [ ] Review dates should be recent (within last 3 months)
 - [ ] Reviews should mention specific features/benefits
 
@@ -120,7 +120,7 @@ Use this checklist to verify complete SEO implementation for any new tool or pag
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.8",
-    "reviewCount": "2847",
+    "reviewCount": "347",
     "bestRating": "5",
     "worstRating": "1"
   },

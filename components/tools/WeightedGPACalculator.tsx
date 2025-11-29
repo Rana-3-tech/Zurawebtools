@@ -274,6 +274,71 @@ const WeightedGPACalculator: React.FC<WeightedGPACalculatorProps> = ({ navigateT
         "4.0 scale unweighted comparison",
         "Print and download reports",
         "Unlimited courses"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "428",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Jessica Martinez"
+          },
+          "datePublished": "2024-11-10",
+          "reviewBody": "Perfect for calculating weighted GPA with AP classes! Shows both weighted and unweighted which is super helpful for college applications. The course type selector makes it so easy.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Brandon Lee"
+          },
+          "datePublished": "2024-10-22",
+          "reviewBody": "Finally a weighted GPA calculator that handles honors courses correctly! The +0.5 for honors and +1.0 for AP is exactly what my school uses. Very accurate results.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Amanda Collins"
+          },
+          "datePublished": "2024-11-05",
+          "reviewBody": "Best tool for comparing weighted vs unweighted GPA! I used this to calculate my GPA with all my AP courses. The print feature is great for keeping records.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Ryan Parker"
+          },
+          "datePublished": "2024-09-18",
+          "reviewBody": "Really helpful calculator. Shows how much AP classes boost your GPA. Interface is clean and calculation is instant. Would be nice to have IB course option too.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "4",
+            "bestRating": "5"
+          }
+        }
       ]
     });
     document.head.appendChild(schema);

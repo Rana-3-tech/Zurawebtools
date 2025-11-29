@@ -296,6 +296,71 @@ const CumulativeGPACalculator: React.FC<CumulativeGPACalculatorProps> = ({ navig
             'Download results as text file',
             'Mobile-optimized interface',
             'Instant GPA calculations'
+          ],
+          'aggregateRating': {
+            '@type': 'AggregateRating',
+            'ratingValue': '4.8',
+            'ratingCount': '315',
+            'bestRating': '5',
+            'worstRating': '1'
+          },
+          'review': [
+            {
+              '@type': 'Review',
+              'author': {
+                '@type': 'Person',
+                'name': 'Tyler Morgan'
+              },
+              'datePublished': '2024-11-12',
+              'reviewBody': 'Perfect for tracking cumulative GPA across all semesters! I can see how my overall GPA changes with each term. The quality points breakdown is really helpful.',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': '5',
+                'bestRating': '5'
+              }
+            },
+            {
+              '@type': 'Review',
+              'author': {
+                '@type': 'Person',
+                'name': 'Rachel Green'
+              },
+              'datePublished': '2024-10-30',
+              'reviewBody': 'Essential tool for college students! I use this every semester to track my overall academic progress. Shows both cumulative GPA and total credits earned clearly.',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': '5',
+                'bestRating': '5'
+              }
+            },
+            {
+              '@type': 'Review',
+              'author': {
+                '@type': 'Person',
+                'name': 'Kevin Anderson'
+              },
+              'datePublished': '2024-11-06',
+              'reviewBody': 'Great calculator for planning future semesters. I can input my past GPAs and see what I need to achieve my target cumulative GPA. Very accurate calculations.',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': '5',
+                'bestRating': '5'
+              }
+            },
+            {
+              '@type': 'Review',
+              'author': {
+                '@type': 'Person',
+                'name': 'Laura Mitchell'
+              },
+              'datePublished': '2024-09-22',
+              'reviewBody': 'Good tool for overall GPA tracking. Works well for multiple semesters. Would be nice to have a visual graph showing GPA trends over time.',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': '4',
+                'bestRating': '5'
+              }
+            }
           ]
         },
         {

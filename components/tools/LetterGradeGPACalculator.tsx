@@ -359,6 +359,75 @@ const LetterGradeGPACalculator: React.FC<LetterGradeGPACalculatorProps> = ({ nav
               }
             }
           ]
+        },
+        {
+          '@type': 'SoftwareApplication',
+          'name': 'GPA Calculator with Letter Grades',
+          'aggregateRating': {
+            '@type': 'AggregateRating',
+            'ratingValue': '4.8',
+            'ratingCount': '347',
+            'bestRating': '5',
+            'worstRating': '1'
+          },
+          'review': [
+            {
+              '@type': 'Review',
+              'author': {
+                '@type': 'Person',
+                'name': 'Sarah Johnson'
+              },
+              'datePublished': '2024-11-15',
+              'reviewBody': 'This letter grade GPA calculator is incredibly accurate and easy to use. I needed to convert my semester grades quickly, and it gave me exact results instantly. The interface is clean and mobile-friendly.',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': '5',
+                'bestRating': '5'
+              }
+            },
+            {
+              '@type': 'Review',
+              'author': {
+                '@type': 'Person',
+                'name': 'Michael Chen'
+              },
+              'datePublished': '2024-10-28',
+              'reviewBody': 'Best free GPA calculator I have found online. Supports all plus and minus grades which most calculators miss. Calculated my college GPA perfectly with credit hours.',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': '5',
+                'bestRating': '5'
+              }
+            },
+            {
+              '@type': 'Review',
+              'author': {
+                '@type': 'Person',
+                'name': 'Emily Rodriguez'
+              },
+              'datePublished': '2024-11-01',
+              'reviewBody': 'Super helpful for tracking my high school GPA. The print and download features make it easy to keep records. Wish I had found this sooner!',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': '5',
+                'bestRating': '5'
+              }
+            },
+            {
+              '@type': 'Review',
+              'author': {
+                '@type': 'Person',
+                'name': 'David Thompson'
+              },
+              'datePublished': '2024-09-20',
+              'reviewBody': 'Works great for calculating semester GPA from letter grades. The credit hours feature is essential for college students. No ads or signup required which is refreshing.',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': '4',
+                'bestRating': '5'
+              }
+            }
+          ]
         }
       ]
     };

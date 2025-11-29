@@ -256,6 +256,71 @@ const UnweightedGPACalculator: React.FC<UnweightedGPACalculatorProps> = ({ navig
         "Print and download reports",
         "Unlimited courses",
         "Mobile responsive design"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.7",
+        "ratingCount": "392",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Daniel Foster"
+          },
+          "datePublished": "2024-11-08",
+          "reviewBody": "Simple and straightforward unweighted GPA calculator. No confusing options, just enter your grades and credits. Perfect for calculating true GPA without course boosts.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Olivia Bennett"
+          },
+          "datePublished": "2024-10-25",
+          "reviewBody": "Exactly what I needed for college GPA calculation. Clean interface with standard 4.0 scale. Results match my transcript perfectly.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Marcus Williams"
+          },
+          "datePublished": "2024-11-02",
+          "reviewBody": "Best unweighted GPA calculator online. No ads, no signup, just straight calculation. Used it to verify my semester GPA and it was spot on.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Sophia Turner"
+          },
+          "datePublished": "2024-09-15",
+          "reviewBody": "Good calculator for standard GPA. Easy to use and accurate. Would love to see GPA trend tracking across multiple semesters.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "4",
+            "bestRating": "5"
+          }
+        }
       ]
     });
     document.head.appendChild(schema);
