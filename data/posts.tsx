@@ -692,7 +692,7 @@ export const posts: Post[] = [
         ),
     },
     {
-        slug: 'education-guides/sat-vs-act-which-test-2026',
+        slug: 'blog/education-guides/sat-vs-act-which-test-2026',
         title: 'SAT vs ACT: Which Test Should You Take in 2026?',
         excerpt: 'Discover the key differences between SAT and ACT exams. Compare format, scoring, content, and difficulty to choose the right standardized test for college admissions in 2026.',
         author: 'Emily Parker',
