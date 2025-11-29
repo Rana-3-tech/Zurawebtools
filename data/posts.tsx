@@ -14,7 +14,7 @@ export interface Post {
 
 export const posts: Post[] = [
     {
-        slug: '5-ai-writing-tools',
+        slug: 'blog/5-ai-writing-tools',
         title: '5 AI Writing Tools to Instantly Improve Your Content',
         excerpt: 'Go beyond grammar checkers. Discover five types of AI-powered writing tools that can help you brainstorm ideas, write faster, and create more engaging content.',
         author: 'Alex Johnson',
@@ -38,7 +38,7 @@ export const posts: Post[] = [
         ),
     },
     {
-        slug: 'essential-developer-utilities',
+        slug: 'blog/essential-developer-utilities',
         title: 'Essential Developer Utilities: A Guide to Code Formatters and Validators',
         excerpt: 'Clean code is happy code. This guide explores why code formatters and validators are non-negotiable for modern developers and how they save you time and prevent bugs.',
         author: 'Samantha Lee',
@@ -58,7 +58,7 @@ export const posts: Post[] = [
         ),
     },
     {
-        slug: 'education-guides/how-to-calculate-gpa-guide',
+        slug: 'blog/education-guides/how-to-calculate-gpa-guide',
         title: 'How to Calculate Your GPA: Complete Step-by-Step Guide (2026)',
         excerpt: 'Learn how to calculate GPA with step-by-step formulas for weighted, unweighted, semester, and cumulative GPA. Includes examples, comparison tables, and free calculator tools.',
         author: 'Emily Parker',

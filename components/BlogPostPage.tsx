@@ -153,29 +153,45 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
         // JSON-LD Schema - BreadcrumbList
         const breadcrumbSchema = document.createElement('script');
         breadcrumbSchema.type = 'application/ld+json';
+        
+        // Build breadcrumb items dynamically based on post category
+        const breadcrumbItems: any[] = [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://zurawebtools.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://zurawebtools.com/blog"
+            }
+        ];
+        
+        // Add category if post has one
+        if (post.category) {
+            breadcrumbItems.push({
+                "@type": "ListItem",
+                "position": 3,
+                "name": post.category,
+                "item": `https://zurawebtools.com/blog?category=${encodeURIComponent(post.category)}`
+            });
+        }
+        
+        // Add the post itself
+        breadcrumbItems.push({
+            "@type": "ListItem",
+            "position": breadcrumbItems.length + 1,
+            "name": post.title,
+            "item": `https://zurawebtools.com/${post.slug}`
+        });
+        
         breadcrumbSchema.textContent = JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://zurawebtools.com/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Blog",
-                    "item": "https://zurawebtools.com/blog"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": post.title,
-                    "item": `https://zurawebtools.com/${post.slug}`
-                }
-            ]
+            "itemListElement": breadcrumbItems
         });
         document.head.appendChild(breadcrumbSchema);
 
@@ -310,19 +326,19 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
             </a>
             <div className="container mx-auto px-6">
                 {/* Breadcrumb Navigation */}
-                <nav className="mb-8 max-w-4xl mx-auto">
-                    <ol className="flex items-center space-x-2 text-sm text-gray-600">
-                        <li><a href="/" className="hover:text-blue-600">Home</a></li>
-                        <li><span className="mx-2">/</span></li>
-                        <li><a href="/blog" className="hover:text-blue-600">Blog</a></li>
-                        {post.slug.startsWith('education-guides/') && (
+                <nav className="mb-8 max-w-4xl mx-auto" aria-label="Breadcrumb">
+                    <ol className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
+                        <li><a href="/" className="hover:text-blue-600 transition-colors">Home</a></li>
+                        <li><span className="text-gray-400">/</span></li>
+                        <li><a href="/blog" className="hover:text-blue-600 transition-colors">Blog</a></li>
+                        {post.category && (
                             <>
-                                <li><span className="mx-2">/</span></li>
-                                <li className="text-gray-600 hover:text-blue-600">Education Guides</li>
+                                <li><span className="text-gray-400">/</span></li>
+                                <li><span className="text-gray-700 font-medium">{post.category}</span></li>
                             </>
                         )}
-                        <li><span className="mx-2">/</span></li>
-                        <li className="text-gray-900 font-semibold truncate">{post.title}</li>
+                        <li><span className="text-gray-400">/</span></li>
+                        <li className="text-gray-900 font-semibold line-clamp-1" aria-current="page">{post.title}</li>
                     </ol>
                 </nav>
 
