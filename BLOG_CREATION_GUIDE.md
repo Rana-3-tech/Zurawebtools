@@ -7,14 +7,73 @@ This document contains all the guidelines, structure, and best practices for cre
 ---
 
 ## Table of Contents
-1. [Blog Post Structure](#blog-post-structure)
-2. [On-Page SEO Checklist](#on-page-seo-checklist)
-3. [Off-Page SEO Strategy](#off-page-seo-strategy)
-4. [Text Color & Styling Guidelines](#text-color--styling-guidelines)
-5. [Component Structure](#component-structure)
-6. [SEO Meta Tags Implementation](#seo-meta-tags-implementation)
-7. [Internal Linking Strategy](#internal-linking-strategy)
-8. [Content Writing Guidelines](#content-writing-guidelines)
+1. [URL Structure Guidelines](#url-structure-guidelines) ⭐ **NEW**
+2. [Blog Post Structure](#blog-post-structure)
+3. [On-Page SEO Checklist](#on-page-seo-checklist)
+4. [Off-Page SEO Strategy](#off-page-seo-strategy)
+5. [Text Color & Styling Guidelines](#text-color--styling-guidelines)
+6. [Component Structure](#component-structure)
+7. [SEO Meta Tags Implementation](#seo-meta-tags-implementation)
+8. [Internal Linking Strategy](#internal-linking-strategy)
+9. [Content Writing Guidelines](#content-writing-guidelines)
+
+---
+
+## URL Structure Guidelines
+
+### **CRITICAL: All blog post URLs MUST follow this structure:**
+
+```
+/blog/{category-slug}/{post-slug}
+```
+
+### **Examples:**
+- ✅ **Correct**: `/blog/education-guides/how-to-calculate-gpa-guide`
+- ✅ **Correct**: `/blog/ai-tools/5-ai-writing-tools`
+- ✅ **Correct**: `/blog/developer-tools/essential-developer-utilities`
+- ❌ **Wrong**: `/education-guides/how-to-calculate-gpa-guide` (missing /blog/)
+- ❌ **Wrong**: `/how-to-calculate-gpa-guide` (missing /blog/ and category)
+
+### **Implementation in `data/posts.tsx`:**
+```tsx
+{
+    slug: 'blog/education-guides/how-to-calculate-gpa-guide',  // ✅ Include /blog/ prefix
+    title: 'How to Calculate Your GPA: Complete Step-by-Step Guide (2026)',
+    category: 'Education Guides',
+    // ... other fields
+}
+```
+
+### **URL Slug Naming Conventions:**
+- **Use lowercase only**: `how-to-calculate-gpa` not `How-To-Calculate-GPA`
+- **Use hyphens for spaces**: `word-counter-tool` not `word_counter_tool`
+- **Keep it concise**: 3-6 words maximum
+- **Include primary keyword**: Always include your main target keyword
+- **Avoid stop words when possible**: Remove "the", "a", "an" unless necessary for clarity
+
+### **Category Slug Examples:**
+- Education Guides → `education-guides`
+- AI Tools → `ai-tools`
+- Developer Tools → `developer-tools`
+- Social Media → `social-media`
+- SEO Tips → `seo-tips`
+
+### **Breadcrumb Structure:**
+```
+Home / Blog / {Category} / {Post Title}
+```
+
+**Example:**
+```
+Home / Blog / Education Guides / How to Calculate Your GPA: Complete Step-by-Step Guide (2026)
+```
+
+### **Important Notes:**
+- ⚠️ The `/blog/` prefix is **MANDATORY** for all blog posts
+- ✅ This structure improves SEO and site hierarchy
+- ✅ Makes content easier to organize and navigate
+- ✅ Helps search engines understand your site structure
+- ✅ Consistent with modern blog best practices
 
 ---
 
