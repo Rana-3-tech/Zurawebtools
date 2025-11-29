@@ -1,1 +1,7 @@
+# Blog post redirects (301 permanent redirects for SEO)
+/education-guides/how-to-calculate-gpa-guide  /blog/education-guides/how-to-calculate-gpa-guide  301!
+/5-ai-writing-tools  /blog/5-ai-writing-tools  301!
+/essential-developer-utilities  /blog/essential-developer-utilities  301!
+
+# SPA fallback (must be last)
 /* /index.html 200
