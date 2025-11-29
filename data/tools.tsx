@@ -359,6 +359,17 @@ const SemesterGPAIcon = () => (
     </svg>
 );
 
+const WeightedGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="weightedGPAIconTitle">
+        <title id="weightedGPAIconTitle">Weighted GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradWeightedGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#8b5cf6" /><stop offset="100%" stopColor="#ec4899" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradWeightedGPA)" />
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradWeightedGPA)" opacity="0.8" />
+        <circle cx="12" cy="9" r="2" fill="#fbbf24" />
+        <path d="M12 7L12.5 8.5L14 9L12.5 9.5L12 11L11.5 9.5L10 9L11.5 8.5Z" fill="#ffffff" />
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -840,6 +851,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/semester-gpa-calculator',
                         icon: <SemesterGPAIcon />,
                         gradientColors: { from: '#10b981', to: '#06b6d4' },
+                    },
+                    {
+                        title: 'Weighted GPA Calculator',
+                        description: 'Free weighted GPA calculator with AP, Honors, and IB course support. Calculate weighted GPA on 5.0 scale with +1.0 for AP/IB, +0.5 for Honors. Instant results with unweighted comparison.',
+                        link: 'education-and-exam-tools/gpa-tools/weighted-gpa-calculator',
+                        icon: <WeightedGPAIcon />,
+                        gradientColors: { from: '#8b5cf6', to: '#ec4899' },
                     },
                 ]
             },
