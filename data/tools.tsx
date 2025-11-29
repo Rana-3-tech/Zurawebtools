@@ -392,6 +392,16 @@ const CumulativeGPAIcon = () => (
     </svg>
 );
 
+const LetterGradeGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="letterGradeGPAIconTitle">
+        <title id="letterGradeGPAIconTitle">Letter Grade GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradLetterGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#8b5cf6" /><stop offset="100%" stopColor="#ec4899" /></linearGradient></defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" fill="url(#toolGradLetterGPA)" />
+        <text x="12" y="16" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ffffff">A</text>
+        <path d="M8 20 L12 18 L16 20" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" opacity="0.9" />
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -894,6 +904,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/cumulative-gpa-calculator',
                         icon: <CumulativeGPAIcon />,
                         gradientColors: { from: '#10b981', to: '#3b82f6' },
+                    },
+                    {
+                        title: 'GPA Calculator with Letter Grades',
+                        description: 'Convert letter grades (A, B, C) to GPA on standard 4.0 scale. Free online calculator supporting A+, A-, B+ grades with credit hours for college and high school students.',
+                        link: 'education-and-exam-tools/gpa-tools/letter-grade-gpa-calculator',
+                        icon: <LetterGradeGPAIcon />,
+                        gradientColors: { from: '#8b5cf6', to: '#ec4899' },
                     },
                 ]
             },
