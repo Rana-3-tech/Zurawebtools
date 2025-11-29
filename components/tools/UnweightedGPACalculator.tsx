@@ -369,7 +369,7 @@ const UnweightedGPACalculator: React.FC<UnweightedGPACalculatorProps> = ({ navig
       <div className="container mx-auto px-4 py-12 max-w-5xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
             Unweighted GPA Calculator
           </h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">

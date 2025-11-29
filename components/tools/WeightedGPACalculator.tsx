@@ -397,7 +397,7 @@ const WeightedGPACalculator: React.FC<WeightedGPACalculatorProps> = ({ navigateT
       <div className="container mx-auto px-4 py-12 max-w-5xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 bg-clip-text text-transparent mb-4">
             Weighted GPA Calculator
           </h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
