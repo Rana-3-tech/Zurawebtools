@@ -266,6 +266,13 @@ const UVAGPAIcon = () => (
         <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18ZM12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="url(#toolGradUVA)" />
     </svg>
 );
+const ASUGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="asuGPAIconTitle">
+        <title id="asuGPAIconTitle">ASU GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradASU" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#8C1D40" /><stop offset="100%" stopColor="#FFC627" /></linearGradient></defs>
+        <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18ZM12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="url(#toolGradASU)" />
+    </svg>
+);
 const LSACGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="lsacGPAIconTitle">
         <title id="lsacGPAIconTitle">LSAC GPA Calculator Icon</title>
@@ -683,6 +690,13 @@ export const toolCategories: Category[] = [
                 gradientColors: { from: '#E57200', to: '#232D4B' }, // UVA Orange and Navy Blue
             },
             {
+                title: 'ASU GPA Calculator',
+                description: 'Arizona State University GPA calculator with official ASU grading scale. Calculate current GPA, projected semester GPA, and cumulative GPA. Supports ASU\'s unique E grade system.',
+                link: 'education-and-exam-tools/university-gpa-tools/asu-gpa-calculator',
+                icon: <ASUGPAIcon />,
+                gradientColors: { from: '#8C1D40', to: '#FFC627' }, // ASU Maroon and Gold
+            },
+            {
                 title: 'LSAC GPA Calculator',
                 description: 'Calculate your Law School Admission Council (LSAC) CAS GPA for law school applications. Official LSAC grade conversion with A+ (4.33) support.',
                 link: 'education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
@@ -856,12 +870,19 @@ export const toolCategories: Category[] = [
                     },
                     {
                         title: 'UVA GPA Calculator',
-                        description: 'University of Virginia GPA calculator with official UVA grade scale (A+ = 4.0). Calculate semester GPA, cumulative GPA, and track Latin honors eligibility.',
+                        description: 'University of Virginia GPA calculator with official UVA grade scale (A+ = 4.0). Calculate semester GPA, cumulative GPA, and track Latin honors eligibility for Cum Laude, Magna Cum Laude, and Summa Cum Laude.',
                         link: 'education-and-exam-tools/university-gpa-tools/uva-gpa-calculator',
                         icon: <UVAGPAIcon />,
                         gradientColors: { from: '#E57200', to: '#232D4B' },
                     },
-                ]
+                    {
+                        title: 'ASU GPA Calculator',
+                        description: 'Arizona State University GPA calculator with official ASU grading scale. Calculate current GPA, projected semester GPA, and cumulative GPA. Supports ASU\'s unique E grade system.',
+                        link: 'education-and-exam-tools/university-gpa-tools/asu-gpa-calculator',
+                        icon: <ASUGPAIcon />,
+                        gradientColors: { from: '#8C1D40', to: '#FFC627' },
+                    },
+                ],
             },
             {
                 slug: 'admission-tools',
