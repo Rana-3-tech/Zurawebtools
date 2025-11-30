@@ -1209,8 +1209,7 @@ const MedicalSchoolGPACalculator: React.FC<MedicalSchoolGPACalculatorProps> = ({
 
         {/* Related Tools */}
         <RelatedTools 
-          relatedSlugs={['nursing-school-gpa-calculator', 'college-gpa-calculator', 'mcat-score-calculator', 'gre-score-calculator']} 
-          currentSlug="medical-school-gpa-calculator" 
+          currentToolPath="/education-and-exam-tools/gpa-tools/medical-school-gpa-calculator"
           navigateTo={navigateTo} 
         />
       </div>
