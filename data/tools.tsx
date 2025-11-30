@@ -412,6 +412,15 @@ const NursingSchoolGPAIcon = () => (
     </svg>
 );
 
+const MedicalSchoolGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="medicalGPAIconTitle">
+        <title id="medicalGPAIconTitle">Medical School GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradMedicalGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3B82F6" /><stop offset="50%" stopColor="#6366F1" /><stop offset="100%" stopColor="#8B5CF6" /></linearGradient></defs>
+        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" fill="url(#toolGradMedicalGPA)" opacity="0.2"/>
+        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke="url(#toolGradMedicalGPA)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -928,6 +937,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/nursing-school-gpa-calculator',
                         icon: <NursingSchoolGPAIcon />,
                         gradientColors: { from: '#f43f5e', to: '#a855f7' },
+                    },
+                    {
+                        title: 'Medical School GPA Calculator (AMCAS)',
+                        description: 'Calculate AMCAS GPA for medical school applications with separate BCPM (Biology, Chemistry, Physics, Math) and AO tracking. Includes retake policy and competitive analysis for MD and DO programs.',
+                        link: 'education-and-exam-tools/gpa-tools/medical-school-gpa-calculator',
+                        icon: <MedicalSchoolGPAIcon />,
+                        gradientColors: { from: '#3B82F6', to: '#8B5CF6' },
                     },
                 ]
             },
