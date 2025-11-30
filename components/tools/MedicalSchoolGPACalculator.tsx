@@ -1043,41 +1043,106 @@ const MedicalSchoolGPACalculator: React.FC<MedicalSchoolGPACalculatorProps> = ({
         </section>
 
         {/* About Section */}
-        <section id="about" className="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">About AMCAS GPA Calculation</h2>
+        <section id="about" className="bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-xl shadow-xl p-6 sm:p-8 mb-8 border-2 border-blue-100">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 mb-3">
+              About AMCAS GPA Calculation
+            </h2>
+            <p className="text-gray-600 text-sm">Your complete guide to understanding medical school GPA requirements</p>
+          </div>
+          
           <div className="prose prose-blue max-w-none">
-            <p className="text-gray-700 leading-relaxed mb-4">
-              The <strong>American Medical College Application Service (AMCAS)</strong> is the centralized application service used by most U.S. allopathic (MD) medical schools. AMCAS calculates your GPA using a standardized methodology that differs from many undergraduate institutions, making it crucial for pre-med students to understand how their GPA will be evaluated by admissions committees.
-            </p>
+            <div className="bg-white rounded-lg p-6 mb-6 border-l-4 border-blue-500 shadow-sm">
+              <p className="text-gray-700 leading-relaxed mb-0">
+                The <strong>American Medical College Application Service (AMCAS)</strong> is the centralized application service used by most U.S. allopathic (MD) medical schools. AMCAS calculates your GPA using a standardized methodology that differs from many undergraduate institutions, making it crucial for pre-med students to understand how their GPA will be evaluated by admissions committees prior to <strong>matriculation</strong>.
+              </p>
+            </div>
 
-            <h3 className="text-2xl font-bold text-gray-800 mt-6 mb-3">Understanding BCPM GPA</h3>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              <strong>BCPM (Biology, Chemistry, Physics, Mathematics) GPA</strong>, also called your science GPA, is one of the most important metrics in medical school admissions. This includes all coursework in biological sciences, chemistry (including biochemistry), physics, and mathematics. Medical schools pay close attention to this number because it predicts performance on the <a href="/education-and-exam-tools/medical-exam-tools/mcat-score-calculator" className="text-blue-600 hover:underline">MCAT exam</a> and success in medical school's rigorous science curriculum.
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-blue-900 mb-0">Understanding BCPM GPA</h3>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  <strong>BCPM (Biology, Chemistry, Physics, Mathematics) GPA</strong>, also called your science GPA, is one of the most important metrics in medical school admissions. This includes all coursework in biological sciences, chemistry (including biochemistry), physics, and mathematics. Medical schools pay close attention to this number because it predicts performance on the <a href="/education-and-exam-tools/medical-exam-tools/mcat-score-calculator" className="text-blue-600 hover:underline font-semibold">MCAT exam</a> and success in medical school's rigorous science curriculum.
+                </p>
+              </div>
 
-            <h3 className="text-2xl font-bold text-gray-800 mt-6 mb-3">AMCAS Retake Policy Explained</h3>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              Unlike many undergraduate institutions that use <strong>grade replacement</strong>, AMCAS counts <strong>BOTH attempts</strong> when you retake a course. If you earned a C in Organic Chemistry and retook it for an A, both grades are included in your GPA calculation. This policy makes it essential to perform well on the first attempt whenever possible. However, an upward trend with retakes can still demonstrate resilience and academic improvement to admissions committees.
-            </p>
+              <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-6 border-2 border-indigo-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-indigo-900 mb-0">AMCAS Retake Policy</h3>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Unlike many undergraduate institutions that use <strong>grade replacement</strong>, AMCAS counts <strong>BOTH attempts</strong> when you retake a course. If you earned a C in Organic Chemistry and retook it for an A, both grades are included in your GPA calculation. This policy makes it essential to perform well on the first attempt whenever possible. However, an upward trend with retakes can still demonstrate resilience and academic improvement to admissions committees.
+                </p>
+              </div>
+            </div>
 
-            <h3 className="text-2xl font-bold text-gray-800 mt-6 mb-3">Competitive GPA Benchmarks</h3>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              For <strong>MD programs</strong>, competitive applicants typically have an overall GPA of 3.7+ and a BCPM GPA of 3.6+. The minimum GPA threshold is generally around 3.0, though most successful applicants to allopathic schools have higher GPAs. <strong>DO (osteopathic) programs</strong> are slightly more holistic in their review, often accepting students with GPAs between 3.0-3.4 if they demonstrate strong clinical experience, research involvement, or exceptional <a href="/education-and-exam-tools/gpa-tools/college-gpa-calculator" className="text-blue-600 hover:underline">academic improvement trends</a>.
-            </p>
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-6 border-2 border-purple-200">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-purple-900 mb-3">Competitive GPA Benchmarks for Matriculation</h3>
+                  <p className="text-gray-700 leading-relaxed mb-3">
+                    For <strong>MD programs</strong>, competitive applicants typically have an overall GPA of 3.7+ and a BCPM GPA of 3.6+. The minimum GPA threshold is generally around 3.0, though most successful applicants to allopathic schools have higher GPAs.
+                  </p>
+                  <p className="text-gray-700 leading-relaxed mb-0">
+                    <strong>DO (osteopathic) programs</strong> are slightly more holistic in their review, often accepting students with GPAs between 3.0-3.4 if they demonstrate strong clinical experience, research involvement, or exceptional <a href="/education-and-exam-tools/gpa-tools/college-gpa-calculator" className="text-purple-600 hover:underline font-semibold">academic improvement trends</a>. Students applying through <strong>AACOMAS</strong> (osteopathic application service) or <strong>TMDSAS</strong> (Texas schools) should verify specific GPA requirements for their target institutions.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-            <h3 className="text-2xl font-bold text-gray-800 mt-6 mb-3">Community College Coursework</h3>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              AMCAS includes all college-level coursework from regionally accredited institutions, including <strong>community college courses</strong>. While these courses count in your GPA, some medical schools may view extensive science prerequisites taken at community colleges less favorably than those taken at four-year universities. Admissions committees prefer to see challenging upper-level science courses completed at a university to demonstrate readiness for medical school rigor.
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="bg-white rounded-lg p-6 border-2 border-gray-200 shadow-sm">
+                <h3 className="text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
+                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  Community College Coursework
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  AMCAS includes all college-level coursework from regionally accredited institutions, including <strong>community college courses</strong>. While these courses count in your GPA, some medical schools may view extensive science prerequisites taken at community colleges less favorably than those taken at four-year universities. Admissions committees prefer to see challenging upper-level science courses completed at a university to demonstrate readiness for medical school rigor.
+                </p>
+              </div>
 
-            <h3 className="text-2xl font-bold text-gray-800 mt-6 mb-3">Improving Your AMCAS GPA</h3>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              If your GPA is below competitive thresholds, several pathways exist for improvement. <strong>Post-baccalaureate programs</strong> allow you to take additional coursework that counts in your AMCAS GPA. <strong>Special Master's Programs (SMPs)</strong> in medical sciences demonstrate ability to handle graduate-level coursework similar to medical school. Taking upper-level science courses (Biochemistry, Immunology, Molecular Biology) at a university can also strengthen your science GPA while showing academic progression. Remember that all post-graduation coursework is included in your AMCAS GPA calculation, making these programs valuable for GPA repair.
-            </p>
+              <div className="bg-white rounded-lg p-6 border-2 border-gray-200 shadow-sm">
+                <h3 className="text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
+                  <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Improving Your AMCAS GPA
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  If your GPA is below competitive thresholds, several pathways exist for improvement. <strong>Post-baccalaureate programs</strong> allow you to take additional coursework that counts in your AMCAS GPA. <strong>Special Master's Programs (SMPs)</strong> in medical sciences demonstrate ability to handle graduate-level coursework similar to medical school. Taking upper-level science courses (Biochemistry, Immunology, Molecular Biology) at a university can also strengthen your science GPA while showing academic progression toward matriculation.
+                </p>
+              </div>
+            </div>
 
-            <p className="text-gray-700 leading-relaxed mt-6">
-              Our <strong>Medical School GPA Calculator</strong> uses the official AMCAS grade conversion chart and methodology to give you accurate GPA calculations. Use this tool throughout your pre-med journey to make informed decisions about course selection, retakes, and application timing. Understanding your AMCAS GPA early allows you to plan strategically and maximize your chances of medical school acceptance.
-            </p>
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-start gap-4">
+                <svg className="w-8 h-8 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="leading-relaxed mb-0">
+                  Our <strong>Medical School GPA Calculator</strong> uses the official AMCAS grade conversion chart and methodology to give you accurate GPA calculations for both AMCAS and AACOMAS applications. Use this tool throughout your pre-med journey to make informed decisions about course selection, retakes, and application timing. Understanding your AMCAS GPA early allows you to plan strategically and maximize your chances of medical school acceptance and successful matriculation.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1209,7 +1274,8 @@ const MedicalSchoolGPACalculator: React.FC<MedicalSchoolGPACalculatorProps> = ({
 
         {/* Related Tools */}
         <RelatedTools 
-          currentToolPath="/education-and-exam-tools/gpa-tools/medical-school-gpa-calculator"
+          relatedSlugs={['nursing-school-gpa-calculator', 'college-gpa-calculator', 'cumulative-gpa-calculator', 'mcat-score-calculator']} 
+          currentSlug="medical-school-gpa-calculator" 
           navigateTo={navigateTo} 
         />
       </div>
