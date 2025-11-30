@@ -430,6 +430,18 @@ const TransferGPAIcon = () => (
     </svg>
 );
 
+const GraduateSchoolGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="graduateSchoolGPAIconTitle">
+        <title id="graduateSchoolGPAIconTitle">Graduate School GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradGraduateGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#4F46E5" /><stop offset="50%" stopColor="#7C3AED" /><stop offset="100%" stopColor="#9333EA" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradGraduateGPA)" opacity="0.3"/>
+        <path d="M12 14l9-5-9-5-9 5 9 5z" stroke="url(#toolGradGraduateGPA)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" fill="url(#toolGradGraduateGPA)" opacity="0.7"/>
+        <circle cx="16" cy="8" r="2" fill="#FCD34D" stroke="#F59E0B" strokeWidth="1.5"/>
+        <text x="16" y="9.5" fontSize="2.5" fontWeight="bold" fill="#78350F" textAnchor="middle">3.0</text>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -960,6 +972,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/transfer-gpa-calculator',
                         icon: <TransferGPAIcon />,
                         gradientColors: { from: '#6366F1', to: '#A855F7' },
+                    },
+                    {
+                        title: 'Graduate School GPA Calculator',
+                        description: 'Calculate graduate GPA for Master\'s, PhD, and Doctoral programs with 3.0 minimum requirement. Track coursework vs research GPA, thesis credits, academic standing, honors eligibility, and assistantship qualification.',
+                        link: 'education-and-exam-tools/gpa-tools/graduate-school-gpa-calculator',
+                        icon: <GraduateSchoolGPAIcon />,
+                        gradientColors: { from: '#4F46E5', to: '#7C3AED' },
                     },
                 ]
             },
