@@ -421,6 +421,15 @@ const MedicalSchoolGPAIcon = () => (
     </svg>
 );
 
+const TransferGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="transferGPAIconTitle">
+        <title id="transferGPAIconTitle">Transfer GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradTransferGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#6366F1" /><stop offset="50%" stopColor="#8B5CF6" /><stop offset="100%" stopColor="#A855F7" /></linearGradient></defs>
+        <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" fill="url(#toolGradTransferGPA)" opacity="0.2"/>
+        <path d="M13 7h8m0 0l-3-3m3 3l-3 3M11 17H3m0 0l3 3m-3-3l3-3" stroke="url(#toolGradTransferGPA)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -944,6 +953,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/medical-school-gpa-calculator',
                         icon: <MedicalSchoolGPAIcon />,
                         gradientColors: { from: '#3B82F6', to: '#8B5CF6' },
+                    },
+                    {
+                        title: 'Transfer GPA Calculator',
+                        description: 'Calculate transfer GPA when moving between colleges with multiple institutional policies: Fresh Start (GPA resets), Combined (both institutions), or Weighted (transferred credits only). Track transfer credit limits.',
+                        link: 'education-and-exam-tools/gpa-tools/transfer-gpa-calculator',
+                        icon: <TransferGPAIcon />,
+                        gradientColors: { from: '#6366F1', to: '#A855F7' },
                     },
                 ]
             },
