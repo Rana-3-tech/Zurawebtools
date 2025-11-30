@@ -402,6 +402,16 @@ const LetterGradeGPAIcon = () => (
     </svg>
 );
 
+const NursingSchoolGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nursingGPAIconTitle">
+        <title id="nursingGPAIconTitle">Nursing School GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradNursingGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#f43f5e" /><stop offset="50%" stopColor="#ec4899" /><stop offset="100%" stopColor="#a855f7" /></linearGradient></defs>
+        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" fill="url(#toolGradNursingGPA)" opacity="0.2"/>
+        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" stroke="url(#toolGradNursingGPA)" strokeWidth="2" fill="none"/>
+        <path d="M12 7v10M7 12h10" stroke="url(#toolGradNursingGPA)" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -911,6 +921,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/letter-grade-gpa-calculator',
                         icon: <LetterGradeGPAIcon />,
                         gradientColors: { from: '#8b5cf6', to: '#ec4899' },
+                    },
+                    {
+                        title: 'Nursing School GPA Calculator',
+                        description: 'Calculate nursing school prerequisite GPA, science GPA, and overall GPA for BSN and ADN applications. Free calculator with competitive analysis and program requirements guide.',
+                        link: 'education-and-exam-tools/gpa-tools/nursing-school-gpa-calculator',
+                        icon: <NursingSchoolGPAIcon />,
+                        gradientColors: { from: '#f43f5e', to: '#a855f7' },
                     },
                 ]
             },

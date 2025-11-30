@@ -74,6 +74,7 @@ const WeightedGPACalculator = lazy(() => import('./components/tools/WeightedGPAC
 const UnweightedGPACalculator = lazy(() => import('./components/tools/UnweightedGPACalculator'));
 const CumulativeGPACalculator = lazy(() => import('./components/tools/CumulativeGPACalculator'));
 const LetterGradeGPACalculator = lazy(() => import('./components/tools/LetterGradeGPACalculator'));
+const NursingSchoolGPACalculator = lazy(() => import('./components/tools/NursingSchoolGPACalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -347,6 +348,7 @@ const App: React.FC = () => {
             'unweighted-gpa-calculator': UnweightedGPACalculator,
             'cumulative-gpa-calculator': CumulativeGPACalculator,
             'letter-grade-gpa-calculator': LetterGradeGPACalculator,
+            'nursing-school-gpa-calculator': NursingSchoolGPACalculator,
             'fill-dirt-calculator': FillDirtCalculator,
             'quilt-backing-calculator': QuiltBackingCalculator,
             'power-to-mass-ratio-calculator': PowerToMassRatioCalculator,
