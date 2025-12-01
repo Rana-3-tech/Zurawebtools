@@ -442,6 +442,17 @@ const GraduateSchoolGPAIcon = () => (
     </svg>
 );
 
+const PharmacySchoolGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pharmacySchoolGPAIconTitle">
+        <title id="pharmacySchoolGPAIconTitle">Pharmacy School GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradPharmacyGPA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#14B8A6" /><stop offset="50%" stopColor="#06B6D4" /><stop offset="100%" stopColor="#0EA5E9" /></linearGradient></defs>
+        <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" fill="url(#toolGradPharmacyGPA)" opacity="0.3"/>
+        <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke="url(#toolGradPharmacyGPA)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="17" cy="7" r="2.5" fill="#10B981" stroke="#059669" strokeWidth="1.5"/>
+        <text x="17" y="8.5" fontSize="2.5" fontWeight="bold" fill="#FFFFFF" textAnchor="middle">3.0</text>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -715,85 +726,7 @@ export const toolCategories: Category[] = [
         title: 'Education & Exam Tools',
         description: 'Essential calculators and tools for students, teachers, and academic professionals.',
         icon: <EducationExamIcon />,
-        tools: [
-            {
-                title: 'SAT Score Calculator',
-                description: 'Digital SAT raw to scaled score converter for 2024-2025. Calculate your total SAT score (400-1600) with percentile estimates and ACT concordance.',
-                link: 'education-and-exam-tools/test-score-tools/sat-score-calculator',
-                icon: <SATScoreCalculatorIcon />,
-                gradientColors: { from: '#001BB7', to: '#60A5FA' }, // Deep Blue to Light Blue
-            },
-            {
-                title: 'LSAT Score Calculator',
-                description: 'Free LSAT raw to scaled score converter for law school admissions. Calculate your LSAT score (120-180) with percentile rankings and law school target analysis.',
-                link: 'education-and-exam-tools/test-score-tools/lsat-score-calculator',
-                icon: <LSATScoreCalculatorIcon />,
-                gradientColors: { from: '#6366f1', to: '#8b5cf6' }, // Indigo to Purple
-            },
-            {
-                title: 'APUSH Score Calculator',
-                description: 'Free AP US History score calculator for 2026. Convert MCQ, SAQ, DBQ, and LEQ scores to AP scores (1-5) with percentile rankings and college credit information.',
-                link: 'education-and-exam-tools/test-score-tools/apush-score-calculator',
-                icon: <APUSHScoreCalculatorIcon />,
-                gradientColors: { from: '#dc2626', to: '#2563eb' }, // Red to Blue (American colors)
-            },
-            {
-                title: 'MCAT Score Calculator',
-                description: 'Medical College Admission Test score calculator for 2026. Convert raw section scores to scaled scores (118-132) with total score, percentile rankings, and medical school competitiveness analysis.',
-                link: 'education-and-exam-tools/test-score-tools/mcat-score-calculator',
-                icon: <APUSHScoreCalculatorIcon />,
-                gradientColors: { from: '#0ea5e9', to: '#06b6d4' }, // Medical blue/cyan
-            },
-            {
-                title: 'Berkeley GPA Calculator',
-                description: 'Calculate your UC Berkeley GPA with accurate grade point conversions. Supports letter grades, plus/minus system, and weighted courses.',
-                link: 'education-and-exam-tools/university-gpa-tools/berkeley-gpa-calculator',
-                icon: <BerkeleyGPAIcon />,
-                gradientColors: { from: '#0033A0', to: '#FDB515' }, // Berkeley Blue to Gold
-            },
-            {
-                title: 'Rutgers GPA Calculator',
-                description: 'Calculate your Rutgers University GPA using official grade scales. Engineering major average calculator with scenario planner and honors graduation requirements.',
-                link: 'education-and-exam-tools/university-gpa-tools/rutgers-gpa-calculator',
-                icon: <RutgersGPAIcon />,
-                gradientColors: { from: '#cc0033', to: '#ff0000' }, // Rutgers Scarlet Red
-            },
-            {
-                title: 'UTA GPA Calculator',
-                description: 'University of Texas at Arlington GPA calculator with Grade Point Deficiency (GPD) computation. Calculate semester GPA, raise cumulative GPA, and plan academic probation removal.',
-                link: 'education-and-exam-tools/university-gpa-tools/uta-gpa-calculator',
-                icon: <UTAGPAIcon />,
-                gradientColors: { from: '#FF8200', to: '#0064B0' }, // UTA Orange and Blue
-            },
-            {
-                title: 'UVA GPA Calculator',
-                description: 'University of Virginia GPA calculator with official UVA grade scale (A+ = 4.0). Calculate semester GPA, cumulative GPA, and track Latin honors eligibility for Cum Laude, Magna Cum Laude, and Summa Cum Laude.',
-                link: 'education-and-exam-tools/university-gpa-tools/uva-gpa-calculator',
-                icon: <UVAGPAIcon />,
-                gradientColors: { from: '#E57200', to: '#232D4B' }, // UVA Orange and Navy Blue
-            },
-            {
-                title: 'ASU GPA Calculator',
-                description: 'Arizona State University GPA calculator with official ASU grading scale. Calculate current GPA, projected semester GPA, and cumulative GPA. Supports ASU\'s unique E grade system.',
-                link: 'education-and-exam-tools/university-gpa-tools/asu-gpa-calculator',
-                icon: <ASUGPAIcon />,
-                gradientColors: { from: '#8C1D40', to: '#FFC627' }, // ASU Maroon and Gold
-            },
-            {
-                title: 'LSAC GPA Calculator',
-                description: 'Calculate your Law School Admission Council (LSAC) CAS GPA for law school applications. Official LSAC grade conversion with A+ (4.33) support.',
-                link: 'education-and-exam-tools/gpa-tools/lsac-gpa-calculator',
-                icon: <LSACGPAIcon />,
-                gradientColors: { from: '#6366f1', to: '#ec4899' }, // Indigo to Pink
-            },
-            {
-                title: 'CSU GPA Calculator',
-                description: 'Official California State University GPA calculator with A-G course verification. Calculate your CSU eligibility GPA with honors weighting caps and 10th-11th grade restrictions.',
-                link: 'education-and-exam-tools/gpa-tools/csu-gpa-calculator',
-                icon: <CSUGPAIcon />,
-                gradientColors: { from: '#dc2626', to: '#ea580c' }, // Red to Orange
-            },
-        ],
+        tools: [],
         subCategories: [
             {
                 slug: 'test-score-tools',
@@ -979,6 +912,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/graduate-school-gpa-calculator',
                         icon: <GraduateSchoolGPAIcon />,
                         gradientColors: { from: '#4F46E5', to: '#7C3AED' },
+                    },
+                    {
+                        title: 'Pharmacy School GPA Calculator',
+                        description: 'Calculate PharmD and pre-pharmacy GPA with BCPM science courses separation. Track NAPLEX eligibility (3.0+), Rho Chi Honor Society qualification, and pharmacy residency competitiveness for PharmD programs.',
+                        link: 'education-and-exam-tools/gpa-tools/pharmacy-school-gpa-calculator',
+                        icon: <PharmacySchoolGPAIcon />,
+                        gradientColors: { from: '#14B8A6', to: '#06B6D4' },
                     },
                 ]
             },
