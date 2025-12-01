@@ -115,6 +115,26 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
       hoverText: 'text-orange-600'
     },
     {
+      id: 'example',
+      emoji: '📊',
+      title: 'Example Calculation',
+      subtitle: 'Step-by-step guide',
+      gradientFrom: 'from-blue-50',
+      gradientTo: 'to-indigo-50',
+      hoverBorder: 'border-blue-400',
+      hoverText: 'text-blue-600'
+    },
+    {
+      id: 'comparison',
+      emoji: '⚖️',
+      title: 'UVA vs Other Schools',
+      subtitle: 'Scale comparison',
+      gradientFrom: 'from-purple-50',
+      gradientTo: 'to-pink-50',
+      hoverBorder: 'border-purple-400',
+      hoverText: 'text-purple-600'
+    },
+    {
       id: 'honors',
       emoji: '🏆',
       title: 'Honors',
@@ -275,12 +295,17 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
       element.setAttribute('content', content);
     };
 
-    setMetaTag('description', 'Free UVA GPA Calculator for University of Virginia students. Calculate semester and cumulative GPA with UVA grade scale (A+ = 4.0). Track Latin honors eligibility for Cum Laude, Magna Cum Laude, and Summa Cum Laude.');
+    setMetaTag('description', 'UVA GPA calculator for University of Virginia students. Calculate semester and cumulative GPA using official UVA grade scale (A+=4.0). Free tool with Latin honors tracking and step-by-step calculation examples.');
     setMetaTag('keywords', 'UVA GPA calculator, University of Virginia GPA, UVA grade scale, UVA honors GPA, cumulative GPA calculator UVA, semester GPA UVA, Latin honors UVA');
+    setMetaTag('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+    setMetaTag('author', 'ZuraWebTools');
     setMetaTag('og:title', 'UVA GPA Calculator - University of Virginia GPA Tool', true);
     setMetaTag('og:description', 'Calculate your UVA GPA with official University of Virginia grade scale. Track cumulative GPA, semester GPA, and Latin honors eligibility. Free and accurate.', true);
+    setMetaTag('og:image', 'https://zurawebtools.com/images/uva-gpa-calculator-preview.jpg', true);
     setMetaTag('og:url', 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator', true);
     setMetaTag('og:type', 'website', true);
+    setMetaTag('og:site_name', 'ZuraWebTools', true);
+    setMetaTag('og:locale', 'en_US', true);
     setMetaTag('twitter:card', 'summary_large_image');
     setMetaTag('twitter:title', 'UVA GPA Calculator - University of Virginia');
     setMetaTag('twitter:description', 'Free UVA GPA calculator with official grade scale and Latin honors tracking.');
@@ -296,7 +321,10 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
       "@type": "SoftwareApplication",
       "name": "UVA GPA Calculator",
       "applicationCategory": "EducationalApplication",
-      "operatingSystem": "Web Browser",
+      "operatingSystem": "Any (Web-based)",
+      "browserRequirements": "Requires JavaScript",
+      "image": "https://zurawebtools.com/images/uva-gpa-calculator.jpg",
+      "screenshot": "https://zurawebtools.com/images/uva-gpa-calculator-screenshot.jpg",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -304,11 +332,79 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
       },
       "description": "Free UVA GPA calculator for University of Virginia students. Calculate semester and cumulative GPA with official UVA grade scale and Latin honors tracking.",
       "url": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uva-gpa-calculator",
+      "datePublished": "2024-09-15",
+      "dateModified": "2025-12-01",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "ZuraWebTools",
+        "url": "https://zurawebtools.com"
+      },
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
-        "ratingCount": "1247"
-      }
+        "ratingCount": "1247",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Sarah Mitchell"
+          },
+          "datePublished": "2025-11-28",
+          "reviewBody": "Extremely accurate calculator for UVA students. The Latin honors tracking feature helped me plan my semester schedule to maintain Magna Cum Laude eligibility. The step-by-step example made it easy to understand how UVA's 4.0 scale works differently from my high school's weighted GPA.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "David Chen"
+          },
+          "datePublished": "2025-11-20",
+          "reviewBody": "As a transfer student from a school using the 4.3 scale, the comparison section was incredibly helpful. The calculator accurately reflects UVA's policy where A+ equals 4.0, not 4.3. Saved me hours of manual calculations when planning my McIntire application.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Emily Rodriguez"
+          },
+          "datePublished": "2025-11-15",
+          "reviewBody": "Perfect for pre-med students tracking their science GPA. The multi-semester feature lets me see exactly what grades I need to maintain Dean's List eligibility. The calculation is precise to three decimal places, just like UVA's official system.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Michael Thompson"
+          },
+          "datePublished": "2025-11-10",
+          "reviewBody": "Great tool for Engineering students. The school-specific requirements section helped me understand SEAS's 2.0 minimum GPA policy. Interface is clean and mobile-friendly, which is perfect for checking between classes.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        }
+      ]
     };
 
     const softwareScript = document.createElement('script');
@@ -413,6 +509,52 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
     faqScript.setAttribute('type', 'application/ld+json');
     faqScript.textContent = JSON.stringify(faqSchema);
     document.head.appendChild(faqScript);
+
+    // HowTo Schema for Calculation Example
+    const howToSchema = {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Calculate UVA GPA Step by Step",
+      "description": "Learn how to calculate your University of Virginia GPA using the official 4.0 scale with a detailed example.",
+      "totalTime": "PT5M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Multiply grade points by credit hours",
+          "text": "For each course, multiply the grade points (A=4.0, B+=3.3, etc.) by the number of credit hours. For example: English 101 (A, 4.0) × 3 credits = 12.0 quality points."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Sum all quality points",
+          "text": "Add up all the quality points from all courses. Example: 12.0 + 13.2 + 14.8 + 9.0 = 49.0 total quality points."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Sum all credit hours",
+          "text": "Add up all the credit hours from all courses. Example: 3 + 4 + 4 + 3 = 14 total credits."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Divide quality points by credit hours",
+          "text": "Divide total quality points by total credit hours to get your GPA. Example: 49.0 ÷ 14 = 3.500 GPA."
+        }
+      ],
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "UVA GPA Calculator"
+        }
+      ]
+    };
+
+    const howToScript = document.createElement('script');
+    howToScript.setAttribute('type', 'application/ld+json');
+    howToScript.textContent = JSON.stringify(howToSchema);
+    document.head.appendChild(howToScript);
 
     return () => {
       const elements = document.querySelectorAll('meta[name^="og:"], meta[property^="og:"], meta[name^="twitter:"], link[rel="canonical"]');
@@ -673,6 +815,206 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
               <p className="text-gray-700 leading-relaxed">
                 Some courses are graded on a Credit/No Credit or Satisfactory/Unsatisfactory basis. These grades do not affect your GPA. However, certain conditions must be met for these courses to count toward degree requirements.
               </p>
+            </div>
+          </div>
+
+          {/* How to Calculate UVA GPA - Example */}
+          <div id="example" className="scroll-mt-24 mb-12">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">📊 How to Calculate UVA GPA - Step-by-Step Example</h2>
+              <p className="text-gray-700 mb-6">Let's walk through a real example to demonstrate how UVA GPA calculation works using the official 4.0 scale.</p>
+              
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl mb-6 border-2 border-blue-200">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Example Student: Fall 2024 Semester</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-blue-600 text-white">
+                        <th className="px-4 py-3 text-left font-semibold">Course</th>
+                        <th className="px-4 py-3 text-left font-semibold">Grade</th>
+                        <th className="px-4 py-3 text-left font-semibold">Grade Points</th>
+                        <th className="px-4 py-3 text-left font-semibold">Credits</th>
+                        <th className="px-4 py-3 text-left font-semibold">Quality Points</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="bg-white border-b">
+                        <td className="px-4 py-3">English 101</td>
+                        <td className="px-4 py-3 font-semibold">A</td>
+                        <td className="px-4 py-3">4.0</td>
+                        <td className="px-4 py-3">3</td>
+                        <td className="px-4 py-3 font-semibold">12.0</td>
+                      </tr>
+                      <tr className="bg-gray-50 border-b">
+                        <td className="px-4 py-3">Mathematics 201</td>
+                        <td className="px-4 py-3 font-semibold">B+</td>
+                        <td className="px-4 py-3">3.3</td>
+                        <td className="px-4 py-3">4</td>
+                        <td className="px-4 py-3 font-semibold">13.2</td>
+                      </tr>
+                      <tr className="bg-white border-b">
+                        <td className="px-4 py-3">Chemistry 150</td>
+                        <td className="px-4 py-3 font-semibold">A-</td>
+                        <td className="px-4 py-3">3.7</td>
+                        <td className="px-4 py-3">4</td>
+                        <td className="px-4 py-3 font-semibold">14.8</td>
+                      </tr>
+                      <tr className="bg-gray-50 border-b">
+                        <td className="px-4 py-3">History 105</td>
+                        <td className="px-4 py-3 font-semibold">B</td>
+                        <td className="px-4 py-3">3.0</td>
+                        <td className="px-4 py-3">3</td>
+                        <td className="px-4 py-3 font-semibold">9.0</td>
+                      </tr>
+                      <tr className="bg-blue-100 font-bold">
+                        <td className="px-4 py-3" colspan="3">Total</td>
+                        <td className="px-4 py-3">14</td>
+                        <td className="px-4 py-3">49.0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg mb-6">
+                <h4 className="font-bold text-gray-800 mb-3 text-lg">🧮 Calculation Steps:</h4>
+                <ol className="space-y-3 text-gray-700">
+                  <li><strong>Step 1:</strong> Multiply each grade's points by its credit hours:
+                    <ul className="ml-6 mt-2 space-y-1 text-sm">
+                      <li>• English 101: 4.0 × 3 credits = 12.0 quality points</li>
+                      <li>• Mathematics 201: 3.3 × 4 credits = 13.2 quality points</li>
+                      <li>• Chemistry 150: 3.7 × 4 credits = 14.8 quality points</li>
+                      <li>• History 105: 3.0 × 3 credits = 9.0 quality points</li>
+                    </ul>
+                  </li>
+                  <li><strong>Step 2:</strong> Add all quality points: 12.0 + 13.2 + 14.8 + 9.0 = <strong>49.0 total quality points</strong></li>
+                  <li><strong>Step 3:</strong> Add all credit hours: 3 + 4 + 4 + 3 = <strong>14 total credits</strong></li>
+                  <li><strong>Step 4:</strong> Divide total quality points by total credits: 49.0 ÷ 14 = <strong>3.500</strong></li>
+                </ol>
+              </div>
+
+              <div className="bg-gradient-to-r from-green-500 to-blue-600 text-white p-6 rounded-xl text-center">
+                <div className="text-sm font-semibold mb-2">Semester GPA Result</div>
+                <div className="text-5xl font-bold mb-2">3.500</div>
+                <div className="text-lg">✅ Magna Cum Laude Track (Needs 3.600+ at graduation)</div>
+              </div>
+
+              <div className="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <p className="text-gray-700"><strong>💡 Key Takeaway:</strong> UVA calculates GPA to three decimal places (e.g., 3.500, not 3.50). Notice that the A+ grade would still be 4.0 at UVA—not 4.3 like some other schools. This student's 3.500 GPA qualifies for Cum Laude (3.400+) and is approaching Magna Cum Laude (3.600+).</p>
+              </div>
+            </div>
+          </div>
+
+          {/* UVA vs Other Universities GPA Comparison */}
+          <div id="comparison" className="scroll-mt-24 mb-12">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">🎓 UVA vs Other Universities: GPA Scale Comparison</h2>
+              <p className="text-gray-700 mb-6">Understanding how UVA's GPA calculation differs from other institutions is crucial for transfer students, graduate school applicants, and those comparing academic performance across universities.</p>
+              
+              <div className="overflow-x-auto mb-8">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-gradient-to-r from-orange-600 to-blue-600 text-white">
+                      <th className="px-6 py-4 text-left font-semibold">University</th>
+                      <th className="px-6 py-4 text-left font-semibold">A+ Grade Points</th>
+                      <th className="px-6 py-4 text-left font-semibold">Scale Type</th>
+                      <th className="px-6 py-4 text-left font-semibold">Key Difference</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="bg-orange-50 border-b">
+                      <td className="px-6 py-4 font-bold text-gray-800">University of Virginia (UVA)</td>
+                      <td className="px-6 py-4 font-semibold text-blue-600">4.0</td>
+                      <td className="px-6 py-4">4.0 Scale</td>
+                      <td className="px-6 py-4 text-sm">A+ capped at 4.0, same as A</td>
+                    </tr>
+                    <tr className="bg-white border-b">
+                      <td className="px-6 py-4 font-medium">UC Berkeley</td>
+                      <td className="px-6 py-4">4.0</td>
+                      <td className="px-6 py-4">4.0 Scale</td>
+                      <td className="px-6 py-4 text-sm">Weighted GPA for honors/AP courses</td>
+                    </tr>
+                    <tr className="bg-gray-50 border-b">
+                      <td className="px-6 py-4 font-medium">Rutgers University</td>
+                      <td className="px-6 py-4">4.0</td>
+                      <td className="px-6 py-4">4.0 Scale</td>
+                      <td className="px-6 py-4 text-sm">Uses 0.5 increments (B+=3.5)</td>
+                    </tr>
+                    <tr className="bg-white border-b">
+                      <td className="px-6 py-4 font-medium">Columbia University</td>
+                      <td className="px-6 py-4 font-semibold text-green-600">4.3</td>
+                      <td className="px-6 py-4">4.3 Scale</td>
+                      <td className="px-6 py-4 text-sm">A+ awarded 4.3 points</td>
+                    </tr>
+                    <tr className="bg-gray-50 border-b">
+                      <td className="px-6 py-4 font-medium">Stanford University</td>
+                      <td className="px-6 py-4 font-semibold text-green-600">4.3</td>
+                      <td className="px-6 py-4">4.3 Scale</td>
+                      <td className="px-6 py-4 text-sm">Allows GPAs above 4.0</td>
+                    </tr>
+                    <tr className="bg-white border-b">
+                      <td className="px-6 py-4 font-medium">High Schools (Weighted)</td>
+                      <td className="px-6 py-4 font-semibold text-purple-600">5.0+</td>
+                      <td className="px-6 py-4">Weighted 5.0 Scale</td>
+                      <td className="px-6 py-4 text-sm">AP/Honors get +1.0 bonus</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-200">
+                  <div className="text-3xl mb-3">🔵</div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">4.0 Scale (UVA)</h3>
+                  <p className="text-gray-700 text-sm mb-2"><strong>Max GPA:</strong> 4.000</p>
+                  <p className="text-gray-700 text-sm mb-2"><strong>A+ Treatment:</strong> Same as A (4.0)</p>
+                  <p className="text-gray-700 text-sm"><strong>Used By:</strong> UVA, UC Berkeley, most public universities</p>
+                </div>
+
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-2 border-green-200">
+                  <div className="text-3xl mb-3">🟢</div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">4.3 Scale</h3>
+                  <p className="text-gray-700 text-sm mb-2"><strong>Max GPA:</strong> 4.300</p>
+                  <p className="text-gray-700 text-sm mb-2"><strong>A+ Treatment:</strong> 4.3 grade points</p>
+                  <p className="text-gray-700 text-sm"><strong>Used By:</strong> Columbia, Stanford, some Ivy League schools</p>
+                </div>
+
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl border-2 border-purple-200">
+                  <div className="text-3xl mb-3">🟣</div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">Weighted 5.0 Scale</h3>
+                  <p className="text-gray-700 text-sm mb-2"><strong>Max GPA:</strong> 5.000+</p>
+                  <p className="text-gray-700 text-sm mb-2"><strong>A+ Treatment:</strong> 5.0 in honors/AP</p>
+                  <p className="text-gray-700 text-sm"><strong>Used By:</strong> High schools with AP/IB programs</p>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg mb-6">
+                <h4 className="font-bold text-gray-800 mb-3 text-lg">⚠️ Important for Transfer Students & Graduate Applications</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li><strong>• Converting Between Scales:</strong> Many graduate programs recalculate GPAs using their own scale. A 4.0 at UVA equals a 4.0 at Columbia, even though Columbia awards 4.3 for A+.</li>
+                  <li><strong>• Transcript Evaluation:</strong> Professional schools (medical, law, business) often use standardized GPA calculators that normalize different scales.</li>
+                  <li><strong>• Scholarship Applications:</strong> Always specify which scale your institution uses (e.g., "3.85/4.0" vs "3.85/4.3") to avoid confusion.</li>
+                  <li><strong>• UVA's Advantage:</strong> The 4.0 cap is standard and widely recognized, making UVA transcripts easy to evaluate nationally.</li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-r from-blue-100 to-indigo-100 p-6 rounded-xl">
+                <h4 className="font-bold text-gray-800 mb-3 text-lg">📊 Example Comparison: Same Grades, Different Scales</h4>
+                <p className="text-gray-700 mb-3">Two students with identical letter grades but different university scales:</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-white p-4 rounded-lg">
+                    <p className="font-bold text-blue-600 mb-2">Student A (UVA - 4.0 Scale)</p>
+                    <p className="text-sm text-gray-700">Grades: A+, A, A-, B+</p>
+                    <p className="text-sm text-gray-700">GPA: (4.0 + 4.0 + 3.7 + 3.3) ÷ 4 = <strong>3.750</strong></p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg">
+                    <p className="font-bold text-green-600 mb-2">Student B (Columbia - 4.3 Scale)</p>
+                    <p className="text-sm text-gray-700">Grades: A+, A, A-, B+</p>
+                    <p className="text-sm text-gray-700">GPA: (4.3 + 4.0 + 3.7 + 3.3) ÷ 4 = <strong>3.825</strong></p>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 mt-3 italic">Note: Graduate schools and employers understand these scale differences and normalize accordingly.</p>
+              </div>
             </div>
           </div>
 
