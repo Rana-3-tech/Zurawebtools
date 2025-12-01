@@ -453,6 +453,23 @@ const PharmacySchoolGPAIcon = () => (
     </svg>
 );
 
+const PASchoolGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="paSchoolGPAIconTitle">
+        <title id="paSchoolGPAIconTitle">PA School GPA Calculator Icon</title>
+        <defs>
+            <linearGradient id="toolGradPASchoolGPA" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="50%" stopColor="#6366f1" />
+                <stop offset="100%" stopColor="#8b5cf6" />
+            </linearGradient>
+        </defs>
+        <path d="M12 2C10.9 2 10 2.9 10 4V5C8.34 5 7 6.34 7 8V15C7 16.66 8.34 18 10 18H14C15.66 18 17 16.66 17 15V8C17 6.34 15.66 5 14 5V4C14 2.9 13.1 2 12 2ZM12 4C12 4 12 4 12 4C12 4 12 4 12 4Z" fill="url(#toolGradPASchoolGPA)" fillOpacity="0.3"/>
+        <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke="url(#toolGradPASchoolGPA)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="17" cy="7" r="2.5" fill="#10B981" stroke="#059669" strokeWidth="1.5"/>
+        <text x="17" y="8.5" fontSize="2.5" fontWeight="bold" fill="#FFFFFF" textAnchor="middle">3.0</text>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -919,6 +936,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/pharmacy-school-gpa-calculator',
                         icon: <PharmacySchoolGPAIcon />,
                         gradientColors: { from: '#14B8A6', to: '#06B6D4' },
+                    },
+                    {
+                        title: 'PA School GPA Calculator',
+                        description: 'Free PA school GPA calculator. Calculate CASPA GPA with science BCPM and overall cumulative GPA for physician assistant programs. Track patient care hours.',
+                        link: 'education-and-exam-tools/gpa-tools/pa-school-gpa-calculator',
+                        icon: <PASchoolGPAIcon />,
+                        gradientColors: { from: '#3b82f6', to: '#8b5cf6' },
                     },
                 ]
             },
