@@ -965,7 +965,7 @@ const RutgersGPACalculator: React.FC<RutgersGPACalculatorProps> = ({ navigateTo 
                 </div>
               </div>
               <p>
-                To calculate your GPA: List courses with grades and credits → Multiply grade value by credits for each course (= Quality Points) → Add all points together → Add all credits together → Divide total points by total credits.
+                To calculate your GPA: List courses with grades and credits → Multiply grade value by credits for each course (= Quality Points) → Add all points together → Add all credits together → Divide total points by total credits. For other university-specific calculations, see our <a href="/education-and-exam-tools/gpa-tools/uva-gpa-calculator" className="text-indigo-600 hover:underline font-medium">UVA GPA Calculator</a> for University of Virginia students.
               </p>
             </div>
 

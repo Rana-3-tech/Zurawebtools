@@ -842,7 +842,7 @@ const BerkeleyGPACalculator: React.FC = () => {
                     <li>semester + cumulative scenarios,</li>
                     <li>real-time GPA forecasting for future planning.</li>
                   </ul>
-                  <p className="text-gray-600 text-lg leading-relaxed">For broader academic analysis, you can also use the LSAC GPA Calculator or SAT Score Calculator to understand how test performance aligns with GPA trends.</p>
+                  <p className="text-gray-600 text-lg leading-relaxed">For broader academic analysis, you can also use the LSAC GPA Calculator or SAT Score Calculator to understand how test performance aligns with GPA trends. University of Virginia students can use our <a href="/education-and-exam-tools/gpa-tools/uva-gpa-calculator" className="text-blue-600 hover:underline font-medium">UVA GPA Calculator</a> for institution-specific calculations with Latin honors tracking.</p>
                 </div>
               </div>
             </div>

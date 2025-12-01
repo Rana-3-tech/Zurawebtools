@@ -857,7 +857,10 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
             <h3 className="text-2xl font-bold text-gray-900 mt-6 mb-3">Why GPA Matters</h3>
             <p>Your academic performance plays a crucial role in scholarship eligibility, honor society membership, and graduate school admissions. Many employers also consider it when evaluating recent graduates. Understanding how to track and improve your grades helps you make informed decisions about course selection and academic goals.</p>
             
-            <p className="mt-6">For more tools to help with your academic journey, check out our <a href="/berkeley-gpa-calculator" className="text-indigo-600 hover:underline font-medium">Berkeley GPA Calculator</a> for UC-specific calculations, or explore our <a href="/sat-score-calculator" className="text-indigo-600 hover:underline font-medium">SAT Score Calculator</a> for standardized test planning.</p>
+            <h3 className="text-2xl font-bold text-gray-900 mt-6 mb-3">University-Specific GPA Calculators</h3>
+            <p>Different universities may use unique grading scales or calculation methods. For University of Virginia students, our <a href="/education-and-exam-tools/gpa-tools/uva-gpa-calculator" className="text-indigo-600 hover:underline font-medium">UVA GPA Calculator</a> uses the official UVA 4.0 scale (where A+ = 4.0, not 4.3) and includes Latin honors tracking for Cum Laude, Magna Cum Laude, and Summa Cum Laude eligibility. Similarly, UC Berkeley students can use our <a href="/berkeley-gpa-calculator" className="text-indigo-600 hover:underline font-medium">Berkeley GPA Calculator</a> for campus-specific calculations.</p>
+            
+            <p className="mt-6">For more tools to help with your academic journey, explore our <a href="/sat-score-calculator" className="text-indigo-600 hover:underline font-medium">SAT Score Calculator</a> for standardized test planning and college admissions preparation.</p>
           </div>
         </div>
 
