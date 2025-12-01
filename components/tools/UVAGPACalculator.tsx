@@ -19,7 +19,7 @@ interface UVAGPACalculatorProps {
 }
 
 // UVA Grade Scale (A+ = 4.0, not 4.3) - Defined outside component to prevent re-creation
-const GRADE_SCALE: { [key: string]: number } = {
+const GRADE_SCALE = {
   'A+': 4.0,
   'A': 4.0,
   'A-': 3.7,
@@ -33,7 +33,9 @@ const GRADE_SCALE: { [key: string]: number } = {
   'D': 1.0,
   'D-': 0.7,
   'F': 0.0
-};
+} as const;
+
+type Grade = keyof typeof GRADE_SCALE;
 
 const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
   // State Management with localStorage persistence
@@ -54,21 +56,29 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
         console.error('Failed to parse saved semesters, resetting to default:', e);
         // Clear corrupted data
         localStorage.removeItem('uva-gpa-semesters');
+        // Notify user about corruption
+        if (typeof window !== 'undefined') {
+          setTimeout(() => setShowCorruptionWarning(true), 100);
+        }
       }
     }
     return [{ id: 1, courses: [{ name: '', grade: 'A', credits: 3 }] }];
   });
 
   const [cumulativeGPA, setCumulativeGPA] = useState<number>(0);
+  const [showCorruptionWarning, setShowCorruptionWarning] = useState<boolean>(false);
 
-  // Auto-save to localStorage
+  // Auto-save to localStorage with debounce (500ms) for performance
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      try {
-        localStorage.setItem('uva-gpa-semesters', JSON.stringify(semesters));
-      } catch (e) {
-        console.error('Failed to save to localStorage:', e);
-      }
+      const timer = setTimeout(() => {
+        try {
+          localStorage.setItem('uva-gpa-semesters', JSON.stringify(semesters));
+        } catch (e) {
+          console.error('Failed to save to localStorage:', e);
+        }
+      }, 500);
+      return () => clearTimeout(timer);
     }
   }, [semesters]);
 
@@ -83,6 +93,16 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
       gradientTo: 'to-indigo-50',
       hoverBorder: 'border-indigo-400',
       hoverText: 'text-indigo-600'
+    },
+    {
+      id: 'examples',
+      emoji: '📝',
+      title: 'Quick Examples',
+      subtitle: 'Sample GPA scenarios',
+      gradientFrom: 'from-orange-50',
+      gradientTo: 'to-yellow-50',
+      hoverBorder: 'border-orange-400',
+      hoverText: 'text-orange-600'
     },
     {
       id: 'understanding',
@@ -181,6 +201,14 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
     const existingIds = semesters.map(s => s.id);
     const newId = existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
     setSemesters([...semesters, { id: newId, courses: [{ name: '', grade: 'A', credits: 3 }] }]);
+    
+    // Smooth scroll to new semester after brief delay
+    setTimeout(() => {
+      const newSemesterElement = document.querySelector(`[data-semester-id="${newId}"]`);
+      if (newSemesterElement) {
+        newSemesterElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
   };
 
   const removeSemester = (semesterId: number) => {
@@ -281,6 +309,175 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
     }
   };
 
+  // Handle print
+  const handlePrint = () => {
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+
+    const semesterResults = semesters.map((semester, index) => ({
+      name: `Semester ${index + 1}`,
+      gpa: calculateSemesterGPA(semester),
+      courses: semester.courses
+    }));
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>UVA GPA Report - University of Virginia</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid #E57200; padding-bottom: 20px; }
+            .header h1 { color: #232D4B; margin: 0; }
+            .header p { color: #666; margin: 5px 0; }
+            .semester { margin-bottom: 30px; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+            .gpa-display { font-size: 24px; font-weight: bold; color: #E57200; text-align: center; margin: 20px 0; }
+            table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #232D4B; color: white; }
+            .cumulative { background-color: #f0f4f8; padding: 20px; border-radius: 8px; margin-top: 20px; border: 2px solid #E57200; }
+            .honors-badge { background-color: #E57200; color: white; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 10px; font-weight: bold; }
+            .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; border-top: 1px solid #ddd; padding-top: 20px; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>University of Virginia GPA Report</h1>
+            <p>Official UVA GPA Scale (A+ = 4.0)</p>
+            <p>Generated on ${new Date().toLocaleDateString()}</p>
+          </div>
+
+          ${semesterResults.map(semester => `
+            <div class="semester">
+              <h2>${semester.name}</h2>
+              <div class="gpa-display">Semester GPA: ${semester.gpa.toFixed(3)}</div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Course Name</th>
+                    <th>Grade</th>
+                    <th>Credits</th>
+                    <th>Grade Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${semester.courses.map(course => {
+                    const gradePoint = GRADE_SCALE[course.grade] ?? 0;
+                    const qualityPoints = (gradePoint * course.credits).toFixed(2);
+                    // Sanitize course name to prevent XSS
+                    const sanitizedName = (course.name || 'Unnamed Course')
+                      .replace(/&/g, '&amp;')
+                      .replace(/</g, '&lt;')
+                      .replace(/>/g, '&gt;')
+                      .replace(/"/g, '&quot;')
+                      .replace(/'/g, '&#39;');
+                    return `
+                    <tr>
+                      <td>${sanitizedName}</td>
+                      <td>${course.grade}</td>
+                      <td>${course.credits}</td>
+                      <td>${qualityPoints}</td>
+                    </tr>
+                  `}).join('')}
+                </tbody>
+              </table>
+            </div>
+          `).join('')}
+
+          <div class="cumulative">
+            <h2 style="color: #232D4B; text-align: center;">Cumulative GPA</h2>
+            <div class="gpa-display" style="color: #232D4B;">Overall GPA: ${cumulativeGPA.toFixed(3)}</div>
+            <div style="text-align: center;">
+              <span class="honors-badge">${getHonorsStatus(cumulativeGPA)}</span>
+            </div>
+            ${cumulativeGPA >= 3.400 ? `
+              <div style="text-align: center; margin-top: 15px; color: #666;">
+                ${cumulativeGPA < 3.600 ? '🎯 ' + (3.600 - cumulativeGPA).toFixed(3) + ' points to Magna Cum Laude' : ''}
+                ${cumulativeGPA >= 3.600 && cumulativeGPA < 3.800 ? '🎯 ' + (3.800 - cumulativeGPA).toFixed(3) + ' points to Summa Cum Laude' : ''}
+                ${cumulativeGPA >= 3.800 ? '🌟 Highest honor achieved!' : ''}
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="footer">
+            <p><strong>Latin Honors Requirements:</strong></p>
+            <p>Cum Laude: 3.400 - 3.599 | Magna Cum Laude: 3.600 - 3.799 | Summa Cum Laude: 3.800 - 4.000</p>
+            <p>Generated by ZuraWebTools UVA GPA Calculator | https://zurawebtools.com/uva-gpa-calculator</p>
+          </div>
+        </body>
+      </html>
+    `;
+
+    printWindow.document.write(html);
+    printWindow.document.close();
+    
+    // Fix race condition: Wait for window to fully load before printing
+    printWindow.onload = () => {
+      printWindow.print();
+    };
+  };
+
+  // Handle download
+  const handleDownload = () => {
+    const semesterResults = semesters.map((semester, index) => ({
+      name: `Semester ${index + 1}`,
+      gpa: calculateSemesterGPA(semester),
+      courses: semester.courses
+    }));
+
+    let textContent = `UNIVERSITY OF VIRGINIA GPA REPORT\n`;
+    textContent += `Official UVA GPA Scale (A+ = 4.0)\n`;
+    textContent += `Generated on: ${new Date().toLocaleDateString()}\n`;
+    textContent += `${'='.repeat(60)}\n\n`;
+
+    semesterResults.forEach(semester => {
+      textContent += `${semester.name}\n`;
+      textContent += `Semester GPA: ${semester.gpa.toFixed(3)}\n\n`;
+      textContent += `Courses:\n`;
+      semester.courses.forEach(course => {
+        const gradePoint = GRADE_SCALE[course.grade] ?? 0;
+        const qualityPoints = (gradePoint * course.credits).toFixed(2);
+        textContent += `  - ${course.name || 'Unnamed Course'}: ${course.grade} (${course.credits} credits, ${qualityPoints} quality points)\n`;
+      });
+      textContent += `\n`;
+    });
+
+    textContent += `${'='.repeat(60)}\n`;
+    textContent += `CUMULATIVE GPA: ${cumulativeGPA.toFixed(3)}\n`;
+    textContent += `LATIN HONORS: ${getHonorsStatus(cumulativeGPA)}\n\n`;
+
+    if (cumulativeGPA >= 3.400) {
+      if (cumulativeGPA < 3.600) {
+        textContent += `🎯 ${(3.600 - cumulativeGPA).toFixed(3)} points to Magna Cum Laude\n`;
+      } else if (cumulativeGPA < 3.800) {
+        textContent += `🎯 ${(3.800 - cumulativeGPA).toFixed(3)} points to Summa Cum Laude\n`;
+      } else {
+        textContent += `🌟 Highest honor achieved!\n`;
+      }
+      textContent += `\n`;
+    }
+
+    textContent += `${'='.repeat(60)}\n`;
+    textContent += `Latin Honors Requirements:\n`;
+    textContent += `  Cum Laude: 3.400 - 3.599\n`;
+    textContent += `  Magna Cum Laude: 3.600 - 3.799\n`;
+    textContent += `  Summa Cum Laude: 3.800 - 4.000\n\n`;
+    textContent += `Generated by ZuraWebTools UVA GPA Calculator\n`;
+    textContent += `https://zurawebtools.com/uva-gpa-calculator\n`;
+
+    // Add UTF-8 BOM for better Windows compatibility
+    const BOM = '\uFEFF';
+    const blob = new Blob([BOM + textContent], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `UVA_GPA_Report_${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   // SEO Setup
   useEffect(() => {
     document.title = "UVA GPA Calculator - University of Virginia GPA Calculator | ZuraWebTools";
@@ -295,7 +492,7 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
       element.setAttribute('content', content);
     };
 
-    setMetaTag('description', 'UVA GPA calculator for University of Virginia students. Calculate semester and cumulative GPA using official UVA grade scale (A+=4.0). Free tool with Latin honors tracking and step-by-step calculation examples.');
+    setMetaTag('description', 'UVA GPA calculator for University of Virginia students in Charlottesville. Calculate semester and cumulative GPA using official UVA grade scale (A+=4.0). Free tool with Latin honors tracking and step-by-step calculation examples.');
     setMetaTag('keywords', 'UVA GPA calculator, University of Virginia GPA, UVA grade scale, UVA honors GPA, cumulative GPA calculator UVA, semester GPA UVA, Latin honors UVA');
     setMetaTag('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
     setMetaTag('author', 'ZuraWebTools');
@@ -570,22 +767,97 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
         html {
           scroll-behavior: smooth;
         }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        
+        @keyframes fadeInChart {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        /* Print styles for GPA Trend Chart */
+        @media print {
+          #gpa-trend-chart {
+            page-break-inside: avoid;
+            break-inside: avoid;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+          }
+          
+          #gpa-trend-chart svg {
+            max-width: 100%;
+            height: auto;
+          }
+          
+          .print\\:border {
+            border: 1px solid #ccc !important;
+          }
+          
+          .print\\:shadow-none {
+            box-shadow: none !important;
+          }
+        }
       `}</style>
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-blue-50 to-navy-50">
+        {/* localStorage Corruption Warning */}
+        {showCorruptionWarning && (
+          <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mx-6 mt-6 rounded-lg" role="alert">
+            <div className="flex items-start">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3 flex-1">
+                <p className="text-sm font-medium">
+                  ⚠️ Your saved data was corrupted and has been reset. Please re-enter your courses.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowCorruptionWarning(false)}
+                className="ml-auto flex-shrink-0 text-yellow-500 hover:text-yellow-700"
+                aria-label="Close warning"
+              >
+                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Hero Section */}
         <div className="relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-blue-700 to-navy-800"></div>
           <div className="absolute inset-0 bg-black bg-opacity-20"></div>
           <div className="relative max-w-6xl mx-auto px-6 py-12 text-center">
-            <div className="inline-flex items-center gap-2 bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+            <div className="inline-flex items-center gap-2 bg-white bg-opacity-90 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
               <span className="text-2xl">🎓</span>
-              <span className="text-white text-sm font-medium">University of Virginia</span>
+              <span className="text-blue-900 text-sm font-medium">University of Virginia</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
               UVA GPA Calculator
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-6">
-              Official University of Virginia GPA calculator with UVA grade scale (A+ = 4.0). Calculate semester GPA, cumulative GPA, and track Latin honors eligibility for Cum Laude, Magna Cum Laude, and Summa Cum Laude.
+              Official University of Virginia (Wahoos) GPA calculator with UVA grade scale (A+ = 4.0). Calculate semester GPA, cumulative GPA, and track Latin honors eligibility for Cum Laude, Magna Cum Laude, and Summa Cum Laude at Thomas Jefferson's university.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2.5 shadow-xl border-2 border-orange-200">
@@ -621,6 +893,152 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
             </div>
           </div>
 
+          {/* GPA Trend Chart */}
+          {semesters.length > 1 && (
+            <div className="bg-white rounded-2xl shadow-xl p-8 mb-8 print:shadow-none print:border print:border-gray-300" id="gpa-trend-chart">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">📈 GPA Trend</h3>
+              <div className="relative">
+                {/* Y-axis labels */}
+                <div className="absolute left-0 top-0 bottom-8 w-12 flex flex-col justify-between text-sm text-gray-600 font-medium">
+                  <span>4.0</span>
+                  <span>3.5</span>
+                  <span>3.0</span>
+                  <span>2.5</span>
+                  <span>2.0</span>
+                  <span>1.5</span>
+                  <span>1.0</span>
+                  <span>0.0</span>
+                </div>
+
+                {/* Chart area */}
+                <div className="ml-14 relative" style={{ height: '300px' }}>
+                  {/* Grid lines */}
+                  <div className="absolute inset-0 flex flex-col justify-between">
+                    {[4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0.0].map((val, idx) => (
+                      <div key={idx} className="border-t border-gray-200"></div>
+                    ))}
+                  </div>
+
+                  {/* Honor level markers */}
+                  <div className="absolute inset-0">
+                    <div 
+                      className="absolute w-full border-t-2 border-dashed border-yellow-400 opacity-50"
+                      style={{ top: `${100 - (3.4 / 4.0 * 100)}%` }}
+                      title="Cum Laude (3.400)"
+                    >
+                      <span className="absolute -top-3 right-2 text-xs text-yellow-600 font-semibold bg-white px-1">Cum Laude</span>
+                    </div>
+                    <div 
+                      className="absolute w-full border-t-2 border-dashed border-orange-400 opacity-50"
+                      style={{ top: `${100 - (3.6 / 4.0 * 100)}%` }}
+                      title="Magna Cum Laude (3.600)"
+                    >
+                      <span className="absolute -top-3 right-2 text-xs text-orange-600 font-semibold bg-white px-1">Magna</span>
+                    </div>
+                    <div 
+                      className="absolute w-full border-t-2 border-dashed border-red-400 opacity-50"
+                      style={{ top: `${100 - (3.8 / 4.0 * 100)}%` }}
+                      title="Summa Cum Laude (3.800)"
+                    >
+                      <span className="absolute -top-3 right-2 text-xs text-red-600 font-semibold bg-white px-1">Summa</span>
+                    </div>
+                  </div>
+
+                  {/* SVG for line and points */}
+                  <svg className="absolute inset-0 w-full h-full" style={{ overflow: 'visible' }}>
+                    <defs>
+                      <linearGradient id="gpaLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#f97316" />
+                        <stop offset="100%" stopColor="#2563eb" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Line connecting points */}
+                    <polyline
+                      points={semesterGPAs.map((sem, idx) => {
+                        const x = (idx / (semesterGPAs.length - 1)) * 100;
+                        const y = 100 - (sem.gpa / 4.0 * 100);
+                        return `${x}%,${y}%`;
+                      }).join(' ')}
+                      fill="none"
+                      stroke="url(#gpaLineGradient)"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+
+                    {/* Data points */}
+                    {semesterGPAs.map((sem, idx) => {
+                      const x = (idx / (semesterGPAs.length - 1)) * 100;
+                      const y = 100 - (sem.gpa / 4.0 * 100);
+                      const honorsStatus = sem.gpa >= 3.8 ? 'Summa Cum Laude' : sem.gpa >= 3.6 ? 'Magna Cum Laude' : sem.gpa >= 3.4 ? 'Cum Laude' : 'No Honors';
+                      return (
+                        <g key={sem.id}>
+                          {/* Invisible larger circle for better hover detection */}
+                          <circle
+                            cx={`${x}%`}
+                            cy={`${y}%`}
+                            r="12"
+                            fill="transparent"
+                            style={{ cursor: 'pointer' }}
+                          >
+                            <title>Semester {idx + 1}: GPA {sem.gpa.toFixed(3)} - {honorsStatus}</title>
+                          </circle>
+                          {/* Visible data point */}
+                          <circle
+                            cx={`${x}%`}
+                            cy={`${y}%`}
+                            r="6"
+                            fill="white"
+                            stroke={sem.gpa >= 3.8 ? '#dc2626' : sem.gpa >= 3.6 ? '#f97316' : sem.gpa >= 3.4 ? '#eab308' : '#2563eb'}
+                            strokeWidth="3"
+                            style={{ 
+                              cursor: 'pointer',
+                              transition: 'all 0.2s ease',
+                              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+                            }}
+                            className="hover:r-8"
+                          >
+                            <title>Semester {idx + 1}: GPA {sem.gpa.toFixed(3)} - {honorsStatus}</title>
+                          </circle>
+                          {/* GPA label above point */}
+                          <text
+                            x={`${x}%`}
+                            y={`${y}%`}
+                            dy="-12"
+                            textAnchor="middle"
+                            className="text-xs font-bold fill-gray-700 pointer-events-none"
+                          >
+                            {sem.gpa.toFixed(2)}
+                          </text>
+                        </g>
+                      );
+                    })}
+                  </svg>
+                </div>
+
+                {/* X-axis labels */}
+                <div className="ml-14 mt-4 flex justify-between text-sm text-gray-600 font-medium">
+                  {semesterGPAs.map((sem, idx) => (
+                    <span key={sem.id}>S{idx + 1}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Legend */}
+              <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-gradient-to-r from-orange-500 to-blue-600"></div>
+                  <span className="text-gray-600">Semester GPA Trend</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-1 border-t-2 border-dashed border-yellow-400"></div>
+                  <span className="text-gray-600">Honor Thresholds</span>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 mb-8">
             <button
@@ -643,13 +1061,41 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                 Clear All
               </button>
             )}
+            <button
+              onClick={handlePrint}
+              className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition-colors font-medium shadow-md"
+              aria-label="Print UVA GPA report"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              Print Report
+            </button>
+            <button
+              onClick={handleDownload}
+              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition-colors font-medium shadow-md"
+              aria-label="Download UVA GPA report as text file"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download Report
+            </button>
           </div>
 
           {/* Calculator Section */}
           <div id="calculator" className="scroll-mt-24 mb-12">
             <div className="space-y-8">
               {semesters.map((semester, semIndex) => (
-                <div key={semester.id} className="bg-white rounded-2xl shadow-xl p-6">
+                <div 
+                  key={semester.id} 
+                  data-semester-id={semester.id}
+                  className="bg-white rounded-2xl shadow-xl p-6 transition-all duration-500 ease-in-out animate-fadeIn"
+                  style={{ 
+                    animation: 'fadeIn 0.5s ease-in-out',
+                    transformOrigin: 'top'
+                  }}
+                >
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="text-2xl font-bold text-gray-800">Semester {semIndex + 1}</h3>
                     <div className="flex items-center gap-4">
@@ -684,9 +1130,12 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                             placeholder="e.g., MATH 1310"
                             value={course.name}
                             onChange={(e) => updateCourse(semester.id, courseIndex, 'name', e.target.value)}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium placeholder:text-gray-400"
+                            className={`w-full px-4 py-3 border-2 ${!course.name.trim() ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium placeholder:text-gray-400`}
                             aria-label="Course name"
                           />
+                          {!course.name.trim() && (
+                            <p className="text-xs text-yellow-600 mt-1">⚠️ Course name is empty</p>
+                          )}
                           <datalist id={`uva-course-list-${semester.id}-${courseIndex}`}>
                             {commonCourses.map((courseName) => (
                               <option key={courseName} value={courseName} />
@@ -726,9 +1175,12 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                                 updateCourse(semester.id, courseIndex, 'credits', 0);
                               }
                             }}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium"
+                            className={`w-full px-4 py-3 border-2 ${course.credits === 0 ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors text-gray-900 font-medium`}
                             aria-label="Credit hours"
                           />
+                          {course.credits === 0 && (
+                            <p className="text-xs text-yellow-600 mt-1">⚠️ This course won't affect GPA</p>
+                          )}
                         </div>
 
                         <div className="md:col-span-1 flex justify-center">
@@ -765,6 +1217,82 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
           {/* Table of Contents */}
           <TableOfContents sections={tocSections} />
 
+          {/* Social Share */}
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-slate-200">
+            <h3 className="text-xl font-bold text-slate-900 mb-4 text-center">Share This Calculator</h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/uva-gpa-calculator')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                aria-label="Share UVA GPA Calculator on Facebook"
+              >
+                <span>📘</span> Facebook
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('Calculate your University of Virginia GPA with Latin honors tracking!')}&url=${encodeURIComponent('https://zurawebtools.com/uva-gpa-calculator')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors"
+                aria-label="Share UVA GPA Calculator on Twitter"
+              >
+                <span>🐦</span> Twitter
+              </a>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://zurawebtools.com/uva-gpa-calculator')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                aria-label="Share UVA GPA Calculator on LinkedIn"
+              >
+                <span>💼</span> LinkedIn
+              </a>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText('https://zurawebtools.com/uva-gpa-calculator');
+                  alert('Link copied to clipboard!');
+                }}
+                className="flex items-center gap-2 bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors"
+                aria-label="Copy link to clipboard"
+              >
+                <span>📋</span> Copy Link
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Examples */}
+          <section id="examples" className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-slate-200 scroll-mt-24">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 bg-gradient-to-r from-orange-600 to-blue-600 bg-clip-text text-transparent">
+              Quick Examples
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
+                <h3 className="text-lg font-semibold text-blue-900 mb-3">Cum Laude Track</h3>
+                <p className="text-sm text-blue-800 mb-2">4 courses with A- and B+ grades</p>
+                <div className="text-2xl font-bold text-blue-600">3.475 GPA</div>
+                <p className="text-xs text-blue-700 mt-2">Example: 3 A- (3.7) + 1 B+ (3.3) = 3.475</p>
+              </div>
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200">
+                <h3 className="text-lg font-semibold text-purple-900 mb-3">Magna Cum Laude Track</h3>
+                <p className="text-sm text-purple-800 mb-2">4 courses with mostly A grades</p>
+                <div className="text-2xl font-bold text-purple-600">3.675 GPA</div>
+                <p className="text-xs text-purple-700 mt-2">Example: 3 A (4.0) + 1 A- (3.7) = 3.675</p>
+              </div>
+              <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border border-orange-200">
+                <h3 className="text-lg font-semibold text-orange-900 mb-3">Summa Cum Laude Track</h3>
+                <p className="text-sm text-orange-800 mb-2">4 courses with all A and A+ grades</p>
+                <div className="text-2xl font-bold text-orange-600">3.925 GPA</div>
+                <p className="text-xs text-orange-700 mt-2">Example: 3 A (4.0) + 1 A- (3.7) = 3.925</p>
+              </div>
+            </div>
+            <div className="mt-6 p-4 bg-gradient-to-r from-orange-50 to-blue-50 rounded-lg border border-orange-200">
+              <p className="text-sm text-gray-700 text-center">
+                <strong>💡 Tip:</strong> At UVA, A+ = 4.0 (not 4.3). Latin Honors: Cum Laude (3.400-3.599), Magna (3.600-3.799), Summa (3.800+)
+              </p>
+            </div>
+          </section>
+
           {/* Understanding UVA GPA */}
           <div id="understanding" className="scroll-mt-24 mb-12">
             <div className="bg-white rounded-2xl shadow-xl p-8">
@@ -800,8 +1328,8 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                   <tbody>
                     {Object.entries(GRADE_SCALE).map(([grade, points], index) => (
                       <tr key={grade} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                        <td className="px-6 py-3 border-b border-gray-200 font-medium">{grade}</td>
-                        <td className="px-6 py-3 border-b border-gray-200">{points.toFixed(1)}</td>
+                        <td className="px-6 py-3 border-b border-gray-200 font-medium text-gray-900">{grade}</td>
+                        <td className="px-6 py-3 border-b border-gray-200 text-gray-800">{points.toFixed(1)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -839,37 +1367,37 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                     </thead>
                     <tbody>
                       <tr className="bg-white border-b">
-                        <td className="px-4 py-3">English 101</td>
-                        <td className="px-4 py-3 font-semibold">A</td>
-                        <td className="px-4 py-3">4.0</td>
-                        <td className="px-4 py-3">3</td>
-                        <td className="px-4 py-3 font-semibold">12.0</td>
+                        <td className="px-4 py-3 text-gray-900">English 101</td>
+                        <td className="px-4 py-3 font-semibold text-gray-900">A</td>
+                        <td className="px-4 py-3 text-gray-800">4.0</td>
+                        <td className="px-4 py-3 text-gray-800">3</td>
+                        <td className="px-4 py-3 font-semibold text-blue-700">12.0</td>
                       </tr>
                       <tr className="bg-gray-50 border-b">
-                        <td className="px-4 py-3">Mathematics 201</td>
-                        <td className="px-4 py-3 font-semibold">B+</td>
-                        <td className="px-4 py-3">3.3</td>
-                        <td className="px-4 py-3">4</td>
-                        <td className="px-4 py-3 font-semibold">13.2</td>
+                        <td className="px-4 py-3 text-gray-900">Mathematics 201</td>
+                        <td className="px-4 py-3 font-semibold text-gray-900">B+</td>
+                        <td className="px-4 py-3 text-gray-800">3.3</td>
+                        <td className="px-4 py-3 text-gray-800">4</td>
+                        <td className="px-4 py-3 font-semibold text-blue-700">13.2</td>
                       </tr>
                       <tr className="bg-white border-b">
-                        <td className="px-4 py-3">Chemistry 150</td>
-                        <td className="px-4 py-3 font-semibold">A-</td>
-                        <td className="px-4 py-3">3.7</td>
-                        <td className="px-4 py-3">4</td>
-                        <td className="px-4 py-3 font-semibold">14.8</td>
+                        <td className="px-4 py-3 text-gray-900">Chemistry 150</td>
+                        <td className="px-4 py-3 font-semibold text-gray-900">A-</td>
+                        <td className="px-4 py-3 text-gray-800">3.7</td>
+                        <td className="px-4 py-3 text-gray-800">4</td>
+                        <td className="px-4 py-3 font-semibold text-blue-700">14.8</td>
                       </tr>
                       <tr className="bg-gray-50 border-b">
-                        <td className="px-4 py-3">History 105</td>
-                        <td className="px-4 py-3 font-semibold">B</td>
-                        <td className="px-4 py-3">3.0</td>
-                        <td className="px-4 py-3">3</td>
-                        <td className="px-4 py-3 font-semibold">9.0</td>
+                        <td className="px-4 py-3 text-gray-900">History 105</td>
+                        <td className="px-4 py-3 font-semibold text-gray-900">B</td>
+                        <td className="px-4 py-3 text-gray-800">3.0</td>
+                        <td className="px-4 py-3 text-gray-800">3</td>
+                        <td className="px-4 py-3 font-semibold text-blue-700">9.0</td>
                       </tr>
                       <tr className="bg-blue-100 font-bold">
-                        <td className="px-4 py-3" colspan="3">Total</td>
-                        <td className="px-4 py-3">14</td>
-                        <td className="px-4 py-3">49.0</td>
+                        <td className="px-4 py-3 text-gray-900" colSpan={3}>Total</td>
+                        <td className="px-4 py-3 text-gray-900">14</td>
+                        <td className="px-4 py-3 text-blue-700">49.0</td>
                       </tr>
                     </tbody>
                   </table>
@@ -923,40 +1451,40 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                   </thead>
                   <tbody>
                     <tr className="bg-orange-50 border-b">
-                      <td className="px-6 py-4 font-bold text-gray-800">University of Virginia (UVA)</td>
-                      <td className="px-6 py-4 font-semibold text-blue-600">4.0</td>
-                      <td className="px-6 py-4">4.0 Scale</td>
-                      <td className="px-6 py-4 text-sm">A+ capped at 4.0, same as A</td>
+                      <td className="px-6 py-4 font-bold text-gray-900">University of Virginia (UVA)</td>
+                      <td className="px-6 py-4 font-semibold text-blue-700">4.0</td>
+                      <td className="px-6 py-4 text-gray-800">4.0 Scale</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">A+ capped at 4.0, same as A</td>
                     </tr>
                     <tr className="bg-white border-b">
-                      <td className="px-6 py-4 font-medium">UC Berkeley</td>
-                      <td className="px-6 py-4">4.0</td>
-                      <td className="px-6 py-4">4.0 Scale</td>
-                      <td className="px-6 py-4 text-sm">Weighted GPA for honors/AP courses</td>
+                      <td className="px-6 py-4 font-medium text-gray-900">UC Berkeley</td>
+                      <td className="px-6 py-4 text-gray-800">4.0</td>
+                      <td className="px-6 py-4 text-gray-800">4.0 Scale</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">Weighted GPA for honors/AP courses</td>
                     </tr>
                     <tr className="bg-gray-50 border-b">
-                      <td className="px-6 py-4 font-medium">Rutgers University</td>
-                      <td className="px-6 py-4">4.0</td>
-                      <td className="px-6 py-4">4.0 Scale</td>
-                      <td className="px-6 py-4 text-sm">Uses 0.5 increments (B+=3.5)</td>
+                      <td className="px-6 py-4 font-medium text-gray-900">Rutgers University</td>
+                      <td className="px-6 py-4 text-gray-800">4.0</td>
+                      <td className="px-6 py-4 text-gray-800">4.0 Scale</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">Uses 0.5 increments (B+=3.5)</td>
                     </tr>
                     <tr className="bg-white border-b">
-                      <td className="px-6 py-4 font-medium">Columbia University</td>
-                      <td className="px-6 py-4 font-semibold text-green-600">4.3</td>
-                      <td className="px-6 py-4">4.3 Scale</td>
-                      <td className="px-6 py-4 text-sm">A+ awarded 4.3 points</td>
+                      <td className="px-6 py-4 font-medium text-gray-900">Columbia University</td>
+                      <td className="px-6 py-4 font-semibold text-green-700">4.3</td>
+                      <td className="px-6 py-4 text-gray-800">4.3 Scale</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">A+ awarded 4.3 points</td>
                     </tr>
                     <tr className="bg-gray-50 border-b">
-                      <td className="px-6 py-4 font-medium">Stanford University</td>
-                      <td className="px-6 py-4 font-semibold text-green-600">4.3</td>
-                      <td className="px-6 py-4">4.3 Scale</td>
-                      <td className="px-6 py-4 text-sm">Allows GPAs above 4.0</td>
+                      <td className="px-6 py-4 font-medium text-gray-900">Stanford University</td>
+                      <td className="px-6 py-4 font-semibold text-green-700">4.3</td>
+                      <td className="px-6 py-4 text-gray-800">4.3 Scale</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">Allows GPAs above 4.0</td>
                     </tr>
                     <tr className="bg-white border-b">
-                      <td className="px-6 py-4 font-medium">High Schools (Weighted)</td>
-                      <td className="px-6 py-4 font-semibold text-purple-600">5.0+</td>
-                      <td className="px-6 py-4">Weighted 5.0 Scale</td>
-                      <td className="px-6 py-4 text-sm">AP/Honors get +1.0 bonus</td>
+                      <td className="px-6 py-4 font-medium text-gray-900">High Schools (Weighted)</td>
+                      <td className="px-6 py-4 font-semibold text-purple-700">5.0+</td>
+                      <td className="px-6 py-4 text-gray-800">Weighted 5.0 Scale</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">AP/Honors get +1.0 bonus</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1056,7 +1584,8 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                 <div className="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500">
                   <h4 className="font-bold text-gray-800 mb-2 text-lg">🏗️ School of Engineering and Applied Science</h4>
                   <p className="text-gray-700 mb-2">Requires a minimum 2.0 GPA in both overall and major-specific courses to remain in good standing.</p>
-                  <p className="text-gray-600 text-sm">Students below 2.0 may face academic probation or suspension.</p>
+                  <p className="text-gray-600 text-sm mb-2">Students below 2.0 may face academic probation or suspension.</p>
+                  <p className="text-gray-600 text-sm"><strong>Academic Probation:</strong> Students on probation must raise their GPA above 2.0 within one semester to avoid academic dismissal.</p>
                 </div>
                 <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
                   <h4 className="font-bold text-gray-800 mb-2 text-lg">📚 College of Arts & Sciences</h4>
@@ -1094,6 +1623,10 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                   <p className="text-gray-700">No, courses graded on a Credit/No Credit or Satisfactory/Unsatisfactory basis do not affect your GPA. However, certain conditions must be met for these courses to count toward degree requirements.</p>
                 </div>
                 <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">What GPA do I need for Dean's List at UVA?</h3>
+                  <p className="text-gray-700">UVA Dean's List recognition typically requires a semester GPA of 3.4 or higher with at least 12 graded credit hours. Dean's List honors are awarded each semester and appear on your transcript, demonstrating consistent academic excellence. This distinction is valuable for graduate school applications and job searches.</p>
+                </div>
+                <div>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">How are repeated courses calculated?</h3>
                   <p className="text-gray-700">Repeated courses are factored in differently depending on the school. Usually, both attempts count unless specifically replaced according to your school's policy. Check with your academic advisor.</p>
                 </div>
@@ -1108,6 +1641,10 @@ const UVAGPACalculator: React.FC<UVAGPACalculatorProps> = ({ navigateTo }) => {
                 <div>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">How precise is UVA's GPA calculation?</h3>
                   <p className="text-gray-700">UVA calculates GPAs to the thousandths place (three decimal points), so your GPA might appear as 3.678 rather than 3.68.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">What happens if my GPA falls below the minimum requirement?</h3>
+                  <p className="text-gray-700">If your cumulative GPA falls below your school's minimum (typically 1.8-2.0), you may be placed on academic probation. During probation, you'll need to meet specific conditions—usually raising your GPA above the threshold within one semester—to continue enrollment. Academic advisors provide support plans to help students recover their academic standing. Maintaining good academic standing is crucial for financial aid eligibility and program continuation.</p>
                 </div>
               </div>
 

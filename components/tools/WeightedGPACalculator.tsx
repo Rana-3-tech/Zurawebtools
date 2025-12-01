@@ -1192,6 +1192,13 @@ const WeightedGPACalculator: React.FC<WeightedGPACalculatorProps> = ({ navigateT
                 Yes, weighted GPA matters because it demonstrates course rigor. Competitive colleges want to see students challenging themselves with advanced courses. However, many colleges recalculate GPA using their own formula, so both weighted and unweighted GPAs are important.
               </p>
             </div>
+
+            <div className="border-l-4 border-amber-500 pl-6 py-2">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">How do California State Universities calculate weighted GPA?</h3>
+              <p className="text-gray-700 leading-relaxed">
+                CSU uses a unique weighted GPA calculation with specific rules: only A-G approved courses from grades 10-12 count, honors weighting is capped at 8 semesters (maximum 2 from 10th grade), and all grades are capped at 4.0. For accurate CSU admissions GPA, use our specialized <a href="/education-and-exam-tools/gpa-tools/csu-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline" onClick={(e) => { e.preventDefault(); navigateTo('/education-and-exam-tools/gpa-tools/csu-gpa-calculator'); }}>CSU GPA Calculator</a> which automatically enforces these Cal State-specific requirements.
+              </p>
+            </div>
           </div>
         </section>
 

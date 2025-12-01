@@ -909,6 +909,12 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Is this GPA calculator accurate for all colleges?</h3>
               <p className="text-gray-600 leading-relaxed">This calculator uses standard 4.0 and 4.3 grading scales adopted by most American colleges and universities. However, some institutions use unique grading systems or exclude certain courses from GPA calculations. Always verify your calculated GPA against your official transcript and consult your registrar's office for institution-specific policies.</p>
             </div>
+            <div className="pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">How is CSU GPA different from regular college GPA?</h3>
+              <p className="text-gray-600 leading-relaxed">
+                California State University uses a specific GPA calculation method for admissions that differs from standard college GPA. CSU GPA only counts A-G approved courses from grades 10-12, caps honors weighting at 8 semesters (with only 2 from 10th grade), and limits all grades to 4.0 maximum. If you're applying to Cal State schools, use our dedicated <a href="/education-and-exam-tools/gpa-tools/csu-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline" onClick={(e) => { e.preventDefault(); navigateTo('/education-and-exam-tools/gpa-tools/csu-gpa-calculator'); }}>CSU GPA Calculator</a> for accurate admissions GPA calculation with automatic honors cap enforcement.
+              </p>
+            </div>
           </div>
         </div>
 
