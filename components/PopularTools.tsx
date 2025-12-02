@@ -16,6 +16,7 @@ const DevIcon = () => <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
 interface PopularTool extends Tool {
     categorySlug: string;
     categoryTitle: string;
+    subCategorySlug?: string;
 }
 
 const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
@@ -39,7 +40,10 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
     
     const tabs = [
         { id: 'all', name: 'All Tools', icon: <GridIcon /> },
-        { id: 'education-and-exam-tools', name: 'Education', icon: <TextIcon /> },
+        { id: 'test-score-tools', name: 'Test Score Tools', icon: <TextIcon /> },
+        { id: 'gpa-tools', name: 'GPA Tools', icon: <MathIcon /> },
+        { id: 'university-gpa-tools', name: 'University GPA', icon: <DevIcon /> },
+        { id: 'admission-tools', name: 'Admission Tools', icon: <ColorIcon /> },
     ];
     
     const allTools: PopularTool[] = useMemo(() => {
@@ -63,6 +67,7 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
                             ...tool,
                             categorySlug: category.slug,
                             categoryTitle: category.title.replace(' Tools', '').replace(' & ', ' and '),
+                            subCategorySlug: subCategory.slug,
                         });
                     });
                 });
@@ -79,8 +84,14 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
     ];
 
     const displayedTools = useMemo(() => {
+        console.log('PopularTools Debug:', { 
+            totalTools: allTools.length, 
+            activeTab,
+            sampleTool: allTools[0]?.link 
+        });
+        
         if (activeTab === 'all') {
-            return allTools
+            const filtered = allTools
                 .filter(tool => {
                     // Extract the tool slug from the full path (last segment)
                     const toolSlug = tool.link.split('/').pop() || '';
@@ -91,8 +102,16 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
                     const slugB = b.link.split('/').pop() || '';
                     return popularToolSlugs.indexOf(slugA) - popularToolSlugs.indexOf(slugB);
                 });
+            console.log('Filtered tools:', filtered.length);
+            // If no tools match, show first 9 tools from all categories
+            const result = filtered.length > 0 ? filtered : allTools.slice(0, 9);
+            console.log('Displaying tools:', result.length);
+            return result;
         }
-        return allTools.filter(tool => tool.categorySlug === activeTab);
+        // Filter by subcategory slug
+        const subCategoryTools = allTools.filter(tool => tool.subCategorySlug === activeTab);
+        console.log('SubCategory tools:', subCategoryTools.length, 'for tab:', activeTab);
+        return subCategoryTools;
     }, [activeTab, allTools]);
 
     const ToolCardComponent: React.FC<{ tool: PopularTool }> = ({ tool }) => {
@@ -102,27 +121,29 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
             <a
                 href={`/${tool.link}`}
                 onClick={(e) => { e.preventDefault(); navigateTo(`/${tool.link}`); }}
-                className="bg-white rounded-xl p-5 text-left shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-200/80 h-full flex flex-col"
+                className="bg-white rounded-xl p-5 text-left shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-200/80 flex flex-col h-48"
             >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${colors.bg}`}>
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${colors.bg} flex-shrink-0`}>
                     {tool.icon}
                 </div>
-                <div className="flex-grow mt-4">
-                    <h3 className="font-bold text-slate-800 leading-tight">{tool.title.replace('Online ', '').replace(' Tool', '').replace('from Text', '')}</h3>
+                <div className="mt-4 flex-grow overflow-hidden">
+                    <h3 className="font-bold text-slate-800 leading-tight line-clamp-2">{tool.title.replace('Online ', '').replace(' Tool', '').replace('from Text', '')}</h3>
                     <p className={`text-xs font-bold ${colors.text} mt-1`}>{tool.categoryTitle}</p>
-                    <p className="text-sm text-slate-500 mt-2">{tool.description.split('.')[0] + '.'}</p>
+                    <p className="text-sm text-slate-500 mt-2 line-clamp-2">{tool.description.split('.')[0] + '.'}</p>
                 </div>
             </a>
         );
     };
 
+    console.log('Rendering PopularTools with', displayedTools.length, 'tools');
+
     return (
         <section className="py-20" style={{background: 'linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)'}}>
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">Our Most Popular Tools</h2>
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">Most Used Education Calculators</h2>
                     <p className="mt-3 text-lg text-slate-600">
-                        We present the best of the best. All free, no catch
+                        Trusted by thousands of students for accurate GPA and test score calculations
                     </p>
                 </div>
 
@@ -162,11 +183,17 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
                             msOverflowStyle: 'none',
                         }}
                     >
-                        {displayedTools.map(tool => (
-                            <div key={tool.link} className="flex-shrink-0 w-64">
-                                <ToolCardComponent tool={tool} />
+                        {displayedTools.length > 0 ? (
+                            displayedTools.map(tool => (
+                                <div key={tool.link} className="flex-shrink-0 w-72">
+                                    <ToolCardComponent tool={tool} />
+                                </div>
+                            ))
+                        ) : (
+                            <div className="w-full text-center py-12">
+                                <p className="text-slate-600 text-lg">Loading tools...</p>
                             </div>
-                        ))}
+                        )}
                     </div>
 
                     {/* Right Arrow */}

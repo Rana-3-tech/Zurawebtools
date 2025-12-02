@@ -15,7 +15,7 @@ const ToolsPage: React.FC<ToolsPageProps> = ({ categories, navigateTo }) => {
                 <div className="text-center mb-16">
                     <h1 className="text-5xl font-extrabold text-gray-900">All Tools</h1>
                     <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-                        Explore our full suite of AI-powered tools designed to supercharge your workflow.
+                        Explore our complete collection of education calculators for GPA, test scores, and college admissions.
                     </p>
                 </div>
                 <div className="space-y-16">

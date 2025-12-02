@@ -15,9 +15,9 @@ const FeaturedTools: React.FC<FeaturedToolsProps> = ({ navigateTo }) => {
         <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold text-slate-900 mb-2">Featured Tools</h2>
+                    <h2 className="text-4xl font-bold text-slate-900 mb-2">Popular Education Tools</h2>
                     <p className="mt-4 text-lg text-slate-600">
-                        Get started with our most popular AI-powered tools
+                        Most used calculators by students and educators
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

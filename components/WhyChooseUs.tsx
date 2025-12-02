@@ -5,10 +5,10 @@ import React from 'react';
 const WhyChooseUs: React.FC = () => {
     const features = [
         {
-            icon: <svg aria-hidden="true" className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>,
-            title: 'AI-Powered',
+            icon: <svg aria-hidden="true" className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>,
+            title: 'Accurate & Reliable',
             number: '01',
-            description: 'Leverage cutting-edge AI to get smarter, faster, and more accurate results for your tasks.',
+            description: 'University-specific formulas and grading scales ensure precise GPA and test score calculations you can trust.',
             color: 'blue'
         },
         {
@@ -22,7 +22,7 @@ const WhyChooseUs: React.FC = () => {
             icon: <svg aria-hidden="true" className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>,
             title: 'User-Friendly',
             number: '03',
-            description: 'Our tools are designed with a clean and intuitive interface, making them easy for anyone to use.',
+            description: 'Clean, intuitive interface designed for students. No complicated setups—just enter your grades and get instant results.',
             color: 'purple'
         }
     ];

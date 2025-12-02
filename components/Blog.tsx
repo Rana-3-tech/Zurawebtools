@@ -16,7 +16,7 @@ const Blog: React.FC<BlogProps> = ({ navigateTo }) => {
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-bold text-slate-900 mb-2">From Our Blog</h2>
                     <p className="mt-4 text-lg text-slate-600">
-                        Latest tips and tricks on SEO, content marketing, and more
+                        Latest guides and tips for students on GPA calculations, test scores, and college admissions
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">

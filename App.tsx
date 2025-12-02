@@ -4,7 +4,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import PopularTools from './components/PopularTools';
-import FeaturedTools from './components/FeaturedTools';
+import HowItWorks from './components/HowItWorks';
 import WhyChooseUs from './components/WhyChooseUs';
 import Testimonials from './components/Testimonials';
 import Blog from './components/Blog';
@@ -212,7 +212,7 @@ const App: React.FC = () => {
                 <>
                     <Hero navigateTo={navigateTo} onSearch={handleSearch} />
                     <PopularTools navigateTo={navigateTo} />
-                    <FeaturedTools navigateTo={navigateTo} />
+                    <HowItWorks />
                     <WhyChooseUs />
                     <Testimonials />
                     <Blog navigateTo={navigateTo} />
@@ -348,7 +348,7 @@ const App: React.FC = () => {
             <>
                 <Hero navigateTo={navigateTo} onSearch={handleSearch} />
                 <PopularTools navigateTo={navigateTo} />
-                <FeaturedTools navigateTo={navigateTo} />
+                <HowItWorks />
                 <WhyChooseUs />
                 <Testimonials />
                 <Blog navigateTo={navigateTo} />

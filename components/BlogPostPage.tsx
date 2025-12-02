@@ -303,7 +303,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
 
         // Cleanup function
         return () => {
-            document.title = 'ZuraWebTools | Free AI Tools for SEO & Social Media Growth';
+            document.title = 'ZuraWebTools | Free Education & Exam Tools';
             metaDescription.remove();
             metaKeywords.remove();
             ogTags.forEach(() => {

@@ -11,15 +11,15 @@ const NotFoundPage: React.FC<NotFoundPageProps> = ({ navigateTo }) => {
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'The page you are looking for does not exist. Browse our free tools for text, math, color, and developer utilities.');
+      metaDescription.setAttribute('content', 'The page you are looking for does not exist. Browse our free education tools for GPA calculators, test score calculators, and college admissions requirements.');
     }
   }, []);
 
   const popularTools = [
-    { name: 'Word Counter', path: '/text-and-writing-tools/word-counter' },
-    { name: 'JSON Formatter', path: '/developer-tools/json-formatter' },
-    { name: 'Color Contrast Checker', path: '/color-and-design-tools/accessible-color-contrast-checker' },
-    { name: 'Time Difference Calculator', path: '/math-and-calculation-tools/time-difference-calculator' },
+    { name: 'SAT Score Calculator', path: '/education-and-exam-tools/sat-score-calculator' },
+    { name: 'ACT Score Calculator', path: '/education-and-exam-tools/act-score-calculator' },
+    { name: 'College GPA Calculator', path: '/education-and-exam-tools/college-gpa-calculator' },
+    { name: 'LSAT Score Calculator', path: '/education-and-exam-tools/lsat-score-calculator' },
   ];
 
   return (

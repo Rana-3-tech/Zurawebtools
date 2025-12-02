@@ -39,23 +39,23 @@ const TestimonialCard: React.FC<{ quote: string; name: string; role: string; ava
 const Testimonials: React.FC = () => {
     const testimonials = [
         {
-            quote: "The YouTube Tag Generator is a game-changer! My video views have increased by 50% since I started using it. Highly recommended.",
-            name: 'Sarah L.',
-            role: 'Content Creator',
+            quote: "The UTA GPA Calculator saved me hours! It perfectly matches my university's grading scale with plus/minus grades. Got my exact GPA for scholarship applications.",
+            name: 'Emily R.',
+            role: 'University of Texas at Arlington Student',
             avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=128&h=128&dpr=1',
             rating: 5
         },
         {
-            quote: "I love how simple and effective these tools are. As a small business owner, ZuraWebTools saves me a ton of time on my SEO tasks.",
-            name: 'Mark T.',
-            role: 'Digital Marketer',
+            quote: "I use the SAT and ACT score calculators to help my students understand their college readiness. These tools are accurate and easy to use—perfect for guidance counselors.",
+            name: 'Mr. David K.',
+            role: 'High School Counselor',
             avatar: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=128&h=128&dpr=1',
             rating: 5
         },
         {
-            quote: "Finally, a collection of web tools that are actually free and work great. The Meta Title checker is my go-to for on-page SEO.",
-            name: 'Jessica P.',
-            role: 'SEO Specialist',
+            quote: "LSAC GPA Calculator is exactly what I needed for law school applications. The CAS GPA calculations matched my official report perfectly!",
+            name: 'Jessica M.',
+            role: 'Pre-Law Student',
             avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=128&h=128&dpr=1',
             rating: 5
         }
@@ -66,9 +66,9 @@ const Testimonials: React.FC = () => {
             <div className="absolute inset-0 bg-grid-slate-200/50 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" style={{backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '50px 50px'}}></div>
             <div className="container mx-auto px-6 relative z-10">
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold text-slate-900 mb-2">What Our Users Say</h2>
+                    <h2 className="text-4xl font-bold text-slate-900 mb-2">Trusted by Students Nationwide</h2>
                     <p className="mt-4 text-lg text-slate-600">
-                        Real stories from satisfied users who boosted their online presence
+                        Real students, real results from our education calculators
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

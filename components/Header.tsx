@@ -51,67 +51,34 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
                         onMouseEnter={() => setIsToolsDropdownOpen(true)}
                         onMouseLeave={() => {
                             setIsToolsDropdownOpen(false);
-                            setHoveredCategorySlug(null);
                         }}
                     >
-                        <a href="/tools" onClick={(e) => handleNavClick(e, '/tools')} className="text-gray-600 hover:text-brand-blue font-semibold transition-colors flex items-center">
-                            Tools <ChevronDownIcon />
+                        <a href="/education-and-exam-tools" onClick={(e) => handleNavClick(e, '/education-and-exam-tools')} className="text-gray-600 hover:text-brand-blue font-semibold transition-colors flex items-center">
+                            Education & Exam <ChevronDownIcon />
                         </a>
                         {isToolsDropdownOpen && (
                             <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 bg-white rounded-lg shadow-xl pt-4 pb-2 z-50 border border-gray-100">
-                                {toolCategories.map(cat => (
-                                    <div 
-                                        key={cat.slug}
-                                        className="relative"
-                                        onMouseEnter={() => cat.subCategories && setHoveredCategorySlug(cat.slug)}
-                                        onMouseLeave={(e) => {
-                                            // Only clear hover if not moving to subcategory menu
-                                            const relatedTarget = e.relatedTarget as HTMLElement;
-                                            if (!relatedTarget?.closest('.subcategory-menu')) {
-                                                setHoveredCategorySlug(null);
-                                            }
+                                {toolCategories[0]?.subCategories?.map(subCat => (
+                                    <a 
+                                        key={subCat.slug}
+                                        href={`/education-and-exam-tools/${subCat.slug}`}
+                                        onClick={(e) => { 
+                                            e.preventDefault(); 
+                                            navigateTo(`/education-and-exam-tools/${subCat.slug}`); 
+                                            setIsToolsDropdownOpen(false);
                                         }}
+                                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-blue transition-colors"
                                     >
-                                        <a 
-                                            href={`/${cat.slug}`}
-                                            onClick={(e) => { e.preventDefault(); navigateTo(`/${cat.slug}`); setIsToolsDropdownOpen(false); setHoveredCategorySlug(null); }}
-                                            className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-blue transition-colors flex items-center justify-between"
-                                        >
-                                            <span>{cat.title}</span>
-                                            {cat.subCategories && <ChevronDownIcon />}
-                                        </a>
-                                        {cat.subCategories && hoveredCategorySlug === cat.slug && (
-                                            <div 
-                                                className="subcategory-menu absolute left-full top-0 ml-1 w-56 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-100"
-                                                onMouseEnter={() => setHoveredCategorySlug(cat.slug)}
-                                                onMouseLeave={() => setHoveredCategorySlug(null)}
-                                            >
-                                                {cat.subCategories.map(subCat => (
-                                                    <a 
-                                                        key={subCat.slug}
-                                                        href={`/${cat.slug}/${subCat.slug}`}
-                                                        onClick={(e) => { 
-                                                            e.preventDefault(); 
-                                                            navigateTo(`/${cat.slug}/${subCat.slug}`); 
-                                                            setIsToolsDropdownOpen(false);
-                                                            setHoveredCategorySlug(null);
-                                                        }}
-                                                        className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-brand-blue transition-colors"
-                                                    >
-                                                        {subCat.title}
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
+                                        {subCat.title}
+                                    </a>
                                 ))}
                                 <div className="border-t border-gray-200 my-2"></div>
                                 <a 
-                                    href="/tools"
-                                    onClick={(e) => { e.preventDefault(); navigateTo('/tools'); setIsToolsDropdownOpen(false); }}
-                                    className="block w-full text-left px-4 py-2 font-bold text-brand-blue hover:bg-gray-100 transition-colors"
+                                    href="/education-and-exam-tools"
+                                    onClick={(e) => { e.preventDefault(); navigateTo('/education-and-exam-tools'); setIsToolsDropdownOpen(false); }}
+                                    className="block w-full text-left px-4 py-2 font-semibold text-gray-700 hover:bg-blue-50 hover:text-brand-blue transition-colors"
                                 >
-                                    View All Tools
+                                    View All Tools →
                                 </a>
                             </div>
                         )}
@@ -143,51 +110,23 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
 
                      <div>
                         <button onClick={() => setIsMobileToolsOpen(!isMobileToolsOpen)} className="w-full text-left px-6 py-2 flex justify-between items-center text-gray-600 hover:bg-gray-100">
-                           <span>Tools</span>
+                           <span>Education & Exam</span>
                            <svg className={`w-5 h-5 transition-transform ${isMobileToolsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         {isMobileToolsOpen && (
                             <div className="pl-8 bg-gray-50">
-                                {toolCategories.map(cat => (
-                                    <div key={cat.slug}>
-                                        <div className="flex items-center">
-                                            <a 
-                                                href={`/${cat.slug}`} 
-                                                onClick={(e) => { e.preventDefault(); handleMobileCatClick(`/${cat.slug}`); }} 
-                                                className="flex-1 block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-200"
-                                            >
-                                                {cat.title}
-                                            </a>
-                                            {cat.subCategories && cat.subCategories.length > 0 && (
-                                                <button 
-                                                    onClick={() => setExpandedMobileCategorySlug(expandedMobileCategorySlug === cat.slug ? null : cat.slug)}
-                                                    className="px-3 py-2 text-gray-500 hover:text-brand-blue"
-                                                    aria-label="Toggle sub-categories"
-                                                >
-                                                    <svg className={`w-4 h-4 transition-transform ${expandedMobileCategorySlug === cat.slug ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                                                    </svg>
-                                                </button>
-                                            )}
-                                        </div>
-                                        {cat.subCategories && expandedMobileCategorySlug === cat.slug && (
-                                            <div className="pl-4 bg-gray-100">
-                                                {cat.subCategories.map(subCat => (
-                                                    <a 
-                                                        key={subCat.slug}
-                                                        href={`/${cat.slug}/${subCat.slug}`}
-                                                        onClick={(e) => { e.preventDefault(); handleMobileCatClick(`/${cat.slug}/${subCat.slug}`); }}
-                                                        className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-200"
-                                                    >
-                                                        {subCat.title}
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
+                                {toolCategories[0]?.subCategories?.map(subCat => (
+                                    <a 
+                                        key={subCat.slug}
+                                        href={`/education-and-exam-tools/${subCat.slug}`}
+                                        onClick={(e) => { e.preventDefault(); handleMobileCatClick(`/education-and-exam-tools/${subCat.slug}`); }}
+                                        className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-200"
+                                    >
+                                        {subCat.title}
+                                    </a>
                                 ))}
-                                <a href="/tools" onClick={(e) => { e.preventDefault(); handleMobileCatClick('/tools'); }} className="block w-full text-left px-4 py-2 font-bold text-brand-blue hover:bg-gray-200">
-                                    View All Tools
+                                <a href="/education-and-exam-tools" onClick={(e) => { e.preventDefault(); handleMobileCatClick('/education-and-exam-tools'); }} className="block w-full text-left px-4 py-2 font-semibold text-gray-700 hover:bg-blue-50 hover:text-brand-blue">
+                                    View All Tools →
                                 </a>
                             </div>
                         )}
