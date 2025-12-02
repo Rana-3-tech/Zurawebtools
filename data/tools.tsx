@@ -380,6 +380,25 @@ const PASchoolGPAIcon = () => (
     </svg>
 );
 
+const DentalSchoolGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="dentalGPAIconTitle">
+        <title id="dentalGPAIconTitle">Dental School GPA Calculator Icon</title>
+        <defs>
+            <linearGradient id="toolGradDentalGPA" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#06B6D4" />
+                <stop offset="50%" stopColor="#0EA5E9" />
+                <stop offset="100%" stopColor="#3B82F6" />
+            </linearGradient>
+        </defs>
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="url(#toolGradDentalGPA)" opacity="0.2"/>
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="url(#toolGradDentalGPA)" strokeWidth="2" fill="none"/>
+        <circle cx="9" cy="10" r="1.5" fill="url(#toolGradDentalGPA)"/>
+        <circle cx="15" cy="10" r="1.5" fill="url(#toolGradDentalGPA)"/>
+        <path d="M8 14 Q12 17 16 14" stroke="url(#toolGradDentalGPA)" strokeWidth="2" strokeLinecap="round" fill="none"/>
+        <path d="M9.5 15 L10 18 M14.5 15 L14 18" stroke="url(#toolGradDentalGPA)" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -723,6 +742,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/pa-school-gpa-calculator',
                         icon: <PASchoolGPAIcon />,
                         gradientColors: { from: '#3b82f6', to: '#8b5cf6' },
+                    },
+                    {
+                        title: 'Dental School GPA Calculator',
+                        description: 'Free AADSAS dental school GPA calculator. Calculate science (BCP), non-science, and cumulative GPA for dental school applications with repeated course handling.',
+                        link: 'education-and-exam-tools/gpa-tools/dental-school-gpa-calculator',
+                        icon: <DentalSchoolGPAIcon />,
+                        gradientColors: { from: '#06B6D4', to: '#3B82F6' },
                     },
                 ]
             },
