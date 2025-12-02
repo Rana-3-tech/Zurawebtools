@@ -1,7 +1,7 @@
 {
-  "name": "ZuraWebTools",
+  "name": "ZuraWebTools - Education & Exam Calculators",
   "short_name": "ZuraWeb",
-  "description": "Free AI Tools for SEO & Social Media Growth",
+  "description": "Free education tools for GPA calculation, test scores, and college admissions",
   "icons": [
     {
       "src": "/favicon-96x96.png",
