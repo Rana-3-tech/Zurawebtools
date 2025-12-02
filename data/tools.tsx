@@ -12,18 +12,6 @@ export interface Tool {
 
 
 // Category Icons (with colorful gradients)
-const TextWritingIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="textWritingIconTitle">
-    <title id="textWritingIconTitle">Text and Writing Tools Icon</title>
-    <defs>
-      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#2563eb" />
-        <stop offset="100%" stopColor="#22d3ee" />
-      </linearGradient>
-    </defs>
-    <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20ZM8 12H16V14H8V12ZM8 16H12V18H8V16Z" fill="url(#grad1)"/>
-  </svg>
-);
 const MathCalculationIcon = () => (
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mathCalcIconTitle">
       <title id="mathCalcIconTitle">Math and Calculation Tools Icon</title>
@@ -608,42 +596,6 @@ export interface Category {
 }
 
 export const toolCategories: Category[] = [
-    {
-        slug: 'text-and-writing-tools',
-        title: 'Text & Writing Tools',
-        description: 'Enhance your writing with tools for content generation, grammar checking, and text analysis.',
-        icon: <TextWritingIcon />,
-        tools: [
-            {
-                title: 'Online Word & Character Counter Tool',
-                description: 'Instantly count words, characters, sentences, and paragraphs in your text. Perfect for essays, social media posts, and SEO content.',
-                link: 'text-and-writing-tools/word-counter',
-                icon: <WordCounterIcon />,
-                gradientColors: { from: '#3b82f6', to: '#22d3ee' }, // Blue to Cyan
-            },
-            {
-                title: 'Remove Extra Spaces from Text',
-                description: 'Clean up your text by automatically removing unnecessary spaces, tabs, and line breaks. A simple tool for tidying up copied content.',
-                link: 'text-and-writing-tools/remove-extra-spaces',
-                icon: <RemoveSpacesIcon />,
-                gradientColors: { from: '#10b981', to: '#14b8a6' }, // Green to Teal
-            },
-            {
-                title: 'Online Case Converter',
-                description: 'Easily convert text between UPPERCASE, lowercase, Title Case, and Sentence case with a single click.',
-                link: 'text-and-writing-tools/case-converter',
-                icon: <CaseConverterIcon />,
-                gradientColors: { from: '#8b5cf6', to: '#ec4899' }, // Purple to Pink
-            },
-             {
-                title: 'Lorem Ipsum Generator',
-                description: 'Generate placeholder text for your design mockups and layouts. Customize by paragraphs, sentences, or words.',
-                link: 'text-and-writing-tools/lorem-ipsum-generator',
-                icon: <LoremIpsumIcon />,
-                gradientColors: { from: '#f97316', to: '#f59e0b' }, // Orange to Amber
-            },
-        ]
-    },
     {
         slug: 'math-and-calculation-tools',
         title: 'Math & Calculation Tools',

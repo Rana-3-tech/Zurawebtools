@@ -24,10 +24,6 @@ import { posts, Post } from './data/posts';
 import NotFoundPage from './components/NotFoundPage';
 
 // Lazy load tool pages for better performance - each tool loads only when needed
-const WordCounter = lazy(() => import('./components/tools/WordCounter'));
-const RemoveExtraSpaces = lazy(() => import('./components/tools/RemoveExtraSpaces'));
-const CaseConverter = lazy(() => import('./components/tools/CaseConverter'));
-const LoremIpsumGenerator = lazy(() => import('./components/tools/LoremIpsumGenerator'));
 const TimeDifferenceCalculator = lazy(() => import('./components/tools/TimeDifferenceCalculator'));
 const PercentageChangeCalculator = lazy(() => import('./components/tools/PercentageChangeCalculator'));
 const HexToRGBConverter = lazy(() => import('./components/tools/HexToRGBConverter'));
@@ -159,16 +155,6 @@ const App: React.FC = () => {
 
         // OLD URL REDIRECT LOGIC - Redirect old flat URLs and /tools/ prefix to new category-based structure
         const oldToNewUrlMap: { [key: string]: string } = {
-            // Text and Writing Tools
-            'word-counter': '/text-and-writing-tools/word-counter',
-            'tools/word-counter': '/text-and-writing-tools/word-counter',
-            'remove-extra-spaces': '/text-and-writing-tools/remove-extra-spaces',
-            'tools/remove-extra-spaces': '/text-and-writing-tools/remove-extra-spaces',
-            'case-converter': '/text-and-writing-tools/case-converter',
-            'tools/case-converter': '/text-and-writing-tools/case-converter',
-            'lorem-ipsum-generator': '/text-and-writing-tools/lorem-ipsum-generator',
-            'tools/lorem-ipsum-generator': '/text-and-writing-tools/lorem-ipsum-generator',
-            
             // Math and Calculation Tools
             'time-difference-calculator': '/math-and-calculation-tools/time-difference-calculator',
             'tools/time-difference-calculator': '/math-and-calculation-tools/time-difference-calculator',
@@ -318,10 +304,6 @@ const App: React.FC = () => {
 
         // Dynamic tool routing - supports both 2-level (category/tool) and 3-level (category/subcategory/tool) paths
         const toolComponentMap: { [key: string]: React.ComponentType<any> } = {
-            'word-counter': WordCounter,
-            'remove-extra-spaces': RemoveExtraSpaces,
-            'case-converter': CaseConverter,
-            'lorem-ipsum-generator': LoremIpsumGenerator,
             'time-difference-calculator': TimeDifferenceCalculator,
             'percentage-change-calculator': PercentageChangeCalculator,
             'fabric-costing-tool': FabricCostingTool,
