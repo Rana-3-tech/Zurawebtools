@@ -25,7 +25,7 @@ const Hero: React.FC<HeroProps> = ({ navigateTo, onSearch }) => {
                     {heroTitle}
                 </h1>
                 <p className="mt-6 text-xl text-slate-400 max-w-3xl mx-auto">
-                    Calculate GPA, test scores, and admission requirements for universities worldwide. Accurate, free, and trusted by thousands of students and educators.
+                    Boost your productivity and online presence with our collection of smart, free-to-use tools for SEO, content creation, and more.
                 </p>
                 <div className="mt-10 max-w-2xl mx-auto">
                     <form onSubmit={handleSearchSubmit} className="relative">
