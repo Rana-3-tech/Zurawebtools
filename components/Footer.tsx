@@ -21,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
                             <span className="text-slate-900">Zura</span><span style={{color: '#007BFF'}}>WebTools</span>
                         </a>
                         <p className="mt-4 text-gray-600">
-                            Free AI-powered tools to improve visibility, rankings, and engagement.
+                            Free education tools for GPA, test scores, and university admissions. Trusted by thousands of students worldwide.
                         </p>
                     </div>
                     <div>

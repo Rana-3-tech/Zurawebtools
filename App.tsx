@@ -24,19 +24,6 @@ import { posts, Post } from './data/posts';
 import NotFoundPage from './components/NotFoundPage';
 
 // Lazy load tool pages for better performance - each tool loads only when needed
-const WordCounter = lazy(() => import('./components/tools/WordCounter'));
-const RemoveExtraSpaces = lazy(() => import('./components/tools/RemoveExtraSpaces'));
-const CaseConverter = lazy(() => import('./components/tools/CaseConverter'));
-const LoremIpsumGenerator = lazy(() => import('./components/tools/LoremIpsumGenerator'));
-const TimeDifferenceCalculator = lazy(() => import('./components/tools/TimeDifferenceCalculator'));
-const PercentageChangeCalculator = lazy(() => import('./components/tools/PercentageChangeCalculator'));
-const HexToRGBConverter = lazy(() => import('./components/tools/HexToRGBConverter'));
-const AccessibleColorContrastChecker = lazy(() => import('./components/tools/AccessibleColorContrastChecker'));
-const JSONFormatterValidator = lazy(() => import('./components/tools/JSONFormatterValidator'));
-const ShadowCSSGenerator = lazy(() => import('./components/tools/ShadowCSSGenerator'));
-const ColorHarmonyChecker = lazy(() => import('./components/tools/ColorHarmonyChecker'));
-const FabricCostingTool = lazy(() => import('./components/tools/FabricCostingTool'));
-const SnowDayCalculator = lazy(() => import('./components/tools/SnowDayCalculator'));
 const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalculator'));
 const ACTScoreCalculator = lazy(() => import('./components/tools/ACTScoreCalculator'));
 const IELTSBandScoreCalculator = lazy(() => import('./components/tools/IELTSBandScoreCalculator'));
@@ -50,12 +37,6 @@ const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACal
 const UVAGPACalculator = lazy(() => import('./components/tools/UVAGPACalculator'));
 const ASUGPACalculator = lazy(() => import('./components/tools/ASUGPACalculator'));
 const LSACGPA = lazy(() => import('./components/tools/LSACGPA'));
-const FillDirtCalculator = lazy(() => import('./components/tools/FillDirtCalculator'));
-const QuiltBackingCalculator = lazy(() => import('./components/tools/QuiltBackingCalculator'));
-const PowerToMassRatioCalculator = lazy(() => import('./components/tools/PowerToMassRatioCalculator'));
-const AudiobookSpeedCalculator = lazy(() => import('./components/tools/AudiobookSpeedCalculator'));
-const ReverbCalculator = lazy(() => import('./components/tools/ReverbCalculator'));
-const CodeSimilarityChecker = lazy(() => import('./components/tools/CodeSimilarityChecker'));
 const CollegeGPACalculator = lazy(() => import('./components/tools/CollegeGPACalculator'));
 const CSUGPACalculator = lazy(() => import('./components/tools/CSUGPACalculator'));
 const GMATScoreCalculator = lazy(() => import('./components/tools/GMATScoreCalculator'));
@@ -159,42 +140,6 @@ const App: React.FC = () => {
 
         // OLD URL REDIRECT LOGIC - Redirect old flat URLs and /tools/ prefix to new category-based structure
         const oldToNewUrlMap: { [key: string]: string } = {
-            // Text and Writing Tools
-            'word-counter': '/text-and-writing-tools/word-counter',
-            'tools/word-counter': '/text-and-writing-tools/word-counter',
-            'remove-extra-spaces': '/text-and-writing-tools/remove-extra-spaces',
-            'tools/remove-extra-spaces': '/text-and-writing-tools/remove-extra-spaces',
-            'case-converter': '/text-and-writing-tools/case-converter',
-            'tools/case-converter': '/text-and-writing-tools/case-converter',
-            'lorem-ipsum-generator': '/text-and-writing-tools/lorem-ipsum-generator',
-            'tools/lorem-ipsum-generator': '/text-and-writing-tools/lorem-ipsum-generator',
-            
-            // Math and Calculation Tools
-            'time-difference-calculator': '/math-and-calculation-tools/time-difference-calculator',
-            'tools/time-difference-calculator': '/math-and-calculation-tools/time-difference-calculator',
-            'percentage-change-calculator': '/math-and-calculation-tools/percentage-change-calculator',
-            'tools/percentage-change-calculator': '/math-and-calculation-tools/percentage-change-calculator',
-            'fabric-costing-tool': '/math-and-calculation-tools/fabric-costing-tool',
-            'tools/fabric-costing-tool': '/math-and-calculation-tools/fabric-costing-tool',
-            'snow-day-calculator': '/math-and-calculation-tools/snow-day-calculator',
-            'tools/snow-day-calculator': '/math-and-calculation-tools/snow-day-calculator',
-            
-            // Color and Design Tools
-            'hex-to-rgb-converter': '/color-and-design-tools/hex-to-rgb-converter',
-            'tools/hex-to-rgb-converter': '/color-and-design-tools/hex-to-rgb-converter',
-            'accessible-color-contrast-checker': '/color-and-design-tools/accessible-color-contrast-checker',
-            'tools/accessible-color-contrast-checker': '/color-and-design-tools/accessible-color-contrast-checker',
-            'shadow-css-generator': '/color-and-design-tools/shadow-css-generator',
-            'tools/shadow-css-generator': '/color-and-design-tools/shadow-css-generator',
-            'color-harmony-checker': '/color-and-design-tools/color-harmony-checker',
-            'tools/color-harmony-checker': '/color-and-design-tools/color-harmony-checker',
-            
-            // Developer Tools
-            'json-formatter': '/developer-tools/json-formatter',
-            'tools/json-formatter': '/developer-tools/json-formatter',
-            'code-similarity-checker': '/developer-tools/code-similarity-checker',
-            'tools/code-similarity-checker': '/developer-tools/code-similarity-checker',
-            
             // Education - Test Score Tools
             'sat-score-calculator': '/education-and-exam-tools/test-score-tools/sat-score-calculator',
             'tools/sat-score-calculator': '/education-and-exam-tools/test-score-tools/sat-score-calculator',
@@ -252,20 +197,6 @@ const App: React.FC = () => {
             'tools/student-visa-fee-calculator-australia': '/education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia',
             'college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
             'tools/college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
-            
-            // Construction and Engineering Tools
-            'fill-dirt-calculator': '/construction-and-engineering-tools/fill-dirt-calculator',
-            'tools/fill-dirt-calculator': '/construction-and-engineering-tools/fill-dirt-calculator',
-            'quilt-backing-calculator': '/construction-and-engineering-tools/quilt-backing-calculator',
-            'tools/quilt-backing-calculator': '/construction-and-engineering-tools/quilt-backing-calculator',
-            'power-to-mass-ratio-calculator': '/construction-and-engineering-tools/power-to-mass-ratio-calculator',
-            'tools/power-to-mass-ratio-calculator': '/construction-and-engineering-tools/power-to-mass-ratio-calculator',
-            
-            // Audio and Media Tools
-            'audiobook-speed-calculator': '/audio-and-media-tools/audiobook-speed-calculator',
-            'tools/audiobook-speed-calculator': '/audio-and-media-tools/audiobook-speed-calculator',
-            'reverb-calculator': '/audio-and-media-tools/reverb-calculator',
-            'tools/reverb-calculator': '/audio-and-media-tools/reverb-calculator',
         };
 
         // Check if this is an old flat URL and redirect
@@ -318,20 +249,6 @@ const App: React.FC = () => {
 
         // Dynamic tool routing - supports both 2-level (category/tool) and 3-level (category/subcategory/tool) paths
         const toolComponentMap: { [key: string]: React.ComponentType<any> } = {
-            'word-counter': WordCounter,
-            'remove-extra-spaces': RemoveExtraSpaces,
-            'case-converter': CaseConverter,
-            'lorem-ipsum-generator': LoremIpsumGenerator,
-            'time-difference-calculator': TimeDifferenceCalculator,
-            'percentage-change-calculator': PercentageChangeCalculator,
-            'fabric-costing-tool': FabricCostingTool,
-            'snow-day-calculator': SnowDayCalculator,
-            'hex-to-rgb-converter': HexToRGBConverter,
-            'accessible-color-contrast-checker': AccessibleColorContrastChecker,
-            'shadow-css-generator': ShadowCSSGenerator,
-            'color-harmony-checker': ColorHarmonyChecker,
-            'json-formatter': JSONFormatterValidator,
-            'code-similarity-checker': CodeSimilarityChecker,
             'sat-score-calculator': SATScoreCalculator,
             'act-score-calculator': ACTScoreCalculator,
             'ielts-band-score-calculator': IELTSBandScoreCalculator,
@@ -359,11 +276,6 @@ const App: React.FC = () => {
             'graduate-school-gpa-calculator': GraduateSchoolGPACalculator,
             'pharmacy-school-gpa-calculator': PharmacySchoolGPACalculator,
             'pa-school-gpa-calculator': PASchoolGPACalculator,
-            'fill-dirt-calculator': FillDirtCalculator,
-            'quilt-backing-calculator': QuiltBackingCalculator,
-            'power-to-mass-ratio-calculator': PowerToMassRatioCalculator,
-            'audiobook-speed-calculator': AudiobookSpeedCalculator,
-            'reverb-calculator': ReverbCalculator,
             'gmat-score-calculator': GMATScoreCalculator,
             'ucat-score-calculator': UCATScoreCalculator,
             'personal-statement-character-counter': PersonalStatementCharacterCounter,

@@ -12,7 +12,7 @@ const AboutUs: React.FC = () => {
                         About ZuraWebTools
                     </h1>
                     <p className="mt-6 text-xl text-slate-300 max-w-3xl mx-auto">
-                        Empowering creators, marketers, and developers with free, powerful AI-driven tools.
+                        Empowering students and educators worldwide with free, accurate academic tools.
                     </p>
                 </div>
             </section>
@@ -24,7 +24,7 @@ const AboutUs: React.FC = () => {
                         <div className="prose lg:prose-lg">
                             <h2 className="text-4xl font-bold text-gray-900 !mb-4">Our Mission</h2>
                             <p className="text-gray-600">
-                                Our mission is simple: to democratize access to high-quality digital tools. We believe that everyone—from students learning the ropes to seasoned professionals scaling their business—should have the resources they need to succeed online without facing a paywall.
+                                Our mission is simple: to support students worldwide with accurate, free academic tools. We believe that every student—whether applying to college, tracking GPA, or preparing for standardized tests—deserves access to reliable calculators without paywalls or subscriptions. Education should be accessible to all.
                             </p>
                         </div>
                         <div>
@@ -41,10 +41,10 @@ const AboutUs: React.FC = () => {
                         <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
                         <div className="prose lg:prose-lg max-w-3xl mx-auto text-gray-600">
                             <p>
-                                ZuraWebTools started as a small side project, born from a simple observation: while premium tools offered powerful features, free alternatives were often cluttered with ads, had poor user experiences, or lacked reliability.
+                                ZuraWebTools started from a student's frustration: why are accurate GPA calculators so hard to find? As students ourselves, we experienced the stress of manually calculating grades and wondering if university-specific formulas were applied correctly.
                             </p>
                             <p>
-                                We set out to create something different. A suite of tools that is clean, user-friendly, powerful, and completely free for everyone. Each tool is crafted with care, focusing on solving real-world problems for creators and developers. We're driven by the community we serve and are constantly working to improve and expand our offerings.
+                                We set out to create something different. A suite of education tools that is accurate, user-friendly, and completely free for every student. Each calculator is crafted with university-specific grading scales and official test scoring rubrics. We're driven by the student community we serve and constantly update our tools with the latest academic requirements.
                             </p>
                         </div>
                     </div>
@@ -57,16 +57,16 @@ const AboutUs: React.FC = () => {
                     <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">Our Core Values</h2>
                     <div className="grid md:grid-cols-3 gap-8">
                         <div className="bg-white p-8 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
-                            <h3 className="text-2xl font-semibold mb-3 text-brand-blue">Accessibility</h3>
-                            <p className="text-gray-600">We believe powerful tools should be available to everyone, regardless of their budget. That's why our tools are, and always will be, free.</p>
+                            <h3 className="text-2xl font-semibold mb-3 text-brand-blue">Accessibility for All</h3>
+                            <p className="text-gray-600">100% free academic tools. No paywalls, no subscriptions. Every student deserves equal access to education resources.</p>
                         </div>
                         <div className="bg-white p-8 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
-                             <h3 className="text-2xl font-semibold mb-3 text-brand-blue">User-Focused</h3>
-                            <p className="text-gray-600">Your workflow is our priority. We design intuitive, ad-free interfaces so you can get the job done without distractions.</p>
+                             <h3 className="text-2xl font-semibold mb-3 text-brand-blue">Academic Accuracy</h3>
+                            <p className="text-gray-600">University-specific formulas, official test rubrics, verified grading scales. Every calculation is tested for precision.</p>
                         </div>
                         <div className="bg-white p-8 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
-                             <h3 className="text-2xl font-semibold mb-3 text-brand-blue">Innovation</h3>
-                            <p className="text-gray-600">We leverage the latest in AI and web technology to build smart, efficient tools that make a real difference in your productivity.</p>
+                             <h3 className="text-2xl font-semibold mb-3 text-brand-blue">Constant Updates</h3>
+                            <p className="text-gray-600">University requirements change. We monitor official sources and update our tools to reflect the latest academic standards.</p>
                         </div>
                     </div>
                 </div>

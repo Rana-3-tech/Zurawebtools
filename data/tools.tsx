@@ -12,55 +12,8 @@ export interface Tool {
 
 
 // Category Icons (with colorful gradients)
-const TextWritingIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="textWritingIconTitle">
-    <title id="textWritingIconTitle">Text and Writing Tools Icon</title>
-    <defs>
-      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#2563eb" />
-        <stop offset="100%" stopColor="#22d3ee" />
-      </linearGradient>
-    </defs>
-    <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20ZM8 12H16V14H8V12ZM8 16H12V18H8V16Z" fill="url(#grad1)"/>
-  </svg>
-);
-const MathCalculationIcon = () => (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mathCalcIconTitle">
-      <title id="mathCalcIconTitle">Math and Calculation Tools Icon</title>
-      <defs>
-        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#8b5cf6" />
-          <stop offset="100%" stopColor="#ec4899" />
-        </linearGradient>
-      </defs>
-      <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM17 17H7V15H17V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z" fill="url(#grad2)"/>
-    </svg>
-);
-const ColorDesignIcon = () => (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="colorDesignIconTitle">
-        <title id="colorDesignIconTitle">Color and Design Tools Icon</title>
-        <defs>
-          <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#ef4444" />
-          </linearGradient>
-        </defs>
-        <path d="M12 3C17.52 3 22 6.58 22 11C22 15.42 17.52 19 12 19C6.48 19 2 15.42 2 11C2 6.58 6.48 3 12 3ZM12 5C8.13 5 5 7.68 5 11C5 14.32 8.13 17 12 17C15.87 17 19 14.32 19 11C19 7.68 15.87 5 12 5Z" fill="url(#grad3)" />
-        <path d="M12 5C8.13 5 5 7.68 5 11C6.34 8.04 8.94 6 12 5.5V5Z" fill="url(#grad3)"/>
-    </svg>
-);
-const DeveloperIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="devIconTitle">
-    <title id="devIconTitle">Developer Tools Icon</title>
-    <defs>
-        <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="100%" stopColor="#3b82f6" />
-        </linearGradient>
-    </defs>
-    <path d="M7.41 16.59L2.83 12L7.41 7.41L6 6L0 12L6 18L7.41 16.59ZM16.59 16.59L21.17 12L16.59 7.41L18 6L24 12L18 18L16.59 16.59Z" fill="url(#grad4)" />
-  </svg>
-);
+
+
 
 const EducationExamIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="educationIconTitle">
@@ -75,31 +28,9 @@ const EducationExamIcon = () => (
   </svg>
 );
 
-const ConstructionEngineeringIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="constructionIconTitle">
-    <title id="constructionIconTitle">Construction & Engineering Tools Icon</title>
-    <defs>
-        <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#dc2626" />
-        </linearGradient>
-    </defs>
-    <path d="M22.61 18.97L13.54 9.9L15.66 7.78L14.24 6.36L12.12 8.48L10.59 6.95L12.71 4.83L11.29 3.41L9.17 5.53L7.29 3.66C6.11 2.47 4.21 2.47 3.03 3.66C1.84 4.84 1.84 6.74 3.03 7.93L4.9 9.8L2.78 11.92L4.2 13.34L6.32 11.22L7.85 12.75L5.73 14.87L7.15 16.29L9.27 14.17L18.34 23.24C19.13 24.03 20.4 24.03 21.19 23.24L23.24 21.19C24.03 20.4 24.03 19.13 23.24 18.34L22.61 18.97ZM4.44 7.93C3.65 7.14 3.65 5.88 4.44 5.09C5.23 4.3 6.49 4.3 7.28 5.09L9.15 6.96L5.73 10.38L4.44 7.93Z" fill="url(#grad6)" />
-  </svg>
-);
 
-const AudioMediaIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="audioMediaIconTitle">
-    <title id="audioMediaIconTitle">Audio & Media Tools Icon</title>
-    <defs>
-        <linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ec4899" />
-            <stop offset="100%" stopColor="#8b5cf6" />
-        </linearGradient>
-    </defs>
-    <path d="M12 3V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17C6 19.21 7.79 21 10 21C12.21 21 14 19.21 14 17V7H18V3H12ZM10 19C8.9 19 8 18.1 8 17C8 15.9 8.9 15 10 15C11.1 15 12 15.9 12 17C12 18.1 11.1 19 10 19Z" fill="url(#grad7)" />
-  </svg>
-);
+
+
 
 // Individual Tool Icons (with colorful gradients)
 const WordCounterIcon = () => (
@@ -609,136 +540,6 @@ export interface Category {
 
 export const toolCategories: Category[] = [
     {
-        slug: 'text-and-writing-tools',
-        title: 'Text & Writing Tools',
-        description: 'Enhance your writing with tools for content generation, grammar checking, and text analysis.',
-        icon: <TextWritingIcon />,
-        tools: [
-            {
-                title: 'Online Word & Character Counter Tool',
-                description: 'Instantly count words, characters, sentences, and paragraphs in your text. Perfect for essays, social media posts, and SEO content.',
-                link: 'text-and-writing-tools/word-counter',
-                icon: <WordCounterIcon />,
-                gradientColors: { from: '#3b82f6', to: '#22d3ee' }, // Blue to Cyan
-            },
-            {
-                title: 'Remove Extra Spaces from Text',
-                description: 'Clean up your text by automatically removing unnecessary spaces, tabs, and line breaks. A simple tool for tidying up copied content.',
-                link: 'text-and-writing-tools/remove-extra-spaces',
-                icon: <RemoveSpacesIcon />,
-                gradientColors: { from: '#10b981', to: '#14b8a6' }, // Green to Teal
-            },
-            {
-                title: 'Online Case Converter',
-                description: 'Easily convert text between UPPERCASE, lowercase, Title Case, and Sentence case with a single click.',
-                link: 'text-and-writing-tools/case-converter',
-                icon: <CaseConverterIcon />,
-                gradientColors: { from: '#8b5cf6', to: '#ec4899' }, // Purple to Pink
-            },
-             {
-                title: 'Lorem Ipsum Generator',
-                description: 'Generate placeholder text for your design mockups and layouts. Customize by paragraphs, sentences, or words.',
-                link: 'text-and-writing-tools/lorem-ipsum-generator',
-                icon: <LoremIpsumIcon />,
-                gradientColors: { from: '#f97316', to: '#f59e0b' }, // Orange to Amber
-            },
-        ]
-    },
-    {
-        slug: 'math-and-calculation-tools',
-        title: 'Math & Calculation Tools',
-        description: 'Perform complex calculations, conversions, and mathematical analyses with our handy tools.',
-        icon: <MathCalculationIcon />,
-        tools: [
-            {
-                title: 'Date Difference Calculator',
-                description: 'Calculate the exact duration between two dates, broken down into years, months, and days.',
-                link: 'math-and-calculation-tools/time-difference-calculator',
-                icon: <TimeDifferenceIcon />,
-                gradientColors: { from: '#d946ef', to: '#8b5cf6' }, // Fuchsia to Purple
-            },
-            {
-                title: 'Percentage Change Calculator',
-                description: 'Quickly calculate the percentage increase or decrease between two numbers. Ideal for finance, business, and math.',
-                link: 'math-and-calculation-tools/percentage-change-calculator',
-                icon: <PercentageChangeIcon />,
-                gradientColors: { from: '#22c55e', to: '#3b82f6' }, // Green to Blue
-            },
-            {
-                title: 'Fabric Costing Calculator',
-                description: 'Professional fabric costing tool for textile engineers. Calculate warp/weft weight, yarn consumption, and per-meter pricing with accurate cost breakdown.',
-                link: 'math-and-calculation-tools/fabric-costing-tool',
-                icon: <FabricCostingIcon />,
-                gradientColors: { from: '#f59e0b', to: '#ef4444' }, // Amber to Red
-            },
-            {
-                title: 'Snow Day Calculator',
-                description: 'Predict the likelihood of school closures due to weather conditions. Advanced algorithm analyzes snowfall, temperature, wind, and school district policies.',
-                link: 'math-and-calculation-tools/snow-day-calculator',
-                icon: <SnowDayCalculatorIcon />,
-                gradientColors: { from: '#3b82f6', to: '#06b6d4' }, // Blue to Cyan
-            },
-        ]
-    },
-    {
-        slug: 'color-and-design-tools',
-        title: 'Color & Design Tools',
-        description: 'Find the perfect color palettes, generate gradients, and get design inspiration for your projects.',
-        icon: <ColorDesignIcon />,
-        tools: [
-            {
-                title: 'Hex to RGB Color Converter',
-                description: 'Instantly convert Hex color codes to RGB values with a live color preview. A must-have tool for designers and developers.',
-                link: 'color-and-design-tools/hex-to-rgb-converter',
-                icon: <HexToRgbIcon />,
-                gradientColors: { from: '#ef4444', to: '#f59e0b' }, // Red to Amber
-            },
-            {
-                title: 'Accessible Color Contrast Checker',
-                description: 'Check color contrast ratios for accessibility compliance (WCAG AA/AAA). Essential for creating inclusive web designs.',
-                link: 'color-and-design-tools/accessible-color-contrast-checker',
-                icon: <ContrastCheckerIcon />,
-                gradientColors: { from: '#6366f1', to: '#a855f7' }, // Indigo to Purple
-            },
-            {
-                title: 'CSS Shadow Generator',
-                description: 'Create realistic box-shadow and text-shadow effects with live preview. Perfect for modern UI design and neumorphism.',
-                link: 'color-and-design-tools/shadow-css-generator',
-                icon: <ShadowGeneratorIcon />,
-                gradientColors: { from: '#8b5cf6', to: '#06b6d4' }, // Purple to Cyan
-            },
-            {
-                title: 'Color Harmony Checker',
-                description: 'Generate beautiful color palettes and harmonies using color theory. Perfect for designers creating cohesive color schemes.',
-                link: 'color-and-design-tools/color-harmony-checker',
-                icon: <ColorHarmonyIcon />,
-                gradientColors: { from: '#ff6b6b', to: '#4ecdc4' }, // Red to Teal
-            },
-        ]
-    },
-    {
-        slug: 'developer-tools',
-        title: 'Developer Tools',
-        description: 'A collection of utilities for developers, including code formatters, JSON validators, and more.',
-        icon: <DeveloperIcon />,
-        tools: [
-            {
-                title: 'JSON Formatter & Validator',
-                description: 'Format, beautify, and validate your JSON data. A crucial tool for checking API responses and cleaning up JSON files.',
-                link: 'developer-tools/json-formatter',
-                icon: <JsonFormatterIcon />,
-                gradientColors: { from: '#06b6d4', to: '#3b82f6' }, // Cyan to Blue
-            },
-            {
-                title: 'Code Similarity Checker',
-                description: 'Compare two code snippets and detect similarities. Perfect for checking code duplication and plagiarism detection.',
-                link: 'developer-tools/code-similarity-checker',
-                icon: <CodeSimilarityIcon />,
-                gradientColors: { from: '#10b981', to: '#06b6d4' }, // Green to Cyan
-            },
-        ]
-    },
-    {
         slug: 'education-and-exam-tools',
         title: 'Education & Exam Tools',
         description: 'Essential calculators and tools for students, teachers, and academic professionals.',
@@ -1027,57 +828,6 @@ export const toolCategories: Category[] = [
                         gradientColors: { from: '#6366f1', to: '#a855f7' },
                     },
                 ]
-            },
-        ]
-    },
-    {
-        slug: 'construction-and-engineering-tools',
-        title: 'Construction & Engineering Tools',
-        description: 'Professional calculators for construction projects, engineering calculations, and DIY home improvements.',
-        icon: <ConstructionEngineeringIcon />,
-        tools: [
-            {
-                title: 'Fill Dirt Calculator',
-                description: 'Calculate the amount of fill dirt needed for your landscaping or construction project. Supports various measurement units and provides cost estimates.',
-                link: 'construction-and-engineering-tools/fill-dirt-calculator',
-                icon: <FillDirtIcon />,
-                gradientColors: { from: '#92400e', to: '#f59e0b' }, // Brown to Amber
-            },
-            {
-                title: 'Quilt Backing Calculator',
-                description: 'Calculate fabric requirements for quilt backing. Perfect for quilters to determine backing sizes and fabric yardage needed.',
-                link: 'construction-and-engineering-tools/quilt-backing-calculator',
-                icon: <QuiltBackingIcon />,
-                gradientColors: { from: '#ec4899', to: '#f59e0b' }, // Pink to Amber
-            },
-            {
-                title: 'Power to Mass Ratio Calculator',
-                description: 'Calculate power-to-weight ratio for vehicles, engines, and machinery. Essential for performance analysis and engineering calculations.',
-                link: 'construction-and-engineering-tools/power-to-mass-ratio-calculator',
-                icon: <PowerToMassIcon />,
-                gradientColors: { from: '#ef4444', to: '#f59e0b' }, // Red to Amber
-            },
-        ]
-    },
-    {
-        slug: 'audio-and-media-tools',
-        title: 'Audio & Media Tools',
-        description: 'Powerful tools for audio processing, media calculations, and content creation.',
-        icon: <AudioMediaIcon />,
-        tools: [
-            {
-                title: 'Audiobook Speed Calculator',
-                description: 'Calculate how long it takes to finish an audiobook at different playback speeds. Save time with optimized listening schedules.',
-                link: 'audio-and-media-tools/audiobook-speed-calculator',
-                icon: <AudiobookSpeedIcon />,
-                gradientColors: { from: '#a855f7', to: '#ec4899' }, // Purple to Pink
-            },
-            {
-                title: 'Reverb Calculator',
-                description: 'Calculate optimal reverb time (RT60) for rooms and recording studios. Essential tool for acoustics and audio engineering.',
-                link: 'audio-and-media-tools/reverb-calculator',
-                icon: <ReverbIcon />,
-                gradientColors: { from: '#06b6d4', to: '#8b5cf6' }, // Cyan to Purple
             },
         ]
     },
