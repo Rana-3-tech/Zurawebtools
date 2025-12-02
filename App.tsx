@@ -37,6 +37,8 @@ const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACal
 const UVAGPACalculator = lazy(() => import('./components/tools/UVAGPACalculator'));
 const ASUGPACalculator = lazy(() => import('./components/tools/ASUGPACalculator'));
 const LSACGPA = lazy(() => import('./components/tools/LSACGPA'));
+const AudiobookSpeedCalculator = lazy(() => import('./components/tools/AudiobookSpeedCalculator'));
+const ReverbCalculator = lazy(() => import('./components/tools/ReverbCalculator'));
 const CollegeGPACalculator = lazy(() => import('./components/tools/CollegeGPACalculator'));
 const CSUGPACalculator = lazy(() => import('./components/tools/CSUGPACalculator'));
 const GMATScoreCalculator = lazy(() => import('./components/tools/GMATScoreCalculator'));
@@ -283,6 +285,8 @@ const App: React.FC = () => {
             'graduate-school-gpa-calculator': GraduateSchoolGPACalculator,
             'pharmacy-school-gpa-calculator': PharmacySchoolGPACalculator,
             'pa-school-gpa-calculator': PASchoolGPACalculator,
+            'audiobook-speed-calculator': AudiobookSpeedCalculator,
+            'reverb-calculator': ReverbCalculator,
             'gmat-score-calculator': GMATScoreCalculator,
             'ucat-score-calculator': UCATScoreCalculator,
             'personal-statement-character-counter': PersonalStatementCharacterCounter,
