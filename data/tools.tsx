@@ -12,19 +12,6 @@ export interface Tool {
 
 
 // Category Icons (with colorful gradients)
-const DeveloperIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="devIconTitle">
-    <title id="devIconTitle">Developer Tools Icon</title>
-    <defs>
-        <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="100%" stopColor="#3b82f6" />
-        </linearGradient>
-    </defs>
-    <path d="M7.41 16.59L2.83 12L7.41 7.41L6 6L0 12L6 18L7.41 16.59ZM16.59 16.59L21.17 12L16.59 7.41L18 6L24 12L18 18L16.59 16.59Z" fill="url(#grad4)" />
-  </svg>
-);
-
 const EducationExamIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="educationIconTitle">
     <title id="educationIconTitle">Education & Exam Tools Icon</title>
@@ -571,28 +558,6 @@ export interface Category {
 }
 
 export const toolCategories: Category[] = [
-    {
-        slug: 'developer-tools',
-        title: 'Developer Tools',
-        description: 'A collection of utilities for developers, including code formatters, JSON validators, and more.',
-        icon: <DeveloperIcon />,
-        tools: [
-            {
-                title: 'JSON Formatter & Validator',
-                description: 'Format, beautify, and validate your JSON data. A crucial tool for checking API responses and cleaning up JSON files.',
-                link: 'developer-tools/json-formatter',
-                icon: <JsonFormatterIcon />,
-                gradientColors: { from: '#06b6d4', to: '#3b82f6' }, // Cyan to Blue
-            },
-            {
-                title: 'Code Similarity Checker',
-                description: 'Compare two code snippets and detect similarities. Perfect for checking code duplication and plagiarism detection.',
-                link: 'developer-tools/code-similarity-checker',
-                icon: <CodeSimilarityIcon />,
-                gradientColors: { from: '#10b981', to: '#06b6d4' }, // Green to Cyan
-            },
-        ]
-    },
     {
         slug: 'education-and-exam-tools',
         title: 'Education & Exam Tools',

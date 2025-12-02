@@ -24,7 +24,6 @@ import { posts, Post } from './data/posts';
 import NotFoundPage from './components/NotFoundPage';
 
 // Lazy load tool pages for better performance - each tool loads only when needed
-const JSONFormatterValidator = lazy(() => import('./components/tools/JSONFormatterValidator'));
 const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalculator'));
 const ACTScoreCalculator = lazy(() => import('./components/tools/ACTScoreCalculator'));
 const IELTSBandScoreCalculator = lazy(() => import('./components/tools/IELTSBandScoreCalculator'));
@@ -43,7 +42,6 @@ const QuiltBackingCalculator = lazy(() => import('./components/tools/QuiltBackin
 const PowerToMassRatioCalculator = lazy(() => import('./components/tools/PowerToMassRatioCalculator'));
 const AudiobookSpeedCalculator = lazy(() => import('./components/tools/AudiobookSpeedCalculator'));
 const ReverbCalculator = lazy(() => import('./components/tools/ReverbCalculator'));
-const CodeSimilarityChecker = lazy(() => import('./components/tools/CodeSimilarityChecker'));
 const CollegeGPACalculator = lazy(() => import('./components/tools/CollegeGPACalculator'));
 const CSUGPACalculator = lazy(() => import('./components/tools/CSUGPACalculator'));
 const GMATScoreCalculator = lazy(() => import('./components/tools/GMATScoreCalculator'));
@@ -148,12 +146,6 @@ const App: React.FC = () => {
         // OLD URL REDIRECT LOGIC - Redirect old flat URLs and /tools/ prefix to new category-based structure
         const oldToNewUrlMap: { [key: string]: string } = {
             // Math and Calculation Tools
-            // Developer Tools
-            'json-formatter': '/developer-tools/json-formatter',
-            'tools/json-formatter': '/developer-tools/json-formatter',
-            'code-similarity-checker': '/developer-tools/code-similarity-checker',
-            'tools/code-similarity-checker': '/developer-tools/code-similarity-checker',
-            
             // Education - Test Score Tools
             'sat-score-calculator': '/education-and-exam-tools/test-score-tools/sat-score-calculator',
             'tools/sat-score-calculator': '/education-and-exam-tools/test-score-tools/sat-score-calculator',
@@ -277,8 +269,6 @@ const App: React.FC = () => {
 
         // Dynamic tool routing - supports both 2-level (category/tool) and 3-level (category/subcategory/tool) paths
         const toolComponentMap: { [key: string]: React.ComponentType<any> } = {
-            'json-formatter': JSONFormatterValidator,
-            'code-similarity-checker': CodeSimilarityChecker,
             'sat-score-calculator': SATScoreCalculator,
             'act-score-calculator': ACTScoreCalculator,
             'ielts-band-score-calculator': IELTSBandScoreCalculator,
