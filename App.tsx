@@ -24,11 +24,7 @@ import { posts, Post } from './data/posts';
 import NotFoundPage from './components/NotFoundPage';
 
 // Lazy load tool pages for better performance - each tool loads only when needed
-const HexToRGBConverter = lazy(() => import('./components/tools/HexToRGBConverter'));
-const AccessibleColorContrastChecker = lazy(() => import('./components/tools/AccessibleColorContrastChecker'));
 const JSONFormatterValidator = lazy(() => import('./components/tools/JSONFormatterValidator'));
-const ShadowCSSGenerator = lazy(() => import('./components/tools/ShadowCSSGenerator'));
-const ColorHarmonyChecker = lazy(() => import('./components/tools/ColorHarmonyChecker'));
 const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalculator'));
 const ACTScoreCalculator = lazy(() => import('./components/tools/ACTScoreCalculator'));
 const IELTSBandScoreCalculator = lazy(() => import('./components/tools/IELTSBandScoreCalculator'));
@@ -152,16 +148,6 @@ const App: React.FC = () => {
         // OLD URL REDIRECT LOGIC - Redirect old flat URLs and /tools/ prefix to new category-based structure
         const oldToNewUrlMap: { [key: string]: string } = {
             // Math and Calculation Tools
-            // Color and Design Tools
-            'hex-to-rgb-converter': '/color-and-design-tools/hex-to-rgb-converter',
-            'tools/hex-to-rgb-converter': '/color-and-design-tools/hex-to-rgb-converter',
-            'accessible-color-contrast-checker': '/color-and-design-tools/accessible-color-contrast-checker',
-            'tools/accessible-color-contrast-checker': '/color-and-design-tools/accessible-color-contrast-checker',
-            'shadow-css-generator': '/color-and-design-tools/shadow-css-generator',
-            'tools/shadow-css-generator': '/color-and-design-tools/shadow-css-generator',
-            'color-harmony-checker': '/color-and-design-tools/color-harmony-checker',
-            'tools/color-harmony-checker': '/color-and-design-tools/color-harmony-checker',
-            
             // Developer Tools
             'json-formatter': '/developer-tools/json-formatter',
             'tools/json-formatter': '/developer-tools/json-formatter',
@@ -291,10 +277,6 @@ const App: React.FC = () => {
 
         // Dynamic tool routing - supports both 2-level (category/tool) and 3-level (category/subcategory/tool) paths
         const toolComponentMap: { [key: string]: React.ComponentType<any> } = {
-            'hex-to-rgb-converter': HexToRGBConverter,
-            'accessible-color-contrast-checker': AccessibleColorContrastChecker,
-            'shadow-css-generator': ShadowCSSGenerator,
-            'color-harmony-checker': ColorHarmonyChecker,
             'json-formatter': JSONFormatterValidator,
             'code-similarity-checker': CodeSimilarityChecker,
             'sat-score-calculator': SATScoreCalculator,

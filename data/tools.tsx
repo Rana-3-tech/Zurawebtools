@@ -12,19 +12,6 @@ export interface Tool {
 
 
 // Category Icons (with colorful gradients)
-const ColorDesignIcon = () => (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="colorDesignIconTitle">
-        <title id="colorDesignIconTitle">Color and Design Tools Icon</title>
-        <defs>
-          <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#ef4444" />
-          </linearGradient>
-        </defs>
-        <path d="M12 3C17.52 3 22 6.58 22 11C22 15.42 17.52 19 12 19C6.48 19 2 15.42 2 11C2 6.58 6.48 3 12 3ZM12 5C8.13 5 5 7.68 5 11C5 14.32 8.13 17 12 17C15.87 17 19 14.32 19 11C19 7.68 15.87 5 12 5Z" fill="url(#grad3)" />
-        <path d="M12 5C8.13 5 5 7.68 5 11C6.34 8.04 8.94 6 12 5.5V5Z" fill="url(#grad3)"/>
-    </svg>
-);
 const DeveloperIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="devIconTitle">
     <title id="devIconTitle">Developer Tools Icon</title>
@@ -584,42 +571,6 @@ export interface Category {
 }
 
 export const toolCategories: Category[] = [
-    {
-        slug: 'color-and-design-tools',
-        title: 'Color & Design Tools',
-        description: 'Find the perfect color palettes, generate gradients, and get design inspiration for your projects.',
-        icon: <ColorDesignIcon />,
-        tools: [
-            {
-                title: 'Hex to RGB Color Converter',
-                description: 'Instantly convert Hex color codes to RGB values with a live color preview. A must-have tool for designers and developers.',
-                link: 'color-and-design-tools/hex-to-rgb-converter',
-                icon: <HexToRgbIcon />,
-                gradientColors: { from: '#ef4444', to: '#f59e0b' }, // Red to Amber
-            },
-            {
-                title: 'Accessible Color Contrast Checker',
-                description: 'Check color contrast ratios for accessibility compliance (WCAG AA/AAA). Essential for creating inclusive web designs.',
-                link: 'color-and-design-tools/accessible-color-contrast-checker',
-                icon: <ContrastCheckerIcon />,
-                gradientColors: { from: '#6366f1', to: '#a855f7' }, // Indigo to Purple
-            },
-            {
-                title: 'CSS Shadow Generator',
-                description: 'Create realistic box-shadow and text-shadow effects with live preview. Perfect for modern UI design and neumorphism.',
-                link: 'color-and-design-tools/shadow-css-generator',
-                icon: <ShadowGeneratorIcon />,
-                gradientColors: { from: '#8b5cf6', to: '#06b6d4' }, // Purple to Cyan
-            },
-            {
-                title: 'Color Harmony Checker',
-                description: 'Generate beautiful color palettes and harmonies using color theory. Perfect for designers creating cohesive color schemes.',
-                link: 'color-and-design-tools/color-harmony-checker',
-                icon: <ColorHarmonyIcon />,
-                gradientColors: { from: '#ff6b6b', to: '#4ecdc4' }, // Red to Teal
-            },
-        ]
-    },
     {
         slug: 'developer-tools',
         title: 'Developer Tools',
