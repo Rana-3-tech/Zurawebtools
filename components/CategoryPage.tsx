@@ -22,6 +22,59 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo, fullP
             metaDescription.setAttribute('content', category.description);
         }
 
+        // Set canonical URL
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) {
+            canonical = document.createElement('link');
+            canonical.setAttribute('rel', 'canonical');
+            document.head.appendChild(canonical);
+        }
+        canonical.setAttribute('href', categoryUrl);
+
+        // Set Open Graph tags
+        const setMetaTag = (property: string, content: string) => {
+            let tag = document.querySelector(`meta[property="${property}"]`);
+            if (!tag) {
+                tag = document.createElement('meta');
+                tag.setAttribute('property', property);
+                document.head.appendChild(tag);
+            }
+            tag.setAttribute('content', content);
+        };
+
+        setMetaTag('og:title', `${category.title} | ZuraWebTools`);
+        setMetaTag('og:description', category.description);
+        setMetaTag('og:url', categoryUrl);
+        setMetaTag('og:type', 'website');
+
+        // Set Twitter Card tags
+        const setTwitterTag = (name: string, content: string) => {
+            let tag = document.querySelector(`meta[name="${name}"]`);
+            if (!tag) {
+                tag = document.createElement('meta');
+                tag.setAttribute('name', name);
+                document.head.appendChild(tag);
+            }
+            tag.setAttribute('content', content);
+        };
+
+        setTwitterTag('twitter:card', 'summary_large_image');
+        setTwitterTag('twitter:title', `${category.title} | ZuraWebTools`);
+        setTwitterTag('twitter:description', category.description);
+
+        // Generate category-specific keywords
+        const categoryKeywords = category.title.toLowerCase().includes('education') 
+            ? 'education calculators, gpa calculator, test score calculator, college admissions, university tools, student calculators'
+            : `${category.title.toLowerCase()}, free online tools, calculators`;
+        
+        let keywordsTag = document.querySelector('meta[name="keywords"]');
+        if (!keywordsTag) {
+            keywordsTag = document.createElement('meta');
+            keywordsTag.setAttribute('name', 'keywords');
+            document.head.appendChild(keywordsTag);
+        }
+        keywordsTag.setAttribute('content', categoryKeywords);
+
         // Build breadcrumb items - handle subcategories
         const breadcrumbItems = [
             {
@@ -73,16 +126,36 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo, fullP
             document.head.appendChild(breadcrumbScript);
         }
 
-        // Add CollectionPage structured data
+        // Add enhanced CollectionPage structured data
         const collectionScript = document.createElement('script');
         collectionScript.type = 'application/ld+json';
         collectionScript.id = 'category-collection-schema';
+        
+        // Count total tools in category and subcategories
+        const totalTools = category.tools.length + 
+            (category.subCategories?.reduce((sum, sub) => sum + sub.tools.length, 0) || 0);
+
         collectionScript.text = JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             "name": category.title,
             "description": category.description,
-            "url": categoryUrl
+            "url": categoryUrl,
+            "mainEntity": {
+                "@type": "ItemList",
+                "numberOfItems": totalTools,
+                "itemListElement": category.tools.slice(0, 5).map((tool, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "name": tool.title,
+                    "url": `https://zurawebtools.com/${tool.link}`
+                }))
+            },
+            "isPartOf": {
+                "@type": "WebSite",
+                "name": "ZuraWebTools",
+                "url": "https://zurawebtools.com"
+            }
         });
         document.head.appendChild(collectionScript);
 
