@@ -25,19 +25,6 @@ const EducationExamIcon = () => (
   </svg>
 );
 
-const AudioMediaIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="audioMediaIconTitle">
-    <title id="audioMediaIconTitle">Audio & Media Tools Icon</title>
-    <defs>
-        <linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ec4899" />
-            <stop offset="100%" stopColor="#8b5cf6" />
-        </linearGradient>
-    </defs>
-    <path d="M12 3V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17C6 19.21 7.79 21 10 21C12.21 21 14 19.21 14 17V7H18V3H12ZM10 19C8.9 19 8 18.1 8 17C8 15.9 8.9 15 10 15C11.1 15 12 15.9 12 17C12 18.1 11.1 19 10 19Z" fill="url(#grad7)" />
-  </svg>
-);
-
 // Individual Tool Icons (with colorful gradients)
 const WordCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="wordCounterIconTitle">
@@ -229,20 +216,6 @@ const QuiltBackingIcon = () => (
         <title id="quiltBackingIconTitle">Quilt Backing Calculator Icon</title>
         <defs><linearGradient id="toolGrad18" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#ec4899" /><stop offset="100%" stopColor="#f59e0b" /></linearGradient></defs>
         <path d="M4 4H11V11H4V4ZM13 4H20V11H13V4ZM4 13H11V20H4V13ZM13 13H20V20H13V13Z" fill="url(#toolGrad18)" />
-    </svg>
-);
-const AudiobookSpeedIcon = () => (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="audiobookSpeedIconTitle">
-        <title id="audiobookSpeedIconTitle">Audiobook Speed Calculator Icon</title>
-        <defs><linearGradient id="toolGrad19" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#a855f7" /><stop offset="100%" stopColor="#ec4899" /></linearGradient></defs>
-        <path d="M4 6H2V20C2 21.1 2.9 22 4 22H18V20H4V6ZM20 2H8C6.9 2 6 2.9 6 4V16C6 17.1 6.9 18 8 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM19 11H9V9H19V11ZM15 15H9V13H15V15ZM19 7H9V5H19V7Z" fill="url(#toolGrad19)" />
-    </svg>
-);
-const ReverbIcon = () => (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="reverbIconTitle">
-        <title id="reverbIconTitle">Reverb Calculator Icon</title>
-        <defs><linearGradient id="toolGrad20" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#06b6d4" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
-        <path d="M3 9V15H7L12 20V4L7 9H3ZM16.5 12C16.5 10.23 15.48 8.71 14 7.97V16.02C15.48 15.29 16.5 13.77 16.5 12ZM14 3.23V5.29C16.89 6.15 19 8.83 19 12C19 15.17 16.89 17.85 14 18.71V20.77C18.01 19.86 21 16.28 21 12C21 7.72 18.01 4.14 14 3.23Z" fill="url(#toolGrad20)" />
     </svg>
 );
 const CodeSimilarityIcon = () => (
@@ -834,28 +807,6 @@ export const toolCategories: Category[] = [
                         gradientColors: { from: '#6366f1', to: '#a855f7' },
                     },
                 ]
-            },
-        ]
-    },
-    {
-        slug: 'audio-and-media-tools',
-        title: 'Audio & Media Tools',
-        description: 'Powerful tools for audio processing, media calculations, and content creation.',
-        icon: <AudioMediaIcon />,
-        tools: [
-            {
-                title: 'Audiobook Speed Calculator',
-                description: 'Calculate how long it takes to finish an audiobook at different playback speeds. Save time with optimized listening schedules.',
-                link: 'audio-and-media-tools/audiobook-speed-calculator',
-                icon: <AudiobookSpeedIcon />,
-                gradientColors: { from: '#a855f7', to: '#ec4899' }, // Purple to Pink
-            },
-            {
-                title: 'Reverb Calculator',
-                description: 'Calculate optimal reverb time (RT60) for rooms and recording studios. Essential tool for acoustics and audio engineering.',
-                link: 'audio-and-media-tools/reverb-calculator',
-                icon: <ReverbIcon />,
-                gradientColors: { from: '#06b6d4', to: '#8b5cf6' }, // Cyan to Purple
             },
         ]
     },

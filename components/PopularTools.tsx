@@ -34,18 +34,12 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
     };
 
     const categoryColors: { [key: string]: { bg: string; text: string } } = {
-        'text-and-writing-tools': { bg: 'bg-rose-100', text: 'text-rose-600' },
-        'math-and-calculation-tools': { bg: 'bg-violet-100', text: 'text-violet-600' },
-        'color-and-design-tools': { bg: 'bg-amber-100', text: 'text-amber-600' },
-        'developer-tools': { bg: 'bg-sky-100', text: 'text-sky-600' },
+        'education-and-exam-tools': { bg: 'bg-blue-100', text: 'text-blue-600' },
     };
     
     const tabs = [
         { id: 'all', name: 'All Tools', icon: <GridIcon /> },
-        { id: 'text-and-writing-tools', name: 'Text', icon: <TextIcon /> },
-        { id: 'math-and-calculation-tools', name: 'Math', icon: <MathIcon /> },
-        { id: 'color-and-design-tools', name: 'Color', icon: <ColorIcon /> },
-        { id: 'developer-tools', name: 'Developer', icon: <DevIcon /> },
+        { id: 'education-and-exam-tools', name: 'Education', icon: <TextIcon /> },
     ];
     
     const allTools: PopularTool[] = useMemo(() => {
@@ -79,9 +73,9 @@ const PopularTools: React.FC<PopularToolsProps> = ({ navigateTo }) => {
     }, []);
         
     const popularToolSlugs = [
-        'word-counter', 'remove-extra-spaces', 'case-converter', 'lorem-ipsum-generator',
-        'json-formatter', 'accessible-color-contrast-checker', 'hex-to-rgb-converter',
-        'percentage-change-calculator', 'time-difference-calculator'
+        'sat-score-calculator', 'act-score-calculator', 'lsat-score-calculator',
+        'college-gpa-calculator', 'uta-gpa-calculator', 'csu-gpa-calculator',
+        'gmat-score-calculator', 'gre-score-calculator', 'ielts-band-score-calculator'
     ];
 
     const displayedTools = useMemo(() => {

@@ -37,8 +37,6 @@ const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACal
 const UVAGPACalculator = lazy(() => import('./components/tools/UVAGPACalculator'));
 const ASUGPACalculator = lazy(() => import('./components/tools/ASUGPACalculator'));
 const LSACGPA = lazy(() => import('./components/tools/LSACGPA'));
-const AudiobookSpeedCalculator = lazy(() => import('./components/tools/AudiobookSpeedCalculator'));
-const ReverbCalculator = lazy(() => import('./components/tools/ReverbCalculator'));
 const CollegeGPACalculator = lazy(() => import('./components/tools/CollegeGPACalculator'));
 const CSUGPACalculator = lazy(() => import('./components/tools/CSUGPACalculator'));
 const GMATScoreCalculator = lazy(() => import('./components/tools/GMATScoreCalculator'));
@@ -200,12 +198,6 @@ const App: React.FC = () => {
             'tools/student-visa-fee-calculator-australia': '/education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia',
             'college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
             'tools/college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
-            
-            // Audio & Media Tools
-            'audiobook-speed-calculator': '/audio-and-media-tools/audiobook-speed-calculator',
-            'tools/audiobook-speed-calculator': '/audio-and-media-tools/audiobook-speed-calculator',
-            'reverb-calculator': '/audio-and-media-tools/reverb-calculator',
-            'tools/reverb-calculator': '/audio-and-media-tools/reverb-calculator',
         };
 
         // Check if this is an old flat URL and redirect
@@ -285,8 +277,6 @@ const App: React.FC = () => {
             'graduate-school-gpa-calculator': GraduateSchoolGPACalculator,
             'pharmacy-school-gpa-calculator': PharmacySchoolGPACalculator,
             'pa-school-gpa-calculator': PASchoolGPACalculator,
-            'audiobook-speed-calculator': AudiobookSpeedCalculator,
-            'reverb-calculator': ReverbCalculator,
             'gmat-score-calculator': GMATScoreCalculator,
             'ucat-score-calculator': UCATScoreCalculator,
             'personal-statement-character-counter': PersonalStatementCharacterCounter,

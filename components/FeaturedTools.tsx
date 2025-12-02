@@ -7,11 +7,8 @@ interface FeaturedToolsProps {
     navigateTo: (page: Page) => void;
 }
 
-// Get first tool from first two categories as featured
-const featuredTools = [
-    ...toolCategories[0].tools.slice(0, 2),
-    ...toolCategories[1].tools.slice(0, 1)
-];
+// Get first 3 tools from Education & Exam Tools category as featured
+const featuredTools = toolCategories[0]?.tools.slice(0, 3) || [];
 
 const FeaturedTools: React.FC<FeaturedToolsProps> = ({ navigateTo }) => {
     return (
