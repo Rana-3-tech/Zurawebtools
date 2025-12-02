@@ -109,6 +109,46 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
       hoverText: 'text-red-600'
     },
     {
+      id: 'what-if-scenarios',
+      emoji: '🔮',
+      title: 'What-If Scenarios',
+      subtitle: 'Test grade changes',
+      gradientFrom: 'from-violet-50',
+      gradientTo: 'to-purple-50',
+      hoverBorder: 'border-violet-500',
+      hoverText: 'text-violet-600'
+    },
+    {
+      id: 'grade-predictor',
+      emoji: '🎯',
+      title: 'Grade Predictor',
+      subtitle: 'What grade do I need?',
+      gradientFrom: 'from-emerald-50',
+      gradientTo: 'to-green-50',
+      hoverBorder: 'border-emerald-500',
+      hoverText: 'text-emerald-600'
+    },
+    {
+      id: 'scholarship-monitor',
+      emoji: '💰',
+      title: 'Scholarship Monitor',
+      subtitle: 'Track requirements',
+      gradientFrom: 'from-amber-50',
+      gradientTo: 'to-yellow-50',
+      hoverBorder: 'border-amber-500',
+      hoverText: 'text-amber-600'
+    },
+    {
+      id: 'semester-timeline',
+      emoji: '📅',
+      title: 'Semester Timeline',
+      subtitle: 'Multi-semester view',
+      gradientFrom: 'from-sky-50',
+      gradientTo: 'to-blue-50',
+      hoverBorder: 'border-sky-500',
+      hoverText: 'text-sky-600'
+    },
+    {
       id: 'faq',
       emoji: '❓',
       title: 'FAQ',
@@ -129,6 +169,39 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
   ]);
   const [calculatedGPA, setCalculatedGPA] = useState<number | null>(null);
   const [gpaHistory, setGpaHistory] = useState<number[]>([]);
+
+  // ✨ NEW: What-If Scenarios State
+  const [whatIfMode, setWhatIfMode] = useState<boolean>(false);
+  const [whatIfCourses, setWhatIfCourses] = useState<Course[]>([]);
+  const [whatIfGPA, setWhatIfGPA] = useState<number | null>(null);
+  const [savedScenarios, setSavedScenarios] = useState<Array<{name: string, courses: Course[], gpa: number}>>([]);
+
+  // ✨ NEW: Email Report State
+  const [userEmail, setUserEmail] = useState<string>('');
+  const [emailSent, setEmailSent] = useState<boolean>(false);
+
+  // ✨ NEW: Grade Predictor State
+  const [predictorMode, setPredictorMode] = useState<boolean>(false);
+  const [currentGradeInput, setCurrentGradeInput] = useState<string>('');
+  const [remainingWeight, setRemainingWeight] = useState<string>('');
+  const [targetGradeInput, setTargetGradeInput] = useState<string>('');
+  const [requiredGrade, setRequiredGrade] = useState<number | null>(null);
+
+  // ✨ NEW: Scholarship Monitor State
+  const [scholarshipThreshold, setScholarshipThreshold] = useState<string>('3.5');
+  const [scholarshipStatus, setScholarshipStatus] = useState<'safe' | 'at-risk' | 'danger' | null>(null);
+  const [scholarshipBuffer, setScholarshipBuffer] = useState<number | null>(null);
+
+  // ✨ NEW: Multi-Semester Timeline State
+  interface Semester {
+    id: number;
+    name: string;
+    courses: Course[];
+    gpa: number;
+    cumulativeGPA: number;
+  }
+  const [semesters, setSemesters] = useState<Semester[]>([]);
+  const [currentSemesterName, setCurrentSemesterName] = useState<string>('Fall 2026');
 
   // Raise GPA State
   const [cumulativeGPA, setCumulativeGPA] = useState<string>('');
@@ -197,16 +270,16 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
     const shareUrl = 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator';
     
     const metaTags = [
-      { name: 'description', content: 'Free UTA GPA calculator 2026 for University of Texas at Arlington students. Calculate semester GPA, raise cumulative GPA, and compute Grade Point Deficiency (GPD) with official UTA grade scales.' },
-      { name: 'keywords', content: 'UTA GPA calculator, University of Texas Arlington GPA, UTA grade calculator, GPD calculator, grade point deficiency calculator, raise GPA UTA, cumulative GPA calculator, MyMav GPA, academic probation calculator, UTA semester GPA, calculate UTA GPA, GPA requirements, UTA grade scale, calculate grades needed, GPA improvement, Arlington GPA calculator free, UTA GPA planner, academic standing, UTA transcript GPA, Dean\'s List requirements, honors GPA requirements, calculate term GPA, plus minus grading scale, graduation GPA requirement, transfer GPA calculator, Arlington Texas university GPA' },
-      { property: 'og:title', content: 'UTA GPA Calculator - University of Texas at Arlington | ZuraWebTools' },
-      { property: 'og:description', content: 'Calculate your UTA GPA, determine Grade Point Deficiency (GPD), and plan how to raise your cumulative GPA at University of Texas Arlington.' },
+      { name: 'description', content: 'Free UTA GPA calculator 2026 with What-If Scenarios, Grade Predictor, Scholarship Monitor, and Multi-Semester Timeline. Calculate GPA, plan improvements, track scholarship requirements, and predict final grades at University of Texas at Arlington.' },
+      { name: 'keywords', content: 'UTA GPA calculator, University of Texas Arlington GPA, UTA grade calculator, GPD calculator, grade point deficiency calculator, raise GPA UTA, cumulative GPA calculator, MyMav GPA, academic probation calculator, UTA semester GPA, calculate UTA GPA, GPA requirements, UTA grade scale, calculate grades needed, GPA improvement, Arlington GPA calculator free, UTA GPA planner, academic standing, UTA transcript GPA, Dean\'s List requirements, honors GPA requirements, calculate term GPA, plus minus grading scale, graduation GPA requirement, transfer GPA calculator, Arlington Texas university GPA, what if GPA scenarios, grade predictor calculator, scholarship GPA monitor, semester timeline tracker, final grade calculator, GPA what if analysis, scholarship requirement tracker' },
+      { property: 'og:title', content: 'UTA GPA Calculator 2026 - What-If Scenarios & Grade Predictor | ZuraWebTools' },
+      { property: 'og:description', content: 'Advanced UTA GPA calculator with What-If scenarios, AI-powered grade predictor, scholarship monitoring, and multi-semester timeline tracking for University of Texas at Arlington students.' },
       { property: 'og:url', content: shareUrl },
       { property: 'og:type', content: 'website' },
       { property: 'og:image', content: 'https://zurawebtools.com/images/uta-gpa-calculator-og.jpg' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'UTA GPA Calculator - University of Texas at Arlington' },
-      { name: 'twitter:description', content: 'Free GPA calculator for UTA students with GPD computation and academic planning tools.' },
+      { name: 'twitter:title', content: 'UTA GPA Calculator 2026 - What-If Scenarios & Grade Predictor' },
+      { name: 'twitter:description', content: 'Free UTA GPA calculator with What-If Scenarios, Grade Predictor, Scholarship Monitor, and Semester Timeline. Perfect for UT Arlington students!' },
       { name: 'twitter:image', content: 'https://zurawebtools.com/images/uta-gpa-calculator-twitter.jpg' },
     ];
 
@@ -239,7 +312,7 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
           "priceCurrency": "USD"
         },
         "operatingSystem": "Any",
-        "description": "Free GPA calculator for University of Texas at Arlington students with Grade Point Deficiency computation.",
+        "description": "Advanced GPA calculator for University of Texas at Arlington students with What-If Scenarios, AI-powered Grade Predictor, Scholarship GPA Monitor, Multi-Semester Timeline, and Grade Point Deficiency computation. Plan your academic success with real-time GPA analysis and scholarship tracking.",
         "url": shareUrl,
         "author": {
           "@type": "Organization",
@@ -247,11 +320,16 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
           "url": "https://zurawebtools.com"
         },
         "featureList": [
-          "Calculate semester GPA",
-          "Compute Grade Point Deficiency (GPD)",
-          "Raise cumulative GPA planner",
-          "Academic probation calculator",
-          "UTA official grade scale"
+          "Calculate semester GPA with official UTA grade scale",
+          "What-If Scenarios: Test grade changes instantly",
+          "AI Grade Predictor: Calculate required final exam grades",
+          "Scholarship GPA Monitor: Real-time scholarship requirement tracking",
+          "Multi-Semester Timeline: Track cumulative GPA across semesters",
+          "Email & Download GPA Reports",
+          "Compute Grade Point Deficiency (GPD) for probation planning",
+          "Raise cumulative GPA planner with credit hour calculator",
+          "Academic probation recovery calculator",
+          "GPA Trend Chart with Dean's List tracking"
         ],
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -391,6 +469,38 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Use the 'Raise GPA' calculator to determine: (1) How many credit hours needed if maintaining a specific average, or (2) What average you need this term to reach your target GPA. Focus on earning A's and B's in high credit-hour courses for maximum impact."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are What-If Scenarios and how do they help?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "What-If Scenarios let you test different grade outcomes without changing your actual calculator data. You can see how dropping a course, changing a B to an A, or adjusting credit hours would affect your GPA. Save multiple scenarios to compare different academic paths and make informed decisions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the Grade Predictor work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Grade Predictor calculates what score you need on remaining assignments or final exams to achieve your target final grade. Enter your current grade percentage, the weight of remaining work (e.g., final exam worth 40%), and your desired final grade. The calculator will tell you exactly what you need to score."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I monitor my scholarship GPA requirements?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the Scholarship Monitor feature to set your scholarship's minimum GPA requirement. The calculator will show you real-time status (Safe/At Risk/Danger) and calculate your buffer room. If you're below the threshold, you'll get an urgent action plan to protect your scholarship funding."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the Multi-Semester Timeline feature?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Multi-Semester Timeline lets you track your academic progress across multiple semesters. Add each semester with its courses and grades to see your cumulative GPA evolution over time. You can export your complete timeline data as JSON for backup or import into other tools."
             }
           }
         ]
@@ -867,6 +977,243 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
     URL.revokeObjectURL(url);
   };
 
+  // ✨ NEW PHASE 1: What-If Scenarios Functions
+  const enableWhatIfMode = () => {
+    setWhatIfCourses(JSON.parse(JSON.stringify(courses))); // Deep copy
+    setWhatIfMode(true);
+    calculateWhatIfGPA(courses);
+  };
+
+  const disableWhatIfMode = () => {
+    setWhatIfMode(false);
+    setWhatIfGPA(null);
+  };
+
+  const calculateWhatIfGPA = (coursesToCalc: Course[]) => {
+    let totalPoints = 0;
+    let totalHours = 0;
+
+    coursesToCalc.forEach(course => {
+      const hours = parseFloat(course.creditHours);
+      const grade = gradePoints[course.grade];
+      
+      if (!isNaN(hours) && grade !== undefined && hours > 0) {
+        totalPoints += hours * grade;
+        totalHours += hours;
+      }
+    });
+
+    if (totalHours > 0) {
+      const newGPA = totalPoints / totalHours;
+      setWhatIfGPA(newGPA);
+    } else {
+      setWhatIfGPA(null);
+    }
+  };
+
+  const updateWhatIfCourse = (id: number, field: keyof Course, value: string) => {
+    const updated = whatIfCourses.map(c => c.id === id ? { ...c, [field]: value } : c);
+    setWhatIfCourses(updated);
+    calculateWhatIfGPA(updated);
+  };
+
+  const dropCourseWhatIf = (id: number) => {
+    const updated = whatIfCourses.filter(c => c.id !== id);
+    setWhatIfCourses(updated);
+    calculateWhatIfGPA(updated);
+  };
+
+  const saveScenario = () => {
+    if (whatIfGPA !== null) {
+      const scenarioName = prompt('Name this scenario:') || `Scenario ${savedScenarios.length + 1}`;
+      setSavedScenarios([...savedScenarios, {
+        name: scenarioName,
+        courses: JSON.parse(JSON.stringify(whatIfCourses)),
+        gpa: whatIfGPA
+      }]);
+    }
+  };
+
+  const loadScenario = (index: number) => {
+    const scenario = savedScenarios[index];
+    setWhatIfCourses(JSON.parse(JSON.stringify(scenario.courses)));
+    calculateWhatIfGPA(scenario.courses);
+  };
+
+  // ✨ NEW PHASE 1: Email Report Functions
+  const sendEmailReport = async () => {
+    if (calculatedGPA === null || !userEmail) return;
+    
+    // Create report text
+    const reportText = `UTA GPA REPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 SEMESTER GPA: ${calculatedGPA.toFixed(3)}
+
+📚 COURSE DETAILS:
+${courses.filter(c => c.creditHours && c.grade).map((c, i) => {
+  const hours = parseFloat(c.creditHours);
+  const grade = gradePoints[c.grade];
+  const points = hours * grade;
+  return `${i + 1}. ${c.name || 'Course ' + (i+1)}
+   Credit Hours: ${c.creditHours}
+   Grade: ${c.grade}
+   Grade Points: ${points.toFixed(2)}`;
+}).join('\n\n')}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📅 Generated: ${new Date().toLocaleDateString()}
+🌐 ZuraWebTools - UTA GPA Calculator
+🔗 https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator`;
+
+    // Try to use Web Share API first (works on mobile)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `UTA GPA Report - ${calculatedGPA.toFixed(3)}`,
+          text: reportText
+        });
+        setEmailSent(true);
+        setTimeout(() => setEmailSent(false), 3000);
+        return;
+      } catch (err) {
+        // User cancelled or share not available, fall back to mailto
+      }
+    }
+
+    // Fallback to mailto
+    const subject = encodeURIComponent(`UTA GPA Report - ${calculatedGPA.toFixed(3)}`);
+    const body = encodeURIComponent(reportText);
+    window.open(`mailto:${userEmail}?subject=${subject}&body=${body}`, '_blank');
+    
+    setEmailSent(true);
+    setTimeout(() => setEmailSent(false), 3000);
+  };
+
+  const copyReportToClipboard = () => {
+    if (calculatedGPA === null) return;
+
+    const report = `UTA GPA Report - ${new Date().toLocaleDateString()}
+
+Semester GPA: ${calculatedGPA.toFixed(3)}
+
+Course Details:
+${courses.filter(c => c.creditHours && c.grade).map((c, i) => {
+  const hours = parseFloat(c.creditHours);
+  const grade = gradePoints[c.grade];
+  const points = hours * grade;
+  return `${i + 1}. ${c.name || 'Course'} - ${c.creditHours} credits - Grade: ${c.grade} (${points.toFixed(2)} points)`;
+}).join('\n')}
+
+Generated by ZuraWebTools
+https://zurawebtools.com`;
+
+    navigator.clipboard.writeText(report);
+    alert('✓ Report copied to clipboard!');
+  };
+
+  // ✨ NEW PHASE 2: Grade Predictor Functions
+  const calculateRequiredGrade = () => {
+    const current = parseFloat(currentGradeInput);
+    const remaining = parseFloat(remainingWeight);
+    const target = parseFloat(targetGradeInput);
+
+    if (isNaN(current) || isNaN(remaining) || isNaN(target)) {
+      setRequiredGrade(null);
+      return;
+    }
+
+    // Formula: Required = (Target - Current * (1 - RemainingWeight)) / RemainingWeight
+    const currentWeight = 100 - remaining;
+    const required = (target - (current * currentWeight / 100)) / (remaining / 100);
+    
+    setRequiredGrade(required);
+  };
+
+  const resetGradePredictor = () => {
+    setCurrentGradeInput('');
+    setRemainingWeight('');
+    setTargetGradeInput('');
+    setRequiredGrade(null);
+  };
+
+  // ✨ NEW PHASE 2: Scholarship Monitor Functions
+  const checkScholarshipStatus = () => {
+    if (calculatedGPA === null || !scholarshipThreshold) {
+      setScholarshipStatus(null);
+      return;
+    }
+
+    const threshold = parseFloat(scholarshipThreshold);
+    const diff = calculatedGPA - threshold;
+
+    if (diff >= 0.3) {
+      setScholarshipStatus('safe');
+    } else if (diff >= 0 && diff < 0.3) {
+      setScholarshipStatus('at-risk');
+    } else {
+      setScholarshipStatus('danger');
+    }
+
+    setScholarshipBuffer(diff);
+  };
+
+  useEffect(() => {
+    if (calculatedGPA !== null) {
+      checkScholarshipStatus();
+    }
+  }, [calculatedGPA, scholarshipThreshold]);
+
+  // ✨ NEW PHASE 2: Multi-Semester Timeline Functions
+  const addSemesterToTimeline = () => {
+    if (calculatedGPA === null) return;
+
+    const prevCumulativeGPA = semesters.length > 0 
+      ? semesters[semesters.length - 1].cumulativeGPA 
+      : 0;
+    
+    const prevTotalHours = semesters.reduce((sum, sem) => {
+      return sum + sem.courses.reduce((courseSum, c) => {
+        return courseSum + (parseFloat(c.creditHours) || 0);
+      }, 0);
+    }, 0);
+
+    const currentHours = courses.reduce((sum, c) => {
+      return sum + (parseFloat(c.creditHours) || 0);
+    }, 0);
+
+    const prevTotalPoints = prevCumulativeGPA * prevTotalHours;
+    const currentPoints = calculatedGPA * currentHours;
+    const newCumulativeGPA = (prevTotalPoints + currentPoints) / (prevTotalHours + currentHours);
+
+    setSemesters([...semesters, {
+      id: Date.now(),
+      name: currentSemesterName || `Semester ${semesters.length + 1}`,
+      courses: JSON.parse(JSON.stringify(courses)),
+      gpa: calculatedGPA,
+      cumulativeGPA: newCumulativeGPA
+    }]);
+
+    setCurrentSemesterName(`Fall ${new Date().getFullYear() + 1}`);
+  };
+
+  const removeSemesterFromTimeline = (id: number) => {
+    setSemesters(semesters.filter(s => s.id !== id));
+  };
+
+  const exportTimelineData = () => {
+    const data = JSON.stringify(semesters, null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `UTA_Semester_Timeline_${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-orange-100 py-12 px-4">
       <div className="max-w-5xl mx-auto">
@@ -876,13 +1223,15 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
             UTA GPA Calculator 2026 - University of Texas Arlington
           </h1>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-4">
-            Official <strong>University of Texas at Arlington GPA calculator 2026</strong> with <strong>Grade Point Deficiency (GPD)</strong> computation. Calculate semester GPA, plan cumulative GPA improvements, and determine grades needed for academic probation removal.
+            Advanced <strong>University of Texas at Arlington GPA calculator 2026</strong> with <strong>What-If Scenarios</strong>, <strong>AI Grade Predictor</strong>, <strong>Scholarship Monitor</strong>, <strong>Multi-Semester Timeline</strong>, and <strong>GPD computation</strong>. Test grade changes instantly, predict required final exam scores, track scholarship requirements, and plan your academic success at UTA.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-600">
+          <div className="flex flex-wrap justify-center gap-2 text-sm text-gray-600">
             <span className="px-3 py-1 bg-orange-100 rounded-full">✓ Free Forever</span>
-            <span className="px-3 py-1 bg-blue-100 rounded-full">✓ No Login Required</span>
-            <span className="px-3 py-1 bg-green-100 rounded-full">✓ Official UTA Scale</span>
-            <span className="px-3 py-1 bg-purple-100 rounded-full">✓ GPD Calculator</span>
+            <span className="px-3 py-1 bg-blue-100 rounded-full">✓ What-If Scenarios</span>
+            <span className="px-3 py-1 bg-green-100 rounded-full">✓ Grade Predictor</span>
+            <span className="px-3 py-1 bg-purple-100 rounded-full">✓ Scholarship Monitor</span>
+            <span className="px-3 py-1 bg-yellow-100 rounded-full">✓ Semester Timeline</span>
+            <span className="px-3 py-1 bg-pink-100 rounded-full">✓ Email Reports</span>
           </div>
         </div>
 
@@ -1158,6 +1507,235 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-0.5 bg-blue-800 border-dashed border-t-2"></div>
                     <span className="text-gray-600">Dean's List (3.5)</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ✨ NEW: What-If Scenarios Section */}
+            {calculatedGPA !== null && (
+              <div id="what-if-scenarios" className="bg-white rounded-xl shadow-lg p-6 mt-8 scroll-mt-20">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold text-violet-700 flex items-center gap-2">
+                      🔮 What-If Scenarios
+                    </h3>
+                    <p className="text-sm text-gray-600 mt-1">Test different grade scenarios and compare results</p>
+                  </div>
+                  {!whatIfMode ? (
+                    <button
+                      onClick={enableWhatIfMode}
+                      className="px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg hover:from-violet-700 hover:to-purple-700 transition-all font-semibold shadow-md"
+                    >
+                      Start What-If
+                    </button>
+                  ) : (
+                    <button
+                      onClick={disableWhatIfMode}
+                      className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all font-medium"
+                    >
+                      Exit What-If
+                    </button>
+                  )}
+                </div>
+
+                {whatIfMode && (
+                  <div className="space-y-6">
+                    <div className="bg-violet-50 border-l-4 border-violet-600 p-4 rounded">
+                      <p className="text-sm text-gray-700">
+                        <strong>💡 Tip:</strong> Change grades below to see how your GPA would be affected. Your actual calculator data remains unchanged!
+                      </p>
+                    </div>
+
+                    {/* Comparison Table */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-blue-50 border-2 border-blue-300 rounded-lg p-4">
+                        <h4 className="font-bold text-blue-700 mb-2">📘 Current GPA</h4>
+                        <p className="text-4xl font-bold text-blue-600">{calculatedGPA.toFixed(3)}</p>
+                      </div>
+                      <div className="bg-violet-50 border-2 border-violet-300 rounded-lg p-4">
+                        <h4 className="font-bold text-violet-700 mb-2">🔮 What-If GPA</h4>
+                        <p className="text-4xl font-bold text-violet-600">
+                          {whatIfGPA !== null ? whatIfGPA.toFixed(3) : '—'}
+                        </p>
+                        {whatIfGPA !== null && calculatedGPA !== null && (
+                          <p className={`text-sm mt-2 font-semibold ${whatIfGPA > calculatedGPA ? 'text-green-600' : whatIfGPA < calculatedGPA ? 'text-red-600' : 'text-gray-600'}`}>
+                            {whatIfGPA > calculatedGPA ? '↑' : whatIfGPA < calculatedGPA ? '↓' : '='} 
+                            {' '}{Math.abs(whatIfGPA - calculatedGPA).toFixed(3)} change
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* What-If Course Inputs */}
+                    <div className="space-y-3">
+                      {whatIfCourses.map((course) => (
+                        <div key={course.id} className="grid grid-cols-12 gap-3 items-center bg-violet-50 p-3 rounded-lg">
+                          <input
+                            type="text"
+                            value={course.name}
+                            onChange={(e) => updateWhatIfCourse(course.id, 'name', e.target.value)}
+                            placeholder="Course Name"
+                            className="col-span-5 px-3 py-2 border border-violet-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm text-gray-900 placeholder-gray-500"
+                          />
+                          <input
+                            type="number"
+                            value={course.creditHours}
+                            onChange={(e) => updateWhatIfCourse(course.id, 'creditHours', e.target.value)}
+                            placeholder="Credits"
+                            min="0"
+                            max="12"
+                            step="0.5"
+                            className="col-span-2 px-3 py-2 border border-violet-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm text-gray-900 placeholder-gray-500"
+                          />
+                          <select
+                            value={course.grade}
+                            onChange={(e) => updateWhatIfCourse(course.id, 'grade', e.target.value)}
+                            className="col-span-2 px-3 py-2 border border-violet-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm text-gray-900"
+                          >
+                            <option value="">Grade</option>
+                            {Object.keys(gradePoints).map(grade => (
+                              <option key={grade} value={grade}>{grade}</option>
+                            ))}
+                          </select>
+                          <div className="col-span-2 text-center">
+                            <span className="text-sm font-semibold text-violet-700">
+                              {course.creditHours && course.grade 
+                                ? (parseFloat(course.creditHours) * gradePoints[course.grade]).toFixed(2) 
+                                : '—'}
+                            </span>
+                          </div>
+                          <button
+                            onClick={() => dropCourseWhatIf(course.id)}
+                            className="col-span-1 text-red-500 hover:text-red-700 font-bold text-lg"
+                            title="Drop this course"
+                          >
+                            ❌
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Scenario Actions */}
+                    <div className="flex flex-wrap gap-3">
+                      <button
+                        onClick={saveScenario}
+                        disabled={whatIfGPA === null}
+                        className={`px-6 py-2 rounded-lg font-medium transition-all ${
+                          whatIfGPA === null
+                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                            : 'bg-green-600 text-white hover:bg-green-700 shadow-md'
+                        }`}
+                      >
+                        💾 Save Scenario
+                      </button>
+                      <button
+                        onClick={() => {
+                          setWhatIfCourses(JSON.parse(JSON.stringify(courses)));
+                          calculateWhatIfGPA(courses);
+                        }}
+                        className="px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition-all font-medium"
+                      >
+                        🔄 Reset to Current
+                      </button>
+                    </div>
+
+                    {/* Saved Scenarios */}
+                    {savedScenarios.length > 0 && (
+                      <div className="mt-6">
+                        <h4 className="font-bold text-gray-800 mb-3">💾 Saved Scenarios</h4>
+                        <div className="space-y-2">
+                          {savedScenarios.map((scenario, index) => (
+                            <div key={index} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg border border-gray-200">
+                              <div>
+                                <span className="font-semibold text-gray-800">{scenario.name}</span>
+                                <span className="ml-3 text-violet-600 font-bold">GPA: {scenario.gpa.toFixed(3)}</span>
+                              </div>
+                              <button
+                                onClick={() => loadScenario(index)}
+                                className="px-4 py-1 bg-violet-600 text-white rounded hover:bg-violet-700 text-sm font-medium"
+                              >
+                                Load
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* ✨ NEW: Email Report Section */}
+            {calculatedGPA !== null && (
+              <div className="bg-white rounded-xl shadow-lg p-6 mt-8">
+                <h3 className="text-2xl font-bold text-blue-700 flex items-center gap-2 mb-4">
+                  📧 Share & Export Report
+                </h3>
+                <p className="text-sm text-gray-600 mb-4">Share your GPA report via email or copy to clipboard</p>
+                
+                <div className="space-y-4">
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                    <p className="text-sm text-gray-800 font-semibold mb-1">📱 How Email Works:</p>
+                    <p className="text-sm text-gray-700">
+                      Click "Send Report" to open your email app (Gmail, Outlook, etc.) with the report ready. You'll need to click "Send" in your email app to complete delivery.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="email"
+                      value={userEmail}
+                      onChange={(e) => setUserEmail(e.target.value)}
+                      placeholder="your.email@example.com"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                    />
+                    <button
+                      onClick={sendEmailReport}
+                      disabled={!userEmail || calculatedGPA === null}
+                      className={`px-6 py-3 rounded-lg font-semibold transition-all whitespace-nowrap ${
+                        !userEmail || calculatedGPA === null
+                          ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                          : 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
+                      }`}
+                    >
+                      📧 Send Report
+                    </button>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={copyReportToClipboard}
+                      className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all font-medium shadow-md"
+                    >
+                      📋 Copy to Clipboard
+                    </button>
+                    <button
+                      onClick={handleDownload}
+                      disabled={calculatedGPA === null}
+                      className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                        calculatedGPA === null
+                          ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                          : 'bg-purple-600 text-white hover:bg-purple-700 shadow-md'
+                      }`}
+                    >
+                      💾 Download .txt
+                    </button>
+                  </div>
+
+                  {emailSent && (
+                    <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                      <p className="text-green-800 font-semibold">✓ Email app should have opened!</p>
+                      <p className="text-sm text-green-700 mt-1">Complete the send in your email client. If nothing happened, use "Copy to Clipboard" instead.</p>
+                    </div>
+                  )}
+
+                  <div className="bg-amber-50 border border-amber-300 p-3 rounded">
+                    <p className="text-xs text-gray-800">
+                      <strong>⚠️ Note:</strong> The email feature opens your device's email app - it doesn't send directly from the website. 
+                      For instant sharing, use "Copy to Clipboard" and paste anywhere!
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1695,6 +2273,428 @@ const UTAGPACalculator: React.FC<UTAGPACalculatorProps> = ({ navigateTo }) => {
                 <p className="text-sm text-gray-600">{points.toFixed(2)}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* ✨ NEW PHASE 2: Grade Predictor Section */}
+        <div id="grade-predictor" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+            🎯 AI Grade Predictor
+          </h2>
+          <p className="text-gray-600 mb-6">Calculate what grade you need on remaining assignments to achieve your target final grade</p>
+          
+          <div className="space-y-6">
+            <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded">
+              <p className="text-sm text-gray-700">
+                <strong>💡 How it works:</strong> Enter your current grade percentage, the weight of remaining assignments/exams, and your target final grade. The calculator will tell you what you need to score!
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Current Grade (%)
+                </label>
+                <input
+                  type="number"
+                  value={currentGradeInput}
+                  onChange={(e) => setCurrentGradeInput(e.target.value)}
+                  placeholder="e.g., 82"
+                  min="0"
+                  max="100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                />
+                <p className="text-xs text-gray-500 mt-1">Your grade so far</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Remaining Weight (%)
+                </label>
+                <input
+                  type="number"
+                  value={remainingWeight}
+                  onChange={(e) => setRemainingWeight(e.target.value)}
+                  placeholder="e.g., 40"
+                  min="0"
+                  max="100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                />
+                <p className="text-xs text-gray-500 mt-1">Final exam + assignments</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Target Final Grade (%)
+                </label>
+                <input
+                  type="number"
+                  value={targetGradeInput}
+                  onChange={(e) => setTargetGradeInput(e.target.value)}
+                  placeholder="e.g., 90"
+                  min="0"
+                  max="100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                />
+                <p className="text-xs text-gray-500 mt-1">Desired final grade</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <button
+                onClick={calculateRequiredGrade}
+                className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-green-600 text-white rounded-lg hover:from-emerald-700 hover:to-green-700 transition-all font-semibold shadow-md"
+              >
+                Calculate Required Grade
+              </button>
+              <button
+                onClick={resetGradePredictor}
+                className="px-6 py-3 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition-all font-medium"
+              >
+                Reset
+              </button>
+            </div>
+
+            {requiredGrade !== null && (
+              <div className={`border-l-4 p-6 rounded-lg ${
+                requiredGrade <= 100 ? 'bg-emerald-50 border-emerald-600' : 'bg-red-50 border-red-600'
+              }`}>
+                <h3 className="text-xl font-bold mb-3 text-gray-800">
+                  {requiredGrade <= 100 ? '✅ You Can Do It!' : '⚠️ Target May Be Challenging'}
+                </h3>
+                <p className={`text-4xl font-bold mb-4 ${requiredGrade <= 100 ? 'text-emerald-600' : 'text-red-600'}`}>
+                  {requiredGrade.toFixed(2)}%
+                </p>
+                <p className="text-gray-700 mb-4">
+                  {requiredGrade <= 100 
+                    ? `You need to score ${requiredGrade.toFixed(2)}% on your remaining work to achieve a final grade of ${targetGradeInput}%.`
+                    : `Your target of ${targetGradeInput}% is not mathematically possible with current grade of ${currentGradeInput}%. Consider adjusting your expectations or speaking with your professor about extra credit opportunities.`
+                  }
+                </p>
+                {requiredGrade <= 100 && (
+                  <div className="bg-white bg-opacity-70 p-4 rounded mt-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">📊 Grade Analysis:</p>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• <strong>Difficulty:</strong> {requiredGrade >= 95 ? 'Very Challenging' : requiredGrade >= 85 ? 'Moderate' : 'Achievable'}</li>
+                      <li>• <strong>Recommendation:</strong> {requiredGrade >= 95 ? 'Focus intensely, seek tutoring' : requiredGrade >= 85 ? 'Solid study plan needed' : 'Stay consistent with current efforts'}</li>
+                      <li>• <strong>Buffer:</strong> {requiredGrade < 70 ? 'Good cushion room' : requiredGrade < 85 ? 'Moderate buffer' : 'Very little room for error'}</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-sm text-gray-600">
+                <strong>Example:</strong> You have 82% currently. The final exam is worth 40% of your grade. To get an A (90%), you need to score:
+                (90 - 82×0.6) / 0.4 = <strong>91.5%</strong> on the final!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* ✨ NEW PHASE 2: Scholarship Monitor Section */}
+        <div id="scholarship-monitor" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent">
+            💰 Scholarship GPA Monitor
+          </h2>
+          <p className="text-gray-600 mb-6">Track your GPA against scholarship requirements in real-time</p>
+          
+          <div className="space-y-6">
+            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+              <p className="text-sm text-gray-700">
+                <strong>💡 Stay Safe:</strong> Many scholarships require maintaining a minimum GPA. Set your requirement below and monitor your status!
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Scholarship GPA Requirement
+                </label>
+                <input
+                  type="number"
+                  value={scholarshipThreshold}
+                  onChange={(e) => setScholarshipThreshold(e.target.value)}
+                  placeholder="e.g., 3.5"
+                  min="0"
+                  max="4.0"
+                  step="0.1"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                />
+                <p className="text-xs text-gray-500 mt-1">Minimum GPA to keep scholarship</p>
+              </div>
+
+              {calculatedGPA !== null && scholarshipStatus && (
+                <div className={`p-6 rounded-lg border-2 ${
+                  scholarshipStatus === 'safe' 
+                    ? 'bg-green-50 border-green-500' 
+                    : scholarshipStatus === 'at-risk' 
+                    ? 'bg-yellow-50 border-yellow-500' 
+                    : 'bg-red-50 border-red-500'
+                }`}>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-3xl">
+                      {scholarshipStatus === 'safe' ? '✅' : scholarshipStatus === 'at-risk' ? '⚠️' : '❌'}
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold uppercase tracking-wide text-gray-800">
+                        {scholarshipStatus === 'safe' ? 'SAFE' : scholarshipStatus === 'at-risk' ? 'AT RISK' : 'DANGER'}
+                      </p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {calculatedGPA.toFixed(3)}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-700">
+                    {scholarshipStatus === 'safe' && `You're ${scholarshipBuffer?.toFixed(3)} above the threshold! 🎉`}
+                    {scholarshipStatus === 'at-risk' && `Only ${scholarshipBuffer?.toFixed(3)} above threshold - be careful! ⚠️`}
+                    {scholarshipStatus === 'danger' && `You're ${Math.abs(scholarshipBuffer || 0).toFixed(3)} below requirement! 🚨`}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {calculatedGPA !== null && scholarshipStatus && (
+              <div className="space-y-4">
+                <div className={`border-l-4 p-4 rounded ${
+                  scholarshipStatus === 'safe' 
+                    ? 'bg-green-50 border-green-500' 
+                    : scholarshipStatus === 'at-risk' 
+                    ? 'bg-yellow-50 border-yellow-500' 
+                    : 'bg-red-50 border-red-500'
+                }`}>
+                  <h4 className="font-bold text-gray-800 mb-2">
+                    {scholarshipStatus === 'safe' && '✓ Scholarship Status: SAFE'}
+                    {scholarshipStatus === 'at-risk' && '⚠ Scholarship Status: AT RISK'}
+                    {scholarshipStatus === 'danger' && '🚨 Scholarship Status: DANGER'}
+                  </h4>
+                  <p className="text-sm text-gray-700">
+                    {scholarshipStatus === 'safe' && 'Great job! You\'re well above your scholarship requirement. Keep up the excellent work!'}
+                    {scholarshipStatus === 'at-risk' && 'Warning: You\'re close to losing your scholarship. Focus on improving your grades this semester.'}
+                    {scholarshipStatus === 'danger' && 'URGENT: Your GPA is below scholarship requirement. Meet with your advisor immediately to create an improvement plan.'}
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-3">📊 Buffer Analysis</h4>
+                  <div className="space-y-2 text-sm text-gray-700">
+                    <div className="flex justify-between">
+                      <span>Current GPA:</span>
+                      <span className="font-bold">{calculatedGPA.toFixed(3)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Required GPA:</span>
+                      <span className="font-bold">{scholarshipThreshold}</span>
+                    </div>
+                    <div className="flex justify-between border-t pt-2">
+                      <span>Buffer:</span>
+                      <span className={`font-bold ${scholarshipBuffer && scholarshipBuffer >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        {scholarshipBuffer !== null ? (scholarshipBuffer >= 0 ? '+' : '') + scholarshipBuffer.toFixed(3) : '—'}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-3">
+                    💡 <strong>Tip:</strong> {scholarshipBuffer && scholarshipBuffer >= 0.3 
+                      ? 'You can afford a slight dip in performance and still maintain your scholarship.' 
+                      : 'Focus on maintaining or improving your current grades to protect your funding.'}
+                  </p>
+                </div>
+
+                {scholarshipStatus === 'danger' && (
+                  <div className="bg-red-100 border-2 border-red-500 p-4 rounded-lg">
+                    <h4 className="font-bold text-red-800 mb-2">🆘 Action Plan Required</h4>
+                    <ul className="text-sm text-red-900 space-y-1 ml-4">
+                      <li>• <strong>Immediate:</strong> Schedule meeting with academic advisor</li>
+                      <li>• <strong>This Week:</strong> Contact financial aid office about scholarship status</li>
+                      <li>• <strong>Ongoing:</strong> Use UTA tutoring services (SMART Program)</li>
+                      <li>• <strong>Consider:</strong> Reducing course load next semester to focus on grades</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {calculatedGPA === null && (
+              <div className="bg-gray-100 border border-gray-300 p-6 rounded-lg text-center">
+                <p className="text-gray-600">
+                  Calculate your GPA first to see your scholarship status!
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ✨ NEW PHASE 2: Multi-Semester Timeline Section */}
+        <div id="semester-timeline" className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 scroll-mt-20">
+          <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
+            📅 Multi-Semester Timeline
+          </h2>
+          <p className="text-gray-600 mb-6">Track your academic progress across multiple semesters</p>
+          
+          <div className="space-y-6">
+            <div className="bg-sky-50 border-l-4 border-sky-500 p-4 rounded">
+              <p className="text-sm text-gray-700">
+                <strong>💡 Track Progress:</strong> Add each semester to build a complete academic timeline. Watch your cumulative GPA evolve over time!
+              </p>
+            </div>
+
+            {calculatedGPA !== null && (
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="text"
+                  value={currentSemesterName}
+                  onChange={(e) => setCurrentSemesterName(e.target.value)}
+                  placeholder="e.g., Fall 2026"
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                />
+                <button
+                  onClick={addSemesterToTimeline}
+                  className="px-8 py-3 bg-gradient-to-r from-sky-600 to-blue-600 text-white rounded-lg hover:from-sky-700 hover:to-blue-700 transition-all font-semibold shadow-md whitespace-nowrap"
+                >
+                  📅 Add Semester
+                </button>
+              </div>
+            )}
+
+            {semesters.length > 0 && (
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-xl font-bold text-gray-800">Your Academic Timeline</h3>
+                  <button
+                    onClick={exportTimelineData}
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"
+                  >
+                    📥 Export Data
+                  </button>
+                </div>
+
+                {/* Timeline Visualization */}
+                <div className="relative">
+                  {semesters.map((semester, index) => (
+                    <div key={semester.id} className="relative pl-8 pb-8">
+                      {/* Timeline Line */}
+                      {index < semesters.length - 1 && (
+                        <div className="absolute left-3 top-10 bottom-0 w-0.5 bg-sky-300"></div>
+                      )}
+                      
+                      {/* Timeline Dot */}
+                      <div className="absolute left-0 top-2 w-6 h-6 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                      
+                      {/* Semester Card */}
+                      <div className="bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200 rounded-lg p-4 ml-4 shadow-sm">
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h4 className="text-lg font-bold text-sky-800">{semester.name}</h4>
+                            <p className="text-sm text-gray-600">
+                              {semester.courses.filter(c => c.creditHours && c.grade).length} courses • 
+                              {' '}{semester.courses.reduce((sum, c) => sum + (parseFloat(c.creditHours) || 0), 0).toFixed(1)} credits
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => removeSemesterFromTimeline(semester.id)}
+                            className="text-red-500 hover:text-red-700 font-bold"
+                            title="Remove semester"
+                          >
+                            ❌
+                          </button>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-4 mb-3">
+                          <div className="bg-white bg-opacity-70 p-3 rounded">
+                            <p className="text-xs text-gray-600 mb-1">Semester GPA</p>
+                            <p className="text-2xl font-bold text-sky-600">{semester.gpa.toFixed(3)}</p>
+                          </div>
+                          <div className="bg-white bg-opacity-70 p-3 rounded">
+                            <p className="text-xs text-gray-600 mb-1">Cumulative GPA</p>
+                            <p className="text-2xl font-bold text-blue-600">{semester.cumulativeGPA.toFixed(3)}</p>
+                          </div>
+                        </div>
+                        
+                        <details className="text-sm">
+                          <summary className="cursor-pointer text-sky-700 hover:text-sky-800 font-semibold">
+                            View Course Details
+                          </summary>
+                          <div className="mt-2 space-y-1 ml-4">
+                            {semester.courses.filter(c => c.creditHours && c.grade).map((course, i) => (
+                              <div key={i} className="text-gray-700">
+                                • {course.name || `Course ${i + 1}`}: {course.grade} ({course.creditHours} credits)
+                              </div>
+                            ))}
+                          </div>
+                        </details>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* GPA Progression Chart */}
+                {semesters.length >= 2 && (
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-800 mb-3">📈 GPA Progression</h4>
+                    <div className="h-40 border border-gray-300 rounded p-2">
+                      <svg width="100%" height="100%" viewBox="0 0 600 120" preserveAspectRatio="none">
+                        {/* Grid */}
+                        {[0, 1, 2, 3, 4].map(i => (
+                          <line
+                            key={i}
+                            x1="30"
+                            y1={110 - (i * 25)}
+                            x2="580"
+                            y2={110 - (i * 25)}
+                            stroke="#e5e7eb"
+                            strokeWidth="1"
+                          />
+                        ))}
+                        
+                        {/* Cumulative GPA Line */}
+                        <polyline
+                          points={semesters.map((sem, index) => {
+                            const x = 30 + (index / (semesters.length - 1)) * 550;
+                            const y = 110 - (sem.cumulativeGPA * 25);
+                            return `${x},${y}`;
+                          }).join(' ')}
+                          fill="none"
+                          stroke="#0284c7"
+                          strokeWidth="3"
+                        />
+                        
+                        {/* Data Points */}
+                        {semesters.map((sem, index) => {
+                          const x = 30 + (index / (semesters.length - 1)) * 550;
+                          const y = 110 - (sem.cumulativeGPA * 25);
+                          return (
+                            <circle
+                              key={index}
+                              cx={x}
+                              cy={y}
+                              r="4"
+                              fill="#0284c7"
+                              stroke="#fff"
+                              strokeWidth="2"
+                            >
+                              <title>{sem.name}: {sem.cumulativeGPA.toFixed(3)}</title>
+                            </circle>
+                          );
+                        })}
+                      </svg>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {semesters.length === 0 && (
+              <div className="bg-gray-100 border border-gray-300 p-8 rounded-lg text-center">
+                <p className="text-2xl mb-2">📚</p>
+                <p className="text-gray-600 mb-2">
+                  No semesters added yet
+                </p>
+                <p className="text-sm text-gray-500">
+                  Calculate your GPA above, then add it to start tracking your timeline!
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
