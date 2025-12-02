@@ -37,9 +37,6 @@ const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACal
 const UVAGPACalculator = lazy(() => import('./components/tools/UVAGPACalculator'));
 const ASUGPACalculator = lazy(() => import('./components/tools/ASUGPACalculator'));
 const LSACGPA = lazy(() => import('./components/tools/LSACGPA'));
-const FillDirtCalculator = lazy(() => import('./components/tools/FillDirtCalculator'));
-const QuiltBackingCalculator = lazy(() => import('./components/tools/QuiltBackingCalculator'));
-const PowerToMassRatioCalculator = lazy(() => import('./components/tools/PowerToMassRatioCalculator'));
 const AudiobookSpeedCalculator = lazy(() => import('./components/tools/AudiobookSpeedCalculator'));
 const ReverbCalculator = lazy(() => import('./components/tools/ReverbCalculator'));
 const CollegeGPACalculator = lazy(() => import('./components/tools/CollegeGPACalculator'));
@@ -204,15 +201,7 @@ const App: React.FC = () => {
             'college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
             'tools/college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
             
-            // Construction and Engineering Tools
-            'fill-dirt-calculator': '/construction-and-engineering-tools/fill-dirt-calculator',
-            'tools/fill-dirt-calculator': '/construction-and-engineering-tools/fill-dirt-calculator',
-            'quilt-backing-calculator': '/construction-and-engineering-tools/quilt-backing-calculator',
-            'tools/quilt-backing-calculator': '/construction-and-engineering-tools/quilt-backing-calculator',
-            'power-to-mass-ratio-calculator': '/construction-and-engineering-tools/power-to-mass-ratio-calculator',
-            'tools/power-to-mass-ratio-calculator': '/construction-and-engineering-tools/power-to-mass-ratio-calculator',
-            
-            // Audio and Media Tools
+            // Audio & Media Tools
             'audiobook-speed-calculator': '/audio-and-media-tools/audiobook-speed-calculator',
             'tools/audiobook-speed-calculator': '/audio-and-media-tools/audiobook-speed-calculator',
             'reverb-calculator': '/audio-and-media-tools/reverb-calculator',
@@ -296,9 +285,6 @@ const App: React.FC = () => {
             'graduate-school-gpa-calculator': GraduateSchoolGPACalculator,
             'pharmacy-school-gpa-calculator': PharmacySchoolGPACalculator,
             'pa-school-gpa-calculator': PASchoolGPACalculator,
-            'fill-dirt-calculator': FillDirtCalculator,
-            'quilt-backing-calculator': QuiltBackingCalculator,
-            'power-to-mass-ratio-calculator': PowerToMassRatioCalculator,
             'audiobook-speed-calculator': AudiobookSpeedCalculator,
             'reverb-calculator': ReverbCalculator,
             'gmat-score-calculator': GMATScoreCalculator,

@@ -25,19 +25,6 @@ const EducationExamIcon = () => (
   </svg>
 );
 
-const ConstructionEngineeringIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="constructionIconTitle">
-    <title id="constructionIconTitle">Construction & Engineering Tools Icon</title>
-    <defs>
-        <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#dc2626" />
-        </linearGradient>
-    </defs>
-    <path d="M22.61 18.97L13.54 9.9L15.66 7.78L14.24 6.36L12.12 8.48L10.59 6.95L12.71 4.83L11.29 3.41L9.17 5.53L7.29 3.66C6.11 2.47 4.21 2.47 3.03 3.66C1.84 4.84 1.84 6.74 3.03 7.93L4.9 9.8L2.78 11.92L4.2 13.34L6.32 11.22L7.85 12.75L5.73 14.87L7.15 16.29L9.27 14.17L18.34 23.24C19.13 24.03 20.4 24.03 21.19 23.24L23.24 21.19C24.03 20.4 24.03 19.13 23.24 18.34L22.61 18.97ZM4.44 7.93C3.65 7.14 3.65 5.88 4.44 5.09C5.23 4.3 6.49 4.3 7.28 5.09L9.15 6.96L5.73 10.38L4.44 7.93Z" fill="url(#grad6)" />
-  </svg>
-);
-
 const AudioMediaIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="audioMediaIconTitle">
     <title id="audioMediaIconTitle">Audio & Media Tools Icon</title>
@@ -847,35 +834,6 @@ export const toolCategories: Category[] = [
                         gradientColors: { from: '#6366f1', to: '#a855f7' },
                     },
                 ]
-            },
-        ]
-    },
-    {
-        slug: 'construction-and-engineering-tools',
-        title: 'Construction & Engineering Tools',
-        description: 'Professional calculators for construction projects, engineering calculations, and DIY home improvements.',
-        icon: <ConstructionEngineeringIcon />,
-        tools: [
-            {
-                title: 'Fill Dirt Calculator',
-                description: 'Calculate the amount of fill dirt needed for your landscaping or construction project. Supports various measurement units and provides cost estimates.',
-                link: 'construction-and-engineering-tools/fill-dirt-calculator',
-                icon: <FillDirtIcon />,
-                gradientColors: { from: '#92400e', to: '#f59e0b' }, // Brown to Amber
-            },
-            {
-                title: 'Quilt Backing Calculator',
-                description: 'Calculate fabric requirements for quilt backing. Perfect for quilters to determine backing sizes and fabric yardage needed.',
-                link: 'construction-and-engineering-tools/quilt-backing-calculator',
-                icon: <QuiltBackingIcon />,
-                gradientColors: { from: '#ec4899', to: '#f59e0b' }, // Pink to Amber
-            },
-            {
-                title: 'Power to Mass Ratio Calculator',
-                description: 'Calculate power-to-weight ratio for vehicles, engines, and machinery. Essential for performance analysis and engineering calculations.',
-                link: 'construction-and-engineering-tools/power-to-mass-ratio-calculator',
-                icon: <PowerToMassIcon />,
-                gradientColors: { from: '#ef4444', to: '#f59e0b' }, // Red to Amber
             },
         ]
     },
