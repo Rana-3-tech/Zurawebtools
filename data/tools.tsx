@@ -12,18 +12,6 @@ export interface Tool {
 
 
 // Category Icons (with colorful gradients)
-const MathCalculationIcon = () => (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mathCalcIconTitle">
-      <title id="mathCalcIconTitle">Math and Calculation Tools Icon</title>
-      <defs>
-        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#8b5cf6" />
-          <stop offset="100%" stopColor="#ec4899" />
-        </linearGradient>
-      </defs>
-      <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM17 17H7V15H17V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z" fill="url(#grad2)"/>
-    </svg>
-);
 const ColorDesignIcon = () => (
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="colorDesignIconTitle">
         <title id="colorDesignIconTitle">Color and Design Tools Icon</title>
@@ -596,42 +584,6 @@ export interface Category {
 }
 
 export const toolCategories: Category[] = [
-    {
-        slug: 'math-and-calculation-tools',
-        title: 'Math & Calculation Tools',
-        description: 'Perform complex calculations, conversions, and mathematical analyses with our handy tools.',
-        icon: <MathCalculationIcon />,
-        tools: [
-            {
-                title: 'Date Difference Calculator',
-                description: 'Calculate the exact duration between two dates, broken down into years, months, and days.',
-                link: 'math-and-calculation-tools/time-difference-calculator',
-                icon: <TimeDifferenceIcon />,
-                gradientColors: { from: '#d946ef', to: '#8b5cf6' }, // Fuchsia to Purple
-            },
-            {
-                title: 'Percentage Change Calculator',
-                description: 'Quickly calculate the percentage increase or decrease between two numbers. Ideal for finance, business, and math.',
-                link: 'math-and-calculation-tools/percentage-change-calculator',
-                icon: <PercentageChangeIcon />,
-                gradientColors: { from: '#22c55e', to: '#3b82f6' }, // Green to Blue
-            },
-            {
-                title: 'Fabric Costing Calculator',
-                description: 'Professional fabric costing tool for textile engineers. Calculate warp/weft weight, yarn consumption, and per-meter pricing with accurate cost breakdown.',
-                link: 'math-and-calculation-tools/fabric-costing-tool',
-                icon: <FabricCostingIcon />,
-                gradientColors: { from: '#f59e0b', to: '#ef4444' }, // Amber to Red
-            },
-            {
-                title: 'Snow Day Calculator',
-                description: 'Predict the likelihood of school closures due to weather conditions. Advanced algorithm analyzes snowfall, temperature, wind, and school district policies.',
-                link: 'math-and-calculation-tools/snow-day-calculator',
-                icon: <SnowDayCalculatorIcon />,
-                gradientColors: { from: '#3b82f6', to: '#06b6d4' }, // Blue to Cyan
-            },
-        ]
-    },
     {
         slug: 'color-and-design-tools',
         title: 'Color & Design Tools',

@@ -24,15 +24,11 @@ import { posts, Post } from './data/posts';
 import NotFoundPage from './components/NotFoundPage';
 
 // Lazy load tool pages for better performance - each tool loads only when needed
-const TimeDifferenceCalculator = lazy(() => import('./components/tools/TimeDifferenceCalculator'));
-const PercentageChangeCalculator = lazy(() => import('./components/tools/PercentageChangeCalculator'));
 const HexToRGBConverter = lazy(() => import('./components/tools/HexToRGBConverter'));
 const AccessibleColorContrastChecker = lazy(() => import('./components/tools/AccessibleColorContrastChecker'));
 const JSONFormatterValidator = lazy(() => import('./components/tools/JSONFormatterValidator'));
 const ShadowCSSGenerator = lazy(() => import('./components/tools/ShadowCSSGenerator'));
 const ColorHarmonyChecker = lazy(() => import('./components/tools/ColorHarmonyChecker'));
-const FabricCostingTool = lazy(() => import('./components/tools/FabricCostingTool'));
-const SnowDayCalculator = lazy(() => import('./components/tools/SnowDayCalculator'));
 const SATScoreCalculator = lazy(() => import('./components/tools/SATScoreCalculator'));
 const ACTScoreCalculator = lazy(() => import('./components/tools/ACTScoreCalculator'));
 const IELTSBandScoreCalculator = lazy(() => import('./components/tools/IELTSBandScoreCalculator'));
@@ -156,15 +152,6 @@ const App: React.FC = () => {
         // OLD URL REDIRECT LOGIC - Redirect old flat URLs and /tools/ prefix to new category-based structure
         const oldToNewUrlMap: { [key: string]: string } = {
             // Math and Calculation Tools
-            'time-difference-calculator': '/math-and-calculation-tools/time-difference-calculator',
-            'tools/time-difference-calculator': '/math-and-calculation-tools/time-difference-calculator',
-            'percentage-change-calculator': '/math-and-calculation-tools/percentage-change-calculator',
-            'tools/percentage-change-calculator': '/math-and-calculation-tools/percentage-change-calculator',
-            'fabric-costing-tool': '/math-and-calculation-tools/fabric-costing-tool',
-            'tools/fabric-costing-tool': '/math-and-calculation-tools/fabric-costing-tool',
-            'snow-day-calculator': '/math-and-calculation-tools/snow-day-calculator',
-            'tools/snow-day-calculator': '/math-and-calculation-tools/snow-day-calculator',
-            
             // Color and Design Tools
             'hex-to-rgb-converter': '/color-and-design-tools/hex-to-rgb-converter',
             'tools/hex-to-rgb-converter': '/color-and-design-tools/hex-to-rgb-converter',
@@ -304,10 +291,6 @@ const App: React.FC = () => {
 
         // Dynamic tool routing - supports both 2-level (category/tool) and 3-level (category/subcategory/tool) paths
         const toolComponentMap: { [key: string]: React.ComponentType<any> } = {
-            'time-difference-calculator': TimeDifferenceCalculator,
-            'percentage-change-calculator': PercentageChangeCalculator,
-            'fabric-costing-tool': FabricCostingTool,
-            'snow-day-calculator': SnowDayCalculator,
             'hex-to-rgb-converter': HexToRGBConverter,
             'accessible-color-contrast-checker': AccessibleColorContrastChecker,
             'shadow-css-generator': ShadowCSSGenerator,
