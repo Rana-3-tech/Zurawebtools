@@ -915,6 +915,12 @@ const CollegeGPACalculator: React.FC<CollegeGPACalculatorProps> = ({ navigateTo 
                 California State University uses a specific GPA calculation method for admissions that differs from standard college GPA. CSU GPA only counts A-G approved courses from grades 10-12, caps honors weighting at 8 semesters (with only 2 from 10th grade), and limits all grades to 4.0 maximum. If you're applying to Cal State schools, use our dedicated <a href="/education-and-exam-tools/gpa-tools/csu-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline" onClick={(e) => { e.preventDefault(); navigateTo('/education-and-exam-tools/gpa-tools/csu-gpa-calculator'); }}>CSU GPA Calculator</a> for accurate admissions GPA calculation with automatic honors cap enforcement.
               </p>
             </div>
+            <div className="pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Does UTA use a plus/minus grading system?</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Yes, University of Texas at Arlington uses a plus/minus grading system (A, A-, B+, B, B-, etc.) that provides more granular GPA calculations compared to traditional letter-only grades. UTA assigns specific grade point values like 3.67 for A- and 3.33 for B+, allowing for more precise GPA tracking. If you're a UTA student or planning to attend, use our specialized <a href="/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline" onClick={(e) => { e.preventDefault(); navigateTo('/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator'); }}>UTA GPA Calculator</a> which includes Grade Point Deficiency (GPD) computation for academic probation management.
+              </p>
+            </div>
           </div>
         </div>
 

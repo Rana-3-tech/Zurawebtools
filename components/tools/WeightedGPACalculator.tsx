@@ -1199,6 +1199,13 @@ const WeightedGPACalculator: React.FC<WeightedGPACalculatorProps> = ({ navigateT
                 CSU uses a unique weighted GPA calculation with specific rules: only A-G approved courses from grades 10-12 count, honors weighting is capped at 8 semesters (maximum 2 from 10th grade), and all grades are capped at 4.0. For accurate CSU admissions GPA, use our specialized <a href="/education-and-exam-tools/gpa-tools/csu-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline" onClick={(e) => { e.preventDefault(); navigateTo('/education-and-exam-tools/gpa-tools/csu-gpa-calculator'); }}>CSU GPA Calculator</a> which automatically enforces these Cal State-specific requirements.
               </p>
             </div>
+
+            <div className="border-l-4 border-orange-500 pl-6 py-2">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">How does UTA calculate weighted GPA?</h3>
+              <p className="text-gray-700 leading-relaxed">
+                University of Texas at Arlington uses a plus/minus grading system (A, A-, B+, B-, etc.) with specific grade point values for more precise GPA calculation. UTA doesn't use traditional weighted GPA for course difficulty, but instead assigns exact values like 3.67 for A- and 3.33 for B+. UTA students can track semester GPA and calculate Grade Point Deficiency (GPD) for academic probation planning using our <a href="/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator" className="text-blue-600 hover:text-blue-800 font-semibold underline" onClick={(e) => { e.preventDefault(); navigateTo('/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator'); }}>UTA GPA Calculator</a>.
+              </p>
+            </div>
           </div>
         </section>
 

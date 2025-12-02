@@ -1612,10 +1612,17 @@ const HighSchoolGPACalculator: React.FC<HighSchoolGPACalculatorProps> = ({ navig
               </p>
             </div>
 
-            <div className="pb-6">
+            <div className="border-b border-gray-200 pb-6">
               <h3 className="text-xl font-bold text-gray-900 mb-3">What is the highest GPA possible in high school?</h3>
               <p className="text-gray-700">
                 The <strong>highest possible GPA in high school is 5.0</strong> on a weighted scale with AP, IB, or Honors course bonuses. On an unweighted scale, the maximum is 4.0 (straight A's in all courses). To achieve a 5.0 weighted GPA, you would need to earn an A (or A+) in every AP or IB course, which adds +1.0 point to the base 4.0 grade (4.0 + 1.0 = 5.0). Honors courses typically add +0.5, giving a maximum of 4.5 for an A in Honors. However, achieving a perfect 5.0 is extremely rare since most students take a mix of AP, Honors, and regular courses. Most top-tier universities see weighted GPAs ranging from 4.2 to 4.8 for admitted students. Remember: colleges value course rigor and consistent performance over chasing a perfect 5.0.
+              </p>
+            </div>
+
+            <div className="pb-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">How do Texas universities calculate GPA?</h3>
+              <p className="text-gray-700">
+                Texas universities like <strong>University of Texas at Arlington (UTA)</strong> use a plus/minus grading system that differs from typical high school GPA scales. UTA assigns specific grade point values (A=4.0, A-=3.67, B+=3.33, B=3.0, B-=2.67, etc.) for more granular GPA tracking. High school students planning to attend UTA should understand that their high school GPA will be recalculated using university standards once enrolled. Current UTA students can calculate semester GPA and Grade Point Deficiency (GPD) for academic probation planning using our specialized <a href="/education-and-exam-tools/university-gpa-tools/uta-gpa-calculator" className="text-blue-600 hover:underline font-semibold">UTA GPA calculator</a>.
               </p>
             </div>
 
