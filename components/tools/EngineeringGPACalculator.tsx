@@ -458,8 +458,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-md w-full">
           <div className="text-center">
             <div className="text-6xl mb-4">⚠️</div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Something Went Wrong</h1>
-            <p className="text-gray-700 mb-6">{errorInfo}</p>
+            <h1 className="text-2xl font-bold text-slate-900 mb-4">Something Went Wrong</h1>
+            <p className="text-slate-800 mb-6">{errorInfo}</p>
             <div className="space-y-3">
               <button
                 onClick={() => window.location.reload()}
@@ -475,7 +475,7 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
               </button>
             </div>
             <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-600">
                 <strong>Troubleshooting:</strong> Clear your browser cache, disable extensions, or try a different browser.
               </p>
             </div>
@@ -658,21 +658,21 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent mb-4">
             Engineering GPA Calculator
           </h1>
-          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
             Calculate your Major GPA, Technical GPA, Cumulative GPA, and Last 60 Credits GPA. 
             ABET-compliant with support for all engineering disciplines and graduate school requirements.
           </p>
           
           {/* Discipline Selector */}
-          <div className="mt-6 max-w-md mx-auto">
-            <label htmlFor="discipline" className="block text-sm font-medium text-gray-700 mb-2">
+          <div className="mt-6 max-w-4xl mx-auto">
+            <label htmlFor="discipline" className="block text-sm font-medium text-slate-700 mb-2">
               Select Your Engineering Discipline
             </label>
             <select
               id="discipline"
               value={selectedDiscipline}
               onChange={(e) => setSelectedDiscipline(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
             >
               {ENGINEERING_DISCIPLINES.map(discipline => (
                 <option key={discipline} value={discipline}>{discipline}</option>
@@ -684,10 +684,10 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
         {/* Calculator Section */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Enter Your Courses</h2>
+            <h2 className="text-2xl font-bold text-slate-900">Enter Your Courses</h2>
             <button
               onClick={resetCalculator}
-              className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors"
+              className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 text-slate-700 rounded-lg transition-colors"
             >
               Reset All
             </button>
@@ -698,12 +698,12 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
             <table className="w-full">
               <thead>
                 <tr className="border-b-2 border-gray-200">
-                  <th className="text-left py-3 px-2 text-sm font-semibold text-gray-700">Course Name</th>
-                  <th className="text-left py-3 px-2 text-sm font-semibold text-gray-700">Credits</th>
-                  <th className="text-left py-3 px-2 text-sm font-semibold text-gray-700">Grade</th>
-                  <th className="text-left py-3 px-2 text-sm font-semibold text-gray-700">Category</th>
-                  <th className="text-center py-3 px-2 text-sm font-semibold text-gray-700">Transfer</th>
-                  <th className="text-center py-3 px-2 text-sm font-semibold text-gray-700">Action</th>
+                  <th className="text-left py-3 px-2 text-sm font-semibold text-slate-700">Course Name</th>
+                  <th className="text-left py-3 px-2 text-sm font-semibold text-slate-700">Credits</th>
+                  <th className="text-left py-3 px-2 text-sm font-semibold text-slate-700">Grade</th>
+                  <th className="text-left py-3 px-2 text-sm font-semibold text-slate-700">Category</th>
+                  <th className="text-center py-3 px-2 text-sm font-semibold text-slate-700">Transfer</th>
+                  <th className="text-center py-3 px-2 text-sm font-semibold text-slate-700">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -715,7 +715,7 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                         value={course.name}
                         onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
                         placeholder="e.g., Thermodynamics I"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                       />
                     </td>
                     <td className="py-3 px-2">
@@ -726,14 +726,14 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                         min="0"
                         max="6"
                         step="0.5"
-                        className="w-20 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-20 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                       />
                     </td>
                     <td className="py-3 px-2">
                       <select
                         value={course.grade}
                         onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
-                        className="w-24 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-24 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                       >
                         <option value="">Select</option>
                         {Object.keys(GRADE_POINTS).map(grade => (
@@ -745,7 +745,7 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                       <select
                         value={course.category}
                         onChange={(e) => updateCourse(course.id, 'category', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                       >
                         {COURSE_CATEGORIES.map(category => (
                           <option key={category} value={category}>{category}</option>
@@ -801,14 +801,14 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
         {/* Results Section */}
         {(majorGPA !== null || technicalGPA !== null || cumulativeGPA !== null) && (
           <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Your GPA Results</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Your GPA Results</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Major GPA Card */}
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-200">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">Major GPA</h3>
-                  <span className="text-sm text-gray-600">(Engineering Core)</span>
+                  <h3 className="text-lg font-semibold text-slate-900">Major GPA</h3>
+                  <span className="text-sm text-slate-600">(Engineering Core)</span>
                 </div>
                 <div className="text-4xl font-bold text-blue-900 mb-2">
                   {majorGPA ? majorGPA.toFixed(3) : 'N/A'}
@@ -816,14 +816,14 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium bg-${getCompetitivenessLevel(majorGPA).color}-100 text-${getCompetitivenessLevel(majorGPA).color}-800`}>
                   {getCompetitivenessLevel(majorGPA).text}
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{getCompetitivenessLevel(majorGPA).description}</p>
+                <p className="text-sm text-slate-600 mt-2">{getCompetitivenessLevel(majorGPA).description}</p>
               </div>
 
               {/* Technical GPA Card */}
               <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-6 border-2 border-indigo-200">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">Technical GPA</h3>
-                  <span className="text-sm text-gray-600">(All STEM)</span>
+                  <h3 className="text-lg font-semibold text-slate-900">Technical GPA</h3>
+                  <span className="text-sm text-slate-600">(All STEM)</span>
                 </div>
                 <div className="text-4xl font-bold text-indigo-900 mb-2">
                   {technicalGPA ? technicalGPA.toFixed(3) : 'N/A'}
@@ -831,26 +831,26 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium bg-${getCompetitivenessLevel(technicalGPA).color}-100 text-${getCompetitivenessLevel(technicalGPA).color}-800`}>
                   {getCompetitivenessLevel(technicalGPA).text}
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{getCompetitivenessLevel(technicalGPA).description}</p>
+                <p className="text-sm text-slate-600 mt-2">{getCompetitivenessLevel(technicalGPA).description}</p>
               </div>
 
               {/* Non-Technical GPA Card */}
               <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border-2 border-purple-200">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">Non-Technical GPA</h3>
-                  <span className="text-sm text-gray-600">(Gen Ed)</span>
+                  <h3 className="text-lg font-semibold text-slate-900">Non-Technical GPA</h3>
+                  <span className="text-sm text-slate-600">(Gen Ed)</span>
                 </div>
                 <div className="text-4xl font-bold text-purple-900 mb-2">
                   {nonTechnicalGPA ? nonTechnicalGPA.toFixed(3) : 'N/A'}
                 </div>
-                <p className="text-sm text-gray-600 mt-2">Humanities & Social Sciences</p>
+                <p className="text-sm text-slate-600 mt-2">Humanities & Social Sciences</p>
               </div>
 
               {/* Cumulative GPA Card */}
               <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border-2 border-green-200">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">Cumulative GPA</h3>
-                  <span className="text-sm text-gray-600">(Overall)</span>
+                  <h3 className="text-lg font-semibold text-slate-900">Cumulative GPA</h3>
+                  <span className="text-sm text-slate-600">(Overall)</span>
                 </div>
                 <div className="text-4xl font-bold text-green-900 mb-2">
                   {cumulativeGPA ? cumulativeGPA.toFixed(3) : 'N/A'}
@@ -858,14 +858,14 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium bg-${getCompetitivenessLevel(cumulativeGPA).color}-100 text-${getCompetitivenessLevel(cumulativeGPA).color}-800`}>
                   {getCompetitivenessLevel(cumulativeGPA).text}
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{getCompetitivenessLevel(cumulativeGPA).description}</p>
+                <p className="text-sm text-slate-600 mt-2">{getCompetitivenessLevel(cumulativeGPA).description}</p>
               </div>
 
               {/* Last 60 Credits GPA Card */}
               <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-6 border-2 border-teal-200 md:col-span-2 lg:col-span-1">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">Last 60 Credits GPA</h3>
-                  <span className="text-sm text-gray-600">(Grad School Focus)</span>
+                  <h3 className="text-lg font-semibold text-slate-900">Last 60 Credits GPA</h3>
+                  <span className="text-sm text-slate-600">(Grad School Focus)</span>
                 </div>
                 <div className="text-4xl font-bold text-teal-900 mb-2">
                   {last60CreditsGPA ? last60CreditsGPA.toFixed(3) : 'N/A'}
@@ -873,17 +873,17 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium bg-${getCompetitivenessLevel(last60CreditsGPA).color}-100 text-${getCompetitivenessLevel(last60CreditsGPA).color}-800`}>
                   {getCompetitivenessLevel(last60CreditsGPA).text}
                 </div>
-                <p className="text-sm text-gray-600 mt-2">Recent academic performance</p>
+                <p className="text-sm text-slate-600 mt-2">Recent academic performance</p>
               </div>
             </div>
 
             {/* ABET Credit Distribution */}
             <div className="mt-8 p-6 bg-gray-50 rounded-xl">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">ABET Credit Distribution</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">ABET Credit Distribution</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">Engineering Core</p>
-                  <p className="text-2xl font-bold text-gray-900">{creditDistribution.engineeringCore}</p>
+                  <p className="text-sm text-slate-600 mb-1">Engineering Core</p>
+                  <p className="text-2xl font-bold text-slate-900">{creditDistribution.engineeringCore}</p>
                   <p className="text-xs text-gray-500">Required: 32+</p>
                   {creditDistribution.engineeringCore >= 32 ? (
                     <span className="text-green-600 text-xs">✓ Met</span>
@@ -892,8 +892,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                   )}
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">Math & Science</p>
-                  <p className="text-2xl font-bold text-gray-900">{creditDistribution.mathScience}</p>
+                  <p className="text-sm text-slate-600 mb-1">Math & Science</p>
+                  <p className="text-2xl font-bold text-slate-900">{creditDistribution.mathScience}</p>
                   <p className="text-xs text-gray-500">Required: 48+</p>
                   {creditDistribution.mathScience >= 48 ? (
                     <span className="text-green-600 text-xs">✓ Met</span>
@@ -902,8 +902,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                   )}
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">Humanities</p>
-                  <p className="text-2xl font-bold text-gray-900">{creditDistribution.humanities}</p>
+                  <p className="text-sm text-slate-600 mb-1">Humanities</p>
+                  <p className="text-2xl font-bold text-slate-900">{creditDistribution.humanities}</p>
                   <p className="text-xs text-gray-500">Required: 32+</p>
                   {creditDistribution.humanities >= 32 ? (
                     <span className="text-green-600 text-xs">✓ Met</span>
@@ -912,8 +912,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                   )}
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">Total Credits</p>
-                  <p className="text-2xl font-bold text-gray-900">{totalCredits}</p>
+                  <p className="text-sm text-slate-600 mb-1">Total Credits</p>
+                  <p className="text-2xl font-bold text-slate-900">{totalCredits}</p>
                   <p className="text-xs text-gray-500">Required: 120+</p>
                   {totalCredits >= 120 ? (
                     <span className="text-green-600 text-xs">✓ Met</span>
@@ -923,12 +923,267 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
             </div>
+
+            {/* Print & Download Buttons */}
+            <div className="mt-6 flex flex-wrap gap-4 justify-center">
+              <button
+                onClick={() => {
+                  const printWindow = window.open('', '_blank');
+                  if (!printWindow) return;
+                  
+                  const html = `
+                    <!DOCTYPE html>
+                    <html>
+                      <head>
+                        <title>Engineering GPA Report - ${selectedDiscipline}</title>
+                        <style>
+                          body { font-family: Arial, sans-serif; padding: 40px; color: #1e293b; }
+                          .header { border-bottom: 3px solid #2563eb; padding-bottom: 20px; margin-bottom: 30px; }
+                          .header h1 { color: #1e40af; font-size: 28px; margin: 0 0 10px 0; }
+                          .header p { color: #64748b; margin: 5px 0; }
+                          .gpa-display { background: #eff6ff; border: 2px solid #2563eb; border-radius: 8px; padding: 20px; margin: 15px 0; font-size: 24px; font-weight: bold; color: #1e40af; }
+                          table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                          th { background: #2563eb; color: white; padding: 12px; text-align: left; }
+                          td { border: 1px solid #d1d5db; padding: 10px; }
+                          .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 12px; }
+                          .section { margin: 20px 0; }
+                          .section h2 { color: #1e40af; font-size: 20px; margin-bottom: 15px; }
+                        </style>
+                      </head>
+                      <body>
+                        <div class="header">
+                          <h1>Engineering GPA Report</h1>
+                          <p>Discipline: ${selectedDiscipline}</p>
+                          <p>Generated: ${new Date().toLocaleDateString()}</p>
+                        </div>
+                        
+                        <div class="section">
+                          <h2>GPA Results</h2>
+                          <div class="gpa-display">Major GPA: ${majorGPA?.toFixed(3) || 'N/A'}</div>
+                          <div class="gpa-display">Technical GPA: ${technicalGPA?.toFixed(3) || 'N/A'}</div>
+                          <div class="gpa-display">Non-Technical GPA: ${nonTechnicalGPA?.toFixed(3) || 'N/A'}</div>
+                          <div class="gpa-display">Cumulative GPA: ${cumulativeGPA?.toFixed(3) || 'N/A'}</div>
+                          <div class="gpa-display">Last 60 Credits GPA: ${last60CreditsGPA?.toFixed(3) || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="section">
+                          <h2>ABET Credit Distribution</h2>
+                          <p><strong>Engineering Core:</strong> ${creditDistribution.engineeringCore} credits (Required: 32+)</p>
+                          <p><strong>Math & Science:</strong> ${creditDistribution.mathScience} credits (Required: 48+)</p>
+                          <p><strong>Humanities:</strong> ${creditDistribution.humanities} credits (Required: 32+)</p>
+                          <p><strong>Total Credits:</strong> ${totalCredits} (Required: 120+)</p>
+                        </div>
+                        
+                        <h2>Course Details</h2>
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Course</th>
+                              <th>Credits</th>
+                              <th>Grade</th>
+                              <th>Category</th>
+                              <th>Transfer</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            ${courses.map(c => `
+                              <tr>
+                                <td>${c.name || 'Unnamed'}</td>
+                                <td>${c.credits}</td>
+                                <td>${c.grade}</td>
+                                <td>${c.category}</td>
+                                <td>${c.isTransfer ? 'Yes' : 'No'}</td>
+                              </tr>
+                            `).join('')}
+                          </tbody>
+                        </table>
+                        
+                        <div class="footer">
+                          <p>Generated by ZuraWebTools Engineering GPA Calculator</p>
+                          <p>https://zurawebtools.com/education-and-exam-tools/gpa-tools/engineering-gpa-calculator</p>
+                        </div>
+                      </body>
+                    </html>
+                  `;
+                  
+                  printWindow.document.write(html);
+                  printWindow.document.close();
+                  printWindow.onload = () => printWindow.print();
+                }}
+                aria-label="Print GPA report"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-slate-600 to-slate-700 text-white rounded-lg font-semibold hover:from-slate-700 hover:to-slate-800 hover:shadow-lg transition-all focus:ring-2 focus:ring-slate-500 focus:outline-none"
+              >
+                <span>🖨️</span>
+                <span>Print Report</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  const text = `ENGINEERING GPA REPORT\nDiscipline: ${selectedDiscipline}\nGenerated: ${new Date().toLocaleDateString()}\n\nGPA RESULTS:\nMajor GPA: ${majorGPA?.toFixed(3) || 'N/A'}\nTechnical GPA: ${technicalGPA?.toFixed(3) || 'N/A'}\nNon-Technical GPA: ${nonTechnicalGPA?.toFixed(3) || 'N/A'}\nCumulative GPA: ${cumulativeGPA?.toFixed(3) || 'N/A'}\nLast 60 Credits GPA: ${last60CreditsGPA?.toFixed(3) || 'N/A'}\n\nABET CREDIT DISTRIBUTION:\nEngineering Core: ${creditDistribution.engineeringCore} credits (Required: 32+)\nMath & Science: ${creditDistribution.mathScience} credits (Required: 48+)\nHumanities: ${creditDistribution.humanities} credits (Required: 32+)\nTotal Credits: ${totalCredits} (Required: 120+)\n\nCOURSES:\n${courses.map(c => `${c.name || 'Unnamed'} - ${c.credits} credits - ${c.grade} - ${c.category}${c.isTransfer ? ' (Transfer)' : ''}`).join('\n')}\n\nGenerated by ZuraWebTools\nhttps://zurawebtools.com/education-and-exam-tools/gpa-tools/engineering-gpa-calculator`;
+                  const blob = new Blob([text], { type: 'text/plain' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `engineering-gpa-report-${new Date().toISOString().split('T')[0]}.txt`;
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}
+                aria-label="Download GPA report"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg transition-all focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              >
+                <span>📥</span>
+                <span>Download Report</span>
+              </button>
+            </div>
           </div>
         )}
 
-        {/* Engineering Grade Scale Table */}
+        {/* Table of Contents / Quick Navigation */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Engineering Grading Scale (4.0 System)</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">📋 Quick Navigation</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3" role="list">
+            <a href="#share" className="text-left text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" role="listitem">→ Share This Tool</a>
+            <a href="#examples" className="text-left text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" role="listitem">→ GPA Examples</a>
+            <a href="#grade-scale" className="text-left text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" role="listitem">→ Grading Scale</a>
+            <a href="#top-schools" className="text-left text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" role="listitem">→ Top Engineering Schools</a>
+            <a href="#how-to-use" className="text-left text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" role="listitem">→ How to Use</a>
+            <a href="#about" className="text-left text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" role="listitem">→ About Engineering GPA</a>
+            <a href="#faqs" className="text-left text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" role="listitem">→ FAQs</a>
+            <a href="#resources" className="text-left text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" role="listitem">→ External Resources</a>
+          </div>
+        </div>
+
+        {/* Social Share Section */}
+        <section id="share" className="bg-white rounded-2xl shadow-xl p-6 mb-8">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">Share This Calculator</h2>
+          <div className="flex flex-wrap gap-4" role="group" aria-label="Social media share buttons">
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CANONICAL_URL)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share calculator on Facebook"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              <span>Share on Facebook</span>
+            </a>
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('Calculate your Engineering GPA with precision!')}&url=${encodeURIComponent(CANONICAL_URL)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share calculator on Twitter"
+              className="flex items-center gap-2 px-6 py-3 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors focus:ring-2 focus:ring-sky-500 focus:outline-none"
+            >
+              <span>Share on Twitter</span>
+            </a>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(CANONICAL_URL)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share calculator on LinkedIn"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              <span>Share on LinkedIn</span>
+            </a>
+          </div>
+        </section>
+
+        {/* Quick Examples Section */}
+        <div id="examples" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6">📝 Quick GPA Examples for Engineering Students</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Example 1: High Performer */}
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-200">
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Example 1: High Performer</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b-2 border-blue-300">
+                      <th className="text-left py-2 text-slate-700">Course</th>
+                      <th className="text-center py-2 text-slate-700">Credits</th>
+                      <th className="text-center py-2 text-slate-700">Grade</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-slate-700">
+                    <tr className="border-b border-blue-200">
+                      <td className="py-2">Fluid Mechanics</td>
+                      <td className="text-center">3</td>
+                      <td className="text-center font-semibold">A (4.0)</td>
+                    </tr>
+                    <tr className="border-b border-blue-200">
+                      <td className="py-2">Differential Equations</td>
+                      <td className="text-center">4</td>
+                      <td className="text-center font-semibold">A- (3.7)</td>
+                    </tr>
+                    <tr className="border-b border-blue-200">
+                      <td className="py-2">Circuits Analysis</td>
+                      <td className="text-center">3</td>
+                      <td className="text-center font-semibold">A (4.0)</td>
+                    </tr>
+                    <tr className="border-b border-blue-200">
+                      <td className="py-2">Engineering Ethics</td>
+                      <td className="text-center">3</td>
+                      <td className="text-center font-semibold">A (4.0)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-4 pt-4 border-t-2 border-blue-300 space-y-1">
+                <p className="font-semibold text-blue-700">Major GPA: 3.954</p>
+                <p className="font-semibold text-blue-700">Technical GPA: 3.831</p>
+                <p className="font-semibold text-blue-700">Overall GPA: 3.923</p>
+                <p className="text-xs text-slate-600 mt-2">Calculation: (3×4.0 + 4×3.7 + 3×4.0 + 3×4.0) / 13 = 3.923</p>
+              </div>
+            </div>
+
+            {/* Example 2: Balanced Performance */}
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl border-2 border-purple-200">
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Example 2: Balanced Performance</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b-2 border-purple-300">
+                      <th className="text-left py-2 text-slate-700">Course</th>
+                      <th className="text-center py-2 text-slate-700">Credits</th>
+                      <th className="text-center py-2 text-slate-700">Grade</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-slate-700">
+                    <tr className="border-b border-purple-200">
+                      <td className="py-2">Thermodynamics</td>
+                      <td className="text-center">3</td>
+                      <td className="text-center font-semibold">B+ (3.3)</td>
+                    </tr>
+                    <tr className="border-b border-purple-200">
+                      <td className="py-2">Linear Algebra</td>
+                      <td className="text-center">3</td>
+                      <td className="text-center font-semibold">B (3.0)</td>
+                    </tr>
+                    <tr className="border-b border-purple-200">
+                      <td className="py-2">Materials Science</td>
+                      <td className="text-center">4</td>
+                      <td className="text-center font-semibold">B+ (3.3)</td>
+                    </tr>
+                    <tr className="border-b border-purple-200">
+                      <td className="py-2">Technical Writing</td>
+                      <td className="text-center">3</td>
+                      <td className="text-center font-semibold">A- (3.7)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-4 pt-4 border-t-2 border-purple-300 space-y-1">
+                <p className="font-semibold text-purple-700">Major GPA: 3.277</p>
+                <p className="font-semibold text-purple-700">Technical GPA: 3.215</p>
+                <p className="font-semibold text-purple-700">Overall GPA: 3.315</p>
+                <p className="text-xs text-slate-600 mt-2">Calculation: (3×3.3 + 3×3.0 + 4×3.3 + 3×3.7) / 13 = 3.315</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Engineering Grade Scale Table */}
+        <div id="grade-scale" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Engineering Grading Scale (4.0 System)</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -958,17 +1213,17 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                   { grade: 'NP', points: '—', range: 'No Pass', quality: 'Not counted in GPA', color: 'gray' },
                 ].map((row, index) => (
                   <tr key={index} className={`border-b border-gray-200 hover:bg-${row.color}-50 transition-colors`}>
-                    <td className="py-3 px-4 font-bold text-gray-800">{row.grade}</td>
-                    <td className="py-3 px-4 text-gray-800">{row.points}</td>
-                    <td className="py-3 px-4 text-gray-700">{row.range}</td>
-                    <td className="py-3 px-4 text-gray-700">{row.quality}</td>
+                    <td className="py-3 px-4 font-bold text-slate-800">{row.grade}</td>
+                    <td className="py-3 px-4 text-slate-800">{row.points}</td>
+                    <td className="py-3 px-4 text-slate-700">{row.range}</td>
+                    <td className="py-3 px-4 text-slate-700">{row.quality}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-slate-700">
               <strong>Note:</strong> Most engineering programs use a 4.0 scale. Some schools cap A+ at 4.0 instead of 4.3. 
               Pass/Fail courses count toward degree requirements but not GPA calculations.
             </p>
@@ -977,8 +1232,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
 
         {/* Example Calculation */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Example: Engineering Student GPA Calculation</h2>
-          <p className="text-gray-700 mb-6">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Example: Engineering Student GPA Calculation</h2>
+          <p className="text-slate-800 mb-6">
             Here's how a typical mechanical engineering student's GPA would be calculated across different categories:
           </p>
           
@@ -986,61 +1241,61 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="py-3 px-4 text-left border-b-2 border-gray-300">Course Name</th>
-                  <th className="py-3 px-4 text-left border-b-2 border-gray-300">Category</th>
-                  <th className="py-3 px-4 text-center border-b-2 border-gray-300">Credits</th>
-                  <th className="py-3 px-4 text-center border-b-2 border-gray-300">Grade</th>
-                  <th className="py-3 px-4 text-center border-b-2 border-gray-300">Points/Credit</th>
-                  <th className="py-3 px-4 text-center border-b-2 border-gray-300">Total Points</th>
+                  <th className="py-3 px-4 text-left border-b-2 border-gray-300 text-slate-900">Course Name</th>
+                  <th className="py-3 px-4 text-left border-b-2 border-gray-300 text-slate-900">Category</th>
+                  <th className="py-3 px-4 text-center border-b-2 border-gray-300 text-slate-900">Credits</th>
+                  <th className="py-3 px-4 text-center border-b-2 border-gray-300 text-slate-900">Grade</th>
+                  <th className="py-3 px-4 text-center border-b-2 border-gray-300 text-slate-900">Points/Credit</th>
+                  <th className="py-3 px-4 text-center border-b-2 border-gray-300 text-slate-900">Total Points</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="hover:bg-blue-50">
-                  <td className="py-3 px-4 border-b border-gray-200">Thermodynamics I</td>
-                  <td className="py-3 px-4 border-b border-gray-200">Engineering Core</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">3</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">A-</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">3.7</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">11.1</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-800">Thermodynamics I</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-700">Engineering Core</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">3</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">A-</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">3.7</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">11.1</td>
                 </tr>
                 <tr className="hover:bg-blue-50">
-                  <td className="py-3 px-4 border-b border-gray-200">Fluid Mechanics</td>
-                  <td className="py-3 px-4 border-b border-gray-200">Engineering Core</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">4</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">B+</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">3.3</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">13.2</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-800">Fluid Mechanics</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-700">Engineering Core</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">4</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">B+</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">3.3</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">13.2</td>
                 </tr>
                 <tr className="hover:bg-blue-50">
-                  <td className="py-3 px-4 border-b border-gray-200">Differential Equations</td>
-                  <td className="py-3 px-4 border-b border-gray-200">Mathematics</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">4</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">A</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">4.0</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">16.0</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-800">Differential Equations</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-700">Mathematics</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">4</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">A</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">4.0</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">16.0</td>
                 </tr>
                 <tr className="hover:bg-blue-50">
-                  <td className="py-3 px-4 border-b border-gray-200">Physics II (E&M)</td>
-                  <td className="py-3 px-4 border-b border-gray-200">Physical Sciences</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">4</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">B</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">3.0</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">12.0</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-800">Physics II (E&M)</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-700">Physical Sciences</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">4</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">B</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">3.0</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">12.0</td>
                 </tr>
                 <tr className="hover:bg-blue-50">
-                  <td className="py-3 px-4 border-b border-gray-200">Technical Writing</td>
-                  <td className="py-3 px-4 border-b border-gray-200">Humanities</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">3</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">A</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">4.0</td>
-                  <td className="py-3 px-4 text-center border-b border-gray-200">12.0</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-800">Technical Writing</td>
+                  <td className="py-3 px-4 border-b border-gray-200 text-slate-700">Humanities</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">3</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">A</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">4.0</td>
+                  <td className="py-3 px-4 text-center border-b border-gray-200 text-slate-800">12.0</td>
                 </tr>
                 <tr className="bg-gradient-to-r from-blue-100 to-indigo-100 font-bold">
-                  <td className="py-3 px-4 border-t-2 border-gray-300" colSpan={2}>Total</td>
-                  <td className="py-3 px-4 text-center border-t-2 border-gray-300">18</td>
-                  <td className="py-3 px-4 text-center border-t-2 border-gray-300">—</td>
-                  <td className="py-3 px-4 text-center border-t-2 border-gray-300">—</td>
-                  <td className="py-3 px-4 text-center border-t-2 border-gray-300">64.3</td>
+                  <td className="py-3 px-4 border-t-2 border-gray-300 text-slate-900" colSpan={2}>Total</td>
+                  <td className="py-3 px-4 text-center border-t-2 border-gray-300 text-slate-900">18</td>
+                  <td className="py-3 px-4 text-center border-t-2 border-gray-300 text-slate-900">—</td>
+                  <td className="py-3 px-4 text-center border-t-2 border-gray-300 text-slate-900">—</td>
+                  <td className="py-3 px-4 text-center border-t-2 border-gray-300 text-slate-900">64.3</td>
                 </tr>
               </tbody>
             </table>
@@ -1048,29 +1303,29 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-4 bg-blue-50 rounded-lg">
-              <h3 className="font-bold text-gray-900 mb-2">Major GPA (Engineering Core only):</h3>
-              <p className="text-gray-700 mb-2">Courses: Thermodynamics I, Fluid Mechanics</p>
-              <p className="text-gray-700 mb-2">Total: 24.3 points ÷ 7 credits = <strong className="text-blue-900 text-xl">3.47</strong></p>
+              <h3 className="font-bold text-slate-900 mb-2">Major GPA (Engineering Core only):</h3>
+              <p className="text-slate-700 mb-2">Courses: Thermodynamics I, Fluid Mechanics</p>
+              <p className="text-slate-700 mb-2">Total: 24.3 points ÷ 7 credits = <strong className="text-blue-900 text-xl">3.47</strong></p>
             </div>
             <div className="p-4 bg-indigo-50 rounded-lg">
-              <h3 className="font-bold text-gray-900 mb-2">Technical GPA (STEM courses):</h3>
-              <p className="text-gray-700 mb-2">Courses: All except Technical Writing</p>
-              <p className="text-gray-700 mb-2">Total: 52.3 points ÷ 15 credits = <strong className="text-indigo-900 text-xl">3.49</strong></p>
+              <h3 className="font-bold text-slate-900 mb-2">Technical GPA (STEM courses):</h3>
+              <p className="text-slate-700 mb-2">Courses: All except Technical Writing</p>
+              <p className="text-slate-700 mb-2">Total: 52.3 points ÷ 15 credits = <strong className="text-indigo-900 text-xl">3.49</strong></p>
             </div>
             <div className="p-4 bg-green-50 rounded-lg">
-              <h3 className="font-bold text-gray-900 mb-2">Cumulative GPA (All courses):</h3>
-              <p className="text-gray-700 mb-2">Total: 64.3 points ÷ 18 credits = <strong className="text-green-900 text-xl">3.57</strong></p>
+              <h3 className="font-bold text-slate-900 mb-2">Cumulative GPA (All courses):</h3>
+              <p className="text-slate-700 mb-2">Total: 64.3 points ÷ 18 credits = <strong className="text-green-900 text-xl">3.57</strong></p>
             </div>
             <div className="p-4 bg-purple-50 rounded-lg">
-              <h3 className="font-bold text-gray-900 mb-2">Competitiveness Level:</h3>
-              <p className="text-gray-700"><strong className="text-purple-900">Very Competitive</strong> - Qualifies for most graduate programs and top industry positions.</p>
+              <h3 className="font-bold text-slate-900 mb-2">Competitiveness Level:</h3>
+              <p className="text-slate-700"><strong className="text-purple-900">Very Competitive</strong> - Qualifies for most graduate programs and top industry positions.</p>
             </div>
           </div>
         </div>
 
         {/* Top Engineering Schools GPA Requirements */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Top Engineering Schools: GPA Requirements</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Top Engineering Schools: GPA Requirements</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -1094,18 +1349,18 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                   { school: 'UIUC', ug: '3.0', ms: '3.2+', phd: '3.4+', notes: 'Top 10 for many disciplines' },
                 ].map((row, index) => (
                   <tr key={index} className="border-b border-gray-200 hover:bg-blue-50">
-                    <td className="py-3 px-4 font-semibold text-gray-800">{row.school}</td>
-                    <td className="py-3 px-4 text-center text-gray-700">{row.ug}</td>
-                    <td className="py-3 px-4 text-center text-gray-700">{row.ms}</td>
-                    <td className="py-3 px-4 text-center text-gray-700">{row.phd}</td>
-                    <td className="py-3 px-4 text-gray-600 text-sm">{row.notes}</td>
+                    <td className="py-3 px-4 font-semibold text-slate-800">{row.school}</td>
+                    <td className="py-3 px-4 text-center text-slate-700">{row.ug}</td>
+                    <td className="py-3 px-4 text-center text-slate-700">{row.ms}</td>
+                    <td className="py-3 px-4 text-center text-slate-700">{row.phd}</td>
+                    <td className="py-3 px-4 text-slate-600 text-sm">{row.notes}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           <div className="mt-4 p-4 bg-yellow-50 rounded-lg">
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-slate-700">
               <strong>Important:</strong> These are minimum or typical GPAs. Competitive applicants often have higher GPAs. 
               Research experience, publications, and strong recommendation letters can offset lower GPAs for graduate admissions.
             </p>
@@ -1114,12 +1369,12 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
 
         {/* Industry GPA Requirements */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Industry Hiring GPA Thresholds</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Industry Hiring GPA Thresholds</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border-2 border-green-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">FAANG & Top Tech</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">FAANG & Top Tech</h3>
               <p className="text-3xl font-bold text-green-900 mb-2">3.5+</p>
-              <ul className="text-sm text-gray-700 space-y-1">
+              <ul className="text-sm text-slate-700 space-y-1">
                 <li>• Google, Meta, Amazon, Apple, Microsoft</li>
                 <li>• Strong technical GPA preferred</li>
                 <li>• Projects & internships matter more</li>
@@ -1128,9 +1383,9 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
             </div>
 
             <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border-2 border-blue-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Defense Contractors</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Defense Contractors</h3>
               <p className="text-3xl font-bold text-blue-900 mb-2">3.0+</p>
-              <ul className="text-sm text-gray-700 space-y-1">
+              <ul className="text-sm text-slate-700 space-y-1">
                 <li>• Lockheed Martin, Raytheon, Boeing</li>
                 <li>• Security clearance required</li>
                 <li>• 3.3+ for competitive positions</li>
@@ -1139,9 +1394,9 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
             </div>
 
             <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl border-2 border-purple-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Consulting (MBB)</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Consulting (MBB)</h3>
               <p className="text-3xl font-bold text-purple-900 mb-2">3.7+</p>
-              <ul className="text-sm text-gray-700 space-y-1">
+              <ul className="text-sm text-slate-700 space-y-1">
                 <li>• McKinsey, BCG, Bain</li>
                 <li>• Very competitive screening</li>
                 <li>• Engineering + MBA preferred</li>
@@ -1150,9 +1405,9 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
             </div>
 
             <div className="p-6 bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl border-2 border-teal-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Automotive</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Automotive</h3>
               <p className="text-3xl font-bold text-teal-900 mb-2">3.0+</p>
-              <ul className="text-sm text-gray-700 space-y-1">
+              <ul className="text-sm text-slate-700 space-y-1">
                 <li>• GM, Ford, Tesla, Toyota</li>
                 <li>• Mechanical/Electrical focus</li>
                 <li>• 3.2+ for engineering roles</li>
@@ -1161,9 +1416,9 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
             </div>
 
             <div className="p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl border-2 border-orange-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Energy & Oil</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Energy & Oil</h3>
               <p className="text-3xl font-bold text-orange-900 mb-2">3.0+</p>
-              <ul className="text-sm text-gray-700 space-y-1">
+              <ul className="text-sm text-slate-700 space-y-1">
                 <li>• Chevron, ExxonMobil, Shell</li>
                 <li>• Chemical/Petroleum emphasis</li>
                 <li>• Relocation often required</li>
@@ -1172,9 +1427,9 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
             </div>
 
             <div className="p-6 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl border-2 border-indigo-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Startups</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-3">Startups</h3>
               <p className="text-3xl font-bold text-indigo-900 mb-2">2.8+</p>
-              <ul className="text-sm text-gray-700 space-y-1">
+              <ul className="text-sm text-slate-700 space-y-1">
                 <li>• More flexible GPA requirements</li>
                 <li>• Skills & portfolio most important</li>
                 <li>• Fast-paced environment</li>
@@ -1184,17 +1439,59 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
           </div>
         </div>
 
+        {/* Use Cases Section */}
+        <div id="use-cases" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6">Who Uses This Engineering GPA Calculator?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border-2 border-blue-200 p-6 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-3">👨‍🎓</div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Current Engineering Students</h3>
+              <p className="text-slate-700">Track your GPA throughout your degree, plan course selections, and ensure you meet ABET requirements for graduation and accreditation.</p>
+            </div>
+
+            <div className="border-2 border-indigo-200 p-6 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-3">📋</div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Graduate School Applicants</h3>
+              <p className="text-slate-700">Calculate your last 60 credits GPA and technical GPA to determine eligibility for MS and PhD programs in engineering.</p>
+            </div>
+
+            <div className="border-2 border-purple-200 p-6 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-3">💼</div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Job Seekers & Interns</h3>
+              <p className="text-slate-700">Verify you meet GPA cutoffs for FAANG companies, defense contractors, consulting firms, and other competitive engineering employers.</p>
+            </div>
+
+            <div className="border-2 border-teal-200 p-6 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-3">👨‍🏫</div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Academic Advisors</h3>
+              <p className="text-slate-700">Help engineering students understand major vs technical GPA differences and provide data-driven course selection guidance.</p>
+            </div>
+
+            <div className="border-2 border-green-200 p-6 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-3">🔄</div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Transfer Students</h3>
+              <p className="text-slate-700">Calculate both institutional and overall GPA including transfer credits to understand how prior coursework impacts your academic standing.</p>
+            </div>
+
+            <div className="border-2 border-orange-200 p-6 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-3">🏢</div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Co-op Program Students</h3>
+              <p className="text-slate-700">Track academic GPA separately from co-op grades and see how internship work experience courses affect your transcript.</p>
+            </div>
+          </div>
+        </div>
+
         {/* How to Use Section */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">How to Use This Engineering GPA Calculator</h2>
+        <div id="how-to-use" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">How to Use This Engineering GPA Calculator</h2>
           <div className="space-y-6">
             <div className="flex gap-4">
               <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold">
                 1
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Select Your Engineering Discipline</h3>
-                <p className="text-gray-700">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">Select Your Engineering Discipline</h3>
+                <p className="text-slate-700">
                   Choose your engineering major from the dropdown (Mechanical, Electrical, Computer, Civil, etc.). 
                   This helps provide discipline-specific guidance and GPA benchmarks.
                 </p>
@@ -1206,8 +1503,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 2
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Enter Course Information</h3>
-                <p className="text-gray-700">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">Enter Course Information</h3>
+                <p className="text-slate-700">
                   For each course, input: (1) Course name (e.g., "Thermodynamics I"), (2) Credit hours (typically 3-4 for engineering courses), 
                   (3) Grade received (A+ to F, or P/NP for pass/fail), (4) Category (Engineering Core, Mathematics, etc.).
                 </p>
@@ -1219,8 +1516,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 3
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Categorize Courses Correctly</h3>
-                <p className="text-gray-700 mb-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">Categorize Courses Correctly</h3>
+                <p className="text-slate-700 mb-2">
                   <strong>Engineering Core:</strong> Major-specific courses (Thermodynamics, Circuits, Mechanics, etc.)<br />
                   <strong>Mathematics:</strong> Calculus, Differential Equations, Linear Algebra, Statistics<br />
                   <strong>Physical Sciences:</strong> Physics, Chemistry courses<br />
@@ -1236,8 +1533,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 4
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Mark Transfer Credits</h3>
-                <p className="text-gray-700">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">Mark Transfer Credits</h3>
+                <p className="text-slate-700">
                   Check the "Transfer" box for courses taken at another institution. Note: Transfer credits typically 
                   don't count in institutional GPA but do appear on transcripts and count toward overall GPA for graduate applications.
                 </p>
@@ -1249,8 +1546,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 5
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Calculate and Review</h3>
-                <p className="text-gray-700">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">Calculate and Review</h3>
+                <p className="text-slate-700">
                   Click "Calculate GPA" to see your five GPA types: Major GPA, Technical GPA, Non-Technical GPA, Cumulative GPA, 
                   and Last 60 Credits GPA. Review the competitiveness level and ABET credit distribution to track graduation requirements.
                 </p>
@@ -1261,8 +1558,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
 
         {/* About Section */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">About Engineering GPA Calculations</h2>
-          <div className="prose max-w-none text-gray-700 space-y-4">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">About Engineering GPA Calculations</h2>
+          <div className="prose max-w-none text-slate-700 space-y-4">
             <p>
               The <strong>Engineering GPA Calculator</strong> is specifically designed for engineering students to track multiple GPA types 
               that are critical for academic success, graduate school applications, and job opportunities. Unlike generic GPA calculators, 
@@ -1270,73 +1567,86 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
               employers, professional societies) evaluate GPAs differently.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">Why Multiple GPA Types Matter</h3>
+            <h3 className="text-xl font-bold text-slate-900 mt-6 mb-3">Why Multiple GPA Types Matter</h3>
             <p>
               <strong>Major GPA</strong> shows your performance in core engineering courses specific to your discipline. This is often 
               the most important metric for graduate schools and technical employers as it demonstrates competency in fundamental engineering concepts.
+              Similar to how <a href="/education-and-exam-tools/gpa-tools/college-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline">college GPA calculators</a> track 
+              overall performance, engineering students need specialized tracking for discipline-specific coursework.
             </p>
             <p>
               <strong>Technical GPA</strong> includes all STEM courses (engineering, mathematics, physical sciences, computer science) and 
               provides a broader view of your quantitative abilities. Many employers specifically request technical GPA on applications 
-              because it better reflects engineering aptitude than cumulative GPA.
+              because it better reflects engineering aptitude than <a href="/education-and-exam-tools/gpa-tools/cumulative-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline">cumulative GPA</a>, 
+              which includes non-technical electives that don't demonstrate engineering proficiency.
             </p>
             <p>
               <strong>Last 60 Credits GPA</strong> is crucial for graduate school applications as it shows recent academic performance and 
               upward trends. Graduate admissions committees often focus on this metric because upper-division courses are more relevant 
-              to graduate-level work than freshman/sophomore courses.
+              to graduate-level work than freshman/sophomore courses. This is similar to how professional schools evaluate applicants - for instance, 
+              <a href="/education-and-exam-tools/gpa-tools/veterinary-school-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline">veterinary school GPA calculators</a> track 
+              prerequisite science performance separately from overall GPA.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">ABET Accreditation Requirements</h3>
+            <h3 className="text-xl font-bold text-slate-900 mt-6 mb-3">ABET Accreditation Requirements</h3>
             <p>
               ABET (Accreditation Board for Engineering and Technology) sets minimum credit distribution standards for accredited engineering 
               programs in the United States. Our calculator tracks these requirements: minimum 32 semester credits in engineering topics, 
               48 credits in mathematics and basic sciences, and 32 credits in general education (humanities and social sciences). 
-              Understanding your progress toward these requirements helps ensure timely graduation.
+              Understanding your progress toward these requirements helps ensure timely graduation. Students can use our <a href="/education-and-exam-tools/gpa-tools/semester-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline">semester GPA calculator</a> to 
+              plan individual semester performance needed to meet overall targets.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">How Engineering Programs Calculate GPA</h3>
+            <h3 className="text-xl font-bold text-slate-900 mt-6 mb-3">How Engineering Programs Calculate GPA</h3>
             <p>
               Most engineering programs use a 4.0 scale where A = 4.0, B = 3.0, C = 2.0, D = 1.0, and F = 0.0. Plus/minus grading 
               adds 0.3 for plus grades and subtracts 0.3 for minus grades (except A+, which is typically capped at 4.0). Pass/Fail courses 
               count toward degree requirements but do NOT factor into GPA calculations - they add zero to both grade points and credit hours 
-              for GPA purposes.
+              for GPA purposes. If you're also taking Advanced Placement courses, you can use our <a href="/education-and-exam-tools/gpa-tools/weighted-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline">weighted GPA calculator</a> to 
+              understand how AP credits from high school may have impacted your college admission profile.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">Course Repetition Policies</h3>
+            <h3 className="text-xl font-bold text-slate-900 mt-6 mb-3">Course Repetition Policies</h3>
             <p>
               When you retake a course, GPA calculation varies by institution. Most schools use "grade replacement" (only highest grade counts) 
               but show all attempts on transcripts. Some schools average all attempts or use only the most recent grade. Graduate schools 
-              typically see all attempts and may recalculate GPA using their own policy. Always verify your specific school's repetition policy.
+              typically see all attempts and may recalculate GPA using their own policy - similar to how <a href="/education-and-exam-tools/gpa-tools/medical-school-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline">medical school GPA calculations</a> include 
+              all coursework attempts. Always verify your specific school's repetition policy and understand that professional programs may recalculate 
+              using different standards.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">Transfer Credit Considerations</h3>
+            <h3 className="text-xl font-bold text-slate-900 mt-6 mb-3">Transfer Credit Considerations</h3>
             <p>
               Transfer credits generally count toward degree requirements and ABET distribution but do NOT factor into your institutional GPA 
               (the GPA at your current school). However, they appear on your transcript with grades. For graduate school applications, 
               you should calculate an overall GPA including transfer courses. Some graduate programs recalculate applicant GPAs using all 
-              coursework from all institutions.
+              coursework from all institutions. Community college students planning to transfer should use both a <a href="/education-and-exam-tools/gpa-tools/community-college-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline">community college GPA calculator</a> and 
+              this engineering calculator to track both institutional and combined GPAs for accurate graduate school planning.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">Co-op and Internship Grades</h3>
+            <h3 className="text-xl font-bold text-slate-900 mt-6 mb-3">Co-op and Internship Grades</h3>
             <p>
               Many engineering programs require co-op (cooperative education) or internship experiences. These work terms are often graded 
               Pass/Fail and do not affect GPA. However, they provide crucial industry experience that employers value highly. Strong co-op 
-              performance can offset lower GPAs when applying for full-time positions.
+              performance can offset lower GPAs when applying for full-time positions. Engineering students should focus on maintaining 
+              at least a 3.0 GPA to remain eligible for competitive internships, while also building practical skills through projects and research.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">GPA and Career Success</h3>
+            <h3 className="text-xl font-bold text-slate-900 mt-6 mb-3">GPA and Career Success</h3>
             <p>
               While GPA is important for first internships and entry-level positions, it becomes less relevant with work experience. 
               After 2-3 years in industry, employers focus on projects, skills, and accomplishments rather than academic performance. 
               However, maintaining a competitive GPA (3.0+) opens doors to better opportunities early in your career and keeps graduate 
-              school options available.
+              school options available. Students considering professional programs beyond engineering (such as <a href="/education-and-exam-tools/gpa-tools/law-school-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline">law school</a> or 
+              <a href="/education-and-exam-tools/gpa-tools/nursing-school-gpa-calculator" className="text-blue-600 hover:text-blue-800 underline"> nursing school</a>) should track 
+              both technical and overall GPA to maximize their career flexibility.
             </p>
           </div>
         </div>
 
         {/* FAQs Section */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
             {[
               {
@@ -1377,8 +1687,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
               }
             ].map((faq, index) => (
               <div key={index} className="border-b border-gray-200 pb-6 last:border-b-0">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{faq.q}</h3>
-                <p className="text-gray-700 leading-relaxed">{faq.a}</p>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">{faq.q}</h3>
+                <p className="text-slate-700 leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -1386,7 +1696,7 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
 
         {/* Benefits Section */}
         <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Why Use Our Engineering GPA Calculator?</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Why Use Our Engineering GPA Calculator?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex gap-4">
               <div className="flex-shrink-0">
@@ -1397,8 +1707,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">Multiple GPA Types</h3>
-                <p className="text-gray-700 text-sm">Calculate Major, Technical, Non-Technical, Cumulative, and Last 60 Credits GPA all at once.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Multiple GPA Types</h3>
+                <p className="text-slate-700 text-sm">Calculate Major, Technical, Non-Technical, Cumulative, and Last 60 Credits GPA all at once.</p>
               </div>
             </div>
 
@@ -1411,8 +1721,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">ABET Compliance Tracking</h3>
-                <p className="text-gray-700 text-sm">Automatically tracks engineering core, math/science, and humanities credit distribution.</p>
+                <h3 className="font-bold text-slate-900 mb-2">ABET Compliance Tracking</h3>
+                <p className="text-slate-700 text-sm">Automatically tracks engineering core, math/science, and humanities credit distribution.</p>
               </div>
             </div>
 
@@ -1425,8 +1735,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">All Engineering Disciplines</h3>
-                <p className="text-gray-700 text-sm">Supports Mechanical, Electrical, Computer, Civil, Chemical, and all other engineering majors.</p>
+                <h3 className="font-bold text-slate-900 mb-2">All Engineering Disciplines</h3>
+                <p className="text-slate-700 text-sm">Supports Mechanical, Electrical, Computer, Civil, Chemical, and all other engineering majors.</p>
               </div>
             </div>
 
@@ -1439,8 +1749,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">Graduate School Readiness</h3>
-                <p className="text-gray-700 text-sm">Highlights Last 60 Credits GPA that graduate admissions committees prioritize.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Graduate School Readiness</h3>
+                <p className="text-slate-700 text-sm">Highlights Last 60 Credits GPA that graduate admissions committees prioritize.</p>
               </div>
             </div>
 
@@ -1453,8 +1763,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">Career Competitiveness</h3>
-                <p className="text-gray-700 text-sm">See if your GPA meets industry thresholds for FAANG, defense, consulting, and more.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Career Competitiveness</h3>
+                <p className="text-slate-700 text-sm">See if your GPA meets industry thresholds for FAANG, defense, consulting, and more.</p>
               </div>
             </div>
 
@@ -1467,8 +1777,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">100% Free & Private</h3>
-                <p className="text-gray-700 text-sm">No registration, no ads, no data collection. Your academic information stays on your device.</p>
+                <h3 className="font-bold text-slate-900 mb-2">100% Free & Private</h3>
+                <p className="text-slate-700 text-sm">No registration, no ads, no data collection. Your academic information stays on your device.</p>
               </div>
             </div>
 
@@ -1481,8 +1791,8 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">Transfer Credit Support</h3>
-                <p className="text-gray-700 text-sm">Mark transfer courses separately to see both institutional and overall GPA calculations.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Transfer Credit Support</h3>
+                <p className="text-slate-700 text-sm">Mark transfer courses separately to see both institutional and overall GPA calculations.</p>
               </div>
             </div>
 
@@ -1495,10 +1805,127 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
                 </div>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">Works Offline</h3>
-                <p className="text-gray-700 text-sm">PWA-enabled calculator that works without internet connection. All calculations done locally.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Works Offline</h3>
+                <p className="text-slate-700 text-sm">PWA-enabled calculator that works without internet connection. All calculations done locally.</p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* External Resources Section */}
+        <div id="resources" className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6">Helpful External Resources</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a
+              href="https://www.abet.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              <span className="text-2xl">🔗</span>
+              <div>
+                <div className="font-semibold text-slate-900">ABET Accreditation</div>
+                <div className="text-sm text-slate-600">Official engineering program accreditation body</div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.nspe.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              <span className="text-2xl">🔗</span>
+              <div>
+                <div className="font-semibold text-slate-900">NSPE</div>
+                <div className="text-sm text-slate-600">National Society of Professional Engineers</div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.asme.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              <span className="text-2xl">🔗</span>
+              <div>
+                <div className="font-semibold text-slate-900">ASME</div>
+                <div className="text-sm text-slate-600">American Society of Mechanical Engineers</div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.ieee.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              <span className="text-2xl">🔗</span>
+              <div>
+                <div className="font-semibold text-slate-900">IEEE</div>
+                <div className="text-sm text-slate-600">Institute of Electrical and Electronics Engineers</div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.aiche.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              <span className="text-2xl">🔗</span>
+              <div>
+                <div className="font-semibold text-slate-900">AIChE</div>
+                <div className="text-sm text-slate-600">American Institute of Chemical Engineers</div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.asce.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              <span className="text-2xl">🔗</span>
+              <div>
+                <div className="font-semibold text-slate-900">ASCE</div>
+                <div className="text-sm text-slate-600">American Society of Civil Engineers</div>
+              </div>
+            </a>
+
+            <a
+              href="https://gradschool.mit.edu/admissions/application-process/academic-requirements"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              <span className="text-2xl">🔗</span>
+              <div>
+                <div className="font-semibold text-slate-900">MIT Graduate Admissions</div>
+                <div className="text-sm text-slate-600">GPA requirements for top engineering programs</div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.petersons.com/graduate-schools/engineering-graduate-school-guide.aspx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              <span className="text-2xl">🔗</span>
+              <div>
+                <div className="font-semibold text-slate-900">Peterson's Engineering Guide</div>
+                <div className="text-sm text-slate-600">Graduate school search and requirements</div>
+              </div>
+            </a>
+          </div>
+
+          <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg">
+            <p className="text-sm text-slate-700">
+              <strong>💡 Tip:</strong> Join your discipline's professional society (ASME, IEEE, AIChE, etc.) for networking, 
+              career resources, and access to exclusive job postings. Student memberships are typically heavily discounted.
+            </p>
           </div>
         </div>
 
