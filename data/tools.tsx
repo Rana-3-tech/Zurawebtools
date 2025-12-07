@@ -438,6 +438,26 @@ const EngineeringGPAIcon = () => (
     </svg>
 );
 
+const GPARaiseIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="gpaRaiseIconTitle">
+        <title id="gpaRaiseIconTitle">GPA Raise Calculator Icon</title>
+        <defs>
+            <linearGradient id="toolGradGPARaise" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#10b981" />
+                <stop offset="50%" stopColor="#059669" />
+                <stop offset="100%" stopColor="#047857" />
+            </linearGradient>
+        </defs>
+        {/* Upward arrow/trend line */}
+        <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z" fill="url(#toolGradGPARaise)"/>
+        {/* Progress bars */}
+        <rect x="3" y="20" width="4" height="2" fill="url(#toolGradGPARaise)" opacity="0.4"/>
+        <rect x="8" y="18" width="4" height="4" fill="url(#toolGradGPARaise)" opacity="0.6"/>
+        <rect x="13" y="16" width="4" height="6" fill="url(#toolGradGPARaise)" opacity="0.8"/>
+        <rect x="18" y="14" width="4" height="8" fill="url(#toolGradGPARaise)"/>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -802,6 +822,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/engineering-gpa-calculator',
                         icon: <EngineeringGPAIcon />,
                         gradientColors: { from: '#1e40af', to: '#3b82f6' },
+                    },
+                    {
+                        title: 'GPA Raise Calculator',
+                        description: 'Free GPA improvement calculator. Calculate what grades you need to raise your GPA to target level. Get realistic scenarios, semester planning, and actionable steps for academic success.',
+                        link: 'education-and-exam-tools/gpa-tools/gpa-raise-calculator',
+                        icon: <GPARaiseIcon />,
+                        gradientColors: { from: '#10b981', to: '#059669' },
                     },
                 ]
             },
