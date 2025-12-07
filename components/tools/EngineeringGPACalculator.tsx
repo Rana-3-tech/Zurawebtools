@@ -652,19 +652,19 @@ const EngineeringGPACalculator: React.FC<EngineeringGPACalculatorProps> = ({ nav
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent mb-4">
             Engineering GPA Calculator
           </h1>
-          <p className="text-lg md:text-xl text-slate-700 max-w-4xl mx-auto">
+          <p className="text-lg md:text-xl text-slate-700 max-w-5xl mx-auto">
             Calculate your Major GPA, Technical GPA, Cumulative GPA, and Last 60 Credits GPA. 
             ABET-compliant with support for all engineering disciplines and graduate school requirements.
           </p>
           
           {/* Discipline Selector */}
-          <div className="mt-6 max-w-4xl mx-auto">
+          <div className="mt-6 max-w-5xl mx-auto">
             <label htmlFor="discipline" className="block text-sm font-medium text-slate-700 mb-2">
               Select Your Engineering Discipline
             </label>
