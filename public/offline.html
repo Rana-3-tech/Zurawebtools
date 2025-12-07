@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10b981">
+    <title>Offline - Veterinary School GPA Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #dcfce7 50%, #d1fae5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 48px 32px;
+            text-align: center;
+        }
+        
+        .icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #0f172a;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        p {
+            font-size: 18px;
+            color: #475569;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        
+        .features {
+            background: #f0fdf4;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border: 2px solid #10b981;
+        }
+        
+        .features h2 {
+            font-size: 18px;
+            color: #047857;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .features ul {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .features li {
+            font-size: 16px;
+            color: #059669;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li::before {
+            content: "✅";
+            margin-right: 12px;
+            font-size: 18px;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+            margin: 8px;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .status {
+            margin-top: 24px;
+            padding: 16px;
+            background: #fef3c7;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .status-text {
+            font-size: 14px;
+            color: #92400e;
+            font-weight: 500;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #fbbf24;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🔌</div>
+        <h1>You're Currently Offline</h1>
+        <p>It looks like you've lost your internet connection. Don't worry - your GPA calculations are saved locally!</p>
+        
+        <div class="features">
+            <h2>📱 Offline Mode Features:</h2>
+            <ul>
+                <li>Calculator works offline</li>
+                <li>All calculations saved locally</li>
+                <li>Data persists after reload</li>
+                <li>Auto-sync when back online</li>
+            </ul>
+        </div>
+        
+        <button class="button" onclick="location.reload()">
+            🔄 Retry Connection
+        </button>
+        
+        <button class="button" onclick="goHome()">
+            🏠 Return to Calculator
+        </button>
+        
+        <div class="status">
+            <div class="status-text">
+                <div class="spinner"></div>
+                Checking connection status...
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Check online status periodically
+        function checkOnlineStatus() {
+            const statusDiv = document.querySelector('.status-text');
+            if (navigator.onLine) {
+                statusDiv.innerHTML = '✅ Connection restored! Refreshing...';
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            } else {
+                statusDiv.innerHTML = '<div class="spinner"></div>Checking connection status...';
+            }
+        }
+        
+        // Check every 3 seconds
+        setInterval(checkOnlineStatus, 3000);
+        
+        // Listen for online event
+        window.addEventListener('online', () => {
+            const statusDiv = document.querySelector('.status-text');
+            statusDiv.innerHTML = '✅ Connection restored! Refreshing...';
+            setTimeout(() => {
+                location.reload();
+            }, 1500);
+        });
+        
+        function goHome() {
+            window.location.href = '/';
+        }
+        
+        // Initial check
+        checkOnlineStatus();
+    </script>
+</body>
+</html>

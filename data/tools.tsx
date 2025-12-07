@@ -399,6 +399,25 @@ const DentalSchoolGPAIcon = () => (
     </svg>
 );
 
+const VeterinarySchoolGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="veterinaryGPAIconTitle">
+        <title id="veterinaryGPAIconTitle">Veterinary School GPA Calculator Icon</title>
+        <defs>
+            <linearGradient id="toolGradVeterinaryGPA" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#10b981" />
+                <stop offset="50%" stopColor="#14b8a6" />
+                <stop offset="100%" stopColor="#06b6d4" />
+            </linearGradient>
+        </defs>
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="url(#toolGradVeterinaryGPA)" opacity="0.15"/>
+        <path d="M12 8c-1.1 0-2 .9-2 2v1c0 .55-.45 1-1 1s-1-.45-1-1V8.5C8 7.67 8.67 7 9.5 7S11 7.67 11 8.5V9c0-.55.45-1 1-1s1 .45 1 1v-.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11c0 .55-.45 1-1 1s-1-.45-1-1v-1c0-1.1-.9-2-2-2z" fill="url(#toolGradVeterinaryGPA)"/>
+        <circle cx="9" cy="10" r="1" fill="url(#toolGradVeterinaryGPA)"/>
+        <circle cx="15" cy="10" r="1" fill="url(#toolGradVeterinaryGPA)"/>
+        <path d="M12 14c-2 0-3.5 1-4 2h8c-.5-1-2-2-4-2z" fill="url(#toolGradVeterinaryGPA)" opacity="0.7"/>
+        <path d="M6 15c.5.5 1.5 1 2 1M18 15c-.5.5-1.5 1-2 1" stroke="url(#toolGradVeterinaryGPA)" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -749,6 +768,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/dental-school-gpa-calculator',
                         icon: <DentalSchoolGPAIcon />,
                         gradientColors: { from: '#06B6D4', to: '#3B82F6' },
+                    },
+                    {
+                        title: 'Veterinary School GPA Calculator',
+                        description: 'Free VMCAS veterinary school GPA calculator. Calculate science BCPM, non-science, cumulative, last 45 credits, and prerequisite GPA for veterinary medicine programs.',
+                        link: 'education-and-exam-tools/gpa-tools/veterinary-school-gpa-calculator',
+                        icon: <VeterinarySchoolGPAIcon />,
+                        gradientColors: { from: '#10b981', to: '#14b8a6' },
                     },
                 ]
             },
