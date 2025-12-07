@@ -418,6 +418,26 @@ const VeterinarySchoolGPAIcon = () => (
     </svg>
 );
 
+const EngineeringGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="engineeringGPAIconTitle">
+        <title id="engineeringGPAIconTitle">Engineering GPA Calculator Icon</title>
+        <defs>
+            <linearGradient id="toolGradEngineeringGPA" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#1e40af" />
+                <stop offset="50%" stopColor="#3b82f6" />
+                <stop offset="100%" stopColor="#60a5fa" />
+            </linearGradient>
+        </defs>
+        {/* Graduation cap */}
+        <path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L23 9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradEngineeringGPA)" opacity="0.2"/>
+        {/* Gear/cog symbol */}
+        <path d="M12 8C9.79 8 8 9.79 8 12C8 14.21 9.79 16 12 16C14.21 16 16 14.21 16 12C16 9.79 14.21 8 12 8ZM12 14C10.9 14 10 13.1 10 12C10 10.9 10.9 10 12 10C13.1 10 14 10.9 14 12C14 13.1 13.1 14 12 14Z" fill="url(#toolGradEngineeringGPA)"/>
+        {/* Engineering blueprint lines */}
+        <line x1="4" y1="19" x2="20" y2="19" stroke="url(#toolGradEngineeringGPA)" strokeWidth="0.5" strokeDasharray="2,1"/>
+        <line x1="4" y1="21" x2="20" y2="21" stroke="url(#toolGradEngineeringGPA)" strokeWidth="0.5" strokeDasharray="2,1"/>
+    </svg>
+);
+
 const RutgersGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rutgersGPAIconTitle">
         <title id="rutgersGPAIconTitle">Rutgers GPA Calculator Icon</title>
@@ -775,6 +795,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/gpa-tools/veterinary-school-gpa-calculator',
                         icon: <VeterinarySchoolGPAIcon />,
                         gradientColors: { from: '#10b981', to: '#14b8a6' },
+                    },
+                    {
+                        title: 'Engineering GPA Calculator',
+                        description: 'Free engineering GPA calculator for all disciplines. Calculate Major, Technical, Non-Technical, Cumulative, and Last 60 Credits GPA. ABET-compliant with graduate school readiness tracking.',
+                        link: 'education-and-exam-tools/gpa-tools/engineering-gpa-calculator',
+                        icon: <EngineeringGPAIcon />,
+                        gradientColors: { from: '#1e40af', to: '#3b82f6' },
                     },
                 ]
             },
