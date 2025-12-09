@@ -577,6 +577,19 @@ const ClassRankIcon = () => (
     </svg>
 );
 
+const CoalitionAppWordCounterIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="coalitionAppIconTitle">
+        <title id="coalitionAppIconTitle">Coalition App Word Counter Icon</title>
+        <defs><linearGradient id="toolGradCoalitionApp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#f97316" /><stop offset="50%" stopColor="#ea580c" /><stop offset="100%" stopColor="#dc2626" /></linearGradient></defs>
+        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="url(#toolGradCoalitionApp)" />
+        <path d="M14 2V8H20" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="11" cy="13" r="3.5" fill="white" />
+        <path d="M9 13L10.5 14.5L13.5 11.5" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="14" y="16" width="7" height="5" rx="1" fill="#10b981" />
+        <text x="17.5" y="19.5" fontSize="3.5" fill="white" textAnchor="middle" fontWeight="bold">650</text>
+    </svg>
+);
+
 const PersonalStatementCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="personalStatementIconTitle">
         <title id="personalStatementIconTitle">Personal Statement Character Counter Icon</title>
@@ -887,6 +900,13 @@ export const toolCategories: Category[] = [
                 slug: 'admission-tools',
                 title: 'Admission Tools',
                 tools: [
+                    {
+                        title: 'Coalition App Word Counter',
+                        description: 'Free Coalition App essay word counter 2026. Track 250-650 word limits with real-time character count for Coalition Application essays. Supports all essay types for 150+ member colleges.',
+                        link: 'education-and-exam-tools/admission-tools/coalition-app-word-counter',
+                        icon: <CoalitionAppWordCounterIcon />,
+                        gradientColors: { from: '#f97316', to: '#dc2626' },
+                    },
                     {
                         title: 'Class Rank Calculator',
                         description: 'Free class rank calculator 2026. Calculate your percentile, decile, and quartile ranking instantly. Determine scholarship eligibility and college competitiveness. Used by 10,000+ students monthly.',
