@@ -567,6 +567,16 @@ const CollegeAdmissionsCalculatorIcon = () => (
     </svg>
 );
 
+const ClassRankIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="classRankIconTitle">
+        <title id="classRankIconTitle">Class Rank Calculator Icon</title>
+        <defs><linearGradient id="toolGradClassRank" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#6366f1" /><stop offset="50%" stopColor="#8b5cf6" /><stop offset="100%" stopColor="#a855f7" /></linearGradient></defs>
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#toolGradClassRank)" />
+        <circle cx="12" cy="10.5" r="2.5" fill="white" />
+        <text x="12" y="11.8" fontSize="2.5" fill="#6366f1" textAnchor="middle" fontWeight="bold">1</text>
+    </svg>
+);
+
 const PersonalStatementCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="personalStatementIconTitle">
         <title id="personalStatementIconTitle">Personal Statement Character Counter Icon</title>
@@ -877,6 +887,13 @@ export const toolCategories: Category[] = [
                 slug: 'admission-tools',
                 title: 'Admission Tools',
                 tools: [
+                    {
+                        title: 'Class Rank Calculator',
+                        description: 'Free class rank calculator 2026. Calculate your percentile, decile, and quartile ranking instantly. Determine scholarship eligibility and college competitiveness. Used by 10,000+ students monthly.',
+                        link: 'education-and-exam-tools/admission-tools/class-rank-calculator',
+                        icon: <ClassRankIcon />,
+                        gradientColors: { from: '#6366f1', to: '#a855f7' },
+                    },
                     {
                         title: 'Personal Statement Character Counter',
                         description: 'Free character counter for UCAS personal statements and college applications. Track 4000-character limit, word count, line count instantly for UK university applications.',

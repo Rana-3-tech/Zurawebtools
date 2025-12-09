@@ -46,6 +46,7 @@ const CommonAppEssayWordCounter = lazy(() => import('./components/tools/CommonAp
 const UCASPointsCalculator = lazy(() => import('./components/tools/UCASPointsCalculator'));
 const StudentVisaFeeCalculatorAustralia = lazy(() => import('./components/tools/StudentVisaFeeCalculatorAustralia'));
 const CollegeAdmissionsCalculator = lazy(() => import('./components/tools/CollegeAdmissionsCalculator'));
+const ClassRankCalculator = lazy(() => import('./components/tools/ClassRankCalculator'));
 const GREScoreCalculator = lazy(() => import('./components/tools/GREScoreCalculator'));
 const ALevelScoreCalculator = lazy(() => import('./components/tools/ALevelScoreCalculator'));
 const APCalculusScoreCalculator = lazy(() => import('./components/tools/APCalculusScoreCalculator'));
@@ -202,6 +203,8 @@ const App: React.FC = () => {
             'tools/student-visa-fee-calculator-australia': '/education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia',
             'college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
             'tools/college-admissions-calculator': '/education-and-exam-tools/admission-tools/college-admissions-calculator',
+            'class-rank-calculator': '/education-and-exam-tools/admission-tools/class-rank-calculator',
+            'tools/class-rank-calculator': '/education-and-exam-tools/admission-tools/class-rank-calculator',
         };
 
         // Check if this is an old flat URL and redirect
@@ -292,6 +295,7 @@ const App: React.FC = () => {
             'ucas-points-calculator': UCASPointsCalculator,
             'student-visa-fee-calculator-australia': StudentVisaFeeCalculatorAustralia,
             'college-admissions-calculator': CollegeAdmissionsCalculator,
+            'class-rank-calculator': ClassRankCalculator,
             'gre-score-calculator': GREScoreCalculator,
             'a-level-score-calculator': ALevelScoreCalculator,
             'ap-calculus-score-calculator': APCalculusScoreCalculator,
