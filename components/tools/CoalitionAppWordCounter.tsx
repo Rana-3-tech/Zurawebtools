@@ -486,7 +486,7 @@ My grandmother's recipe box taught me that innovation often comes from necessity
         
         {/* Header */}
         <header className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
             Coalition App Word Counter
           </h1>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
