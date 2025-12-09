@@ -25,16 +25,18 @@ jobs:
     - name: Build project
       run: npm run build
     
-    - name: Setup SSH key
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.VPS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.VPS_PRIVATE_KEY }}
+        known_hosts: 'placeholder'
+        
+    - name: Adding Known Hosts
+      run: ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
     
     - name: Deploy via rsync
       run: |
-        rsync -avz --delete --timeout=60 ./dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/Zurawebtools/dist/
+        rsync -avz --delete --timeout=60 -e "ssh -o StrictHostKeyChecking=no" ./dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/Zurawebtools/dist/
         echo "✅ Deployment completed successfully!"
         echo "🌐 Website is live at: http://${{ secrets.VPS_HOST }}"
       timeout-minutes: 10
