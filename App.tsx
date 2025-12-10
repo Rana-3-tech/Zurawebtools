@@ -45,6 +45,7 @@ const PersonalStatementCharacterCounter = lazy(() => import('./components/tools/
 const CommonAppEssayWordCounter = lazy(() => import('./components/tools/CommonAppEssayWordCounter'));
 const CoalitionAppWordCounter = lazy(() => import('./components/tools/CoalitionAppWordCounter'));
 const CollegeApplicationFeeCalculator = lazy(() => import('./components/tools/CollegeApplicationFeeCalculator'));
+const CollegeEssayLengthCalculator = lazy(() => import('./components/tools/CollegeEssayLengthCalculator'));
 const UCASPointsCalculator = lazy(() => import('./components/tools/UCASPointsCalculator'));
 const StudentVisaFeeCalculatorAustralia = lazy(() => import('./components/tools/StudentVisaFeeCalculatorAustralia'));
 const CollegeAdmissionsCalculator = lazy(() => import('./components/tools/CollegeAdmissionsCalculator'));
@@ -300,6 +301,7 @@ const App: React.FC = () => {
             'common-app-essay-word-counter': CommonAppEssayWordCounter,
             'coalition-app-word-counter': CoalitionAppWordCounter,
             'college-application-fee-calculator': CollegeApplicationFeeCalculator,
+            'college-essay-length-calculator': CollegeEssayLengthCalculator,
             'ucas-points-calculator': UCASPointsCalculator,
             'student-visa-fee-calculator-australia': StudentVisaFeeCalculatorAustralia,
             'college-admissions-calculator': CollegeAdmissionsCalculator,

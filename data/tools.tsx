@@ -602,6 +602,20 @@ const CollegeApplicationFeeCalculatorIcon = () => (
     </svg>
 );
 
+const CollegeEssayLengthCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="essayLengthCalcIconTitle">
+        <title id="essayLengthCalcIconTitle">College Essay Length Calculator Icon</title>
+        <defs><linearGradient id="toolGradEssayLength" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#8b5cf6" /><stop offset="50%" stopColor="#ec4899" /><stop offset="100%" stopColor="#f97316" /></linearGradient></defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" fill="url(#toolGradEssayLength)" opacity="0.2" />
+        <path d="M9 7H15M9 11H15M9 15H13" stroke="url(#toolGradEssayLength)" strokeWidth="2" strokeLinecap="round" />
+        <rect x="16" y="14" width="5" height="7" rx="1" fill="url(#toolGradEssayLength)" />
+        <text x="18.5" y="18" fontSize="3" fill="white" textAnchor="middle" fontWeight="bold">650</text>
+        <circle cx="6" cy="7" r="1" fill="#8b5cf6" />
+        <circle cx="6" cy="11" r="1" fill="#ec4899" />
+        <circle cx="6" cy="15" r="1" fill="#f97316" />
+    </svg>
+);
+
 const PersonalStatementCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="personalStatementIconTitle">
         <title id="personalStatementIconTitle">Personal Statement Character Counter Icon</title>
@@ -918,6 +932,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/admission-tools/college-application-fee-calculator',
                         icon: <CollegeApplicationFeeCalculatorIcon />,
                         gradientColors: { from: '#2563eb', to: '#06b6d4' },
+                    },
+                    {
+                        title: 'College Essay Length Calculator',
+                        description: 'Free college essay length calculator 2026. Track word & character limits for Common App (650 words), Coalition (250-650), UC PIQs (350 words), ApplyTexas, UCAS (4000 chars). Compare all platform requirements instantly.',
+                        link: 'education-and-exam-tools/admission-tools/college-essay-length-calculator',
+                        icon: <CollegeEssayLengthCalculatorIcon />,
+                        gradientColors: { from: '#8b5cf6', to: '#f97316' },
                     },
                     {
                         title: 'Coalition App Word Counter',
