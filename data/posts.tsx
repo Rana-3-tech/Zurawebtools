@@ -1130,4 +1130,411 @@ export const posts: Post[] = [
             </>
         ),
     },
+    {
+        slug: 'blog/education-guides/good-gpa-college-admissions-2026',
+        title: 'What is a Good GPA for College Admissions? Complete 2026 Guide',
+        excerpt: 'Discover what GPA you need for college admissions in 2026. Learn average GPAs for Ivy League schools (3.9-4.0), top 50 universities (3.5-3.9), and state schools (3.0-3.5), plus proven strategies to improve your GPA and boost your admissions chances.',
+        author: 'Emily Parker',
+        date: 'December 10, 2025',
+        lastUpdated: 'December 10, 2025',
+        category: 'Education Guides',
+        imageUrl: 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1200',
+        content: (
+            <>
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    Your GPA (Grade Point Average) is one of the most critical factors in college admissions decisions. <strong>For competitive colleges in 2026, a good GPA typically ranges from 3.5-4.0 on a 4.0 scale</strong>, but what's considered "good" varies significantly depending on your target schools, intended major, and overall application profile. Understanding GPA benchmarks can help you set realistic goals and create a strategic plan for strengthening your college applications.
+                </p>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    With over <strong>14,500 students searching monthly for "good gpa for college"</strong>, it's clear that understanding GPA requirements is crucial for college-bound students. This comprehensive guide breaks down average GPAs by school tier, explains weighted vs unweighted calculations, provides major-specific requirements, and offers actionable strategies to improve your GPA before application deadlines. Whether you're targeting Ivy League schools or state universities, you'll learn exactly what GPA you need and how to get there.
+                </p>
+
+                <div className="mt-6 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
+                    <p className="font-bold text-blue-900 text-lg mb-3">⚡ Quick Navigation:</p>
+                    <ul className="mt-2 space-y-2 text-gray-900">
+                        <li><a href="#what-is-good-gpa" className="text-blue-700 hover:text-blue-900 underline font-medium">• What is Considered a Good GPA?</a></li>
+                        <li><a href="#gpa-by-school-tier" className="text-blue-700 hover:text-blue-900 underline font-medium">• GPA Requirements by School Tier</a></li>
+                        <li><a href="#weighted-vs-unweighted" className="text-blue-700 hover:text-blue-900 underline font-medium">• Weighted vs Unweighted GPA</a></li>
+                        <li><a href="#gpa-by-major" className="text-blue-700 hover:text-blue-900 underline font-medium">• Average GPA by Major</a></li>
+                        <li><a href="#improve-gpa" className="text-blue-700 hover:text-blue-900 underline font-medium">• How to Improve Your GPA</a></li>
+                        <li><a href="#gpa-vs-test-scores" className="text-blue-700 hover:text-blue-900 underline font-medium">• GPA vs Test Scores: What Matters More?</a></li>
+                        <li><a href="#faqs" className="text-blue-700 hover:text-blue-900 underline font-medium">• Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="what-is-good-gpa" className="text-3xl font-bold text-gray-900 mt-12 mb-6 border-b-4 border-purple-500 pb-2">
+                    What is Considered a Good GPA for College?
+                </h2>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    A "good" GPA depends entirely on your college aspirations. Here's the general breakdown for 2026 admissions:
+                </p>
+
+                <div className="my-6 bg-gradient-to-r from-purple-50 to-blue-50 border-l-4 border-purple-500 p-6 rounded-lg shadow-md">
+                    <h3 className="text-2xl font-bold text-purple-900 mb-4">📊 GPA Benchmarks by College Selectivity</h3>
+                    <ul className="space-y-3 text-gray-900">
+                        <li><strong className="text-purple-700">Ivy League & Top 10 Schools:</strong> 3.9-4.0 unweighted (nearly perfect grades required)</li>
+                        <li><strong className="text-purple-700">Top 50 National Universities:</strong> 3.5-3.9 unweighted (mostly A's with some B's)</li>
+                        <li><strong className="text-purple-700">Top 100 Schools:</strong> 3.2-3.7 unweighted (solid B+ to A- average)</li>
+                        <li><strong className="text-purple-700">State Universities:</strong> 3.0-3.5 unweighted (B average or higher)</li>
+                        <li><strong className="text-purple-700">Community Colleges:</strong> 2.0-3.0 unweighted (open admission, but higher GPA = more opportunities)</li>
+                    </ul>
+                </div>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    According to the <strong>National Association for College Admission Counseling (NACAC)</strong>, the average high school GPA for college-bound students is <strong>3.38 on a 4.0 scale</strong>. However, this average includes all college applicants, from community colleges to Ivy League schools. Use our <a href="/education-and-exam-tools/admission-tools/college-admissions-calculator" className="text-blue-600 hover:underline font-medium">College Admissions Calculator</a> to see how your GPA compares to accepted students at your target schools.
+                </p>
+
+                <h2 id="gpa-by-school-tier" className="text-3xl font-bold text-gray-900 mt-12 mb-6 border-b-4 border-purple-500 pb-2">
+                    GPA Requirements by School Tier (2026 Data)
+                </h2>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    Let's break down specific GPA requirements for different tiers of colleges. These numbers reflect <strong>middle 50% ranges for admitted students</strong> (25th to 75th percentile):
+                </p>
+
+                <div className="overflow-x-auto my-8">
+                    <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow">
+                        <thead className="bg-gradient-to-r from-purple-600 to-purple-500 text-white">
+                            <tr>
+                                <th className="px-6 py-4 text-left font-semibold">School Tier</th>
+                                <th className="px-6 py-4 text-left font-semibold">Unweighted GPA Range</th>
+                                <th className="px-6 py-4 text-left font-semibold">Weighted GPA Range</th>
+                                <th className="px-6 py-4 text-left font-semibold">Example Schools</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Ivy League</td>
+                                <td className="px-6 py-4 text-gray-800">3.9 - 4.0</td>
+                                <td className="px-6 py-4 text-gray-800">4.3 - 4.6</td>
+                                <td className="px-6 py-4 text-gray-700">Harvard, Yale, Princeton, Columbia</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Elite Private (Top 20)</td>
+                                <td className="px-6 py-4 text-gray-800">3.8 - 4.0</td>
+                                <td className="px-6 py-4 text-gray-800">4.2 - 4.5</td>
+                                <td className="px-6 py-4 text-gray-700">Stanford, MIT, Duke, Northwestern</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Top 50 National</td>
+                                <td className="px-6 py-4 text-gray-800">3.5 - 3.9</td>
+                                <td className="px-6 py-4 text-gray-800">3.9 - 4.3</td>
+                                <td className="px-6 py-4 text-gray-700">UC Berkeley, UMich, UVA, NYU</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Top 100 National</td>
+                                <td className="px-6 py-4 text-gray-800">3.2 - 3.7</td>
+                                <td className="px-6 py-4 text-gray-800">3.6 - 4.1</td>
+                                <td className="px-6 py-4 text-gray-700">Penn State, UMass, ASU, Rutgers</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">State Universities</td>
+                                <td className="px-6 py-4 text-gray-800">3.0 - 3.5</td>
+                                <td className="px-6 py-4 text-gray-800">3.3 - 3.9</td>
+                                <td className="px-6 py-4 text-gray-700">Regional state schools, flagship branches</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Community Colleges</td>
+                                <td className="px-6 py-4 text-gray-800">2.0 - 3.0</td>
+                                <td className="px-6 py-4 text-gray-800">2.0 - 3.5</td>
+                                <td className="px-6 py-4 text-gray-700">Open admission (high GPA = scholarships)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="my-6 bg-gradient-to-r from-green-50 to-teal-50 border-l-4 border-green-500 p-6 rounded-lg shadow-md">
+                    <h3 className="text-xl font-bold text-green-900 mb-3">💡 Pro Tip: Context Matters!</h3>
+                    <p className="text-gray-800 leading-relaxed">
+                        A 3.7 GPA from a competitive high school with 10 AP classes is often viewed more favorably than a 4.0 from a school with limited advanced courses. Admissions officers evaluate your GPA in the <strong>context of your school's rigor and available opportunities</strong>. Use our <a href="/education-and-exam-tools/gpa-calculator" className="text-blue-600 hover:underline font-medium">College GPA Calculator</a> to track your grades and see how course rigor affects your weighted GPA.
+                    </p>
+                </div>
+
+                <h2 id="weighted-vs-unweighted" className="text-3xl font-bold text-gray-900 mt-12 mb-6 border-b-4 border-purple-500 pb-2">
+                    Weighted vs Unweighted GPA: Which One Matters?
+                </h2>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    Understanding the difference between weighted and unweighted GPAs is crucial for interpreting college GPA requirements:
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-6 my-8">
+                    <div className="bg-white border-2 border-blue-200 rounded-lg p-6 shadow-md">
+                        <h3 className="text-2xl font-bold text-blue-700 mb-4">📘 Unweighted GPA (0-4.0 Scale)</h3>
+                        <ul className="space-y-2 text-gray-800">
+                            <li><strong>A = 4.0</strong></li>
+                            <li><strong>B = 3.0</strong></li>
+                            <li><strong>C = 2.0</strong></li>
+                            <li><strong>D = 1.0</strong></li>
+                            <li><strong>F = 0.0</strong></li>
+                        </ul>
+                        <p className="mt-4 text-gray-700 leading-relaxed">
+                            <strong>No extra credit</strong> for honors, AP, or IB courses. All A's are equal regardless of course difficulty.
+                        </p>
+                    </div>
+
+                    <div className="bg-white border-2 border-purple-200 rounded-lg p-6 shadow-md">
+                        <h3 className="text-2xl font-bold text-purple-700 mb-4">📗 Weighted GPA (0-5.0+ Scale)</h3>
+                        <ul className="space-y-2 text-gray-800">
+                            <li><strong>Honors A = 4.5</strong></li>
+                            <li><strong>AP/IB A = 5.0</strong></li>
+                            <li><strong>Regular A = 4.0</strong></li>
+                            <li><strong>AP B = 4.0</strong></li>
+                        </ul>
+                        <p className="mt-4 text-gray-700 leading-relaxed">
+                            <strong>Extra points</strong> for advanced coursework. Rewards students who challenge themselves with rigorous classes.
+                        </p>
+                    </div>
+                </div>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    <strong>Most selective colleges recalculate your GPA</strong> using their own formula, often focusing on core academic subjects (English, Math, Science, Social Studies, Foreign Language) and giving extra weight to AP/IB courses. Some schools report both weighted and unweighted GPAs, while others only report unweighted. Our <a href="/education-and-exam-tools/weighted-gpa-calculator" className="text-blue-600 hover:underline font-medium">Weighted GPA Calculator</a> helps you understand both calculations.
+                </p>
+
+                <h2 id="gpa-by-major" className="text-3xl font-bold text-gray-900 mt-12 mb-6 border-b-4 border-purple-500 pb-2">
+                    Average GPA by Intended Major
+                </h2>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    Your intended major can significantly impact GPA expectations. Competitive programs often require higher GPAs than the school's general admission average:
+                </p>
+
+                <div className="overflow-x-auto my-8">
+                    <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow">
+                        <thead className="bg-gradient-to-r from-purple-600 to-purple-500 text-white">
+                            <tr>
+                                <th className="px-6 py-4 text-left font-semibold">Major Category</th>
+                                <th className="px-6 py-4 text-left font-semibold">Typical GPA Requirement</th>
+                                <th className="px-6 py-4 text-left font-semibold">Key Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Engineering</td>
+                                <td className="px-6 py-4 text-gray-800">3.7 - 4.0</td>
+                                <td className="px-6 py-4 text-gray-700">Strong math/science grades critical</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Computer Science</td>
+                                <td className="px-6 py-4 text-gray-800">3.6 - 4.0</td>
+                                <td className="px-6 py-4 text-gray-700">Math performance heavily weighted</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Nursing/Pre-Med</td>
+                                <td className="px-6 py-4 text-gray-800">3.7 - 4.0</td>
+                                <td className="px-6 py-4 text-gray-700">Biology/chemistry grades essential</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Business</td>
+                                <td className="px-6 py-4 text-gray-800">3.5 - 3.9</td>
+                                <td className="px-6 py-4 text-gray-700">Leadership/extracurriculars also important</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Liberal Arts/Humanities</td>
+                                <td className="px-6 py-4 text-gray-800">3.4 - 3.8</td>
+                                <td className="px-6 py-4 text-gray-700">Writing ability, essays carry more weight</td>
+                            </tr>
+                            <tr className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-gray-900">Fine Arts/Music</td>
+                                <td className="px-6 py-4 text-gray-800">3.0 - 3.7</td>
+                                <td className="px-6 py-4 text-gray-700">Portfolio/audition often most important</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="my-6 bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500 p-6 rounded-lg shadow-md">
+                    <h3 className="text-xl font-bold text-yellow-900 mb-3">⚠️ Important Note for STEM Majors</h3>
+                    <p className="text-gray-800 leading-relaxed">
+                        If you're applying to <strong>Engineering, Computer Science, or Pre-Med programs</strong>, admissions officers pay special attention to your math and science GPAs. A student with a 3.6 overall GPA but 4.0 in all STEM courses may be more competitive than someone with a 3.8 overall but 3.5 in sciences. Calculate your STEM-specific GPA using our <a href="/education-and-exam-tools/high-school-gpa-calculator" className="text-blue-600 hover:underline font-medium">High School GPA Calculator</a>.
+                    </p>
+                </div>
+
+                <h2 id="improve-gpa" className="text-3xl font-bold text-gray-900 mt-12 mb-6 border-b-4 border-purple-500 pb-2">
+                    How to Improve Your GPA for College Admissions
+                </h2>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    If your GPA is below your target school's average, don't panic. Here are proven strategies to boost your GPA before application deadlines:
+                </p>
+
+                <div className="space-y-6 my-8">
+                    <div className="bg-white border-l-4 border-blue-500 p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl font-bold text-blue-900 mb-3">📚 1. Focus on Core Academic Subjects</h3>
+                        <p className="text-gray-800 leading-relaxed mb-3">
+                            Colleges weigh <strong>English, Math, Science, Social Studies, and Foreign Language</strong> more heavily than electives. Prioritize studying for these classes:
+                        </p>
+                        <ul className="space-y-2 text-gray-800 ml-6 list-disc">
+                            <li>Dedicate 2-3 hours daily to homework and test prep in core subjects</li>
+                            <li>Attend office hours or tutoring sessions for challenging courses</li>
+                            <li>Complete all extra credit opportunities in these classes</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-white border-l-4 border-purple-500 p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl font-bold text-purple-900 mb-3">📈 2. Take Challenging Courses (But Be Strategic)</h3>
+                        <p className="text-gray-800 leading-relaxed mb-3">
+                            A <strong>B+ in an AP course often looks better than an A in a regular course</strong>. However, don't overload yourself:
+                        </p>
+                        <ul className="space-y-2 text-gray-800 ml-6 list-disc">
+                            <li><strong>Sophomore year:</strong> 1-2 AP/Honors courses</li>
+                            <li><strong>Junior year:</strong> 3-4 AP/Honors courses (critical year for GPA)</li>
+                            <li><strong>Senior year:</strong> 4-5 AP courses (maintain momentum, avoid senioritis)</li>
+                            <li>Balance rigor with grades—a 3.9 with moderate rigor beats a 3.5 with excessive APs</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-white border-l-4 border-green-500 p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl font-bold text-green-900 mb-3">⏰ 3. Time Management & Study Techniques</h3>
+                        <p className="text-gray-800 leading-relaxed mb-3">
+                            Efficiency matters as much as effort. Implement these proven study strategies:
+                        </p>
+                        <ul className="space-y-2 text-gray-800 ml-6 list-disc">
+                            <li><strong>Active recall:</strong> Test yourself instead of re-reading notes (proven 50% more effective)</li>
+                            <li><strong>Spaced repetition:</strong> Study material over multiple days, not cramming</li>
+                            <li><strong>Pomodoro Technique:</strong> 25-minute focused study sessions with 5-minute breaks</li>
+                            <li><strong>Study groups:</strong> Teach concepts to peers (best retention method)</li>
+                            <li>Use digital tools like Quizlet, Anki, or Khan Academy for practice</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-white border-l-4 border-red-500 p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl font-bold text-red-900 mb-3">🎯 4. Strategic GPA Recovery Plan</h3>
+                        <p className="text-gray-800 leading-relaxed mb-3">
+                            If you had a weak freshman or sophomore year, create a <strong>documented upward trend</strong>:
+                        </p>
+                        <ul className="space-y-2 text-gray-800 ml-6 list-disc">
+                            <li><strong>Junior year is most important</strong>—aim for 3.8+ this year to show improvement</li>
+                            <li>Retake classes you failed or got C's in (if your school allows grade replacement)</li>
+                            <li>Take summer courses at community colleges to boost GPA and show academic commitment</li>
+                            <li>Address GPA issues in your personal statement (briefly, focusing on growth and lessons learned)</li>
+                        </ul>
+                        <p className="text-gray-800 leading-relaxed mt-3">
+                            Use our <a href="/education-and-exam-tools/gpa-raise-calculator" className="text-blue-600 hover:underline font-medium">GPA Raise Calculator</a> to see exactly what grades you need to reach your target GPA.
+                        </p>
+                    </div>
+
+                    <div className="bg-white border-l-4 border-yellow-500 p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl font-bold text-yellow-900 mb-3">💬 5. Build Relationships with Teachers</h3>
+                        <p className="text-gray-800 leading-relaxed mb-3">
+                            Strong teacher relationships lead to better grades AND better recommendation letters:
+                        </p>
+                        <ul className="space-y-2 text-gray-800 ml-6 list-disc">
+                            <li>Participate actively in class discussions (even if it's uncomfortable at first)</li>
+                            <li>Ask thoughtful questions during lectures</li>
+                            <li>Visit teachers during office hours—even when you don't need help</li>
+                            <li>Request feedback on assignments before final submission</li>
+                            <li>Teachers are more likely to round up borderline grades (89.4% → A) for engaged students</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 id="gpa-vs-test-scores" className="text-3xl font-bold text-gray-900 mt-12 mb-6 border-b-4 border-purple-500 pb-2">
+                    GPA vs Test Scores: What Matters More in 2026?
+                </h2>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    With many colleges adopting <strong>test-optional policies</strong>, the importance of GPA has increased dramatically. Here's what admissions officers prioritize:
+                </p>
+
+                <div className="my-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 p-6 rounded-lg shadow-md">
+                    <h3 className="text-2xl font-bold text-blue-900 mb-4">🏆 Admissions Criteria Ranked by Importance (2026 Data)</h3>
+                    <ol className="space-y-3 text-gray-900 list-decimal ml-6">
+                        <li><strong className="text-blue-700">GPA in Core Academic Courses (Most Important):</strong> 4-year trend matters more than single year</li>
+                        <li><strong className="text-blue-700">Rigor of Curriculum:</strong> Number and difficulty of AP/IB/Honors courses</li>
+                        <li><strong className="text-blue-700">Standardized Test Scores:</strong> SAT/ACT (still important for merit scholarships, even if test-optional)</li>
+                        <li><strong className="text-blue-700">Extracurricular Activities:</strong> Depth over breadth—leadership and impact matter</li>
+                        <li><strong className="text-blue-700">Essays & Personal Statement:</strong> Differentiation and authentic voice</li>
+                        <li><strong className="text-blue-700">Letters of Recommendation:</strong> Quality over quantity (2-3 strong letters)</li>
+                    </ol>
+                </div>
+
+                <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                    <strong>Bottom line:</strong> A 3.9 GPA with rigorous coursework is generally more valuable than a 3.6 GPA with perfect SAT/ACT scores. However, <strong>high test scores can offset a slightly lower GPA</strong>, especially at test-flexible schools. Use our <a href="/education-and-exam-tools/sat-score-calculator" className="text-blue-600 hover:underline font-medium">SAT Score Calculator</a> and <a href="/education-and-exam-tools/act-score-calculator" className="text-blue-600 hover:underline font-medium">ACT Score Calculator</a> to see how your test scores complement your GPA.
+                </p>
+
+                <div className="my-6 bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-purple-500 p-6 rounded-lg shadow-md">
+                    <h3 className="text-xl font-bold text-purple-900 mb-3">💡 Holistic Admissions Reality Check</h3>
+                    <p className="text-gray-800 leading-relaxed">
+                        While GPA is the single most important factor, <strong>no number alone guarantees admission</strong>. Top schools practice "holistic admissions," meaning they evaluate your entire profile: academic performance, extracurriculars, essays, recommendations, demonstrated interest, and personal background. A 4.0 student with no extracurriculars may be rejected in favor of a 3.7 student who founded a nonprofit. Balance is key.
+                    </p>
+                </div>
+
+                <h2 id="faqs" className="text-3xl font-bold text-gray-900 mt-12 mb-6 border-b-4 border-purple-500 pb-2">
+                    Frequently Asked Questions About GPA for College Admissions
+                </h2>
+
+                <div className="space-y-6 my-8">
+                    <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-md">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">❓ Is a 3.5 GPA good enough for Ivy League schools?</h3>
+                        <p className="text-gray-800 leading-relaxed">
+                            A 3.5 unweighted GPA is <strong>below average for Ivy League schools</strong>, where the middle 50% typically ranges from 3.9-4.0. However, it's not impossible if you have: (1) exceptional test scores (1550+ SAT or 35+ ACT), (2) world-class extracurriculars (national/international recognition), (3) compelling personal story or unique background (first-generation, overcoming adversity), or (4) recruited athlete status. Most admitted students with sub-3.8 GPAs have at least 2-3 of these factors. Consider applying to Top 50 schools where a 3.5 GPA is more competitive.
+                        </p>
+                    </div>
+
+                    <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-md">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">❓ What GPA do I need for a full-ride scholarship?</h3>
+                        <p className="text-gray-800 leading-relaxed">
+                            <strong>Full-ride academic scholarships</strong> typically require: (1) <strong>3.8-4.0 unweighted GPA</strong>, (2) 1400+ SAT or 32+ ACT, (3) strong class rank (top 5-10%), and (4) demonstrated leadership. State universities often offer full rides to top students with 3.9+ GPAs and 1500+ SAT scores. Private schools may have different criteria. Use our <a href="/education-and-exam-tools/admission-tools/college-application-fee-calculator" className="text-blue-600 hover:underline font-medium">College Application Fee Calculator</a> to estimate total application costs across multiple schools while hunting for scholarship opportunities.
+                        </p>
+                    </div>
+
+                    <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-md">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">❓ Can I get into a good college with a 3.0 GPA?</h3>
+                        <p className="text-gray-800 leading-relaxed">
+                            <strong>Yes!</strong> A 3.0 GPA (B average) is competitive for many excellent schools: (1) <strong>State universities</strong> (flagship schools often have 3.0-3.3 average GPAs), (2) <strong>Top 100-200 national universities</strong> (schools like Arizona State, Oregon State, Temple), (3) <strong>Strong regional colleges</strong>, and (4) <strong>Community colleges</strong> (transfer pathway to top schools after 2 years with strong college GPA). Focus on schools where your GPA falls within the middle 50% of admitted students. A 3.0 GPA with excellent essays, test scores, and extracurriculars can still earn admission to solid programs.
+                        </p>
+                    </div>
+
+                    <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-md">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">❓ Do colleges look at all four years of high school?</h3>
+                        <p className="text-gray-800 leading-relaxed">
+                            <strong>Yes, colleges see all four years</strong>, but they weigh them differently: (1) <strong>Freshman year (15-20% weight):</strong> Establishes baseline, some colleges exclude it from GPA calculation, (2) <strong>Sophomore year (20-25% weight):</strong> Shows academic trajectory, (3) <strong>Junior year (35-40% weight):</strong> MOST IMPORTANT YEAR—most recent full year of grades before applications, (4) <strong>Senior year (20-25% weight):</strong> First-semester grades due mid-year, critical for waitlist/deferral decisions. Admissions officers love <strong>"upward trends"</strong>—a 3.3 freshman year → 3.9 junior year shows growth and resilience.
+                        </p>
+                    </div>
+
+                    <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-md">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">❓ Is weighted or unweighted GPA more important?</h3>
+                        <p className="text-gray-800 leading-relaxed">
+                            Most admissions officers look at <strong>both, but recalculate using their own formula</strong>. They consider: (1) <strong>Unweighted GPA</strong> for raw academic performance (all A's = 4.0 regardless of course level), (2) <strong>Course rigor</strong> separately (number of AP/IB/Honors classes relative to what your school offers), and (3) <strong>Class rank</strong> (if available) to understand how you compare to peers. A 3.7 unweighted with 10 AP classes is stronger than a 4.0 with no advanced courses. Use our <a href="/education-and-exam-tools/cumulative-gpa-calculator" className="text-blue-600 hover:underline font-medium">Cumulative GPA Calculator</a> to track both weighted and unweighted GPAs throughout high school.
+                        </p>
+                    </div>
+
+                    <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-md">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">❓ What if I have one bad semester or grade?</h3>
+                        <p className="text-gray-800 leading-relaxed">
+                            <strong>One bad semester won't ruin your chances</strong> if you address it strategically: (1) <strong>Acknowledge it briefly</strong> in your application (illness, family issues, etc.—don't make excuses, just explain), (2) <strong>Show recovery</strong> by earning strong grades the following semesters (upward trend is powerful), (3) <strong>Demonstrate learning</strong> from the setback in your essay, (4) <strong>Let counselor address it</strong> in their recommendation letter for context. Colleges understand that students face challenges. A single C or D won't derail your application if your overall GPA is strong and you've shown resilience. What matters most is how you bounced back.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="mt-12 p-8 bg-gradient-to-r from-purple-100 via-blue-100 to-teal-100 border-2 border-purple-300 rounded-xl shadow-lg">
+                    <h3 className="text-2xl font-bold text-purple-900 mb-4">🎓 Ready to Calculate Your Admissions Chances?</h3>
+                    <p className="text-gray-800 text-lg leading-relaxed mb-6">
+                        Understanding your target GPA is just the first step. Use our free tools to evaluate your complete admissions profile:
+                    </p>
+                    <ul className="space-y-3 text-gray-900 ml-6 list-disc">
+                        <li><a href="/education-and-exam-tools/admission-tools/college-admissions-calculator" className="text-blue-600 hover:underline font-bold">College Admissions Calculator</a> - Calculate your acceptance probability at 50+ top universities based on GPA, test scores, and extracurriculars</li>
+                        <li><a href="/education-and-exam-tools/gpa-calculator" className="text-blue-600 hover:underline font-bold">College GPA Calculator</a> - Track your semester and cumulative GPA with our easy-to-use calculator</li>
+                        <li><a href="/education-and-exam-tools/weighted-gpa-calculator" className="text-blue-600 hover:underline font-bold">Weighted GPA Calculator</a> - Calculate how AP, IB, and Honors classes boost your weighted GPA</li>
+                        <li><a href="/education-and-exam-tools/gpa-raise-calculator" className="text-blue-600 hover:underline font-bold">GPA Raise Calculator</a> - Determine what grades you need to reach your target GPA before applications</li>
+                        <li><a href="/education-and-exam-tools/high-school-gpa-calculator" className="text-blue-600 hover:underline font-bold">High School GPA Calculator</a> - Calculate your 4-year high school GPA with semester-by-semester tracking</li>
+                    </ul>
+                </div>
+
+                <div className="mt-12 p-6 bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-500 rounded-lg shadow-md">
+                    <h3 className="text-xl font-bold text-green-900 mb-3">📚 Final Thoughts: GPA is Important, But Not Everything</h3>
+                    <p className="text-gray-800 leading-relaxed mb-4">
+                        While a strong GPA significantly improves your college admissions chances, remember that <strong>no single number defines your worth or potential</strong>. Admissions officers evaluate your entire application holistically—they want to see academic ability, intellectual curiosity, leadership, resilience, and authentic passion. Focus on doing your best academically while also developing as a well-rounded individual.
+                    </p>
+                    <p className="text-gray-800 leading-relaxed">
+                        If your GPA is lower than you hoped, don't give up. Thousands of students with "imperfect" GPAs attend excellent colleges every year by showcasing other strengths: compelling essays, meaningful extracurriculars, strong test scores, unique backgrounds, and demonstrated growth. Your GPA opens doors, but <strong>your entire story gets you admitted</strong>.
+                    </p>
+                </div>
+
+                <p className="mt-8 text-gray-800 italic">Last updated: December 10, 2025 | <a href="/contact" className="text-blue-600 hover:underline font-medium">Have questions about GPA requirements? Contact us</a></p>
+            </>
+        ),
+    },
 ];
