@@ -616,6 +616,20 @@ const CollegeEssayLengthCalculatorIcon = () => (
     </svg>
 );
 
+const CSSProfileCostCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cssProfileIconTitle">
+        <title id="cssProfileIconTitle">CSS Profile Cost Calculator Icon</title>
+        <defs><linearGradient id="toolGradCSSProfile" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#10b981" /><stop offset="50%" stopColor="#3b82f6" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
+        <circle cx="12" cy="12" r="9" fill="url(#toolGradCSSProfile)" opacity="0.2" />
+        <path d="M12 6V12L16 14" stroke="url(#toolGradCSSProfile)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8 20C8 20 7 19 7 17C7 15 8 14 8 14M16 20C16 20 17 19 17 17C17 15 16 14 16 14" stroke="url(#toolGradCSSProfile)" strokeWidth="1.5" strokeLinecap="round" />
+        <rect x="15" y="3" width="7" height="5" rx="1" fill="#10b981" />
+        <text x="18.5" y="6.5" fontSize="3.5" fill="white" textAnchor="middle" fontWeight="bold">$25</text>
+        <circle cx="5" cy="12" r="2" fill="#3b82f6" />
+        <text x="5" y="13" fontSize="2" fill="white" textAnchor="middle" fontWeight="bold">$</text>
+    </svg>
+);
+
 const PersonalStatementCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="personalStatementIconTitle">
         <title id="personalStatementIconTitle">Personal Statement Character Counter Icon</title>
@@ -939,6 +953,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/admission-tools/college-essay-length-calculator',
                         icon: <CollegeEssayLengthCalculatorIcon />,
                         gradientColors: { from: '#8b5cf6', to: '#f97316' },
+                    },
+                    {
+                        title: 'CSS Profile Cost Calculator',
+                        description: 'Free CSS Profile cost calculator 2026. Calculate College Board CSS Profile fees ($25 + $16 per school), check fee waiver eligibility by income, compare with FAFSA. 400+ schools require CSS Profile for financial aid.',
+                        link: 'education-and-exam-tools/admission-tools/css-profile-cost-calculator',
+                        icon: <CSSProfileCostCalculatorIcon />,
+                        gradientColors: { from: '#10b981', to: '#8b5cf6' },
                     },
                     {
                         title: 'Coalition App Word Counter',
