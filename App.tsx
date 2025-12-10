@@ -44,6 +44,7 @@ const UCATScoreCalculator = lazy(() => import('./components/tools/UCATScoreCalcu
 const PersonalStatementCharacterCounter = lazy(() => import('./components/tools/PersonalStatementCharacterCounter'));
 const CommonAppEssayWordCounter = lazy(() => import('./components/tools/CommonAppEssayWordCounter'));
 const CoalitionAppWordCounter = lazy(() => import('./components/tools/CoalitionAppWordCounter'));
+const CollegeApplicationFeeCalculator = lazy(() => import('./components/tools/CollegeApplicationFeeCalculator'));
 const UCASPointsCalculator = lazy(() => import('./components/tools/UCASPointsCalculator'));
 const StudentVisaFeeCalculatorAustralia = lazy(() => import('./components/tools/StudentVisaFeeCalculatorAustralia'));
 const CollegeAdmissionsCalculator = lazy(() => import('./components/tools/CollegeAdmissionsCalculator'));
@@ -200,6 +201,8 @@ const App: React.FC = () => {
             'tools/common-app-essay-word-counter': '/education-and-exam-tools/admission-tools/common-app-essay-word-counter',
             'coalition-app-word-counter': '/education-and-exam-tools/admission-tools/coalition-app-word-counter',
             'tools/coalition-app-word-counter': '/education-and-exam-tools/admission-tools/coalition-app-word-counter',
+            'college-application-fee-calculator': '/education-and-exam-tools/admission-tools/college-application-fee-calculator',
+            'tools/college-application-fee-calculator': '/education-and-exam-tools/admission-tools/college-application-fee-calculator',
             'ucas-points-calculator': '/education-and-exam-tools/admission-tools/ucas-points-calculator',
             'tools/ucas-points-calculator': '/education-and-exam-tools/admission-tools/ucas-points-calculator',
             'student-visa-fee-calculator-australia': '/education-and-exam-tools/admission-tools/student-visa-fee-calculator-australia',
@@ -296,6 +299,7 @@ const App: React.FC = () => {
             'personal-statement-character-counter': PersonalStatementCharacterCounter,
             'common-app-essay-word-counter': CommonAppEssayWordCounter,
             'coalition-app-word-counter': CoalitionAppWordCounter,
+            'college-application-fee-calculator': CollegeApplicationFeeCalculator,
             'ucas-points-calculator': UCASPointsCalculator,
             'student-visa-fee-calculator-australia': StudentVisaFeeCalculatorAustralia,
             'college-admissions-calculator': CollegeAdmissionsCalculator,

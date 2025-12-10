@@ -590,6 +590,18 @@ const CoalitionAppWordCounterIcon = () => (
     </svg>
 );
 
+const CollegeApplicationFeeCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="collegeFeeCalcIconTitle">
+        <title id="collegeFeeCalcIconTitle">College Application Fee Calculator Icon</title>
+        <defs><linearGradient id="toolGradCollegeFeeCalc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#2563eb" /><stop offset="50%" stopColor="#06b6d4" /><stop offset="100%" stopColor="#0ea5e9" /></linearGradient></defs>
+        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="url(#toolGradCollegeFeeCalc)" />
+        <path d="M12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" fill="url(#toolGradCollegeFeeCalc)" />
+        <text x="12" y="9" fontSize="3" fill="#2563eb" textAnchor="middle" fontWeight="bold">$</text>
+        <circle cx="18" cy="6" r="3" fill="#10b981" />
+        <path d="M17 6L17.5 6.5L19 5" stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+);
+
 const PersonalStatementCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="personalStatementIconTitle">
         <title id="personalStatementIconTitle">Personal Statement Character Counter Icon</title>
@@ -900,6 +912,13 @@ export const toolCategories: Category[] = [
                 slug: 'admission-tools',
                 title: 'Admission Tools',
                 tools: [
+                    {
+                        title: 'College Application Fee Calculator',
+                        description: 'Free college application fee calculator 2026. Calculate total costs including application fees ($50-$90), SAT/ACT score sending ($12-$15), transcripts, and CSS Profile. Check fee waiver eligibility instantly.',
+                        link: 'education-and-exam-tools/admission-tools/college-application-fee-calculator',
+                        icon: <CollegeApplicationFeeCalculatorIcon />,
+                        gradientColors: { from: '#2563eb', to: '#06b6d4' },
+                    },
                     {
                         title: 'Coalition App Word Counter',
                         description: 'Free Coalition App essay word counter 2026. Track 250-650 word limits with real-time character count for Coalition Application essays. Supports all essay types for 150+ member colleges.',
