@@ -1138,26 +1138,7 @@ const SATScoreCalculator: React.FC = () => {
                     </div>
                 </section>
 
-                <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Related Tools</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <a href="/math-and-calculation-tools/percentage-change-calculator" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
-                            <PercentageIcon className="h-8 w-8 text-[#001BB7]" />
-                            <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Percentage Change Calculator</h4>
-                            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Calculate percentage increase or decrease between numbers.</p>
-                        </a>
-                         <a href="/math-and-calculation-tools/time-difference-calculator" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
-                            <TimeDiffIcon className="h-8 w-8 text-purple-600" />
-                            <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Date Difference Calculator</h4>
-                            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Calculate duration between two dates accurately.</p>
-                        </a>
-                         <a href="/math-and-calculation-tools/fabric-costing-tool" className="block p-6 bg-white dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:shadow-lg hover:-translate-y-1 transition-all hover:border-blue-300 dark:hover:border-blue-700">
-                            <FabricIcon className="h-8 w-8 text-blue-600" />
-                            <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Fabric Costing Calculator</h4>
-                            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Professional fabric costing for textile engineers.</p>
-                        </a>
-                    </div>
-                </section>
+
                 
                 <section className="bg-white dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 mb-8">
                     <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -1174,7 +1155,7 @@ const SATScoreCalculator: React.FC = () => {
                     <p><strong>Data Sources:</strong> Official concordance tables from the <a href="https://collegereadiness.collegeboard.org/sat" target="_blank" rel="nofollow noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">College Board</a> and <a href="https://www.act.org/content/act/en/products-and-services/the-act/scores/act-sat-concordance.html" target="_blank" rel="nofollow noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">ACT, Inc.</a></p>
                     <p><strong>Additional Resources:</strong> <a href="https://www.khanacademy.org/test-prep/sat" target="_blank" rel="nofollow noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Khan Academy SAT Prep</a> | <a href="https://satsuite.collegeboard.org/digital/digital-practice-preparation" target="_blank" rel="nofollow noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Official SAT Practice Tests</a></p>
                     <p className="text-xs text-slate-400 dark:text-slate-500">Last Updated: November 8, 2025</p>
-                    <p>&copy; {new Date().getFullYear()} <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">ZuraWebTools</a>. All rights reserved. | <a href="/tools" className="text-blue-600 dark:text-blue-400 hover:underline">All Tools</a> | <a href="/tools/math-and-calculation" className="text-blue-600 dark:text-blue-400 hover:underline">Math & Calculation Tools</a></p>
+                    <p>&copy; {new Date().getFullYear()} <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">ZuraWebTools</a>. All rights reserved. | <a href="/education-and-exam-tools" className="text-blue-600 dark:text-blue-400 hover:underline">Education Tools</a></p>
                 </footer>
             </div>
 

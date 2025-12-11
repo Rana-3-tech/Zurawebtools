@@ -1,7 +1,7 @@
 # ZuraWebTools AI Coding Instructions
 
 ## Project Overview
-ZuraWebTools is a React + TypeScript SPA providing free web tools (text processing, calculators, color utilities, developer tools). Built with Vite, Tailwind CSS v4, and deployed as a static site with SEO-first architecture.
+ZuraWebTools is a React + TypeScript SPA providing free education and exam tools for students and academic professionals. Built with Vite, Tailwind CSS v4, and deployed as a static site with SEO-first architecture.
 
 ## Architecture
 

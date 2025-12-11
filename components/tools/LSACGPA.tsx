@@ -1020,20 +1020,7 @@ const LSACGPA: React.FC<LSACGPAProps> = ({ navigateTo }) => {
                   Use SAT Calculator
                 </a>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">Percentage Change Calculator</h3>
-                <p className="text-gray-600 mb-4">Calculate percentage increases or decreases for academic grade analysis.</p>
-                <a href="/math-and-calculation-tools/percentage-change-calculator" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
-                  Use Percentage Calculator
-                </a>
-              </div>
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">Word Counter Tool</h3>
-                <p className="text-gray-600 mb-4">Count words, characters, and reading time for essays and academic papers.</p>
-                <a href="/text-and-writing-tools/word-counter" className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors font-medium block text-center">
-                  Use Word Counter
-                </a>
-              </div>
+
             </div>
           </div>
 
