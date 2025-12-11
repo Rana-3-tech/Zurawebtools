@@ -630,6 +630,24 @@ const CSSProfileCostCalculatorIcon = () => (
     </svg>
 );
 
+const EarlyDecisionActionCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="edEaIconTitle">
+        <title id="edEaIconTitle">Early Decision vs Early Action Calculator Icon</title>
+        <defs><linearGradient id="toolGradEDEA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3b82f6" /><stop offset="50%" stopColor="#8b5cf6" /><stop offset="100%" stopColor="#ec4899" /></linearGradient></defs>
+        <rect x="2" y="4" width="9" height="16" rx="1.5" fill="url(#toolGradEDEA)" opacity="0.3" />
+        <rect x="13" y="4" width="9" height="16" rx="1.5" fill="url(#toolGradEDEA)" opacity="0.3" />
+        <path d="M2 9H11M13 9H22" stroke="url(#toolGradEDEA)" strokeWidth="1.5" />
+        <text x="6.5" y="7.5" fontSize="3" fill="#3b82f6" textAnchor="middle" fontWeight="bold">ED</text>
+        <text x="17.5" y="7.5" fontSize="3" fill="#ec4899" textAnchor="middle" fontWeight="bold">EA</text>
+        <circle cx="6.5" cy="13" r="2.5" fill="#3b82f6" />
+        <text x="6.5" y="14.5" fontSize="3" fill="white" textAnchor="middle" fontWeight="bold">✓</text>
+        <circle cx="17.5" cy="13" r="2.5" fill="#ec4899" />
+        <text x="17.5" y="14.5" fontSize="3" fill="white" textAnchor="middle" fontWeight="bold">✓</text>
+        <rect x="3" y="17" width="7" height="2" rx="0.5" fill="#10b981" />
+        <rect x="14" y="17" width="7" height="2" rx="0.5" fill="#fbbf24" />
+    </svg>
+);
+
 const PersonalStatementCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="personalStatementIconTitle">
         <title id="personalStatementIconTitle">Personal Statement Character Counter Icon</title>
@@ -960,6 +978,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/admission-tools/css-profile-cost-calculator',
                         icon: <CSSProfileCostCalculatorIcon />,
                         gradientColors: { from: '#10b981', to: '#8b5cf6' },
+                    },
+                    {
+                        title: 'Early Decision vs Early Action Calculator',
+                        description: 'Free Early Decision vs Early Action calculator 2026. Compare ED EA acceptance rates (2-4x higher than RD), deadlines, binding policies. Should you apply early decision or early action? Get personalized recommendations based on your situation.',
+                        link: 'education-and-exam-tools/admission-tools/early-decision-action-calculator',
+                        icon: <EarlyDecisionActionCalculatorIcon />,
+                        gradientColors: { from: '#3b82f6', to: '#ec4899' },
                     },
                     {
                         title: 'Coalition App Word Counter',
