@@ -1009,13 +1009,6 @@ export const toolCategories: Category[] = [
                         gradientColors: { from: '#8b5cf6', to: '#3b82f6' },
                     },
                     {
-                        title: 'Waitlist Acceptance Rate Calculator',
-                        description: 'Free college waitlist acceptance calculator 2025. Calculate your chances of getting off a waitlist with real data from 50+ top schools (Harvard 0.5%, Stanford 0.8%, WashU 12.5%). Get personalized probability based on LOCI quality, demonstrated interest, academic profile.',
-                        link: 'education-and-exam-tools/admission-tools/waitlist-acceptance-calculator',
-                        icon: <WaitlistAcceptanceCalculatorIcon />,
-                        gradientColors: { from: '#9333ea', to: '#3b82f6' },
-                    },
-                    {
                         title: 'Coalition App Word Counter',
                         description: 'Free Coalition App essay word counter 2026. Track 250-650 word limits with real-time character count for Coalition Application essays. Supports all essay types for 150+ member colleges.',
                         link: 'education-and-exam-tools/admission-tools/coalition-app-word-counter',
