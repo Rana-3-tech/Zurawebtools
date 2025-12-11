@@ -675,6 +675,17 @@ const PersonalStatementCounterIcon = () => (
     </svg>
 );
 
+const DemonstratedInterestCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="demonstratedInterestIconTitle">
+        <title id="demonstratedInterestIconTitle">Demonstrated Interest Calculator Icon</title>
+        <defs><linearGradient id="toolGradDemonstratedInterest" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#10b981" /><stop offset="50%" stopColor="#14b8a6" /><stop offset="100%" stopColor="#3b82f6" /></linearGradient></defs>
+        <rect x="3" y="4" width="18" height="16" rx="2" fill="url(#toolGradDemonstratedInterest)" />
+        <path d="M7 9L10 12L17 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="18" cy="18" r="4" fill="#10b981" stroke="white" strokeWidth="1.5" />
+        <path d="M16.5 18L17.5 19L19.5 17" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -1007,6 +1018,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/admission-tools/waitlist-acceptance-calculator',
                         icon: <WaitlistAcceptanceCalculatorIcon />,
                         gradientColors: { from: '#8b5cf6', to: '#3b82f6' },
+                    },
+                    {
+                        title: 'Demonstrated Interest Calculator',
+                        description: 'Free demonstrated interest calculator 2026. Calculate how campus visits, email engagement, interviews, and social media impact your college admissions chances. Track interest for 100+ schools. Find which colleges track interest (Emory, WashU, Case Western) vs. don\'t track (MIT, UCs). Get personalized interest score 0-100.',
+                        link: 'education-and-exam-tools/admission-tools/demonstrated-interest-calculator',
+                        icon: <DemonstratedInterestCalculatorIcon />,
+                        gradientColors: { from: '#10b981', to: '#3b82f6' },
                     },
                     {
                         title: 'Coalition App Word Counter',

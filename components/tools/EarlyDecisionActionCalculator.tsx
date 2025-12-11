@@ -612,7 +612,7 @@ const EarlyDecisionActionCalculator: React.FC<EarlyDecisionActionCalculatorProps
                 id="school-type"
                 value={selectedSchoolType}
                 onChange={(e) => setSelectedSchoolType(e.target.value)}
-                className="w-full px-4 py-3 text-lg border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full px-4 py-3 text-lg text-gray-900 bg-white border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               >
                 <option value="ivy-league">Ivy League (Harvard, Yale, Princeton, etc.)</option>
                 <option value="top-private">Top Private Universities (Stanford, MIT, Duke, etc.)</option>
@@ -654,7 +654,7 @@ const EarlyDecisionActionCalculator: React.FC<EarlyDecisionActionCalculatorProps
                 min="0"
                 max="4.0"
                 step="0.01"
-                className="w-full px-4 py-3 text-lg border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full px-4 py-3 text-lg text-gray-900 bg-white border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 aria-describedby="gpa-hint"
                 aria-invalid={hasError && errorInfo.includes('GPA')}
                 aria-required="false"

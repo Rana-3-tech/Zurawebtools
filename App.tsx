@@ -49,6 +49,7 @@ const CollegeEssayLengthCalculator = lazy(() => import('./components/tools/Colle
 const CSSProfileCostCalculator = lazy(() => import('./components/tools/CSSProfileCostCalculator'));
 const EarlyDecisionActionCalculator = lazy(() => import('./components/tools/EarlyDecisionActionCalculator'));
 const WaitlistAcceptanceCalculator = lazy(() => import('./components/tools/WaitlistAcceptanceCalculator'));
+const DemonstratedInterestCalculator = lazy(() => import('./components/tools/DemonstratedInterestCalculator'));
 const UCASPointsCalculator = lazy(() => import('./components/tools/UCASPointsCalculator'));
 const StudentVisaFeeCalculatorAustralia = lazy(() => import('./components/tools/StudentVisaFeeCalculatorAustralia'));
 const CollegeAdmissionsCalculator = lazy(() => import('./components/tools/CollegeAdmissionsCalculator'));
@@ -308,6 +309,7 @@ const App: React.FC = () => {
             'css-profile-cost-calculator': CSSProfileCostCalculator,
             'early-decision-action-calculator': EarlyDecisionActionCalculator,
             'waitlist-acceptance-calculator': WaitlistAcceptanceCalculator,
+            'demonstrated-interest-calculator': DemonstratedInterestCalculator,
             'ucas-points-calculator': UCASPointsCalculator,
             'student-visa-fee-calculator-australia': StudentVisaFeeCalculatorAustralia,
             'college-admissions-calculator': CollegeAdmissionsCalculator,
