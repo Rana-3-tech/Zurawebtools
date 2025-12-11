@@ -931,7 +931,7 @@ const CSSProfileCostCalculator: React.FC<CSSProfileCostCalculatorProps> = ({ nav
           <ul className="space-y-3">
             <li className="flex items-start gap-3">
               <span className="text-green-600 font-bold text-xl" aria-hidden="true">✓</span>
-              <span className="text-gray-800"><strong>Apply Early:</strong> CSS Profile opens October 1st. Submit as soon as possible after deadlines open to maximize aid eligibility.</span>
+              <span className="text-gray-800"><strong>Apply Early:</strong> CSS Profile opens October 1st. Submit as soon as possible after deadlines open to maximize aid eligibility. Learn more about <a href="https://cssprofile.collegeboard.org/pdf/css-profile-student-guide.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">CSS Profile application process</a>.</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-green-600 font-bold text-xl" aria-hidden="true">✓</span>
@@ -943,7 +943,7 @@ const CSSProfileCostCalculator: React.FC<CSSProfileCostCalculatorProps> = ({ nav
             </li>
             <li className="flex items-start gap-3">
               <span className="text-green-600 font-bold text-xl" aria-hidden="true">✓</span>
-              <span className="text-gray-800"><strong>Check College Deadlines:</strong> CSS Profile deadlines vary by school. Some are as early as November for Early Decision/Action.</span>
+              <span className="text-gray-800"><strong>Check College Deadlines:</strong> CSS Profile deadlines vary by school. Some are as early as November for Early Decision/Action. Track your deadlines and use our <button onClick={() => navigateTo('/education-and-exam-tools/admission-tools/college-admissions-calculator')} className="text-blue-600 hover:text-blue-800 underline font-semibold">College Admissions Calculator</button> to plan your applications.</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-green-600 font-bold text-xl" aria-hidden="true">✓</span>
@@ -967,7 +967,7 @@ const CSSProfileCostCalculator: React.FC<CSSProfileCostCalculatorProps> = ({ nav
               </h3>
               <div className="prose max-w-none text-gray-800 leading-relaxed space-y-4">
                 <p>
-                  The <strong>CSS Profile (College Scholarship Service Profile)</strong> is an online financial aid application created and administered by the College Board. Unlike the FAFSA (Free Application for Federal Student Aid), which is used to determine eligibility for federal aid, the CSS Profile is used by approximately <strong>400 colleges, universities, and scholarship programs</strong> to award their own institutional financial aid.
+                  The <strong>CSS Profile (College Scholarship Service Profile)</strong> is an online financial aid application created and administered by the <a href="https://www.collegeboard.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">College Board</a>. Unlike the <a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">FAFSA (Free Application for Federal Student Aid)</a>, which is used to determine eligibility for federal aid, the CSS Profile is used by approximately <strong>400 colleges, universities, and scholarship programs</strong> to award their own institutional financial aid.
                 </p>
                 <p>
                   The CSS Profile collects more detailed financial information than the FAFSA, including:
@@ -1073,7 +1073,7 @@ const CSSProfileCostCalculator: React.FC<CSSProfileCostCalculatorProps> = ({ nav
                 </table>
               </div>
               <p className="mt-4 text-gray-700 italic">
-                <span aria-hidden="true">💡</span> <strong>Pro Tip:</strong> You should complete <strong>both</strong> CSS Profile and FAFSA if your colleges require CSS Profile. FAFSA is always free and required for federal aid (grants, loans, work-study).
+                <span aria-hidden="true">💡</span> <strong>Pro Tip:</strong> You should complete <strong>both</strong> CSS Profile and FAFSA if your colleges require CSS Profile. FAFSA is always free and required for federal aid (grants, loans, work-study). Use our <button onClick={() => navigateTo('/education-and-exam-tools/admission-tools/college-application-fee-calculator')} className="text-blue-600 hover:text-blue-800 underline font-semibold">College Application Fee Calculator</button> to budget for all application costs.
               </p>
             </div>
 
@@ -1194,8 +1194,8 @@ const CSSProfileCostCalculator: React.FC<CSSProfileCostCalculatorProps> = ({ nav
                     <span aria-hidden="true">🔍</span> How to Check if Your College Requires CSS Profile:
                   </p>
                   <ol className="list-decimal list-inside space-y-2 text-yellow-800">
-                    <li>Visit the <strong>College Board CSS Profile website</strong></li>
-                    <li>Go to the "Participating Institutions" page</li>
+                    <li>Visit the <a href="https://cssprofile.collegeboard.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline font-semibold">College Board CSS Profile website</a></li>
+                    <li>Go to the <a href="https://profile.collegeboard.org/profile/ppi/participatingInstitutions.aspx" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">"Participating Institutions" page</a></li>
                     <li>Search for your college by name or browse alphabetically</li>
                     <li>Check the college's financial aid website for specific requirements and deadlines</li>
                   </ol>
@@ -1389,7 +1389,7 @@ const CSSProfileCostCalculator: React.FC<CSSProfileCostCalculatorProps> = ({ nav
                 <span aria-hidden="true">❌</span> Not Completing FAFSA
               </h3>
               <p className="text-gray-800">
-                CSS Profile does <strong>NOT</strong> replace FAFSA. You must complete <strong>both</strong> forms. FAFSA is required for federal aid (Pell Grants, federal loans, work-study), while CSS Profile determines institutional aid. Complete both!
+                CSS Profile does <strong>NOT</strong> replace <a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">FAFSA</a>. You must complete <strong>both</strong> forms. FAFSA is required for federal aid (Pell Grants, federal loans, work-study), while CSS Profile determines institutional aid. Complete both! Also check our <button onClick={() => navigateTo('/education-and-exam-tools/admission-tools/common-app-essay-word-counter')} className="text-blue-600 hover:text-blue-800 underline font-semibold">Common App Essay Word Counter</button> to perfect your application essays.
               </p>
             </div>
 
@@ -1407,7 +1407,7 @@ const CSSProfileCostCalculator: React.FC<CSSProfileCostCalculatorProps> = ({ nav
                 <span aria-hidden="true">❌</span> Not Saving Your Application ID
               </h3>
               <p className="text-gray-800">
-                After submitting, save your CSS Profile Application ID. You'll need it to check submission status, make corrections, or add more colleges later. Print or screenshot your confirmation page.
+                After submitting, save your CSS Profile Application ID. You'll need it to check submission status, make corrections, or add more colleges later. Print or screenshot your confirmation page. For help, visit <a href="https://cbsupport.collegeboard.org/css-profile" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">College Board CSS Profile Support</a>.
               </p>
             </div>
           </div>
@@ -1443,7 +1443,7 @@ const CSSProfileCostCalculator: React.FC<CSSProfileCostCalculatorProps> = ({ nav
                 3. Is CSS Profile free like FAFSA?
               </h3>
               <p className="text-gray-800 leading-relaxed">
-                No, CSS Profile charges fees ($25 + $16 per school), while <strong>FAFSA is completely free</strong>. However, you should complete <strong>both</strong> forms if your colleges require CSS Profile. FAFSA determines federal aid eligibility (grants, loans, work-study), while CSS Profile helps colleges award their own institutional aid from endowments.
+                No, CSS Profile charges fees ($25 + $16 per school), while <strong>FAFSA is completely free</strong>. However, you should complete <strong>both</strong> forms if your colleges require CSS Profile. FAFSA determines federal aid eligibility (grants, loans, work-study), while CSS Profile helps colleges award their own institutional aid from endowments. Don't forget to use our <button onClick={() => navigateTo('/education-and-exam-tools/admission-tools/personal-statement-character-counter')} className="text-blue-600 hover:text-blue-800 underline font-semibold">Personal Statement Character Counter</button> for your essays.
               </p>
             </div>
 
