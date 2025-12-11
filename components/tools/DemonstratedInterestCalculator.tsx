@@ -736,58 +736,6 @@ const DemonstratedInterestCalculator: React.FC<DemonstratedInterestCalculatorPro
           </div>
         </div>
 
-        {/* Accessibility & Financial Barrier Notice */}
-        <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-amber-500">
-          <div className="flex items-start">
-            <span className="text-3xl mr-4" aria-hidden="true">⚠️</span>
-            <div>
-              <h3 className="text-xl font-bold text-amber-900 mb-3">Important: Financial & Geographic Access Notice</h3>
-              <p className="text-gray-800 mb-3">
-                <strong>Campus visits and travel-based demonstrated interest activities create significant barriers for low-income, rural, and international students.</strong> Colleges are increasingly aware of these inequities. Many admissions officers explicitly state they do NOT penalize students who cannot visit campus due to financial constraints or geographic distance.
-              </p>
-              <div className="bg-white rounded-lg p-4 mb-3">
-                <p className="text-gray-800 font-semibold mb-2">🌍 Alternative Options for Students with Limited Resources:</p>
-                <ul className="list-disc list-inside space-y-1 text-gray-700 text-sm">
-                  <li><strong>Virtual campus tours</strong> - Free and provide similar information (score nearly as well at equity-conscious schools)</li>
-                  <li><strong>Email engagement</strong> - Costs nothing, shows sustained interest over time</li>
-                  <li><strong>"Why This College" essay specificity</strong> - Research through website, not travel required (15 points)</li>
-                  <li><strong>Request fee waivers</strong> - For application fees, CSS Profile, and interview travel if offered</li>
-                  <li><strong>Mention constraints in application</strong> - Many schools have sections to explain why you couldn't visit</li>
-                </ul>
-              </div>
-              <p className="text-sm text-gray-700">
-                <strong>Rural Students:</strong> Colleges understand that students 2+ hours from campus face travel barriers. Virtual engagement is weighted more heavily in your region. <strong>International Students:</strong> Most schools do NOT expect international applicants to visit campus before admission. Focus on virtual tours, email, and regional events if available.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Accessibility & Financial Barrier Notice */}
-        <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-amber-500">
-          <div className="flex items-start">
-            <span className="text-3xl mr-4" aria-hidden="true">⚠️</span>
-            <div>
-              <h3 className="text-xl font-bold text-amber-900 mb-3">Important: Financial & Geographic Access Notice</h3>
-              <p className="text-gray-800 mb-3">
-                <strong>Campus visits and travel-based demonstrated interest activities create significant barriers for low-income, rural, and international students.</strong> Colleges are increasingly aware of these inequities. Many admissions officers explicitly state they do NOT penalize students who cannot visit campus due to financial constraints or geographic distance.
-              </p>
-              <div className="bg-white rounded-lg p-4 mb-3">
-                <p className="text-gray-800 font-semibold mb-2">🌍 Alternative Options for Students with Limited Resources:</p>
-                <ul className="list-disc list-inside space-y-1 text-gray-700 text-sm">
-                  <li><strong>Virtual campus tours</strong> - Free and provide similar information (score nearly as well at equity-conscious schools)</li>
-                  <li><strong>Email engagement</strong> - Costs nothing, shows sustained interest over time</li>
-                  <li><strong>"Why This College" essay specificity</strong> - Research through website, not travel required (15 points)</li>
-                  <li><strong>Request fee waivers</strong> - For application fees, CSS Profile, and interview travel if offered</li>
-                  <li><strong>Mention constraints in application</strong> - Many schools have sections to explain why you could not visit</li>
-                </ul>
-              </div>
-              <p className="text-sm text-gray-700">
-                <strong>Rural Students:</strong> Colleges understand that students 2+ hours from campus face travel barriers. Virtual engagement is weighted more heavily in your region. <strong>International Students:</strong> Most schools do NOT expect international applicants to visit campus before admission. Focus on virtual tours, email, and regional events if available.
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Calculator Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 border-b-4 border-indigo-500 pb-3">
@@ -971,6 +919,32 @@ const DemonstratedInterestCalculator: React.FC<DemonstratedInterestCalculatorPro
             >
               🎯 Calculate My Interest Score
             </button>
+          </div>
+        </div>
+
+        {/* Accessibility & Financial Barrier Notice */}
+        <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl shadow-lg p-6 mb-8 border-l-4 border-amber-500">
+          <div className="flex items-start">
+            <span className="text-3xl mr-4" aria-hidden="true">⚠️</span>
+            <div>
+              <h3 className="text-xl font-bold text-amber-900 mb-3">Important: Financial & Geographic Access Notice</h3>
+              <p className="text-gray-800 mb-3">
+                <strong>Campus visits and travel-based demonstrated interest activities create significant barriers for low-income, rural, and international students.</strong> Colleges are increasingly aware of these inequities. Many admissions officers explicitly state they do NOT penalize students who cannot visit campus due to financial constraints or geographic distance.
+              </p>
+              <div className="bg-white rounded-lg p-4 mb-3">
+                <p className="text-gray-800 font-semibold mb-2">🌍 Alternative Options for Students with Limited Resources:</p>
+                <ul className="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                  <li><strong>Virtual campus tours</strong> - Free and provide similar information (score nearly as well at equity-conscious schools)</li>
+                  <li><strong>Email engagement</strong> - Costs nothing, shows sustained interest over time</li>
+                  <li><strong>"Why This College" essay specificity</strong> - Research through website, not travel required (15 points)</li>
+                  <li><strong>Request fee waivers</strong> - For application fees, CSS Profile, and interview travel if offered</li>
+                  <li><strong>Mention constraints in application</strong> - Many schools have sections to explain why you could not visit</li>
+                </ul>
+              </div>
+              <p className="text-sm text-gray-700">
+                <strong>Rural Students:</strong> Colleges understand that students 2+ hours from campus face travel barriers. Virtual engagement is weighted more heavily in your region. <strong>International Students:</strong> Most schools do NOT expect international applicants to visit campus before admission. Focus on virtual tours, email, and regional events if available.
+              </p>
+            </div>
           </div>
         </div>
 
