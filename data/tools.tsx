@@ -648,6 +648,21 @@ const EarlyDecisionActionCalculatorIcon = () => (
     </svg>
 );
 
+const WaitlistAcceptanceCalculatorIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="waitlistIconTitle">
+        <title id="waitlistIconTitle">Waitlist Acceptance Calculator Icon</title>
+        <defs><linearGradient id="toolGradWaitlist" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#8b5cf6" /><stop offset="50%" stopColor="#ec4899" /><stop offset="100%" stopColor="#3b82f6" /></linearGradient></defs>
+        <rect x="3" y="4" width="18" height="16" rx="2" fill="url(#toolGradWaitlist)" opacity="0.2" />
+        <path d="M3 8h18M3 12h18M3 16h18" stroke="url(#toolGradWaitlist)" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="7" cy="8" r="1.5" fill="#8b5cf6" />
+        <circle cx="7" cy="12" r="1.5" fill="#ec4899" />
+        <circle cx="7" cy="16" r="1.5" fill="#3b82f6" />
+        <path d="M10 7h8M10 11h8M10 15h8" stroke="#6b7280" strokeWidth="1" strokeLinecap="round" />
+        <circle cx="19" cy="19" r="3.5" fill="#10b981" />
+        <path d="M17.5 19l1 1 2-2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+);
+
 const PersonalStatementCounterIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="personalStatementIconTitle">
         <title id="personalStatementIconTitle">Personal Statement Character Counter Icon</title>
@@ -985,6 +1000,20 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/admission-tools/early-decision-action-calculator',
                         icon: <EarlyDecisionActionCalculatorIcon />,
                         gradientColors: { from: '#3b82f6', to: '#ec4899' },
+                    },
+                    {
+                        title: 'Waitlist Acceptance Calculator',
+                        description: 'Free college waitlist acceptance calculator 2026. Calculate your chances of getting off a waitlist with real data from 50+ top schools. Get personalized probability based on LOCI quality, demonstrated interest, academic profile. Includes Harvard, Stanford, MIT, Duke waitlist statistics.',
+                        link: 'education-and-exam-tools/admission-tools/waitlist-acceptance-calculator',
+                        icon: <WaitlistAcceptanceCalculatorIcon />,
+                        gradientColors: { from: '#8b5cf6', to: '#3b82f6' },
+                    },
+                    {
+                        title: 'Waitlist Acceptance Rate Calculator',
+                        description: 'Free college waitlist acceptance calculator 2025. Calculate your chances of getting off a waitlist with real data from 50+ top schools (Harvard 0.5%, Stanford 0.8%, WashU 12.5%). Get personalized probability based on LOCI quality, demonstrated interest, academic profile.',
+                        link: 'education-and-exam-tools/admission-tools/waitlist-acceptance-calculator',
+                        icon: <WaitlistAcceptanceCalculatorIcon />,
+                        gradientColors: { from: '#9333ea', to: '#3b82f6' },
                     },
                     {
                         title: 'Coalition App Word Counter',
