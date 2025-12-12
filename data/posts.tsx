@@ -1545,7 +1545,7 @@ export const posts: Post[] = [
         date: 'December 12, 2025',
         lastUpdated: 'December 12, 2025',
         category: 'Education Guides',
-        imageUrl: 'https://images.pexels.com/photos/6348119/pexels-photo-6348119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        imageUrl: 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         content: (
             <>
                 <div className="mb-8">

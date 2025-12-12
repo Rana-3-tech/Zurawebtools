@@ -319,14 +319,14 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
     }, [post]);
 
     return (
-        <section className="py-20 bg-white">
+        <section className="pt-6 pb-20 bg-white">
             {/* Skip to main content link for accessibility */}
             <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg">
                 Skip to main content
             </a>
             <div className="container mx-auto px-6">
-                {/* Breadcrumb Navigation */}
-                <nav className="mb-8 max-w-4xl mx-auto" aria-label="Breadcrumb">
+                {/* Breadcrumb Navigation - Left aligned */}
+                <nav className="mb-3" aria-label="Breadcrumb">
                     <ol className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
                         <li><a href="/" className="hover:text-blue-600 transition-colors">Home</a></li>
                         <li><span className="text-gray-400">/</span></li>
@@ -344,13 +344,13 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
 
                 <div className="max-w-4xl mx-auto">
                     <h1 className="text-4xl md:text-5xl font-bold text-gray-900 text-center">{post.title}</h1>
-                    <div className="mt-6 text-center text-gray-500">
+                    <div className="mt-4 text-center text-gray-500">
                         <span>By {post.author}</span> &bull; <span>{post.date}</span>
                         {post.lastUpdated && post.lastUpdated !== post.date && (
                             <span> &bull; Updated: {post.lastUpdated}</span>
                         )}
                     </div>
-                    <img loading="lazy" src={post.imageUrl} alt={post.title} className="mt-12 w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg" />
+                    <img loading="lazy" src={post.imageUrl} alt={post.title} className="mt-6 w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg" />
                     
                     {/* Like/Dislike Buttons */}
                     <div className="mt-8 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6 border border-gray-200">
