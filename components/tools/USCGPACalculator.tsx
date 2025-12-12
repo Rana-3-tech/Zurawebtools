@@ -635,7 +635,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/usc-gpa-c
     const schemas = [softwareAppSchema, breadcrumbSchema, faqSchema, howToSchema];
     schemas.forEach((schema, index) => {
       const scriptId = `schema-${index}`;
-      let script = document.getElementById(scriptId);
+      let script = document.getElementById(scriptId) as HTMLScriptElement | null;
       if (!script) {
         script = document.createElement('script');
         script.id = scriptId;
@@ -729,7 +729,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/usc-gpa-c
                     placeholder="e.g., ECON 203"
                     value={course.name}
                     onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#990000] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#990000] focus:border-transparent text-gray-900"
                     aria-label={`Course name for row ${index + 1}`}
                     aria-describedby="calculator-instructions"
                   />
@@ -744,7 +744,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/usc-gpa-c
                     value={course.grade}
                     onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
                     disabled={course.isPassNoPass}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#990000] focus:border-transparent disabled:bg-gray-200 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#990000] focus:border-transparent disabled:bg-gray-200 disabled:cursor-not-allowed text-gray-900"
                     aria-label={`Grade for ${course.name || 'course ' + (index + 1)}`}
                     aria-describedby="grade-scale-info"
                   >
@@ -767,7 +767,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/usc-gpa-c
                     step="0.5"
                     value={course.units}
                     onChange={(e) => updateCourse(course.id, 'units', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#990000] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#990000] focus:border-transparent text-gray-900"
                     aria-label={`Semester units for ${course.name || 'course ' + (index + 1)}`}
                     aria-describedby="units-info"
                   />
@@ -781,7 +781,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/usc-gpa-c
                     id={`category-${course.id}`}
                     value={course.category}
                     onChange={(e) => updateCourse(course.id, 'category', e.target.value as 'Major' | 'Overall')}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#990000] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#990000] focus:border-transparent text-gray-900"
                     aria-label={`Category for ${course.name || 'course ' + (index + 1)}`}
                     aria-describedby="category-info"
                   >
@@ -1241,6 +1241,230 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/usc-gpa-c
                 <p className="text-gray-700"><strong>Important:</strong> Graduate and professional schools often recalculate GPAs including P/NP courses as C grades (2.0), which can significantly lower your GPA for admissions purposes. Use P/NP strategically!</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* USC vs Other Universities Comparison Table */}
+        <section className="bg-white rounded-xl shadow-lg p-8 mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">🏫 USC vs Other California Universities</h2>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gradient-to-r from-[#990000] to-[#FFCC00] text-white">
+                  <th className="px-4 py-3 text-left font-semibold">University</th>
+                  <th className="px-4 py-3 text-left font-semibold">System</th>
+                  <th className="px-4 py-3 text-left font-semibold">Units Required</th>
+                  <th className="px-4 py-3 text-left font-semibold">A+ Value</th>
+                  <th className="px-4 py-3 text-left font-semibold">Summa GPA</th>
+                  <th className="px-4 py-3 text-left font-semibold">Magna GPA</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-700">
+                <tr className="border-b border-gray-200 bg-red-50">
+                  <td className="px-4 py-3 font-bold text-[#990000]">USC (You're here)</td>
+                  <td className="px-4 py-3">Semester</td>
+                  <td className="px-4 py-3">120 units</td>
+                  <td className="px-4 py-3">4.0</td>
+                  <td className="px-4 py-3">3.90+</td>
+                  <td className="px-4 py-3">3.75+</td>
+                </tr>
+                <tr className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">UCLA</td>
+                  <td className="px-4 py-3">Quarter</td>
+                  <td className="px-4 py-3">180 units</td>
+                  <td className="px-4 py-3">4.0</td>
+                  <td className="px-4 py-3">3.935+</td>
+                  <td className="px-4 py-3">3.753+</td>
+                </tr>
+                <tr className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">UC Berkeley</td>
+                  <td className="px-4 py-3">Semester</td>
+                  <td className="px-4 py-3">120 units</td>
+                  <td className="px-4 py-3">4.0</td>
+                  <td className="px-4 py-3">3.90+</td>
+                  <td className="px-4 py-3">3.70+</td>
+                </tr>
+                <tr className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">Stanford</td>
+                  <td className="px-4 py-3">Quarter</td>
+                  <td className="px-4 py-3">180 units</td>
+                  <td className="px-4 py-3">4.3</td>
+                  <td className="px-4 py-3">Top 15%</td>
+                  <td className="px-4 py-3">N/A</td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">Caltech</td>
+                  <td className="px-4 py-3">Quarter</td>
+                  <td className="px-4 py-3">186 units</td>
+                  <td className="px-4 py-3">4.0</td>
+                  <td className="px-4 py-3">N/A</td>
+                  <td className="px-4 py-3">N/A</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg">
+            <p className="text-gray-700 leading-relaxed">
+              <strong>Key Insight:</strong> USC's semester system requires fewer total units (120 vs UCLA's 180) but semester courses carry more weight per unit. USC's Latin Honors thresholds are slightly more achievable than UCLA's (3.90 vs 3.935 for Summa), making it competitive but fair. Your USC GPA directly translates to other semester-system schools like Berkeley.
+            </p>
+          </div>
+        </section>
+
+        {/* GPA Planning Guide */}
+        <section className="bg-white rounded-xl shadow-lg p-8 mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">📊 GPA Planning & Goal Setting</h2>
+          
+          <div className="space-y-6">
+            {/* Target GPA Calculator */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 p-6 rounded-r-lg">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">What GPA Do You Need to Reach Your Goal?</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">For Summa Cum Laude (3.90+)</h4>
+                  <ul className="space-y-2 text-gray-700 text-sm">
+                    <li>• If you have <strong>30 units with 3.5 GPA</strong> → Need <strong>4.0 in remaining 90 units</strong></li>
+                    <li>• If you have <strong>60 units with 3.7 GPA</strong> → Need <strong>4.0 in remaining 60 units</strong></li>
+                    <li>• If you have <strong>90 units with 3.8 GPA</strong> → Need <strong>4.0 in remaining 30 units</strong></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">For Magna Cum Laude (3.75+)</h4>
+                  <ul className="space-y-2 text-gray-700 text-sm">
+                    <li>• If you have <strong>30 units with 3.3 GPA</strong> → Need <strong>3.9 in remaining 90 units</strong></li>
+                    <li>• If you have <strong>60 units with 3.5 GPA</strong> → Need <strong>3.9 in remaining 60 units</strong></li>
+                    <li>• If you have <strong>90 units with 3.6 GPA</strong> → Need <strong>4.0 in remaining 30 units</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Semester Planning Strategy */}
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-600 p-6 rounded-r-lg">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Strategic Course Load Planning</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 className="font-bold text-green-700 mb-2">Freshman Year</h4>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• Take 14-16 units per semester</li>
+                    <li>• Mix easy & challenging courses</li>
+                    <li>• Build strong GPA foundation</li>
+                    <li>• Target: 3.7+ first year</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 className="font-bold text-blue-700 mb-2">Sophomore-Junior</h4>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• Complete major prerequisites</li>
+                    <li>• Use P/NP strategically (1-2 per term)</li>
+                    <li>• Focus on major GPA (3.5+ required)</li>
+                    <li>• Maintain cumulative 3.75+</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 className="font-bold text-purple-700 mb-2">Senior Year</h4>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• Can't significantly raise GPA now</li>
+                    <li>• Take courses you'll excel in</li>
+                    <li>• Avoid risky electives</li>
+                    <li>• Protect your Latin Honors status</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Common Pitfalls */}
+            <div className="bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-600 p-6 rounded-r-lg">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">🚨 Common GPA Mistakes USC Students Make</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-semibold text-red-700 mb-2">Academic Mistakes</h4>
+                  <ul className="space-y-1 text-sm text-gray-700">
+                    <li>• Taking 18+ units while working part-time</li>
+                    <li>• Not using office hours when struggling</li>
+                    <li>• Waiting until senior year to fix GPA</li>
+                    <li>• Ignoring major GPA requirements</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-red-700 mb-2">Strategic Mistakes</h4>
+                  <ul className="space-y-1 text-sm text-gray-700">
+                    <li>• Using P/NP for med/law school prerequisites</li>
+                    <li>• Taking difficult courses together</li>
+                    <li>• Not dropping courses before deadline</li>
+                    <li>• Missing Dean's List by 1-2 units</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Graduate School Requirements */}
+        <section className="bg-white rounded-xl shadow-lg p-8 mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">🎯 Graduate School GPA Requirements for USC Students</h2>
+          
+          <div className="overflow-x-auto mb-6">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-800 text-white">
+                  <th className="px-4 py-3 text-left font-semibold">Program Type</th>
+                  <th className="px-4 py-3 text-left font-semibold">Minimum GPA</th>
+                  <th className="px-4 py-3 text-left font-semibold">Competitive GPA</th>
+                  <th className="px-4 py-3 text-left font-semibold">Major GPA Importance</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-700">
+                <tr className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">Medical School</td>
+                  <td className="px-4 py-3">3.5</td>
+                  <td className="px-4 py-3 text-green-700 font-bold">3.7-3.9</td>
+                  <td className="px-4 py-3">Science GPA Critical (3.6+)</td>
+                </tr>
+                <tr className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">Law School (Top 14)</td>
+                  <td className="px-4 py-3">3.6</td>
+                  <td className="px-4 py-3 text-green-700 font-bold">3.8-4.0</td>
+                  <td className="px-4 py-3">Less Important</td>
+                </tr>
+                <tr className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">MBA Programs</td>
+                  <td className="px-4 py-3">3.0</td>
+                  <td className="px-4 py-3 text-green-700 font-bold">3.5-3.7</td>
+                  <td className="px-4 py-3">Work Experience > GPA</td>
+                </tr>
+                <tr className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">PhD Programs</td>
+                  <td className="px-4 py-3">3.3</td>
+                  <td className="px-4 py-3 text-green-700 font-bold">3.7-3.9</td>
+                  <td className="px-4 py-3">Major GPA Critical (3.8+)</td>
+                </tr>
+                <tr className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">Master's Programs</td>
+                  <td className="px-4 py-3">3.0</td>
+                  <td className="px-4 py-3 text-green-700 font-bold">3.5+</td>
+                  <td className="px-4 py-3">Major GPA Important (3.3+)</td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-4 py-3 font-semibold">Dental/Pharmacy School</td>
+                  <td className="px-4 py-3">3.4</td>
+                  <td className="px-4 py-3 text-green-700 font-bold">3.6-3.8</td>
+                  <td className="px-4 py-3">Science GPA Critical</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-lg">
+            <h3 className="font-bold text-gray-900 mb-2">⚠️ Important Notes for USC Pre-Professional Students:</h3>
+            <ul className="space-y-2 text-gray-700">
+              <li>• <strong>LSAC GPA Recalculation:</strong> Law schools use LSAC to recalculate GPAs (A+=4.33, includes all attempts)</li>
+              <li>• <strong>AMCAS/AACOMAS:</strong> Medical schools recalculate with all college coursework including community college</li>
+              <li>• <strong>P/NP Warning:</strong> Most professional schools convert P grades to C (2.0) for admissions GPA</li>
+              <li>• <strong>Grade Replacement:</strong> USC's grade replacement policy may not apply to professional school applications</li>
+              <li>• <strong>Upward Trend Matters:</strong> Strong junior/senior year performance can offset weaker freshman grades</li>
+            </ul>
           </div>
         </section>
 
