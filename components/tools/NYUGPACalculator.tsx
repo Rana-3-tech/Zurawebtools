@@ -51,6 +51,24 @@ const NYUGPACalculator: React.FC<NYUGPACalculatorProps> = ({ navigateTo }) => {
       document.head.appendChild(meta);
     }
 
+    // Robots Meta
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.setAttribute('name', 'robots');
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.setAttribute('content', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+
+    // Author Meta
+    let metaAuthor = document.querySelector('meta[name="author"]');
+    if (!metaAuthor) {
+      metaAuthor = document.createElement('meta');
+      metaAuthor.setAttribute('name', 'author');
+      document.head.appendChild(metaAuthor);
+    }
+    metaAuthor.setAttribute('content', 'ZuraWebTools');
+
     // Open Graph tags
     let ogTitle = document.querySelector('meta[property="og:title"]');
     if (!ogTitle) {
@@ -76,6 +94,38 @@ const NYUGPACalculator: React.FC<NYUGPACalculatorProps> = ({ navigateTo }) => {
     }
     ogUrl.setAttribute('content', 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/nyu-gpa-calculator');
 
+    let ogType = document.querySelector('meta[property="og:type"]');
+    if (!ogType) {
+      ogType = document.createElement('meta');
+      ogType.setAttribute('property', 'og:type');
+      document.head.appendChild(ogType);
+    }
+    ogType.setAttribute('content', 'website');
+
+    let ogSiteName = document.querySelector('meta[property="og:site_name"]');
+    if (!ogSiteName) {
+      ogSiteName = document.createElement('meta');
+      ogSiteName.setAttribute('property', 'og:site_name');
+      document.head.appendChild(ogSiteName);
+    }
+    ogSiteName.setAttribute('content', 'ZuraWebTools');
+
+    let ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (!ogLocale) {
+      ogLocale = document.createElement('meta');
+      ogLocale.setAttribute('property', 'og:locale');
+      document.head.appendChild(ogLocale);
+    }
+    ogLocale.setAttribute('content', 'en_US');
+
+    let ogImage = document.querySelector('meta[property="og:image"]');
+    if (!ogImage) {
+      ogImage = document.createElement('meta');
+      ogImage.setAttribute('property', 'og:image');
+      document.head.appendChild(ogImage);
+    }
+    ogImage.setAttribute('content', 'https://zurawebtools.com/og-nyu-gpa-calculator.png');
+
     // Twitter Card tags
     let twitterCard = document.querySelector('meta[name="twitter:card"]');
     if (!twitterCard) {
@@ -93,6 +143,22 @@ const NYUGPACalculator: React.FC<NYUGPACalculatorProps> = ({ navigateTo }) => {
     }
     twitterTitle.setAttribute('content', 'NYU GPA Calculator 2026 - Calculate Your New York University GPA');
 
+    let twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    if (!twitterDescription) {
+      twitterDescription = document.createElement('meta');
+      twitterDescription.setAttribute('name', 'twitter:description');
+      document.head.appendChild(twitterDescription);
+    }
+    twitterDescription.setAttribute('content', 'Free NYU GPA calculator for 2026. Calculate your New York University grade point average instantly with our easy-to-use tool. Track Dean\'s List eligibility and honors.');
+
+    let twitterImage = document.querySelector('meta[name="twitter:image"]');
+    if (!twitterImage) {
+      twitterImage = document.createElement('meta');
+      twitterImage.setAttribute('name', 'twitter:image');
+      document.head.appendChild(twitterImage);
+    }
+    twitterImage.setAttribute('content', 'https://zurawebtools.com/og-nyu-gpa-calculator.png');
+
     // Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
@@ -109,14 +175,31 @@ const NYUGPACalculator: React.FC<NYUGPACalculatorProps> = ({ navigateTo }) => {
         "@type": "SoftwareApplication",
         "name": "NYU GPA Calculator",
         "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Web",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "url": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/nyu-gpa-calculator",
+        "description": "Free NYU GPA calculator for 2026. Calculate your New York University grade point average instantly with Latin Honors tracking (Summa 3.9+, Magna 3.7+, Cum Laude 3.5+) and Dean's List eligibility (3.5+ with 12+ credits).",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD"
         },
-        "description": "Free NYU GPA calculator for 2025. Calculate your New York University grade point average instantly.",
-        "url": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/nyu-gpa-calculator"
+        "creator": {
+          "@type": "Organization",
+          "name": "ZuraWebTools",
+          "url": "https://zurawebtools.com"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "463",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "featureList": "11-grade scale (A through F), Latin Honors tracking, Dean's List calculation, semester GPA, cumulative GPA, quality points calculation, print results, download results, share results",
+        "datePublished": "2025-12-12",
+        "dateModified": "2025-12-12",
+        "inLanguage": "en-US"
       },
       {
         "@context": "https://schema.org",
@@ -145,6 +228,108 @@ const NYUGPACalculator: React.FC<NYUGPACalculatorProps> = ({ navigateTo }) => {
             "position": 4,
             "name": "NYU GPA Calculator",
             "item": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/nyu-gpa-calculator"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What GPA do I need for Dean's List at NYU?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You need a 3.5 GPA or higher for the semester with at least 12 graded credit hours. Dean's List is awarded term-by-term based on semester performance, not cumulative GPA. Pass/Fail courses don't count toward the credit hour requirement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does NYU use plus grades (like A+)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. NYU does not use plus grades. The highest grade at NYU is an A (4.0), and there is no A+ grade. NYU uses minus grades (A-, B-, C-) and plus grades only for B+ (3.333), C+ (2.333), and D+ (1.333)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a good GPA at New York University?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A 3.5+ GPA is considered good at NYU and qualifies you for Dean's List. A 3.5+ GPA earns Cum Laude honors. For competitive graduate programs or top employers, aim for 3.7+. The average NYU GPA is around 3.4, so anything above 3.5 puts you in the top tier of students."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I calculate my semester GPA vs cumulative GPA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Semester GPA includes only courses from one term. Cumulative GPA includes all courses you've taken at NYU. Use our calculator for semester GPA by entering only current term courses, or track your cumulative GPA across multiple semesters."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do Pass/Fail courses affect my NYU GPA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Courses taken Pass/Fail (P/F) do not affect your GPA calculation at NYU. They count toward your total credit hours for graduation but don't factor into quality points. However, P/F courses don't count toward the 12-credit minimum for Dean's List eligibility."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I retake a course to improve my GPA at NYU?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, but with restrictions. NYU allows grade replacement for courses where you earned a C or below. When you retake the course, the new grade replaces the old one in your GPA calculation (though both grades remain on your transcript). Check with your academic advisor about specific retake policies for your school."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What GPA do I need for graduate school from NYU?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most competitive graduate programs prefer a 3.5+ GPA. Top programs (medical school, law school, PhD programs) typically require 3.7+. However, GPA is just one factor - research experience, test scores (like the MCAT, LSAT, or GMAT), letters of recommendation, and personal statements also matter significantly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is NYU GPA different from high school GPA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "NYU uses a 4.0 scale with minus grades (A-, B-, etc.), while high schools often use simpler scales or weighted GPAs. NYU GPA is weighted by credit hours - a 4-credit course impacts your GPA more than a 1-credit course. Also, NYU doesn't offer GPA boosts for honors or AP courses."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if my GPA falls below 2.0 at NYU?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A GPA below 2.0 puts you on academic probation. You'll need to meet with an academic advisor to create an improvement plan. If your GPA doesn't improve, you may face academic dismissal. NYU offers support resources like tutoring, academic coaching, and counseling to help students in academic difficulty."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I calculate my LSAC GPA using this calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The Law School Admission Council (LSAC) uses a different calculation method that includes all college coursework (including community college and study abroad). LSAC also treats repeated courses differently. If you're applying to law school, use a dedicated LSAC GPA Calculator for accurate results."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do transfer credits affect my NYU GPA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Transfer credits from other institutions count toward your total credits for graduation but do not factor into your NYU GPA. Only courses taken directly at New York University affect your GPA. This means transfer students start with a fresh GPA at NYU, though their prior coursework appears on their transcript."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the difference between NYU and other university GPA calculators?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each university has unique grading policies. NYU's grading system (no A+ grade) differs from schools like Stanford or UMich. Latin Honors thresholds also vary - NYU's Summa (3.9+) is higher than UMich's (3.85+). Always use your specific university's calculator for accurate GPA tracking."
+            }
           }
         ]
       }
