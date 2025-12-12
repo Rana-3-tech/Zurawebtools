@@ -1588,7 +1588,7 @@ export const posts: Post[] = [
 
                 <div className="my-8 text-center">
                     <img src="https://images.pexels.com/photos/5905857/pexels-photo-5905857.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Student writing UCAS personal statement on laptop" className="rounded-lg shadow-lg mx-auto max-w-3xl" />
-                    <p className="text-sm text-gray-600 mt-3 italic">Your personal statement is read by every university you apply to</p>
+                    <p className="text-sm text-gray-700 mt-3 italic">Your personal statement is read by every university you apply to</p>
                 </div>
 
                 <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Who Reads Your Personal Statement?</h3>
@@ -1713,7 +1713,7 @@ export const posts: Post[] = [
                             <p className="text-gray-800">Final deadline for: <strong>All 2026 applications</strong> (applications after this date go through Clearing)</p>
                         </div>
                     </div>
-                    <p className="mt-4 text-sm text-gray-600 italic">Note: Late applications may still be considered but universities are not obligated to process them.</p>
+                    <p className="mt-4 text-sm text-gray-700 italic">Note: Late applications may still be considered but universities are not obligated to process them.</p>
                 </div>
 
                 <h2 id="what-to-include" className="text-3xl font-bold text-gray-900 mt-12 mb-6 border-b-4 border-blue-500 pb-2">
@@ -1839,7 +1839,7 @@ export const posts: Post[] = [
                                     <strong>Template:</strong> "My fascination with [subject] began when [specific moment/experience]. This led me to explore [related topic], which revealed [what you learned about the field]."
                                 </p>
                             </div>
-                            <p className="text-sm text-gray-600 mt-2">
+                            <p className="text-sm text-gray-700 mt-2">
                                 ✅ Do: Be specific, authentic, and engaging<br/>
                                 ❌ Don't: Use clichés ("From a young age..."), quote famous people, or start with a dictionary definition
                             </p>
@@ -1853,7 +1853,7 @@ export const posts: Post[] = [
                                     <strong>Template:</strong> "My A-Level studies in [subjects] have particularly interested me in [specific area]. For example, [coursework/project] allowed me to [what you did]. Beyond the curriculum, I explored [wider reading/research] which challenged my understanding of [concept]. This reading led me to question [critical thinking point]."
                                 </p>
                             </div>
-                            <p className="text-sm text-gray-600 mt-2">
+                            <p className="text-sm text-gray-700 mt-2">
                                 Include: Specific books/articles, coursework details, independent research, academic competitions
                             </p>
                         </div>
@@ -1866,7 +1866,7 @@ export const posts: Post[] = [
                                     <strong>Template:</strong> "To gain practical insight, I [work experience/volunteering]. This experience taught me [specific learning points] and confirmed my desire to pursue [subject] because [reflection on what you learned]."
                                 </p>
                             </div>
-                            <p className="text-sm text-gray-600 mt-2">
+                            <p className="text-sm text-gray-700 mt-2">
                                 Focus on: What you learned, skills developed, how it relates to your course choice
                             </p>
                         </div>
@@ -1879,7 +1879,7 @@ export const posts: Post[] = [
                                     <strong>Template:</strong> "Outside academics, I [main extracurricular activity] which has developed my [key skills]. As [leadership role], I [achievement/responsibility]. These experiences have enhanced my [skills relevant to university study]."
                                 </p>
                             </div>
-                            <p className="text-sm text-gray-600 mt-2">
+                            <p className="text-sm text-gray-700 mt-2">
                                 Keep brief: Only include activities that demonstrate relevant skills or show commitment
                             </p>
                         </div>
@@ -1892,7 +1892,7 @@ export const posts: Post[] = [
                                     <strong>Template:</strong> "I am eager to deepen my understanding of [subject] at university, where I can [specific aspects of university study you're excited about]. My academic preparation, practical experience, and commitment to [field] have equipped me to thrive in higher education and contribute meaningfully to [future career/field]."
                                 </p>
                             </div>
-                            <p className="text-sm text-gray-600 mt-2">
+                            <p className="text-sm text-gray-700 mt-2">
                                 ✅ Do: Be forward-looking and confident<br/>
                                 ❌ Don't: Introduce completely new information or be overly humble/arrogant
                             </p>
@@ -1929,22 +1929,22 @@ export const posts: Post[] = [
                             <table className="w-full border-collapse">
                                 <thead>
                                     <tr className="bg-gray-50">
-                                        <th className="border border-gray-300 p-3 text-left font-semibold">Focus Area</th>
-                                        <th className="border border-gray-300 p-3 text-left font-semibold">What to Emphasize</th>
+                                        <th className="border border-gray-300 p-3 text-left font-semibold text-gray-900">Focus Area</th>
+                                        <th className="border border-gray-300 p-3 text-left font-semibold text-gray-900">What to Emphasize</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Work Experience</td>
-                                        <td className="border border-gray-300 p-3">Hospital shadowing, care home volunteering, patient interaction observations. Mention what you <em>learned</em> about healthcare challenges.</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Work Experience</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Hospital shadowing, care home volunteering, patient interaction observations. Mention what you <em>learned</em> about healthcare challenges.</td>
                                     </tr>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Scientific Knowledge</td>
-                                        <td className="border border-gray-300 p-3">Reference specific biology/chemistry topics, medical journals read (BMJ, Lancet), ethical issues considered (end-of-life care, medical AI).</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Scientific Knowledge</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Reference specific biology/chemistry topics, medical journals read (BMJ, Lancet), ethical issues considered (end-of-life care, medical AI).</td>
                                     </tr>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Personal Qualities</td>
-                                        <td className="border border-gray-300 p-3">Empathy, resilience, teamwork. Provide concrete examples from volunteering or sports.</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Personal Qualities</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Empathy, resilience, teamwork. Provide concrete examples from volunteering or sports.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1956,22 +1956,22 @@ export const posts: Post[] = [
                             <table className="w-full border-collapse">
                                 <thead>
                                     <tr className="bg-gray-50">
-                                        <th className="border border-gray-300 p-3 text-left font-semibold">Focus Area</th>
-                                        <th className="border border-gray-300 p-3 text-left font-semibold">What to Emphasize</th>
+                                        <th className="border border-gray-300 p-3 text-left font-semibold text-gray-900">Focus Area</th>
+                                        <th className="border border-gray-300 p-3 text-left font-semibold text-gray-900">What to Emphasize</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Analytical Skills</td>
-                                        <td className="border border-gray-300 p-3">Discuss cases studied, legal debates participated in, ability to construct arguments with evidence.</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Analytical Skills</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Discuss cases studied, legal debates participated in, ability to construct arguments with evidence.</td>
                                     </tr>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Current Affairs</td>
-                                        <td className="border border-gray-300 p-3">Reference recent Supreme Court cases, legal reforms, international law developments. Show critical thinking.</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Current Affairs</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Reference recent Supreme Court cases, legal reforms, international law developments. Show critical thinking.</td>
                                     </tr>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Work Experience</td>
-                                        <td className="border border-gray-300 p-3">Court visits, law firm shadowing, Citizens Advice volunteering. Explain what insights you gained about legal practice.</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Work Experience</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Court visits, law firm shadowing, Citizens Advice volunteering. Explain what insights you gained about legal practice.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1983,22 +1983,22 @@ export const posts: Post[] = [
                             <table className="w-full border-collapse">
                                 <thead>
                                     <tr className="bg-gray-50">
-                                        <th className="border border-gray-300 p-3 text-left font-semibold">Focus Area</th>
-                                        <th className="border border-gray-300 p-3 text-left font-semibold">What to Emphasize</th>
+                                        <th className="border border-gray-300 p-3 text-left font-semibold text-gray-900">Focus Area</th>
+                                        <th className="border border-gray-300 p-3 text-left font-semibold text-gray-900">What to Emphasize</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Projects & Problem-Solving</td>
-                                        <td className="border border-gray-300 p-3">Detail personal projects (Arduino builds, coding projects, CAD designs). Explain challenges faced and solutions developed.</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Projects & Problem-Solving</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Detail personal projects (Arduino builds, coding projects, CAD designs). Explain challenges faced and solutions developed.</td>
                                     </tr>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Mathematical Application</td>
-                                        <td className="border border-gray-300 p-3">Show how maths/physics concepts apply to real-world engineering. Reference Further Maths topics if relevant.</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Mathematical Application</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Show how maths/physics concepts apply to real-world engineering. Reference Further Maths topics if relevant.</td>
                                     </tr>
                                     <tr>
-                                        <td className="border border-gray-300 p-3 font-medium">Innovation Interest</td>
-                                        <td className="border border-gray-300 p-3">Discuss emerging technologies (AI, renewable energy, robotics), competitions entered (STEM challenges), maker fairs.</td>
+                                        <td className="border border-gray-300 p-3 font-medium text-gray-900">Innovation Interest</td>
+                                        <td className="border border-gray-300 p-3 text-gray-800">Discuss emerging technologies (AI, renewable energy, robotics), competitions entered (STEM challenges), maker fairs.</td>
                                     </tr>
                                 </tbody>
                             </table>
