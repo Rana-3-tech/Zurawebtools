@@ -1545,7 +1545,7 @@ export const posts: Post[] = [
         date: 'December 12, 2025',
         lastUpdated: 'December 12, 2025',
         category: 'Education Guides',
-        imageUrl: 'https://images.pexels.com/photos/1591062/pexels-photo-1591062.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        imageUrl: 'https://images.pexels.com/photos/6348119/pexels-photo-6348119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         content: (
             <>
                 <div className="mb-8">
@@ -2325,7 +2325,7 @@ export const posts: Post[] = [
                         Remember: specificity beats generality, reflection beats listing, and genuine passion beats trying to sound impressive. Start early, draft multiple versions, seek feedback from teachers and mentors, and don't be afraid to showcase what makes <em>your</em> intellectual journey unique.
                     </p>
                     <p className="text-gray-800 text-lg leading-relaxed font-semibold">
-                        Good luck with your application! If you found this guide helpful, explore our other <a href="/blog" className="text-blue-600 hover:underline">education resources</a> and use our <a href="/tools/common-app-essay-word-counter" className="text-blue-600 hover:underline">essay tools</a> to perfect your writing.
+                        Good luck with your application! If you found this guide helpful, explore our other <a href="/blog" className="text-blue-600 hover:underline">education resources</a> and use our <a href="/education-and-exam-tools/admission-tools/common-app-essay-word-counter" className="text-blue-600 hover:underline">essay tools</a> to perfect your writing.
                     </p>
                 </section>
 
@@ -2334,7 +2334,7 @@ export const posts: Post[] = [
                         <strong>Need more help?</strong> Check out our related guides: 
                         <a href="/blog/education-guides/how-to-calculate-gpa" className="text-blue-600 hover:underline ml-1">How to Calculate GPA</a>, 
                         <a href="/blog/education-guides/sat-vs-act-which-test" className="text-blue-600 hover:underline ml-1">SAT vs ACT Guide</a>, 
-                        and use our <a href="/tools/personal-statement-character-counter" className="text-blue-600 hover:underline ml-1">Personal Statement Character Counter</a> to stay within UCAS limits.
+                        and use our <a href="/education-and-exam-tools/admission-tools/personal-statement-character-counter" className="text-blue-600 hover:underline ml-1">Personal Statement Character Counter</a> to stay within UCAS limits.
                     </p>
                 </div>
             </>

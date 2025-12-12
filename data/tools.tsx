@@ -708,6 +708,17 @@ const USCGPAIcon = () => (
     </svg>
 );
 
+const NYUGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nyuGPAIconTitle">
+        <title id="nyuGPAIconTitle">NYU GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradNYU" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#57068C" /><stop offset="100%" stopColor="#8900E1" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradNYU)" />
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradNYU)" opacity="0.8" />
+        <circle cx="12" cy="9" r="2.5" fill="#8900E1" />
+        <text x="12" y="10.5" fontSize="3" fill="#FFFFFF" textAnchor="middle" fontWeight="bold">A</text>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -1013,6 +1024,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/usc-gpa-calculator',
                         icon: <USCGPAIcon />,
                         gradientColors: { from: '#990000', to: '#FFCC00' },
+                    },
+                    {
+                        title: 'NYU GPA Calculator',
+                        description: 'NYU Violets GPA calculator with official NYU grading scale (A = 4.0). Calculate semester GPA, cumulative GPA, and track Latin Honors eligibility (Summa 3.9+, Magna 3.7+, Cum Laude 3.5+). Supports NYU\'s plus/minus grading system and Dean\'s List requirements (3.5+ with 12+ credits).',
+                        link: 'education-and-exam-tools/university-gpa-tools/nyu-gpa-calculator',
+                        icon: <NYUGPAIcon />,
+                        gradientColors: { from: '#57068C', to: '#8900E1' },
                     },
                 ],
             },
