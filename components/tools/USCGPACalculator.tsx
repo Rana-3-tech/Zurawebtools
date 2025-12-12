@@ -1432,7 +1432,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/usc-gpa-c
                   <td className="px-4 py-3 font-semibold">MBA Programs</td>
                   <td className="px-4 py-3">3.0</td>
                   <td className="px-4 py-3 text-green-700 font-bold">3.5-3.7</td>
-                  <td className="px-4 py-3">Work Experience > GPA</td>
+                  <td className="px-4 py-3">Work Experience {'>'}  GPA</td>
                 </tr>
                 <tr className="border-b border-gray-200 hover:bg-gray-50">
                   <td className="px-4 py-3 font-semibold">PhD Programs</td>
