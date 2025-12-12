@@ -32,6 +32,7 @@ const LSATScoreCalculator = lazy(() => import('./components/tools/LSATScoreCalcu
 const APUSHScoreCalculator = lazy(() => import('./components/tools/APUSHScoreCalculator'));
 const MCATScoreCalculator = lazy(() => import('./components/tools/MCATScoreCalculator'));
 const BerkeleyGPACalculator = lazy(() => import('./components/tools/BerkeleyGPACalculator'));
+const USCGPACalculator = lazy(() => import('./components/tools/USCGPACalculator'));
 const UTAGPACalculator = lazy(() => import('./components/tools/UTAGPACalculator'));
 const RutgersGPACalculator = lazy(() => import('./components/tools/RutgersGPACalculator'));
 const UVAGPACalculator = lazy(() => import('./components/tools/UVAGPACalculator'));
@@ -277,6 +278,7 @@ const App: React.FC = () => {
             'apush-score-calculator': APUSHScoreCalculator,
             'mcat-score-calculator': MCATScoreCalculator,
             'berkeley-gpa-calculator': BerkeleyGPACalculator,
+            'usc-gpa-calculator': USCGPACalculator,
             'rutgers-gpa-calculator': RutgersGPACalculator,
             'uta-gpa-calculator': UTAGPACalculator,
             'asu-gpa-calculator': ASUGPACalculator,
