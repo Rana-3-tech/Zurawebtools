@@ -730,6 +730,17 @@ const UMichGPAIcon = () => (
     </svg>
 );
 
+const UNCGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="uncGPAIconTitle">
+        <title id="uncGPAIconTitle">UNC Chapel Hill GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradUNC" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#13294B" /><stop offset="50%" stopColor="#7BAFD4" /><stop offset="100%" stopColor="#4B9CD3" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradUNC)" />
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradUNC)" opacity="0.8" />
+        <circle cx="12" cy="9" r="2.5" fill="#7BAFD4" />
+        <text x="12" y="10.5" fontSize="3" fill="#13294B" textAnchor="middle" fontWeight="bold">A</text>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -1049,6 +1060,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/umich-gpa-calculator',
                         icon: <UMichGPAIcon />,
                         gradientColors: { from: '#00274C', to: '#FFCB05' },
+                    },
+                    {
+                        title: 'UNC Chapel Hill GPA Calculator',
+                        description: 'UNC Chapel Hill Tar Heels GPA calculator with official UNC grading scale (A+ = 4.0). Calculate semester GPA, cumulative GPA, and track Latin Honors eligibility (Summa 3.85+, Magna 3.65+, Cum Laude 3.5+). Supports UNC\'s plus/minus grading system and Dean\'s List requirements (3.5+ with 12+ credits).',
+                        link: 'education-and-exam-tools/university-gpa-tools/unc-gpa-calculator',
+                        icon: <UNCGPAIcon />,
+                        gradientColors: { from: '#13294B', to: '#7BAFD4' },
                     },
                 ],
             },
