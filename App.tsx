@@ -73,6 +73,7 @@ const DentalSchoolGPACalculator = lazy(() => import('./components/tools/DentalSc
 const VeterinarySchoolGPACalculator = lazy(() => import('./components/tools/VeterinarySchoolGPACalculator'));
 const EngineeringGPACalculator = lazy(() => import('./components/tools/EngineeringGPACalculator'));
 const GPARaiseCalculator = lazy(() => import('./components/tools/GPARaiseCalculator'));
+const UCLAGPACalculator = lazy(() => import('./components/tools/UCLAGPACalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -299,6 +300,7 @@ const App: React.FC = () => {
             'veterinary-school-gpa-calculator': VeterinarySchoolGPACalculator,
             'engineering-gpa-calculator': EngineeringGPACalculator,
             'gpa-raise-calculator': GPARaiseCalculator,
+            'ucla-gpa-calculator': UCLAGPACalculator,
             'gmat-score-calculator': GMATScoreCalculator,
             'ucat-score-calculator': UCATScoreCalculator,
             'personal-statement-character-counter': PersonalStatementCharacterCounter,

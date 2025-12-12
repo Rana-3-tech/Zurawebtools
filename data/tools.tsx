@@ -686,6 +686,17 @@ const DemonstratedInterestCalculatorIcon = () => (
     </svg>
 );
 
+const UCLAGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="uclaGPAIconTitle">
+        <title id="uclaGPAIconTitle">UCLA GPA Calculator Icon</title>
+        <defs><linearGradient id="toolGradUCLA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#2774AE" /><stop offset="100%" stopColor="#FFD100" /></linearGradient></defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#toolGradUCLA)" />
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#toolGradUCLA)" opacity="0.8" />
+        <circle cx="12" cy="9" r="2.5" fill="#FFD100" />
+        <text x="12" y="10.5" fontSize="3" fill="#2774AE" textAnchor="middle" fontWeight="bold">A</text>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -977,6 +988,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/asu-gpa-calculator',
                         icon: <ASUGPAIcon />,
                         gradientColors: { from: '#8C1D40', to: '#FFC627' },
+                    },
+                    {
+                        title: 'UCLA GPA Calculator',
+                        description: 'UCLA Bruins GPA calculator with official UCLA grading scale (A+ = 4.0). Calculate quarterly GPA, major GPA, and track Latin Honors eligibility (Summa Cum Laude, Magna Cum Laude, Cum Laude). Supports UCLA\'s Pass/No Pass system and Dean\'s List requirements.',
+                        link: 'education-and-exam-tools/university-gpa-tools/ucla-gpa-calculator',
+                        icon: <UCLAGPAIcon />,
+                        gradientColors: { from: '#2774AE', to: '#FFD100' },
                     },
                 ],
             },
