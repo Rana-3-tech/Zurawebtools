@@ -779,6 +779,27 @@ const GeorgiaTechGPAIcon = () => (
     </svg>
 );
 
+// Stanford GPA Icon - Cardinal Red gradient with tree theme
+const StanfordGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="stanfordIconTitle">
+        <title id="stanfordIconTitle">Stanford GPA Calculator</title>
+        <defs>
+            <linearGradient id="stanfordGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#8C1515" />
+                <stop offset="50%" stopColor="#B83A4B" />
+                <stop offset="100%" stopColor="#B1040E" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#stanfordGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M3 8 L21 8" stroke="url(#stanfordGrad)" strokeWidth="1.5"/>
+        <path d="M12 10 L12 17" stroke="url(#stanfordGrad)" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M9 11 Q10 9 12 10 Q14 9 15 11" fill="url(#stanfordGrad)" opacity="0.8"/>
+        <path d="M8 13 Q9.5 11.5 12 12 Q14.5 11.5 16 13" fill="url(#stanfordGrad)" opacity="0.6"/>
+        <circle cx="12" cy="5.5" r="1.2" fill="url(#stanfordGrad)"/>
+        <text x="12" y="6" fontSize="2.5" fill="white" textAnchor="middle" fontWeight="bold">S</text>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -1119,6 +1140,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/georgia-tech-gpa-calculator',
                         icon: <GeorgiaTechGPAIcon />,
                         gradientColors: { from: '#B3A369', to: '#003057' },
+                    },
+                    {
+                        title: 'Stanford GPA Calculator',
+                        description: 'Stanford Cardinal GPA calculator with official 4.0 scale (no plus/minus). Track Latin Honors (Summa 3.95+, Magna 3.85+, Cum Laude 3.70+), Coterm eligibility (3.5+), CS major declaration (3.0+), and P/NC option.',
+                        link: 'education-and-exam-tools/university-gpa-tools/stanford-gpa-calculator',
+                        icon: <StanfordGPAIcon />,
+                        gradientColors: { from: '#8C1515', to: '#B1040E' },
                     },
                 ],
             },
