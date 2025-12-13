@@ -741,6 +741,25 @@ const UNCGPAIcon = () => (
     </svg>
 );
 
+// UT Austin GPA Icon - Burnt Orange gradient with Longhorns theme
+const UTAustinGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="utAustinIconTitle">
+        <title id="utAustinIconTitle">UT Austin GPA Calculator</title>
+        <defs>
+            <linearGradient id="utAustinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#BF5700" />
+                <stop offset="50%" stopColor="#FF8C42" />
+                <stop offset="100%" stopColor="#FFA500" />
+            </linearGradient>
+        </defs>
+        <rect x="4" y="3" width="16" height="18" rx="1" stroke="url(#utAustinGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M4 7 L20 7" stroke="url(#utAustinGrad)" strokeWidth="1.5"/>
+        <circle cx="12" cy="14" r="5" fill="url(#utAustinGrad)"/>
+        <text x="12" y="10.5" fontSize="3" fill="#BF5700" textAnchor="middle" fontWeight="bold">A</text>
+        <path d="M10 14 L11.5 16 L14 12" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -1067,6 +1086,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/unc-gpa-calculator',
                         icon: <UNCGPAIcon />,
                         gradientColors: { from: '#13294B', to: '#7BAFD4' },
+                    },
+                    {
+                        title: 'UT Austin GPA Calculator',
+                        description: 'UT Austin Longhorns GPA calculator with official UT grading scale (A = 4.0, A- = 3.67). Track Latin Honors (Highest 3.9+, High 3.7+, Honors 3.5+), Dean\'s List, and internal transfer requirements for McCombs and CS.',
+                        link: 'education-and-exam-tools/university-gpa-tools/ut-austin-gpa-calculator',
+                        icon: <UTAustinGPAIcon />,
+                        gradientColors: { from: '#BF5700', to: '#FF8C42' },
                     },
                 ],
             },
