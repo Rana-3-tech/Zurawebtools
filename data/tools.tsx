@@ -760,6 +760,25 @@ const UTAustinGPAIcon = () => (
     </svg>
 );
 
+// Georgia Tech GPA Icon - Tech Gold and Navy Blue gradient with Yellow Jackets theme
+const GeorgiaTechGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="gtIconTitle">
+        <title id="gtIconTitle">Georgia Tech GPA Calculator</title>
+        <defs>
+            <linearGradient id="gtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#B3A369" />
+                <stop offset="50%" stopColor="#EAB208" />
+                <stop offset="100%" stopColor="#003057" />
+            </linearGradient>
+        </defs>
+        <rect x="4" y="3" width="16" height="18" rx="1" stroke="url(#gtGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M4 7 L20 7" stroke="url(#gtGrad)" strokeWidth="1.5"/>
+        <circle cx="12" cy="14" r="5" fill="url(#gtGrad)"/>
+        <text x="12" y="10.5" fontSize="3" fill="#B3A369" textAnchor="middle" fontWeight="bold">A</text>
+        <path d="M9 13.5 L10.5 15.5 L15 11" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -1093,6 +1112,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/ut-austin-gpa-calculator',
                         icon: <UTAustinGPAIcon />,
                         gradientColors: { from: '#BF5700', to: '#FF8C42' },
+                    },
+                    {
+                        title: 'Georgia Tech GPA Calculator',
+                        description: 'Georgia Tech Yellow Jackets GPA calculator with official GT 4.0 grading scale (straight letter grades, no plus/minus). Track Faculty Honors (top 5%), Highest Honors (3.8+), Dean\'s List (3.0+), co-op eligibility (2.7+), and CS transfer requirements (3.7+).',
+                        link: 'education-and-exam-tools/university-gpa-tools/georgia-tech-gpa-calculator',
+                        icon: <GeorgiaTechGPAIcon />,
+                        gradientColors: { from: '#B3A369', to: '#003057' },
                     },
                 ],
             },

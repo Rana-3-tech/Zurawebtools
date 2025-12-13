@@ -79,6 +79,7 @@ const NYUGPACalculator = lazy(() => import('./components/tools/NYUGPACalculator'
 const UMichGPACalculator = lazy(() => import('./components/tools/UMichGPACalculator'));
 const UNCGPACalculator = lazy(() => import('./components/tools/UNCGPACalculator'));
 const UTAustinGPACalculator = lazy(() => import('./components/tools/UTAustinGPACalculator'));
+const GeorgiaTechGPACalculator = lazy(() => import('./components/tools/GeorgiaTechGPACalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -287,6 +288,7 @@ const App: React.FC = () => {
             'umich-gpa-calculator': UMichGPACalculator,
             'unc-gpa-calculator': UNCGPACalculator,
             'ut-austin-gpa-calculator': UTAustinGPACalculator,
+            'georgia-tech-gpa-calculator': GeorgiaTechGPACalculator,
             'rutgers-gpa-calculator': RutgersGPACalculator,
             'uta-gpa-calculator': UTAGPACalculator,
             'asu-gpa-calculator': ASUGPACalculator,
