@@ -454,7 +454,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/georgia-t
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50">
       <div className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <div className="text-center mb-12 pt-8 pb-12">
+        <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-600 to-blue-700 bg-clip-text text-transparent">
             Georgia Tech GPA Calculator
           </h1>
@@ -467,7 +467,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/georgia-t
         </div>
 
         {/* Calculator Section */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-12 pb-12">
+        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-12">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Enter Your Courses</h2>
 
           <div className="space-y-4">
