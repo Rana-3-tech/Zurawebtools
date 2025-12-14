@@ -31,6 +31,11 @@ const sanitizeInput = (input: string): string => {
 };
 
 const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => {
+  // Constants
+  const CALCULATOR_URL = 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator';
+  const SHARE_TITLE = 'Yale GPA Calculator - Free & Accurate';
+  const SHARE_TEXT = 'Calculate your Yale GPA with precision!';
+
   const [courses, setCourses] = useState<Course[]>([
     { id: crypto.randomUUID(), name: '', credits: 0, grade: '' }
   ]);
@@ -85,7 +90,16 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
   }, []);
 
   // Memoized course row component for better performance
-  const CourseRow = React.memo(({ course, index }: { course: Course; index: number }) => (
+  interface CourseRowProps {
+    course: Course;
+    index: number;
+    coursesLength: number;
+    onUpdate: (id: string, field: keyof Course, value: string | number) => void;
+    onRemove: (id: string) => void;
+    popularCourses: string[];
+  }
+
+  const CourseRow = React.memo<CourseRowProps>(({ course, index, coursesLength, onUpdate, onRemove, popularCourses }) => (
     <div key={course.id} className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 bg-slate-50 rounded-lg border border-slate-200 hover:border-blue-300 transition-all">
       <div className="md:col-span-1 flex items-center">
         <span className="text-lg font-semibold text-slate-700" aria-label={`Course number ${index + 1}`}>#{index + 1}</span>
@@ -100,7 +114,13 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
           type="text"
           list={`course-datalist-${course.id}`}
           value={course.name}
-          onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
+          onChange={(e) => onUpdate(course.id, 'name', e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              document.getElementById(`course-credits-${course.id}`)?.focus();
+            }
+          }}
           placeholder="Type or select from popular courses"
           className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-slate-400"
           aria-label={`Course name for course ${index + 1}`}
@@ -108,7 +128,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
           maxLength={200}
         />
         <datalist id={`course-datalist-${course.id}`}>
-          {popularYaleCourses.map((courseName, idx) => (
+          {popularCourses.map((courseName, idx) => (
             <option key={idx} value={courseName} />
           ))}
         </datalist>
@@ -126,7 +146,13 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
           max="6"
           step="0.5"
           value={course.credits || ''}
-          onChange={(e) => updateCourse(course.id, 'credits', parseFloat(e.target.value) || 0)}
+          onChange={(e) => onUpdate(course.id, 'credits', parseFloat(e.target.value) || 0)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              document.getElementById(`course-grade-${course.id}`)?.focus();
+            }
+          }}
           placeholder="1-6"
           className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-slate-400"
           aria-label={`Credit hours for course ${index + 1}`}
@@ -145,7 +171,16 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
         <select
           id={`course-grade-${course.id}`}
           value={course.grade}
-          onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
+          onChange={(e) => onUpdate(course.id, 'grade', e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              const nextCourse = document.querySelector(`#course-name-${course.id}`)?.closest('.grid')?.nextElementSibling?.querySelector('input');
+              if (nextCourse) {
+                (nextCourse as HTMLElement).focus();
+              }
+            }
+          }}
           className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
           aria-label={`Grade for course ${index + 1}`}
           aria-describedby={`course-grade-help-${course.id}`}
@@ -171,11 +206,18 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
       <div className="md:col-span-1 flex items-end justify-center">
         <button
-          onClick={() => removeCourse(course.id)}
-          className="p-2.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={courses.length === 1}
+          onClick={() => onRemove(course.id)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onRemove(course.id);
+            }
+          }}
+          className="p-2.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:ring-4 focus:ring-red-300"
+          disabled={coursesLength === 1}
           aria-label={`Remove course ${index + 1}`}
           title="Remove this course"
+          type="button"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -609,10 +651,10 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
       sanitizedValue = Math.max(0, Math.min(6, value)); // Clamp between 0-6
     }
     
-    setCourses(courses.map(course =>
+    setCourses(prevCourses => prevCourses.map(course =>
       course.id === id ? { ...course, [field]: sanitizedValue } : course
     ));
-  }, [courses]);
+  }, []);
 
   // Reset calculator
   const resetCalculator = () => {
@@ -938,7 +980,15 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
             {/* Course Input Fields */}
             <div className="space-y-4 mb-6" role="list" aria-label="Course list">
               {courses.map((course, index) => (
-                <CourseRow key={course.id} course={course} index={index} />
+                <CourseRow 
+                  key={course.id} 
+                  course={course} 
+                  index={index}
+                  coursesLength={courses.length}
+                  onUpdate={updateCourse}
+                  onRemove={removeCourse}
+                  popularCourses={popularYaleCourses}
+                />
               ))}
             </div>
 
@@ -965,6 +1015,14 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
               <button
                 onClick={calculateGPA}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    if (!isCalculating && !courses.every(c => !c.grade || c.credits === 0)) {
+                      calculateGPA();
+                    }
+                  }
+                }}
                 disabled={isCalculating || courses.every(c => !c.grade || c.credits === 0)}
                 className="py-4 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg rounded-lg hover:from-blue-700 hover:to-indigo-700 disabled:from-slate-300 disabled:to-slate-400 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl focus:ring-4 focus:ring-blue-300 flex items-center justify-center gap-3"
                 aria-label="Calculate your Yale GPA based on entered courses"
@@ -991,8 +1049,15 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
               <button
                 onClick={resetCalculator}
-                className="py-4 px-8 bg-gradient-to-r from-slate-600 to-slate-700 text-white font-bold text-lg rounded-lg hover:from-slate-700 hover:to-slate-800 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    resetCalculator();
+                  }
+                }}
+                className="py-4 px-8 bg-gradient-to-r from-slate-600 to-slate-700 text-white font-bold text-lg rounded-lg hover:from-slate-700 hover:to-slate-800 transition-all shadow-lg hover:shadow-xl focus:ring-4 focus:ring-slate-300 flex items-center justify-center gap-3"
                 aria-label="Reset calculator"
+                type="button"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -2241,7 +2306,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
           <div className="flex flex-wrap justify-center gap-4">
             {/* Facebook Share */}
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator')}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CALCULATOR_URL)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
@@ -2255,7 +2320,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
             {/* Twitter Share */}
             <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('Calculate your Yale GPA with precision!')}&url=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator')}`}
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(CALCULATOR_URL)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors shadow-md hover:shadow-lg"
@@ -2269,7 +2334,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
             {/* LinkedIn Share */}
             <a
-              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator')}`}
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(CALCULATOR_URL)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors shadow-md hover:shadow-lg"
@@ -2283,7 +2348,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
             {/* Reddit Share */}
             <a
-              href={`https://reddit.com/submit?url=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator')}&title=${encodeURIComponent('Yale GPA Calculator - Free & Accurate')}`}
+              href={`https://reddit.com/submit?url=${encodeURIComponent(CALCULATOR_URL)}&title=${encodeURIComponent(SHARE_TITLE)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors shadow-md hover:shadow-lg"
@@ -2297,7 +2362,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
             {/* WhatsApp Share */}
             <a
-              href={`https://wa.me/?text=${encodeURIComponent('Check out this Yale GPA Calculator: https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator')}`}
+              href={`https://wa.me/?text=${encodeURIComponent(`Check out this ${SHARE_TITLE}: ${CALCULATOR_URL}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors shadow-md hover:shadow-lg"
