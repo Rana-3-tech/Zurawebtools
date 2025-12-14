@@ -13,6 +13,23 @@ interface YaleGPACalculatorProps {
   navigateTo: (page: Page) => void;
 }
 
+// Utility function to sanitize user input
+const sanitizeInput = (input: string): string => {
+  return input
+    .replace(/[<>"'&]/g, (char) => {
+      const entities: { [key: string]: string } = {
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '&': '&amp;'
+      };
+      return entities[char] || char;
+    })
+    .trim()
+    .slice(0, 200); // Limit length to prevent abuse
+};
+
 const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => {
   const [courses, setCourses] = useState<Course[]>([
     { id: crypto.randomUUID(), name: '', credits: 0, grade: '' }
@@ -23,11 +40,194 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
   const [showResults, setShowResults] = useState<boolean>(false);
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [errorInfo, setErrorInfo] = useState<string>('');
+  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
+
+  // Error Boundary: Global error handlers
+  useEffect(() => {
+    const handleError = (event: ErrorEvent) => {
+      console.error('Global error caught:', event.error);
+      setHasError(true);
+      setErrorInfo(event.message || 'An unexpected error occurred');
+    };
+
+    const handleRejection = (event: PromiseRejectionEvent) => {
+      console.error('Unhandled promise rejection:', event.reason);
+      setHasError(true);
+      setErrorInfo('An error occurred while processing your request');
+    };
+
+    const handleOnline = () => {
+      setIsOnline(true);
+      setHasError(false);
+      setErrorInfo('');
+      console.log('Connection restored');
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+      setHasError(true);
+      setErrorInfo('You are currently offline. The calculator will continue to work, but some features may be limited.');
+    };
+
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handleRejection);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleRejection);
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  // Memoized course row component for better performance
+  const CourseRow = React.memo(({ course, index }: { course: Course; index: number }) => (
+    <div key={course.id} className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 bg-slate-50 rounded-lg border border-slate-200 hover:border-blue-300 transition-all">
+      <div className="md:col-span-1 flex items-center">
+        <span className="text-lg font-semibold text-slate-700" aria-label={`Course number ${index + 1}`}>#{index + 1}</span>
+      </div>
+      
+      <div className="md:col-span-5">
+        <label htmlFor={`course-name-${course.id}`} className="block text-sm font-medium text-slate-700 mb-1">
+          Course Name
+        </label>
+        <input
+          id={`course-name-${course.id}`}
+          type="text"
+          list={`course-datalist-${course.id}`}
+          value={course.name}
+          onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
+          placeholder="Type or select from popular courses"
+          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-slate-400"
+          aria-label={`Course name for course ${index + 1}`}
+          aria-describedby={`course-name-help-${course.id}`}
+          maxLength={200}
+        />
+        <datalist id={`course-datalist-${course.id}`}>
+          {popularYaleCourses.map((courseName, idx) => (
+            <option key={idx} value={courseName} />
+          ))}
+        </datalist>
+        <span id={`course-name-help-${course.id}`} className="sr-only">Enter the name of your course or select from dropdown</span>
+      </div>
+
+      <div className="md:col-span-2">
+        <label htmlFor={`course-credits-${course.id}`} className="block text-sm font-medium text-slate-700 mb-1">
+          Credits
+        </label>
+        <input
+          id={`course-credits-${course.id}`}
+          type="number"
+          min="0"
+          max="6"
+          step="0.5"
+          value={course.credits || ''}
+          onChange={(e) => updateCourse(course.id, 'credits', parseFloat(e.target.value) || 0)}
+          placeholder="1-6"
+          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-slate-400"
+          aria-label={`Credit hours for course ${index + 1}`}
+          aria-describedby={`course-credits-help-${course.id}`}
+          aria-valuemin={0}
+          aria-valuemax={6}
+          aria-valuenow={course.credits}
+        />
+        <span id={`course-credits-help-${course.id}`} className="sr-only">Enter credit hours between 0 and 6</span>
+      </div>
+
+      <div className="md:col-span-3">
+        <label htmlFor={`course-grade-${course.id}`} className="block text-sm font-medium text-slate-700 mb-1">
+          Grade
+        </label>
+        <select
+          id={`course-grade-${course.id}`}
+          value={course.grade}
+          onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
+          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+          aria-label={`Grade for course ${index + 1}`}
+          aria-describedby={`course-grade-help-${course.id}`}
+        >
+          <option value="">Select Grade</option>
+          <option value="A">A (4.00)</option>
+          <option value="A-">A- (3.67)</option>
+          <option value="B+">B+ (3.33)</option>
+          <option value="B">B (3.00)</option>
+          <option value="B-">B- (2.67)</option>
+          <option value="C+">C+ (2.33)</option>
+          <option value="C">C (2.00)</option>
+          <option value="C-">C- (1.67)</option>
+          <option value="D+">D+ (1.33)</option>
+          <option value="D">D (1.00)</option>
+          <option value="D-">D- (0.67)</option>
+          <option value="F">F (0.00)</option>
+          <option value="P">P - Pass (No GPA impact)</option>
+          <option value="CR">CR - Credit (No GPA impact)</option>
+        </select>
+        <span id={`course-grade-help-${course.id}`} className="sr-only">Select the letter grade you received</span>
+      </div>
+
+      <div className="md:col-span-1 flex items-end justify-center">
+        <button
+          onClick={() => removeCourse(course.id)}
+          className="p-2.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={courses.length === 1}
+          aria-label={`Remove course ${index + 1}`}
+          title="Remove this course"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  ));
+
+  // Popular Yale courses for dropdown
+  const popularYaleCourses = [
+    "PSYC 110 - Introduction to Psychology",
+    "ECON 115 - Introductory Microeconomics",
+    "ECON 116 - Introductory Macroeconomics",
+    "MATH 112 - Calculus of Functions of One Variable I",
+    "MATH 115 - Calculus of Functions of One Variable II",
+    "CPSC 201 - Introduction to Computer Science",
+    "CHEM 161 - General Chemistry I",
+    "CHEM 165 - General Chemistry II",
+    "ENGL 114 - Reading and Writing the Modern Essay",
+    "ENGL 120 - Reading Poetry",
+    "HIST 210 - Early Modern Europe",
+    "BIOL 101 - Principles of Biology",
+    "PHYS 180 - University Physics I",
+    "PHYS 181 - University Physics II",
+    "SOCY 151 - Foundations of Modern Social Theory",
+    "POLS 124 - Introduction to American Politics",
+    "SPAN 130 - Spanish for Heritage Speakers",
+    "FREN 110 - Elementary French I",
+    "STATS 101 - Introduction to Statistics",
+    "PHIL 125 - Introduction to Philosophy",
+    "ASTR 160 - Frontiers and Controversies in Astrophysics",
+    "MB&B 200 - Fundamentals of Molecular Cell Biology",
+    "CHEM 220 - Organic Chemistry I",
+    "LING 110 - Introduction to Linguistics",
+    "ANTH 140 - Cultural Anthropology",
+    "ARCH 150 - Introduction to Architecture",
+    "ARTH 111 - Introduction to Art History: Renaissance to Modern",
+    "MUSC 112 - Introduction to Western Music",
+    "THST 110 - Introduction to Theater Studies",
+    "ENGL 125 - Shakespeare",
+    "HIST 115 - The United States Since 1945",
+    "POLS 130 - Introduction to International Relations",
+    "ECON 136 - Introduction to Game Theory",
+    "PSYC 140 - Developmental Psychology",
+    "BIOL 103 - Biology and Global Change"
+  ];
 
   // SEO metadata
   useEffect(() => {
     // Title: 50-60 characters
-    document.title = "Yale GPA Calculator 2025 | Official Bulldog GPA Tool";
+    document.title = "Yale GPA Calculator | Official Bulldog GPA Tool";
 
     // Meta description: 150-160 characters
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -43,11 +243,11 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
     // Robots
     let robotsMeta = document.querySelector('meta[name="robots"]');
     if (robotsMeta) {
-      robotsMeta.setAttribute('content', 'index, follow');
+      robotsMeta.setAttribute('content', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
     } else {
       robotsMeta = document.createElement('meta');
       robotsMeta.setAttribute('name', 'robots');
-      robotsMeta.setAttribute('content', 'index, follow');
+      robotsMeta.setAttribute('content', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
       document.head.appendChild(robotsMeta);
     }
 
@@ -75,7 +275,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
     // Open Graph tags
     const ogTags = {
-      'og:title': 'Yale GPA Calculator 2025 | Official Bulldog GPA Tool',
+      'og:title': 'Yale GPA Calculator | Official Bulldog GPA Tool',
       'og:description': 'Official Yale GPA calculator with 4.0 scale. Calculate Latin Honors (Summa 3.9+, Magna 3.7+, Cum Laude 3.5+), track credit hours, pass/fail options.',
       'og:url': 'https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator',
       'og:type': 'website',
@@ -99,7 +299,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
     // Twitter Card tags
     const twitterTags = {
       'twitter:card': 'summary_large_image',
-      'twitter:title': 'Yale GPA Calculator 2025 | Official Bulldog GPA Tool',
+      'twitter:title': 'Yale GPA Calculator | Official Bulldog GPA Tool',
       'twitter:description': 'Official Yale GPA calculator with 4.0 scale. Calculate Latin Honors (Summa 3.9+, Magna 3.7+, Cum Laude 3.5+), track credit hours, pass/fail options.',
       'twitter:image': 'https://zurawebtools.com/images/yale-gpa-calculator-twitter.jpg',
       'twitter:site': '@ZuraWebTools',
@@ -214,30 +414,135 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
     faqScript.text = JSON.stringify(faqSchema);
     document.head.appendChild(faqScript);
 
+    // JSON-LD Schema for HowTo
+    const howToSchema = {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Calculate Your Yale GPA",
+      "description": "Step-by-step guide to calculating your Yale University GPA using our official calculator",
+      "totalTime": "PT2M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Enter Course Information",
+          "text": "Type your course name in the Course Name field. While optional, naming your courses helps you keep track of which classes contribute to your GPA."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Input Credit Hours",
+          "text": "Enter the number of credits for each course. Most Yale courses are worth 1.0 credit, but some seminars, labs, or intensive courses may be 0.5 or 1.5 credits."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Select Your Letter Grade",
+          "text": "Choose the letter grade you received from the dropdown menu. Yale's grading system includes A, A-, B+, B, B-, C+, C, C-, D+, D, and F. If you took a course pass/fail, select P (Pass) or CR (Credit)."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Add More Courses",
+          "text": "Click the Add Another Course button to include additional classes. You can add as many courses as needed to calculate your semester or cumulative GPA."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Calculate Your GPA",
+          "text": "Once you've entered all your courses, credits, and grades, click the Calculate GPA button. The calculator will instantly display your GPA on a 4.0 scale, total credit hours, quality points, and your Latin Honors eligibility status."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Save or Share Your Results",
+          "text": "After calculating, you can print your results for your records, download them as a text file, or share them directly. Use the Reset Calculator button to start a new calculation from scratch."
+        }
+      ]
+    };
+
+    const howToScript = document.createElement('script');
+    howToScript.type = 'application/ld+json';
+    howToScript.id = 'howto-schema';
+    howToScript.text = JSON.stringify(howToSchema);
+    document.head.appendChild(howToScript);
+
+    // Core Web Vitals Monitoring
+    try {
+      // LCP - Largest Contentful Paint
+      const lcpObserver = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const lastEntry = entries[entries.length - 1] as any;
+        const lcp = lastEntry.renderTime || lastEntry.loadTime;
+        console.log('LCP (Largest Contentful Paint):', lcp, 'ms - Target: <2500ms');
+      });
+      lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+
+      // FID - First Input Delay
+      const fidObserver = new PerformanceObserver((list) => {
+        list.getEntries().forEach((entry: any) => {
+          const fid = entry.processingStart - entry.startTime;
+          console.log('FID (First Input Delay):', fid, 'ms - Target: <100ms');
+        });
+      });
+      fidObserver.observe({ entryTypes: ['first-input'] });
+
+      // CLS - Cumulative Layout Shift
+      let clsValue = 0;
+      const clsObserver = new PerformanceObserver((list) => {
+        list.getEntries().forEach((entry: any) => {
+          if (!entry.hadRecentInput) {
+            clsValue += entry.value;
+            console.log('CLS (Cumulative Layout Shift):', clsValue.toFixed(4), '- Target: <0.1');
+          }
+        });
+      });
+      clsObserver.observe({ entryTypes: ['layout-shift'] });
+    } catch (error) {
+      console.error('Core Web Vitals monitoring failed:', error);
+    }
+
+    // Service Worker Registration for offline functionality
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/service-worker.js')
+          .then((registration) => {
+            console.log('Service Worker registered successfully:', registration.scope);
+          })
+          .catch((error) => {
+            console.log('Service Worker registration failed:', error);
+          });
+      });
+    }
+
     // Cleanup on unmount
     return () => {
       const breadcrumb = document.getElementById('breadcrumb-schema');
       const software = document.getElementById('software-schema');
       const faq = document.getElementById('faq-schema');
+      const howTo = document.getElementById('howto-schema');
       if (breadcrumb) breadcrumb.remove();
       if (software) software.remove();
       if (faq) faq.remove();
+      if (howTo) howTo.remove();
     };
   }, []);
 
-  // Yale grade values (4.0 scale)
+  // Yale grade values (4.0 scale) - Official Yale University grading scale
   const yaleGradeValues: { [key: string]: number } = {
-    'A': 4.0,
-    'A-': 3.7,
-    'B+': 3.3,
-    'B': 3.0,
-    'B-': 2.7,
-    'C+': 2.3,
-    'C': 2.0,
-    'C-': 1.7,
-    'D+': 1.3,
-    'D': 1.0,
-    'F': 0.0,
+    'A': 4.00,
+    'A-': 3.67,
+    'B+': 3.33,
+    'B': 3.00,
+    'B-': 2.67,
+    'C+': 2.33,
+    'C': 2.00,
+    'C-': 1.67,
+    'D+': 1.33,
+    'D': 1.00,
+    'D-': 0.67,
+    'F': 0.00,
     'P': 0, // Pass (doesn't count in GPA)
     'CR': 0 // Credit (doesn't count in GPA)
   };
@@ -290,12 +595,24 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
     }
   };
 
-  // Update course
-  const updateCourse = (id: string, field: keyof Course, value: string | number) => {
+  // Update course with validation and sanitization
+  const updateCourse = useCallback((id: string, field: keyof Course, value: string | number) => {
+    let sanitizedValue = value;
+    
+    // Sanitize string inputs
+    if (typeof value === 'string' && field === 'name') {
+      sanitizedValue = sanitizeInput(value);
+    }
+    
+    // Validate numeric inputs
+    if (typeof value === 'number' && field === 'credits') {
+      sanitizedValue = Math.max(0, Math.min(6, value)); // Clamp between 0-6
+    }
+    
     setCourses(courses.map(course =>
-      course.id === id ? { ...course, [field]: value } : course
+      course.id === id ? { ...course, [field]: sanitizedValue } : course
     ));
-  };
+  }, [courses]);
 
   // Reset calculator
   const resetCalculator = () => {
@@ -324,7 +641,159 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
   // Print results
   const handlePrint = () => {
-    window.print();
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Yale GPA Calculation Results</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            color: #1e293b;
+          }
+          h1 {
+            color: #1e40af;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+          }
+          .summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+          }
+          .summary-card {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+          }
+          .summary-card h3 {
+            margin: 0 0 8px 0;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: normal;
+          }
+          .summary-card p {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e293b;
+          }
+          .honor-status {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left-color: #f59e0b;
+            grid-column: span 2;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+          }
+          th {
+            background: #3b82f6;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+          }
+          td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+          }
+          tr:nth-child(even) {
+            background: #f8fafc;
+          }
+          .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+          }
+          @media print {
+            body { margin: 20px; }
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Yale GPA Calculation Results</h1>
+        
+        <div class="summary">
+          <div class="summary-card">
+            <h3>GPA</h3>
+            <p>${gpa.toFixed(3)} / 4.0</p>
+          </div>
+          
+          <div class="summary-card">
+            <h3>Total Credits</h3>
+            <p>${totalCredits}</p>
+          </div>
+          
+          <div class="summary-card">
+            <h3>Quality Points</h3>
+            <p>${totalQualityPoints.toFixed(2)}</p>
+          </div>
+          
+          <div class="summary-card honor-status">
+            <h3>Honor Status</h3>
+            <p>${getHonorStatus.status}</p>
+          </div>
+        </div>
+
+        <h2>Course Details</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Course Name</th>
+              <th>Credits</th>
+              <th>Grade</th>
+              <th>Quality Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${courses.map((course, index) => {
+              const gradeValue = yaleGradeValues[course.grade] || 0;
+              const qualityPoints = course.grade && course.credits > 0 && course.grade !== 'P' && course.grade !== 'CR' 
+                ? (gradeValue * course.credits).toFixed(2) 
+                : 'N/A';
+              return `
+                <tr>
+                  <td>${index + 1}</td>
+                  <td>${course.name || 'Unnamed Course'}</td>
+                  <td>${course.credits}</td>
+                  <td>${course.grade || 'N/A'}</td>
+                  <td>${qualityPoints}</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+
+        <div class="footer">
+          <p>Calculated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}</p>
+          <p>Generated by ZuraWebTools - https://zurawebtools.com</p>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 250);
+    }
   };
 
   // Download results
@@ -373,19 +842,68 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
     }
   };
 
+  // Error UI
+  if (hasError && !isOnline) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 flex items-center justify-center px-6">
+        <div className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center">
+          <div className="mb-6">
+            <svg className="w-24 h-24 mx-auto text-orange-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h1 className="text-3xl font-bold text-slate-800 mb-4">You're Offline</h1>
+          <p className="text-lg text-slate-600 mb-6">{errorInfo}</p>
+          <div className="bg-blue-50 rounded-lg p-6 mb-6">
+            <h2 className="text-xl font-bold text-slate-800 mb-3">Calculator Features Still Available:</h2>
+            <ul className="text-left space-y-2 text-slate-700">
+              <li className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>GPA calculations work offline</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>Your data is saved locally</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>Full calculator functionality available</span>
+              </li>
+            </ul>
+          </div>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-bold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg"
+          >
+            Retry Connection
+          </button>
+          <button
+            onClick={() => navigateTo('/')}
+            className="ml-4 px-8 py-3 bg-slate-200 text-slate-800 rounded-lg font-bold hover:bg-slate-300 transition-all"
+          >
+            Go Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-50">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white py-16 px-6">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-            Yale GPA Calculator 2025 | Official Bulldog GPA Tool
+            Yale GPA Calculator | Official Bulldog GPA Tool
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-            Calculate your Yale University GPA with precision using our official calculator. Track your Latin Honors eligibility (Summa, Magna, Cum Laude) and academic standing.
-          </p>
-          <p className="text-lg text-blue-200 mt-3 max-w-2xl mx-auto">
-            Free, accurate, and designed specifically for Yale's 4.0 grading system with support for pass/fail courses and credit hour tracking.
+            Calculate your Yale GPA with precision. Track Latin Honors eligibility and academic standing using our free 4.0 scale calculator.
           </p>
         </div>
       </section>
@@ -418,97 +936,26 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
             </div>
 
             {/* Course Input Fields */}
-            <div className="space-y-4 mb-6">
+            <div className="space-y-4 mb-6" role="list" aria-label="Course list">
               {courses.map((course, index) => (
-                <div key={course.id} className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 bg-slate-50 rounded-lg border border-slate-200 hover:border-blue-300 transition-all">
-                  <div className="md:col-span-1 flex items-center">
-                    <span className="text-lg font-semibold text-slate-700">#{index + 1}</span>
-                  </div>
-                  
-                  <div className="md:col-span-5">
-                    <label htmlFor={`course-name-${course.id}`} className="block text-sm font-medium text-slate-700 mb-1">
-                      Course Name
-                    </label>
-                    <input
-                      id={`course-name-${course.id}`}
-                      type="text"
-                      value={course.name}
-                      onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
-                      placeholder="e.g., Introduction to Psychology"
-                      className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-slate-400"
-                      aria-label={`Course name for course ${index + 1}`}
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label htmlFor={`course-credits-${course.id}`} className="block text-sm font-medium text-slate-700 mb-1">
-                      Credits
-                    </label>
-                    <input
-                      id={`course-credits-${course.id}`}
-                      type="number"
-                      min="0"
-                      max="6"
-                      step="0.5"
-                      value={course.credits || ''}
-                      onChange={(e) => updateCourse(course.id, 'credits', parseFloat(e.target.value) || 0)}
-                      placeholder="1-6"
-                      className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-slate-400"
-                      aria-label={`Credit hours for course ${index + 1}`}
-                    />
-                  </div>
-
-                  <div className="md:col-span-3">
-                    <label htmlFor={`course-grade-${course.id}`} className="block text-sm font-medium text-slate-700 mb-1">
-                      Grade
-                    </label>
-                    <select
-                      id={`course-grade-${course.id}`}
-                      value={course.grade}
-                      onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
-                      className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
-                      aria-label={`Grade for course ${index + 1}`}
-                    >
-                      <option value="">Select Grade</option>
-                      <option value="A">A (4.0)</option>
-                      <option value="A-">A- (3.7)</option>
-                      <option value="B+">B+ (3.3)</option>
-                      <option value="B">B (3.0)</option>
-                      <option value="B-">B- (2.7)</option>
-                      <option value="C+">C+ (2.3)</option>
-                      <option value="C">C (2.0)</option>
-                      <option value="C-">C- (1.7)</option>
-                      <option value="D+">D+ (1.3)</option>
-                      <option value="D">D (1.0)</option>
-                      <option value="F">F (0.0)</option>
-                      <option value="P">P (Pass)</option>
-                      <option value="CR">CR (Credit)</option>
-                    </select>
-                  </div>
-
-                  <div className="md:col-span-1 flex items-end">
-                    <button
-                      onClick={() => removeCourse(course.id)}
-                      disabled={courses.length === 1}
-                      className="w-full px-3 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
-                      aria-label={`Remove course ${index + 1}`}
-                    >
-                      <svg className="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
+                <CourseRow key={course.id} course={course} index={index} />
               ))}
             </div>
 
             {/* Add Course Button */}
             <button
               onClick={addCourse}
-              className="w-full py-3 px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
-              aria-label="Add another course"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  addCourse();
+                }
+              }}
+              className="w-full py-3 px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all shadow-md hover:shadow-lg focus:ring-4 focus:ring-green-300 flex items-center justify-center gap-2"
+              aria-label="Add another course to the list"
+              type="button"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
               Add Another Course
@@ -519,8 +966,10 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
               <button
                 onClick={calculateGPA}
                 disabled={isCalculating || courses.every(c => !c.grade || c.credits === 0)}
-                className="py-4 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg rounded-lg hover:from-blue-700 hover:to-indigo-700 disabled:from-slate-300 disabled:to-slate-400 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
-                aria-label="Calculate GPA"
+                className="py-4 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg rounded-lg hover:from-blue-700 hover:to-indigo-700 disabled:from-slate-300 disabled:to-slate-400 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl focus:ring-4 focus:ring-blue-300 flex items-center justify-center gap-3"
+                aria-label="Calculate your Yale GPA based on entered courses"
+                aria-busy={isCalculating}
+                type="button"
               >
                 {isCalculating ? (
                   <>
@@ -1007,7 +1456,10 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
           
           <div className="prose max-w-none">
             <p className="text-lg text-slate-700 leading-relaxed mb-6">
-              Yale University uses a <strong>standard 4.0 GPA scale</strong> to evaluate undergraduate academic performance. This system has been in place for decades and aligns with most American universities, making it easy for graduate schools and employers to understand your academic achievements. If you're also considering other elite schools, check out our{' '}
+              Yale University uses a <strong>standard 4.0 GPA scale</strong> to evaluate undergraduate academic performance. This system has been in place for decades and aligns with most American universities, making it easy for graduate schools and employers to understand your academic achievements. For official Yale academic policies, visit the{' '}
+              <a href="https://www.yale.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline font-semibold">
+                Yale University website
+              </a>. If you're also considering other elite schools, check out our{' '}
               <button onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/harvard-gpa-calculator')} className="text-blue-600 hover:text-blue-800 underline font-semibold">
                 Harvard GPA Calculator
               </button>{' '}or{' '}
@@ -1018,7 +1470,10 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
             <h3 className="text-2xl font-bold text-slate-800 mt-8 mb-4">The Yale Grading Philosophy</h3>
             <p className="text-slate-700 leading-relaxed mb-4">
-              Yale's approach to grading emphasizes <strong>intellectual rigor and academic excellence</strong>. Unlike some peer institutions that experimented with grade deflation policies, Yale maintains that grades should reflect genuine achievement. The university expects high-quality work but provides robust support systems to help students succeed.
+              Yale's approach to grading emphasizes <strong>intellectual rigor and academic excellence</strong>. Unlike some peer institutions that experimented with grade deflation policies, Yale maintains that grades should reflect genuine achievement. The university expects high-quality work but provides robust support systems to help students succeed. Learn more about Yale's academic standards on the{' '}
+              <a href="https://catalog.yale.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline font-semibold">
+                Yale Course Catalog
+              </a>.
             </p>
             <p className="text-slate-700 leading-relaxed mb-6">
               The average GPA at Yale typically hovers around <strong>3.6 to 3.7</strong>, which is comparable to peer Ivy League schools like Harvard (3.65) and Princeton (3.5). This average has remained relatively stable over the past decade, despite ongoing national conversations about grade inflation. For high school students preparing applications, our{' '}
@@ -1056,7 +1511,11 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
             <p className="text-slate-700 leading-relaxed mb-6">
               <strong>Total Quality Points:</strong> 4.0 + 3.7 + 3.3 + 3.0 = 14.0<br />
               <strong>Total Credits:</strong> 4.0<br />
-              <strong>Semester GPA:</strong> 14.0 ÷ 4.0 = <span className="text-blue-600 font-bold">3.50</span>
+              <strong>Semester GPA:</strong> 14.0 ÷ 4.0 = <span className="text-blue-600 font-bold">3.50</span><br />
+              To calculate your cumulative GPA across multiple semesters, use our{' '}
+              <button onClick={() => navigateTo('/education-and-exam-tools/gpa-calculators/cumulative-gpa-calculator')} className="text-blue-600 hover:text-blue-800 underline font-semibold">
+                Cumulative GPA Calculator
+              </button>.
             </p>
 
             <h3 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Pass/Fail and Credit/D/Fail Options</h3>
@@ -1094,7 +1553,10 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
             <h3 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Residential College System and Academic Support</h3>
             <p className="text-slate-700 leading-relaxed mb-4">
-              Yale's <strong>14 residential colleges</strong> provide built-in academic support that can significantly impact your GPA. Each college has resources specifically designed to help you succeed.
+              Yale's <strong>14 residential colleges</strong> provide built-in academic support that can significantly impact your GPA. Each college has resources specifically designed to help you succeed. Learn more about the{' '}
+              <a href="https://rescolleges.yale.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline font-semibold">
+                residential college system
+              </a>{' '}on Yale's official website.
             </p>
 
             <h4 className="text-xl font-bold text-slate-800 mt-6 mb-3">Available Support Services</h4>
@@ -1117,7 +1579,21 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
             </p>
             <ul className="list-disc pl-6 space-y-2 text-slate-700 mb-6">
               <li><strong>Computer Science:</strong> No GPA cutoff but growing demand means strong performance in prerequisite courses matters</li>
-              <li><strong>Pre-med Track:</strong> Not a major, but med schools typically expect 3.7+ GPA for competitive applications</li>
+              <li><strong>Pre-med Track:</strong> Not a major, but med schools typically expect 3.7+ GPA for competitive applications. Check your{' '}
+                <button onClick={() => navigateTo('/education-and-exam-tools/grade-score-calculators/mcat-score-calculator')} className="text-blue-600 hover:text-blue-800 underline font-semibold">
+                  MCAT Score
+                </button>{' '}for med school readiness</li>
+              <li><strong>Pre-law Track:</strong> Law schools value high GPAs. Calculate your{' '}
+                <button onClick={() => navigateTo('/education-and-exam-tools/gpa-calculators/lsac-gpa-calculator')} className="text-blue-600 hover:text-blue-800 underline font-semibold">
+                  LSAC GPA
+                </button>{' '}and{' '}
+                <button onClick={() => navigateTo('/education-and-exam-tools/grade-score-calculators/lsat-score-calculator')} className="text-blue-600 hover:text-blue-800 underline font-semibold">
+                  LSAT Score
+                </button></li>
+              <li><strong>Graduate School Prep:</strong> Planning for grad school? Use our{' '}
+                <button onClick={() => navigateTo('/education-and-exam-tools/grade-score-calculators/gre-score-calculator')} className="text-blue-600 hover:text-blue-800 underline font-semibold">
+                  GRE Score Calculator
+                </button></li>
               <li><strong>Engineering Intensive:</strong> Requires strong performance in math and science foundations</li>
               <li><strong>Directed Studies:</strong> Freshman program requiring high school academic excellence and interview</li>
             </ul>
@@ -1807,7 +2283,7 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
 
             {/* Reddit Share */}
             <a
-              href={`https://reddit.com/submit?url=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator')}&title=${encodeURIComponent('Yale GPA Calculator 2025')}`}
+              href={`https://reddit.com/submit?url=${encodeURIComponent('https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator')}&title=${encodeURIComponent('Yale GPA Calculator - Free & Accurate')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors shadow-md hover:shadow-lg"
@@ -1837,7 +2313,11 @@ const YaleGPACalculator: React.FC<YaleGPACalculatorProps> = ({ navigateTo }) => 
       </section>
 
       {/* Related Tools */}
-      <RelatedTools currentToolPath="/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator" navigateTo={navigateTo} />
+      <RelatedTools 
+        relatedSlugs={['harvard-gpa-calculator', 'princeton-gpa-calculator', 'stanford-gpa-calculator', 'columbia-gpa-calculator', 'cumulative-gpa-calculator', 'college-gpa-calculator']}
+        navigateTo={navigateTo}
+        currentSlug="yale-gpa-calculator"
+      />
     </div>
   );
 };

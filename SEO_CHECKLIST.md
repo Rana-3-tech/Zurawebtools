@@ -206,42 +206,114 @@ Use this checklist to verify complete SEO implementation for any new tool or pag
 
 ## ♿ Accessibility (A11y) & UX
 
-### ARIA Labels & Roles
+### ARIA Labels & Roles (⭐ HIGH PRIORITY)
 - [ ] All form inputs have `id` and matching `for` in labels
 - [ ] Slider inputs have `aria-label`, `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
-- [ ] Buttons have `aria-label` (especially icon-only buttons)
-- [ ] Main sections have `role` attributes (`main`, `navigation`, `complementary`)
-- [ ] SVG icons have `aria-hidden="true"` or proper labels
+- [ ] Number inputs have `aria-valuemin`, `aria-valuemax`, `aria-valuenow` attributes
+- [ ] Buttons have descriptive `aria-label` (especially icon-only buttons)
+- [ ] Main sections have `role` attributes (`main`, `navigation`, `complementary`, `list`)
+- [ ] SVG icons have `aria-hidden="true"` for decorative elements
+- [ ] Form inputs have `aria-describedby` linking to help text
+- [ ] Screen reader-only help text using `sr-only` class
+- [ ] Loading states use `aria-busy` attribute
+- [ ] Disabled states properly communicated with `disabled` attribute
 
 ### Image Alt Text
 - [ ] All images have descriptive `alt` attributes
 - [ ] Decorative images use `alt=""` or `aria-hidden="true"`
-- [ ] SVG icons include `<title>` elements
+- [ ] SVG icons include `<title>` elements or `aria-hidden="true"`
 
-### Keyboard Navigation
+### Keyboard Navigation (⭐ HIGH PRIORITY)
 - [ ] All interactive elements accessible via Tab key
-- [ ] Focus states visible (outline/ring on focus)
+- [ ] Focus states highly visible (`focus:ring-4` or similar)
+- [ ] Enter and Space key handlers for custom buttons
 - [ ] Skip links available (if needed)
+- [ ] No keyboard traps in modals or dynamic content
+- [ ] `type="button"` added to prevent accidental form submission
+- [ ] Tab order follows logical flow
 
 ### Color Contrast
 - [ ] Text meets WCAG AA standards (4.5:1 for normal text)
 - [ ] UI elements meet 3:1 contrast ratio
+- [ ] Focus indicators meet 3:1 contrast ratio
 
 ---
 
 ## 🎨 Technical SEO
 
-### Page Performance
+### Page Performance (⭐ HIGH PRIORITY)
 - [ ] Lazy loading for images/components (use `React.lazy()`)
 - [ ] Code splitting implemented (check `vite.config.ts`)
 - [ ] No console errors in production build
 - [ ] Fast load time (<3 seconds on 3G)
+- [ ] **React.memo()** for list items to prevent re-renders
+- [ ] **useCallback** for event handlers in child components
+- [ ] Memoized components for repetitive UI elements (course rows, cards, etc.)
 
 ### Mobile Responsiveness
 - [ ] Tool works on mobile devices (320px+ width)
 - [ ] Touch-friendly controls (44px+ tap targets)
 - [ ] Responsive breakpoints: `sm`, `md`, `lg`, `xl`
 - [ ] No horizontal scrolling
+
+### 🔐 Security & Input Validation (⭐ HIGH PRIORITY - Required for all tools)
+
+#### Input Sanitization
+- [ ] **Sanitize HTML special characters** from user input
+  - [ ] Replace `<`, `>`, `"`, `'`, `&` with HTML entities
+  - [ ] Implement `sanitizeInput()` utility function
+  - [ ] Apply to all text inputs (course names, essay text, etc.)
+  
+- [ ] **Input length limits** to prevent abuse
+  - [ ] Set `maxLength` attribute on text inputs (200-500 chars recommended)
+  - [ ] Validate on onChange handler
+  - [ ] Truncate if exceeds limit: `.slice(0, maxLength)`
+
+#### Data Validation
+- [ ] **Numeric input validation**
+  - [ ] Clamp values between min and max: `Math.max(min, Math.min(max, value))`
+  - [ ] Validate credit hours (0-6 range for courses)
+  - [ ] Prevent negative numbers where inappropriate
+  
+- [ ] **String input validation**
+  - [ ] Trim whitespace: `.trim()`
+  - [ ] Check for empty strings before processing
+  - [ ] Validate format for specific inputs (emails, dates, etc.)
+
+**Sanitization Template:**
+```tsx
+// Utility function to sanitize user input
+const sanitizeInput = (input: string): string => {
+  return input
+    .replace(/[<>"'&]/g, (char) => {
+      const entities: { [key: string]: string } = {
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '&': '&amp;'
+      };
+      return entities[char] || char;
+    })
+    .trim()
+    .slice(0, 200); // Limit length
+};
+
+// Use in updateCourse or similar handlers
+const updateCourse = useCallback((id: string, field: string, value: string | number) => {
+  let sanitizedValue = value;
+  
+  if (typeof value === 'string' && field === 'name') {
+    sanitizedValue = sanitizeInput(value);
+  }
+  
+  if (typeof value === 'number' && field === 'credits') {
+    sanitizedValue = Math.max(0, Math.min(6, value));
+  }
+  
+  // Update state...
+}, [dependencies]);
+```
 
 ### 🚀 Progressive Web App (PWA) Features
 
