@@ -823,6 +823,30 @@ const PrincetonGPAIcon = () => (
     </svg>
 );
 
+// Yale GPA Icon - Yale Blue gradient with bulldog theme
+const YaleGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="yaleIconTitle">
+        <title id="yaleIconTitle">Yale GPA Calculator</title>
+        <defs>
+            <linearGradient id="yaleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#00356B" />
+                <stop offset="50%" stopColor="#0F4D92" />
+                <stop offset="100%" stopColor="#286DC0" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#yaleGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M3 8 L21 8" stroke="url(#yaleGrad)" strokeWidth="1.5"/>
+        <path d="M8 11 Q9 9.5 12 10.5 Q15 9.5 16 11" stroke="url(#yaleGrad)" strokeWidth="1.5" fill="none"/>
+        <circle cx="9" cy="10.5" r="0.8" fill="url(#yaleGrad)"/>
+        <circle cx="15" cy="10.5" r="0.8" fill="url(#yaleGrad)"/>
+        <path d="M9 14 L10 15 M15 14 L14 15" stroke="url(#yaleGrad)" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M10 17 Q12 18 14 17" stroke="url(#yaleGrad)" strokeWidth="1.2" strokeLinecap="round" fill="none"/>
+        <circle cx="12" cy="5.5" r="1.2" fill="url(#yaleGrad)"/>
+        <text x="12" y="6" fontSize="2.5" fill="white" textAnchor="middle" fontWeight="bold">Y</text>
+        <path d="M7 12 Q6.5 13 7 14 M17 12 Q17.5 13 17 14" stroke="url(#yaleGrad)" strokeWidth="1" strokeLinecap="round"/>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -1177,6 +1201,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/princeton-gpa-calculator',
                         icon: <PrincetonGPAIcon />,
                         gradientColors: { from: '#FF8F00', to: '#E65100' },
+                    },
+                    {
+                        title: 'Yale GPA Calculator',
+                        description: 'Yale Bulldog GPA calculator with 4.0 scale (A to F). Calculate Latin Honors (Summa 3.9+ top 5%, Magna 3.7+ top 10%, Cum Laude 3.5+ top 25%), pass/fail options, Dean\'s List (3.5+), shopping period strategy, 36 credits to graduate.',
+                        link: 'education-and-exam-tools/university-gpa-tools/yale-gpa-calculator',
+                        icon: <YaleGPAIcon />,
+                        gradientColors: { from: '#00356B', to: '#286DC0' },
                     },
                 ],
             },
