@@ -800,6 +800,29 @@ const StanfordGPAIcon = () => (
     </svg>
 );
 
+// Princeton GPA Icon - Orange & Black gradient with tiger theme
+const PrincetonGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="princetonIconTitle">
+        <title id="princetonIconTitle">Princeton GPA Calculator</title>
+        <defs>
+            <linearGradient id="princetonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FF8F00" />
+                <stop offset="50%" stopColor="#F57C00" />
+                <stop offset="100%" stopColor="#E65100" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#princetonGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M3 8 L21 8" stroke="url(#princetonGrad)" strokeWidth="1.5"/>
+        <path d="M8 12 Q9 10 12 11 Q15 10 16 12" stroke="url(#princetonGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M9 14 L11 16 M15 14 L13 16" stroke="url(#princetonGrad)" strokeWidth="1.5" strokeLinecap="round"/>
+        <circle cx="9.5" cy="11" r="0.8" fill="url(#princetonGrad)"/>
+        <circle cx="14.5" cy="11" r="0.8" fill="url(#princetonGrad)"/>
+        <path d="M10 17 Q12 18.5 14 17" stroke="url(#princetonGrad)" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+        <circle cx="12" cy="5.5" r="1.2" fill="url(#princetonGrad)"/>
+        <text x="12" y="6" fontSize="2.5" fill="white" textAnchor="middle" fontWeight="bold">P</text>
+    </svg>
+);
+
 
 export interface SubCategory {
     slug: string;
@@ -1147,6 +1170,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/stanford-gpa-calculator',
                         icon: <StanfordGPAIcon />,
                         gradientColors: { from: '#8C1515', to: '#B1040E' },
+                    },
+                    {
+                        title: 'Princeton GPA Calculator',
+                        description: 'Princeton Tiger GPA calculator with 4.3 scale (A+ to F). Track Latin Honors ranking-based (Summa top 2%, Magna next 8%, Cum Laude next 15%), departmental honors (3.5+), grade deflation history (2004-2014), senior thesis impact.',
+                        link: 'education-and-exam-tools/university-gpa-tools/princeton-gpa-calculator',
+                        icon: <PrincetonGPAIcon />,
+                        gradientColors: { from: '#FF8F00', to: '#E65100' },
                     },
                 ],
             },

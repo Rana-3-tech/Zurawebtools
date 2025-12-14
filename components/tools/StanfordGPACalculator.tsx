@@ -1788,30 +1788,21 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/stanford-
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <button
-              onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/harvard-gpa-calculator' as Page)}
-              className="bg-gradient-to-br from-red-500 to-red-600 text-white p-6 rounded-xl hover:shadow-lg transition-shadow text-left"
+              onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/princeton-gpa-calculator' as Page)}
+              className="bg-gradient-to-br from-orange-500 to-amber-600 text-white p-6 rounded-xl hover:shadow-lg transition-shadow text-left"
             >
-              <div className="text-3xl mb-3">🎓</div>
-              <h3 className="text-lg font-bold mb-2">Harvard GPA Calculator</h3>
-              <p className="text-sm opacity-90">Calculate Harvard Crimson GPA with plus/minus grading</p>
+              <div className="text-3xl mb-3">🐯</div>
+              <h3 className="text-lg font-bold mb-2">Princeton GPA Calculator</h3>
+              <p className="text-sm opacity-90">Calculate Princeton Tiger GPA with 4.3 scale</p>
             </button>
 
             <button
-              onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/mit-gpa-calculator' as Page)}
-              className="bg-gradient-to-br from-gray-700 to-red-700 text-white p-6 rounded-xl hover:shadow-lg transition-shadow text-left"
+              onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/georgia-tech-gpa-calculator' as Page)}
+              className="bg-gradient-to-br from-yellow-500 to-blue-900 text-white p-6 rounded-xl hover:shadow-lg transition-shadow text-left"
             >
-              <div className="text-3xl mb-3">🔬</div>
-              <h3 className="text-lg font-bold mb-2">MIT GPA Calculator</h3>
-              <p className="text-sm opacity-90">Calculate MIT Engineers GPA with 5.0 scale</p>
-            </button>
-
-            <button
-              onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/yale-gpa-calculator' as Page)}
-              className="bg-gradient-to-br from-blue-700 to-blue-800 text-white p-6 rounded-xl hover:shadow-lg transition-shadow text-left"
-            >
-              <div className="text-3xl mb-3">🐕</div>
-              <h3 className="text-lg font-bold mb-2">Yale GPA Calculator</h3>
-              <p className="text-sm opacity-90">Calculate Yale Bulldogs GPA with Latin Honors</p>
+              <div className="text-3xl mb-3">🐝</div>
+              <h3 className="text-lg font-bold mb-2">Georgia Tech GPA Calculator</h3>
+              <p className="text-sm opacity-90">Calculate Yellow Jackets GPA with Faculty Honors</p>
             </button>
 
             <button
@@ -1824,7 +1815,16 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/stanford-
             </button>
 
             <button
-              onClick={() => navigateTo('/education-and-exam-tools/gpa-tools/college-gpa-calculator' as Page)}
+              onClick={() => navigateTo('/education-and-exam-tools/university-gpa-tools/ucla-gpa-calculator' as Page)}
+              className="bg-gradient-to-br from-blue-600 to-yellow-600 text-white p-6 rounded-xl hover:shadow-lg transition-shadow text-left"
+            >
+              <div className="text-3xl mb-3">🐻</div>
+              <h3 className="text-lg font-bold mb-2">UCLA GPA Calculator</h3>
+              <p className="text-sm opacity-90">Calculate UCLA Bruins GPA with UC system</p>
+            </button>
+
+            <button
+              onClick={() => navigateTo('/education-and-exam-tools/gpa-calculator/college-gpa-calculator' as Page)}
               className="bg-gradient-to-br from-green-600 to-emerald-600 text-white p-6 rounded-xl hover:shadow-lg transition-shadow text-left"
             >
               <div className="text-3xl mb-3">📚</div>
@@ -1833,7 +1833,7 @@ https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/stanford-
             </button>
 
             <button
-              onClick={() => navigateTo('/education-and-exam-tools/gpa-tools/cumulative-gpa-calculator' as Page)}
+              onClick={() => navigateTo('/education-and-exam-tools/gpa-calculator/cumulative-gpa-calculator' as Page)}
               className="bg-gradient-to-br from-purple-600 to-pink-600 text-white p-6 rounded-xl hover:shadow-lg transition-shadow text-left"
             >
               <div className="text-3xl mb-3">📊</div>
