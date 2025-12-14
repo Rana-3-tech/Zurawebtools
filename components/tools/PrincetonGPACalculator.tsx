@@ -13,6 +13,19 @@ interface PrincetonGPACalculatorProps {
   navigateTo: (page: Page) => void;
 }
 
+// Sanitize input to prevent XSS attacks
+const sanitizeInput = (input: string): string => {
+  const map: { [key: string]: string } = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '/': '&#x2F;',
+  };
+  return input.replace(/[&<>"'\/]/g, (char) => map[char] || char);
+};
+
 const PrincetonGPACalculator: React.FC<PrincetonGPACalculatorProps> = ({ navigateTo }) => {
   const [courses, setCourses] = useState<Course[]>([
     { id: crypto.randomUUID(), name: '', credits: 0, grade: '' }
@@ -23,22 +36,25 @@ const PrincetonGPACalculator: React.FC<PrincetonGPACalculatorProps> = ({ navigat
   const [showResults, setShowResults] = useState<boolean>(false);
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   // SEO metadata
   useEffect(() => {
-    // Title: 50-60 characters
-    document.title = "Princeton GPA Calculator 2025 | Tiger GPA Tool";
+    try {
+      // Title: 50-60 characters
+      document.title = "Princeton GPA Calculator 2025 | Tiger GPA Tool";
 
-    // Meta description: 150-160 characters
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Princeton GPA calculator with 4.3 scale. Track Latin Honors (Summa top 2%, Magna 8%, Cum Laude 15%), departmental honors (3.5+), grade deflation history.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Princeton GPA calculator with 4.3 scale. Track Latin Honors (Summa top 2%, Magna 8%, Cum Laude 15%), departmental honors (3.5+), grade deflation history.';
-      document.head.appendChild(meta);
-    }
+      // Meta description: 150-160 characters
+      const safeDescription = sanitizeInput('Princeton GPA calculator with 4.3 scale. Track Latin Honors (Summa top 2%, Magna 8%, Cum Laude 15%), departmental honors (3.5+), grade deflation history.');
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', safeDescription);
+      } else {
+        const meta = document.createElement('meta');
+        meta.name = 'description';
+        meta.content = safeDescription;
+        document.head.appendChild(meta);
+      }
 
     // Robots
     let robotsMeta = document.querySelector('meta[name="robots"]');
@@ -290,13 +306,20 @@ const PrincetonGPACalculator: React.FC<PrincetonGPACalculatorProps> = ({ navigat
     schemaScript3.text = JSON.stringify(faqSchema);
     document.head.appendChild(schemaScript3);
 
-    // Cleanup
+    // Cleanup function with error handling
     return () => {
-      // Remove schemas on unmount
-      document.head.removeChild(schemaScript1);
-      document.head.removeChild(schemaScript2);
-      document.head.removeChild(schemaScript3);
+      try {
+        if (document.head.contains(schemaScript1)) document.head.removeChild(schemaScript1);
+        if (document.head.contains(schemaScript2)) document.head.removeChild(schemaScript2);
+        if (document.head.contains(schemaScript3)) document.head.removeChild(schemaScript3);
+      } catch (cleanupErr) {
+        console.error('SEO cleanup error:', cleanupErr);
+      }
     };
+    } catch (err) {
+      setError('Failed to initialize SEO metadata');
+      console.error('SEO setup error:', err);
+    }
   }, []);
 
   // Constants - Grade scale and honor thresholds
@@ -342,60 +365,117 @@ const PrincetonGPACalculator: React.FC<PrincetonGPACalculatorProps> = ({ navigat
   };
 
   const updateCourse = (id: string, field: keyof Course, value: string | number) => {
-    setCourses(courses.map(course =>
-      course.id === id ? { ...course, [field]: value } : course
-    ));
+    try {
+      setCourses(courses.map(course => {
+        if (course.id === id) {
+          if (field === 'name' && typeof value === 'string') {
+            const sanitized = sanitizeInput(value);
+            if (sanitized.length > 200) {
+              setError('Course name too long (max 200 characters)');
+              return { ...course, name: sanitized.slice(0, 200) };
+            }
+            setError(null);
+            return { ...course, name: sanitized.slice(0, 200) };
+          } else if (field === 'credits' && typeof value === 'number') {
+            if (isNaN(value) || value < 0 || value > 8) {
+              setError('Credits must be between 0 and 8');
+              const credits = Math.max(0, Math.min(8, value));
+              return { ...course, credits };
+            }
+            setError(null);
+            return { ...course, credits: value };
+          } else if (field === 'grade') {
+            setError(null);
+            return { ...course, grade: value as string };
+          }
+        }
+        return course;
+      }));
+    } catch (err) {
+      setError('Error updating course');
+      console.error('Update course error:', err);
+    }
   };
 
   const calculateGPA = () => {
-    setIsCalculating(true);
-    setShowSuccessMessage(false);
+    try {
+      setIsCalculating(true);
+      setShowSuccessMessage(false);
+      setError(null);
 
-    setTimeout(() => {
-      let totalPoints = 0;
-      let totalCreds = 0;
+      setTimeout(() => {
+        try {
+          let totalPoints = 0;
+          let totalCreds = 0;
 
-      courses.forEach(course => {
-        if (course.grade && course.credits > 0) {
-          const gradePoint = GRADE_SCALE[course.grade];
-          if (gradePoint !== undefined) {
-            totalPoints += gradePoint * course.credits;
-            totalCreds += course.credits;
+          courses.forEach(course => {
+            if (course.grade && course.credits > 0) {
+              const credits = Number(course.credits);
+              if (isNaN(credits) || credits < 0 || credits > 8) {
+                throw new Error(`Invalid credits: ${credits}`);
+              }
+
+              const gradePoint = GRADE_SCALE[course.grade];
+              if (gradePoint !== undefined) {
+                if (isNaN(gradePoint)) {
+                  throw new Error(`Invalid grade value for ${course.grade}`);
+                }
+                totalPoints += gradePoint * credits;
+                totalCreds += credits;
+              }
+            }
+          });
+
+          const calculatedGPA = totalCreds > 0 ? totalPoints / totalCreds : 0;
+          if (isNaN(calculatedGPA) || !isFinite(calculatedGPA)) {
+            throw new Error('Invalid GPA calculation result');
           }
+
+          setGpa(calculatedGPA);
+          setTotalCredits(totalCreds);
+          setTotalQualityPoints(totalPoints);
+          setShowResults(true);
+          setIsCalculating(false);
+          setShowSuccessMessage(true);
+
+          // Hide success message after 3 seconds
+          setTimeout(() => setShowSuccessMessage(false), 3000);
+
+          // Announce to screen readers
+          const announcement = `GPA calculated successfully: ${calculatedGPA.toFixed(2)}`;
+          const ariaLive = document.createElement('div');
+          ariaLive.setAttribute('role', 'status');
+          ariaLive.setAttribute('aria-live', 'polite');
+          ariaLive.className = 'sr-only';
+          ariaLive.textContent = announcement;
+          document.body.appendChild(ariaLive);
+          setTimeout(() => document.body.removeChild(ariaLive), 1000);
+        } catch (err) {
+          setIsCalculating(false);
+          setError(err instanceof Error ? err.message : 'Calculation error occurred');
+          alert('Error calculating GPA. Please check your inputs.');
         }
-      });
-
-      const calculatedGPA = totalCreds > 0 ? totalPoints / totalCreds : 0;
-
-      setGpa(calculatedGPA);
-      setTotalCredits(totalCreds);
-      setTotalQualityPoints(totalPoints);
-      setShowResults(true);
+      }, 800);
+    } catch (err) {
       setIsCalculating(false);
-      setShowSuccessMessage(true);
-
-      // Hide success message after 3 seconds
-      setTimeout(() => setShowSuccessMessage(false), 3000);
-
-      // Announce to screen readers
-      const announcement = `GPA calculated successfully: ${calculatedGPA.toFixed(2)}`;
-      const ariaLive = document.createElement('div');
-      ariaLive.setAttribute('role', 'status');
-      ariaLive.setAttribute('aria-live', 'polite');
-      ariaLive.className = 'sr-only';
-      ariaLive.textContent = announcement;
-      document.body.appendChild(ariaLive);
-      setTimeout(() => document.body.removeChild(ariaLive), 1000);
-    }, 500);
+      setError('Failed to start GPA calculation');
+      console.error('Calculate GPA error:', err);
+    }
   };
 
   const resetCalculator = () => {
-    setCourses([{ id: crypto.randomUUID(), name: '', credits: 0, grade: '' }]);
-    setGpa(0);
-    setTotalCredits(0);
-    setTotalQualityPoints(0);
-    setShowResults(false);
-    setShowSuccessMessage(false);
+    try {
+      setCourses([{ id: crypto.randomUUID(), name: '', credits: 0, grade: '' }]);
+      setGpa(0);
+      setTotalCredits(0);
+      setTotalQualityPoints(0);
+      setShowResults(false);
+      setShowSuccessMessage(false);
+      setError(null);
+    } catch (err) {
+      setError('Error resetting calculator');
+      console.error('Reset error:', err);
+    }
   };
 
   const getLatinHonorsLevel = useCallback((gpa: number): { level: string; color: string; description: string } => {
@@ -445,8 +525,9 @@ const PrincetonGPACalculator: React.FC<PrincetonGPACalculatorProps> = ({ navigat
   };
 
   const printResults = () => {
-    const printWindow = window.open('', '', 'height=600,width=800');
-    if (printWindow) {
+    try {
+      const printWindow = window.open('', '', 'height=600,width=800');
+      if (printWindow) {
       printWindow.document.write('<html><head><title>Princeton GPA Calculator Results</title>');
       printWindow.document.write('<style>body{font-family:Arial,sans-serif;padding:20px;}table{width:100%;border-collapse:collapse;margin:20px 0;}th,td{border:1px solid #ddd;padding:12px;text-align:left;}th{background-color:#FF8F00;color:white;}.result-box{margin:20px 0;padding:15px;background:#f5f5f5;border-left:4px solid #FF8F00;}</style>');
       printWindow.document.write('</head><body>');
@@ -466,7 +547,13 @@ const PrincetonGPACalculator: React.FC<PrincetonGPACalculatorProps> = ({ navigat
       printWindow.document.write('<p style="margin-top:30px;color:#666;">Generated by ZuraWebTools - Princeton GPA Calculator</p>');
       printWindow.document.write('</body></html>');
       printWindow.document.close();
+      printWindow.focus();
       printWindow.print();
+      printWindow.close();
+      }
+    } catch (err) {
+      setError('Print function unavailable');
+      console.error('Print error:', err);
     }
   };
 
@@ -502,22 +589,42 @@ const PrincetonGPACalculator: React.FC<PrincetonGPACalculatorProps> = ({ navigat
   };
 
   const shareResults = async () => {
-    const shareText = `My Princeton GPA: ${gpa.toFixed(2)} 🎓\nLatin Honors: ${getLatinHonorsLevel(gpa).level}\nCalculate yours at ZuraWebTools!`;
+    try {
+      const shareText = `My Princeton GPA: ${gpa.toFixed(2)} 🎓\nLatin Honors: ${getLatinHonorsLevel(gpa).level}\nCalculate yours at ZuraWebTools!`;
 
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'My Princeton GPA Results',
-          text: shareText,
-          url: window.location.href
-        });
-      } catch (err) {
-        console.log('Error sharing:', err);
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'My Princeton GPA Results',
+            text: shareText,
+            url: window.location.href
+          });
+        } catch (err) {
+          console.log('Error sharing:', err);
+        }
+      } else {
+        // Fallback: copy to clipboard with error handling
+        try {
+          await navigator.clipboard.writeText(shareText + '\n' + window.location.href);
+          alert('Results copied to clipboard!');
+        } catch (clipErr) {
+          // Fallback for older browsers
+          const textarea = document.createElement('textarea');
+          textarea.value = shareText + '\n' + window.location.href;
+          document.body.appendChild(textarea);
+          textarea.select();
+          try {
+            document.execCommand('copy');
+            alert('Results copied to clipboard!');
+          } catch (fallbackErr) {
+            alert('Copy failed. Please copy manually.');
+          }
+          document.body.removeChild(textarea);
+        }
       }
-    } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(shareText + '\n' + window.location.href);
-      alert('Results copied to clipboard!');
+    } catch (err) {
+      setError('Failed to share results');
+      console.error('Share error:', err);
     }
   };
 
@@ -533,6 +640,31 @@ const PrincetonGPACalculator: React.FC<PrincetonGPACalculatorProps> = ({ navigat
             Calculate your Princeton University GPA with our free 4.3-scale calculator. Track Latin Honors eligibility (Summa, Magna, Cum Laude), departmental honors requirements, and understand how grade deflation history affects your academic standing.
           </p>
         </div>
+
+        {/* Error Display */}
+        {error && (
+          <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8 rounded-lg" role="alert">
+            <div className="flex items-start">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm text-red-800 font-medium">{error}</p>
+              </div>
+              <button
+                onClick={() => setError(null)}
+                className="ml-auto flex-shrink-0 text-red-500 hover:text-red-700"
+                aria-label="Close error message"
+              >
+                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Calculator Section */}
         <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-12">
