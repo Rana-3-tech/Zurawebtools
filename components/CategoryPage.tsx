@@ -189,7 +189,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo, fullP
                                 <h2 className="text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-brand-blue">
                                     {subCategory.title}
                                 </h2>
-                                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
                                     {subCategory.tools.map(tool => (
                                         <ToolCard key={tool.title} {...tool} navigateTo={navigateTo} />
                                     ))}
@@ -199,7 +199,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo, fullP
                     </div>
                 ) : category.tools.length > 0 ? (
                     /* Show tools directly if no subcategories */
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
                         {category.tools.map(tool => (
                             <ToolCard key={tool.title} {...tool} navigateTo={navigateTo} />
                         ))}
