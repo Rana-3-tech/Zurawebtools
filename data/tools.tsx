@@ -824,6 +824,23 @@ const PrincetonGPAIcon = () => (
 );
 
 // Yale GPA Icon - Yale Blue gradient with bulldog theme
+const DukeGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="dukeIconTitle">
+        <title id="dukeIconTitle">Duke GPA Calculator</title>
+        <defs>
+            <linearGradient id="dukeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#001A57" />
+                <stop offset="50%" stopColor="#003087" />
+                <stop offset="100%" stopColor="#0736A8" />
+            </linearGradient>
+        </defs>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" fill="url(#dukeGrad)"/>
+        <path d="M17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="url(#dukeGrad)" opacity="0.8"/>
+        <circle cx="12" cy="9" r="2.5" fill="#FFFFFF"/>
+        <text x="12" y="10.5" fontSize="3" fill="#001A57" textAnchor="middle" fontWeight="bold">D</text>
+    </svg>
+);
+
 const YaleGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="yaleIconTitle">
         <title id="yaleIconTitle">Yale GPA Calculator</title>
@@ -1208,6 +1225,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/yale-gpa-calculator',
                         icon: <YaleGPAIcon />,
                         gradientColors: { from: '#00356B', to: '#286DC0' },
+                    },
+                    {
+                        title: 'Duke GPA Calculator',
+                        description: 'Free Duke University GPA calculator with official 4.0 grading scale. Calculate Latin Honors eligibility (Summa ≥3.80, Magna ≥3.60, Cum Laude ≥3.40), Trinity & Pratt courses, credit hours tracking, Dean\'s List status for Blue Devils.',
+                        link: 'education-and-exam-tools/university-gpa-tools/duke-gpa-calculator',
+                        icon: <DukeGPAIcon />,
+                        gradientColors: { from: '#001A57', to: '#003087' },
                     },
                 ],
             },
