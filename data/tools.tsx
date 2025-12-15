@@ -823,6 +823,29 @@ const PrincetonGPAIcon = () => (
     </svg>
 );
 
+const NorthwesternGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="northwesternIconTitle">
+        <title id="northwesternIconTitle">Northwestern GPA Calculator</title>
+        <defs>
+            <linearGradient id="northwesternGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#4E2A84" />
+                <stop offset="50%" stopColor="#6A3DAB" />
+                <stop offset="100%" stopColor="#836EAA" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#northwesternGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M3 10 L21 10" stroke="url(#northwesternGrad)" strokeWidth="1.5"/>
+        <path d="M3 14 L21 14" stroke="url(#northwesternGrad)" strokeWidth="1.5"/>
+        <circle cx="12" cy="6.5" r="2" fill="url(#northwesternGrad)"/>
+        <text x="12" y="7.5" fontSize="2.8" fill="white" textAnchor="middle" fontWeight="bold">N</text>
+        <path d="M7 17 L9 19 L11 17" stroke="url(#northwesternGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M13 17 L15 19 L17 17" stroke="url(#northwesternGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <circle cx="8" cy="12" r="0.8" fill="url(#northwesternGrad)"/>
+        <circle cx="12" cy="12" r="0.8" fill="url(#northwesternGrad)"/>
+        <circle cx="16" cy="12" r="0.8" fill="url(#northwesternGrad)"/>
+    </svg>
+);
+
 // Yale GPA Icon - Yale Blue gradient with bulldog theme
 const DukeGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="dukeIconTitle">
@@ -1256,6 +1279,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/cornell-gpa-calculator',
                         icon: <CornellGPAIcon />,
                         gradientColors: { from: '#B31B1B', to: '#DC143C' },
+                    },
+                    {
+                        title: 'Northwestern GPA Calculator',
+                        description: 'Northwestern Wildcat GPA calculator with 4.0 scale (no A+, max A=4.0). Quarter system support (12 courses/year), track Latin Honors (Summa 3.85+, Magna 3.70+, Cum Laude 3.50+), Weinberg/McCormick/Medill/Bienen grading, Dean\'s List (3.7+).',
+                        link: 'education-and-exam-tools/university-gpa-tools/northwestern-gpa-calculator',
+                        icon: <NorthwesternGPAIcon />,
+                        gradientColors: { from: '#4E2A84', to: '#836EAA' },
                     },
                 ],
             },
