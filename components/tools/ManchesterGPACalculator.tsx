@@ -220,6 +220,7 @@ const ManchesterGPACalculator: React.FC<ManchesterGPACalculatorProps> = ({ navig
     const breadcrumbSchema = {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uk/manchester-gpa-calculator#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
