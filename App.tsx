@@ -380,10 +380,34 @@ const App: React.FC = () => {
                         title: subCategory.title,
                         description: `Explore ${subCategory.title} under ${parentCategory.title}`,
                         icon: parentCategory.icon,
-                        tools: subCategory.tools
+                        tools: subCategory.tools,
+                        subCategories: subCategory.subCategories
                     };
                     const fullPath = `${categoryPathParts[0]}/${categoryPathParts[1]}`;
                     return <CategoryPage category={subCategoryAsCategory} navigateTo={navigateTo} fullPath={fullPath} />;
+                }
+            }
+        }
+
+        // Check for nested sub-category pages (e.g., /education-and-exam-tools/university-gpa-tools/uk)
+        if (categoryPathParts.length === 3) {
+            const parentCategory = toolCategories.find(cat => cat.slug === categoryPathParts[0]);
+            if (parentCategory?.subCategories) {
+                const subCategory = parentCategory.subCategories.find(sub => sub.slug === categoryPathParts[1]);
+                if (subCategory?.subCategories) {
+                    const nestedSubCategory = subCategory.subCategories.find(nested => nested.slug === categoryPathParts[2]);
+                    if (nestedSubCategory) {
+                        // Create a temporary category object for nested sub-category page
+                        const nestedSubCategoryAsCategory: Category = {
+                            slug: nestedSubCategory.slug,
+                            title: nestedSubCategory.title,
+                            description: `Explore ${nestedSubCategory.title} under ${subCategory.title}`,
+                            icon: parentCategory.icon,
+                            tools: nestedSubCategory.tools
+                        };
+                        const fullPath = `${categoryPathParts[0]}/${categoryPathParts[1]}/${categoryPathParts[2]}`;
+                        return <CategoryPage category={nestedSubCategoryAsCategory} navigateTo={navigateTo} fullPath={fullPath} />;
+                    }
                 }
             }
         }

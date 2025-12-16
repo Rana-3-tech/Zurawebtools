@@ -947,6 +947,7 @@ export interface SubCategory {
     slug: string;
     title: string;
     tools: Tool[];
+    subCategories?: SubCategory[]; // Support for nested subcategories
 }
 
 export interface Category {
