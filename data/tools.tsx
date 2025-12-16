@@ -846,6 +846,25 @@ const NorthwesternGPAIcon = () => (
     </svg>
 );
 
+const TexasAMGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="texasAMIconTitle">
+        <title id="texasAMIconTitle">Texas A&M GPA Calculator</title>
+        <defs>
+            <linearGradient id="texasAMGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#500000" />
+                <stop offset="50%" stopColor="#6B0000" />
+                <stop offset="100%" stopColor="#800000" />
+            </linearGradient>
+        </defs>
+        <path d="M12 2 L16 8 L22 9 L17 14 L18 20 L12 17 L6 20 L7 14 L2 9 L8 8 Z" fill="url(#texasAMGrad)" stroke="url(#texasAMGrad)" strokeWidth="0.5"/>
+        <circle cx="12" cy="12" r="6" stroke="url(#texasAMGrad)" strokeWidth="1.5" fill="none"/>
+        <text x="12" y="14" fontSize="4.5" fill="url(#texasAMGrad)" textAnchor="middle" fontWeight="bold">A&M</text>
+        <path d="M12 3 L12 7" stroke="url(#texasAMGrad)" strokeWidth="1.2" strokeLinecap="round"/>
+        <path d="M12 17 L12 21" stroke="url(#texasAMGrad)" strokeWidth="1.2" strokeLinecap="round"/>
+        <circle cx="12" cy="12" r="2" fill="#ffffff" opacity="0.2"/>
+    </svg>
+);
+
 // Yale GPA Icon - Yale Blue gradient with bulldog theme
 const DukeGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="dukeIconTitle">
@@ -1286,6 +1305,13 @@ export const toolCategories: Category[] = [
                         link: 'education-and-exam-tools/university-gpa-tools/northwestern-gpa-calculator',
                         icon: <NorthwesternGPAIcon />,
                         gradientColors: { from: '#4E2A84', to: '#836EAA' },
+                    },
+                    {
+                        title: 'Texas A&M GPA Calculator',
+                        description: 'Texas A&M Aggie GPA calculator with 4.0 scale (no A+). Track Q-drop policy, Mays Business School requirements (3.75+), Century Scholars eligibility (3.85+ top 10%), Latin Honors (Summa 3.90+), scholarship maintenance (3.5+), 6-drop rule.',
+                        link: 'education-and-exam-tools/university-gpa-tools/texas-am-gpa-calculator',
+                        icon: <TexasAMGPAIcon />,
+                        gradientColors: { from: '#500000', to: '#800000' },
                     },
                 ],
             },
