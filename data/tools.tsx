@@ -846,6 +846,31 @@ const NorthwesternGPAIcon = () => (
     </svg>
 );
 
+const ManchesterGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="manchesterIconTitle">
+        <title id="manchesterIconTitle">Manchester GPA Calculator</title>
+        <defs>
+            <linearGradient id="manchesterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#9333ea" />
+                <stop offset="50%" stopColor="#c026d3" />
+                <stop offset="100%" stopColor="#db2777" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#manchesterGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M3 9 L21 9" stroke="url(#manchesterGrad)" strokeWidth="1.5"/>
+        <path d="M3 15 L21 15" stroke="url(#manchesterGrad)" strokeWidth="1.5"/>
+        <circle cx="12" cy="6" r="2.5" fill="url(#manchesterGrad)"/>
+        <text x="12" y="7.2" fontSize="3" fill="white" textAnchor="middle" fontWeight="bold">M</text>
+        <path d="M7 12 L9 13.5 L11 12" stroke="url(#manchesterGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M13 12 L15 13.5 L17 12" stroke="url(#manchesterGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <circle cx="8" cy="18" r="0.9" fill="url(#manchesterGrad)"/>
+        <circle cx="12" cy="18" r="0.9" fill="url(#manchesterGrad)"/>
+        <circle cx="16" cy="18" r="0.9" fill="url(#manchesterGrad)"/>
+        <path d="M6 11 Q7 10.5 8 11" stroke="url(#manchesterGrad)" strokeWidth="0.8" fill="none"/>
+        <path d="M16 11 Q17 10.5 18 11" stroke="url(#manchesterGrad)" strokeWidth="0.8" fill="none"/>
+    </svg>
+);
+
 const TexasAMGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="texasAMIconTitle">
         <title id="texasAMIconTitle">Texas A&M GPA Calculator</title>
@@ -1210,6 +1235,13 @@ export const toolCategories: Category[] = [
                                 link: 'education-and-exam-tools/university-gpa-tools/uk/uk-gpa-system-guide',
                                 icon: <UKGPAGuideIcon />,
                                 gradientColors: { from: '#3b82f6', to: '#6366f1' },
+                            },
+                            {
+                                title: 'University of Manchester GPA Calculator',
+                                description: 'Calculate Manchester GPA with UK percentage to US GPA conversion. Russell Group standards, 20/30/50 year weightings, module-based calculator with 360 CATs. First Class, 2:1, 2:2, Third classifications for graduate school applications.',
+                                link: 'education-and-exam-tools/university-gpa-tools/uk/manchester-gpa-calculator',
+                                icon: <ManchesterGPAIcon />,
+                                gradientColors: { from: '#9333ea', to: '#db2777' },
                             }
                         ]
                     }
