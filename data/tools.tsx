@@ -865,6 +865,25 @@ const TexasAMGPAIcon = () => (
     </svg>
 );
 
+const UKGPAGuideIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ukGPAGuideIconTitle">
+        <title id="ukGPAGuideIconTitle">UK GPA System Guide</title>
+        <defs>
+            <linearGradient id="ukGPAGuideGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="50%" stopColor="#5b7ff8" />
+                <stop offset="100%" stopColor="#6366f1" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#ukGPAGuideGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9Z" transform="scale(0.7) translate(4.5, 4)" fill="url(#ukGPAGuideGrad)"/>
+        <path d="M7 16 L10 18 L7 20" stroke="url(#ukGPAGuideGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M17 16 L14 18 L17 20" stroke="url(#ukGPAGuideGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <circle cx="12" cy="18" r="1.5" fill="url(#ukGPAGuideGrad)"/>
+        <text x="12" y="8" fontSize="3" fill="url(#ukGPAGuideGrad)" textAnchor="middle" fontWeight="bold">UK</text>
+    </svg>
+);
+
 // Yale GPA Icon - Yale Blue gradient with bulldog theme
 const DukeGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="dukeIconTitle">
@@ -1179,6 +1198,21 @@ export const toolCategories: Category[] = [
             {
                 slug: 'university-gpa-tools',
                 title: 'University GPA Tools',
+                subCategories: [
+                    {
+                        slug: 'uk',
+                        title: 'UK Universities',
+                        tools: [
+                            {
+                                title: 'UK GPA System Explained',
+                                description: 'Complete guide to converting UK degree classifications to US GPA. First Class Honours, 2:1, 2:2, Third to 4.0 scale. Includes Russell Group, Oxbridge standards, ECTS credits, Masters classifications, and comprehensive FAQs.',
+                                link: 'education-and-exam-tools/university-gpa-tools/uk/uk-gpa-system-guide',
+                                icon: <UKGPAGuideIcon />,
+                                gradientColors: { from: '#3b82f6', to: '#6366f1' },
+                            }
+                        ]
+                    }
+                ],
                 tools: [
                     {
                         title: 'Berkeley GPA Calculator',
