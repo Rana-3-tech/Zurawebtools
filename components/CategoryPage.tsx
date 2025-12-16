@@ -182,8 +182,8 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo, fullP
                 </div>
 
                 {/* Show subcategories if they exist */}
-                {category.subCategories && category.subCategories.length > 0 ? (
-                    <div className="space-y-16">
+                {category.subCategories && category.subCategories.length > 0 && (
+                    <div className="space-y-16 mb-16">
                         {category.subCategories.map(subCategory => (
                             <div key={subCategory.slug}>
                                 <h2 className="text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-brand-blue">
@@ -197,21 +197,30 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, navigateTo, fullP
                             </div>
                         ))}
                     </div>
-                ) : category.tools.length > 0 ? (
-                    /* Show tools directly if no subcategories */
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
-                        {category.tools.map(tool => (
-                            <ToolCard key={tool.title} {...tool} navigateTo={navigateTo} />
-                        ))}
+                )}
+
+                {/* Show main category tools */}
+                {category.tools.length > 0 ? (
+                    <div>
+                        {category.subCategories && category.subCategories.length > 0 && (
+                            <h2 className="text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-brand-blue">
+                                All {category.title}
+                            </h2>
+                        )}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+                            {category.tools.map(tool => (
+                                <ToolCard key={tool.title} {...tool} navigateTo={navigateTo} />
+                            ))}
+                        </div>
                     </div>
-                ) : (
+                ) : !category.subCategories || category.subCategories.length === 0 ? (
                     <div className="text-center py-20 bg-white rounded-lg shadow-lg">
                         <h3 className="text-2xl font-semibold text-gray-700">Coming Soon!</h3>
                         <p className="mt-4 text-gray-500">
                             We're working hard to bring you new tools in this category. Stay tuned!
                         </p>
                     </div>
-                )}
+                ) : null}
             </div>
         </section>
     );

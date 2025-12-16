@@ -59,18 +59,50 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
                         {isToolsDropdownOpen && (
                             <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 bg-white rounded-lg shadow-xl pt-4 pb-2 z-50 border border-gray-100">
                                 {toolCategories[0]?.subCategories?.map(subCat => (
-                                    <a 
+                                    <div 
                                         key={subCat.slug}
-                                        href={`/education-and-exam-tools/${subCat.slug}`}
-                                        onClick={(e) => { 
-                                            e.preventDefault(); 
-                                            navigateTo(`/education-and-exam-tools/${subCat.slug}`); 
-                                            setIsToolsDropdownOpen(false);
-                                        }}
-                                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-blue transition-colors"
+                                        className="relative group"
+                                        onMouseEnter={() => setHoveredCategorySlug(subCat.slug)}
+                                        onMouseLeave={() => setHoveredCategorySlug(null)}
                                     >
-                                        {subCat.title}
-                                    </a>
+                                        <a 
+                                            href={`/education-and-exam-tools/${subCat.slug}`}
+                                            onClick={(e) => { 
+                                                e.preventDefault(); 
+                                                navigateTo(`/education-and-exam-tools/${subCat.slug}`); 
+                                                setIsToolsDropdownOpen(false);
+                                                setHoveredCategorySlug(null);
+                                            }}
+                                            className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-brand-blue transition-colors flex items-center justify-between"
+                                        >
+                                            <span>{subCat.title}</span>
+                                            {subCat.subCategories && subCat.subCategories.length > 0 && (
+                                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                                                </svg>
+                                            )}
+                                        </a>
+                                        {/* Nested subcategories dropdown */}
+                                        {subCat.subCategories && subCat.subCategories.length > 0 && hoveredCategorySlug === subCat.slug && (
+                                            <div className="absolute left-full top-0 ml-1 w-56 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-100">
+                                                {subCat.subCategories.map(nestedSub => (
+                                                    <a 
+                                                        key={nestedSub.slug}
+                                                        href={`/education-and-exam-tools/${subCat.slug}/${nestedSub.slug}`}
+                                                        onClick={(e) => { 
+                                                            e.preventDefault(); 
+                                                            navigateTo(`/education-and-exam-tools/${subCat.slug}/${nestedSub.slug}`); 
+                                                            setIsToolsDropdownOpen(false);
+                                                            setHoveredCategorySlug(null);
+                                                        }}
+                                                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-brand-blue transition-colors text-sm"
+                                                    >
+                                                        {nestedSub.title}
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                 ))}
                                 <div className="border-t border-gray-200 my-2"></div>
                                 <a 
