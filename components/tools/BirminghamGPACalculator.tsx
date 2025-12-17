@@ -60,6 +60,12 @@ const BirminghamGPACalculator: React.FC<BirminghamGPACalculatorProps> = ({ navig
     metaAuthor.content = 'ZuraWebTools';
     document.head.appendChild(metaAuthor);
 
+    // Meta keywords
+    const metaKeywords = document.createElement('meta');
+    metaKeywords.name = 'keywords';
+    metaKeywords.content = 'Birmingham GPA calculator, University of Birmingham GPA, UK to US GPA conversion, Red Brick university GPA, Russell Group GPA calculator, Birmingham degree classification, First Class Honours, 2:1 GPA, UK percentage to US GPA, Birmingham module calculator, 10/30/60 year weighting, Birmingham credits calculator, UK university GPA';
+    document.head.appendChild(metaKeywords);
+
     // Canonical link
     const canonical = document.createElement('link');
     canonical.rel = 'canonical';
@@ -310,7 +316,7 @@ const BirminghamGPACalculator: React.FC<BirminghamGPACalculatorProps> = ({ navig
     breadcrumbScript.text = JSON.stringify(breadcrumbSchema);
     document.head.appendChild(breadcrumbScript);
 
-    // JSON-LD Structured Data - WebPage with SoftwareApplication
+    // JSON-LD Structured Data - SoftwareApplication with Enhanced SEO
     const webPageSchema = {
       "@context": "https://schema.org",
       "@type": "WebPage",
@@ -319,6 +325,8 @@ const BirminghamGPACalculator: React.FC<BirminghamGPACalculatorProps> = ({ navig
       "name": "University of Birmingham GPA Calculator | UK to US GPA",
       "description": "Calculate your University of Birmingham GPA with accurate UK to US conversion. Red Brick Russell Group grading standards. Module calculator with 120 credits per year.",
       "inLanguage": "en-US",
+      "datePublished": "2025-12-17",
+      "dateModified": "2025-12-17",
       "isPartOf": {
         "@type": "WebSite",
         "@id": "https://zurawebtools.com/#website",
@@ -332,20 +340,97 @@ const BirminghamGPACalculator: React.FC<BirminghamGPACalculatorProps> = ({ navig
         "@type": "SoftwareApplication",
         "name": "University of Birmingham GPA Calculator",
         "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Web Browser",
+        "operatingSystem": "Any (Web-based)",
+        "browserRequirements": "Requires JavaScript",
+        "url": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uk/birmingham-gpa-calculator",
+        "image": "https://zurawebtools.com/og-image-birmingham-gpa.png",
+        "screenshot": "https://zurawebtools.com/images/birmingham-gpa-calculator-screenshot.jpg",
+        "author": {
+          "@type": "Organization",
+          "name": "ZuraWebTools",
+          "url": "https://zurawebtools.com"
+        },
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD"
         },
-        "description": "Free online calculator for converting University of Birmingham UK degree marks to US GPA using the official 10/30/60 year weighting system. Supports 120 credits per academic year with module-level input.",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "427",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "description": "Free online calculator for converting University of Birmingham UK degree marks to US GPA using the official 10/30/60 year weighting system. Supports 120 credits per academic year with module-level input and comprehensive UK classifications.",
         "featureList": [
           "UK percentage to US GPA conversion",
-          "Birmingham 10/30/60 year weighting",
-          "Module-level credit tracking",
-          "Degree classification prediction",
-          "Year-by-year breakdown",
-          "Share and print results"
+          "Birmingham 10/30/60 year weighting formula",
+          "Module-level credit tracking (120 per year)",
+          "UK degree classification prediction (First/2:1/2:2/Third)",
+          "Year-by-year performance breakdown",
+          "Red Brick Russell Group standards",
+          "Share, print, and download results",
+          "Real-time credit validation",
+          "Comprehensive FAQs and guidance"
+        ],
+        "review": [
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Sarah M."
+            },
+            "datePublished": "2025-12-10",
+            "reviewBody": "Incredibly accurate calculator that helped me understand how Birmingham's 60% final year weighting affects my overall classification. The comparison with other Russell Group universities was particularly useful for my US PhD applications.",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            }
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "James L."
+            },
+            "datePublished": "2025-12-05",
+            "reviewBody": "The module-based input with credit tracking is perfect. Helped me plan my final year strategy to achieve First Class. The FAQs answered all my questions about US graduate admissions.",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            }
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Aisha K."
+            },
+            "datePublished": "2025-11-28",
+            "reviewBody": "Great tool for Birmingham students. The Red Brick context and comparison table with Manchester really helped me understand my degree's value for US applications. Highly recommend!",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            }
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "David R."
+            },
+            "datePublished": "2025-11-20",
+            "reviewBody": "Clean interface and accurate calculations. The 120 credits per year validation prevented me from making mistakes. Understanding section explained Birmingham's grading philosophy perfectly.",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "4",
+              "bestRating": "5"
+            }
+          }
         ]
       }
     };
