@@ -1326,7 +1326,7 @@ export const toolCategories: Category[] = [
                             {
                                 title: 'University of Nottingham Grade Calculator',
                                 description: 'Calculate Nottingham grades with UK percentage to US GPA conversion. Russell Group standards, 0/33/67 year weightings, Sutton Trust 30. First Class, 2:1, 2:2, Third classifications with borderline policy for international applications.',
-                                link: 'education-and-exam-tools/university-gpa-tools/uk/nottingham-gpa-calculator',
+                                link: 'education-and-exam-tools/university-gpa-tools/uk/nottingham-grade-calculator',
                                 icon: <NottinghamGPAIcon />,
                                 gradientColors: { from: '#0d9488', to: '#10b981' },
                             }
