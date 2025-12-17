@@ -103,7 +103,7 @@ const LeedsGPACalculator: React.FC<LeedsGPACalculatorProps> = ({ navigateTo }) =
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Free Leeds GPA Calculator converts UK percentages to US GPA. Supports both Pre-2022 (10/30/60) and 2022+ (33/67) weighting systems. Updated 2024/25 thresholds with 0.5% borderline uplift. Calculate First Class, 2:1, 2:2, Third degree classifications.');
+      metaDescription.setAttribute('content', 'Unofficial Leeds GPA Calculator converts UK percentages to estimated US GPA. Supports Pre-2022 (10/30/60) and 2022+ (33/67) weighting systems. Planning tool for First Class, 2:1, 2:2 classifications. Not endorsed by University of Leeds.');
     }
 
     const metaRobots = document.querySelector('meta[name="robots"]');
@@ -186,57 +186,7 @@ const LeedsGPACalculator: React.FC<LeedsGPACalculatorProps> = ({ navigateTo }) =
         "price": "0",
         "priceCurrency": "USD"
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "312",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Sarah Thompson"
-          },
-          "datePublished": "2025-11-15",
-          "reviewBody": "Incredibly accurate calculator that saved me hours when applying to US grad schools. The cohort selection feature ensures correct weighting (10/30/60 for older students, 33/67 for recent entries), and the updated 2024/25 thresholds match Leeds' current system perfectly. Highly recommend!",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "James Chen"
-          },
-          "datePublished": "2025-10-22",
-          "reviewBody": "As a final year Leeds student, this tool is essential. The year-by-year breakdown helps me understand exactly how my final year performance will impact my degree classification. The interface is intuitive and calculations are instant.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Emily Rodriguez"
-          },
-          "datePublished": "2025-12-01",
-          "reviewBody": "Perfect for understanding Russell Group grading standards. The detailed FAQs answered all my questions about borderline classifications and how US schools view UK degrees. Print and download features are very useful.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          }
-        }
-      ],
+
       "description": "Free online calculator to convert University of Leeds UK percentage marks to US GPA. Supports both Pre-2022 (10/30/60) and 2022+ (33/67) weighting systems with updated 2024/25 classification thresholds and 0.5% borderline uplift.",
       "url": "https://zurawebtools.com/education-and-exam-tools/university-gpa-tools/uk/leeds-gpa-calculator",
       "author": {
@@ -419,28 +369,38 @@ const LeedsGPACalculator: React.FC<LeedsGPACalculatorProps> = ({ navigateTo }) =
   const [studentCohort, setStudentCohort] = useState<'pre-2022' | '2022-onwards'>('2022-onwards');
 
   const percentageToGPA = (percentage: number): number => {
-    if (percentage >= 70) return 4.0;
-    if (percentage >= 67) return 3.85;
-    if (percentage >= 64) return 3.7;
-    if (percentage >= 60) return 3.5;
-    if (percentage >= 57) return 3.3;
-    if (percentage >= 54) return 3.15;
-    if (percentage >= 50) return 3.0;
-    if (percentage >= 47) return 2.7;
-    if (percentage >= 44) return 2.5;
-    if (percentage >= 40) return 2.3;
+    // Returns midpoint of GPA range for display purposes
+    // Actual GPA equivalence varies by US institution
+    if (percentage >= 70) return 3.85; // Range: 3.7 - 4.0
+    if (percentage >= 65) return 3.5;  // Range: 3.3 - 3.7
+    if (percentage >= 60) return 3.15; // Range: 3.0 - 3.3
+    if (percentage >= 55) return 2.85; // Range: 2.7 - 3.0
+    if (percentage >= 50) return 2.5;  // Range: 2.3 - 2.7
+    if (percentage >= 45) return 2.25; // Range: 2.0 - 2.5
+    if (percentage >= 40) return 2.0;  // Range: 2.0 - 2.3
     return 0.0;
   };
 
+  const getGPARange = (percentage: number): string => {
+    if (percentage >= 70) return '3.7 - 4.0';
+    if (percentage >= 65) return '3.3 - 3.7';
+    if (percentage >= 60) return '3.0 - 3.3';
+    if (percentage >= 55) return '2.7 - 3.0';
+    if (percentage >= 50) return '2.3 - 2.7';
+    if (percentage >= 45) return '2.0 - 2.5';
+    if (percentage >= 40) return '2.0 - 2.3';
+    return '0.0';
+  };
+
   const getClassification = (percentage: number, cohort: 'pre-2022' | '2022-onwards'): string => {
-    // Apply 0.5% automatic uplift for 2022+ cohorts (borderline policy)
-    const adjustedPercentage = cohort === '2022-onwards' ? percentage + 0.5 : percentage;
+    // Note: Borderline consideration (68.0-69.9%, 58.0-59.9%, etc.) is discretionary
+    // and decided by exam boards based on trajectory, profile, and extenuating circumstances
     
     // Updated thresholds for 2024/25 academic year
-    if (adjustedPercentage >= 68.5) return 'First Class Honours';
-    if (adjustedPercentage >= 59.0) return 'Upper Second Class (2:1)';
-    if (adjustedPercentage >= 49.5) return 'Lower Second Class (2:2)';
-    if (adjustedPercentage >= 39.5) return 'Third Class Honours';
+    if (percentage >= 70.0) return 'First Class Honours';
+    if (percentage >= 60.0) return 'Upper Second Class (2:1)';
+    if (percentage >= 50.0) return 'Lower Second Class (2:2)';
+    if (percentage >= 40.0) return 'Third Class Honours';
     return 'Fail';
   };
 
@@ -555,7 +515,7 @@ const LeedsGPACalculator: React.FC<LeedsGPACalculatorProps> = ({ navigateTo }) =
   const handleDownload = () => {
     const weightingInfo = studentCohort === 'pre-2022'
       ? 'Weighting System: Pre-2022 (10/30/60)\nYear 1: 10%, Year 2: 30%, Year 3: 60%'
-      : 'Weighting System: 2022+ (33/67)\nYear 1: Not counted, Year 2: 33.33%, Year 3: 66.67%\nBorderline Uplift: +0.5% applied';
+      : 'Weighting System: 2022+ (33/67)\nYear 1: Not counted, Year 2: 33.33%, Year 3: 66.67%';
     
     const year1Info = studentCohort === 'pre-2022'
       ? `Year 1 (10% weight):\n- Average: ${results.year1Avg.toFixed(2)}%\n- GPA: ${results.year1GPA.toFixed(2)}\n- Credits: ${results.year1Credits}\n\n`
@@ -637,6 +597,23 @@ Generated by ZuraWebTools - https://zurawebtools.com`;
           </p>
         </div>
 
+        {/* Legal Disclaimer */}
+        <div className="bg-amber-50 border-l-4 border-amber-500 p-6 mb-8 rounded-lg shadow-md">
+          <div className="flex items-start gap-3">
+            <svg className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <h3 className="text-lg font-bold text-amber-900 mb-2">Important Disclaimer</h3>
+              <p className="text-amber-800 text-sm leading-relaxed">
+                <strong>This tool is not affiliated with or endorsed by the University of Leeds.</strong> Results are estimates for planning purposes only. 
+                GPA conversions vary by US institution. Borderline classifications (within 1-2% of thresholds) are subject to discretionary exam board review. 
+                Always verify official degree classification with Leeds Registry and consult target universities for their specific equivalence standards.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Calculator Section */}
         <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 mb-8 border border-green-200">
           <div className="flex items-center gap-3 mb-6">
@@ -677,6 +654,8 @@ Generated by ZuraWebTools - https://zurawebtools.com`;
               {studentCohort === 'pre-2022' 
                 ? '📌 Year 1: 10%, Year 2: 30%, Year 3: 60%' 
                 : '📌 Year 1 does not count. Year 2: 33.33%, Year 3: 66.67%'}
+              <br />
+              <span className="text-amber-700">⚠️ Borderline cases (within 1-2% of threshold) subject to exam board discretion</span>
             </p>
           </div>
 
@@ -897,9 +876,9 @@ Generated by ZuraWebTools - https://zurawebtools.com`;
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               {/* Overall GPA Card */}
               <div className="bg-gradient-to-br from-green-600 to-teal-600 text-white rounded-xl p-6 shadow-lg">
-                <h3 className="text-lg font-semibold mb-2">Overall US GPA</h3>
+                <h3 className="text-lg font-semibold mb-2">Overall US GPA (Estimated)</h3>
                 <p className="text-5xl font-bold mb-2">{results.overallGPA.toFixed(2)}</p>
-                <p className="text-sm">out of 4.0</p>
+                <p className="text-sm">Range: {getGPARange(results.overallPercentage)}</p>
                 <div className="mt-4 bg-white bg-opacity-20 rounded-full h-3">
                   <div
                     className="bg-white rounded-full h-3 transition-all duration-1000"
