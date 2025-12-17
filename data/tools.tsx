@@ -894,6 +894,29 @@ const BirminghamGPAIcon = () => (
     </svg>
 );
 
+const LeedsGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="leedsIconTitle">
+        <title id="leedsIconTitle">Leeds GPA Calculator</title>
+        <defs>
+            <linearGradient id="leedsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#10b981" />
+                <stop offset="50%" stopColor="#14b8a6" />
+                <stop offset="100%" stopColor="#06b6d4" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#leedsGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M3 9 L21 9" stroke="url(#leedsGrad)" strokeWidth="1.5"/>
+        <path d="M3 15 L21 15" stroke="url(#leedsGrad)" strokeWidth="1.5"/>
+        <circle cx="12" cy="6" r="2.5" fill="url(#leedsGrad)"/>
+        <text x="12" y="7.2" fontSize="3" fill="white" textAnchor="middle" fontWeight="bold">L</text>
+        <path d="M7 12 L9 13.5 L11 12" stroke="url(#leedsGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M13 12 L15 13.5 L17 12" stroke="url(#leedsGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <rect x="6" y="17" width="12" height="2.5" rx="0.5" fill="url(#leedsGrad)"/>
+        <path d="M6 11 Q7 10.5 8 11" stroke="url(#leedsGrad)" strokeWidth="0.8" fill="none"/>
+        <path d="M16 11 Q17 10.5 18 11" stroke="url(#leedsGrad)" strokeWidth="0.8" fill="none"/>
+    </svg>
+);
+
 const TexasAMGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="texasAMIconTitle">
         <title id="texasAMIconTitle">Texas A&M GPA Calculator</title>
@@ -1272,6 +1295,13 @@ export const toolCategories: Category[] = [
                                 link: 'education-and-exam-tools/university-gpa-tools/uk/birmingham-gpa-calculator',
                                 icon: <BirminghamGPAIcon />,
                                 gradientColors: { from: '#f59e0b', to: '#eab308' },
+                            },
+                            {
+                                title: 'University of Leeds GPA Calculator',
+                                description: 'Calculate Leeds GPA with UK percentage to US GPA conversion. Red Brick Russell Group standards, 10/30/60 year weightings, 120 credits per year. First Class, 2:1, 2:2, Third classifications for US graduate school and employment applications.',
+                                link: 'education-and-exam-tools/university-gpa-tools/uk/leeds-gpa-calculator',
+                                icon: <LeedsGPAIcon />,
+                                gradientColors: { from: '#10b981', to: '#06b6d4' },
                             }
                         ]
                     }
