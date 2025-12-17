@@ -908,6 +908,26 @@ const LeedsGPAIcon = () => (
         <path d="M3 9 L21 9" stroke="url(#leedsGrad)" strokeWidth="1.5"/>
         <path d="M3 15 L21 15" stroke="url(#leedsGrad)" strokeWidth="1.5"/>
         <circle cx="12" cy="6" r="2.5" fill="url(#leedsGrad)"/>
+        <circle cx="7.5" cy="12" r="1.5" fill="url(#leedsGrad)"/>
+        <circle cx="16.5" cy="12" r="1.5" fill="url(#leedsGrad)"/>
+        <circle cx="12" cy="18" r="1.5" fill="url(#leedsGrad)"/>
+    </svg>
+);
+
+const NottinghamGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nottinghamIconTitle">
+        <title id="nottinghamIconTitle">Nottingham GPA Calculator</title>
+        <defs>
+            <linearGradient id="nottinghamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0d9488" />
+                <stop offset="50%" stopColor="#14b8a6" />
+                <stop offset="100%" stopColor="#10b981" />
+            </linearGradient>
+        </defs>
+        <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="url(#nottinghamGrad)" strokeWidth="1.5" fill="none"/>
+        <circle cx="12" cy="12" r="4" fill="url(#nottinghamGrad)" opacity="0.7"/>
+        <path d="M12 7L12 17" stroke="url(#nottinghamGrad)" strokeWidth="2"/>
+        <path d="M7 12L17 12" stroke="url(#nottinghamGrad)" strokeWidth="2"/>
         <text x="12" y="7.2" fontSize="3" fill="white" textAnchor="middle" fontWeight="bold">L</text>
         <path d="M7 12 L9 13.5 L11 12" stroke="url(#leedsGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
         <path d="M13 12 L15 13.5 L17 12" stroke="url(#leedsGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
@@ -1302,6 +1322,13 @@ export const toolCategories: Category[] = [
                                 link: 'education-and-exam-tools/university-gpa-tools/uk/leeds-gpa-calculator',
                                 icon: <LeedsGPAIcon />,
                                 gradientColors: { from: '#10b981', to: '#06b6d4' },
+                            },
+                            {
+                                title: 'University of Nottingham Grade Calculator',
+                                description: 'Calculate Nottingham grades with UK percentage to US GPA conversion. Russell Group standards, 0/33/67 year weightings, Sutton Trust 30. First Class, 2:1, 2:2, Third classifications with borderline policy for international applications.',
+                                link: 'education-and-exam-tools/university-gpa-tools/uk/nottingham-gpa-calculator',
+                                icon: <NottinghamGPAIcon />,
+                                gradientColors: { from: '#0d9488', to: '#10b981' },
                             }
                         ]
                     }
