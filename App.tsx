@@ -87,6 +87,7 @@ const DukeGPACalculator = lazy(() => import('./components/tools/DukeGPACalculato
 const CornellGPACalculator = lazy(() => import('./components/tools/CornellGPACalculator'));
 const NorthwesternGPACalculator = lazy(() => import('./components/tools/NorthwesternGPACalculator'));
 const ManchesterGPACalculator = lazy(() => import('./components/tools/ManchesterGPACalculator'));
+const BirminghamGPACalculator = lazy(() => import('./components/tools/BirminghamGPACalculator'));
 const TexasAMGPACalculator = lazy(() => import('./components/tools/TexasAMGPACalculator'));
 const UKGPAGuide = lazy(() => import('./components/tools/UKGPAGuide'));
 
@@ -305,6 +306,7 @@ const App: React.FC = () => {
             'cornell-gpa-calculator': CornellGPACalculator,
             'northwestern-gpa-calculator': NorthwesternGPACalculator,
             'manchester-gpa-calculator': ManchesterGPACalculator,
+            'birmingham-gpa-calculator': BirminghamGPACalculator,
             'texas-am-gpa-calculator': TexasAMGPACalculator,
             'uk-gpa-system-guide': UKGPAGuide,
             'rutgers-gpa-calculator': RutgersGPACalculator,

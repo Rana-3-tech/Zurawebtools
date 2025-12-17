@@ -871,6 +871,29 @@ const ManchesterGPAIcon = () => (
     </svg>
 );
 
+const BirminghamGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="birminghamIconTitle">
+        <title id="birminghamIconTitle">Birmingham GPA Calculator</title>
+        <defs>
+            <linearGradient id="birminghamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f59e0b" />
+                <stop offset="50%" stopColor="#fbbf24" />
+                <stop offset="100%" stopColor="#eab308" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#birminghamGrad)" strokeWidth="1.5" fill="none"/>
+        <path d="M3 9 L21 9" stroke="url(#birminghamGrad)" strokeWidth="1.5"/>
+        <path d="M3 15 L21 15" stroke="url(#birminghamGrad)" strokeWidth="1.5"/>
+        <circle cx="12" cy="6" r="2.5" fill="url(#birminghamGrad)"/>
+        <text x="12" y="7.2" fontSize="3" fill="white" textAnchor="middle" fontWeight="bold">B</text>
+        <path d="M7 12 L9 13.5 L11 12" stroke="url(#birminghamGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M13 12 L15 13.5 L17 12" stroke="url(#birminghamGrad)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <rect x="6" y="17" width="12" height="2.5" rx="0.5" fill="url(#birminghamGrad)"/>
+        <path d="M6 11 Q7 10.5 8 11" stroke="url(#birminghamGrad)" strokeWidth="0.8" fill="none"/>
+        <path d="M16 11 Q17 10.5 18 11" stroke="url(#birminghamGrad)" strokeWidth="0.8" fill="none"/>
+    </svg>
+);
+
 const TexasAMGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="texasAMIconTitle">
         <title id="texasAMIconTitle">Texas A&M GPA Calculator</title>
@@ -1242,6 +1265,13 @@ export const toolCategories: Category[] = [
                                 link: 'education-and-exam-tools/university-gpa-tools/uk/manchester-gpa-calculator',
                                 icon: <ManchesterGPAIcon />,
                                 gradientColors: { from: '#9333ea', to: '#db2777' },
+                            },
+                            {
+                                title: 'University of Birmingham GPA Calculator',
+                                description: 'Calculate Birmingham GPA with UK percentage to US GPA conversion. Red Brick Russell Group standards, 10/30/60 year weightings, module calculator with 120 credits per year. First Class, 2:1, 2:2, Third degree classifications for US graduate school applications.',
+                                link: 'education-and-exam-tools/university-gpa-tools/uk/birmingham-gpa-calculator',
+                                icon: <BirminghamGPAIcon />,
+                                gradientColors: { from: '#f59e0b', to: '#eab308' },
                             }
                         ]
                     }
