@@ -51,13 +51,21 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
                         onMouseEnter={() => setIsToolsDropdownOpen(true)}
                         onMouseLeave={() => {
                             setIsToolsDropdownOpen(false);
+                            setHoveredCategorySlug(null);
                         }}
                     >
                         <a href="/education-and-exam-tools" onClick={(e) => handleNavClick(e, '/education-and-exam-tools')} className="text-gray-600 hover:text-brand-blue font-semibold transition-colors flex items-center">
                             Education & Exam <ChevronDownIcon />
                         </a>
                         {isToolsDropdownOpen && (
-                            <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 bg-white rounded-lg shadow-xl pt-4 pb-2 z-50 border border-gray-100">
+                            <div 
+                                className="absolute top-full left-1/2 -translate-x-1/2 w-64 bg-white rounded-lg shadow-xl pt-4 pb-2 z-50 border border-gray-100"
+                                onMouseEnter={() => setIsToolsDropdownOpen(true)}
+                                onMouseLeave={() => {
+                                    setIsToolsDropdownOpen(false);
+                                    setHoveredCategorySlug(null);
+                                }}
+                            >
                                 {toolCategories[0]?.subCategories?.map(subCat => (
                                     <div 
                                         key={subCat.slug}
@@ -84,7 +92,11 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
                                         </a>
                                         {/* Nested subcategories dropdown */}
                                         {subCat.subCategories && subCat.subCategories.length > 0 && hoveredCategorySlug === subCat.slug && (
-                                            <div className="absolute left-full top-0 ml-1 w-56 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-100">
+                                            <div 
+                                                className="absolute left-full top-0 ml-1 w-56 bg-white rounded-lg shadow-xl py-2 z-50 border border-gray-100"
+                                                onMouseEnter={() => setHoveredCategorySlug(subCat.slug)}
+                                                onMouseLeave={() => setHoveredCategorySlug(null)}
+                                            >
                                                 {subCat.subCategories.map(nestedSub => (
                                                     <a 
                                                         key={nestedSub.slug}
