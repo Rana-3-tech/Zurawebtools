@@ -92,6 +92,7 @@ const LeedsGPACalculator = lazy(() => import('./components/tools/LeedsGPACalcula
 const NottinghamGPACalculator = lazy(() => import('./components/tools/NottinghamGradeCalculator'));
 const TexasAMGPACalculator = lazy(() => import('./components/tools/TexasAMGPACalculator'));
 const UKGPAGuide = lazy(() => import('./components/tools/UKGPAGuide'));
+const TeessideGPACalculator = lazy(() => import('./components/tools/TeessideGPACalculator'));
 
 // This type will be used by other components
 export type Page = string; // Represents a URL path, e.g., '/', '/tools', '/word-counter'
@@ -311,6 +312,7 @@ const App: React.FC = () => {
             'birmingham-gpa-calculator': BirminghamGPACalculator,
             'leeds-gpa-calculator': LeedsGPACalculator,
             'nottingham-grade-calculator': NottinghamGPACalculator,
+            'teesside-university-grade-calculator': TeessideGPACalculator,
             'texas-am-gpa-calculator': TexasAMGPACalculator,
             'uk-gpa-system-guide': UKGPAGuide,
             'rutgers-gpa-calculator': RutgersGPACalculator,

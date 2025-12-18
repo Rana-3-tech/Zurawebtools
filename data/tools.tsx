@@ -937,6 +937,27 @@ const NottinghamGPAIcon = () => (
     </svg>
 );
 
+const TeessideGPAIcon = () => (
+    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="teessideIconTitle">
+        <title id="teessideIconTitle">Teesside University Grade Calculator</title>
+        <defs>
+            <linearGradient id="teessideGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0ea5e9" />
+                <stop offset="50%" stopColor="#06b6d4" />
+                <stop offset="100%" stopColor="#14b8a6" />
+            </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#teessideGrad)" strokeWidth="1.5" fill="none"/>
+        <circle cx="12" cy="7" r="2.5" fill="url(#teessideGrad)"/>
+        <path d="M3 10 L21 10" stroke="url(#teessideGrad)" strokeWidth="1.5"/>
+        <path d="M3 15 L21 15" stroke="url(#teessideGrad)" strokeWidth="1.5"/>
+        <rect x="7" y="12" width="3" height="2" rx="0.5" fill="url(#teessideGrad)" opacity="0.7"/>
+        <rect x="14" y="12" width="3" height="2" rx="0.5" fill="url(#teessideGrad)" opacity="0.7"/>
+        <rect x="7" y="17" width="10" height="2" rx="0.5" fill="url(#teessideGrad)"/>
+        <text x="12" y="7.5" fontSize="2.5" fill="white" textAnchor="middle" fontWeight="bold">T</text>
+    </svg>
+);
+
 const TexasAMGPAIcon = () => (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="texasAMIconTitle">
         <title id="texasAMIconTitle">Texas A&M GPA Calculator</title>
@@ -1329,6 +1350,13 @@ export const toolCategories: Category[] = [
                                 link: 'education-and-exam-tools/university-gpa-tools/uk/nottingham-grade-calculator',
                                 icon: <NottinghamGPAIcon />,
                                 gradientColors: { from: '#0d9488', to: '#10b981' },
+                            },
+                            {
+                                title: 'Teesside University Grade Calculator',
+                                description: 'Calculate your Teesside University final degree classification and GPA conversion. Free calculator with 0/33/67 year weightings. Convert UK percentage to First Class, 2:1, 2:2, Third with grade or percentage input options.',
+                                link: 'education-and-exam-tools/university-gpa-tools/uk/teesside-university-grade-calculator',
+                                icon: <TeessideGPAIcon />,
+                                gradientColors: { from: '#0ea5e9', to: '#14b8a6' },
                             }
                         ]
                     }
